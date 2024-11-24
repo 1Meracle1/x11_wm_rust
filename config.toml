@@ -1,0 +1,25 @@
+startup_commands = [
+  "setxkbmap -layout us,ru,pl -option grp:alt_space_toggle",
+  "alacritty",
+]
+
+[[keybindings]]
+keys_combination = "Alt+Return"
+action = "exec"
+arguments = ["alacritty"]
+
+[window]
+resize_tick_pixels = 6
+minimum_width_tiling = 10
+default_width_tiling = 0.33
+
+[window.border]
+size = 2
+color_inactive = "#2b2b29"
+color_active = "#a38b43"
+
+[workspaces]
+count = 9
+outer_gap_horiz = 10
+outer_gap_vert = 10
+inner_gap = 5
