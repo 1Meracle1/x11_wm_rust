@@ -7,7 +7,9 @@ use crate::{
     keybindings::KeyEventsHandler,
     monitor::{Monitor, Rect},
     window::{Window, WindowType},
+    workspace,
 };
+use image::{imageops::FilterType, ColorType};
 use log::{debug, error, info};
 use xcb::{
     randr,
@@ -19,6 +21,10 @@ pub struct XcbWindowManager {
     conn: xcb::Connection,
     // screen_num: i32,
     root_window: x::Window,
+    root_depth: u8,
+    root_visual: x::Visualid,
+    root_black_pixel: u32,
+    root_white_pixel: u32,
     meta_window: x::Window,
     ewmh: ewmh::Ewmh,
     key_events_handler: KeyEventsHandler,
@@ -34,15 +40,30 @@ impl XcbWindowManager {
         )
         .expect("Established XCB connection.");
 
-        let root_window = conn
-            .get_setup()
-            .roots()
-            .nth(screen_num as usize)
-            .unwrap()
-            .root();
+        let screen = conn.get_setup().roots().nth(screen_num as usize).unwrap();
+        let root_window = screen.root();
+        let root_depth = screen.root_depth();
+        let root_visual = screen.root_visual();
+        let root_black_pixel = screen.black_pixel();
+        let root_white_pixel = screen.white_pixel();
 
         let ewmh = ewmh::Ewmh::new(&conn, root_window);
         let key_events_handler = KeyEventsHandler::new(&conn, root_window, config);
+
+        // result.set_cursor();
+        let cursor: x::Cursor = conn.generate_id();
+        conn.send_request(&x::GrabPointer {
+            owner_events: false, // get all pointer events specified by the following mask
+            grab_window: root_window, // grab the root window
+            event_mask: x::EventMask::NO_EVENT, // which event to let through
+            pointer_mode: x::GrabMode::Async, // pointer events should continue as normal
+            keyboard_mode: x::GrabMode::Async, // pointer events should continue as normal
+            confine_to: x::Window::none(), // in which window should the cursor stay
+            cursor,              // we change the cursor
+            time: x::CURRENT_TIME,
+        });
+
+        conn.flush().unwrap();
 
         // let randr_ext = randr::get_extension_data(&conn).unwrap();
         conn.send_request(&randr::SelectInput {
@@ -70,8 +91,11 @@ impl XcbWindowManager {
 
         let mut result = Self {
             conn,
-            // screen_num,
             root_window,
+            root_depth,
+            root_visual,
+            root_black_pixel,
+            root_white_pixel,
             meta_window: x::WINDOW_NONE,
             ewmh,
             key_events_handler,
@@ -80,6 +104,7 @@ impl XcbWindowManager {
         };
         result.subscribe_to_wm_events();
         result.meta_window = result.create_meta_window(window_manager_name);
+
         result
             .ewmh
             .update_current_desktop(&result.conn, result.root_window, 0);
@@ -92,26 +117,24 @@ impl XcbWindowManager {
     pub fn handle_event(&mut self, config: &Config) -> bool {
         match self.conn.wait_for_event() {
             Err(xcb::Error::Connection(err)) => {
-                error!("Unexpected I/O error: {err}");
+                error!("Unexpected I/O error: {err:?}");
                 return false;
             }
             Err(xcb::Error::Protocol(err)) => {
-                error!("Unexpected protocol error: {err}");
-                return false;
+                error!("Unexpected protocol error: {err:?}");
+                // return false;
             }
             Ok(event) => match event {
                 xcb::Event::X(event) => match event {
-                    x::Event::KeyPress(event) => {
-                        self.key_events_handler.handle_key_press(event);
-                    }
+                    x::Event::KeyPress(event) => self.key_events_handler.handle_key_press(event),
                     // x::Event::KeyRelease(_) => todo!(),
                     // x::Event::ButtonPress(_) => todo!(),
                     // x::Event::ButtonRelease(_) => todo!(),
-                    // x::Event::MotionNotify(_) => todo!(),
-                    // x::Event::EnterNotify(_) => todo!(),
+                    x::Event::MotionNotify(event) => self.handle_motion_event(event),
+                    x::Event::EnterNotify(event) => self.handle_enter_notify_event(event),
                     // x::Event::LeaveNotify(_) => todo!(),
-                    // x::Event::FocusIn(_) => todo!(),
-                    // x::Event::FocusOut(_) => todo!(),
+                    x::Event::FocusIn(event) => self.handle_focus_in_event(event, config),
+                    x::Event::FocusOut(event) => self.handle_focus_out_event(event, config),
                     // x::Event::KeymapNotify(_) => todo!(),
                     // x::Event::Expose(_) => todo!(),
                     // x::Event::GraphicsExposure(_) => todo!(),
@@ -146,7 +169,7 @@ impl XcbWindowManager {
                 // xcb::Event::Present(_) => todo!(),
                 xcb::Event::RandR(event) => match event {
                     randr::Event::ScreenChangeNotify(event) => {
-                        debug!("Randr screen change event: {:#?}", event);
+                        // debug!("Randr screen change event: {:#?}", event);
                         for (index, monitor) in self.monitors.iter().enumerate() {
                             if monitor.root_window == event.root() {
                                 self.focused_monitor = Some(index);
@@ -183,11 +206,11 @@ impl XcbWindowManager {
 
     fn handle_map_request(&mut self, event: x::MapRequestEvent, config: &Config) {
         info!("MapRequest - {}", event.window().resource_id());
-        let xwindow = event.window();
+        let window_id = event.window();
 
         let window_attrs_cookie = self
             .conn
-            .send_request(&x::GetWindowAttributes { window: xwindow });
+            .send_request(&x::GetWindowAttributes { window: window_id });
         match self.conn.wait_for_reply(window_attrs_cookie) {
             Ok(window_attrs) => {
                 if window_attrs.override_redirect() {
@@ -201,7 +224,7 @@ impl XcbWindowManager {
             }
         };
 
-        let window_type = self.ewmh.get_window_type(&self.conn, xwindow);
+        let window_type = self.ewmh.get_window_type(&self.conn, window_id);
         debug!("Window type: {:?}", window_type);
         // let size_hints_cookie = self.conn.send_request(&x::GetProperty {
         //     delete: false,
@@ -219,52 +242,101 @@ impl XcbWindowManager {
         //         error!("Failed to get size hints: {:?}", err);
         //     }
         // };
+
         let monitor = self
             .monitors
             .get_mut(self.focused_monitor.unwrap())
             .unwrap();
-        let mut window = match window_type {
+        match window_type {
             WindowType::Tiling => {
-                let rect = monitor.make_rect_for_tiling_window(&self.conn, config);
-                let window = Window::new(rect, xwindow, window_type, config.window.border.size);
-                window
+                monitor.add_window_tiling(&self.conn, config, window_id);
             }
-            WindowType::Floating => {
-                let rect = monitor.make_rect_for_tiling_window(&self.conn, config);
-                let window = Window::new(rect, xwindow, window_type, config.window.border.size);
-                window
-            }
-            WindowType::Docking => {
-                let rect = monitor.make_rect_for_tiling_window(&self.conn, config);
-                let window = Window::new(rect, xwindow, window_type, config.window.border.size);
-                window
-            }
+            WindowType::Floating => {}
+            WindowType::Docking => {}
         };
-        window.rect.height -= 2 * config.window.border.size as u16;
-        window.rect.width -= 2 * config.window.border.size as u16;
-        window.configure(&self.conn);
-        window.subscribe_to_wm_events(&self.conn);
-        window.show(&self.conn);
-        monitor.set_focused(&window, &self.conn, config);
 
         self.conn.flush().unwrap();
     }
 
+    fn handle_focus_in_event(&self, event: x::FocusInEvent, config: &Config) {
+        debug!("FocusIn: {:?}", event.event());
+        if event.event() != self.root_window {
+            let monitor = self.monitors.get(self.focused_monitor.unwrap()).unwrap();
+            if let Some(window) = monitor.get_window(event.event()) {
+                window.change_border_color(
+                    &self.conn,
+                    config.window.border.color_active_u32.unwrap(),
+                );
+                self.conn.flush().unwrap();
+            }
+        }
+    }
+
+    fn handle_focus_out_event(&self, event: x::FocusOutEvent, config: &Config) {
+        debug!("FocusOut: {:?}", event.event());
+        if event.event() != self.root_window {
+            let monitor = self.monitors.get(self.focused_monitor.unwrap()).unwrap();
+            if let Some(window) = monitor.get_window(event.event()) {
+                window.change_border_color(
+                    &self.conn,
+                    config.window.border.color_inactive_u32.unwrap(),
+                );
+                self.conn.flush().unwrap();
+            }
+        }
+    }
+
+    fn handle_enter_notify_event(&mut self, event: x::EnterNotifyEvent) {
+        debug!("Enter Notify: {:?}", event.event());
+        if event.event() != self.root_window {
+            let monitor = self
+                .monitors
+                .get_mut(self.focused_monitor.unwrap())
+                .unwrap();
+            let workspace = monitor.get_focused_workspace_mut().unwrap();
+            workspace.set_focused_by_id(event.event(), &self.conn, false);
+            self.conn.flush().unwrap();
+        }
+    }
+
+    // fn handle_leave_notify_event(&self, event: x::LeaveNotifyEvent) {
+    //     debug!("Leave Notify: {:?}", event.event());
+    // }
+
+    #[inline]
+    fn handle_motion_event(&mut self, event: x::MotionNotifyEvent) {
+        let monitor = self
+            .monitors
+            .get_mut(self.focused_monitor.unwrap())
+            .unwrap();
+        let workspace = monitor.get_focused_workspace_mut().unwrap();
+        if workspace.is_keyboard_focused() {
+            // debug!("event_x: {}, event_y: {}", event.event_x(), event.event_y());
+            let focused_window = workspace.get_focused_window();
+            let window = workspace.get_window_under_cursor(event.event_x(), event.event_y());
+            if focused_window == window {
+                workspace.reset_keyboard_focused_flag();
+            }
+        }
+    }
+
     pub fn execute_startup_commands(&self, config: &Config) {
         for command in &config.startup_commands {
-            match Command::new(command.clone())
+            let segments = command.split(' ').collect::<Vec<_>>();
+            match Command::new(segments.first().unwrap())
+                .args(segments[1..].iter())
                 .stdout(Stdio::piped())
                 .stderr(Stdio::piped())
                 .spawn()
             {
                 Ok(_) => info!("Successfully executed command: '{command}'"),
-                Err(error) => error!("Failed to executed command: '{command}', error: '{error}'"),
+                Err(error) => error!("Failed to execute command: '{command}', error: '{error}'"),
             }
         }
     }
 
     fn subscribe_to_wm_events(&self) {
-        self.conn.send_request(&ChangeWindowAttributes {
+        let cookie = self.conn.send_request_checked(&ChangeWindowAttributes {
             window: self.root_window,
             value_list: &[Cw::EventMask(
                 EventMask::SUBSTRUCTURE_REDIRECT
@@ -272,6 +344,7 @@ impl XcbWindowManager {
                     | EventMask::POINTER_MOTION,
             )],
         });
+        self.conn.check_request(cookie).unwrap();
     }
 
     fn create_meta_window(&self, window_manager_name: &str) -> x::Window {
@@ -304,6 +377,116 @@ impl XcbWindowManager {
         });
 
         meta_window
+    }
+
+    fn set_cursor(&self) {
+        let img = image::open("cursor_image1.jpg").unwrap();
+        debug!("width: {}, height: {}", img.width(), img.height());
+        let img = img
+            .crop_imm(105, 4, 492, 492)
+            .resize(32, 32, FilterType::Nearest);
+        let width = img.width() as u16;
+        let height = img.height() as u16;
+        debug!("width: {}, height: {}", width, height);
+        // let bytes = img.grayscale().to_rgb8().into_raw();
+        let bytes = img.to_rgb8().into_raw();
+        let color_type = img.color();
+        let depth = match color_type {
+            ColorType::L8 | ColorType::La8 | ColorType::Rgb8 | ColorType::Rgba8 => 8,
+            ColorType::L16 | ColorType::La16 | ColorType::Rgb16 | ColorType::Rgba16 => 16,
+            _ => 0, // Handle unsupported or unknown color types
+        };
+        let depth = depth * color_type.channel_count() as u8;
+        debug!("depth: {}", depth);
+
+        // let mask_bitmap: [u8; 8] = [
+        //     0b00011000, 0b00111100, 0b01111110, 0b11111111, 0b01111110, 0b00111100, 0b00011000,
+        //     0b00000000,
+        // ];
+        // let mut binary_bitmap = String::new();
+        // for b in mask_bitmap {
+        //     binary_bitmap.push_str(format!("0b{:08b}", b).as_str());
+        //     binary_bitmap.push_str(", ");
+        // }
+        // debug!("bitmap: {}", binary_bitmap);
+
+        let drawable = x::Drawable::Window(self.root_window);
+
+        let cursor_pixmap: x::Pixmap = self.conn.generate_id();
+        self.conn.send_request(&x::CreatePixmap {
+            depth,
+            pid: cursor_pixmap,
+            drawable,
+            width,
+            height,
+        });
+
+        let mask_pixmap: x::Pixmap = self.conn.generate_id();
+        self.conn.send_request(&x::CreatePixmap {
+            depth,
+            pid: mask_pixmap,
+            drawable,
+            width,
+            height,
+        });
+
+        let gc: x::Gcontext = self.conn.generate_id();
+        self.conn.send_request(&x::CreateGc {
+            cid: gc,
+            // drawable: x::Drawable::Pixmap(cursor_pixmap),
+            drawable,
+            value_list: &[
+                x::Gc::Foreground(self.root_black_pixel),
+                x::Gc::Background(self.root_white_pixel),
+            ],
+        });
+
+        self.conn.send_request(&x::PutImage {
+            format: x::ImageFormat::XyPixmap,
+            drawable: x::Drawable::Pixmap(cursor_pixmap),
+            // drawable,
+            gc,
+            width,
+            height,
+            dst_x: 0,
+            dst_y: 0,
+            left_pad: 0,
+            depth,
+            data: &bytes,
+        });
+
+        self.conn.send_request(&x::PutImage {
+            format: x::ImageFormat::XyPixmap,
+            drawable: x::Drawable::Pixmap(mask_pixmap),
+            // drawable,
+            gc,
+            width,
+            height,
+            dst_x: 0,
+            dst_y: 0,
+            left_pad: 0,
+            depth,
+            data: &bytes,
+        });
+
+        let cursor: x::Cursor = self.conn.generate_id();
+        self.conn.send_request(&x::CreateCursor {
+            cid: cursor,
+            source: cursor_pixmap,
+            mask: cursor_pixmap,
+            fore_red: 0x0000,
+            fore_green: 0x0000,
+            fore_blue: 0x0000,
+            back_red: 0x0000,
+            back_green: 0x0000,
+            back_blue: 0x0000,
+            x: width / 2,
+            y: 0,
+        });
+        self.conn.send_request(&x::ChangeWindowAttributes {
+            window: self.root_window,
+            value_list: &[x::Cw::Cursor(cursor)],
+        });
     }
 }
 

@@ -1,5 +1,1 @@
-#setxkbmap -layout us,ru,pl -option grp:alt_space_toggle &
-#~/.config/polybar/launch.sh --colorblocks &
-#odin run bar &
-alacritty &
 exec cargo run

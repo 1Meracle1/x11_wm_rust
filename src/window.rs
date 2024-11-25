@@ -106,6 +106,16 @@ impl Window {
     pub fn intersects_with_rect(&self, rect: &Rect) -> bool {
         self.intersects_with(rect.x, rect.y, rect.width, rect.height)
     }
+
+    pub fn point_belongs_to(&self, pos_x: i16, pos_y: i16) -> bool {
+        if pos_x < self.rect.x || pos_x > self.rect.x + self.rect.width as i16 {
+            return false;
+        }
+        if pos_y < self.rect.y || pos_y > self.rect.y + self.rect.height as i16 {
+            return false;
+        }
+        true
+    }
 }
 
 impl PartialEq for Window {

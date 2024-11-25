@@ -3,7 +3,7 @@ use std::{
     str::FromStr,
 };
 
-use log::{debug, error, info};
+use log::{error, info};
 
 use crate::config::Config;
 use xcb::x;
@@ -93,10 +93,19 @@ impl KeyEventsHandler {
                         continue;
                     }
 
+                    // conn.send_request(&x::GrabKey {
+                    //     owner_events: true,
+                    //     grab_window: root_window,
+                    //     modifiers,
+                    //     key: key_name as u8,
+                    //     pointer_mode: x::GrabMode::Async,
+                    //     keyboard_mode: x::GrabMode::Async,
+                    // });
+                    // debug!("modifiers: {:#?}", modifiers);
                     conn.send_request(&x::GrabKey {
-                        owner_events: false,
+                        owner_events: true,
                         grab_window: root_window,
-                        modifiers,
+                        modifiers: x::ModMask::ANY,
                         key: key_name as u8,
                         pointer_mode: x::GrabMode::Async,
                         keyboard_mode: x::GrabMode::Async,
@@ -114,7 +123,7 @@ impl KeyEventsHandler {
         }
 
         binds.sort_by(|lhs, rhs| lhs.weight.cmp(&rhs.weight));
-        debug!("binds: {:#?}", binds);
+        // debug!("binds: {:#?}", binds);
 
         Self { binds }
     }
