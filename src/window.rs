@@ -18,40 +18,36 @@ impl Default for WindowType {
 #[derive(Debug)]
 pub struct Window {
     pub rect: Rect,
-    pub xcb_window: x::Window,
+    pub id: x::Window,
     pub r#type: WindowType,
     pub mapped: bool,
-    pub border_size: u32,
+    pub border_size: u16,
 }
 
 impl Window {
-    pub fn new(rect: Rect, xcb_window: x::Window, r#type: WindowType, border_size: u32) -> Self {
+    pub fn new(rect: Rect, xcb_window: x::Window, r#type: WindowType, border_size: u16) -> Self {
         Self {
             rect,
-            xcb_window,
+            id: xcb_window,
             r#type,
             mapped: false,
             border_size,
         }
     }
 
-    pub fn show(&mut self, conn: &xcb::Connection) {
-        conn.send_request(&x::MapWindow {
-            window: self.xcb_window,
-        });
+    pub fn map(&mut self, conn: &xcb::Connection) {
+        conn.send_request(&x::MapWindow { window: self.id });
         self.mapped = true;
     }
 
-    pub fn hide(&mut self, conn: &xcb::Connection) {
-        conn.send_request(&x::UnmapWindow {
-            window: self.xcb_window,
-        });
+    pub fn unmap(&mut self, conn: &xcb::Connection) {
+        conn.send_request(&x::UnmapWindow { window: self.id });
         self.mapped = false;
     }
 
     pub fn subscribe_to_wm_events(&self, conn: &xcb::Connection) {
         conn.send_request(&x::ChangeWindowAttributes {
-            window: self.xcb_window,
+            window: self.id,
             value_list: &[x::Cw::EventMask(
                 x::EventMask::PROPERTY_CHANGE
                     | x::EventMask::FOCUS_CHANGE
@@ -63,20 +59,20 @@ impl Window {
 
     pub fn configure(&self, conn: &xcb::Connection) {
         conn.send_request(&x::ConfigureWindow {
-            window: self.xcb_window,
+            window: self.id,
             value_list: &[
                 x::ConfigWindow::X(self.rect.x as i32),
                 x::ConfigWindow::Y(self.rect.y as i32),
                 x::ConfigWindow::Width(self.rect.width as u32),
                 x::ConfigWindow::Height(self.rect.height as u32),
-                x::ConfigWindow::BorderWidth(self.border_size),
+                x::ConfigWindow::BorderWidth(self.border_size as u32),
             ],
         });
     }
 
     pub fn change_border_color(&self, conn: &xcb::Connection, color: u32) {
         conn.send_request(&x::ChangeWindowAttributes {
-            window: self.xcb_window,
+            window: self.id,
             value_list: &[x::Cw::BorderPixel(color)],
         });
     }
@@ -84,7 +80,7 @@ impl Window {
     pub fn set_input_focus(&self, conn: &xcb::Connection) {
         conn.send_request(&x::SetInputFocus {
             revert_to: x::InputFocus::PointerRoot,
-            focus: self.xcb_window,
+            focus: self.id,
             time: x::CURRENT_TIME,
         });
     }
@@ -120,7 +116,7 @@ impl Window {
 
 impl PartialEq for Window {
     fn eq(&self, other: &Self) -> bool {
-        self.xcb_window == other.xcb_window
+        self.id == other.id
     }
 }
 

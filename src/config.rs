@@ -11,7 +11,7 @@ pub struct KeybindingsConfig {
 
 #[derive(Deserialize, Debug)]
 pub struct WindowBorderConfig {
-    pub size: u32,
+    pub size: u16,
     pub color_inactive: String,
     pub color_active: String,
     pub color_inactive_u32: Option<u32>,

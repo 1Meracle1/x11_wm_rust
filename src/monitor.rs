@@ -19,7 +19,7 @@ pub struct Monitor {
     pub root_window: x::Window,
     pub rect: Rect,
     workspaces: Vec<Workspace>,
-    focused_workspace: usize,
+    focused_workspace_index: usize,
     available_area: Rect,
     docked_windows: Vec<Window>,
 }
@@ -38,13 +38,13 @@ impl Monitor {
         };
         let mut workspaces = Vec::new();
         workspaces.reserve(workspaces_count);
-        workspaces.push(Workspace::new(rect.clone(), config, conn));
+        workspaces.push(Workspace::new(1, rect.clone(), config, conn, false));
 
         Self {
             root_window,
             rect: rect.clone(),
             workspaces,
-            focused_workspace: 0,
+            focused_workspace_index: 0,
             available_area: rect,
             docked_windows: Vec::new(),
         }
@@ -61,27 +61,55 @@ impl Monitor {
         }
     }
 
-    pub fn set_focused(&mut self, window: &Window, conn: &xcb::Connection, via_keyboard: bool) {
-        if let Some(focused_workspace) = self.workspaces.get_mut(self.focused_workspace) {
-            focused_workspace.set_focused(window, conn, via_keyboard);
-        }
-    }
+    // pub fn set_window_focused(
+    //     &mut self,
+    //     window: &Window,
+    //     conn: &xcb::Connection,
+    //     via_keyboard: bool,
+    // ) {
+    //     if let Some(focused_workspace) = self.workspaces.get_mut(self.focused_workspace_index) {
+    //         focused_workspace.set_window_focused(window, conn, via_keyboard);
+    //     }
+    // }
 
-    pub fn add_window_tiling(
+    pub fn add_tiling_window_to_focused_workspace(
         &mut self,
         conn: &xcb::Connection,
         config: &Config,
         window_id: x::Window,
     ) {
-        if let Some(focused_workspace) = self.workspaces.get_mut(self.focused_workspace) {
+        if let Some(focused_workspace) = self.workspaces.get_mut(self.focused_workspace_index) {
             let expected_width =
                 (self.available_area.width as f32 * config.window.default_width_tiling) as u16;
-            focused_workspace.add_window_tiling(conn, config, window_id, expected_width);
+            focused_workspace.add_window_tiling(conn, window_id, expected_width);
         }
     }
 
+    pub fn set_workspace_focused(&mut self, id: u16, config: &Config, conn: &xcb::Connection) {
+        if let Some(currently_focused) = self.workspaces.get_mut(self.focused_workspace_index) {
+            if currently_focused.id == id {
+                return;
+            }
+            currently_focused.hide_all_windows(self.rect.height, conn);
+        }
+        if let Some((index, workspace)) = self
+            .workspaces
+            .iter_mut()
+            .enumerate()
+            .find(|(_, w)| w.id == id)
+        {
+            workspace.unhide_all_windows(self.rect.height, conn);
+            self.focused_workspace_index = index;
+        } else {
+            self.workspaces
+                .push(Workspace::new(id, self.rect.clone(), config, conn, false));
+            self.focused_workspace_index = self.workspaces.len() - 1;
+        }
+    }
+
+    #[inline]
     pub fn get_focused_workspace(&self) -> Option<&Workspace> {
-        let focused_workspace = self.workspaces.get(self.focused_workspace);
+        let focused_workspace = self.workspaces.get(self.focused_workspace_index);
         if focused_workspace.is_some() {
             focused_workspace
         } else {
@@ -91,7 +119,7 @@ impl Monitor {
 
     #[inline]
     pub fn get_focused_workspace_mut(&mut self) -> Option<&mut Workspace> {
-        let focused_workspace = self.workspaces.get_mut(self.focused_workspace);
+        let focused_workspace = self.workspaces.get_mut(self.focused_workspace_index);
         if focused_workspace.is_some() {
             focused_workspace
         } else {
@@ -99,19 +127,19 @@ impl Monitor {
         }
     }
 
-    pub fn get_window(&self, window_xcb: x::Window) -> Option<&Window> {
-        if let Some(focused_workspace) = self.workspaces.get(self.focused_workspace) {
-            focused_workspace.get_window(window_xcb)
-        } else {
-            None
-        }
-    }
+    // pub fn get_window(&self, window_xcb: x::Window) -> Option<&Window> {
+    //     if let Some(focused_workspace) = self.workspaces.get(self.focused_workspace_index) {
+    //         focused_workspace.get_window(window_xcb)
+    //     } else {
+    //         None
+    //     }
+    // }
 
-    pub fn get_window_mut(&mut self, window_xcb: x::Window) -> Option<&mut Window> {
-        if let Some(focused_workspace) = self.workspaces.get_mut(self.focused_workspace) {
-            focused_workspace.get_window_mut(window_xcb)
-        } else {
-            None
-        }
-    }
+    // pub fn get_window_mut(&mut self, window_xcb: x::Window) -> Option<&mut Window> {
+    //     if let Some(focused_workspace) = self.workspaces.get_mut(self.focused_workspace_index) {
+    //         focused_workspace.get_window_mut(window_xcb)
+    //     } else {
+    //         None
+    //     }
+    // }
 }

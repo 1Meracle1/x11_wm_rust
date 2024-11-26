@@ -249,10 +249,22 @@ impl XcbWindowManager {
             .unwrap();
         match window_type {
             WindowType::Tiling => {
-                monitor.add_window_tiling(&self.conn, config, window_id);
+                monitor.add_tiling_window_to_focused_workspace(&self.conn, config, window_id);
             }
             WindowType::Floating => {}
-            WindowType::Docking => {}
+            WindowType::Docking => {
+                let desktop_index = self.ewmh.get_desktop_index(&self.conn, window_id);
+                if desktop_index.is_none() || desktop_index.unwrap() == 0xFFFFFFFF {
+                    debug!("docking window with global desktop index");
+                } else {
+                    debug!("docking window with specific desktop index");
+                    monitor.set_workspace_focused(
+                        desktop_index.unwrap() as u16,
+                        config,
+                        &self.conn,
+                    );
+                }
+            }
         };
 
         self.conn.flush().unwrap();
@@ -262,7 +274,11 @@ impl XcbWindowManager {
         debug!("FocusIn: {:?}", event.event());
         if event.event() != self.root_window {
             let monitor = self.monitors.get(self.focused_monitor.unwrap()).unwrap();
-            if let Some(window) = monitor.get_window(event.event()) {
+            if let Some(window) = monitor
+                .get_focused_workspace()
+                .unwrap()
+                .get_window(event.event())
+            {
                 window.change_border_color(
                     &self.conn,
                     config.window.border.color_active_u32.unwrap(),
@@ -276,7 +292,11 @@ impl XcbWindowManager {
         debug!("FocusOut: {:?}", event.event());
         if event.event() != self.root_window {
             let monitor = self.monitors.get(self.focused_monitor.unwrap()).unwrap();
-            if let Some(window) = monitor.get_window(event.event()) {
+            if let Some(window) = monitor
+                .get_focused_workspace()
+                .unwrap()
+                .get_window(event.event())
+            {
                 window.change_border_color(
                     &self.conn,
                     config.window.border.color_inactive_u32.unwrap(),
@@ -294,7 +314,7 @@ impl XcbWindowManager {
                 .get_mut(self.focused_monitor.unwrap())
                 .unwrap();
             let workspace = monitor.get_focused_workspace_mut().unwrap();
-            workspace.set_focused_by_id(event.event(), &self.conn, false);
+            workspace.set_window_focused_by_id(event.event(), &self.conn, false);
             self.conn.flush().unwrap();
         }
     }

@@ -3,11 +3,12 @@ use crate::{
     monitor::Rect,
     window::{Window, WindowType},
 };
-use log::{debug, error};
+use log::{debug, error, info};
 use xcb::x;
 
 #[derive(Debug)]
 pub struct Workspace {
+    pub id: u16,
     tiling_windows: Vec<Window>,
     floating_windows: Vec<Window>,
     available_area: Rect,
@@ -20,14 +21,22 @@ pub struct Workspace {
     outer_gap_vert: u16,
     inner_gap: u16,
     border_size: u16,
+    hidden: bool,
 }
 
 impl Workspace {
-    pub fn new(available_area: Rect, config: &Config, conn: &xcb::Connection) -> Self {
+    pub fn new(
+        id: u16,
+        available_area: Rect,
+        config: &Config,
+        conn: &xcb::Connection,
+        hidden: bool,
+    ) -> Self {
         let mut tiling_windows = Vec::new();
         tiling_windows.reserve(3);
 
         let mut res = Self {
+            id,
             tiling_windows,
             floating_windows: Vec::new(),
             available_area,
@@ -38,7 +47,8 @@ impl Workspace {
             outer_gap_horiz: 0,
             outer_gap_vert: 0,
             inner_gap: config.workspaces.inner_gap,
-            border_size: 0,
+            border_size: config.window.border.size,
+            hidden,
         };
         res.update_gaps(config, conn);
 
@@ -46,7 +56,7 @@ impl Workspace {
     }
 
     pub fn update_gaps(&mut self, config: &Config, conn: &xcb::Connection) {
-        self.border_size = config.window.border.size as u16;
+        self.border_size = config.window.border.size;
 
         let mut outer_gap_horiz = config.workspaces.outer_gap_horiz;
         if self.available_area.width <= config.workspaces.outer_gap_horiz {
@@ -82,8 +92,6 @@ impl Workspace {
         debug!("update_available_area: {:#?}", new_available_area);
         let diff_x = self.available_area.x - new_available_area.x;
         let diff_y = self.available_area.y - new_available_area.y;
-        // let diff_width = self.available_area.width as i16 - new_available_area.width as i16;
-        // let diff_height = self.available_area.height as i16 - new_available_area.height as i16;
         self.available_area = new_available_area;
         self.tiling_windows.iter_mut().for_each(|item| {
             item.rect.x += diff_x;
@@ -98,7 +106,7 @@ impl Workspace {
         self.tiling_windows.iter_mut().for_each(|item| {
             let intersects = item.intersects_with_rect(&self.available_area);
             if intersects && !item.mapped {
-                item.show(conn);
+                item.map(conn);
             }
         });
     }
@@ -107,17 +115,78 @@ impl Workspace {
         self.tiling_windows.iter_mut().for_each(|item| {
             let intersects = item.intersects_with_rect(&self.available_area);
             if !intersects && item.mapped {
-                item.hide(conn);
+                item.unmap(conn);
             }
         });
     }
 
-    pub fn set_focused(&mut self, window: &Window, conn: &xcb::Connection, via_keyboard: bool) {
+    pub fn hide_all_windows(&mut self, monitor_height: u16, conn: &xcb::Connection) {
+        if self.hidden {
+            return;
+        }
+        let shift = (monitor_height * self.id) as i16;
+        self.tiling_windows.iter_mut().for_each(|w| {
+            w.rect.y += shift;
+            w.configure(conn);
+            if w.mapped {
+                w.unmap(conn);
+            }
+        });
+        self.floating_windows.iter_mut().for_each(|w| {
+            w.rect.y += shift;
+            w.configure(conn);
+            if w.mapped {
+                w.unmap(conn);
+            }
+        });
+        self.docked_windows.iter_mut().for_each(|w| {
+            w.rect.y += shift;
+            w.configure(conn);
+            if w.mapped {
+                w.unmap(conn);
+            }
+        });
+    }
+
+    pub fn unhide_all_windows(&mut self, monitor_height: u16, conn: &xcb::Connection) {
+        if !self.hidden {
+            return;
+        }
+        let shift = (monitor_height * self.id) as i16;
+        self.tiling_windows.iter_mut().for_each(|w| {
+            w.rect.y -= shift;
+            w.configure(conn);
+            if w.mapped {
+                w.map(conn);
+            }
+        });
+        self.floating_windows.iter_mut().for_each(|w| {
+            w.rect.y -= shift;
+            w.configure(conn);
+            if w.mapped {
+                w.map(conn);
+            }
+        });
+        self.docked_windows.iter_mut().for_each(|w| {
+            w.rect.y -= shift;
+            w.configure(conn);
+            if w.mapped {
+                w.map(conn);
+            }
+        });
+    }
+
+    pub fn set_window_focused(
+        &mut self,
+        window: &Window,
+        conn: &xcb::Connection,
+        via_keyboard: bool,
+    ) {
         if !via_keyboard && self.focused_via_keyboard {
             return;
         }
 
-        self.focused_window = Some(window.xcb_window);
+        self.focused_window = Some(window.id);
         self.focused_window_type = window.r#type;
         self.focused_via_keyboard = via_keyboard;
 
@@ -129,7 +198,7 @@ impl Workspace {
         );
     }
 
-    pub fn set_focused_by_id(
+    pub fn set_window_focused_by_id(
         &mut self,
         window_id: x::Window,
         conn: &xcb::Connection,
@@ -138,13 +207,10 @@ impl Workspace {
         if !via_keyboard && self.focused_via_keyboard {
             return;
         }
-        let tiling_window = self
-            .tiling_windows
-            .iter()
-            .find(|item| item.xcb_window == window_id);
+        let tiling_window = self.tiling_windows.iter().find(|item| item.id == window_id);
         if let Some(window) = tiling_window {
             window.set_input_focus(conn);
-            self.focused_window = Some(window.xcb_window);
+            self.focused_window = Some(window.id);
             self.focused_window_type = window.r#type;
             self.focused_via_keyboard = via_keyboard;
             debug!(
@@ -156,10 +222,10 @@ impl Workspace {
         let floating_window = self
             .floating_windows
             .iter()
-            .find(|item| item.xcb_window == window_id);
+            .find(|item| item.id == window_id);
         if let Some(window) = floating_window {
             window.set_input_focus(conn);
-            self.focused_window = Some(window.xcb_window);
+            self.focused_window = Some(window.id);
             self.focused_window_type = window.r#type;
             self.focused_via_keyboard = via_keyboard;
             debug!(
@@ -183,21 +249,27 @@ impl Workspace {
 
         if self.focused_window.is_some() && self.focused_window_type == WindowType::Tiling {
             let focused_window_id = self.focused_window.unwrap();
-            if let Some(focused_window) = self
+            if let Some((index, focused_window)) = self
                 .tiling_windows
                 .iter()
-                .find(|item| item.xcb_window == focused_window_id)
+                .enumerate()
+                .find(|(_, item)| item.id == focused_window_id)
             {
                 let mut rect = focused_window.rect.clone();
-                rect.x += focused_window.rect.width as i16 + self.inner_gap as i16;
+                rect.x += focused_window.rect.width as i16
+                    + self.inner_gap as i16
+                    + self.border_size as i16;
                 rect.width = expected_width;
                 rect.height = self.available_area.height;
+                self.tiling_windows[index + 1..]
+                    .iter_mut()
+                    .for_each(|item| item.rect.x += expected_width as i16);
                 return rect;
             }
         }
 
         let mut rect = self.get_tiling_mapped_last().unwrap().rect.clone();
-        rect.x += rect.width as i16 + self.inner_gap as i16;
+        rect.x += rect.width as i16 + self.inner_gap as i16 + self.border_size as i16;
         rect.width = expected_width;
         rect.height = self.available_area.height;
         rect
@@ -205,42 +277,39 @@ impl Workspace {
 
     fn shift_to_make_rect_visible_on_screen(&mut self, rect: &mut Rect) {
         let diff = self.available_area.x + self.available_area.width as i16
-            - self.outer_gap_horiz as i16
+            - self.border_size as i16
             - rect.x
             - rect.width as i16;
+        debug!("shift_to_make_rect_visible_on_screen - diff: {}", diff);
         if diff < 0 {
             self.tiling_windows.iter_mut().for_each(|item| {
-                item.rect.x -= diff;
+                item.rect.x += diff;
             });
-            rect.x -= diff;
+            rect.x += diff;
         }
     }
 
     #[inline]
     fn get_tiling_mapped_first(&self) -> Option<&Window> {
         self.tiling_windows.iter().find(|item| {
-            item.mapped
-                || self.focused_window.is_some() && self.focused_window.unwrap() == item.xcb_window
+            item.mapped || self.focused_window.is_some() && self.focused_window.unwrap() == item.id
         })
     }
 
     #[inline]
     fn get_tiling_mapped_last(&self) -> Option<&Window> {
         self.tiling_windows.iter().rev().find(|item| {
-            item.mapped
-                || self.focused_window.is_some() && self.focused_window.unwrap() == item.xcb_window
+            item.mapped || self.focused_window.is_some() && self.focused_window.unwrap() == item.id
         })
     }
 
     fn shift_to_balance_free_space(&mut self) {
         let left_most_rect = &self.get_tiling_mapped_first().unwrap().rect;
-        let free_space_left =
-            left_most_rect.x - self.available_area.x - self.outer_gap_horiz as i16;
+        let free_space_left = left_most_rect.x - self.available_area.x;
         debug!("free_space_left: {}", free_space_left);
 
         let right_most_rect = &self.get_tiling_mapped_last().unwrap().rect;
         let free_space_right = self.available_area.x + self.available_area.width as i16
-            - self.outer_gap_horiz as i16
             - right_most_rect.x
             - right_most_rect.width as i16;
         debug!("free_space_right: {}", free_space_right);
@@ -252,9 +321,9 @@ impl Workspace {
         let shift = if free_space_right >= 0 && free_space_left >= 0 {
             (free_space_right - free_space_left) / 2
         } else if free_space_left + free_space_right >= 0 {
-            (free_space_left + free_space_right) / 2
+            -(free_space_left + free_space_right) / 2
         } else if free_space_left > 0 && free_space_right < 0 {
-            free_space_left
+            -free_space_left
         } else {
             0
         };
@@ -262,14 +331,13 @@ impl Workspace {
         if shift != 0 {
             self.tiling_windows
                 .iter_mut()
-                .for_each(|item| item.rect.x -= shift);
+                .for_each(|item| item.rect.x += shift);
         }
     }
 
     pub fn add_window_tiling(
         &mut self,
         conn: &xcb::Connection,
-        config: &Config,
         window_id: x::Window,
         expected_width: u16,
     ) {
@@ -280,27 +348,32 @@ impl Workspace {
         self.focused_window_type = WindowType::Tiling;
         self.focused_via_keyboard = true;
 
-        let window = Window::new(
-            rect,
-            window_id,
-            WindowType::Tiling,
-            config.window.border.size,
-        );
+        let window = Window::new(rect, window_id, WindowType::Tiling, self.border_size);
         window.subscribe_to_wm_events(conn);
         self.tiling_windows.push(window);
         self.sort_windows();
+        info!("before balance of free space");
+        self.tiling_windows
+            .iter()
+            .for_each(|item| debug!("{:?}", item.rect));
         self.shift_to_balance_free_space();
+        info!("after balance of free space");
+        self.tiling_windows
+            .iter()
+            .for_each(|item| debug!("{:?}", item.rect));
 
         self.tiling_windows.iter().for_each(|item| {
             item.configure(conn);
         });
+        self.show_windows_in_available_area(conn);
+        self.hide_windows_out_available_area(conn);
 
         let window = self
             .tiling_windows
             .iter_mut()
-            .find(|item| item.xcb_window == self.focused_window.unwrap())
+            .find(|item| item.id == self.focused_window.unwrap())
             .unwrap();
-        window.show(conn);
+        window.map(conn);
         window.set_input_focus(conn);
     }
 
@@ -331,14 +404,14 @@ impl Workspace {
         let tiling_window = self
             .tiling_windows
             .iter()
-            .find(|item| item.xcb_window == window_xcb);
+            .find(|item| item.id == window_xcb);
         if tiling_window.is_some() {
             return tiling_window;
         }
         let floating_window = self
             .floating_windows
             .iter()
-            .find(|item| item.xcb_window == window_xcb);
+            .find(|item| item.id == window_xcb);
         if floating_window.is_some() {
             return floating_window;
         }
@@ -349,14 +422,14 @@ impl Workspace {
         let tiling_window = self
             .tiling_windows
             .iter_mut()
-            .find(|item| item.xcb_window == window_xcb);
+            .find(|item| item.id == window_xcb);
         if tiling_window.is_some() {
             return tiling_window;
         }
         let floating_window = self
             .floating_windows
             .iter_mut()
-            .find(|item| item.xcb_window == window_xcb);
+            .find(|item| item.id == window_xcb);
         if floating_window.is_some() {
             return floating_window;
         }
@@ -369,7 +442,7 @@ impl Workspace {
                 let tiling_window = self
                     .tiling_windows
                     .iter()
-                    .find(|item| item.xcb_window == focused_window);
+                    .find(|item| item.id == focused_window);
                 if tiling_window.is_some() {
                     return tiling_window;
                 }
@@ -377,7 +450,7 @@ impl Workspace {
                 let floating_window = self
                     .floating_windows
                     .iter()
-                    .find(|item| item.xcb_window == focused_window);
+                    .find(|item| item.id == focused_window);
                 if floating_window.is_some() {
                     return floating_window;
                 }
@@ -392,7 +465,7 @@ impl Workspace {
                 let tiling_window = self
                     .tiling_windows
                     .iter_mut()
-                    .find(|item| item.xcb_window == focused_window);
+                    .find(|item| item.id == focused_window);
                 if tiling_window.is_some() {
                     return tiling_window;
                 }
@@ -400,7 +473,7 @@ impl Workspace {
                 let floating_window = self
                     .floating_windows
                     .iter_mut()
-                    .find(|item| item.xcb_window == focused_window);
+                    .find(|item| item.id == focused_window);
                 if floating_window.is_some() {
                     return floating_window;
                 }

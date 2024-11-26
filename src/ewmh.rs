@@ -1,4 +1,7 @@
-use xcb::x;
+use std::io::Read;
+
+use log::error;
+use xcb::x::{self};
 
 use crate::window::WindowType;
 
@@ -221,4 +224,32 @@ impl Ewmh {
             Err(_) => None,
         }
     }
+
+    pub fn get_desktop_index(&self, conn: &xcb::Connection, window: x::Window) -> Option<u32> {
+        let cookie = conn.send_request(&x::GetProperty {
+            delete: false,
+            window,
+            property: self.atoms.wm_desktop,
+            r#type: x::ATOM_CARDINAL,
+            long_offset: 0,
+            long_length: 1,
+        });
+        match conn.wait_for_reply(cookie) {
+            Ok(reply) => bytes_to_u32(reply.value()),
+            Err(err) => {
+                error!(
+                    "Failed to fetch desktop index for window {:?}, error: {}",
+                    window, err
+                );
+                None
+            }
+        }
+    }
+}
+
+fn bytes_to_u32(bytes: &[u8]) -> Option<u32> {
+    let mut padded = [0u8; 4];
+    let len = bytes.len().min(4);
+    padded[..len].copy_from_slice(&bytes[..len]);
+    Some(u32::from_le_bytes(padded))
 }
