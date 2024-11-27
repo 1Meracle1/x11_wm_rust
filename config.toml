@@ -8,6 +8,16 @@ keys_combination = "Alt+Return"
 action = "exec"
 arguments = ["alacritty"]
 
+[[keybindings]]
+keys_combination = "Alt+H"
+action = "exec"
+arguments = ["target/debug/wm_msg focus left"]
+
+[[keybindings]]
+keys_combination = "Alt+L"
+action = "exec"
+arguments = ["target/debug/wm_msg focus right"]
+
 [window]
 resize_tick_pixels = 6
 minimum_width_tiling = 10

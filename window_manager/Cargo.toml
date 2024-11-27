@@ -1,0 +1,17 @@
+[package]
+name = "window_manager"
+version = "0.1.0"
+edition = "2021"
+
+[build-dependencies]
+bindgen = "0.70.1"
+
+[dependencies]
+env_logger = "0.11.5"
+image = "0.25.5"
+log = "0.4.22"
+serde = { version = "1.0.215", features = ["serde_derive"] }
+strum = "0.26.3"
+strum_macros = "0.26.4"
+toml = "0.8.19"
+xcb = { version = "1.5.0", features = ["as-raw-xcb-connection", "composite", "damage", "debug_atom_names", "dpms", "dri2", "dri3", "ge", "glx", "present", "randr", "record", "render", "res", "screensaver", "shape", "shm", "sync", "x11", "xevie", "xf86dri", "xf86vidmode", "xfixes", "xinerama", "xinput", "xkb", "xlib_xcb", "xprint", "xselinux", "xtest", "xv", "xvmc"] }

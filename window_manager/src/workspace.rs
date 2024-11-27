@@ -352,15 +352,16 @@ impl Workspace {
         window.subscribe_to_wm_events(conn);
         self.tiling_windows.push(window);
         self.sort_windows();
-        info!("before balance of free space");
-        self.tiling_windows
-            .iter()
-            .for_each(|item| debug!("{:?}", item.rect));
+
+        // info!("before balance of free space");
+        // self.tiling_windows
+        //     .iter()
+        //     .for_each(|item| debug!("{:?}", item.rect));
         self.shift_to_balance_free_space();
-        info!("after balance of free space");
-        self.tiling_windows
-            .iter()
-            .for_each(|item| debug!("{:?}", item.rect));
+        // info!("after balance of free space");
+        // self.tiling_windows
+        //     .iter()
+        //     .for_each(|item| debug!("{:?}", item.rect));
 
         self.tiling_windows.iter().for_each(|item| {
             item.configure(conn);
@@ -375,6 +376,73 @@ impl Workspace {
             .unwrap();
         window.map(conn);
         window.set_input_focus(conn);
+    }
+
+    pub fn shift_focus_left(&mut self, conn: &xcb::Connection) {
+        if let Some(focused_id) = self.focused_window {
+            if self.focused_window_type == WindowType::Tiling {
+                if let Some((index, _)) = self
+                    .tiling_windows
+                    .iter()
+                    .enumerate()
+                    .find(|(_, w)| w.id == focused_id)
+                {
+                    if index != 0 {
+                        let new_selected_window = self.tiling_windows.get(index - 1).unwrap();
+                        self.focused_window = Some(new_selected_window.id);
+                        self.focused_window_type = new_selected_window.r#type;
+                        self.focused_via_keyboard = true;
+                        new_selected_window.set_input_focus(conn);
+
+                        let diff = new_selected_window.rect.x
+                            - self.available_area.x
+                            - self.border_size as i16;
+                        if diff < 0 {
+                            self.tiling_windows.iter_mut().for_each(|w| {
+                                w.rect.x -= diff;
+                                w.configure(conn);
+                            });
+                            self.show_windows_in_available_area(conn);
+                            self.hide_windows_out_available_area(conn);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    pub fn shift_focus_right(&mut self, conn: &xcb::Connection) {
+        if let Some(focused_id) = self.focused_window {
+            if self.focused_window_type == WindowType::Tiling {
+                if let Some((index, _)) = self
+                    .tiling_windows
+                    .iter()
+                    .enumerate()
+                    .find(|(_, w)| w.id == focused_id)
+                {
+                    if index != self.tiling_windows.len() - 1 {
+                        let new_selected_window = self.tiling_windows.get(index + 1).unwrap();
+                        self.focused_window = Some(new_selected_window.id);
+                        self.focused_window_type = new_selected_window.r#type;
+                        self.focused_via_keyboard = true;
+                        new_selected_window.set_input_focus(conn);
+
+                        let diff = self.available_area.x + self.available_area.width as i16
+                            - self.border_size as i16
+                            - new_selected_window.rect.x
+                            - new_selected_window.rect.width as i16;
+                        if diff < 0 {
+                            self.tiling_windows.iter_mut().for_each(|w| {
+                                w.rect.x += diff;
+                                w.configure(conn);
+                            });
+                            self.show_windows_in_available_area(conn);
+                            self.hide_windows_out_available_area(conn);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     fn sort_windows(&mut self) {

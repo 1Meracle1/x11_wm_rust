@@ -17,14 +17,16 @@ impl Action {
     fn execute(&self) {
         match self {
             Action::Exec(command) => {
-                match Command::new(command.clone())
+                let segments = command.split(' ').collect::<Vec<_>>();
+                match Command::new(segments.first().unwrap())
+                    .args(segments[1..].iter())
                     .stdout(Stdio::piped())
                     .stderr(Stdio::piped())
                     .spawn()
                 {
                     Ok(_) => info!("Successfully executed command: '{command}'"),
                     Err(error) => {
-                        error!("Failed to executed command: '{command}', error: '{error}'")
+                        error!("Failed to execute command: '{command}', error: '{error}'")
                     }
                 }
             }

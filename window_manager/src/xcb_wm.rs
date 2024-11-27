@@ -115,7 +115,7 @@ impl XcbWindowManager {
     }
 
     pub fn handle_event(&mut self, config: &Config) -> bool {
-        match self.conn.wait_for_event() {
+        match self.conn.poll_for_event() {
             Err(xcb::Error::Connection(err)) => {
                 error!("Unexpected I/O error: {err:?}");
                 return false;
@@ -125,7 +125,7 @@ impl XcbWindowManager {
                 // return false;
             }
             Ok(event) => match event {
-                xcb::Event::X(event) => match event {
+                Some(xcb::Event::X(event)) => match event {
                     x::Event::KeyPress(event) => self.key_events_handler.handle_key_press(event),
                     // x::Event::KeyRelease(_) => todo!(),
                     // x::Event::ButtonPress(_) => todo!(),
@@ -167,7 +167,7 @@ impl XcbWindowManager {
                 // xcb::Event::Dri2(_) => todo!(),
                 // xcb::Event::Glx(_) => todo!(),
                 // xcb::Event::Present(_) => todo!(),
-                xcb::Event::RandR(event) => match event {
+                Some(xcb::Event::RandR(event)) => match event {
                     randr::Event::ScreenChangeNotify(event) => {
                         // debug!("Randr screen change event: {:#?}", event);
                         for (index, monitor) in self.monitors.iter().enumerate() {
@@ -507,6 +507,26 @@ impl XcbWindowManager {
             window: self.root_window,
             value_list: &[x::Cw::Cursor(cursor)],
         });
+    }
+
+    pub fn handle_shift_focus_left(&mut self) {
+        let monitor = self
+            .monitors
+            .get_mut(self.focused_monitor.unwrap())
+            .unwrap();
+        let workspace = monitor.get_focused_workspace_mut().unwrap();
+        workspace.shift_focus_left(&self.conn);
+        self.conn.flush().unwrap();
+    }
+
+    pub fn handle_shift_focus_right(&mut self) {
+        let monitor = self
+            .monitors
+            .get_mut(self.focused_monitor.unwrap())
+            .unwrap();
+        let workspace = monitor.get_focused_workspace_mut().unwrap();
+        workspace.shift_focus_right(&self.conn);
+        self.conn.flush().unwrap();
     }
 }
 
