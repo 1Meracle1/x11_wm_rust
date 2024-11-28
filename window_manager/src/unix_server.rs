@@ -7,19 +7,14 @@ use std::{
 };
 
 use log::{error, info};
-
-#[derive(Debug)]
-pub enum UnixClientMessage {
-    FocusLeft,
-    FocusRight,
-}
+use msg_types::WmCommand;
 
 pub struct UnixServerWorker {
     thread_handle: Option<JoinHandle<()>>,
 }
 
 impl UnixServerWorker {
-    pub fn new(socket_path: &str, sender: Sender<UnixClientMessage>) -> Self {
+    pub fn new(socket_path: &str, sender: Sender<WmCommand>) -> Self {
         if fs::metadata(socket_path).is_ok() {
             fs::remove_file(socket_path).unwrap();
         }
@@ -30,10 +25,12 @@ impl UnixServerWorker {
                 Ok((mut stream, _addr)) => {
                     let mut message = String::new();
                     stream.read_to_string(&mut message).unwrap();
-                    if let Some(decoded_message) = decode_unix_client_message(&message) {
+                    if let Some(decoded_message) =
+                        WmCommand::deserialize(message.into_bytes().as_slice())
+                    {
                         sender.send(decoded_message).unwrap();
                     } else {
-                        error!("Failed to decode message: {}", message);
+                        error!("Failed to deserialize message");
                     }
                 }
                 Err(err) => error!("Connection failed: {}", err),
@@ -43,21 +40,6 @@ impl UnixServerWorker {
             thread_handle: Some(thread_handle),
         }
     }
-}
-
-fn decode_unix_client_message(message: &String) -> Option<UnixClientMessage> {
-    let parts: Vec<&str> = message.split(' ').collect();
-    if !parts.is_empty() {
-        if parts.first().unwrap().starts_with("focus") && parts.len() == 2 {
-            let focus_type = parts.get(1).unwrap();
-            if focus_type.starts_with("left") {
-                return Some(UnixClientMessage::FocusLeft);
-            } else if focus_type.starts_with("right") {
-                return Some(UnixClientMessage::FocusRight);
-            }
-        }
-    }
-    None
 }
 
 impl Drop for UnixServerWorker {

@@ -12,7 +12,8 @@ use std::sync::mpsc;
 
 use env_logger::Env;
 use log::{debug, trace};
-use unix_server::{UnixClientMessage, UnixServerWorker};
+use msg_types::WmCommand;
+use unix_server::UnixServerWorker;
 
 const WM_NAME: &'static str = "Unknown WM";
 
@@ -39,8 +40,8 @@ fn main() {
         receiver.try_iter().for_each(|msg| {
             debug!("message received via Unix domain socket: {:?}", msg);
             match msg {
-                UnixClientMessage::FocusLeft => wm.handle_shift_focus_left(),
-                UnixClientMessage::FocusRight => wm.handle_shift_focus_right(),
+                WmCommand::FocusLeft => wm.handle_shift_focus_left(),
+                WmCommand::FocusRight => wm.handle_shift_focus_right(),
             }
         });
         if !wm.handle_event(&config) {

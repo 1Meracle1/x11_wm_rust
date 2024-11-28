@@ -2,5 +2,6 @@
 resolver = "2"
 members = [
   "window_manager", 
-  "wm_msg"
+  "wm_msg",
+  "msg_types"
 ]
