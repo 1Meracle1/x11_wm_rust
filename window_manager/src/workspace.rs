@@ -3,7 +3,7 @@ use crate::{
     monitor::Rect,
     window::{Window, WindowType},
 };
-use log::{debug, error, info};
+use log::{debug, error};
 use xcb::x;
 
 #[derive(Debug)]
@@ -440,6 +440,108 @@ impl Workspace {
                             self.hide_windows_out_available_area(conn);
                         }
                     }
+                }
+            }
+        }
+    }
+
+    pub fn move_window_left(&mut self, conn: &xcb::Connection) {
+        if let Some(focused_id) = self.focused_window {
+            if self.focused_window_type == WindowType::Tiling {
+                let index = self
+                    .tiling_windows
+                    .iter()
+                    .enumerate()
+                    .find(|(_, w)| w.id == focused_id)
+                    .unwrap()
+                    .0;
+                if index != 0 {
+                    debug!("index: {}", index);
+                    let focused_window_rect = self.tiling_windows.get(index).unwrap().rect.clone();
+                    let swapped_with_window_rect =
+                        self.tiling_windows.get(index - 1).unwrap().rect.clone();
+
+                    self.tiling_windows.get_mut(index).unwrap().rect =
+                        swapped_with_window_rect.clone();
+                    self.tiling_windows.get_mut(index - 1).unwrap().rect = focused_window_rect;
+
+                    self.sort_windows();
+                    self.tiling_windows.get_mut(index).unwrap().configure(conn);
+                    self.tiling_windows
+                        .get_mut(index - 1)
+                        .unwrap()
+                        .configure(conn);
+
+                    // let new_selected_window = self.tiling_windows.get_mut(index - 1).unwrap();
+                    // self.focused_window = Some(new_selected_window.id);
+                    // self.focused_window_type = new_selected_window.r#type;
+                    // self.focused_via_keyboard = true;
+                    // new_selected_window.set_input_focus(conn);
+
+                    let diff = swapped_with_window_rect.x
+                        - self.available_area.x
+                        - self.border_size as i16;
+                    if diff < 0 {
+                        self.tiling_windows.iter_mut().for_each(|w| {
+                            w.rect.x -= diff;
+                            w.configure(conn);
+                        });
+                        self.show_windows_in_available_area(conn);
+                        self.hide_windows_out_available_area(conn);
+                    }
+
+                    conn.flush().unwrap();
+                }
+            }
+        }
+    }
+
+    pub fn move_window_right(&mut self, conn: &xcb::Connection) {
+        if let Some(focused_id) = self.focused_window {
+            if self.focused_window_type == WindowType::Tiling {
+                let index = self
+                    .tiling_windows
+                    .iter()
+                    .enumerate()
+                    .find(|(_, w)| w.id == focused_id)
+                    .unwrap()
+                    .0;
+                if index != self.tiling_windows.len() - 1 {
+                    debug!("index: {}", index);
+                    let focused_window_rect = self.tiling_windows.get(index).unwrap().rect.clone();
+                    let swapped_with_window_rect =
+                        self.tiling_windows.get(index + 1).unwrap().rect.clone();
+
+                    self.tiling_windows.get_mut(index).unwrap().rect =
+                        swapped_with_window_rect.clone();
+                    self.tiling_windows.get_mut(index + 1).unwrap().rect = focused_window_rect;
+
+                    self.sort_windows();
+                    self.tiling_windows.get_mut(index).unwrap().configure(conn);
+                    self.tiling_windows
+                        .get_mut(index + 1)
+                        .unwrap()
+                        .configure(conn);
+
+                    // let new_selected_window = self.tiling_windows.get_mut(index + 1).unwrap();
+                    // self.focused_window = Some(new_selected_window.id);
+                    // self.focused_window_type = new_selected_window.r#type;
+                    // self.focused_via_keyboard = true;
+                    // new_selected_window.set_input_focus(conn);
+
+                    let diff = self.available_area.x + self.available_area.width as i16
+                        - self.border_size as i16
+                        - swapped_with_window_rect.x
+                        - swapped_with_window_rect.width as i16;
+                    if diff < 0 {
+                        self.tiling_windows.iter_mut().for_each(|w| {
+                            w.rect.x += diff;
+                            w.configure(conn);
+                        });
+                        self.show_windows_in_available_area(conn);
+                        self.hide_windows_out_available_area(conn);
+                    }
+                    conn.flush().unwrap();
                 }
             }
         }

@@ -15,6 +15,8 @@ impl WmMessage {
 pub enum WmCommand {
     FocusLeft,
     FocusRight,
+    MoveLeft,
+    MoveRight,
 }
 
 impl WmCommand {
@@ -48,6 +50,15 @@ impl TryFrom<WmMessage> for WmCommand {
                     Ok(WmCommand::FocusRight)
                 } else {
                     Err(format!("Invalid focus command: {}", value.parts.join(" ")))
+                }
+            } else if value.parts.first().unwrap() == "move" && value.parts.len() == 2 {
+                let move_type = value.parts.get(1).unwrap();
+                if move_type.starts_with("left") {
+                    Ok(WmCommand::MoveLeft)
+                } else if move_type.starts_with("right") {
+                    Ok(WmCommand::MoveRight)
+                } else {
+                    Err(format!("Invalid move command: {}", value.parts.join(" ")))
                 }
             } else {
                 Err(format!("Unknown command: {}", value.parts.join(" ")))

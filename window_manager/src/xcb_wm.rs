@@ -510,6 +510,7 @@ impl XcbWindowManager {
     }
 
     pub fn handle_shift_focus_left(&mut self) {
+        debug!("handle shift focus left.");
         let monitor = self
             .monitors
             .get_mut(self.focused_monitor.unwrap())
@@ -520,6 +521,7 @@ impl XcbWindowManager {
     }
 
     pub fn handle_shift_focus_right(&mut self) {
+        debug!("handle shift focus right.");
         let monitor = self
             .monitors
             .get_mut(self.focused_monitor.unwrap())
@@ -527,6 +529,26 @@ impl XcbWindowManager {
         let workspace = monitor.get_focused_workspace_mut().unwrap();
         workspace.shift_focus_right(&self.conn);
         self.conn.flush().unwrap();
+    }
+
+    pub fn handle_window_move_left(&mut self) {
+        debug!("handle window move left");
+        let monitor = self
+            .monitors
+            .get_mut(self.focused_monitor.unwrap())
+            .unwrap();
+        let workspace = monitor.get_focused_workspace_mut().unwrap();
+        workspace.move_window_left(&self.conn);
+    }
+
+    pub fn handle_window_move_right(&mut self) {
+        debug!("handle window move right");
+        let monitor = self
+            .monitors
+            .get_mut(self.focused_monitor.unwrap())
+            .unwrap();
+        let workspace = monitor.get_focused_workspace_mut().unwrap();
+        workspace.move_window_right(&self.conn);
     }
 }
 

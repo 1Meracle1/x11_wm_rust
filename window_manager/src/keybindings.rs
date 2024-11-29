@@ -3,7 +3,7 @@ use std::{
     str::FromStr,
 };
 
-use log::{error, info};
+use log::{debug, error, info};
 
 use crate::config::Config;
 use xcb::x;
@@ -95,23 +95,46 @@ impl KeyEventsHandler {
                         continue;
                     }
 
-                    // conn.send_request(&x::GrabKey {
-                    //     owner_events: true,
-                    //     grab_window: root_window,
-                    //     modifiers,
-                    //     key: key_name as u8,
-                    //     pointer_mode: x::GrabMode::Async,
-                    //     keyboard_mode: x::GrabMode::Async,
-                    // });
-                    // debug!("modifiers: {:#?}", modifiers);
                     conn.send_request(&x::GrabKey {
                         owner_events: true,
                         grab_window: root_window,
-                        modifiers: x::ModMask::ANY,
+                        modifiers,
                         key: key_name as u8,
                         pointer_mode: x::GrabMode::Async,
                         keyboard_mode: x::GrabMode::Async,
                     });
+                    conn.send_request(&x::GrabKey {
+                        owner_events: true,
+                        grab_window: root_window,
+                        modifiers: modifiers.union(x::ModMask::LOCK),
+                        key: key_name as u8,
+                        pointer_mode: x::GrabMode::Async,
+                        keyboard_mode: x::GrabMode::Async,
+                    });
+                    conn.send_request(&x::GrabKey {
+                        owner_events: true,
+                        grab_window: root_window,
+                        modifiers: modifiers.union(x::ModMask::N2),
+                        key: key_name as u8,
+                        pointer_mode: x::GrabMode::Async,
+                        keyboard_mode: x::GrabMode::Async,
+                    });
+                    conn.send_request(&x::GrabKey {
+                        owner_events: true,
+                        grab_window: root_window,
+                        modifiers: modifiers.union(x::ModMask::N2.union(x::ModMask::LOCK)),
+                        key: key_name as u8,
+                        pointer_mode: x::GrabMode::Async,
+                        keyboard_mode: x::GrabMode::Async,
+                    });
+                    // conn.send_request(&x::GrabKey {
+                    //     owner_events: true,
+                    //     grab_window: root_window,
+                    //     modifiers: x::ModMask::ANY,
+                    //     key: key_name as u8,
+                    //     pointer_mode: x::GrabMode::Async,
+                    //     keyboard_mode: x::GrabMode::Async,
+                    // });
 
                     binds.push(Keybinding {
                         modifiers,
@@ -131,17 +154,127 @@ impl KeyEventsHandler {
     }
 
     pub fn handle_key_press(&self, event: x::KeyPressEvent) {
+        // print_modifiers(event.state(), "before:");
         let modifiers = event
             .state()
             .difference(x::KeyButMask::LOCK | x::KeyButMask::MOD2);
+        // print_modifiers(modifiers, "after:");
         let modifiers = key_into_mod_mask(modifiers);
+        // print_mod_mask(modifiers, "converted mod mask:");
         for bind in &self.binds {
-            if bind.modifiers.contains(modifiers) && event.detail() == bind.key_name as u8 {
+            if modifiers.contains(bind.modifiers) && event.detail() == bind.key_name as u8 {
+                // print_mod_mask(bind.modifiers, "matching bind mod mask:");
                 bind.action.execute();
                 break;
             }
         }
     }
+}
+
+fn print_modifiers(modifiers: x::KeyButMask, message: &str) {
+    let mut pressed_modifiers = String::new();
+    if modifiers.contains(x::KeyButMask::SHIFT) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("SHIFT");
+    }
+    if modifiers.contains(x::KeyButMask::LOCK) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("LOCK");
+    }
+    if modifiers.contains(x::KeyButMask::CONTROL) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("CONTROL");
+    }
+    if modifiers.contains(x::KeyButMask::MOD1) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("MOD1");
+    }
+    if modifiers.contains(x::KeyButMask::MOD2) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("MOD2");
+    }
+    if modifiers.contains(x::KeyButMask::MOD3) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("MOD3");
+    }
+    if modifiers.contains(x::KeyButMask::MOD4) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("MOD4");
+    }
+    if modifiers.contains(x::KeyButMask::MOD5) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("MOD5");
+    }
+    debug!("{} {}", message, pressed_modifiers);
+}
+
+fn print_mod_mask(modifiers: x::ModMask, message: &str) {
+    let mut pressed_modifiers = String::new();
+    if modifiers.contains(x::ModMask::SHIFT) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("SHIFT");
+    }
+    if modifiers.contains(x::ModMask::LOCK) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("LOCK");
+    }
+    if modifiers.contains(x::ModMask::CONTROL) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("CONTROL");
+    }
+    if modifiers.contains(x::ModMask::N1) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("N1");
+    }
+    if modifiers.contains(x::ModMask::N2) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("N2");
+    }
+    if modifiers.contains(x::ModMask::N3) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("N3");
+    }
+    if modifiers.contains(x::ModMask::N4) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("N4");
+    }
+    if modifiers.contains(x::ModMask::N5) {
+        if !pressed_modifiers.is_empty() {
+            pressed_modifiers.push_str(" -> ");
+        }
+        pressed_modifiers.push_str("N5");
+    }
+    debug!("{} {}", message, pressed_modifiers);
 }
 
 fn key_into_mod_mask(key_mask: x::KeyButMask) -> x::ModMask {

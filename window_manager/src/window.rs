@@ -1,3 +1,4 @@
+use log::debug;
 use xcb::x;
 
 use crate::monitor::Rect;
@@ -71,6 +72,7 @@ impl Window {
     }
 
     pub fn change_border_color(&self, conn: &xcb::Connection, color: u32) {
+        debug!("change border color: {} for {:?}", color, self.id);
         conn.send_request(&x::ChangeWindowAttributes {
             window: self.id,
             value_list: &[x::Cw::BorderPixel(color)],
@@ -78,6 +80,7 @@ impl Window {
     }
 
     pub fn set_input_focus(&self, conn: &xcb::Connection) {
+        debug!("set input focus for {:?}", self.id);
         conn.send_request(&x::SetInputFocus {
             revert_to: x::InputFocus::PointerRoot,
             focus: self.id,
