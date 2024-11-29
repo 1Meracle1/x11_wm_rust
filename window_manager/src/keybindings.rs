@@ -95,8 +95,9 @@ impl KeyEventsHandler {
                         continue;
                     }
 
+                    let owner_events = false;
                     conn.send_request(&x::GrabKey {
-                        owner_events: true,
+                        owner_events,
                         grab_window: root_window,
                         modifiers,
                         key: key_name as u8,
@@ -104,7 +105,7 @@ impl KeyEventsHandler {
                         keyboard_mode: x::GrabMode::Async,
                     });
                     conn.send_request(&x::GrabKey {
-                        owner_events: true,
+                        owner_events,
                         grab_window: root_window,
                         modifiers: modifiers.union(x::ModMask::LOCK),
                         key: key_name as u8,
@@ -112,7 +113,7 @@ impl KeyEventsHandler {
                         keyboard_mode: x::GrabMode::Async,
                     });
                     conn.send_request(&x::GrabKey {
-                        owner_events: true,
+                        owner_events,
                         grab_window: root_window,
                         modifiers: modifiers.union(x::ModMask::N2),
                         key: key_name as u8,
@@ -120,7 +121,7 @@ impl KeyEventsHandler {
                         keyboard_mode: x::GrabMode::Async,
                     });
                     conn.send_request(&x::GrabKey {
-                        owner_events: true,
+                        owner_events,
                         grab_window: root_window,
                         modifiers: modifiers.union(x::ModMask::N2.union(x::ModMask::LOCK)),
                         key: key_name as u8,
@@ -158,12 +159,15 @@ impl KeyEventsHandler {
         let modifiers = event
             .state()
             .difference(x::KeyButMask::LOCK | x::KeyButMask::MOD2);
+        if modifiers.is_empty() {
+            return;
+        }
         // print_modifiers(modifiers, "after:");
         let modifiers = key_into_mod_mask(modifiers);
-        // print_mod_mask(modifiers, "converted mod mask:");
+        print_mod_mask(modifiers, "converted mod mask:");
         for bind in &self.binds {
-            if modifiers.contains(bind.modifiers) && event.detail() == bind.key_name as u8 {
-                // print_mod_mask(bind.modifiers, "matching bind mod mask:");
+            if bind.modifiers.contains(modifiers) && event.detail() == bind.key_name as u8 {
+                print_mod_mask(bind.modifiers, "matching bind mod mask:");
                 bind.action.execute();
                 break;
             }
