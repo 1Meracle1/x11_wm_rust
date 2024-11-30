@@ -126,4 +126,34 @@ impl Monitor {
             None
         }
     }
+
+    pub fn get_upper_workspace_id(&self) -> Option<u16> {
+        if let Some(focused_workspace) = self.workspaces.get(self.focused_workspace_index) {
+            let mut upper_id: u16 = 0;
+            self.workspaces.iter().for_each(|w| {
+                if w.id > focused_workspace.id && upper_id < w.id {
+                    upper_id = w.id;
+                }
+            });
+            if upper_id != 0 {
+                return Some(upper_id);
+            }
+        }
+        None
+    }
+
+    pub fn get_lower_workspace_id(&self) -> Option<u16> {
+        if let Some(focused_workspace) = self.workspaces.get(self.focused_workspace_index) {
+            let mut lower_id: u16 = u16::MAX;
+            self.workspaces.iter().for_each(|w| {
+                if w.id < focused_workspace.id && lower_id > w.id {
+                    lower_id = w.id;
+                }
+            });
+            if lower_id != u16::MAX {
+                return Some(lower_id);
+            }
+        }
+        None
+    }
 }

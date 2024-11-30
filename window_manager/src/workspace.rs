@@ -422,18 +422,6 @@ impl Workspace {
         window.set_input_focus(conn);
     }
 
-    pub fn focus_tiling_window(
-        &mut self,
-        window: &Window,
-        conn: &xcb::Connection,
-        focused_via_keyboard: bool,
-    ) {
-        self.focused_window = Some(window.id);
-        self.focused_window_type = window.r#type;
-        self.focused_via_keyboard = focused_via_keyboard;
-        window.set_input_focus(conn);
-    }
-
     pub fn shift_focus_left(&mut self, conn: &xcb::Connection) {
         if let Some(focused_id) = self.focused_window {
             if self.focused_window_type == WindowType::Tiling {
@@ -705,5 +693,13 @@ impl Workspace {
     #[inline]
     pub fn reset_keyboard_focused_flag(&mut self) {
         self.focused_via_keyboard = false;
+    }
+
+    pub fn get_focused_window_type(&self) -> Option<WindowType> {
+        if self.focused_window.is_some() {
+            Some(self.focused_window_type)
+        } else {
+            None
+        }
     }
 }

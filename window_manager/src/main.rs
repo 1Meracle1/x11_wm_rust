@@ -47,6 +47,8 @@ fn main() {
                 WmCommand::WorkspaceChange(workspace_id) => {
                     wm.handle_change_workspace_id(workspace_id, &config)
                 }
+                WmCommand::FocusUp => wm.handle_shift_focus_up(&config),
+                WmCommand::FocusDown => wm.handle_shift_focus_down(&config),
             }
         });
         if !wm.handle_event(&config) {

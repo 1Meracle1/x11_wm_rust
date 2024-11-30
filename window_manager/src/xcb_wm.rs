@@ -531,6 +531,42 @@ impl XcbWindowManager {
         self.conn.flush().unwrap();
     }
 
+    pub fn handle_shift_focus_up(&mut self, config: &Config) {
+        debug!("handle shift focus up.");
+        let monitor = self
+            .monitors
+            .get_mut(self.focused_monitor.unwrap())
+            .unwrap();
+        let workspace = monitor.get_focused_workspace_mut().unwrap();
+        match workspace.get_focused_window_type() {
+            Some(WindowType::Tiling) => {
+                if let Some(new_workspace_id) = monitor.get_upper_workspace_id() {
+                    monitor.set_workspace_focused(new_workspace_id, config, &self.conn);
+                    self.conn.flush().unwrap();
+                }
+            }
+            _ => {}
+        }
+    }
+
+    pub fn handle_shift_focus_down(&mut self, config: &Config) {
+        debug!("handle shift focus down.");
+        let monitor = self
+            .monitors
+            .get_mut(self.focused_monitor.unwrap())
+            .unwrap();
+        let workspace = monitor.get_focused_workspace_mut().unwrap();
+        match workspace.get_focused_window_type() {
+            Some(WindowType::Tiling) => {
+                if let Some(new_workspace_id) = monitor.get_lower_workspace_id() {
+                    monitor.set_workspace_focused(new_workspace_id, config, &self.conn);
+                    self.conn.flush().unwrap();
+                }
+            }
+            _ => {}
+        }
+    }
+
     pub fn handle_window_move_left(&mut self, config: &Config) {
         debug!("handle window move left");
         let monitor = self

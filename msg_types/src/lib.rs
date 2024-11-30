@@ -15,6 +15,8 @@ impl WmMessage {
 pub enum WmCommand {
     FocusLeft,
     FocusRight,
+    FocusUp,
+    FocusDown,
     MoveLeft,
     MoveRight,
     WorkspaceChange(u16),
@@ -42,13 +44,12 @@ impl TryFrom<WmMessage> for WmCommand {
     fn try_from(value: WmMessage) -> Result<Self, Self::Error> {
         if !value.parts.is_empty() {
             if value.parts.first().unwrap().starts_with("focus") && value.parts.len() == 2 {
-                let focus_type = value.parts.get(1).unwrap();
-                if focus_type.starts_with("left") {
-                    Ok(Self::FocusLeft)
-                } else if focus_type.starts_with("right") {
-                    Ok(Self::FocusRight)
-                } else {
-                    Err(format!("Invalid focus command: {}", value.parts.join(" ")))
+                match value.parts.get(1).unwrap().as_str() {
+                    "left" => Ok(Self::FocusLeft),
+                    "right" => Ok(Self::FocusRight),
+                    "up" => Ok(Self::FocusUp),
+                    "down" => Ok(Self::FocusDown),
+                    _ => Err(format!("Invalid focus command: {}", value.parts.join(" "))),
                 }
             } else if value.parts.first().unwrap() == "move" && value.parts.len() == 2 {
                 let move_type = value.parts.get(1).unwrap();
@@ -63,14 +64,17 @@ impl TryFrom<WmMessage> for WmCommand {
                 && value.parts.len() == 3
                 && value.parts.get(1).unwrap() == "change"
             {
-                let new_workspace_id = value.parts.get(2).unwrap();
-                match u16::from_str_radix(&new_workspace_id, 10) {
-                    Ok(workspace_id) => Ok(Self::WorkspaceChange(workspace_id)),
-                    Err(err) => Err(format!(
-                        "Invalid workspace change command: {}, error: {}",
-                        value.parts.join(" "),
-                        err
-                    )),
+                match value.parts.get(2).unwrap().as_str() {
+                    // "up" => Ok(Self::WorkspaceChangeUp),
+                    // "down" => Ok(Self::WorkspaceChangeDown),
+                    new_workspace_id => match u16::from_str_radix(&new_workspace_id, 10) {
+                        Ok(workspace_id) => Ok(Self::WorkspaceChange(workspace_id)),
+                        Err(err) => Err(format!(
+                            "Invalid workspace change command: {}, error: {}",
+                            value.parts.join(" "),
+                            err
+                        )),
+                    },
                 }
             } else {
                 Err(format!("Unknown command: {}", value.parts.join(" ")))

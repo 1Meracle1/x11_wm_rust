@@ -28,6 +28,8 @@ keys_combination = "Alt+Return"
 action = "exec"
 arguments = ["alacritty"]
 
+#############################################################
+
 [[keybindings]]
 keys_combination = "Alt+H"
 action = "exec"
@@ -39,6 +41,18 @@ action = "exec"
 arguments = ["target/debug/wm_msg focus right"]
 
 [[keybindings]]
+keys_combination = "Alt+J"
+action = "exec"
+arguments = ["target/debug/wm_msg focus up"]
+
+[[keybindings]]
+keys_combination = "Alt+K"
+action = "exec"
+arguments = ["target/debug/wm_msg focus down"]
+
+#############################################################
+
+[[keybindings]]
 keys_combination = "Alt+Shift+H"
 action = "exec"
 arguments = ["target/debug/wm_msg move left"]
@@ -47,6 +61,8 @@ arguments = ["target/debug/wm_msg move left"]
 keys_combination = "Alt+Shift+L"
 action = "exec"
 arguments = ["target/debug/wm_msg move right"]
+
+#############################################################
 
 [[keybindings]]
 keys_combination = "Alt+1"
