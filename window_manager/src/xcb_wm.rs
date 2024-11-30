@@ -539,6 +539,7 @@ impl XcbWindowManager {
             .unwrap();
         let workspace = monitor.get_focused_workspace_mut().unwrap();
         workspace.move_window_left(&self.conn, config);
+        self.conn.flush().unwrap();
     }
 
     pub fn handle_window_move_right(&mut self, config: &Config) {
@@ -549,6 +550,17 @@ impl XcbWindowManager {
             .unwrap();
         let workspace = monitor.get_focused_workspace_mut().unwrap();
         workspace.move_window_right(&self.conn, config);
+        self.conn.flush().unwrap();
+    }
+
+    pub fn handle_change_workspace_id(&mut self, new_workspace_id: u16, config: &Config) {
+        debug!("change workspace to {}", new_workspace_id);
+        let monitor = self
+            .monitors
+            .get_mut(self.focused_monitor.unwrap())
+            .unwrap();
+        monitor.set_workspace_focused(new_workspace_id, config, &self.conn);
+        self.conn.flush().unwrap();
     }
 }
 

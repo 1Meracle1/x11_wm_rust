@@ -123,6 +123,7 @@ impl Workspace {
     }
 
     pub fn hide_all_windows(&mut self, monitor_height: u16, conn: &xcb::Connection) {
+        debug!("hide_all_windows at {}, hidden: {}", self.id, self.hidden);
         if self.hidden {
             return;
         }
@@ -131,26 +132,28 @@ impl Workspace {
             w.rect.y += shift;
             w.configure(conn);
             if w.mapped {
-                w.unmap(conn);
+                w.hide(conn);
             }
         });
         self.floating_windows.iter_mut().for_each(|w| {
             w.rect.y += shift;
             w.configure(conn);
             if w.mapped {
-                w.unmap(conn);
+                w.hide(conn);
             }
         });
         self.docked_windows.iter_mut().for_each(|w| {
             w.rect.y += shift;
             w.configure(conn);
             if w.mapped {
-                w.unmap(conn);
+                w.hide(conn);
             }
         });
+        self.hidden = true;
     }
 
     pub fn unhide_all_windows(&mut self, monitor_height: u16, conn: &xcb::Connection) {
+        debug!("unhide_all_windows at {}, hidden: {}", self.id, self.hidden);
         if !self.hidden {
             return;
         }
@@ -159,23 +162,24 @@ impl Workspace {
             w.rect.y -= shift;
             w.configure(conn);
             if w.mapped {
-                w.map(conn);
+                w.show(conn);
             }
         });
         self.floating_windows.iter_mut().for_each(|w| {
             w.rect.y -= shift;
             w.configure(conn);
             if w.mapped {
-                w.map(conn);
+                w.show(conn);
             }
         });
         self.docked_windows.iter_mut().for_each(|w| {
             w.rect.y -= shift;
             w.configure(conn);
             if w.mapped {
-                w.map(conn);
+                w.show(conn);
             }
         });
+        self.hidden = false;
     }
 
     pub fn set_window_focused(
@@ -566,7 +570,6 @@ impl Workspace {
                     .0;
                 if index != 0 {
                     self.swap_windows_rects(index, index - 1, conn, config);
-                    conn.flush().unwrap();
                 }
             }
         }
@@ -584,7 +587,6 @@ impl Workspace {
                     .0;
                 if index != self.tiling_windows.len() - 1 {
                     self.swap_windows_rects(index, index + 1, conn, config);
-                    conn.flush().unwrap();
                 }
             }
         }

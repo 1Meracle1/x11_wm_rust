@@ -1,3 +1,4 @@
+use log::debug;
 use xcb::x;
 
 use crate::{
@@ -39,6 +40,7 @@ impl Monitor {
         let mut workspaces = Vec::new();
         workspaces.reserve(workspaces_count);
         workspaces.push(Workspace::new(1, rect.clone(), config, conn, false));
+        debug!("creating new workspace: {}", 1);
 
         Self {
             root_window,
@@ -61,17 +63,6 @@ impl Monitor {
         }
     }
 
-    // pub fn set_window_focused(
-    //     &mut self,
-    //     window: &Window,
-    //     conn: &xcb::Connection,
-    //     via_keyboard: bool,
-    // ) {
-    //     if let Some(focused_workspace) = self.workspaces.get_mut(self.focused_workspace_index) {
-    //         focused_workspace.set_window_focused(window, conn, via_keyboard);
-    //     }
-    // }
-
     pub fn add_tiling_window_to_focused_workspace(
         &mut self,
         conn: &xcb::Connection,
@@ -86,6 +77,14 @@ impl Monitor {
     }
 
     pub fn set_workspace_focused(&mut self, id: u16, config: &Config, conn: &xcb::Connection) {
+        debug!(
+            "attempt to change focused workspace from {} to {}",
+            self.workspaces
+                .get(self.focused_workspace_index)
+                .unwrap()
+                .id,
+            id
+        );
         if let Some(currently_focused) = self.workspaces.get_mut(self.focused_workspace_index) {
             if currently_focused.id == id {
                 return;
@@ -101,6 +100,7 @@ impl Monitor {
             workspace.unhide_all_windows(self.rect.height, conn);
             self.focused_workspace_index = index;
         } else {
+            debug!("creating new workspace: {}", id);
             self.workspaces
                 .push(Workspace::new(id, self.rect.clone(), config, conn, false));
             self.focused_workspace_index = self.workspaces.len() - 1;
@@ -126,20 +126,4 @@ impl Monitor {
             None
         }
     }
-
-    // pub fn get_window(&self, window_xcb: x::Window) -> Option<&Window> {
-    //     if let Some(focused_workspace) = self.workspaces.get(self.focused_workspace_index) {
-    //         focused_workspace.get_window(window_xcb)
-    //     } else {
-    //         None
-    //     }
-    // }
-
-    // pub fn get_window_mut(&mut self, window_xcb: x::Window) -> Option<&mut Window> {
-    //     if let Some(focused_workspace) = self.workspaces.get_mut(self.focused_workspace_index) {
-    //         focused_workspace.get_window_mut(window_xcb)
-    //     } else {
-    //         None
-    //     }
-    // }
 }

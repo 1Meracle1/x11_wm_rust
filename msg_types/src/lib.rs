@@ -17,22 +17,21 @@ pub enum WmCommand {
     FocusRight,
     MoveLeft,
     MoveRight,
+    WorkspaceChange(u16),
 }
 
 impl WmCommand {
-    pub fn serialize(&self) -> Option<Vec<u8>> {
-        if let Ok(bytes) = bincode::serialize(self) {
-            Some(bytes)
-        } else {
-            None
+    pub fn serialize(&self) -> Result<Vec<u8>, String> {
+        match bincode::serialize(self) {
+            Ok(bytes) => Ok(bytes),
+            Err(err) => Err(format!("Serialize error: {:?}", err)),
         }
     }
 
-    pub fn deserialize(bytes: &[u8]) -> Option<WmCommand> {
-        if let Ok(command) = bincode::deserialize(bytes) {
-            Some(command)
-        } else {
-            None
+    pub fn deserialize(bytes: &[u8]) -> Result<WmCommand, String> {
+        match bincode::deserialize(bytes) {
+            Ok(command) => Ok(command),
+            Err(err) => Err(format!("Deserialize error: {:?}", err)),
         }
     }
 }
@@ -45,20 +44,33 @@ impl TryFrom<WmMessage> for WmCommand {
             if value.parts.first().unwrap().starts_with("focus") && value.parts.len() == 2 {
                 let focus_type = value.parts.get(1).unwrap();
                 if focus_type.starts_with("left") {
-                    Ok(WmCommand::FocusLeft)
+                    Ok(Self::FocusLeft)
                 } else if focus_type.starts_with("right") {
-                    Ok(WmCommand::FocusRight)
+                    Ok(Self::FocusRight)
                 } else {
                     Err(format!("Invalid focus command: {}", value.parts.join(" ")))
                 }
             } else if value.parts.first().unwrap() == "move" && value.parts.len() == 2 {
                 let move_type = value.parts.get(1).unwrap();
                 if move_type.starts_with("left") {
-                    Ok(WmCommand::MoveLeft)
+                    Ok(Self::MoveLeft)
                 } else if move_type.starts_with("right") {
-                    Ok(WmCommand::MoveRight)
+                    Ok(Self::MoveRight)
                 } else {
                     Err(format!("Invalid move command: {}", value.parts.join(" ")))
+                }
+            } else if value.parts.first().unwrap() == "workspace"
+                && value.parts.len() == 3
+                && value.parts.get(1).unwrap() == "change"
+            {
+                let new_workspace_id = value.parts.get(2).unwrap();
+                match u16::from_str_radix(&new_workspace_id, 10) {
+                    Ok(workspace_id) => Ok(Self::WorkspaceChange(workspace_id)),
+                    Err(err) => Err(format!(
+                        "Invalid workspace change command: {}, error: {}",
+                        value.parts.join(" "),
+                        err
+                    )),
                 }
             } else {
                 Err(format!("Unknown command: {}", value.parts.join(" ")))

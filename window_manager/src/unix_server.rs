@@ -25,13 +25,10 @@ impl UnixServerWorker {
                 Ok((mut stream, _addr)) => {
                     let mut message = String::new();
                     stream.read_to_string(&mut message).unwrap();
-                    if let Some(decoded_message) =
-                        WmCommand::deserialize(message.into_bytes().as_slice())
-                    {
-                        sender.send(decoded_message).unwrap();
-                    } else {
-                        error!("Failed to deserialize message");
-                    }
+                    match WmCommand::deserialize(message.into_bytes().as_slice()) {
+                        Ok(decoded_message) => sender.send(decoded_message).unwrap(),
+                        Err(err) => error!("Failed to accept message: {}", err),
+                    };
                 }
                 Err(err) => error!("Connection failed: {}", err),
             };

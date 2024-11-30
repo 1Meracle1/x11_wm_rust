@@ -55,7 +55,33 @@ impl KeyEventsHandler {
             let mut modifiers = x::ModMask::empty();
             let mut key_name = Keycodes::None;
             let mut weight: u32 = 0;
+            let mut is_range = false;
             for key in keys {
+                if key.starts_with('[') && key.ends_with(']') {
+                    if let Some(keycodes) = keycodes_from_number_range_str(key) {
+                        if modifiers.is_empty() {
+                            error!(
+                                "Invalid binding: no modifier supplied, binding: {:#?}",
+                                bind
+                            );
+                            continue;
+                        }
+                        keycodes.iter().for_each(|keycode| {
+                            Self::add_grab_binding(
+                                &mut binds,
+                                &bind.action,
+                                &bind.arguments,
+                                modifiers,
+                                keycode.clone(),
+                                weight,
+                                root_window,
+                                conn,
+                            )
+                        });
+                        is_range = true;
+                        break;
+                    }
+                }
                 match Keycodes::from_str(&key) {
                     Ok(key) => {
                         if let Some(modifier) = Into::<Option<x::ModMask>>::into(key) {
@@ -76,6 +102,9 @@ impl KeyEventsHandler {
                     }
                 };
             }
+            if is_range {
+                continue;
+            }
             if modifiers.is_empty() || key_name == Keycodes::None {
                 error!(
                     "Invalid binding: no modifier/keys supplied, binding: {:#?}",
@@ -84,74 +113,98 @@ impl KeyEventsHandler {
                 continue;
             }
 
-            match bind.action.as_str() {
-                "exec" => {
-                    if bind.arguments.len() != 1 {
-                        error!(
-                            "Arguments len is {}, invalid binding found: {:#?}",
-                            bind.arguments.len(),
-                            bind
-                        );
-                        continue;
-                    }
-
-                    let owner_events = false;
-                    conn.send_request(&x::GrabKey {
-                        owner_events,
-                        grab_window: root_window,
-                        modifiers,
-                        key: key_name as u8,
-                        pointer_mode: x::GrabMode::Async,
-                        keyboard_mode: x::GrabMode::Async,
-                    });
-                    conn.send_request(&x::GrabKey {
-                        owner_events,
-                        grab_window: root_window,
-                        modifiers: modifiers.union(x::ModMask::LOCK),
-                        key: key_name as u8,
-                        pointer_mode: x::GrabMode::Async,
-                        keyboard_mode: x::GrabMode::Async,
-                    });
-                    conn.send_request(&x::GrabKey {
-                        owner_events,
-                        grab_window: root_window,
-                        modifiers: modifiers.union(x::ModMask::N2),
-                        key: key_name as u8,
-                        pointer_mode: x::GrabMode::Async,
-                        keyboard_mode: x::GrabMode::Async,
-                    });
-                    conn.send_request(&x::GrabKey {
-                        owner_events,
-                        grab_window: root_window,
-                        modifiers: modifiers.union(x::ModMask::N2.union(x::ModMask::LOCK)),
-                        key: key_name as u8,
-                        pointer_mode: x::GrabMode::Async,
-                        keyboard_mode: x::GrabMode::Async,
-                    });
-                    // conn.send_request(&x::GrabKey {
-                    //     owner_events: true,
-                    //     grab_window: root_window,
-                    //     modifiers: x::ModMask::ANY,
-                    //     key: key_name as u8,
-                    //     pointer_mode: x::GrabMode::Async,
-                    //     keyboard_mode: x::GrabMode::Async,
-                    // });
-
-                    binds.push(Keybinding {
-                        modifiers,
-                        key_name,
-                        action: Action::Exec(bind.arguments.first().unwrap().clone()),
-                        weight,
-                    });
-                }
-                _ => {}
-            }
+            Self::add_grab_binding(
+                &mut binds,
+                &bind.action,
+                &bind.arguments,
+                modifiers,
+                key_name,
+                weight,
+                root_window,
+                conn,
+            );
         }
 
         binds.sort_by(|lhs, rhs| lhs.weight.cmp(&rhs.weight));
         // debug!("binds: {:#?}", binds);
 
         Self { binds }
+    }
+
+    fn add_grab_binding(
+        binds: &mut Vec<Keybinding>,
+        action: &str,
+        arguments: &Vec<String>,
+        modifiers: x::ModMask,
+        keycode: Keycodes,
+        weight: u32,
+        root_window: x::Window,
+        conn: &xcb::Connection,
+    ) {
+        match action {
+            "exec" => {
+                if arguments.len() != 1 {
+                    error!(
+                        "Invalid binding, arguments len: {}, arguments: {:?}",
+                        arguments.len(),
+                        arguments
+                    );
+                    return;
+                }
+
+                let owner_events = false;
+                conn.send_request(&x::GrabKey {
+                    owner_events,
+                    grab_window: root_window,
+                    modifiers,
+                    key: keycode as u8,
+                    pointer_mode: x::GrabMode::Async,
+                    keyboard_mode: x::GrabMode::Async,
+                });
+                conn.send_request(&x::GrabKey {
+                    owner_events,
+                    grab_window: root_window,
+                    modifiers: modifiers.union(x::ModMask::LOCK),
+                    key: keycode as u8,
+                    pointer_mode: x::GrabMode::Async,
+                    keyboard_mode: x::GrabMode::Async,
+                });
+                conn.send_request(&x::GrabKey {
+                    owner_events,
+                    grab_window: root_window,
+                    modifiers: modifiers.union(x::ModMask::N2),
+                    key: keycode as u8,
+                    pointer_mode: x::GrabMode::Async,
+                    keyboard_mode: x::GrabMode::Async,
+                });
+                conn.send_request(&x::GrabKey {
+                    owner_events,
+                    grab_window: root_window,
+                    modifiers: modifiers.union(x::ModMask::N2.union(x::ModMask::LOCK)),
+                    key: keycode as u8,
+                    pointer_mode: x::GrabMode::Async,
+                    keyboard_mode: x::GrabMode::Async,
+                });
+                // conn.send_request(&x::GrabKey {
+                //     owner_events: true,
+                //     grab_window: root_window,
+                //     modifiers: x::ModMask::ANY,
+                //     key: key_name as u8,
+                //     pointer_mode: x::GrabMode::Async,
+                //     keyboard_mode: x::GrabMode::Async,
+                // });
+                print_mod_mask(modifiers, "add keybinding - modifiers:");
+                debug!("add keybinding - keycode: {:?}", keycode);
+
+                binds.push(Keybinding {
+                    modifiers,
+                    key_name: keycode,
+                    action: Action::Exec(arguments.first().unwrap().clone()),
+                    weight,
+                });
+            }
+            _ => {}
+        }
     }
 
     pub fn handle_key_press(&self, event: x::KeyPressEvent) {
@@ -534,6 +587,72 @@ pub enum Keycodes {
     XF86RFKill = 255,
 }
 
+fn keycodes_from_number_range_str(key: &str) -> Option<Vec<Keycodes>> {
+    let key = &key[1..(key.len() - 1)];
+    let range_segments: Vec<&str> = key.split("..").collect();
+    if range_segments.len() == 2 {
+        let start_range: u16;
+        match u16::from_str(range_segments.first().unwrap()) {
+            Ok(value) => start_range = value,
+            Err(err) => {
+                error!("Invalid range - starts with not a number: {}", err);
+                return None;
+            }
+        }
+        let end_range: u16;
+        match u16::from_str(range_segments.last().unwrap()) {
+            Ok(value) => end_range = value,
+            Err(err) => {
+                error!("Invalid range - ends with not a number: {}", err);
+                return None;
+            }
+        }
+
+        if start_range < end_range {
+            if end_range > 9 {
+                error!(
+                    "Invalid range - ends with number higher than 9: {}",
+                    end_range
+                );
+            } else {
+                return Some(keycodes_from_number_range(start_range, end_range));
+            }
+        } else {
+            error!(
+                "invalid boundaries of the range, starts with: {}, ends with: {}",
+                start_range, end_range
+            );
+        }
+    } else {
+        error!(
+            "Invalid range - consists of more than two segments: {}",
+            key
+        );
+    }
+
+    None
+}
+
+fn keycodes_from_number_range(starts: u16, ends: u16) -> Vec<Keycodes> {
+    assert!(starts < ends);
+    let mut res = Vec::<Keycodes>::new();
+    for i in starts..=ends {
+        match i {
+            1 => res.push(Keycodes::_1),
+            2 => res.push(Keycodes::_2),
+            3 => res.push(Keycodes::_3),
+            4 => res.push(Keycodes::_4),
+            5 => res.push(Keycodes::_5),
+            6 => res.push(Keycodes::_6),
+            7 => res.push(Keycodes::_7),
+            8 => res.push(Keycodes::_8),
+            9 => res.push(Keycodes::_9),
+            _ => {}
+        }
+    }
+    res
+}
+
 impl FromStr for Keycodes {
     type Err = String;
 
@@ -784,7 +903,7 @@ impl FromStr for Keycodes {
             "XF86DisplayOff" => Ok(Keycodes::XF86DisplayOff),
             "XF86WWAN" => Ok(Keycodes::XF86WWAN),
             "XF86RFKill" => Ok(Keycodes::XF86RFKill),
-            _ => Err(format!("No matching keycode for '{s}'_ ")),
+            _ => Err(format!("No matching keycode for {s}")),
         }
     }
 }

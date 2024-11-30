@@ -15,9 +15,17 @@ fn main() {
         let wm_message = WmMessage::new(args);
         match WmCommand::try_from(wm_message.clone()) {
             Ok(wm_command) => {
-                if let Err(err) = unix_stream.write(wm_command.serialize().unwrap().as_slice()) {
-                    eprintln!("Failed to send message to the unix socket; error: {}", err);
-                }
+                match wm_command.serialize() {
+                    Ok(bytes) => {
+                        if let Err(err) = unix_stream.write(bytes.as_slice()) {
+                            eprintln!("Failed to send message to the unix socket; error: {}", err);
+                        }
+                    }
+                    Err(err) => eprintln!(
+                        "Failed to serialize message to send to the unix socket; error: {}",
+                        err
+                    ),
+                };
             }
             Err(error) => eprintln!("Error converting WmMessage to WmCommand: {}", error),
         }

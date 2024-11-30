@@ -3,6 +3,26 @@ startup_commands = [
   "alacritty",
 ]
 
+################################################################
+
+[window]
+resize_tick_pixels = 6
+minimum_width_tiling = 10
+default_width_tiling = 0.324
+
+[window.border]
+size = 2
+color_inactive = "#2b2b29"
+color_active = "#a38b43"
+
+[workspaces]
+count = 9
+outer_gap_horiz = 10
+outer_gap_vert = 10
+inner_gap = 5
+
+################################################################
+
 [[keybindings]]
 keys_combination = "Alt+Return"
 action = "exec"
@@ -28,18 +48,49 @@ keys_combination = "Alt+Shift+L"
 action = "exec"
 arguments = ["target/debug/wm_msg move right"]
 
-[window]
-resize_tick_pixels = 6
-minimum_width_tiling = 10
-default_width_tiling = 0.324
+[[keybindings]]
+keys_combination = "Alt+1"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace change 1"]
 
-[window.border]
-size = 2
-color_inactive = "#2b2b29"
-color_active = "#a38b43"
+[[keybindings]]
+keys_combination = "Alt+2"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace change 2"]
 
-[workspaces]
-count = 9
-outer_gap_horiz = 10
-outer_gap_vert = 10
-inner_gap = 5
+[[keybindings]]
+keys_combination = "Alt+3"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace change 3"]
+
+[[keybindings]]
+keys_combination = "Alt+4"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace change 4"]
+
+[[keybindings]]
+keys_combination = "Alt+5"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace change 5"]
+
+[[keybindings]]
+keys_combination = "Alt+6"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace change 6"]
+
+[[keybindings]]
+keys_combination = "Alt+7"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace change 7"]
+
+[[keybindings]]
+keys_combination = "Alt+8"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace change 8"]
+
+[[keybindings]]
+keys_combination = "Alt+9"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace change 9"]
+
+################################################################

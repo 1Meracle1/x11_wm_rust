@@ -44,6 +44,9 @@ fn main() {
                 WmCommand::FocusRight => wm.handle_shift_focus_right(),
                 WmCommand::MoveLeft => wm.handle_window_move_left(&config),
                 WmCommand::MoveRight => wm.handle_window_move_right(&config),
+                WmCommand::WorkspaceChange(workspace_id) => {
+                    wm.handle_change_workspace_id(workspace_id, &config)
+                }
             }
         });
         if !wm.handle_event(&config) {

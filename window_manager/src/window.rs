@@ -46,6 +46,14 @@ impl Window {
         self.mapped = false;
     }
 
+    pub fn show(&mut self, conn: &xcb::Connection) {
+        conn.send_request(&x::MapWindow { window: self.id });
+    }
+
+    pub fn hide(&mut self, conn: &xcb::Connection) {
+        conn.send_request(&x::UnmapWindow { window: self.id });
+    }
+
     pub fn subscribe_to_wm_events(&self, conn: &xcb::Connection) {
         conn.send_request(&x::ChangeWindowAttributes {
             window: self.id,
