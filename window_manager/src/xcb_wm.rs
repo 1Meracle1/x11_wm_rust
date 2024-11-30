@@ -598,6 +598,30 @@ impl XcbWindowManager {
         monitor.set_workspace_focused(new_workspace_id, config, &self.conn);
         self.conn.flush().unwrap();
     }
+
+    pub fn handle_selected_window_grows_width(&mut self, pixels: u16) {
+        debug!("grow window width");
+        assert!(pixels != 0);
+        let monitor = self
+            .monitors
+            .get_mut(self.focused_monitor.unwrap())
+            .unwrap();
+        let workspace = monitor.get_focused_workspace_mut().unwrap();
+        workspace.grow_width_selected_window(&self.conn, pixels);
+        self.conn.flush().unwrap();
+    }
+
+    pub fn handle_selected_window_shrink_width(&mut self, pixels: u16) {
+        debug!("shrink window width");
+        assert!(pixels != 0);
+        let monitor = self
+            .monitors
+            .get_mut(self.focused_monitor.unwrap())
+            .unwrap();
+        let workspace = monitor.get_focused_workspace_mut().unwrap();
+        workspace.shrink_width_selected_window(&self.conn, pixels);
+        self.conn.flush().unwrap();
+    }
 }
 
 impl Drop for XcbWindowManager {

@@ -702,4 +702,58 @@ impl Workspace {
             None
         }
     }
+
+    pub fn grow_width_selected_window(&mut self, conn: &xcb::Connection, pixels: u16) {
+        if let Some(focused_window_id) = self.focused_window {
+            if self.focused_window_type == WindowType::Tiling {
+                let focused_window_index = self
+                    .tiling_windows
+                    .iter()
+                    .enumerate()
+                    .find(|(_, w)| w.id == focused_window_id)
+                    .unwrap()
+                    .0;
+                self.tiling_windows[focused_window_index].rect.width += pixels;
+                self.tiling_windows[..=focused_window_index]
+                    .iter_mut()
+                    .for_each(|w| {
+                        w.rect.x -= (pixels / 2) as i16;
+                        w.configure(conn);
+                    });
+                self.tiling_windows[focused_window_index + 1..]
+                    .iter_mut()
+                    .for_each(|w| {
+                        w.rect.x += (pixels / 2) as i16;
+                        w.configure(conn);
+                    });
+            }
+        }
+    }
+
+    pub fn shrink_width_selected_window(&mut self, conn: &xcb::Connection, pixels: u16) {
+        if let Some(focused_window_id) = self.focused_window {
+            if self.focused_window_type == WindowType::Tiling {
+                let focused_window_index = self
+                    .tiling_windows
+                    .iter()
+                    .enumerate()
+                    .find(|(_, w)| w.id == focused_window_id)
+                    .unwrap()
+                    .0;
+                self.tiling_windows[focused_window_index].rect.width -= pixels;
+                self.tiling_windows[..=focused_window_index]
+                    .iter_mut()
+                    .for_each(|w| {
+                        w.rect.x += (pixels / 2) as i16;
+                        w.configure(conn);
+                    });
+                self.tiling_windows[focused_window_index + 1..]
+                    .iter_mut()
+                    .for_each(|w| {
+                        w.rect.x -= (pixels / 2) as i16;
+                        w.configure(conn);
+                    });
+            }
+        }
+    }
 }

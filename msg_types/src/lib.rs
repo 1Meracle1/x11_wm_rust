@@ -20,6 +20,10 @@ pub enum WmCommand {
     MoveLeft,
     MoveRight,
     WorkspaceChange(u16),
+    WindowWidthGrow(u16),
+    WindowWidthShrink(u16),
+    WindowHeightGrow(u16),
+    WindowHeightShrink(u16),
 }
 
 impl WmCommand {
@@ -75,6 +79,46 @@ impl TryFrom<WmMessage> for WmCommand {
                             err
                         )),
                     },
+                }
+            } else if value.parts.first().unwrap() == "grow" && value.parts.len() == 3 {
+                let pixels_str = value.parts.get(2).unwrap();
+                let pixels: u16;
+                match u16::from_str_radix(&pixels_str, 10) {
+                    Ok(res) => pixels = res,
+                    Err(err) => {
+                        return Err(format!(
+                            "Invalid value in place of number of pixel: {}, err: {}",
+                            pixels_str, err
+                        ));
+                    }
+                };
+                match value.parts.get(1).unwrap().as_str() {
+                    "width" => Ok(Self::WindowWidthGrow(pixels)),
+                    "height" => Ok(Self::WindowHeightGrow(pixels)),
+                    val => Err(format!(
+                        "Invalid dimension for window to be grown in: {}",
+                        val
+                    )),
+                }
+            } else if value.parts.first().unwrap() == "shrink" && value.parts.len() == 3 {
+                let pixels_str = value.parts.get(2).unwrap();
+                let pixels: u16;
+                match u16::from_str_radix(&pixels_str, 10) {
+                    Ok(res) => pixels = res,
+                    Err(err) => {
+                        return Err(format!(
+                            "Invalid value in place of number of pixel: {}, err: {}",
+                            pixels_str, err
+                        ));
+                    }
+                };
+                match value.parts.get(1).unwrap().as_str() {
+                    "width" => Ok(Self::WindowWidthShrink(pixels)),
+                    "height" => Ok(Self::WindowHeightShrink(pixels)),
+                    val => Err(format!(
+                        "Invalid dimension for window to be shrinked in: {}",
+                        val
+                    )),
                 }
             } else {
                 Err(format!("Unknown command: {}", value.parts.join(" ")))

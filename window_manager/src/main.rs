@@ -49,6 +49,12 @@ fn main() {
                 }
                 WmCommand::FocusUp => wm.handle_shift_focus_up(&config),
                 WmCommand::FocusDown => wm.handle_shift_focus_down(&config),
+                WmCommand::WindowWidthGrow(pixels) => wm.handle_selected_window_grows_width(pixels),
+                WmCommand::WindowWidthShrink(pixels) => {
+                    wm.handle_selected_window_shrink_width(pixels)
+                }
+                WmCommand::WindowHeightGrow(_) => todo!(),
+                WmCommand::WindowHeightShrink(_) => todo!(),
             }
         });
         if !wm.handle_event(&config) {

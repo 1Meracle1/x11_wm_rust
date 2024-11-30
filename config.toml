@@ -53,14 +53,26 @@ arguments = ["target/debug/wm_msg focus down"]
 #############################################################
 
 [[keybindings]]
-keys_combination = "Alt+Shift+H"
+keys_combination = "Alt+Ctrl+H"
 action = "exec"
 arguments = ["target/debug/wm_msg move left"]
 
 [[keybindings]]
-keys_combination = "Alt+Shift+L"
+keys_combination = "Alt+Ctrl+L"
 action = "exec"
 arguments = ["target/debug/wm_msg move right"]
+
+#############################################################
+
+[[keybindings]]
+keys_combination = "Alt+Shift+H"
+action = "exec"
+arguments = ["target/debug/wm_msg grow width 16"]
+
+[[keybindings]]
+keys_combination = "Alt+Shift+L"
+action = "exec"
+arguments = ["target/debug/wm_msg shrink width 16"]
 
 #############################################################
 
