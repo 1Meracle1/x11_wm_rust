@@ -6,7 +6,6 @@ startup_commands = [
 ################################################################
 
 [window]
-resize_tick_pixels = 6
 minimum_width_tiling = 10
 default_width_tiling = 0.324
 

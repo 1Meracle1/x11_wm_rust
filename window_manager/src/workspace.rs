@@ -730,7 +730,12 @@ impl Workspace {
         }
     }
 
-    pub fn shrink_width_selected_window(&mut self, conn: &xcb::Connection, pixels: u16) {
+    pub fn shrink_width_selected_window(
+        &mut self,
+        conn: &xcb::Connection,
+        pixels: u16,
+        config: &Config,
+    ) {
         if let Some(focused_window_id) = self.focused_window {
             if self.focused_window_type == WindowType::Tiling {
                 let focused_window_index = self
@@ -740,6 +745,11 @@ impl Workspace {
                     .find(|(_, w)| w.id == focused_window_id)
                     .unwrap()
                     .0;
+                if self.tiling_windows[focused_window_index].rect.width as i16 - pixels as i16
+                    <= config.window.minimum_width_tiling as i16
+                {
+                    return;
+                }
                 self.tiling_windows[focused_window_index].rect.width -= pixels;
                 self.tiling_windows[..=focused_window_index]
                     .iter_mut()

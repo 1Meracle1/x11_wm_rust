@@ -51,7 +51,7 @@ fn main() {
                 WmCommand::FocusDown => wm.handle_shift_focus_down(&config),
                 WmCommand::WindowWidthGrow(pixels) => wm.handle_selected_window_grows_width(pixels),
                 WmCommand::WindowWidthShrink(pixels) => {
-                    wm.handle_selected_window_shrink_width(pixels)
+                    wm.handle_selected_window_shrink_width(pixels, &config)
                 }
                 WmCommand::WindowHeightGrow(_) => todo!(),
                 WmCommand::WindowHeightShrink(_) => todo!(),

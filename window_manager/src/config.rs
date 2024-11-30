@@ -21,8 +21,7 @@ pub struct WindowBorderConfig {
 #[derive(Deserialize, Debug)]
 pub struct WindowConfig {
     pub border: WindowBorderConfig,
-    pub resize_tick_pixels: u32,
-    pub minimum_width_tiling: u32,
+    pub minimum_width_tiling: u16,
     pub default_width_tiling: f32,
 }
 

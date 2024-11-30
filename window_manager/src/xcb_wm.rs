@@ -611,7 +611,7 @@ impl XcbWindowManager {
         self.conn.flush().unwrap();
     }
 
-    pub fn handle_selected_window_shrink_width(&mut self, pixels: u16) {
+    pub fn handle_selected_window_shrink_width(&mut self, pixels: u16, config: &Config) {
         debug!("shrink window width");
         assert!(pixels != 0);
         let monitor = self
@@ -619,7 +619,7 @@ impl XcbWindowManager {
             .get_mut(self.focused_monitor.unwrap())
             .unwrap();
         let workspace = monitor.get_focused_workspace_mut().unwrap();
-        workspace.shrink_width_selected_window(&self.conn, pixels);
+        workspace.shrink_width_selected_window(&self.conn, pixels, config);
         self.conn.flush().unwrap();
     }
 }
