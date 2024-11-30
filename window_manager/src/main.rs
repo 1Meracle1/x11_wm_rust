@@ -42,8 +42,8 @@ fn main() {
             match msg {
                 WmCommand::FocusLeft => wm.handle_shift_focus_left(),
                 WmCommand::FocusRight => wm.handle_shift_focus_right(),
-                WmCommand::MoveLeft => wm.handle_window_move_left(),
-                WmCommand::MoveRight => wm.handle_window_move_right(),
+                WmCommand::MoveLeft => wm.handle_window_move_left(&config),
+                WmCommand::MoveRight => wm.handle_window_move_right(&config),
             }
         });
         if !wm.handle_event(&config) {

@@ -131,7 +131,7 @@ impl XcbWindowManager {
                     // x::Event::ButtonPress(_) => todo!(),
                     // x::Event::ButtonRelease(_) => todo!(),
                     x::Event::MotionNotify(event) => self.handle_motion_event(event),
-                    x::Event::EnterNotify(event) => self.handle_enter_notify_event(event),
+                    x::Event::EnterNotify(event) => self.handle_enter_notify_event(event, config),
                     // x::Event::LeaveNotify(_) => todo!(),
                     x::Event::FocusIn(event) => self.handle_focus_in_event(event, config),
                     x::Event::FocusOut(event) => self.handle_focus_out_event(event, config),
@@ -306,7 +306,7 @@ impl XcbWindowManager {
         }
     }
 
-    fn handle_enter_notify_event(&mut self, event: x::EnterNotifyEvent) {
+    fn handle_enter_notify_event(&mut self, event: x::EnterNotifyEvent, config: &Config) {
         debug!("Enter Notify: {:?}", event.event());
         if event.event() != self.root_window {
             let monitor = self
@@ -314,7 +314,7 @@ impl XcbWindowManager {
                 .get_mut(self.focused_monitor.unwrap())
                 .unwrap();
             let workspace = monitor.get_focused_workspace_mut().unwrap();
-            workspace.set_window_focused_by_id(event.event(), &self.conn, false);
+            workspace.set_window_focused_by_id(event.event(), &self.conn, false, config);
             self.conn.flush().unwrap();
         }
     }
@@ -531,24 +531,24 @@ impl XcbWindowManager {
         self.conn.flush().unwrap();
     }
 
-    pub fn handle_window_move_left(&mut self) {
+    pub fn handle_window_move_left(&mut self, config: &Config) {
         debug!("handle window move left");
         let monitor = self
             .monitors
             .get_mut(self.focused_monitor.unwrap())
             .unwrap();
         let workspace = monitor.get_focused_workspace_mut().unwrap();
-        workspace.move_window_left(&self.conn);
+        workspace.move_window_left(&self.conn, config);
     }
 
-    pub fn handle_window_move_right(&mut self) {
+    pub fn handle_window_move_right(&mut self, config: &Config) {
         debug!("handle window move right");
         let monitor = self
             .monitors
             .get_mut(self.focused_monitor.unwrap())
             .unwrap();
         let workspace = monitor.get_focused_workspace_mut().unwrap();
-        workspace.move_window_right(&self.conn);
+        workspace.move_window_right(&self.conn, config);
     }
 }
 

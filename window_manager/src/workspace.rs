@@ -1,3 +1,5 @@
+use std::ptr;
+
 use crate::{
     config::Config,
     monitor::Rect,
@@ -181,16 +183,19 @@ impl Workspace {
         window: &Window,
         conn: &xcb::Connection,
         via_keyboard: bool,
+        config: &Config,
     ) {
         if !via_keyboard && self.focused_via_keyboard {
             return;
         }
 
+        window.set_input_focus(conn);
+        self.unset_focused_border(conn, config);
+        window.change_border_color(conn, config.window.border.color_active_u32.unwrap());
+
         self.focused_window = Some(window.id);
         self.focused_window_type = window.r#type;
         self.focused_via_keyboard = via_keyboard;
-
-        window.set_input_focus(conn);
 
         debug!(
             "Set focused {:?}, window type: {:?}",
@@ -203,36 +208,69 @@ impl Workspace {
         window_id: x::Window,
         conn: &xcb::Connection,
         via_keyboard: bool,
+        config: &Config,
     ) {
         if !via_keyboard && self.focused_via_keyboard {
             return;
         }
-        let tiling_window = self.tiling_windows.iter().find(|item| item.id == window_id);
-        if let Some(window) = tiling_window {
+        if let Some(window) = self.tiling_windows.iter().find(|item| item.id == window_id) {
             window.set_input_focus(conn);
+            self.unset_focused_border(conn, config);
+            window.change_border_color(conn, config.window.border.color_active_u32.unwrap());
+
             self.focused_window = Some(window.id);
             self.focused_window_type = window.r#type;
             self.focused_via_keyboard = via_keyboard;
+
             debug!(
                 "Set focused {:?}, window type: {:?}",
                 self.focused_window, self.focused_window_type
             );
             return;
         }
+
         let floating_window = self
             .floating_windows
             .iter()
             .find(|item| item.id == window_id);
         if let Some(window) = floating_window {
             window.set_input_focus(conn);
+            self.unset_focused_border(conn, config);
+            window.change_border_color(conn, config.window.border.color_active_u32.unwrap());
+
             self.focused_window = Some(window.id);
             self.focused_window_type = window.r#type;
             self.focused_via_keyboard = via_keyboard;
+
             debug!(
                 "Set focused {:?}, window type: {:?}",
                 self.focused_window, self.focused_window_type
             );
             return;
+        }
+    }
+
+    fn unset_focused_border(&self, conn: &xcb::Connection, config: &Config) {
+        if let Some(focused_id) = self.focused_window {
+            if self.focused_window_type == WindowType::Tiling {
+                if let Some(focused_window) =
+                    self.tiling_windows.iter().find(|w| w.id == focused_id)
+                {
+                    focused_window.change_border_color(
+                        conn,
+                        config.window.border.color_inactive_u32.unwrap(),
+                    );
+                }
+            } else if self.focused_window_type == WindowType::Floating {
+                if let Some(focused_window) =
+                    self.floating_windows.iter().find(|w| w.id == focused_id)
+                {
+                    focused_window.change_border_color(
+                        conn,
+                        config.window.border.color_inactive_u32.unwrap(),
+                    );
+                }
+            }
         }
     }
 
@@ -263,7 +301,9 @@ impl Workspace {
                 rect.height = self.available_area.height;
                 self.tiling_windows[index + 1..]
                     .iter_mut()
-                    .for_each(|item| item.rect.x += expected_width as i16);
+                    .for_each(|item| {
+                        item.rect.x += (expected_width + self.border_size + self.inner_gap) as i16
+                    });
                 return rect;
             }
         }
@@ -378,6 +418,18 @@ impl Workspace {
         window.set_input_focus(conn);
     }
 
+    pub fn focus_tiling_window(
+        &mut self,
+        window: &Window,
+        conn: &xcb::Connection,
+        focused_via_keyboard: bool,
+    ) {
+        self.focused_window = Some(window.id);
+        self.focused_window_type = window.r#type;
+        self.focused_via_keyboard = focused_via_keyboard;
+        window.set_input_focus(conn);
+    }
+
     pub fn shift_focus_left(&mut self, conn: &xcb::Connection) {
         if let Some(focused_id) = self.focused_window {
             if self.focused_window_type == WindowType::Tiling {
@@ -445,7 +497,64 @@ impl Workspace {
         }
     }
 
-    pub fn move_window_left(&mut self, conn: &xcb::Connection) {
+    fn swap_windows_rects(
+        &mut self,
+        index_current: usize,
+        index_swapped_with: usize,
+        conn: &xcb::Connection,
+        config: &Config,
+    ) {
+        assert!(index_current != index_swapped_with);
+        unsafe {
+            let lhs: *mut Rect = &mut self.tiling_windows.get_mut(index_current).unwrap().rect;
+            let rhs: *mut Rect = &mut self
+                .tiling_windows
+                .get_mut(index_swapped_with)
+                .unwrap()
+                .rect;
+            ptr::swap(lhs, rhs);
+        }
+        self.sort_windows();
+
+        let old_index_current = index_current;
+        let index_current = index_swapped_with;
+        let index_swapped_with = old_index_current;
+
+        let current = self.tiling_windows.get(index_current).unwrap();
+        let swapped_with = self.tiling_windows.get(index_swapped_with).unwrap();
+
+        current.configure(conn);
+        swapped_with.configure(conn);
+
+        swapped_with.change_border_color(conn, config.window.border.color_inactive_u32.unwrap());
+        current.change_border_color(conn, config.window.border.color_active_u32.unwrap());
+        current.set_input_focus(conn);
+        self.focused_via_keyboard = true;
+
+        let sign = if index_current > index_swapped_with {
+            -1
+        } else {
+            1
+        };
+        let diff = if index_current > index_swapped_with {
+            swapped_with.rect.x - self.available_area.x - self.border_size as i16
+        } else {
+            self.available_area.x + self.available_area.width as i16
+                - self.border_size as i16
+                - swapped_with.rect.x
+                - swapped_with.rect.width as i16
+        };
+        if diff < 0 {
+            self.tiling_windows.iter_mut().for_each(|w| {
+                w.rect.x += diff * sign;
+                w.configure(conn);
+            });
+            self.show_windows_in_available_area(conn);
+            self.hide_windows_out_available_area(conn);
+        }
+    }
+
+    pub fn move_window_left(&mut self, conn: &xcb::Connection, config: &Config) {
         if let Some(focused_id) = self.focused_window {
             if self.focused_window_type == WindowType::Tiling {
                 let index = self
@@ -456,47 +565,14 @@ impl Workspace {
                     .unwrap()
                     .0;
                 if index != 0 {
-                    debug!("index: {}", index);
-                    let focused_window_rect = self.tiling_windows.get(index).unwrap().rect.clone();
-                    let swapped_with_window_rect =
-                        self.tiling_windows.get(index - 1).unwrap().rect.clone();
-
-                    self.tiling_windows.get_mut(index).unwrap().rect =
-                        swapped_with_window_rect.clone();
-                    self.tiling_windows.get_mut(index - 1).unwrap().rect = focused_window_rect;
-
-                    self.sort_windows();
-                    self.tiling_windows.get_mut(index).unwrap().configure(conn);
-                    self.tiling_windows
-                        .get_mut(index - 1)
-                        .unwrap()
-                        .configure(conn);
-
-                    // let new_selected_window = self.tiling_windows.get_mut(index - 1).unwrap();
-                    // self.focused_window = Some(new_selected_window.id);
-                    // self.focused_window_type = new_selected_window.r#type;
-                    // self.focused_via_keyboard = true;
-                    // new_selected_window.set_input_focus(conn);
-
-                    let diff = swapped_with_window_rect.x
-                        - self.available_area.x
-                        - self.border_size as i16;
-                    if diff < 0 {
-                        self.tiling_windows.iter_mut().for_each(|w| {
-                            w.rect.x -= diff;
-                            w.configure(conn);
-                        });
-                        self.show_windows_in_available_area(conn);
-                        self.hide_windows_out_available_area(conn);
-                    }
-
+                    self.swap_windows_rects(index, index - 1, conn, config);
                     conn.flush().unwrap();
                 }
             }
         }
     }
 
-    pub fn move_window_right(&mut self, conn: &xcb::Connection) {
+    pub fn move_window_right(&mut self, conn: &xcb::Connection, config: &Config) {
         if let Some(focused_id) = self.focused_window {
             if self.focused_window_type == WindowType::Tiling {
                 let index = self
@@ -507,40 +583,7 @@ impl Workspace {
                     .unwrap()
                     .0;
                 if index != self.tiling_windows.len() - 1 {
-                    debug!("index: {}", index);
-                    let focused_window_rect = self.tiling_windows.get(index).unwrap().rect.clone();
-                    let swapped_with_window_rect =
-                        self.tiling_windows.get(index + 1).unwrap().rect.clone();
-
-                    self.tiling_windows.get_mut(index).unwrap().rect =
-                        swapped_with_window_rect.clone();
-                    self.tiling_windows.get_mut(index + 1).unwrap().rect = focused_window_rect;
-
-                    self.sort_windows();
-                    self.tiling_windows.get_mut(index).unwrap().configure(conn);
-                    self.tiling_windows
-                        .get_mut(index + 1)
-                        .unwrap()
-                        .configure(conn);
-
-                    // let new_selected_window = self.tiling_windows.get_mut(index + 1).unwrap();
-                    // self.focused_window = Some(new_selected_window.id);
-                    // self.focused_window_type = new_selected_window.r#type;
-                    // self.focused_via_keyboard = true;
-                    // new_selected_window.set_input_focus(conn);
-
-                    let diff = self.available_area.x + self.available_area.width as i16
-                        - self.border_size as i16
-                        - swapped_with_window_rect.x
-                        - swapped_with_window_rect.width as i16;
-                    if diff < 0 {
-                        self.tiling_windows.iter_mut().for_each(|w| {
-                            w.rect.x += diff;
-                            w.configure(conn);
-                        });
-                        self.show_windows_in_available_area(conn);
-                        self.hide_windows_out_available_area(conn);
-                    }
+                    self.swap_windows_rects(index, index + 1, conn, config);
                     conn.flush().unwrap();
                 }
             }

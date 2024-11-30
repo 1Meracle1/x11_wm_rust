@@ -167,7 +167,7 @@ impl KeyEventsHandler {
         print_mod_mask(modifiers, "converted mod mask:");
         for bind in &self.binds {
             if bind.modifiers.contains(modifiers) && event.detail() == bind.key_name as u8 {
-                print_mod_mask(bind.modifiers, "matching bind mod mask:");
+                // print_mod_mask(bind.modifiers, "matching bind mod mask:");
                 bind.action.execute();
                 break;
             }

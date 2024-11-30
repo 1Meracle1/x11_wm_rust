@@ -71,6 +71,12 @@ impl Window {
         });
     }
 
+    pub fn swap_rect_with(&mut self, other: &mut Window) {
+        let rect = self.rect.clone();
+        self.rect = other.rect.clone();
+        other.rect = rect;
+    }
+
     pub fn change_border_color(&self, conn: &xcb::Connection, color: u32) {
         debug!("change border color: {} for {:?}", color, self.id);
         conn.send_request(&x::ChangeWindowAttributes {
