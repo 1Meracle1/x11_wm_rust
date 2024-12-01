@@ -27,7 +27,7 @@ pub struct WindowConfig {
 
 #[derive(Deserialize, Debug)]
 pub struct WorkspacesConfig {
-    pub count: usize,
+    pub count: u16,
     pub outer_gap_horiz: u16,
     pub outer_gap_vert: u16,
     pub inner_gap: u16,

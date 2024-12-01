@@ -622,16 +622,8 @@ impl XcbWindowManager {
         self.conn.flush().unwrap();
     }
 
-    pub fn handle_workspace_change_for_selected_window(
-        &mut self,
-        new_workspace_id: u16,
-        config: &Config,
-    ) {
-        debug!("selected window workspace change");
-        if new_workspace_id == 0 {
-            error!("new_workspace_id received as 0");
-            return;
-        }
+    fn move_window_to_workspace_id(&mut self, new_workspace_id: u16, config: &Config) {
+        assert!(new_workspace_id != 0);
         let monitor = self
             .monitors
             .get_mut(self.focused_monitor.unwrap())
@@ -665,6 +657,59 @@ impl XcbWindowManager {
                 // debug!("new workspace: {:#?}", new_workspace);
             }
             self.conn.flush().unwrap();
+        }
+    }
+
+    pub fn handle_workspace_change_for_selected_window(
+        &mut self,
+        new_workspace_id: u16,
+        config: &Config,
+    ) {
+        debug!("selected window workspace change");
+        self.move_window_to_workspace_id(new_workspace_id, config);
+    }
+
+    pub fn handle_window_move_up(&mut self, config: &Config) {
+        debug!("handle window move up");
+        let monitor = self
+            .monitors
+            .get_mut(self.focused_monitor.unwrap())
+            .unwrap();
+        let new_workspace_id = if let Some(new_workspace_id) = monitor.get_upper_workspace_id() {
+            new_workspace_id
+        } else {
+            let focused_workspace_id = monitor.get_focused_workspace().unwrap().id;
+            if focused_workspace_id > 1 {
+                monitor.add_new_workspace(focused_workspace_id - 1, config, &self.conn);
+                focused_workspace_id - 1
+            } else {
+                0
+            }
+        };
+        if new_workspace_id != 0 {
+            self.move_window_to_workspace_id(new_workspace_id, config);
+        }
+    }
+
+    pub fn handle_window_move_down(&mut self, config: &Config) {
+        debug!("handle window move down");
+        let monitor = self
+            .monitors
+            .get_mut(self.focused_monitor.unwrap())
+            .unwrap();
+        let new_workspace_id = if let Some(new_workspace_id) = monitor.get_lower_workspace_id() {
+            new_workspace_id
+        } else {
+            let focused_workspace_id = monitor.get_focused_workspace().unwrap().id;
+            if focused_workspace_id + 1 < config.workspaces.count {
+                monitor.add_new_workspace(focused_workspace_id + 1, config, &self.conn);
+                focused_workspace_id + 1
+            } else {
+                config.workspaces.count
+            }
+        };
+        if new_workspace_id != config.workspaces.count {
+            self.move_window_to_workspace_id(new_workspace_id, config);
         }
     }
 }

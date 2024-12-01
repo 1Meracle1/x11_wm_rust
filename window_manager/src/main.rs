@@ -58,6 +58,8 @@ fn main() {
                 WmCommand::WorkspaceWindowChange(workspace_id) => {
                     wm.handle_workspace_change_for_selected_window(workspace_id, &config)
                 }
+                WmCommand::MoveUp => wm.handle_window_move_up(&config),
+                WmCommand::MoveDown => wm.handle_window_move_down(&config),
             }
         });
         if !wm.handle_event(&config) {

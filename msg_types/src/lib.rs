@@ -19,6 +19,8 @@ pub enum WmCommand {
     FocusDown,
     MoveLeft,
     MoveRight,
+    MoveUp,
+    MoveDown,
     WorkspaceChange(u16),
     WorkspaceWindowChange(u16),
     WindowWidthGrow(u16),
@@ -67,6 +69,8 @@ impl TryFrom<WmMessage> for WmCommand {
                         match value.parts.get(1).unwrap().as_str() {
                             "left" => Ok(Self::MoveLeft),
                             "right" => Ok(Self::MoveRight),
+                            "up" => Ok(Self::MoveUp),
+                            "down" => Ok(Self::MoveDown),
                             _ => Err(format!("Invalid move command: {}", value.parts.join(" "))),
                         }
                     } else {

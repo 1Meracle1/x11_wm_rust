@@ -38,7 +38,7 @@ impl Monitor {
             9
         };
         let mut workspaces = Vec::new();
-        workspaces.reserve(workspaces_count);
+        workspaces.reserve(workspaces_count as usize);
         workspaces.push(Workspace::new(1, rect.clone(), config, conn, false));
         debug!("creating new workspace: {}", 1);
 

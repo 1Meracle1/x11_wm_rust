@@ -63,6 +63,16 @@ keys_combination = "Alt+Ctrl+L"
 action = "exec"
 arguments = ["target/debug/wm_msg move right"]
 
+[[keybindings]]
+keys_combination = "Alt+Ctrl+J"
+action = "exec"
+arguments = ["target/debug/wm_msg move down"]
+
+[[keybindings]]
+keys_combination = "Alt+Ctrl+K"
+action = "exec"
+arguments = ["target/debug/wm_msg move up"]
+
 #############################################################
 
 [[keybindings]]
