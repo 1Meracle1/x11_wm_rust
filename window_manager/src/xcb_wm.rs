@@ -133,8 +133,8 @@ impl XcbWindowManager {
                     x::Event::MotionNotify(event) => self.handle_motion_event(event),
                     x::Event::EnterNotify(event) => self.handle_enter_notify_event(event, config),
                     // x::Event::LeaveNotify(_) => todo!(),
-                    x::Event::FocusIn(event) => self.handle_focus_in_event(event, config),
-                    x::Event::FocusOut(event) => self.handle_focus_out_event(event, config),
+                    // x::Event::FocusIn(event) => self.handle_focus_in_event(event, config),
+                    // x::Event::FocusOut(event) => self.handle_focus_out_event(event, config),
                     // x::Event::KeymapNotify(_) => todo!(),
                     // x::Event::Expose(_) => todo!(),
                     // x::Event::GraphicsExposure(_) => todo!(),
@@ -271,7 +271,7 @@ impl XcbWindowManager {
     }
 
     fn handle_focus_in_event(&self, event: x::FocusInEvent, config: &Config) {
-        debug!("FocusIn: {:?}", event.event());
+        debug!("FocusIn: {}", event.event().resource_id());
         if event.event() != self.root_window {
             let monitor = self.monitors.get(self.focused_monitor.unwrap()).unwrap();
             if let Some(window) = monitor
@@ -289,7 +289,7 @@ impl XcbWindowManager {
     }
 
     fn handle_focus_out_event(&self, event: x::FocusOutEvent, config: &Config) {
-        debug!("FocusOut: {:?}", event.event());
+        debug!("FocusOut: {}", event.event().resource_id());
         if event.event() != self.root_window {
             let monitor = self.monitors.get(self.focused_monitor.unwrap()).unwrap();
             if let Some(window) = monitor
@@ -307,7 +307,7 @@ impl XcbWindowManager {
     }
 
     fn handle_enter_notify_event(&mut self, event: x::EnterNotifyEvent, config: &Config) {
-        debug!("Enter Notify: {:?}", event.event());
+        debug!("Enter Notify: {}", event.event().resource_id());
         if event.event() != self.root_window {
             let monitor = self
                 .monitors
@@ -356,7 +356,7 @@ impl XcbWindowManager {
     }
 
     fn subscribe_to_wm_events(&self) {
-        let cookie = self.conn.send_request_checked(&ChangeWindowAttributes {
+        self.conn.send_request(&ChangeWindowAttributes {
             window: self.root_window,
             value_list: &[Cw::EventMask(
                 EventMask::SUBSTRUCTURE_REDIRECT
@@ -364,7 +364,6 @@ impl XcbWindowManager {
                     | EventMask::POINTER_MOTION,
             )],
         });
-        self.conn.check_request(cookie).unwrap();
     }
 
     fn create_meta_window(&self, window_manager_name: &str) -> x::Window {
@@ -509,25 +508,25 @@ impl XcbWindowManager {
         });
     }
 
-    pub fn handle_shift_focus_left(&mut self) {
+    pub fn handle_shift_focus_left(&mut self, config: &Config) {
         debug!("handle shift focus left.");
         let monitor = self
             .monitors
             .get_mut(self.focused_monitor.unwrap())
             .unwrap();
         let workspace = monitor.get_focused_workspace_mut().unwrap();
-        workspace.shift_focus_left(&self.conn);
+        workspace.shift_focus_left(&self.conn, config);
         self.conn.flush().unwrap();
     }
 
-    pub fn handle_shift_focus_right(&mut self) {
+    pub fn handle_shift_focus_right(&mut self, config: &Config) {
         debug!("handle shift focus right.");
         let monitor = self
             .monitors
             .get_mut(self.focused_monitor.unwrap())
             .unwrap();
         let workspace = monitor.get_focused_workspace_mut().unwrap();
-        workspace.shift_focus_right(&self.conn);
+        workspace.shift_focus_right(&self.conn, config);
         self.conn.flush().unwrap();
     }
 
@@ -621,6 +620,52 @@ impl XcbWindowManager {
         let workspace = monitor.get_focused_workspace_mut().unwrap();
         workspace.shrink_width_selected_window(&self.conn, pixels, config);
         self.conn.flush().unwrap();
+    }
+
+    pub fn handle_workspace_change_for_selected_window(
+        &mut self,
+        new_workspace_id: u16,
+        config: &Config,
+    ) {
+        debug!("selected window workspace change");
+        if new_workspace_id == 0 {
+            error!("new_workspace_id received as 0");
+            return;
+        }
+        let monitor = self
+            .monitors
+            .get_mut(self.focused_monitor.unwrap())
+            .unwrap();
+        let monitor_height = monitor.rect.height;
+        let workspace = monitor.get_focused_workspace_mut().unwrap();
+        // debug!("workspace: {:#?}", workspace);
+        if let Some(window) = workspace.remove_selected_window(&self.conn, config, monitor_height) {
+            if let Some(new_workspace) = monitor.get_workspace_by_id_mut(new_workspace_id) {
+                new_workspace.add_existing_tiling_window(
+                    &self.conn,
+                    window,
+                    config,
+                    monitor_height,
+                );
+                if config.switch_workspace_on_window_workspace_change {
+                    new_workspace.unhide_all_windows(monitor_height, &self.conn);
+                }
+            } else {
+                monitor.add_new_workspace(new_workspace_id, config, &self.conn);
+                let new_workspace = monitor.get_workspace_by_id_mut(new_workspace_id).unwrap();
+                new_workspace.add_existing_tiling_window(
+                    &self.conn,
+                    window,
+                    config,
+                    monitor_height,
+                );
+                if config.switch_workspace_on_window_workspace_change {
+                    new_workspace.unhide_all_windows(monitor_height, &self.conn);
+                }
+                // debug!("new workspace: {:#?}", new_workspace);
+            }
+            self.conn.flush().unwrap();
+        }
     }
 }
 

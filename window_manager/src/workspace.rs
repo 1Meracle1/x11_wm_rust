@@ -100,11 +100,11 @@ impl Workspace {
             item.rect.y += diff_y;
             item.configure(conn);
         });
-        self.show_windows_in_available_area(conn);
-        self.hide_windows_out_available_area(conn);
+        self.map_windows_in_available_area(conn);
+        self.unmap_windows_out_available_area(conn);
     }
 
-    pub fn show_windows_in_available_area(&mut self, conn: &xcb::Connection) {
+    pub fn map_windows_in_available_area(&mut self, conn: &xcb::Connection) {
         self.tiling_windows.iter_mut().for_each(|item| {
             let intersects = item.intersects_with_rect(&self.available_area);
             if intersects && !item.mapped {
@@ -113,7 +113,7 @@ impl Workspace {
         });
     }
 
-    pub fn hide_windows_out_available_area(&mut self, conn: &xcb::Connection) {
+    pub fn unmap_windows_out_available_area(&mut self, conn: &xcb::Connection) {
         self.tiling_windows.iter_mut().for_each(|item| {
             let intersects = item.intersects_with_rect(&self.available_area);
             if !intersects && item.mapped {
@@ -127,28 +127,33 @@ impl Workspace {
         if self.hidden {
             return;
         }
-        let shift = (monitor_height * self.id) as i16;
-        self.tiling_windows.iter_mut().for_each(|w| {
-            w.rect.y += shift;
-            w.configure(conn);
-            if w.mapped {
-                w.hide(conn);
-            }
-        });
-        self.floating_windows.iter_mut().for_each(|w| {
-            w.rect.y += shift;
-            w.configure(conn);
-            if w.mapped {
-                w.hide(conn);
-            }
-        });
-        self.docked_windows.iter_mut().for_each(|w| {
-            w.rect.y += shift;
-            w.configure(conn);
-            if w.mapped {
-                w.hide(conn);
-            }
-        });
+        if !self.tiling_windows.is_empty()
+            || !self.floating_windows.is_empty()
+            || !self.docked_windows.is_empty()
+        {
+            let shift = (monitor_height * self.id) as i16;
+            self.tiling_windows.iter_mut().for_each(|w| {
+                w.rect.y += shift;
+                w.configure(conn);
+                if w.mapped {
+                    w.hide(conn);
+                }
+            });
+            self.floating_windows.iter_mut().for_each(|w| {
+                w.rect.y += shift;
+                w.configure(conn);
+                if w.mapped {
+                    w.hide(conn);
+                }
+            });
+            self.docked_windows.iter_mut().for_each(|w| {
+                w.rect.y += shift;
+                w.configure(conn);
+                if w.mapped {
+                    w.hide(conn);
+                }
+            });
+        }
         self.hidden = true;
     }
 
@@ -157,28 +162,38 @@ impl Workspace {
         if !self.hidden {
             return;
         }
-        let shift = (monitor_height * self.id) as i16;
-        self.tiling_windows.iter_mut().for_each(|w| {
-            w.rect.y -= shift;
-            w.configure(conn);
-            if w.mapped {
-                w.show(conn);
-            }
-        });
-        self.floating_windows.iter_mut().for_each(|w| {
-            w.rect.y -= shift;
-            w.configure(conn);
-            if w.mapped {
-                w.show(conn);
-            }
-        });
-        self.docked_windows.iter_mut().for_each(|w| {
-            w.rect.y -= shift;
-            w.configure(conn);
-            if w.mapped {
-                w.show(conn);
-            }
-        });
+        if !self.tiling_windows.is_empty()
+            || !self.floating_windows.is_empty()
+            || !self.docked_windows.is_empty()
+        {
+            let shift = (monitor_height * self.id) as i16;
+            self.tiling_windows.iter_mut().for_each(|w| {
+                w.rect.y -= shift;
+                w.configure(conn);
+                if w.mapped {
+                    w.show(conn);
+                }
+            });
+            self.floating_windows.iter_mut().for_each(|w| {
+                w.rect.y -= shift;
+                w.configure(conn);
+                if w.mapped {
+                    w.show(conn);
+                }
+            });
+            self.docked_windows.iter_mut().for_each(|w| {
+                w.rect.y -= shift;
+                w.configure(conn);
+                if w.mapped {
+                    w.show(conn);
+                }
+            });
+            self.shift_to_balance_free_space(conn, true);
+            self.map_windows_in_available_area(conn);
+            self.unmap_windows_out_available_area(conn);
+            self.sort_windows();
+            self.focused_via_keyboard = true;
+        }
         self.hidden = false;
     }
 
@@ -347,7 +362,7 @@ impl Workspace {
         })
     }
 
-    fn shift_to_balance_free_space(&mut self) {
+    fn shift_to_balance_free_space(&mut self, conn: &xcb::Connection, configure: bool) {
         let left_most_rect = &self.get_tiling_mapped_first().unwrap().rect;
         let free_space_left = left_most_rect.x - self.available_area.x;
         debug!("free_space_left: {}", free_space_left);
@@ -375,54 +390,99 @@ impl Workspace {
         if shift != 0 {
             self.tiling_windows
                 .iter_mut()
-                .for_each(|item| item.rect.x += shift);
+                .for_each(|w| w.rect.x += shift);
+            if configure {
+                self.tiling_windows
+                    .iter_mut()
+                    .for_each(|w| w.configure(conn));
+            }
         }
     }
 
-    pub fn add_window_tiling(
+    pub fn add_tiling_window_by_id_width(
         &mut self,
         conn: &xcb::Connection,
         window_id: x::Window,
         expected_width: u16,
+        config: &Config,
+        monitor_height: u16,
     ) {
         let mut rect = self.free_rect_after_active_tiling_window(expected_width);
         self.shift_to_make_rect_visible_on_screen(&mut rect);
+        if self.hidden {
+            rect.y += (monitor_height * self.id) as i16;
+        }
 
-        self.focused_window = Some(window_id);
-        self.focused_window_type = WindowType::Tiling;
-        self.focused_via_keyboard = true;
-
-        let window = Window::new(rect, window_id, WindowType::Tiling, self.border_size);
+        let mut window = Window::new(rect, window_id, WindowType::Tiling, self.border_size);
+        window.configure(conn);
         window.subscribe_to_wm_events(conn);
+        if !self.hidden {
+            window.map(conn);
+            self.set_window_focused(&window, conn, true, config);
+        } else {
+            self.focused_window = Some(window.id);
+            self.focused_window_type = window.r#type;
+            self.focused_via_keyboard = true;
+        }
+
         self.tiling_windows.push(window);
         self.sort_windows();
 
-        // info!("before balance of free space");
-        // self.tiling_windows
-        //     .iter()
-        //     .for_each(|item| debug!("{:?}", item.rect));
-        self.shift_to_balance_free_space();
-        // info!("after balance of free space");
-        // self.tiling_windows
-        //     .iter()
-        //     .for_each(|item| debug!("{:?}", item.rect));
-
+        self.shift_to_balance_free_space(conn, false);
         self.tiling_windows.iter().for_each(|item| {
             item.configure(conn);
         });
-        self.show_windows_in_available_area(conn);
-        self.hide_windows_out_available_area(conn);
-
-        let window = self
-            .tiling_windows
-            .iter_mut()
-            .find(|item| item.id == self.focused_window.unwrap())
-            .unwrap();
-        window.map(conn);
-        window.set_input_focus(conn);
+        if !self.hidden {
+            self.map_windows_in_available_area(conn);
+            self.unmap_windows_out_available_area(conn);
+        }
     }
 
-    pub fn shift_focus_left(&mut self, conn: &xcb::Connection) {
+    pub fn add_existing_tiling_window(
+        &mut self,
+        conn: &xcb::Connection,
+        window: Window,
+        config: &Config,
+        monitor_height: u16,
+    ) {
+        let mut rect = self.free_rect_after_active_tiling_window(window.rect.width);
+        self.shift_to_make_rect_visible_on_screen(&mut rect);
+        if self.hidden {
+            rect.y = self.available_area.y + (monitor_height * self.id) as i16;
+        }
+
+        let mut window = window;
+        window.rect = rect;
+
+        window.map(conn);
+        self.set_window_focused(&window, conn, true, config);
+        if self.hidden {
+            window.hide(conn);
+        }
+        // if !self.hidden {
+        //     window.map(conn);
+        //     self.set_window_focused(&window, conn, true, config);
+        // } else {
+        //     window.hide(conn);
+        //     self.focused_window = Some(window.id);
+        //     self.focused_window_type = window.r#type;
+        //     self.focused_via_keyboard = true;
+        // }
+
+        self.tiling_windows.push(window);
+        self.sort_windows();
+
+        self.shift_to_balance_free_space(conn, false);
+        self.tiling_windows.iter().for_each(|item| {
+            item.configure(conn);
+        });
+        if !self.hidden {
+            self.map_windows_in_available_area(conn);
+            self.unmap_windows_out_available_area(conn);
+        }
+    }
+
+    pub fn shift_focus_left(&mut self, conn: &xcb::Connection, config: &Config) {
         if let Some(focused_id) = self.focused_window {
             if self.focused_window_type == WindowType::Tiling {
                 if let Some((index, _)) = self
@@ -432,13 +492,11 @@ impl Workspace {
                     .find(|(_, w)| w.id == focused_id)
                 {
                     if index != 0 {
-                        let new_selected_window = self.tiling_windows.get(index - 1).unwrap();
-                        self.focused_window = Some(new_selected_window.id);
-                        self.focused_window_type = new_selected_window.r#type;
-                        self.focused_via_keyboard = true;
-                        new_selected_window.set_input_focus(conn);
+                        let new_selected_window_rect = self.tiling_windows[index - 1].rect.clone();
+                        let new_selected_window_id = self.tiling_windows[index - 1].id;
+                        self.set_window_focused_by_id(new_selected_window_id, conn, true, config);
 
-                        let diff = new_selected_window.rect.x
+                        let diff = new_selected_window_rect.x
                             - self.available_area.x
                             - self.border_size as i16;
                         if diff < 0 {
@@ -446,8 +504,8 @@ impl Workspace {
                                 w.rect.x -= diff;
                                 w.configure(conn);
                             });
-                            self.show_windows_in_available_area(conn);
-                            self.hide_windows_out_available_area(conn);
+                            self.map_windows_in_available_area(conn);
+                            self.unmap_windows_out_available_area(conn);
                         }
                     }
                 }
@@ -455,7 +513,7 @@ impl Workspace {
         }
     }
 
-    pub fn shift_focus_right(&mut self, conn: &xcb::Connection) {
+    pub fn shift_focus_right(&mut self, conn: &xcb::Connection, config: &Config) {
         if let Some(focused_id) = self.focused_window {
             if self.focused_window_type == WindowType::Tiling {
                 if let Some((index, _)) = self
@@ -465,23 +523,21 @@ impl Workspace {
                     .find(|(_, w)| w.id == focused_id)
                 {
                     if index != self.tiling_windows.len() - 1 {
-                        let new_selected_window = self.tiling_windows.get(index + 1).unwrap();
-                        self.focused_window = Some(new_selected_window.id);
-                        self.focused_window_type = new_selected_window.r#type;
-                        self.focused_via_keyboard = true;
-                        new_selected_window.set_input_focus(conn);
+                        let new_selected_window_rect = self.tiling_windows[index + 1].rect.clone();
+                        let new_selected_window_id = self.tiling_windows[index + 1].id;
+                        self.set_window_focused_by_id(new_selected_window_id, conn, true, config);
 
                         let diff = self.available_area.x + self.available_area.width as i16
                             - self.border_size as i16
-                            - new_selected_window.rect.x
-                            - new_selected_window.rect.width as i16;
+                            - new_selected_window_rect.x
+                            - new_selected_window_rect.width as i16;
                         if diff < 0 {
                             self.tiling_windows.iter_mut().for_each(|w| {
                                 w.rect.x += diff;
                                 w.configure(conn);
                             });
-                            self.show_windows_in_available_area(conn);
-                            self.hide_windows_out_available_area(conn);
+                            self.map_windows_in_available_area(conn);
+                            self.unmap_windows_out_available_area(conn);
                         }
                     }
                 }
@@ -541,8 +597,8 @@ impl Workspace {
                 w.rect.x += diff * sign;
                 w.configure(conn);
             });
-            self.show_windows_in_available_area(conn);
-            self.hide_windows_out_available_area(conn);
+            self.map_windows_in_available_area(conn);
+            self.unmap_windows_out_available_area(conn);
         }
     }
 
@@ -765,5 +821,65 @@ impl Workspace {
                     });
             }
         }
+    }
+
+    pub fn remove_selected_window(
+        &mut self,
+        conn: &xcb::Connection,
+        config: &Config,
+        monitor_height: u16,
+    ) -> Option<Window> {
+        if let Some(focused_window_id) = self.focused_window {
+            if self.focused_window_type == WindowType::Tiling {
+                let focused_window_index = self
+                    .tiling_windows
+                    .iter()
+                    .enumerate()
+                    .find(|(_, w)| w.id == focused_window_id)
+                    .unwrap()
+                    .0;
+                let removed_window = self.tiling_windows.remove(focused_window_index);
+                if focused_window_index < self.tiling_windows.len() {
+                    self.tiling_windows[focused_window_index..]
+                        .iter_mut()
+                        .for_each(|w| {
+                            w.rect.x -= (removed_window.rect.width
+                                + self.inner_gap
+                                + self.border_size) as i16;
+                            w.configure(conn);
+                        });
+                    self.map_windows_in_available_area(conn);
+                    self.unmap_windows_out_available_area(conn);
+                    self.set_window_focused_by_id(
+                        self.tiling_windows[focused_window_index].id,
+                        conn,
+                        true,
+                        config,
+                    );
+                    let mut focused_rect = self.tiling_windows[focused_window_index].rect.clone();
+                    self.shift_to_make_rect_visible_on_screen(&mut focused_rect);
+                    self.tiling_windows[focused_window_index].rect = focused_rect;
+                } else if !self.tiling_windows.is_empty() {
+                    self.set_window_focused_by_id(
+                        self.tiling_windows.last().unwrap().id,
+                        conn,
+                        true,
+                        config,
+                    );
+                } else {
+                    self.focused_window = None;
+                }
+                if !self.tiling_windows.is_empty() {
+                    self.shift_to_balance_free_space(conn, true);
+                    self.map_windows_in_available_area(conn);
+                    self.unmap_windows_out_available_area(conn);
+                    if config.switch_workspace_on_window_workspace_change {
+                        self.hide_all_windows(monitor_height, conn);
+                    }
+                }
+                return Some(removed_window);
+            }
+        }
+        None
     }
 }

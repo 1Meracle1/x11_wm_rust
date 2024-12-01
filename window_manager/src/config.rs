@@ -39,6 +39,7 @@ pub struct Config {
     pub keybindings: Vec<KeybindingsConfig>,
     pub window: WindowConfig,
     pub workspaces: WorkspacesConfig,
+    pub switch_workspace_on_window_workspace_change: bool,
 }
 
 impl Config {

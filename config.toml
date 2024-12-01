@@ -3,6 +3,8 @@ startup_commands = [
   "alacritty",
 ]
 
+switch_workspace_on_window_workspace_change = false
+
 ################################################################
 
 [window]
@@ -121,3 +123,51 @@ action = "exec"
 arguments = ["target/debug/wm_msg workspace change 9"]
 
 ################################################################
+
+[[keybindings]]
+keys_combination = "Alt+Shift+1"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace window change 1"]
+
+[[keybindings]]
+keys_combination = "Alt+Shift+2"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace window change 2"]
+
+[[keybindings]]
+keys_combination = "Alt+Shift+3"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace window change 3"]
+
+[[keybindings]]
+keys_combination = "Alt+Shift+4"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace window change 4"]
+
+[[keybindings]]
+keys_combination = "Alt+Shift+5"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace window change 5"]
+
+[[keybindings]]
+keys_combination = "Alt+Shift+6"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace window change 6"]
+
+[[keybindings]]
+keys_combination = "Alt+Shift+7"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace window change 7"]
+
+[[keybindings]]
+keys_combination = "Alt+Shift+8"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace window change 8"]
+
+[[keybindings]]
+keys_combination = "Alt+Shift+9"
+action = "exec"
+arguments = ["target/debug/wm_msg workspace window change 9"]
+
+#############################################################
+

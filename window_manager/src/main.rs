@@ -40,8 +40,8 @@ fn main() {
         receiver.try_iter().for_each(|msg| {
             debug!("message received via Unix domain socket: {:?}", msg);
             match msg {
-                WmCommand::FocusLeft => wm.handle_shift_focus_left(),
-                WmCommand::FocusRight => wm.handle_shift_focus_right(),
+                WmCommand::FocusLeft => wm.handle_shift_focus_left(&config),
+                WmCommand::FocusRight => wm.handle_shift_focus_right(&config),
                 WmCommand::MoveLeft => wm.handle_window_move_left(&config),
                 WmCommand::MoveRight => wm.handle_window_move_right(&config),
                 WmCommand::WorkspaceChange(workspace_id) => {
@@ -55,6 +55,9 @@ fn main() {
                 }
                 WmCommand::WindowHeightGrow(_) => todo!(),
                 WmCommand::WindowHeightShrink(_) => todo!(),
+                WmCommand::WorkspaceWindowChange(workspace_id) => {
+                    wm.handle_workspace_change_for_selected_window(workspace_id, &config)
+                }
             }
         });
         if !wm.handle_event(&config) {

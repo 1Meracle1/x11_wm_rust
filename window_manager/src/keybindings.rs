@@ -55,33 +55,33 @@ impl KeyEventsHandler {
             let mut modifiers = x::ModMask::empty();
             let mut key_name = Keycodes::None;
             let mut weight: u32 = 0;
-            let mut is_range = false;
+            // let mut is_range = false;
             for key in keys {
-                if key.starts_with('[') && key.ends_with(']') {
-                    if let Some(keycodes) = keycodes_from_number_range_str(key) {
-                        if modifiers.is_empty() {
-                            error!(
-                                "Invalid binding: no modifier supplied, binding: {:#?}",
-                                bind
-                            );
-                            continue;
-                        }
-                        keycodes.iter().for_each(|keycode| {
-                            Self::add_grab_binding(
-                                &mut binds,
-                                &bind.action,
-                                &bind.arguments,
-                                modifiers,
-                                keycode.clone(),
-                                weight,
-                                root_window,
-                                conn,
-                            )
-                        });
-                        is_range = true;
-                        break;
-                    }
-                }
+                // if key.starts_with('[') && key.ends_with(']') {
+                //     if let Some(keycodes) = keycodes_from_number_range_str(key) {
+                //         if modifiers.is_empty() {
+                //             error!(
+                //                 "Invalid binding: no modifier supplied, binding: {:#?}",
+                //                 bind
+                //             );
+                //             continue;
+                //         }
+                //         keycodes.iter().for_each(|keycode| {
+                //             Self::add_grab_binding(
+                //                 &mut binds,
+                //                 &bind.action,
+                //                 &bind.arguments,
+                //                 modifiers,
+                //                 keycode.clone(),
+                //                 weight,
+                //                 root_window,
+                //                 conn,
+                //             )
+                //         });
+                //         is_range = true;
+                //         break;
+                //     }
+                // }
                 match Keycodes::from_str(&key) {
                     Ok(key) => {
                         if let Some(modifier) = Into::<Option<x::ModMask>>::into(key) {
@@ -102,9 +102,9 @@ impl KeyEventsHandler {
                     }
                 };
             }
-            if is_range {
-                continue;
-            }
+            // if is_range {
+            //     continue;
+            // }
             if modifiers.is_empty() || key_name == Keycodes::None {
                 error!(
                     "Invalid binding: no modifier/keys supplied, binding: {:#?}",
@@ -193,8 +193,8 @@ impl KeyEventsHandler {
                 //     pointer_mode: x::GrabMode::Async,
                 //     keyboard_mode: x::GrabMode::Async,
                 // });
-                print_mod_mask(modifiers, "add keybinding - modifiers:");
-                debug!("add keybinding - keycode: {:?}", keycode);
+                // print_mod_mask(modifiers, "add keybinding - modifiers:");
+                // debug!("add keybinding - keycode: {:?}", keycode);
 
                 binds.push(Keybinding {
                     modifiers,
@@ -217,7 +217,7 @@ impl KeyEventsHandler {
         }
         // print_modifiers(modifiers, "after:");
         let modifiers = key_into_mod_mask(modifiers);
-        print_mod_mask(modifiers, "converted mod mask:");
+        // print_mod_mask(modifiers, "converted mod mask:");
         for bind in &self.binds {
             if bind.modifiers.contains(modifiers) && event.detail() == bind.key_name as u8 {
                 // print_mod_mask(bind.modifiers, "matching bind mod mask:");
@@ -699,6 +699,7 @@ impl FromStr for Keycodes {
             "Return" => Ok(Keycodes::Return),
             "Control_L" => Ok(Keycodes::Control_L),
             "Control" => Ok(Keycodes::Control_L),
+            "Ctrl" => Ok(Keycodes::Control_L),
             "a" => Ok(Keycodes::a),
             "s" => Ok(Keycodes::s),
             "d" => Ok(Keycodes::d),

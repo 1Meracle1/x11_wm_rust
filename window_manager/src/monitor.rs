@@ -72,7 +72,13 @@ impl Monitor {
         if let Some(focused_workspace) = self.workspaces.get_mut(self.focused_workspace_index) {
             let expected_width =
                 (self.available_area.width as f32 * config.window.default_width_tiling) as u16;
-            focused_workspace.add_window_tiling(conn, window_id, expected_width);
+            focused_workspace.add_tiling_window_by_id_width(
+                conn,
+                window_id,
+                expected_width,
+                config,
+                self.rect.height,
+            );
         }
     }
 
@@ -90,6 +96,7 @@ impl Monitor {
                 return;
             }
             currently_focused.hide_all_windows(self.rect.height, conn);
+            debug!("currently_focused: {:#?}", currently_focused);
         }
         if let Some((index, workspace)) = self
             .workspaces
@@ -99,12 +106,20 @@ impl Monitor {
         {
             workspace.unhide_all_windows(self.rect.height, conn);
             self.focused_workspace_index = index;
+            debug!("workspace new: {:#?}", workspace);
         } else {
             debug!("creating new workspace: {}", id);
             self.workspaces
                 .push(Workspace::new(id, self.rect.clone(), config, conn, false));
             self.focused_workspace_index = self.workspaces.len() - 1;
+            debug!("workspace new: {:#?}", self.workspaces.last().unwrap());
         }
+    }
+
+    pub fn add_new_workspace(&mut self, id: u16, config: &Config, conn: &xcb::Connection) {
+        debug!("adding new workspace: {}", id);
+        self.workspaces
+            .push(Workspace::new(id, self.rect.clone(), config, conn, true));
     }
 
     #[inline]
@@ -122,6 +137,26 @@ impl Monitor {
         let focused_workspace = self.workspaces.get_mut(self.focused_workspace_index);
         if focused_workspace.is_some() {
             focused_workspace
+        } else {
+            None
+        }
+    }
+
+    #[inline]
+    pub fn get_workspace_by_id(&mut self, id: u16) -> Option<&Workspace> {
+        let workspace = self.workspaces.iter().find(|w| w.id == id);
+        if workspace.is_some() {
+            workspace
+        } else {
+            None
+        }
+    }
+
+    #[inline]
+    pub fn get_workspace_by_id_mut(&mut self, id: u16) -> Option<&mut Workspace> {
+        let workspace = self.workspaces.iter_mut().find(|w| w.id == id);
+        if workspace.is_some() {
+            workspace
         } else {
             None
         }
