@@ -363,7 +363,8 @@ impl Workspace {
                     conn.window_configure(lhs_window.window, &rhs_window.rect, config.border_size);
 
                     self.normal.sort_by_key(|w| w.rect.x);
-                    self.set_focused(lhs_window.window, self.focused_type, conn, config);
+                    // self.set_focused(lhs_window.window, self.focused_type, conn, config);
+                    self.focused_idx = self.focused_idx - 1;
 
                     let avail_rect = Rect {
                         x: monitor_rect.x + config.outer_gap_horiz as i32,
@@ -416,7 +417,8 @@ impl Workspace {
                     conn.window_configure(lhs_window.window, &rhs_window.rect, config.border_size);
 
                     self.normal.sort_by_key(|w| w.rect.x);
-                    self.set_focused(rhs_window.window, self.focused_type, conn, config);
+                    // self.set_focused(rhs_window.window, self.focused_type, conn, config);
+                    self.focused_idx = self.focused_idx + 1;
 
                     let avail_rect = Rect {
                         x: monitor_rect.x + config.outer_gap_horiz as i32,
