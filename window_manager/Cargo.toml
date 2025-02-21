@@ -1,0 +1,18 @@
+[package]
+name = "window_manager"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+base = { path = "../base" }
+x11_bindings = { path = "../x11_bindings" }
+env_logger = "0.11.6"
+log = "0.4.25"
+serde = { version = "1.0.217", features = ["derive"] }
+toml = "0.8.20"
+
+[profile.dev]
+sanitizer = ["address"]
+
+# [target.'cfg(target_os = "linux")']
+# rustflags = ["-Zsanitizer=address"]

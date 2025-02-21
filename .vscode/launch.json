@@ -1,0 +1,65 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "attach",
+            "name": "Attach",
+            "pid": "${command:pickMyProcess}" // use ${command:pickProcess} to pick other users' processes
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Cargo launch testbed_window",
+            "cargo": {
+                "args": [
+                    "build",
+                    "-p",
+                    "testbed_window"
+                ]
+            },
+            "args": ["floating", "X11 floating window"]
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'x11_wm'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=x11_wm",
+                    "--package=x11_wm"
+                ],
+                "filter": {
+                    "name": "x11_wm",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'x11_wm'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=x11_wm",
+                    "--package=x11_wm"
+                ],
+                "filter": {
+                    "name": "x11_wm",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
