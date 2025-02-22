@@ -1,5 +1,3 @@
-use std::{cmp::Reverse, mem::swap};
-
 use base::Rect;
 use log::{trace, warn};
 use x11_bindings::{
@@ -507,6 +505,58 @@ impl Workspace {
         conn.change_window_attrs(window, XCB_CW_EVENT_MASK, XCB_EVENT_MASK_FOCUS_CHANGE);
         trace!("apply focus to {}", window);
         conn.window_set_input_focus(window);
+    }
+
+    pub fn handle_resize_window_horizontal(
+        &mut self,
+        conn: &Connection,
+        config: &Config,
+        monitor_rect: &Rect,
+        size_change_pixels: i32,
+    ) {
+        let avail_rect = Rect {
+            x: monitor_rect.x + config.outer_gap_horiz as i32,
+            y: monitor_rect.y + config.outer_gap_vert as i32,
+            width: monitor_rect.width - config.outer_gap_horiz * 2,
+            height: monitor_rect.height - config.outer_gap_vert * 2,
+        };
+        match self.focused_type {
+            WindowType::Normal if self.focused_idx < self.normal.len() => {
+                let focused_rect = self.normal[self.focused_idx].rect.clone();
+                let new_width = (focused_rect.width as i32 + size_change_pixels)
+                    .clamp(config.minimum_width_tiling as i32, avail_rect.width as i32);
+                let new_x = (focused_rect.x - size_change_pixels / 2)
+                    .clamp(avail_rect.x, avail_rect.x + avail_rect.width as i32);
+
+                self.normal[self.focused_idx].rect.width = new_width as u32;
+                self.normal[self.focused_idx].rect.x = new_x;
+
+                let move_x_from_left = new_x - focused_rect.x;
+                let move_x_from_right = move_x_from_left + new_width - focused_rect.width as i32;
+                if move_x_from_left != 0 {
+                    for w in self.normal[..self.focused_idx].iter_mut() {
+                        w.rect.x += move_x_from_left;
+                    }
+                }
+                if move_x_from_right != 0 {
+                    for w in self.normal[self.focused_idx + 1..].iter_mut() {
+                        w.rect.x += move_x_from_right;
+                    }
+                }
+                for w in self.normal.iter() {
+                    conn.window_configure(w.window, &w.rect, config.border_size);
+                }
+
+                self.fix_visibility(monitor_rect, conn);
+            }
+            WindowType::Floating => {
+                trace!("horizontal resize window event received when floating window is focused");
+            }
+            WindowType::Docked => todo!(),
+            _ => {
+                warn!("horizontal resize window when docked window is focused");
+            }
+        }
     }
 
     fn get_left_most_visible_normal_idx(&self, monitor_rect: &Rect) -> usize {

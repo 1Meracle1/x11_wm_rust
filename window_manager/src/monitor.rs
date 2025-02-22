@@ -8,7 +8,7 @@ use x11_bindings::bindings::{
 use crate::{
     config::Config,
     connection::{Connection, WindowType},
-    keybindings::Direction,
+    keybindings::{Dimension, Direction},
     window::Window,
     workspace::Workspace,
 };
@@ -23,7 +23,6 @@ pub struct Monitor {
 }
 
 impl Monitor {
-    #[allow(dead_code)]
     pub fn new(conn: &Connection) -> Self {
         Self {
             rect: conn.screen_rect(),
@@ -33,7 +32,6 @@ impl Monitor {
         }
     }
 
-    #[allow(dead_code)]
     pub fn handle_map_request(&mut self, conn: &Connection, config: &Config, window: xcb_window_t) {
         trace!("map request: {}", window);
         if conn.has_override_redirect(window) {
@@ -111,7 +109,6 @@ impl Monitor {
         conn.flush();
     }
 
-    #[allow(dead_code)]
     pub fn handle_focus_in(
         &mut self,
         conn: &Connection,
@@ -136,7 +133,6 @@ impl Monitor {
         conn.flush();
     }
 
-    #[allow(dead_code)]
     pub fn handle_focus_out(
         &mut self,
         conn: &Connection,
@@ -161,7 +157,6 @@ impl Monitor {
         conn.flush();
     }
 
-    #[allow(dead_code)]
     pub fn handle_focus_window_change(
         &mut self,
         conn: &Connection,
@@ -183,7 +178,6 @@ impl Monitor {
         conn.flush();
     }
 
-    #[allow(dead_code)]
     pub fn handle_move_window(&mut self, conn: &Connection, config: &Config, direction: Direction) {
         trace!("move window: {:?}", direction);
         let focused_workspace = self.workspaces.get_mut(self.focused_workspace_idx).unwrap();
@@ -194,6 +188,35 @@ impl Monitor {
             }
             Direction::Up => todo!(),
             Direction::Down => todo!(),
+        };
+        conn.flush();
+    }
+
+    pub fn handle_resize_window(
+        &mut self,
+        conn: &Connection,
+        config: &Config,
+        dimension: Dimension,
+        size_change_pixels: i32,
+    ) {
+        trace!(
+            "resize window: {:?}, pixels: {}",
+            dimension, size_change_pixels
+        );
+        if size_change_pixels == 0 {
+            return;
+        }
+        let focused_workspace = self.workspaces.get_mut(self.focused_workspace_idx).unwrap();
+        match dimension {
+            Dimension::Horizontal => {
+                focused_workspace.handle_resize_window_horizontal(
+                    conn,
+                    config,
+                    &self.rect,
+                    size_change_pixels,
+                );
+            }
+            Dimension::Vertical => todo!(),
         };
         conn.flush();
     }

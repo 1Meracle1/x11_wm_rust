@@ -24,9 +24,9 @@ keybindings = [
     "Alt+Ctrl+J          move_window down  15",
 
     "Alt+Shift+H         window_size_change horizontal  15",
-    "Alt+Shift+L         window_size_change horizontal  15",
-    "Alt+Shift+J         window_size_change vertical    15",
-    "Alt+Shift+K         window_size_change vertical    15",
+    "Alt+Shift+L         window_size_change horizontal  -15",
+    # "Alt+Shift+J         window_size_change vertical    15",
+    # "Alt+Shift+K         window_size_change vertical    15",
 
     "Alt+Enter           exec alacritty",
     "Alt+B               exec cargo run -p testbed_window -- docked bottom X11_docked_bottom_window",

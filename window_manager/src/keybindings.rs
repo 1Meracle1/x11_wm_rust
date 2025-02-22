@@ -396,12 +396,19 @@ pub enum Direction {
     Down,
 }
 
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
+pub enum Dimension {
+    Horizontal,
+    Vertical,
+}
+
 #[allow(dead_code)]
 #[derive(Debug)]
 pub enum KeybindingAction {
     Exec(String),
     FocusWindow(Direction),
     MoveWindow(Direction),
+    ResizeWindow(Dimension, i32),
 }
 
 #[allow(dead_code)]
@@ -464,7 +471,11 @@ pub fn handle_key_press(
                 KeybindingAction::MoveWindow(direction) => {
                     monitor.handle_move_window(conn, config, *direction)
                 }
-            }
+                KeybindingAction::ResizeWindow(dimension, size_change_pixels) => {
+                    monitor.handle_resize_window(conn, config, *dimension, *size_change_pixels);
+                }
+            };
+            break;
         }
     }
 }
@@ -638,6 +649,57 @@ fn keybinding_from_string(keybinding_str: &str) -> Option<Keybinding> {
                         }
                     } else {
                         error!("no direction supplied for move window command: {:?}", parts);
+                    }
+                }
+                "window_size_change" => {
+                    if let Some(resize_dimension) = parts.next() {
+                        let maybe_size_change_str = parts.next();
+                        if maybe_size_change_str.is_none() {
+                            error!("no pixels in which size would be changed was specified");
+                            return None;
+                        }
+                        let maybe_size_change = maybe_size_change_str.unwrap().parse::<i32>();
+                        if maybe_size_change.is_err() {
+                            error!(
+                                "invalid size change pixels value: {}, error: {:?}",
+                                maybe_size_change_str.unwrap(),
+                                maybe_size_change.err()
+                            );
+                            return None;
+                        }
+                        let size_change_pixels = maybe_size_change.unwrap();
+                        match resize_dimension {
+                            "horizontal" => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::ResizeWindow(
+                                        Dimension::Horizontal,
+                                        size_change_pixels,
+                                    ),
+                                });
+                            }
+                            "vertical" => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::ResizeWindow(
+                                        Dimension::Vertical,
+                                        size_change_pixels,
+                                    ),
+                                });
+                            }
+                            _ => {
+                                error!("unknown resize dimension name: {}", resize_dimension);
+                            }
+                        }
+                    } else {
+                        error!(
+                            "no direction supplied for focus window change command: {:?}",
+                            parts
+                        );
                     }
                 }
                 _ => error!("no command matching string: {}", command),
