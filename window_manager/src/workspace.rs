@@ -559,6 +559,123 @@ impl Workspace {
         }
     }
 
+    pub fn show_all_windows(&mut self, monitor_rect: &Rect, conn: &Connection, config: &Config) {
+        if self.normal.is_empty() && self.floating.is_empty() && self.docked.is_empty() {
+            return;
+        }
+        let is_below = if !self.normal.is_empty() {
+            self.normal[0].rect.y > monitor_rect.y
+        } else if !self.docked.is_empty() {
+            self.docked[0].rect.y > monitor_rect.y
+        } else {
+            self.floating[0].rect.y > monitor_rect.y
+        };
+        let move_y = if is_below {
+            -(monitor_rect.height as i32)
+        } else {
+            monitor_rect.height as i32
+        };
+        for w in self.normal.iter_mut() {
+            w.rect.y += move_y;
+            conn.window_configure(w.window, &w.rect, config.border_size);
+            if w.visible {
+                conn.map_window(w.window);
+            }
+        }
+        self.fix_visibility(monitor_rect, conn);
+        if self.focused_type == WindowType::Normal && !self.normal.is_empty() {
+            let focused_idx = if self.focused_idx < self.normal.len() {
+                self.focused_idx
+            } else {
+                0
+            };
+            self.set_focused(
+                self.normal[focused_idx].window,
+                self.focused_type,
+                conn,
+                config,
+            );
+        }
+
+        for w in self.floating.iter_mut() {
+            w.rect.y += move_y;
+            conn.window_configure(w.window, &w.rect, config.border_size);
+            if w.visible {
+                conn.unmap_window(w.window);
+            }
+        }
+        if self.focused_type == WindowType::Floating && !self.floating.is_empty() {
+            let focused_idx = if self.focused_idx < self.floating.len() {
+                self.focused_idx
+            } else {
+                0
+            };
+            self.set_focused(
+                self.floating[focused_idx].window,
+                self.focused_type,
+                conn,
+                config,
+            );
+        }
+
+        for w in self.docked.iter_mut() {
+            w.rect.y += move_y;
+            conn.window_configure(w.window, &w.rect, config.border_size);
+            if w.visible {
+                conn.unmap_window(w.window);
+            }
+        }
+        if self.focused_type == WindowType::Docked && !self.docked.is_empty() {
+            let focused_idx = if self.focused_idx < self.docked.len() {
+                self.focused_idx
+            } else {
+                0
+            };
+            self.set_focused(
+                self.docked[focused_idx].window,
+                self.focused_type,
+                conn,
+                config,
+            );
+        }
+    }
+
+    pub fn hide_all_windows(
+        &mut self,
+        monitor_rect: &Rect,
+        conn: &Connection,
+        config: &Config,
+        hide_below: bool,
+    ) {
+        // let move_y = (self.id + 1) * monitor_rect.height;
+        let move_y = if hide_below {
+            monitor_rect.height as i32
+        } else {
+            -(monitor_rect.height as i32)
+        };
+        for w in self.normal.iter_mut() {
+            w.rect.y += move_y;
+            conn.window_configure(w.window, &w.rect, config.border_size);
+            if w.visible {
+                conn.unmap_window(w.window);
+            }
+        }
+        for w in self.floating.iter_mut() {
+            w.rect.y += move_y;
+            conn.window_configure(w.window, &w.rect, config.border_size);
+            if w.visible {
+                conn.unmap_window(w.window);
+            }
+        }
+        for w in self.docked.iter_mut() {
+            w.rect.y += move_y;
+            conn.window_configure(w.window, &w.rect, config.border_size);
+            if w.visible {
+                conn.unmap_window(w.window);
+            }
+        }
+    }
+
     fn get_left_most_visible_normal_idx(&self, monitor_rect: &Rect) -> usize {
         let mut res = self.normal.len();
         let mut start_x = monitor_rect.x + monitor_rect.width as i32;

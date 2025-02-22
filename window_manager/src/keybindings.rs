@@ -409,6 +409,7 @@ pub enum KeybindingAction {
     FocusWindow(Direction),
     MoveWindow(Direction),
     ResizeWindow(Dimension, i32),
+    SwitchToWorkspace(u32),
 }
 
 #[allow(dead_code)]
@@ -473,6 +474,9 @@ pub fn handle_key_press(
                 }
                 KeybindingAction::ResizeWindow(dimension, size_change_pixels) => {
                     monitor.handle_resize_window(conn, config, *dimension, *size_change_pixels);
+                }
+                KeybindingAction::SwitchToWorkspace(workspace_id) => {
+                    monitor.handle_switch_to_workspace(conn, config, *workspace_id)
                 }
             };
             break;
@@ -700,6 +704,31 @@ fn keybinding_from_string(keybinding_str: &str) -> Option<Keybinding> {
                             "no direction supplied for focus window change command: {:?}",
                             parts
                         );
+                    }
+                }
+                "switch_to_workspace" => {
+                    if let Some(workspace_id_str) = parts.next() {
+                        match workspace_id_str.parse::<u32>() {
+                            Ok(workspace_id) => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::SwitchToWorkspace(workspace_id),
+                                });
+                            }
+                            Err(err) => {
+                                error!(
+                                    "invalid unsigned integer '{}' provided as a workspace id for switch to workspace command: {}, error: {:?}",
+                                    workspace_id_str, command, err
+                                );
+                            }
+                        }
+                    } else {
+                        error!(
+                            "no workspace id provided for switch to workspace command: {}",
+                            command
+                        )
                     }
                 }
                 _ => error!("no command matching string: {}", command),

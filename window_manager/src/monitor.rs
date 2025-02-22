@@ -2,7 +2,7 @@ use base::Rect;
 use log::trace;
 use x11_bindings::bindings::{
     XCB_CW_BORDER_PIXEL, XCB_CW_EVENT_MASK, XCB_EVENT_MASK_FOCUS_CHANGE, XCB_NOTIFY_MODE_GRAB,
-    XCB_NOTIFY_MODE_UNGRAB, xcb_notify_mode_t, xcb_window_t,
+    XCB_NOTIFY_MODE_UNGRAB, xcb_notify_mode_t, xcb_render_add_glyphs_glyphids_end, xcb_window_t,
 };
 
 use crate::{
@@ -26,7 +26,7 @@ impl Monitor {
     pub fn new(conn: &Connection) -> Self {
         Self {
             rect: conn.screen_rect(),
-            workspaces: vec![Workspace::new(0)],
+            workspaces: vec![Workspace::new(1)],
             docked: Vec::new(),
             focused_workspace_idx: 0,
         }
@@ -218,6 +218,47 @@ impl Monitor {
             }
             Dimension::Vertical => todo!(),
         };
+        conn.flush();
+    }
+
+    pub fn handle_switch_to_workspace(
+        &mut self,
+        conn: &Connection,
+        config: &Config,
+        workspace_id: u32,
+    ) {
+        let focused_workspace_id = self.workspaces.get(self.focused_workspace_idx).unwrap().id;
+        trace!(
+            "switch to workspace: {}, currently focused workspace id: {}, index: {}",
+            workspace_id, focused_workspace_id, self.focused_workspace_idx,
+        );
+        if workspace_id == focused_workspace_id {
+            return;
+        }
+
+        let hide_below = workspace_id < focused_workspace_id;
+        self.workspaces
+            .get_mut(self.focused_workspace_idx)
+            .unwrap()
+            .hide_all_windows(&self.rect, conn, config, hide_below);
+
+        let new_focused_workspace_idx = if let Some((idx, _)) = self
+            .workspaces
+            .iter()
+            .enumerate()
+            .find(|(_, w)| w.id == workspace_id)
+        {
+            idx
+        } else {
+            self.workspaces.push(Workspace::new(workspace_id));
+            self.workspaces.len() - 1
+        };
+        self.focused_workspace_idx = new_focused_workspace_idx;
+        self.workspaces
+            .get_mut(self.focused_workspace_idx)
+            .unwrap()
+            .show_all_windows(&self.rect, conn, config);
+
         conn.flush();
     }
 }
