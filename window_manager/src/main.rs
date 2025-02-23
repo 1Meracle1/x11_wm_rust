@@ -54,6 +54,7 @@ fn main() {
     // );
 
     let conn = Connection::new().unwrap();
+
     if let Err(err) = conn.change_window_attrs_checked(
         conn.root(),
         XCB_CW_EVENT_MASK,
@@ -78,7 +79,19 @@ fn main() {
     // trace!("keybindings: {:#?}", keybindings);
 
     conn.grab_pointer(XCB_EVENT_MASK_POINTER_MOTION);
-    conn.change_cursor("left_ptr");
+    if let Some(cursor_filepath) = &config.custom_cursor_filepath {
+        if let Err(err) = conn.set_cursor_filename(cursor_filepath.as_str()) {
+            error!(
+                "failed to set cursor from filename: {}, error: {:?}",
+                cursor_filepath, err
+            );
+            trace!("falling back to default left_ptr cursor to the root window");
+            conn.change_cursor("left_ptr");
+        }
+    } else {
+        conn.change_cursor("left_ptr");
+    }
+
     conn.flush();
 
     let frame_duration = Duration::from_nanos(16_666_667);
@@ -106,7 +119,7 @@ fn main() {
                         monitor.handle_focus_out(&conn, &config, window, mode)
                     }
                 },
-                Err(error) => warn!("Error event: {}", error),
+                Err(error) => warn!("Error event: {:?}", error),
             }
         }
 

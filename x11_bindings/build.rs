@@ -4,7 +4,17 @@ fn main() {
     // Tell cargo to invalidate the built crate whenever the wrapper changes
     println!("cargo:rerun-if-changed=xcb_wrapper.h");
 
-    for lib in ["X11", "X11-xcb", "xcb", "xcb-cursor", "xcb-icccm", "xcb-ewmh", "xcb-randr"] {
+    for lib in [
+        "X11",
+        "X11-xcb",
+        "Xcursor",
+        "xcb",
+        "xcb-cursor",
+        "xcb-icccm",
+        "xcb-ewmh",
+        "xcb-randr",
+        "xcb-image",
+    ] {
         println!("cargo:rustc-link-lib={}", lib);
     }
 

@@ -7,3 +7,5 @@
 #include <X11/Xlib.h>
 #include <X11/Xlib-xcb.h>
 #include <X11/extensions/XTest.h>
+#include <X11/Xcursor/Xcursor.h>
+#include <xcb/xcb_image.h>

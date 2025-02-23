@@ -76,3 +76,5 @@ inner_gap = 5
 border_size = 2
 border_color_inactive_str = "#3c3a3a"
 border_color_active_str = "#82948c"
+
+custom_cursor_filepath = "data/starter-lights-pack_32x32.cursor"

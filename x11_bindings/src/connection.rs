@@ -1,4 +1,4 @@
-use std::{collections::HashMap, mem::MaybeUninit};
+use std::{collections::HashMap, error, ffi::CString, mem::MaybeUninit};
 
 use base::Rect;
 
@@ -6,27 +6,34 @@ use crate::bindings::{
     XCB_ACCESS, XCB_ALLOC, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING, XCB_ATOM_WM_CLASS,
     XCB_ATOM_WM_NORMAL_HINTS, XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH,
     XCB_CONFIG_WINDOW_HEIGHT, XCB_CONFIG_WINDOW_WIDTH, XCB_CONFIG_WINDOW_X, XCB_CONFIG_WINDOW_Y,
-    XCB_COPY_FROM_PARENT, XCB_CURRENT_TIME, XCB_CURSOR, XCB_CW_CURSOR, XCB_DRAWABLE, XCB_FOCUS_IN,
-    XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT, XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC,
-    XCB_ID_CHOICE, XCB_IMPLEMENTATION, XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS, XCB_LENGTH,
-    XCB_MAP_REQUEST, XCB_MATCH, XCB_NAME, XCB_NONE, XCB_PIXMAP, XCB_PROP_MODE_REPLACE, XCB_WINDOW,
-    XCB_WINDOW_CLASS_INPUT_OUTPUT, XCloseDisplay, XDisplay, XGetXCBConnection, XOpenDisplay,
-    xcb_atom_t, xcb_change_property, xcb_change_window_attributes,
+    XCB_COORD_MODE_ORIGIN, XCB_COPY_FROM_PARENT, XCB_CURRENT_TIME, XCB_CURSOR, XCB_CW_CURSOR,
+    XCB_DRAWABLE, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT, XCB_GC_BACKGROUND,
+    XCB_GC_FOREGROUND, XCB_GC_FUNCTION, XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC,
+    XCB_GX_COPY, XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP, XCB_IMAGE_FORMAT_Z_PIXMAP,
+    XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION, XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS,
+    XCB_LENGTH, XCB_MAP_REQUEST, XCB_MATCH, XCB_NAME, XCB_NONE, XCB_PIXMAP, XCB_PROP_MODE_REPLACE,
+    XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT, XCloseDisplay, XDefaultRootWindow, XDefineCursor,
+    XDisplay, XGetXCBConnection, XOpenDisplay, XcursorFilenameLoadCursor, xcb_atom_t,
+    xcb_change_gc, xcb_change_property, xcb_change_window_attributes,
     xcb_change_window_attributes_checked, xcb_configure_window, xcb_configure_window_checked,
-    xcb_connection_has_error, xcb_connection_t, xcb_create_window, xcb_cursor_context_free,
-    xcb_cursor_context_new, xcb_cursor_context_t, xcb_cursor_load_cursor, xcb_cw_t, xcb_disconnect,
-    xcb_event_mask_t, xcb_ewmh_connection_t, xcb_ewmh_get_atoms_reply_t,
-    xcb_ewmh_get_atoms_reply_wipe, xcb_ewmh_get_cardinal_reply, xcb_ewmh_get_wm_desktop,
-    xcb_ewmh_get_wm_strut_partial, xcb_ewmh_get_wm_strut_partial_reply,
-    xcb_ewmh_get_wm_window_type, xcb_ewmh_get_wm_window_type_reply, xcb_ewmh_init_atoms,
-    xcb_ewmh_init_atoms_replies, xcb_ewmh_set_supported_checked, xcb_ewmh_wm_strut_partial_t,
-    xcb_flush, xcb_focus_in_event_t, xcb_focus_out_event_t, xcb_generate_id, xcb_generic_error_t,
-    xcb_get_property, xcb_get_property_reply, xcb_get_property_value,
+    xcb_connection_has_error, xcb_connection_t, xcb_create_cursor, xcb_create_cursor_checked,
+    xcb_create_gc, xcb_create_gc_checked, xcb_create_pixmap, xcb_create_pixmap_checked,
+    xcb_create_window, xcb_cursor_context_free, xcb_cursor_context_new, xcb_cursor_context_t,
+    xcb_cursor_load_cursor, xcb_cursor_t, xcb_cw_t, xcb_disconnect, xcb_event_mask_t,
+    xcb_ewmh_connection_t, xcb_ewmh_get_atoms_reply_t, xcb_ewmh_get_atoms_reply_wipe,
+    xcb_ewmh_get_cardinal_reply, xcb_ewmh_get_wm_desktop, xcb_ewmh_get_wm_strut_partial,
+    xcb_ewmh_get_wm_strut_partial_reply, xcb_ewmh_get_wm_window_type,
+    xcb_ewmh_get_wm_window_type_reply, xcb_ewmh_init_atoms, xcb_ewmh_init_atoms_replies,
+    xcb_ewmh_set_supported_checked, xcb_ewmh_wm_strut_partial_t, xcb_flush, xcb_focus_in_event_t,
+    xcb_focus_out_event_t, xcb_free_gc, xcb_free_pixmap, xcb_gc_t, xcb_gcontext_t, xcb_generate_id,
+    xcb_generic_error_t, xcb_get_property, xcb_get_property_reply, xcb_get_property_value,
     xcb_get_property_value_length, xcb_get_setup, xcb_get_window_attributes,
     xcb_get_window_attributes_reply, xcb_grab_key, xcb_grab_pointer, xcb_icccm_set_wm_normal_hints,
-    xcb_intern_atom, xcb_intern_atom_cookie_t, xcb_intern_atom_reply, xcb_key_press_event_t,
-    xcb_keycode_t, xcb_map_request_event_t, xcb_map_window, xcb_mod_mask_t, xcb_notify_mode_t,
-    xcb_poll_for_event, xcb_request_check, xcb_screen_t, xcb_set_input_focus,
+    xcb_image_create, xcb_image_create_native, xcb_image_destroy, xcb_image_put, xcb_intern_atom,
+    xcb_intern_atom_cookie_t, xcb_intern_atom_reply, xcb_key_press_event_t, xcb_keycode_t,
+    xcb_map_request_event_t, xcb_map_window, xcb_mod_mask_t, xcb_notify_mode_t, xcb_pixmap_t,
+    xcb_point_t, xcb_poll_for_event, xcb_poly_fill_rectangle, xcb_poly_point, xcb_put_image,
+    xcb_put_image_checked, xcb_rectangle_t, xcb_request_check, xcb_screen_t, xcb_set_input_focus,
     xcb_setup_roots_iterator, xcb_size_hints_t, xcb_unmap_window, xcb_window_t,
 };
 
@@ -683,6 +690,350 @@ impl Connection {
             )
         };
     }
+
+    #[allow(dead_code)]
+    pub fn create_pixmap(&self, pixmap: xcb_pixmap_t, width: u32, height: u32, depth: u8) {
+        unsafe {
+            xcb_create_pixmap(
+                self.conn,
+                depth,
+                pixmap,
+                self.screen().root,
+                width as u16,
+                height as u16,
+            )
+        };
+    }
+
+    #[allow(dead_code)]
+    pub fn create_pixmap_checked(
+        &self,
+        pixmap: xcb_pixmap_t,
+        width: u32,
+        height: u32,
+        depth: u8,
+    ) -> Result<(), XcbErrors> {
+        let cookie = unsafe {
+            xcb_create_pixmap_checked(
+                self.conn,
+                depth,
+                pixmap,
+                self.screen().root,
+                width as u16,
+                height as u16,
+            )
+        };
+        let error = unsafe { xcb_request_check(self.conn, cookie) };
+        if !error.is_null() {
+            return Err(XcbErrors::from(error));
+        }
+        Ok(())
+    }
+
+    #[allow(dead_code)]
+    pub fn create_gc<const N: usize>(
+        &self,
+        gc: xcb_gcontext_t,
+        pixmap: xcb_pixmap_t,
+        mask: xcb_gc_t,
+        values: [u32; N],
+    ) {
+        unsafe {
+            xcb_create_gc(
+                self.conn,
+                gc,
+                pixmap,
+                mask,
+                values.as_ptr() as *const ::std::os::raw::c_void,
+            )
+        };
+    }
+
+    #[allow(dead_code)]
+    pub fn create_gc_checked<const N: usize>(
+        &self,
+        gc: xcb_gcontext_t,
+        pixmap: xcb_pixmap_t,
+        mask: xcb_gc_t,
+        values: [u32; N],
+    ) -> Result<(), XcbErrors> {
+        let cookie = unsafe {
+            xcb_create_gc_checked(
+                self.conn,
+                gc,
+                pixmap,
+                mask,
+                values.as_ptr() as *const ::std::os::raw::c_void,
+            )
+        };
+        let error = unsafe { xcb_request_check(self.conn, cookie) };
+        if !error.is_null() {
+            return Err(XcbErrors::from(error));
+        }
+        Ok(())
+    }
+
+    #[allow(dead_code)]
+    pub fn change_gc<const N: usize>(&self, gc: xcb_gcontext_t, mask: xcb_gc_t, values: [u32; N]) {
+        unsafe {
+            xcb_change_gc(
+                self.conn,
+                gc,
+                mask,
+                values.as_ptr() as *const ::std::os::raw::c_void,
+            )
+        };
+    }
+
+    #[allow(dead_code)]
+    pub fn poly_point(&self, pixmap: xcb_pixmap_t, gc: xcb_gcontext_t, x: i16, y: i16) {
+        let points = [xcb_point_t { x, y }];
+        unsafe {
+            xcb_poly_point(
+                self.conn,
+                XCB_COORD_MODE_ORIGIN as u8,
+                pixmap,
+                gc,
+                points.len() as u32,
+                points.as_ptr(),
+            )
+        };
+    }
+
+    #[allow(dead_code)]
+    pub fn poly_fill_rectangle(
+        &self,
+        pixmap: xcb_pixmap_t,
+        gc: xcb_gcontext_t,
+        rect: xcb_rectangle_t,
+    ) {
+        let rects = [rect];
+        unsafe {
+            xcb_poly_fill_rectangle(self.conn, pixmap, gc, rects.len() as u32, rects.as_ptr())
+        };
+    }
+
+    #[allow(dead_code)]
+    pub fn put_image_rgba(
+        &self,
+        pixmap: xcb_pixmap_t,
+        gc: xcb_gcontext_t,
+        width: u32,
+        height: u32,
+        data_len: usize,
+        data: *const u8,
+    ) {
+        unsafe {
+            xcb_put_image(
+                self.conn,
+                XCB_IMAGE_FORMAT_Z_PIXMAP as u8,
+                pixmap,
+                gc,
+                width as u16,
+                height as u16,
+                0,
+                0,
+                0,
+                4, // channels
+                data_len as u32,
+                data,
+            )
+        };
+    }
+
+    #[allow(dead_code)]
+    pub fn image_put_checked(
+        &self,
+        pixmap: xcb_pixmap_t,
+        gc: xcb_gcontext_t,
+        width: u32,
+        height: u32,
+        data: *mut u8,
+        data_len: usize,
+    ) -> Result<(), XcbErrors> {
+        let image = unsafe {
+            xcb_image_create_native(
+                self.conn,
+                width as u16,
+                height as u16,
+                XCB_IMAGE_FORMAT_Z_PIXMAP,
+                self.screen().root_depth,
+                data as *mut ::std::os::raw::c_void,
+                data_len as u32,
+                data,
+            )
+        };
+        if image.is_null() {
+            return Err(XcbErrors::FailedToCreateImage);
+        }
+        let cookie = unsafe { xcb_image_put(self.conn, pixmap, gc, image, 0, 0, 0) };
+        let error = unsafe { xcb_request_check(self.conn, cookie) };
+        unsafe { xcb_image_destroy(image) };
+        if !error.is_null() {
+            return Err(XcbErrors::from(error));
+        }
+
+        Ok(())
+    }
+
+    #[allow(dead_code)]
+    pub fn image_create_checked(
+        &self,
+        pixmap: xcb_pixmap_t,
+        gc: xcb_gcontext_t,
+        width: u32,
+        height: u32,
+        data: *mut u8,
+        data_len: usize,
+    ) -> Result<(), XcbErrors> {
+        let image = unsafe {
+            xcb_image_create(
+                width as u16,
+                height as u16,
+                XCB_IMAGE_FORMAT_Z_PIXMAP,
+                32,                       // xpad
+                self.screen().root_depth, // depth
+                24,                       // bpp
+                32,                       // unit
+                XCB_IMAGE_ORDER_LSB_FIRST,
+                XCB_IMAGE_ORDER_LSB_FIRST,
+                std::ptr::null_mut(), // base
+                data_len as u32,      // bytes
+                data,
+            )
+        };
+        if image.is_null() {
+            return Err(XcbErrors::FailedToCreateImage);
+        }
+        let cookie = unsafe { xcb_image_put(self.conn, pixmap, gc, image, 0, 0, 0) };
+        let error = unsafe { xcb_request_check(self.conn, cookie) };
+        unsafe { xcb_image_destroy(image) };
+        if !error.is_null() {
+            return Err(XcbErrors::from(error));
+        }
+
+        Ok(())
+    }
+
+    #[allow(dead_code)]
+    pub fn image_create_native_checked(
+        &self,
+        pixmap: xcb_pixmap_t,
+        gc: xcb_gcontext_t,
+        width: u32,
+        height: u32,
+        data: *mut u8,
+        data_len: usize,
+    ) -> Result<(), XcbErrors> {
+        let image = unsafe {
+            xcb_image_create_native(
+                self.conn,
+                width as u16,
+                height as u16,
+                XCB_IMAGE_FORMAT_XY_PIXMAP,
+                self.screen().root_depth,
+                std::ptr::null_mut(), //data as *mut std::os::raw::c_void,
+                data_len as u32,
+                data,
+            )
+        };
+        if image.is_null() {
+            return Err(XcbErrors::FailedToCreateNativeImage);
+        }
+        let cookie = unsafe { xcb_image_put(self.conn, pixmap, gc, image, 0, 0, 0) };
+        unsafe { xcb_image_destroy(image) };
+        let error = unsafe { xcb_request_check(self.conn, cookie) };
+        if !error.is_null() {
+            return Err(XcbErrors::from(error));
+        }
+
+        Ok(())
+    }
+
+    #[allow(dead_code)]
+    pub fn create_cursor(
+        &self,
+        cursor: xcb_cursor_t,
+        pixmap: xcb_pixmap_t,
+        mask_pixmap: xcb_pixmap_t,
+    ) {
+        unsafe {
+            xcb_create_cursor(
+                self.conn,
+                cursor,
+                pixmap,
+                mask_pixmap,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+            )
+        };
+    }
+
+    #[allow(dead_code)]
+    pub fn create_cursor_checked(
+        &self,
+        cursor: xcb_cursor_t,
+        pixmap: xcb_pixmap_t,
+        mask_pixmap: xcb_pixmap_t,
+    ) -> Result<(), XcbErrors> {
+        let cookie = unsafe {
+            xcb_create_cursor_checked(
+                self.conn,
+                cursor,
+                pixmap,
+                mask_pixmap,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+            )
+        };
+        let error = unsafe { xcb_request_check(self.conn, cookie) };
+        if !error.is_null() {
+            return Err(XcbErrors::from(error));
+        }
+
+        Ok(())
+    }
+
+    #[allow(dead_code)]
+    pub fn free_gc(&self, gc: xcb_gcontext_t) {
+        unsafe { xcb_free_gc(self.conn, gc) };
+    }
+
+    #[allow(dead_code)]
+    pub fn free_pixmap(&self, pixmap: xcb_pixmap_t) {
+        unsafe { xcb_free_pixmap(self.conn, pixmap) };
+    }
+
+    #[allow(dead_code)]
+    pub fn set_cursor_filename(&self, filename: &str) -> Result<(), XcbErrors> {
+        if let Ok(filename) = CString::new(filename) {
+            let cursor = unsafe { XcursorFilenameLoadCursor(self.display, filename.as_ptr()) };
+            if cursor == 0 {
+                return Err(XcbErrors::FailedToCreateCursor(
+                    "XcursorFilenameLoadCursor return None".to_string(),
+                ));
+            }
+            unsafe { XDefineCursor(self.display, XDefaultRootWindow(self.display), cursor) };
+        } else {
+            return Err(XcbErrors::FailedToCreateCursor(format!(
+                "failed to convert filename '{}' to cstring",
+                filename
+            )));
+        }
+        Ok(())
+    }
 }
 
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
@@ -770,6 +1121,9 @@ pub enum XcbErrors {
     Length(XcbError),
     Implementation(XcbError),
     UnknownError(XcbError),
+    FailedToCreateImage,
+    FailedToCreateNativeImage,
+    FailedToCreateCursor(String),
 }
 
 impl From<*mut xcb_generic_error_t> for XcbErrors {
@@ -796,92 +1150,95 @@ impl From<*mut xcb_generic_error_t> for XcbErrors {
     }
 }
 
-impl std::fmt::Display for XcbErrors {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            XcbErrors::Window(err) => write!(
-                f,
-                "XcbErrors::Window{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::Pixmap(err) => write!(
-                f,
-                "XcbErrors::Pixmap{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::Atom(err) => write!(
-                f,
-                "XcbErrors::Atom{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::Cursor(err) => write!(
-                f,
-                "XcbErrors::Cursor{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::Font(err) => write!(
-                f,
-                "XcbErrors::Font{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::Match(err) => write!(
-                f,
-                "XcbErrors::Match{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::Drawable(err) => write!(
-                f,
-                "XcbErrors::Drawable{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::Access(err) => write!(
-                f,
-                "XcbErrors::Access{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::Alloc(err) => write!(
-                f,
-                "XcbErrors::Alloc{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::Colormap(err) => write!(
-                f,
-                "XcbErrors::Colormap{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::GContext(err) => write!(
-                f,
-                "XcbErrors::GContext{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::IdChoice(err) => write!(
-                f,
-                "XcbErrors::IdChoice{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::Name(err) => write!(
-                f,
-                "XcbErrors::Name{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::Length(err) => write!(
-                f,
-                "XcbErrors::Length{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::Implementation(err) => write!(
-                f,
-                "XcbErrors::Implementation{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-            XcbErrors::UnknownError(err) => write!(
-                f,
-                "XcbErrors::UnknownError{{error_code: {}, major_code: {}, minor_code: {}}}",
-                err.error_code, err.major_code, err.minor_code
-            ),
-        }
-    }
-}
+// impl std::fmt::Display for XcbErrors {
+//     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+//         match self {
+//             XcbErrors::Window(err) => write!(
+//                 f,
+//                 "XcbErrors::Window{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::Pixmap(err) => write!(
+//                 f,
+//                 "XcbErrors::Pixmap{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::Atom(err) => write!(
+//                 f,
+//                 "XcbErrors::Atom{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::Cursor(err) => write!(
+//                 f,
+//                 "XcbErrors::Cursor{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::Font(err) => write!(
+//                 f,
+//                 "XcbErrors::Font{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::Match(err) => write!(
+//                 f,
+//                 "XcbErrors::Match{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::Drawable(err) => write!(
+//                 f,
+//                 "XcbErrors::Drawable{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::Access(err) => write!(
+//                 f,
+//                 "XcbErrors::Access{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::Alloc(err) => write!(
+//                 f,
+//                 "XcbErrors::Alloc{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::Colormap(err) => write!(
+//                 f,
+//                 "XcbErrors::Colormap{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::GContext(err) => write!(
+//                 f,
+//                 "XcbErrors::GContext{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::IdChoice(err) => write!(
+//                 f,
+//                 "XcbErrors::IdChoice{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::Name(err) => write!(
+//                 f,
+//                 "XcbErrors::Name{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::Length(err) => write!(
+//                 f,
+//                 "XcbErrors::Length{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::Implementation(err) => write!(
+//                 f,
+//                 "XcbErrors::Implementation{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::UnknownError(err) => write!(
+//                 f,
+//                 "XcbErrors::UnknownError{{error_code: {}, major_code: {}, minor_code: {}}}",
+//                 err.error_code, err.major_code, err.minor_code
+//             ),
+//             XcbErrors::FailedToCreateImage => {
+//                 write!(f, "XcbErrors::FailedToCreateNativeImage")
+//             }
+//         }
+//     }
+// }
 
 #[allow(dead_code)]
 #[derive(Debug)]

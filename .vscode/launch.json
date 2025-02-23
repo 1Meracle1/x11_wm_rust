@@ -26,15 +26,15 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'x11_wm'",
+            "name": "Debug executable 'window_manager'",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=x11_wm",
-                    "--package=x11_wm"
+                    "--bin=window_manager",
+                    "--package=window_manager"
                 ],
                 "filter": {
-                    "name": "x11_wm",
+                    "name": "window_manager",
                     "kind": "bin"
                 }
             },

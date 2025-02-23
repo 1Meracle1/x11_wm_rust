@@ -1942,8 +1942,8 @@ const _: () = {
     ["Offset of field: xcb_setup_authenticate_iterator_t::index"]
         [::std::mem::offset_of!(xcb_setup_authenticate_iterator_t, index) - 12usize];
 };
-pub const xcb_image_order_t_XCB_IMAGE_ORDER_LSB_FIRST: xcb_image_order_t = 0;
-pub const xcb_image_order_t_XCB_IMAGE_ORDER_MSB_FIRST: xcb_image_order_t = 1;
+pub const XCB_IMAGE_ORDER_LSB_FIRST: xcb_image_order_t = 0;
+pub const XCB_IMAGE_ORDER_MSB_FIRST: xcb_image_order_t = 1;
 pub type xcb_image_order_t = ::std::os::raw::c_uint;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -6251,73 +6251,73 @@ const _: () = {
     ["Offset of field: xcb_free_pixmap_request_t::pixmap"]
         [::std::mem::offset_of!(xcb_free_pixmap_request_t, pixmap) - 4usize];
 };
-pub const xcb_gc_t_XCB_GC_FUNCTION: xcb_gc_t = 1;
-pub const xcb_gc_t_XCB_GC_PLANE_MASK: xcb_gc_t = 2;
-pub const xcb_gc_t_XCB_GC_FOREGROUND: xcb_gc_t = 4;
-pub const xcb_gc_t_XCB_GC_BACKGROUND: xcb_gc_t = 8;
-pub const xcb_gc_t_XCB_GC_LINE_WIDTH: xcb_gc_t = 16;
-pub const xcb_gc_t_XCB_GC_LINE_STYLE: xcb_gc_t = 32;
-pub const xcb_gc_t_XCB_GC_CAP_STYLE: xcb_gc_t = 64;
-pub const xcb_gc_t_XCB_GC_JOIN_STYLE: xcb_gc_t = 128;
-pub const xcb_gc_t_XCB_GC_FILL_STYLE: xcb_gc_t = 256;
-pub const xcb_gc_t_XCB_GC_FILL_RULE: xcb_gc_t = 512;
-pub const xcb_gc_t_XCB_GC_TILE: xcb_gc_t = 1024;
-pub const xcb_gc_t_XCB_GC_STIPPLE: xcb_gc_t = 2048;
-pub const xcb_gc_t_XCB_GC_TILE_STIPPLE_ORIGIN_X: xcb_gc_t = 4096;
-pub const xcb_gc_t_XCB_GC_TILE_STIPPLE_ORIGIN_Y: xcb_gc_t = 8192;
-pub const xcb_gc_t_XCB_GC_FONT: xcb_gc_t = 16384;
-pub const xcb_gc_t_XCB_GC_SUBWINDOW_MODE: xcb_gc_t = 32768;
-pub const xcb_gc_t_XCB_GC_GRAPHICS_EXPOSURES: xcb_gc_t = 65536;
-pub const xcb_gc_t_XCB_GC_CLIP_ORIGIN_X: xcb_gc_t = 131072;
-pub const xcb_gc_t_XCB_GC_CLIP_ORIGIN_Y: xcb_gc_t = 262144;
-pub const xcb_gc_t_XCB_GC_CLIP_MASK: xcb_gc_t = 524288;
-pub const xcb_gc_t_XCB_GC_DASH_OFFSET: xcb_gc_t = 1048576;
-pub const xcb_gc_t_XCB_GC_DASH_LIST: xcb_gc_t = 2097152;
-pub const xcb_gc_t_XCB_GC_ARC_MODE: xcb_gc_t = 4194304;
+pub const XCB_GC_FUNCTION: xcb_gc_t = 1;
+pub const XCB_GC_PLANE_MASK: xcb_gc_t = 2;
+pub const XCB_GC_FOREGROUND: xcb_gc_t = 4;
+pub const XCB_GC_BACKGROUND: xcb_gc_t = 8;
+pub const XCB_GC_LINE_WIDTH: xcb_gc_t = 16;
+pub const XCB_GC_LINE_STYLE: xcb_gc_t = 32;
+pub const XCB_GC_CAP_STYLE: xcb_gc_t = 64;
+pub const XCB_GC_JOIN_STYLE: xcb_gc_t = 128;
+pub const XCB_GC_FILL_STYLE: xcb_gc_t = 256;
+pub const XCB_GC_FILL_RULE: xcb_gc_t = 512;
+pub const XCB_GC_TILE: xcb_gc_t = 1024;
+pub const XCB_GC_STIPPLE: xcb_gc_t = 2048;
+pub const XCB_GC_TILE_STIPPLE_ORIGIN_X: xcb_gc_t = 4096;
+pub const XCB_GC_TILE_STIPPLE_ORIGIN_Y: xcb_gc_t = 8192;
+pub const XCB_GC_FONT: xcb_gc_t = 16384;
+pub const XCB_GC_SUBWINDOW_MODE: xcb_gc_t = 32768;
+pub const XCB_GC_GRAPHICS_EXPOSURES: xcb_gc_t = 65536;
+pub const XCB_GC_CLIP_ORIGIN_X: xcb_gc_t = 131072;
+pub const XCB_GC_CLIP_ORIGIN_Y: xcb_gc_t = 262144;
+pub const XCB_GC_CLIP_MASK: xcb_gc_t = 524288;
+pub const XCB_GC_DASH_OFFSET: xcb_gc_t = 1048576;
+pub const XCB_GC_DASH_LIST: xcb_gc_t = 2097152;
+pub const XCB_GC_ARC_MODE: xcb_gc_t = 4194304;
 pub type xcb_gc_t = ::std::os::raw::c_uint;
-pub const xcb_gx_t_XCB_GX_CLEAR: xcb_gx_t = 0;
-pub const xcb_gx_t_XCB_GX_AND: xcb_gx_t = 1;
-pub const xcb_gx_t_XCB_GX_AND_REVERSE: xcb_gx_t = 2;
-pub const xcb_gx_t_XCB_GX_COPY: xcb_gx_t = 3;
-pub const xcb_gx_t_XCB_GX_AND_INVERTED: xcb_gx_t = 4;
-pub const xcb_gx_t_XCB_GX_NOOP: xcb_gx_t = 5;
-pub const xcb_gx_t_XCB_GX_XOR: xcb_gx_t = 6;
-pub const xcb_gx_t_XCB_GX_OR: xcb_gx_t = 7;
-pub const xcb_gx_t_XCB_GX_NOR: xcb_gx_t = 8;
-pub const xcb_gx_t_XCB_GX_EQUIV: xcb_gx_t = 9;
-pub const xcb_gx_t_XCB_GX_INVERT: xcb_gx_t = 10;
-pub const xcb_gx_t_XCB_GX_OR_REVERSE: xcb_gx_t = 11;
-pub const xcb_gx_t_XCB_GX_COPY_INVERTED: xcb_gx_t = 12;
-pub const xcb_gx_t_XCB_GX_OR_INVERTED: xcb_gx_t = 13;
-pub const xcb_gx_t_XCB_GX_NAND: xcb_gx_t = 14;
-pub const xcb_gx_t_XCB_GX_SET: xcb_gx_t = 15;
+pub const XCB_GX_CLEAR: xcb_gx_t = 0;
+pub const XCB_GX_AND: xcb_gx_t = 1;
+pub const XCB_GX_AND_REVERSE: xcb_gx_t = 2;
+pub const XCB_GX_COPY: xcb_gx_t = 3;
+pub const XCB_GX_AND_INVERTED: xcb_gx_t = 4;
+pub const XCB_GX_NOOP: xcb_gx_t = 5;
+pub const XCB_GX_XOR: xcb_gx_t = 6;
+pub const XCB_GX_OR: xcb_gx_t = 7;
+pub const XCB_GX_NOR: xcb_gx_t = 8;
+pub const XCB_GX_EQUIV: xcb_gx_t = 9;
+pub const XCB_GX_INVERT: xcb_gx_t = 10;
+pub const XCB_GX_OR_REVERSE: xcb_gx_t = 11;
+pub const XCB_GX_COPY_INVERTED: xcb_gx_t = 12;
+pub const XCB_GX_OR_INVERTED: xcb_gx_t = 13;
+pub const XCB_GX_NAND: xcb_gx_t = 14;
+pub const XCB_GX_SET: xcb_gx_t = 15;
 pub type xcb_gx_t = ::std::os::raw::c_uint;
-pub const xcb_line_style_t_XCB_LINE_STYLE_SOLID: xcb_line_style_t = 0;
-pub const xcb_line_style_t_XCB_LINE_STYLE_ON_OFF_DASH: xcb_line_style_t = 1;
-pub const xcb_line_style_t_XCB_LINE_STYLE_DOUBLE_DASH: xcb_line_style_t = 2;
+pub const XCB_LINE_STYLE_SOLID: xcb_line_style_t = 0;
+pub const XCB_LINE_STYLE_ON_OFF_DASH: xcb_line_style_t = 1;
+pub const XCB_LINE_STYLE_DOUBLE_DASH: xcb_line_style_t = 2;
 pub type xcb_line_style_t = ::std::os::raw::c_uint;
-pub const xcb_cap_style_t_XCB_CAP_STYLE_NOT_LAST: xcb_cap_style_t = 0;
-pub const xcb_cap_style_t_XCB_CAP_STYLE_BUTT: xcb_cap_style_t = 1;
-pub const xcb_cap_style_t_XCB_CAP_STYLE_ROUND: xcb_cap_style_t = 2;
-pub const xcb_cap_style_t_XCB_CAP_STYLE_PROJECTING: xcb_cap_style_t = 3;
+pub const XCB_CAP_STYLE_NOT_LAST: xcb_cap_style_t = 0;
+pub const XCB_CAP_STYLE_BUTT: xcb_cap_style_t = 1;
+pub const XCB_CAP_STYLE_ROUND: xcb_cap_style_t = 2;
+pub const XCB_CAP_STYLE_PROJECTING: xcb_cap_style_t = 3;
 pub type xcb_cap_style_t = ::std::os::raw::c_uint;
-pub const xcb_join_style_t_XCB_JOIN_STYLE_MITER: xcb_join_style_t = 0;
-pub const xcb_join_style_t_XCB_JOIN_STYLE_ROUND: xcb_join_style_t = 1;
-pub const xcb_join_style_t_XCB_JOIN_STYLE_BEVEL: xcb_join_style_t = 2;
+pub const XCB_JOIN_STYLE_MITER: xcb_join_style_t = 0;
+pub const XCB_JOIN_STYLE_ROUND: xcb_join_style_t = 1;
+pub const XCB_JOIN_STYLE_BEVEL: xcb_join_style_t = 2;
 pub type xcb_join_style_t = ::std::os::raw::c_uint;
-pub const xcb_fill_style_t_XCB_FILL_STYLE_SOLID: xcb_fill_style_t = 0;
-pub const xcb_fill_style_t_XCB_FILL_STYLE_TILED: xcb_fill_style_t = 1;
-pub const xcb_fill_style_t_XCB_FILL_STYLE_STIPPLED: xcb_fill_style_t = 2;
-pub const xcb_fill_style_t_XCB_FILL_STYLE_OPAQUE_STIPPLED: xcb_fill_style_t = 3;
+pub const XCB_FILL_STYLE_SOLID: xcb_fill_style_t = 0;
+pub const XCB_FILL_STYLE_TILED: xcb_fill_style_t = 1;
+pub const XCB_FILL_STYLE_STIPPLED: xcb_fill_style_t = 2;
+pub const XCB_FILL_STYLE_OPAQUE_STIPPLED: xcb_fill_style_t = 3;
 pub type xcb_fill_style_t = ::std::os::raw::c_uint;
-pub const xcb_fill_rule_t_XCB_FILL_RULE_EVEN_ODD: xcb_fill_rule_t = 0;
-pub const xcb_fill_rule_t_XCB_FILL_RULE_WINDING: xcb_fill_rule_t = 1;
+pub const XCB_FILL_RULE_EVEN_ODD: xcb_fill_rule_t = 0;
+pub const XCB_FILL_RULE_WINDING: xcb_fill_rule_t = 1;
 pub type xcb_fill_rule_t = ::std::os::raw::c_uint;
-pub const xcb_subwindow_mode_t_XCB_SUBWINDOW_MODE_CLIP_BY_CHILDREN: xcb_subwindow_mode_t = 0;
-pub const xcb_subwindow_mode_t_XCB_SUBWINDOW_MODE_INCLUDE_INFERIORS: xcb_subwindow_mode_t = 1;
+pub const XCB_SUBWINDOW_MODE_CLIP_BY_CHILDREN: xcb_subwindow_mode_t = 0;
+pub const XCB_SUBWINDOW_MODE_INCLUDE_INFERIORS: xcb_subwindow_mode_t = 1;
 pub type xcb_subwindow_mode_t = ::std::os::raw::c_uint;
-pub const xcb_arc_mode_t_XCB_ARC_MODE_CHORD: xcb_arc_mode_t = 0;
-pub const xcb_arc_mode_t_XCB_ARC_MODE_PIE_SLICE: xcb_arc_mode_t = 1;
+pub const XCB_ARC_MODE_CHORD: xcb_arc_mode_t = 0;
+pub const XCB_ARC_MODE_PIE_SLICE: xcb_arc_mode_t = 1;
 pub type xcb_arc_mode_t = ::std::os::raw::c_uint;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -6776,8 +6776,8 @@ const _: () = {
     ["Offset of field: xcb_copy_plane_request_t::bit_plane"]
         [::std::mem::offset_of!(xcb_copy_plane_request_t, bit_plane) - 28usize];
 };
-pub const xcb_coord_mode_t_XCB_COORD_MODE_ORIGIN: xcb_coord_mode_t = 0;
-pub const xcb_coord_mode_t_XCB_COORD_MODE_PREVIOUS: xcb_coord_mode_t = 1;
+pub const XCB_COORD_MODE_ORIGIN: xcb_coord_mode_t = 0;
+pub const XCB_COORD_MODE_PREVIOUS: xcb_coord_mode_t = 1;
 pub type xcb_coord_mode_t = ::std::os::raw::c_uint;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -7033,9 +7033,9 @@ const _: () = {
     ["Offset of field: xcb_poly_fill_arc_request_t::gc"]
         [::std::mem::offset_of!(xcb_poly_fill_arc_request_t, gc) - 8usize];
 };
-pub const xcb_image_format_t_XCB_IMAGE_FORMAT_XY_BITMAP: xcb_image_format_t = 0;
-pub const xcb_image_format_t_XCB_IMAGE_FORMAT_XY_PIXMAP: xcb_image_format_t = 1;
-pub const xcb_image_format_t_XCB_IMAGE_FORMAT_Z_PIXMAP: xcb_image_format_t = 2;
+pub const XCB_IMAGE_FORMAT_XY_BITMAP: xcb_image_format_t = 0;
+pub const XCB_IMAGE_FORMAT_XY_PIXMAP: xcb_image_format_t = 1;
+pub const XCB_IMAGE_FORMAT_Z_PIXMAP: xcb_image_format_t = 2;
 pub type xcb_image_format_t = ::std::os::raw::c_uint;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -9749,7 +9749,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_setup_failed_sizeof(_buffer: *const ::std::os::raw::c_void)
-        -> ::std::os::raw::c_int;
+    -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     pub fn xcb_setup_failed_reason(R: *const xcb_setup_failed_t) -> *mut ::std::os::raw::c_char;
@@ -10359,7 +10359,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_get_property_sizeof(_buffer: *const ::std::os::raw::c_void)
-        -> ::std::os::raw::c_int;
+    -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     pub fn xcb_get_property(
@@ -10395,7 +10395,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_get_property_value_end(R: *const xcb_get_property_reply_t)
-        -> xcb_generic_iterator_t;
+    -> xcb_generic_iterator_t;
 }
 unsafe extern "C" {
     pub fn xcb_get_property_reply(
@@ -10555,7 +10555,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_ungrab_pointer(c: *mut xcb_connection_t, time: xcb_timestamp_t)
-        -> xcb_void_cookie_t;
+    -> xcb_void_cookie_t;
 }
 unsafe extern "C" {
     pub fn xcb_grab_button_checked(
@@ -11572,7 +11572,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_poly_line_points_iterator(R: *const xcb_poly_line_request_t)
-        -> xcb_point_iterator_t;
+    -> xcb_point_iterator_t;
 }
 unsafe extern "C" {
     pub fn xcb_segment_next(i: *mut xcb_segment_iterator_t);
@@ -11725,7 +11725,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_fill_poly_points_iterator(R: *const xcb_fill_poly_request_t)
-        -> xcb_point_iterator_t;
+    -> xcb_point_iterator_t;
 }
 unsafe extern "C" {
     pub fn xcb_poly_fill_rectangle_sizeof(
@@ -11931,7 +11931,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_poly_text_8_items_end(R: *const xcb_poly_text_8_request_t)
-        -> xcb_generic_iterator_t;
+    -> xcb_generic_iterator_t;
 }
 unsafe extern "C" {
     pub fn xcb_poly_text_16_sizeof(
@@ -11976,7 +11976,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_image_text_8_sizeof(_buffer: *const ::std::os::raw::c_void)
-        -> ::std::os::raw::c_int;
+    -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     pub fn xcb_image_text_8_checked(
@@ -12483,7 +12483,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_lookup_color_sizeof(_buffer: *const ::std::os::raw::c_void)
-        -> ::std::os::raw::c_int;
+    -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     pub fn xcb_lookup_color(
@@ -12912,7 +12912,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_change_hosts_sizeof(_buffer: *const ::std::os::raw::c_void)
-        -> ::std::os::raw::c_int;
+    -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     pub fn xcb_change_hosts_checked(
@@ -12993,7 +12993,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_set_close_down_mode_checked(c: *mut xcb_connection_t, mode: u8)
-        -> xcb_void_cookie_t;
+    -> xcb_void_cookie_t;
 }
 unsafe extern "C" {
     pub fn xcb_set_close_down_mode(c: *mut xcb_connection_t, mode: u8) -> xcb_void_cookie_t;
@@ -18507,7 +18507,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_render_pictformat_end(i: xcb_render_pictformat_iterator_t)
-        -> xcb_generic_iterator_t;
+    -> xcb_generic_iterator_t;
 }
 unsafe extern "C" {
     pub fn xcb_render_fixed_next(i: *mut xcb_render_fixed_iterator_t);
@@ -18536,7 +18536,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_render_pictvisual_end(i: xcb_render_pictvisual_iterator_t)
-        -> xcb_generic_iterator_t;
+    -> xcb_generic_iterator_t;
 }
 unsafe extern "C" {
     pub fn xcb_render_pictdepth_sizeof(
@@ -18584,14 +18584,14 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_render_pictscreen_end(i: xcb_render_pictscreen_iterator_t)
-        -> xcb_generic_iterator_t;
+    -> xcb_generic_iterator_t;
 }
 unsafe extern "C" {
     pub fn xcb_render_indexvalue_next(i: *mut xcb_render_indexvalue_iterator_t);
 }
 unsafe extern "C" {
     pub fn xcb_render_indexvalue_end(i: xcb_render_indexvalue_iterator_t)
-        -> xcb_generic_iterator_t;
+    -> xcb_generic_iterator_t;
 }
 unsafe extern "C" {
     pub fn xcb_render_color_next(i: *mut xcb_render_color_iterator_t);
@@ -19549,7 +19549,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_render_query_filters_aliases(R: *const xcb_render_query_filters_reply_t)
-        -> *mut u16;
+    -> *mut u16;
 }
 unsafe extern "C" {
     pub fn xcb_render_query_filters_aliases_length(
@@ -23646,7 +23646,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_randr_screen_size_end(i: xcb_randr_screen_size_iterator_t)
-        -> xcb_generic_iterator_t;
+    -> xcb_generic_iterator_t;
 }
 unsafe extern "C" {
     pub fn xcb_randr_refresh_rates_sizeof(
@@ -24522,7 +24522,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_randr_set_crtc_gamma_green(R: *const xcb_randr_set_crtc_gamma_request_t)
-        -> *mut u16;
+    -> *mut u16;
 }
 unsafe extern "C" {
     pub fn xcb_randr_set_crtc_gamma_green_length(
@@ -25279,7 +25279,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_randr_crtc_change_end(i: xcb_randr_crtc_change_iterator_t)
-        -> xcb_generic_iterator_t;
+    -> xcb_generic_iterator_t;
 }
 unsafe extern "C" {
     pub fn xcb_randr_output_change_next(i: *mut xcb_randr_output_change_iterator_t);
@@ -25490,7 +25490,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
     pub fn xcb_randr_notify_data_end(i: xcb_randr_notify_data_iterator_t)
-        -> xcb_generic_iterator_t;
+    -> xcb_generic_iterator_t;
 }
 pub type XID = ::std::os::raw::c_ulong;
 pub type Mask = ::std::os::raw::c_ulong;
@@ -27996,8 +27996,9 @@ pub type XIMProc =
 pub type XICProc = ::std::option::Option<
     unsafe extern "C" fn(arg1: XIC, arg2: XPointer, arg3: XPointer) -> ::std::os::raw::c_int,
 >;
-pub type XIDProc =
-    ::std::option::Option<unsafe extern "C" fn(arg1: *mut XDisplay, arg2: XPointer, arg3: XPointer)>;
+pub type XIDProc = ::std::option::Option<
+    unsafe extern "C" fn(arg1: *mut XDisplay, arg2: XPointer, arg3: XPointer),
+>;
 pub type XIMStyle = ::std::os::raw::c_ulong;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -28747,10 +28748,12 @@ unsafe extern "C" {
     pub fn XDefaultGCOfScreen(arg1: *mut Screen) -> GC;
 }
 unsafe extern "C" {
-    pub fn XBlackPixel(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int) -> ::std::os::raw::c_ulong;
+    pub fn XBlackPixel(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int)
+    -> ::std::os::raw::c_ulong;
 }
 unsafe extern "C" {
-    pub fn XWhitePixel(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int) -> ::std::os::raw::c_ulong;
+    pub fn XWhitePixel(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int)
+    -> ::std::os::raw::c_ulong;
 }
 unsafe extern "C" {
     pub fn XAllPlanes() -> ::std::os::raw::c_ulong;
@@ -29195,7 +29198,8 @@ unsafe extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
-    pub fn XDefaultDepth(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn XDefaultDepth(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int)
+    -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     pub fn XDefaultDepthOfScreen(arg1: *mut Screen) -> ::std::os::raw::c_int;
@@ -29225,11 +29229,14 @@ unsafe extern "C" {
     pub fn XDisableAccessControl(arg1: *mut XDisplay) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
-    pub fn XDisplayCells(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn XDisplayCells(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int)
+    -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
-    pub fn XDisplayHeight(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int)
-        -> ::std::os::raw::c_int;
+    pub fn XDisplayHeight(
+        arg1: *mut XDisplay,
+        arg2: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     pub fn XDisplayHeightMM(
@@ -29245,11 +29252,14 @@ unsafe extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
-    pub fn XDisplayPlanes(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int)
-        -> ::std::os::raw::c_int;
+    pub fn XDisplayPlanes(
+        arg1: *mut XDisplay,
+        arg2: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
-    pub fn XDisplayWidth(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn XDisplayWidth(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int)
+    -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     pub fn XDisplayWidthMM(
@@ -29418,7 +29428,8 @@ unsafe extern "C" {
     pub fn XEnableAccessControl(arg1: *mut XDisplay) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
-    pub fn XEventsQueued(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn XEventsQueued(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int)
+    -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     pub fn XFetchName(
@@ -30084,8 +30095,10 @@ unsafe extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
-    pub fn XRotateBuffers(arg1: *mut XDisplay, arg2: ::std::os::raw::c_int)
-        -> ::std::os::raw::c_int;
+    pub fn XRotateBuffers(
+        arg1: *mut XDisplay,
+        arg2: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     pub fn XRotateWindowProperties(
@@ -30965,7 +30978,10 @@ unsafe extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
-    pub fn _Xwctomb(arg1: *mut ::std::os::raw::c_char, arg2: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn _Xwctomb(
+        arg1: *mut ::std::os::raw::c_char,
+        arg2: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
     pub fn XGetEventData(
@@ -32906,6 +32922,207 @@ unsafe extern "C" {
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
+pub struct xcb_image_t {
+    pub width: u16,
+    pub height: u16,
+    pub format: xcb_image_format_t,
+    pub scanline_pad: u8,
+    pub depth: u8,
+    pub bpp: u8,
+    pub unit: u8,
+    pub plane_mask: u32,
+    pub byte_order: xcb_image_order_t,
+    pub bit_order: xcb_image_order_t,
+    pub stride: u32,
+    pub size: u32,
+    pub base: *mut ::std::os::raw::c_void,
+    pub data: *mut u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_image_t"][::std::mem::size_of::<xcb_image_t>() - 48usize];
+    ["Alignment of xcb_image_t"][::std::mem::align_of::<xcb_image_t>() - 8usize];
+    ["Offset of field: xcb_image_t::width"][::std::mem::offset_of!(xcb_image_t, width) - 0usize];
+    ["Offset of field: xcb_image_t::height"][::std::mem::offset_of!(xcb_image_t, height) - 2usize];
+    ["Offset of field: xcb_image_t::format"][::std::mem::offset_of!(xcb_image_t, format) - 4usize];
+    ["Offset of field: xcb_image_t::scanline_pad"]
+        [::std::mem::offset_of!(xcb_image_t, scanline_pad) - 8usize];
+    ["Offset of field: xcb_image_t::depth"][::std::mem::offset_of!(xcb_image_t, depth) - 9usize];
+    ["Offset of field: xcb_image_t::bpp"][::std::mem::offset_of!(xcb_image_t, bpp) - 10usize];
+    ["Offset of field: xcb_image_t::unit"][::std::mem::offset_of!(xcb_image_t, unit) - 11usize];
+    ["Offset of field: xcb_image_t::plane_mask"]
+        [::std::mem::offset_of!(xcb_image_t, plane_mask) - 12usize];
+    ["Offset of field: xcb_image_t::byte_order"]
+        [::std::mem::offset_of!(xcb_image_t, byte_order) - 16usize];
+    ["Offset of field: xcb_image_t::bit_order"]
+        [::std::mem::offset_of!(xcb_image_t, bit_order) - 20usize];
+    ["Offset of field: xcb_image_t::stride"][::std::mem::offset_of!(xcb_image_t, stride) - 24usize];
+    ["Offset of field: xcb_image_t::size"][::std::mem::offset_of!(xcb_image_t, size) - 28usize];
+    ["Offset of field: xcb_image_t::base"][::std::mem::offset_of!(xcb_image_t, base) - 32usize];
+    ["Offset of field: xcb_image_t::data"][::std::mem::offset_of!(xcb_image_t, data) - 40usize];
+};
+pub type xcb_shm_seg_t = u32;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shm_segment_info_t {
+    pub shmseg: xcb_shm_seg_t,
+    pub shmid: u32,
+    pub shmaddr: *mut u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shm_segment_info_t"][::std::mem::size_of::<xcb_shm_segment_info_t>() - 16usize];
+    ["Alignment of xcb_shm_segment_info_t"]
+        [::std::mem::align_of::<xcb_shm_segment_info_t>() - 8usize];
+    ["Offset of field: xcb_shm_segment_info_t::shmseg"]
+        [::std::mem::offset_of!(xcb_shm_segment_info_t, shmseg) - 0usize];
+    ["Offset of field: xcb_shm_segment_info_t::shmid"]
+        [::std::mem::offset_of!(xcb_shm_segment_info_t, shmid) - 4usize];
+    ["Offset of field: xcb_shm_segment_info_t::shmaddr"]
+        [::std::mem::offset_of!(xcb_shm_segment_info_t, shmaddr) - 8usize];
+};
+unsafe extern "C" {
+    pub fn xcb_image_annotate(image: *mut xcb_image_t);
+}
+unsafe extern "C" {
+    pub fn xcb_image_create(
+        width: u16,
+        height: u16,
+        format: xcb_image_format_t,
+        xpad: u8,
+        depth: u8,
+        bpp: u8,
+        unit: u8,
+        byte_order: xcb_image_order_t,
+        bit_order: xcb_image_order_t,
+        base: *mut ::std::os::raw::c_void,
+        bytes: u32,
+        data: *mut u8,
+    ) -> *mut xcb_image_t;
+}
+unsafe extern "C" {
+    pub fn xcb_image_create_native(
+        c: *mut xcb_connection_t,
+        width: u16,
+        height: u16,
+        format: xcb_image_format_t,
+        depth: u8,
+        base: *mut ::std::os::raw::c_void,
+        bytes: u32,
+        data: *mut u8,
+    ) -> *mut xcb_image_t;
+}
+unsafe extern "C" {
+    pub fn xcb_image_destroy(image: *mut xcb_image_t);
+}
+unsafe extern "C" {
+    pub fn xcb_image_get(
+        conn: *mut xcb_connection_t,
+        draw: xcb_drawable_t,
+        x: i16,
+        y: i16,
+        width: u16,
+        height: u16,
+        plane_mask: u32,
+        format: xcb_image_format_t,
+    ) -> *mut xcb_image_t;
+}
+unsafe extern "C" {
+    pub fn xcb_image_put(
+        conn: *mut xcb_connection_t,
+        draw: xcb_drawable_t,
+        gc: xcb_gcontext_t,
+        image: *mut xcb_image_t,
+        x: i16,
+        y: i16,
+        left_pad: u8,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_image_native(
+        c: *mut xcb_connection_t,
+        image: *mut xcb_image_t,
+        convert: ::std::os::raw::c_int,
+    ) -> *mut xcb_image_t;
+}
+unsafe extern "C" {
+    pub fn xcb_image_put_pixel(image: *mut xcb_image_t, x: u32, y: u32, pixel: u32);
+}
+unsafe extern "C" {
+    pub fn xcb_image_get_pixel(image: *mut xcb_image_t, x: u32, y: u32) -> u32;
+}
+unsafe extern "C" {
+    pub fn xcb_image_convert(src: *mut xcb_image_t, dst: *mut xcb_image_t) -> *mut xcb_image_t;
+}
+unsafe extern "C" {
+    pub fn xcb_image_subimage(
+        image: *mut xcb_image_t,
+        x: u32,
+        y: u32,
+        width: u32,
+        height: u32,
+        base: *mut ::std::os::raw::c_void,
+        bytes: u32,
+        data: *mut u8,
+    ) -> *mut xcb_image_t;
+}
+unsafe extern "C" {
+    pub fn xcb_image_shm_put(
+        conn: *mut xcb_connection_t,
+        draw: xcb_drawable_t,
+        gc: xcb_gcontext_t,
+        image: *mut xcb_image_t,
+        shminfo: xcb_shm_segment_info_t,
+        src_x: i16,
+        src_y: i16,
+        dest_x: i16,
+        dest_y: i16,
+        src_width: u16,
+        src_height: u16,
+        send_event: u8,
+    ) -> *mut xcb_image_t;
+}
+unsafe extern "C" {
+    pub fn xcb_image_shm_get(
+        conn: *mut xcb_connection_t,
+        draw: xcb_drawable_t,
+        image: *mut xcb_image_t,
+        shminfo: xcb_shm_segment_info_t,
+        x: i16,
+        y: i16,
+        plane_mask: u32,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_image_create_from_bitmap_data(
+        data: *mut u8,
+        width: u32,
+        height: u32,
+    ) -> *mut xcb_image_t;
+}
+unsafe extern "C" {
+    pub fn xcb_create_pixmap_from_bitmap_data(
+        display: *mut xcb_connection_t,
+        d: xcb_drawable_t,
+        data: *mut u8,
+        width: u32,
+        height: u32,
+        depth: u32,
+        fg: u32,
+        bg: u32,
+        gcp: *mut xcb_gcontext_t,
+    ) -> xcb_pixmap_t;
+}
+
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
 pub struct __locale_data {
     pub _address: u8,
+}
+
+unsafe extern "C" {
+    pub fn XcursorFilenameLoadCursor(
+        dpy: *mut XDisplay,
+        file: *const ::std::os::raw::c_char,
+    ) -> Cursor;
 }
