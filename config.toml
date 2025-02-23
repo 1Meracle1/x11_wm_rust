@@ -1,10 +1,13 @@
 startup_commands = [
-  # "setxkbmap -layout us,ru,pl -option grp:alt_space_toggle",
-  # "feh --bg-center wallpaper.png",
-  "feh --bg-scale data/wallpaper.png",
+  "setxkbmap -layout us,ru,pl -option grp:alt_space_toggle",
+  # "feh --bg-center data/wallpapers/wallpaper.png",
+  "feh --bg-scale data/wallpapers/solid8.jpg",
+  # "feh --bg-scale data/wallpapers/default24.jpg",
+  # "picom --config ~/.config/i3/picom.conf",
   "alacritty",
   "target/debug/testbed_window floating X11_floating_window",
   "target/debug/testbed_window floating X11_floating_window",
+  "target/debug/testbed_window docked bottom X11_docked_bottom_window",
 ]
 
 keybindings = [
@@ -23,8 +26,8 @@ keybindings = [
     "Alt+Ctrl+K          move_window up    15",
     "Alt+Ctrl+J          move_window down  15",
 
-    "Alt+Shift+H         window_size_change horizontal  15",
-    "Alt+Shift+L         window_size_change horizontal  -15",
+    "Alt+Shift+H         window_size_change horizontal  30",
+    "Alt+Shift+L         window_size_change horizontal  -30",
     # "Alt+Shift+J         window_size_change vertical    15",
     # "Alt+Shift+K         window_size_change vertical    15",
 
@@ -73,8 +76,10 @@ outer_gap_horiz = 10
 outer_gap_vert = 10
 inner_gap = 5
 
-border_size = 2
+border_size = 3
 border_color_inactive_str = "#3c3a3a"
 border_color_active_str = "#82948c"
 
-custom_cursor_filepath = "data/starter-lights-pack_32x32.cursor"
+# custom_cursor_filepath = "data/cursors/starter-lights-pack_32x32.cursor"
+
+switch_to_workspace_on_focused_window_moved = false

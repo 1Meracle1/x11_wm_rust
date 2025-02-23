@@ -19,6 +19,7 @@ pub struct Config {
     pub border_color_inactive_int: Option<u32>,
     pub border_color_active_int: Option<u32>,
     pub custom_cursor_filepath: Option<String>,
+    pub switch_to_workspace_on_focused_window_moved: bool,
 }
 
 #[derive(Debug)]
@@ -169,6 +170,7 @@ impl Default for Config {
             border_color_inactive_int: Self::try_color_from_str("#2b2b29"),
             border_color_active_int: Self::try_color_from_str("#a38b43"),
             custom_cursor_filepath: None,
+            switch_to_workspace_on_focused_window_moved: false,
         }
     }
 }

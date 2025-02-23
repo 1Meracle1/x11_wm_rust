@@ -5,7 +5,11 @@ use x11_bindings::{
     connection::WindowType,
 };
 
-use crate::{config::Config, connection::Connection, window::Window};
+use crate::{
+    config::Config,
+    connection::Connection,
+    window::{DockedWindows, Window},
+};
 
 #[allow(dead_code)]
 #[derive(Debug)]
@@ -13,7 +17,7 @@ pub struct Workspace {
     pub id: u32,
     pub normal: Vec<Window>,
     pub floating: Vec<Window>,
-    pub docked: Vec<Window>,
+    pub docked: DockedWindows,
     pub focused_idx: usize,
     pub focused_type: WindowType,
 }
@@ -30,7 +34,7 @@ impl Workspace {
             id,
             normal,
             floating,
-            docked: Vec::new(),
+            docked: DockedWindows::new(0),
             focused_idx: 0,
             focused_type: WindowType::Normal,
         }
@@ -122,7 +126,9 @@ impl Workspace {
 
         let window_rect = if self.normal.is_empty() {
             Rect {
-                x: avail_rect.x + (avail_rect.width as i32 - window_width as i32) / 2,
+                x: avail_rect.x
+                    + (avail_rect.width as i32 - window_width as i32) / 2
+                    + config.border_size as i32 * 2,
                 y: avail_rect.y,
                 width: window_width,
                 height: window_height,
@@ -181,7 +187,8 @@ impl Workspace {
                 Rect {
                     x: focused_normal.rect.x
                         + focused_normal.rect.width as i32
-                        + config.inner_gap as i32,
+                        + config.inner_gap as i32
+                        + config.border_size as i32 * 2,
                     y: avail_rect.y,
                     width: window_width,
                     height: window_height,
@@ -222,7 +229,8 @@ impl Workspace {
                 Rect {
                     x: right_most_visible.rect.x
                         + right_most_visible.rect.width as i32
-                        + config.inner_gap as i32,
+                        + config.inner_gap as i32
+                        + config.border_size as i32 * 2,
                     y: avail_rect.y,
                     width: window_width,
                     height: window_height,
@@ -241,6 +249,19 @@ impl Workspace {
         self.fix_visibility(monitor_rect, conn);
 
         self.set_focused(window, WindowType::Normal, conn, config);
+    }
+
+    pub fn handle_new_docked_window(
+        &mut self,
+        window: xcb_window_t,
+        partial_strut: &Rect,
+        monitor_rect: &Rect,
+        conn: &Connection,
+    ) {
+        let magnified_rect = monitor_rect.new_rect_magnified(&partial_strut);
+        conn.window_configure(window, &magnified_rect, 0);
+        conn.map_window(window);
+        self.docked.add(window, magnified_rect);
     }
 
     pub fn handle_change_focus_window_left(
@@ -482,15 +503,7 @@ impl Workspace {
                         .unwrap();
                     idx
                 }
-                WindowType::Docked => {
-                    let (idx, _) = self
-                        .docked
-                        .iter()
-                        .enumerate()
-                        .find(|(_, w)| w.window == window)
-                        .unwrap();
-                    idx
-                }
+                WindowType::Docked => self.docked.index_of(window).unwrap(),
             }
         };
 
@@ -563,10 +576,45 @@ impl Workspace {
         if self.normal.is_empty() && self.floating.is_empty() && self.docked.is_empty() {
             return;
         }
+
+        let mut avail_rect = Rect {
+            x: monitor_rect.x + config.outer_gap_horiz as i32,
+            y: monitor_rect.y + config.outer_gap_vert as i32,
+            width: monitor_rect.width - config.outer_gap_horiz * 2,
+            height: monitor_rect.height - config.outer_gap_vert * 2,
+        };
+        for rect in self.docked.rects_iter_mut() {
+            let new_rect = avail_rect.new_rect_magnified(rect);
+            rect.x = new_rect.x;
+            rect.y = new_rect.y;
+            rect.width = new_rect.width;
+            rect.height = new_rect.height;
+            avail_rect = avail_rect.available_rect_after_adding_rect(&new_rect);
+        }
+        for idx in 0..self.docked.len() {
+            let window = self.docked.at_window(idx).unwrap();
+            let rect = self.docked.at_rect(idx).unwrap();
+            conn.window_configure(window, &rect, config.border_size);
+            conn.map_window(window);
+        }
+        if self.focused_type == WindowType::Docked && !self.docked.is_empty() {
+            let focused_idx = if self.focused_idx < self.docked.len() {
+                self.focused_idx
+            } else {
+                0
+            };
+            self.set_focused(
+                self.docked.at_window(focused_idx).unwrap(),
+                self.focused_type,
+                conn,
+                config,
+            );
+        }
+
         let is_below = if !self.normal.is_empty() {
             self.normal[0].rect.y > monitor_rect.y
         } else if !self.docked.is_empty() {
-            self.docked[0].rect.y > monitor_rect.y
+            self.docked.at_rect(0).unwrap().y > monitor_rect.y
         } else {
             self.floating[0].rect.y > monitor_rect.y
         };
@@ -601,7 +649,7 @@ impl Workspace {
             w.rect.y += move_y;
             conn.window_configure(w.window, &w.rect, config.border_size);
             if w.visible {
-                conn.unmap_window(w.window);
+                conn.map_window(w.window);
             }
         }
         if self.focused_type == WindowType::Floating && !self.floating.is_empty() {
@@ -612,27 +660,6 @@ impl Workspace {
             };
             self.set_focused(
                 self.floating[focused_idx].window,
-                self.focused_type,
-                conn,
-                config,
-            );
-        }
-
-        for w in self.docked.iter_mut() {
-            w.rect.y += move_y;
-            conn.window_configure(w.window, &w.rect, config.border_size);
-            if w.visible {
-                conn.unmap_window(w.window);
-            }
-        }
-        if self.focused_type == WindowType::Docked && !self.docked.is_empty() {
-            let focused_idx = if self.focused_idx < self.docked.len() {
-                self.focused_idx
-            } else {
-                0
-            };
-            self.set_focused(
-                self.docked[focused_idx].window,
                 self.focused_type,
                 conn,
                 config,
@@ -667,12 +694,26 @@ impl Workspace {
                 conn.unmap_window(w.window);
             }
         }
-        for w in self.docked.iter_mut() {
-            w.rect.y += move_y;
-            conn.window_configure(w.window, &w.rect, config.border_size);
-            if w.visible {
-                conn.unmap_window(w.window);
+        for rect in self.docked.rects_iter_mut() {
+            rect.y += move_y;
+        }
+        for idx in 0..self.docked.len() {
+            let window = self.docked.at_window(idx).unwrap();
+            let rect = self.docked.at_rect(idx).unwrap();
+            conn.window_configure(window, &rect, config.border_size);
+            conn.unmap_window(window);
+        }
+    }
+
+    pub fn pop_focused_window(&mut self) -> Option<(Window, WindowType)> {
+        match self.focused_type {
+            WindowType::Normal if self.focused_idx < self.normal.len() => {
+                // if self.focused_idx == 0 {}
+                None
             }
+            WindowType::Floating => None,
+            WindowType::Docked => None,
+            _ => None,
         }
     }
 

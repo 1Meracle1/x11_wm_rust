@@ -1,14 +1,14 @@
 use std::{collections::HashMap, ffi::CString, mem::MaybeUninit};
 
-use base::Rect;
+use base::{Rect, RectSide};
 
 use crate::bindings::{
     XCB_ACCESS, XCB_ALLOC, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING, XCB_ATOM_WM_CLASS,
     XCB_ATOM_WM_NORMAL_HINTS, XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH,
     XCB_CONFIG_WINDOW_HEIGHT, XCB_CONFIG_WINDOW_WIDTH, XCB_CONFIG_WINDOW_X, XCB_CONFIG_WINDOW_Y,
     XCB_COORD_MODE_ORIGIN, XCB_COPY_FROM_PARENT, XCB_CURRENT_TIME, XCB_CURSOR, XCB_CW_CURSOR,
-    XCB_DRAWABLE, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT, XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC,
-    XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP, XCB_IMAGE_FORMAT_Z_PIXMAP,
+    XCB_DRAWABLE, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT, XCB_GET_PROPERTY_TYPE_ANY,
+    XCB_GRAB_MODE_ASYNC, XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP, XCB_IMAGE_FORMAT_Z_PIXMAP,
     XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION, XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS,
     XCB_LENGTH, XCB_MAP_REQUEST, XCB_MATCH, XCB_NAME, XCB_NONE, XCB_PIXMAP, XCB_PROP_MODE_REPLACE,
     XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT, XCloseDisplay, XDefaultRootWindow, XDefineCursor,
@@ -374,7 +374,7 @@ impl Connection {
     pub fn window_strut_partial(&self, window: xcb_window_t, monitor_rect: &Rect) -> Option<Rect> {
         let mut error: *mut xcb_generic_error_t = std::ptr::null_mut();
         let mut maybe_strut: MaybeUninit<xcb_ewmh_wm_strut_partial_t> = MaybeUninit::uninit();
-        let res = unsafe {
+        unsafe {
             xcb_ewmh_get_wm_strut_partial_reply(
                 self.ewmh,
                 xcb_ewmh_get_wm_strut_partial(self.ewmh, window),
@@ -382,7 +382,7 @@ impl Connection {
                 &mut error,
             )
         };
-        if res == 1 && error.is_null() {
+        if error.is_null() {
             let strut = unsafe { maybe_strut.assume_init() };
             if strut.left > 0 {
                 return Some(Rect {

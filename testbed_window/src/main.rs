@@ -1,11 +1,12 @@
+use std::{thread, time::Duration};
+
 use base::Rect;
 use clap::{Parser, Subcommand};
 use env_logger::Env;
 use log::{error, trace};
 use x11_bindings::{
     bindings::{
-        XCB_ATOM_ATOM, XCB_CW_BACK_PIXEL, XCB_CW_EVENT_MASK, XCB_EVENT_MASK_EXPOSURE,
-        XCB_EVENT_MASK_STRUCTURE_NOTIFY, 
+        XCB_ATOM_CARDINAL, XCB_CW_BACK_PIXEL, XCB_CW_EVENT_MASK, XCB_EVENT_MASK_EXPOSURE, XCB_EVENT_MASK_STRUCTURE_NOTIFY 
     },
     connection::Connection,
 };
@@ -214,7 +215,7 @@ fn main() {
                 conn.change_property(
                     window,
                     *strut_atom,
-                    XCB_ATOM_ATOM,
+                    XCB_ATOM_CARDINAL,
                     32,
                     12,
                     strut.as_ptr() as *const ::std::os::raw::c_void,
@@ -271,6 +272,8 @@ fn main() {
     conn.flush();
 
     loop {
-        let _ = conn.poll_for_event();
+        while conn.poll_for_event().is_some() {
+        }
+        thread::sleep(Duration::from_secs(1));
     }
 }

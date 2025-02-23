@@ -410,6 +410,7 @@ pub enum KeybindingAction {
     MoveWindow(Direction),
     ResizeWindow(Dimension, i32),
     SwitchToWorkspace(u32),
+    MoveFocusedWindowToWorkspace(u32),
 }
 
 #[allow(dead_code)]
@@ -477,6 +478,9 @@ pub fn handle_key_press(
                 }
                 KeybindingAction::SwitchToWorkspace(workspace_id) => {
                     monitor.handle_switch_to_workspace(conn, config, *workspace_id)
+                }
+                KeybindingAction::MoveFocusedWindowToWorkspace(workspace_id) => {
+                    monitor.handle_move_focused_window_to_workspace(conn, config, *workspace_id);
                 }
             };
             break;
@@ -727,6 +731,33 @@ fn keybinding_from_string(keybinding_str: &str) -> Option<Keybinding> {
                     } else {
                         error!(
                             "no workspace id provided for switch to workspace command: {}",
+                            command
+                        )
+                    }
+                }
+                "move_focused_window_to_workspace" => {
+                    if let Some(workspace_id_str) = parts.next() {
+                        match workspace_id_str.parse::<u32>() {
+                            Ok(workspace_id) => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::MoveFocusedWindowToWorkspace(
+                                        workspace_id,
+                                    ),
+                                });
+                            }
+                            Err(err) => {
+                                error!(
+                                    "invalid unsigned integer '{}' provided as a workspace id for move focused window to workspace command: {}, error: {:?}",
+                                    workspace_id_str, command, err
+                                );
+                            }
+                        }
+                    } else {
+                        error!(
+                            "no workspace id provided for move focused window to workspace command: {}",
                             command
                         )
                     }
