@@ -2,7 +2,7 @@ use base::Rect;
 use log::trace;
 use x11_bindings::bindings::{
     XCB_CW_BORDER_PIXEL, XCB_CW_EVENT_MASK, XCB_EVENT_MASK_FOCUS_CHANGE, XCB_NOTIFY_MODE_GRAB,
-    XCB_NOTIFY_MODE_UNGRAB, xcb_notify_mode_t, xcb_render_add_glyphs_glyphids_end, xcb_window_t,
+    XCB_NOTIFY_MODE_UNGRAB, xcb_notify_mode_t, xcb_window_t,
 };
 
 use crate::{

@@ -1,4 +1,4 @@
-use std::{collections::HashMap, error, ffi::CString, mem::MaybeUninit};
+use std::{collections::HashMap, ffi::CString, mem::MaybeUninit};
 
 use base::Rect;
 
@@ -7,9 +7,8 @@ use crate::bindings::{
     XCB_ATOM_WM_NORMAL_HINTS, XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH,
     XCB_CONFIG_WINDOW_HEIGHT, XCB_CONFIG_WINDOW_WIDTH, XCB_CONFIG_WINDOW_X, XCB_CONFIG_WINDOW_Y,
     XCB_COORD_MODE_ORIGIN, XCB_COPY_FROM_PARENT, XCB_CURRENT_TIME, XCB_CURSOR, XCB_CW_CURSOR,
-    XCB_DRAWABLE, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT, XCB_GC_BACKGROUND,
-    XCB_GC_FOREGROUND, XCB_GC_FUNCTION, XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC,
-    XCB_GX_COPY, XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP, XCB_IMAGE_FORMAT_Z_PIXMAP,
+    XCB_DRAWABLE, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT, XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC,
+    XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP, XCB_IMAGE_FORMAT_Z_PIXMAP,
     XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION, XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS,
     XCB_LENGTH, XCB_MAP_REQUEST, XCB_MATCH, XCB_NAME, XCB_NONE, XCB_PIXMAP, XCB_PROP_MODE_REPLACE,
     XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT, XCloseDisplay, XDefaultRootWindow, XDefineCursor,
@@ -33,7 +32,7 @@ use crate::bindings::{
     xcb_intern_atom_cookie_t, xcb_intern_atom_reply, xcb_key_press_event_t, xcb_keycode_t,
     xcb_map_request_event_t, xcb_map_window, xcb_mod_mask_t, xcb_notify_mode_t, xcb_pixmap_t,
     xcb_point_t, xcb_poll_for_event, xcb_poly_fill_rectangle, xcb_poly_point, xcb_put_image,
-    xcb_put_image_checked, xcb_rectangle_t, xcb_request_check, xcb_screen_t, xcb_set_input_focus,
+    xcb_rectangle_t, xcb_request_check, xcb_screen_t, xcb_set_input_focus,
     xcb_setup_roots_iterator, xcb_size_hints_t, xcb_unmap_window, xcb_window_t,
 };
 
