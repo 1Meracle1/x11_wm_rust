@@ -142,6 +142,7 @@ impl Monitor {
             return;
         }
         trace!("focus_in {}", window);
+
         conn.change_window_attrs(
             window,
             XCB_CW_BORDER_PIXEL,

@@ -1,6 +1,6 @@
 use std::{collections::HashMap, ffi::CString, mem::MaybeUninit};
 
-use base::{Rect, RectSide};
+use base::Rect;
 
 use crate::bindings::{
     XCB_ACCESS, XCB_ALLOC, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING, XCB_ATOM_WM_CLASS,

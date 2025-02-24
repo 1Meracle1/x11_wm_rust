@@ -88,7 +88,7 @@ impl Config {
         // take only first 6 characters as xcb_change_window_attributes supports only 24-bit color range
         let hex = color_str.trim_start_matches('#').chars().take(6).collect::<String>();
         if let Ok(res) = u32::from_str_radix(&hex, 16) {
-            Some(res)
+            Some(res | (0xff << 24))
         } else {
             None
         }
@@ -173,4 +173,10 @@ impl Default for Config {
             switch_to_workspace_on_focused_window_moved: false,
         }
     }
+}
+
+#[allow(dead_code)]
+#[inline]
+fn create_color_with_alpha(red: u8, green: u8, blue: u8, alpha: u8) -> u32 {
+    ((alpha as u32) << 24) | ((red as u32) << 16) | ((green as u32) << 8) | (blue as u32)
 }
