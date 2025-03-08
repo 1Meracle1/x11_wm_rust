@@ -33126,3 +33126,40 @@ unsafe extern "C" {
         file: *const ::std::os::raw::c_char,
     ) -> Cursor;
 }
+
+pub const XCB_SHAPE_SO_SET: xcb_shape_so_t = 0;
+pub const XCB_SHAPE_SO_UNION: xcb_shape_so_t = 1;
+pub const XCB_SHAPE_SO_INTERSECT: xcb_shape_so_t = 2;
+pub const XCB_SHAPE_SO_SUBTRACT: xcb_shape_so_t = 3;
+pub const XCB_SHAPE_SO_INVERT: xcb_shape_so_t = 4;
+pub type xcb_shape_so_t = ::std::os::raw::c_uint;
+pub const XCB_SHAPE_SK_BOUNDING: xcb_shape_sk_t = 0;
+pub const XCB_SHAPE_SK_CLIP: xcb_shape_sk_t = 1;
+pub const XCB_SHAPE_SK_INPUT: xcb_shape_sk_t = 2;
+pub type xcb_shape_sk_t = ::std::os::raw::c_uint;
+
+pub type xcb_shape_op_t = u8;
+pub type xcb_shape_kind_t = u8;
+
+unsafe extern "C" {
+    pub fn xcb_shape_mask_checked(
+        c: *mut xcb_connection_t,
+        operation: xcb_shape_op_t,
+        destination_kind: xcb_shape_kind_t,
+        destination_window: xcb_window_t,
+        x_offset: i16,
+        y_offset: i16,
+        source_bitmap: xcb_pixmap_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_mask(
+        c: *mut xcb_connection_t,
+        operation: xcb_shape_op_t,
+        destination_kind: xcb_shape_kind_t,
+        destination_window: xcb_window_t,
+        x_offset: i16,
+        y_offset: i16,
+        source_bitmap: xcb_pixmap_t,
+    ) -> xcb_void_cookie_t;
+}

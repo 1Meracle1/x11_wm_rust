@@ -14,6 +14,7 @@ fn main() {
         "xcb-ewmh",
         "xcb-randr",
         "xcb-image",
+        "xcb-shape",
     ] {
         println!("cargo:rustc-link-lib={}", lib);
     }

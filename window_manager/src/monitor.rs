@@ -11,7 +11,7 @@ use crate::{
     config::Config,
     connection::{Connection, WindowType},
     keybindings::{Dimension, Direction},
-    window::DockedWindows,
+    window::WindowsCollection,
     workspace::Workspace,
 };
 
@@ -20,7 +20,7 @@ use crate::{
 pub struct Monitor {
     pub rect: Rect,
     pub workspaces: Vec<Workspace>,
-    pub docked: DockedWindows,
+    pub docked: WindowsCollection,
     pub focused_workspace_idx: usize,
 }
 
@@ -28,8 +28,8 @@ impl Monitor {
     pub fn new(conn: &Connection) -> Self {
         Self {
             rect: conn.screen_rect(),
-            workspaces: vec![Workspace::new(1)],
-            docked: DockedWindows::new(1),
+            workspaces: vec![Workspace::new(1, true)],
+            docked: WindowsCollection::new(1),
             focused_workspace_idx: 0,
         }
     }
@@ -51,7 +51,7 @@ impl Monitor {
 
         let avail_rect = self
             .rect
-            .available_rect_after_adding_rects(self.docked.rects());
+            .available_rect_after_adding_rects(self.docked.rect_iter());
 
         let window_type = conn.window_type(window);
         trace!("Window type: {:?}", window_type);
@@ -90,7 +90,7 @@ impl Monitor {
                             let magnified_rect = avail_rect.new_rect_magnified(&partial_strut);
                             conn.window_configure(window, &magnified_rect, 0);
                             conn.map_window(window);
-                            self.docked.add(window, magnified_rect);
+                            self.docked.add(window, magnified_rect, true);
                         } else {
                             error!(
                                 "can't add globally docked window {} as there is no more elements that can fit on the screen",
@@ -106,12 +106,12 @@ impl Monitor {
                         {
                             idx
                         } else {
-                            self.workspaces.push(Workspace::new(workspace_id));
+                            self.workspaces.push(Workspace::new(workspace_id, false));
                             self.workspaces.len() - 1
                         };
                         let avail_rect = self
                             .rect
-                            .available_rect_after_adding_rects(self.docked.rects());
+                            .available_rect_after_adding_rects(self.docked.rect_iter());
                         self.workspaces
                             .get_mut(target_workspace_idx)
                             .unwrap()
@@ -184,7 +184,7 @@ impl Monitor {
         trace!("focus window change: {:?}", direction);
         let avail_rect = self
             .rect
-            .available_rect_after_adding_rects(self.docked.rects());
+            .available_rect_after_adding_rects(self.docked.rect_iter());
         let focused_workspace = self.workspaces.get_mut(self.focused_workspace_idx).unwrap();
         match direction {
             Direction::Left => {
@@ -203,7 +203,7 @@ impl Monitor {
         trace!("move window: {:?}", direction);
         let avail_rect = self
             .rect
-            .available_rect_after_adding_rects(self.docked.rects());
+            .available_rect_after_adding_rects(self.docked.rect_iter());
         let focused_workspace = self.workspaces.get_mut(self.focused_workspace_idx).unwrap();
         match direction {
             Direction::Left => focused_workspace.handle_move_window_left(conn, config, &avail_rect),
@@ -232,7 +232,7 @@ impl Monitor {
         }
         let avail_rect = self
             .rect
-            .available_rect_after_adding_rects(self.docked.rects());
+            .available_rect_after_adding_rects(self.docked.rect_iter());
         let focused_workspace = self.workspaces.get_mut(self.focused_workspace_idx).unwrap();
         match dimension {
             Dimension::Horizontal => {
@@ -264,7 +264,7 @@ impl Monitor {
         }
         let avail_rect = self
             .rect
-            .available_rect_after_adding_rects(self.docked.rects());
+            .available_rect_after_adding_rects(self.docked.rect_iter());
 
         let hide_below = workspace_id < focused_workspace_id;
         self.workspaces
@@ -280,7 +280,7 @@ impl Monitor {
         {
             idx
         } else {
-            self.workspaces.push(Workspace::new(workspace_id));
+            self.workspaces.push(Workspace::new(workspace_id, false));
             self.workspaces.len() - 1
         };
         self.focused_workspace_idx = new_focused_workspace_idx;
@@ -308,7 +308,7 @@ impl Monitor {
         }
         let avail_rect = self
             .rect
-            .available_rect_after_adding_rects(self.docked.rects());
+            .available_rect_after_adding_rects(self.docked.rect_iter());
 
         if config.switch_to_workspace_on_focused_window_moved {
             let hide_below = workspace_id < focused_workspace_id;
@@ -326,25 +326,41 @@ impl Monitor {
         {
             idx
         } else {
-            self.workspaces.push(Workspace::new(workspace_id));
+            self.workspaces.push(Workspace::new(workspace_id, false));
             self.workspaces.len() - 1
         };
 
-        if let Some((window, window_type)) = self
+        if let Some((window, rect, window_type)) = self
             .workspaces
             .get_mut(self.focused_workspace_idx)
             .unwrap()
-            .pop_focused_window()
+            .pop_focused_window(&avail_rect, conn, config)
         {
             match window_type {
                 WindowType::Normal => {
-                    // self.workspaces
-                    //     .get_mut(new_focused_workspace_idx)
-                    //     .unwrap()
-                    //     .handle_new_normal_window(window, monitor_rect, conn, config);
-                    todo!()
+                    self.workspaces
+                        .get_mut(new_focused_workspace_idx)
+                        .unwrap()
+                        .handle_existing_normal_window(
+                            window,
+                            rect,
+                            &avail_rect,
+                            conn,
+                            config,
+                        );
                 }
-                WindowType::Floating => todo!(),
+                WindowType::Floating => {
+                    self.workspaces
+                        .get_mut(new_focused_workspace_idx)
+                        .unwrap()
+                        .handle_new_floating_window(
+                            window,
+                            rect,
+                            &avail_rect,
+                            conn,
+                            config,
+                        );
+                }
                 WindowType::Docked => todo!(),
             }
         }

@@ -9,3 +9,4 @@
 #include <X11/extensions/XTest.h>
 #include <X11/Xcursor/Xcursor.h>
 #include <xcb/xcb_image.h>
+#include <xcb/shape.h>

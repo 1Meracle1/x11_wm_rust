@@ -8,7 +8,9 @@
             "type": "lldb",
             "request": "attach",
             "name": "Attach",
-            "pid": "${command:pickMyProcess}" // use ${command:pickProcess} to pick other users' processes
+            "program": "${workspaceFolder}/target/debug/window_manager",
+            "pid": "${command:pickMyProcess}",
+            "sourceLanguages": ["rust"]
         },
         {
             "type": "lldb",

@@ -11,29 +11,30 @@ use crate::bindings::{
     XCB_GRAB_MODE_ASYNC, XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP, XCB_IMAGE_FORMAT_Z_PIXMAP,
     XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION, XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS,
     XCB_LENGTH, XCB_MAP_REQUEST, XCB_MATCH, XCB_NAME, XCB_NONE, XCB_PIXMAP, XCB_PROP_MODE_REPLACE,
-    XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT, XCloseDisplay, XDefaultRootWindow, XDefineCursor,
-    XDisplay, XGetXCBConnection, XOpenDisplay, XcursorFilenameLoadCursor, xcb_atom_t,
-    xcb_change_gc, xcb_change_property, xcb_change_window_attributes,
-    xcb_change_window_attributes_checked, xcb_configure_window, xcb_configure_window_checked,
-    xcb_connection_has_error, xcb_connection_t, xcb_create_cursor, xcb_create_cursor_checked,
-    xcb_create_gc, xcb_create_gc_checked, xcb_create_pixmap, xcb_create_pixmap_checked,
-    xcb_create_window, xcb_cursor_context_free, xcb_cursor_context_new, xcb_cursor_context_t,
-    xcb_cursor_load_cursor, xcb_cursor_t, xcb_cw_t, xcb_disconnect, xcb_event_mask_t,
-    xcb_ewmh_connection_t, xcb_ewmh_get_atoms_reply_t, xcb_ewmh_get_atoms_reply_wipe,
-    xcb_ewmh_get_cardinal_reply, xcb_ewmh_get_wm_desktop, xcb_ewmh_get_wm_strut_partial,
-    xcb_ewmh_get_wm_strut_partial_reply, xcb_ewmh_get_wm_window_type,
-    xcb_ewmh_get_wm_window_type_reply, xcb_ewmh_init_atoms, xcb_ewmh_init_atoms_replies,
-    xcb_ewmh_set_supported_checked, xcb_ewmh_wm_strut_partial_t, xcb_flush, xcb_focus_in_event_t,
-    xcb_focus_out_event_t, xcb_free_gc, xcb_free_pixmap, xcb_gc_t, xcb_gcontext_t, xcb_generate_id,
-    xcb_generic_error_t, xcb_get_property, xcb_get_property_reply, xcb_get_property_value,
-    xcb_get_property_value_length, xcb_get_setup, xcb_get_window_attributes,
-    xcb_get_window_attributes_reply, xcb_grab_key, xcb_grab_pointer, xcb_icccm_set_wm_normal_hints,
-    xcb_image_create, xcb_image_create_native, xcb_image_destroy, xcb_image_put, xcb_intern_atom,
-    xcb_intern_atom_cookie_t, xcb_intern_atom_reply, xcb_key_press_event_t, xcb_keycode_t,
-    xcb_map_request_event_t, xcb_map_window, xcb_mod_mask_t, xcb_notify_mode_t, xcb_pixmap_t,
-    xcb_point_t, xcb_poll_for_event, xcb_poly_fill_rectangle, xcb_poly_point, xcb_put_image,
-    xcb_rectangle_t, xcb_request_check, xcb_screen_t, xcb_set_input_focus,
-    xcb_setup_roots_iterator, xcb_size_hints_t, xcb_unmap_window, xcb_window_t,
+    XCB_SHAPE_SK_BOUNDING, XCB_SHAPE_SO_SET, XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT,
+    XCloseDisplay, XDefaultRootWindow, XDefineCursor, XDisplay, XGetXCBConnection, XOpenDisplay,
+    XcursorFilenameLoadCursor, xcb_arc_t, xcb_atom_t, xcb_change_gc, xcb_change_property,
+    xcb_change_window_attributes, xcb_change_window_attributes_checked, xcb_configure_window,
+    xcb_configure_window_checked, xcb_connection_has_error, xcb_connection_t, xcb_create_cursor,
+    xcb_create_cursor_checked, xcb_create_gc, xcb_create_gc_checked, xcb_create_pixmap,
+    xcb_create_pixmap_checked, xcb_create_window, xcb_cursor_context_free, xcb_cursor_context_new,
+    xcb_cursor_context_t, xcb_cursor_load_cursor, xcb_cursor_t, xcb_cw_t, xcb_disconnect,
+    xcb_event_mask_t, xcb_ewmh_connection_t, xcb_ewmh_get_atoms_reply_t,
+    xcb_ewmh_get_atoms_reply_wipe, xcb_ewmh_get_cardinal_reply, xcb_ewmh_get_wm_desktop,
+    xcb_ewmh_get_wm_strut_partial, xcb_ewmh_get_wm_strut_partial_reply,
+    xcb_ewmh_get_wm_window_type, xcb_ewmh_get_wm_window_type_reply, xcb_ewmh_init_atoms,
+    xcb_ewmh_init_atoms_replies, xcb_ewmh_set_supported_checked, xcb_ewmh_wm_strut_partial_t,
+    xcb_flush, xcb_focus_in_event_t, xcb_focus_out_event_t, xcb_free_gc, xcb_free_pixmap, xcb_gc_t,
+    xcb_gcontext_t, xcb_generate_id, xcb_generic_error_t, xcb_get_property, xcb_get_property_reply,
+    xcb_get_property_value, xcb_get_property_value_length, xcb_get_setup,
+    xcb_get_window_attributes, xcb_get_window_attributes_reply, xcb_grab_key, xcb_grab_pointer,
+    xcb_icccm_set_wm_normal_hints, xcb_image_create, xcb_image_create_native, xcb_image_destroy,
+    xcb_image_put, xcb_intern_atom, xcb_intern_atom_cookie_t, xcb_intern_atom_reply,
+    xcb_key_press_event_t, xcb_keycode_t, xcb_map_request_event_t, xcb_map_window, xcb_mod_mask_t,
+    xcb_notify_mode_t, xcb_pixmap_t, xcb_point_t, xcb_poll_for_event, xcb_poly_fill_arc,
+    xcb_poly_fill_rectangle, xcb_poly_point, xcb_put_image, xcb_rectangle_t, xcb_request_check,
+    xcb_screen_t, xcb_set_input_focus, xcb_setup_roots_iterator, xcb_shape_mask, xcb_size_hints_t,
+    xcb_unmap_window, xcb_window_t,
 };
 
 #[derive(Debug)]
@@ -737,15 +738,12 @@ impl Connection {
         mask: xcb_gc_t,
         values: [u32; N],
     ) {
-        unsafe {
-            xcb_create_gc(
-                self.conn,
-                gc,
-                pixmap,
-                mask,
-                values.as_ptr() as *const ::std::os::raw::c_void,
-            )
+        let value_list = if values.is_empty() {
+            std::ptr::null_mut()
+        } else {
+            values.as_ptr() as *const ::std::os::raw::c_void
         };
+        unsafe { xcb_create_gc(self.conn, gc, pixmap, mask, value_list) };
     }
 
     #[allow(dead_code)]
@@ -810,6 +808,16 @@ impl Connection {
         unsafe {
             xcb_poly_fill_rectangle(self.conn, pixmap, gc, rects.len() as u32, rects.as_ptr())
         };
+    }
+
+    #[allow(dead_code)]
+    pub fn poly_fill_arc<const N: usize>(
+        &self,
+        pixmap: xcb_pixmap_t,
+        gc: xcb_gcontext_t,
+        arcs: [xcb_arc_t; N],
+    ) {
+        unsafe { xcb_poly_fill_arc(self.conn, pixmap, gc, arcs.len() as u32, arcs.as_ptr()) };
     }
 
     #[allow(dead_code)]
@@ -1032,6 +1040,22 @@ impl Connection {
             )));
         }
         Ok(())
+    }
+
+    #[allow(dead_code)]
+    #[inline]
+    pub fn shape_mask(&self, window: xcb_window_t, mask: xcb_pixmap_t) {
+        unsafe {
+            xcb_shape_mask(
+                self.conn,
+                XCB_SHAPE_SO_SET as u8,
+                XCB_SHAPE_SK_BOUNDING as u8,
+                window,
+                0,
+                0,
+                mask,
+            )
+        };
     }
 }
 

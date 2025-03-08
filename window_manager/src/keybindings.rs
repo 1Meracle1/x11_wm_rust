@@ -450,7 +450,7 @@ pub fn handle_key_press(
     keycode: xcb_keycode_t,
 ) {
     trace!(
-        "handle key pres, modifier: {}, keycode: {}",
+        "handle key press, modifier: {}, keycode: {}",
         modifier, keycode
     );
     let modifiers = modifier as u32 & !(XCB_MOD_MASK_2 | XCB_MOD_MASK_LOCK);

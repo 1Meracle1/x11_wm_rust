@@ -42,16 +42,6 @@ fn main() {
             Ok::<Config, ConfigErrors>(Config::default())
         })
         .unwrap();
-    // trace!(
-    //     "border_color_inactive: {}, {}",
-    //     config.border_color_inactive_str.as_ref().unwrap(),
-    //     config.border_color_inactive_int.as_ref().unwrap()
-    // );
-    // trace!(
-    //     "border_color_active: {}, {}",
-    //     config.border_color_active_str.as_ref().unwrap(),
-    //     config.border_color_active_int.as_ref().unwrap()
-    // );
 
     let conn = Connection::new().unwrap();
 

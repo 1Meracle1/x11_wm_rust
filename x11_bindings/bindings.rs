@@ -1353,6 +1353,18 @@ pub const XCB_SHM_GET_IMAGE: u32 = 4;
 pub const XCB_SHM_CREATE_PIXMAP: u32 = 5;
 pub const XCB_SHM_ATTACH_FD: u32 = 6;
 pub const XCB_SHM_CREATE_SEGMENT: u32 = 7;
+pub const XCB_SHAPE_MAJOR_VERSION: u32 = 1;
+pub const XCB_SHAPE_MINOR_VERSION: u32 = 1;
+pub const XCB_SHAPE_NOTIFY: u32 = 0;
+pub const XCB_SHAPE_QUERY_VERSION: u32 = 0;
+pub const XCB_SHAPE_RECTANGLES: u32 = 1;
+pub const XCB_SHAPE_MASK: u32 = 2;
+pub const XCB_SHAPE_COMBINE: u32 = 3;
+pub const XCB_SHAPE_OFFSET: u32 = 4;
+pub const XCB_SHAPE_QUERY_EXTENTS: u32 = 5;
+pub const XCB_SHAPE_SELECT_INPUT: u32 = 6;
+pub const XCB_SHAPE_INPUT_SELECTED: u32 = 7;
+pub const XCB_SHAPE_GET_RECTANGLES: u32 = 8;
 pub type __u_char = ::std::os::raw::c_uchar;
 pub type __u_short = ::std::os::raw::c_ushort;
 pub type __u_int = ::std::os::raw::c_uint;
@@ -37555,6 +37567,826 @@ unsafe extern "C" {
         bg: u32,
         gcp: *mut xcb_gcontext_t,
     ) -> xcb_pixmap_t;
+}
+unsafe extern "C" {
+    pub static mut xcb_shape_id: xcb_extension_t;
+}
+pub type xcb_shape_op_t = u8;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_op_iterator_t {
+    pub data: *mut xcb_shape_op_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_op_iterator_t"][::std::mem::size_of::<xcb_shape_op_iterator_t>() - 16usize];
+    ["Alignment of xcb_shape_op_iterator_t"]
+        [::std::mem::align_of::<xcb_shape_op_iterator_t>() - 8usize];
+    ["Offset of field: xcb_shape_op_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_shape_op_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_shape_op_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_shape_op_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_shape_op_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_shape_op_iterator_t, index) - 12usize];
+};
+pub type xcb_shape_kind_t = u8;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_kind_iterator_t {
+    pub data: *mut xcb_shape_kind_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_kind_iterator_t"]
+        [::std::mem::size_of::<xcb_shape_kind_iterator_t>() - 16usize];
+    ["Alignment of xcb_shape_kind_iterator_t"]
+        [::std::mem::align_of::<xcb_shape_kind_iterator_t>() - 8usize];
+    ["Offset of field: xcb_shape_kind_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_shape_kind_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_shape_kind_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_shape_kind_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_shape_kind_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_shape_kind_iterator_t, index) - 12usize];
+};
+pub const xcb_shape_so_t_XCB_SHAPE_SO_SET: xcb_shape_so_t = 0;
+pub const xcb_shape_so_t_XCB_SHAPE_SO_UNION: xcb_shape_so_t = 1;
+pub const xcb_shape_so_t_XCB_SHAPE_SO_INTERSECT: xcb_shape_so_t = 2;
+pub const xcb_shape_so_t_XCB_SHAPE_SO_SUBTRACT: xcb_shape_so_t = 3;
+pub const xcb_shape_so_t_XCB_SHAPE_SO_INVERT: xcb_shape_so_t = 4;
+pub type xcb_shape_so_t = ::std::os::raw::c_uint;
+pub const xcb_shape_sk_t_XCB_SHAPE_SK_BOUNDING: xcb_shape_sk_t = 0;
+pub const xcb_shape_sk_t_XCB_SHAPE_SK_CLIP: xcb_shape_sk_t = 1;
+pub const xcb_shape_sk_t_XCB_SHAPE_SK_INPUT: xcb_shape_sk_t = 2;
+pub type xcb_shape_sk_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_notify_event_t {
+    pub response_type: u8,
+    pub shape_kind: xcb_shape_kind_t,
+    pub sequence: u16,
+    pub affected_window: xcb_window_t,
+    pub extents_x: i16,
+    pub extents_y: i16,
+    pub extents_width: u16,
+    pub extents_height: u16,
+    pub server_time: xcb_timestamp_t,
+    pub shaped: u8,
+    pub pad0: [u8; 11usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_notify_event_t"]
+        [::std::mem::size_of::<xcb_shape_notify_event_t>() - 32usize];
+    ["Alignment of xcb_shape_notify_event_t"]
+        [::std::mem::align_of::<xcb_shape_notify_event_t>() - 4usize];
+    ["Offset of field: xcb_shape_notify_event_t::response_type"]
+        [::std::mem::offset_of!(xcb_shape_notify_event_t, response_type) - 0usize];
+    ["Offset of field: xcb_shape_notify_event_t::shape_kind"]
+        [::std::mem::offset_of!(xcb_shape_notify_event_t, shape_kind) - 1usize];
+    ["Offset of field: xcb_shape_notify_event_t::sequence"]
+        [::std::mem::offset_of!(xcb_shape_notify_event_t, sequence) - 2usize];
+    ["Offset of field: xcb_shape_notify_event_t::affected_window"]
+        [::std::mem::offset_of!(xcb_shape_notify_event_t, affected_window) - 4usize];
+    ["Offset of field: xcb_shape_notify_event_t::extents_x"]
+        [::std::mem::offset_of!(xcb_shape_notify_event_t, extents_x) - 8usize];
+    ["Offset of field: xcb_shape_notify_event_t::extents_y"]
+        [::std::mem::offset_of!(xcb_shape_notify_event_t, extents_y) - 10usize];
+    ["Offset of field: xcb_shape_notify_event_t::extents_width"]
+        [::std::mem::offset_of!(xcb_shape_notify_event_t, extents_width) - 12usize];
+    ["Offset of field: xcb_shape_notify_event_t::extents_height"]
+        [::std::mem::offset_of!(xcb_shape_notify_event_t, extents_height) - 14usize];
+    ["Offset of field: xcb_shape_notify_event_t::server_time"]
+        [::std::mem::offset_of!(xcb_shape_notify_event_t, server_time) - 16usize];
+    ["Offset of field: xcb_shape_notify_event_t::shaped"]
+        [::std::mem::offset_of!(xcb_shape_notify_event_t, shaped) - 20usize];
+    ["Offset of field: xcb_shape_notify_event_t::pad0"]
+        [::std::mem::offset_of!(xcb_shape_notify_event_t, pad0) - 21usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_query_version_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_query_version_cookie_t"]
+        [::std::mem::size_of::<xcb_shape_query_version_cookie_t>() - 4usize];
+    ["Alignment of xcb_shape_query_version_cookie_t"]
+        [::std::mem::align_of::<xcb_shape_query_version_cookie_t>() - 4usize];
+    ["Offset of field: xcb_shape_query_version_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_shape_query_version_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_query_version_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_query_version_request_t"]
+        [::std::mem::size_of::<xcb_shape_query_version_request_t>() - 4usize];
+    ["Alignment of xcb_shape_query_version_request_t"]
+        [::std::mem::align_of::<xcb_shape_query_version_request_t>() - 2usize];
+    ["Offset of field: xcb_shape_query_version_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_shape_query_version_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_shape_query_version_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_shape_query_version_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_shape_query_version_request_t::length"]
+        [::std::mem::offset_of!(xcb_shape_query_version_request_t, length) - 2usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_query_version_reply_t {
+    pub response_type: u8,
+    pub pad0: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub major_version: u16,
+    pub minor_version: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_query_version_reply_t"]
+        [::std::mem::size_of::<xcb_shape_query_version_reply_t>() - 12usize];
+    ["Alignment of xcb_shape_query_version_reply_t"]
+        [::std::mem::align_of::<xcb_shape_query_version_reply_t>() - 4usize];
+    ["Offset of field: xcb_shape_query_version_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_shape_query_version_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_shape_query_version_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_shape_query_version_reply_t, pad0) - 1usize];
+    ["Offset of field: xcb_shape_query_version_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_shape_query_version_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_shape_query_version_reply_t::length"]
+        [::std::mem::offset_of!(xcb_shape_query_version_reply_t, length) - 4usize];
+    ["Offset of field: xcb_shape_query_version_reply_t::major_version"]
+        [::std::mem::offset_of!(xcb_shape_query_version_reply_t, major_version) - 8usize];
+    ["Offset of field: xcb_shape_query_version_reply_t::minor_version"]
+        [::std::mem::offset_of!(xcb_shape_query_version_reply_t, minor_version) - 10usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_rectangles_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub operation: xcb_shape_op_t,
+    pub destination_kind: xcb_shape_kind_t,
+    pub ordering: u8,
+    pub pad0: u8,
+    pub destination_window: xcb_window_t,
+    pub x_offset: i16,
+    pub y_offset: i16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_rectangles_request_t"]
+        [::std::mem::size_of::<xcb_shape_rectangles_request_t>() - 16usize];
+    ["Alignment of xcb_shape_rectangles_request_t"]
+        [::std::mem::align_of::<xcb_shape_rectangles_request_t>() - 4usize];
+    ["Offset of field: xcb_shape_rectangles_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_shape_rectangles_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_shape_rectangles_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_shape_rectangles_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_shape_rectangles_request_t::length"]
+        [::std::mem::offset_of!(xcb_shape_rectangles_request_t, length) - 2usize];
+    ["Offset of field: xcb_shape_rectangles_request_t::operation"]
+        [::std::mem::offset_of!(xcb_shape_rectangles_request_t, operation) - 4usize];
+    ["Offset of field: xcb_shape_rectangles_request_t::destination_kind"]
+        [::std::mem::offset_of!(xcb_shape_rectangles_request_t, destination_kind) - 5usize];
+    ["Offset of field: xcb_shape_rectangles_request_t::ordering"]
+        [::std::mem::offset_of!(xcb_shape_rectangles_request_t, ordering) - 6usize];
+    ["Offset of field: xcb_shape_rectangles_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_shape_rectangles_request_t, pad0) - 7usize];
+    ["Offset of field: xcb_shape_rectangles_request_t::destination_window"]
+        [::std::mem::offset_of!(xcb_shape_rectangles_request_t, destination_window) - 8usize];
+    ["Offset of field: xcb_shape_rectangles_request_t::x_offset"]
+        [::std::mem::offset_of!(xcb_shape_rectangles_request_t, x_offset) - 12usize];
+    ["Offset of field: xcb_shape_rectangles_request_t::y_offset"]
+        [::std::mem::offset_of!(xcb_shape_rectangles_request_t, y_offset) - 14usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_mask_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub operation: xcb_shape_op_t,
+    pub destination_kind: xcb_shape_kind_t,
+    pub pad0: [u8; 2usize],
+    pub destination_window: xcb_window_t,
+    pub x_offset: i16,
+    pub y_offset: i16,
+    pub source_bitmap: xcb_pixmap_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_mask_request_t"]
+        [::std::mem::size_of::<xcb_shape_mask_request_t>() - 20usize];
+    ["Alignment of xcb_shape_mask_request_t"]
+        [::std::mem::align_of::<xcb_shape_mask_request_t>() - 4usize];
+    ["Offset of field: xcb_shape_mask_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_shape_mask_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_shape_mask_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_shape_mask_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_shape_mask_request_t::length"]
+        [::std::mem::offset_of!(xcb_shape_mask_request_t, length) - 2usize];
+    ["Offset of field: xcb_shape_mask_request_t::operation"]
+        [::std::mem::offset_of!(xcb_shape_mask_request_t, operation) - 4usize];
+    ["Offset of field: xcb_shape_mask_request_t::destination_kind"]
+        [::std::mem::offset_of!(xcb_shape_mask_request_t, destination_kind) - 5usize];
+    ["Offset of field: xcb_shape_mask_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_shape_mask_request_t, pad0) - 6usize];
+    ["Offset of field: xcb_shape_mask_request_t::destination_window"]
+        [::std::mem::offset_of!(xcb_shape_mask_request_t, destination_window) - 8usize];
+    ["Offset of field: xcb_shape_mask_request_t::x_offset"]
+        [::std::mem::offset_of!(xcb_shape_mask_request_t, x_offset) - 12usize];
+    ["Offset of field: xcb_shape_mask_request_t::y_offset"]
+        [::std::mem::offset_of!(xcb_shape_mask_request_t, y_offset) - 14usize];
+    ["Offset of field: xcb_shape_mask_request_t::source_bitmap"]
+        [::std::mem::offset_of!(xcb_shape_mask_request_t, source_bitmap) - 16usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_combine_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub operation: xcb_shape_op_t,
+    pub destination_kind: xcb_shape_kind_t,
+    pub source_kind: xcb_shape_kind_t,
+    pub pad0: u8,
+    pub destination_window: xcb_window_t,
+    pub x_offset: i16,
+    pub y_offset: i16,
+    pub source_window: xcb_window_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_combine_request_t"]
+        [::std::mem::size_of::<xcb_shape_combine_request_t>() - 20usize];
+    ["Alignment of xcb_shape_combine_request_t"]
+        [::std::mem::align_of::<xcb_shape_combine_request_t>() - 4usize];
+    ["Offset of field: xcb_shape_combine_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_shape_combine_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_shape_combine_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_shape_combine_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_shape_combine_request_t::length"]
+        [::std::mem::offset_of!(xcb_shape_combine_request_t, length) - 2usize];
+    ["Offset of field: xcb_shape_combine_request_t::operation"]
+        [::std::mem::offset_of!(xcb_shape_combine_request_t, operation) - 4usize];
+    ["Offset of field: xcb_shape_combine_request_t::destination_kind"]
+        [::std::mem::offset_of!(xcb_shape_combine_request_t, destination_kind) - 5usize];
+    ["Offset of field: xcb_shape_combine_request_t::source_kind"]
+        [::std::mem::offset_of!(xcb_shape_combine_request_t, source_kind) - 6usize];
+    ["Offset of field: xcb_shape_combine_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_shape_combine_request_t, pad0) - 7usize];
+    ["Offset of field: xcb_shape_combine_request_t::destination_window"]
+        [::std::mem::offset_of!(xcb_shape_combine_request_t, destination_window) - 8usize];
+    ["Offset of field: xcb_shape_combine_request_t::x_offset"]
+        [::std::mem::offset_of!(xcb_shape_combine_request_t, x_offset) - 12usize];
+    ["Offset of field: xcb_shape_combine_request_t::y_offset"]
+        [::std::mem::offset_of!(xcb_shape_combine_request_t, y_offset) - 14usize];
+    ["Offset of field: xcb_shape_combine_request_t::source_window"]
+        [::std::mem::offset_of!(xcb_shape_combine_request_t, source_window) - 16usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_offset_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub destination_kind: xcb_shape_kind_t,
+    pub pad0: [u8; 3usize],
+    pub destination_window: xcb_window_t,
+    pub x_offset: i16,
+    pub y_offset: i16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_offset_request_t"]
+        [::std::mem::size_of::<xcb_shape_offset_request_t>() - 16usize];
+    ["Alignment of xcb_shape_offset_request_t"]
+        [::std::mem::align_of::<xcb_shape_offset_request_t>() - 4usize];
+    ["Offset of field: xcb_shape_offset_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_shape_offset_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_shape_offset_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_shape_offset_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_shape_offset_request_t::length"]
+        [::std::mem::offset_of!(xcb_shape_offset_request_t, length) - 2usize];
+    ["Offset of field: xcb_shape_offset_request_t::destination_kind"]
+        [::std::mem::offset_of!(xcb_shape_offset_request_t, destination_kind) - 4usize];
+    ["Offset of field: xcb_shape_offset_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_shape_offset_request_t, pad0) - 5usize];
+    ["Offset of field: xcb_shape_offset_request_t::destination_window"]
+        [::std::mem::offset_of!(xcb_shape_offset_request_t, destination_window) - 8usize];
+    ["Offset of field: xcb_shape_offset_request_t::x_offset"]
+        [::std::mem::offset_of!(xcb_shape_offset_request_t, x_offset) - 12usize];
+    ["Offset of field: xcb_shape_offset_request_t::y_offset"]
+        [::std::mem::offset_of!(xcb_shape_offset_request_t, y_offset) - 14usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_query_extents_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_query_extents_cookie_t"]
+        [::std::mem::size_of::<xcb_shape_query_extents_cookie_t>() - 4usize];
+    ["Alignment of xcb_shape_query_extents_cookie_t"]
+        [::std::mem::align_of::<xcb_shape_query_extents_cookie_t>() - 4usize];
+    ["Offset of field: xcb_shape_query_extents_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_shape_query_extents_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_query_extents_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub destination_window: xcb_window_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_query_extents_request_t"]
+        [::std::mem::size_of::<xcb_shape_query_extents_request_t>() - 8usize];
+    ["Alignment of xcb_shape_query_extents_request_t"]
+        [::std::mem::align_of::<xcb_shape_query_extents_request_t>() - 4usize];
+    ["Offset of field: xcb_shape_query_extents_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_shape_query_extents_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_shape_query_extents_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_shape_query_extents_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_shape_query_extents_request_t::length"]
+        [::std::mem::offset_of!(xcb_shape_query_extents_request_t, length) - 2usize];
+    ["Offset of field: xcb_shape_query_extents_request_t::destination_window"]
+        [::std::mem::offset_of!(xcb_shape_query_extents_request_t, destination_window) - 4usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_query_extents_reply_t {
+    pub response_type: u8,
+    pub pad0: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub bounding_shaped: u8,
+    pub clip_shaped: u8,
+    pub pad1: [u8; 2usize],
+    pub bounding_shape_extents_x: i16,
+    pub bounding_shape_extents_y: i16,
+    pub bounding_shape_extents_width: u16,
+    pub bounding_shape_extents_height: u16,
+    pub clip_shape_extents_x: i16,
+    pub clip_shape_extents_y: i16,
+    pub clip_shape_extents_width: u16,
+    pub clip_shape_extents_height: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_query_extents_reply_t"]
+        [::std::mem::size_of::<xcb_shape_query_extents_reply_t>() - 28usize];
+    ["Alignment of xcb_shape_query_extents_reply_t"]
+        [::std::mem::align_of::<xcb_shape_query_extents_reply_t>() - 4usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_shape_query_extents_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_shape_query_extents_reply_t, pad0) - 1usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_shape_query_extents_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::length"]
+        [::std::mem::offset_of!(xcb_shape_query_extents_reply_t, length) - 4usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::bounding_shaped"]
+        [::std::mem::offset_of!(xcb_shape_query_extents_reply_t, bounding_shaped) - 8usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::clip_shaped"]
+        [::std::mem::offset_of!(xcb_shape_query_extents_reply_t, clip_shaped) - 9usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::pad1"]
+        [::std::mem::offset_of!(xcb_shape_query_extents_reply_t, pad1) - 10usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::bounding_shape_extents_x"][::std::mem::offset_of!(
+        xcb_shape_query_extents_reply_t,
+        bounding_shape_extents_x
+    ) - 12usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::bounding_shape_extents_y"][::std::mem::offset_of!(
+        xcb_shape_query_extents_reply_t,
+        bounding_shape_extents_y
+    ) - 14usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::bounding_shape_extents_width"][::std::mem::offset_of!(
+        xcb_shape_query_extents_reply_t,
+        bounding_shape_extents_width
+    ) - 16usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::bounding_shape_extents_height"][::std::mem::offset_of!(
+        xcb_shape_query_extents_reply_t,
+        bounding_shape_extents_height
+    )
+        - 18usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::clip_shape_extents_x"]
+        [::std::mem::offset_of!(xcb_shape_query_extents_reply_t, clip_shape_extents_x) - 20usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::clip_shape_extents_y"]
+        [::std::mem::offset_of!(xcb_shape_query_extents_reply_t, clip_shape_extents_y) - 22usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::clip_shape_extents_width"][::std::mem::offset_of!(
+        xcb_shape_query_extents_reply_t,
+        clip_shape_extents_width
+    ) - 24usize];
+    ["Offset of field: xcb_shape_query_extents_reply_t::clip_shape_extents_height"][::std::mem::offset_of!(
+        xcb_shape_query_extents_reply_t,
+        clip_shape_extents_height
+    ) - 26usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_select_input_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub destination_window: xcb_window_t,
+    pub enable: u8,
+    pub pad0: [u8; 3usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_select_input_request_t"]
+        [::std::mem::size_of::<xcb_shape_select_input_request_t>() - 12usize];
+    ["Alignment of xcb_shape_select_input_request_t"]
+        [::std::mem::align_of::<xcb_shape_select_input_request_t>() - 4usize];
+    ["Offset of field: xcb_shape_select_input_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_shape_select_input_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_shape_select_input_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_shape_select_input_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_shape_select_input_request_t::length"]
+        [::std::mem::offset_of!(xcb_shape_select_input_request_t, length) - 2usize];
+    ["Offset of field: xcb_shape_select_input_request_t::destination_window"]
+        [::std::mem::offset_of!(xcb_shape_select_input_request_t, destination_window) - 4usize];
+    ["Offset of field: xcb_shape_select_input_request_t::enable"]
+        [::std::mem::offset_of!(xcb_shape_select_input_request_t, enable) - 8usize];
+    ["Offset of field: xcb_shape_select_input_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_shape_select_input_request_t, pad0) - 9usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_input_selected_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_input_selected_cookie_t"]
+        [::std::mem::size_of::<xcb_shape_input_selected_cookie_t>() - 4usize];
+    ["Alignment of xcb_shape_input_selected_cookie_t"]
+        [::std::mem::align_of::<xcb_shape_input_selected_cookie_t>() - 4usize];
+    ["Offset of field: xcb_shape_input_selected_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_shape_input_selected_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_input_selected_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub destination_window: xcb_window_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_input_selected_request_t"]
+        [::std::mem::size_of::<xcb_shape_input_selected_request_t>() - 8usize];
+    ["Alignment of xcb_shape_input_selected_request_t"]
+        [::std::mem::align_of::<xcb_shape_input_selected_request_t>() - 4usize];
+    ["Offset of field: xcb_shape_input_selected_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_shape_input_selected_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_shape_input_selected_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_shape_input_selected_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_shape_input_selected_request_t::length"]
+        [::std::mem::offset_of!(xcb_shape_input_selected_request_t, length) - 2usize];
+    ["Offset of field: xcb_shape_input_selected_request_t::destination_window"]
+        [::std::mem::offset_of!(xcb_shape_input_selected_request_t, destination_window) - 4usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_input_selected_reply_t {
+    pub response_type: u8,
+    pub enabled: u8,
+    pub sequence: u16,
+    pub length: u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_input_selected_reply_t"]
+        [::std::mem::size_of::<xcb_shape_input_selected_reply_t>() - 8usize];
+    ["Alignment of xcb_shape_input_selected_reply_t"]
+        [::std::mem::align_of::<xcb_shape_input_selected_reply_t>() - 4usize];
+    ["Offset of field: xcb_shape_input_selected_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_shape_input_selected_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_shape_input_selected_reply_t::enabled"]
+        [::std::mem::offset_of!(xcb_shape_input_selected_reply_t, enabled) - 1usize];
+    ["Offset of field: xcb_shape_input_selected_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_shape_input_selected_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_shape_input_selected_reply_t::length"]
+        [::std::mem::offset_of!(xcb_shape_input_selected_reply_t, length) - 4usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_get_rectangles_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_get_rectangles_cookie_t"]
+        [::std::mem::size_of::<xcb_shape_get_rectangles_cookie_t>() - 4usize];
+    ["Alignment of xcb_shape_get_rectangles_cookie_t"]
+        [::std::mem::align_of::<xcb_shape_get_rectangles_cookie_t>() - 4usize];
+    ["Offset of field: xcb_shape_get_rectangles_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_shape_get_rectangles_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_get_rectangles_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub window: xcb_window_t,
+    pub source_kind: xcb_shape_kind_t,
+    pub pad0: [u8; 3usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_get_rectangles_request_t"]
+        [::std::mem::size_of::<xcb_shape_get_rectangles_request_t>() - 12usize];
+    ["Alignment of xcb_shape_get_rectangles_request_t"]
+        [::std::mem::align_of::<xcb_shape_get_rectangles_request_t>() - 4usize];
+    ["Offset of field: xcb_shape_get_rectangles_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_shape_get_rectangles_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_shape_get_rectangles_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_shape_get_rectangles_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_shape_get_rectangles_request_t::length"]
+        [::std::mem::offset_of!(xcb_shape_get_rectangles_request_t, length) - 2usize];
+    ["Offset of field: xcb_shape_get_rectangles_request_t::window"]
+        [::std::mem::offset_of!(xcb_shape_get_rectangles_request_t, window) - 4usize];
+    ["Offset of field: xcb_shape_get_rectangles_request_t::source_kind"]
+        [::std::mem::offset_of!(xcb_shape_get_rectangles_request_t, source_kind) - 8usize];
+    ["Offset of field: xcb_shape_get_rectangles_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_shape_get_rectangles_request_t, pad0) - 9usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_shape_get_rectangles_reply_t {
+    pub response_type: u8,
+    pub ordering: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub rectangles_len: u32,
+    pub pad0: [u8; 20usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_shape_get_rectangles_reply_t"]
+        [::std::mem::size_of::<xcb_shape_get_rectangles_reply_t>() - 32usize];
+    ["Alignment of xcb_shape_get_rectangles_reply_t"]
+        [::std::mem::align_of::<xcb_shape_get_rectangles_reply_t>() - 4usize];
+    ["Offset of field: xcb_shape_get_rectangles_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_shape_get_rectangles_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_shape_get_rectangles_reply_t::ordering"]
+        [::std::mem::offset_of!(xcb_shape_get_rectangles_reply_t, ordering) - 1usize];
+    ["Offset of field: xcb_shape_get_rectangles_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_shape_get_rectangles_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_shape_get_rectangles_reply_t::length"]
+        [::std::mem::offset_of!(xcb_shape_get_rectangles_reply_t, length) - 4usize];
+    ["Offset of field: xcb_shape_get_rectangles_reply_t::rectangles_len"]
+        [::std::mem::offset_of!(xcb_shape_get_rectangles_reply_t, rectangles_len) - 8usize];
+    ["Offset of field: xcb_shape_get_rectangles_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_shape_get_rectangles_reply_t, pad0) - 12usize];
+};
+unsafe extern "C" {
+    pub fn xcb_shape_op_next(i: *mut xcb_shape_op_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_shape_op_end(i: xcb_shape_op_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_kind_next(i: *mut xcb_shape_kind_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_shape_kind_end(i: xcb_shape_kind_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_query_version(c: *mut xcb_connection_t) -> xcb_shape_query_version_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_query_version_unchecked(
+        c: *mut xcb_connection_t,
+    ) -> xcb_shape_query_version_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_query_version_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_shape_query_version_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_shape_query_version_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_rectangles_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+        rectangles_len: u32,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_rectangles_checked(
+        c: *mut xcb_connection_t,
+        operation: xcb_shape_op_t,
+        destination_kind: xcb_shape_kind_t,
+        ordering: u8,
+        destination_window: xcb_window_t,
+        x_offset: i16,
+        y_offset: i16,
+        rectangles_len: u32,
+        rectangles: *const xcb_rectangle_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_rectangles(
+        c: *mut xcb_connection_t,
+        operation: xcb_shape_op_t,
+        destination_kind: xcb_shape_kind_t,
+        ordering: u8,
+        destination_window: xcb_window_t,
+        x_offset: i16,
+        y_offset: i16,
+        rectangles_len: u32,
+        rectangles: *const xcb_rectangle_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_rectangles_rectangles(
+        R: *const xcb_shape_rectangles_request_t,
+    ) -> *mut xcb_rectangle_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_rectangles_rectangles_length(
+        R: *const xcb_shape_rectangles_request_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_rectangles_rectangles_iterator(
+        R: *const xcb_shape_rectangles_request_t,
+    ) -> xcb_rectangle_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_mask_checked(
+        c: *mut xcb_connection_t,
+        operation: xcb_shape_op_t,
+        destination_kind: xcb_shape_kind_t,
+        destination_window: xcb_window_t,
+        x_offset: i16,
+        y_offset: i16,
+        source_bitmap: xcb_pixmap_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_mask(
+        c: *mut xcb_connection_t,
+        operation: xcb_shape_op_t,
+        destination_kind: xcb_shape_kind_t,
+        destination_window: xcb_window_t,
+        x_offset: i16,
+        y_offset: i16,
+        source_bitmap: xcb_pixmap_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_combine_checked(
+        c: *mut xcb_connection_t,
+        operation: xcb_shape_op_t,
+        destination_kind: xcb_shape_kind_t,
+        source_kind: xcb_shape_kind_t,
+        destination_window: xcb_window_t,
+        x_offset: i16,
+        y_offset: i16,
+        source_window: xcb_window_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_combine(
+        c: *mut xcb_connection_t,
+        operation: xcb_shape_op_t,
+        destination_kind: xcb_shape_kind_t,
+        source_kind: xcb_shape_kind_t,
+        destination_window: xcb_window_t,
+        x_offset: i16,
+        y_offset: i16,
+        source_window: xcb_window_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_offset_checked(
+        c: *mut xcb_connection_t,
+        destination_kind: xcb_shape_kind_t,
+        destination_window: xcb_window_t,
+        x_offset: i16,
+        y_offset: i16,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_offset(
+        c: *mut xcb_connection_t,
+        destination_kind: xcb_shape_kind_t,
+        destination_window: xcb_window_t,
+        x_offset: i16,
+        y_offset: i16,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_query_extents(
+        c: *mut xcb_connection_t,
+        destination_window: xcb_window_t,
+    ) -> xcb_shape_query_extents_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_query_extents_unchecked(
+        c: *mut xcb_connection_t,
+        destination_window: xcb_window_t,
+    ) -> xcb_shape_query_extents_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_query_extents_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_shape_query_extents_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_shape_query_extents_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_select_input_checked(
+        c: *mut xcb_connection_t,
+        destination_window: xcb_window_t,
+        enable: u8,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_select_input(
+        c: *mut xcb_connection_t,
+        destination_window: xcb_window_t,
+        enable: u8,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_input_selected(
+        c: *mut xcb_connection_t,
+        destination_window: xcb_window_t,
+    ) -> xcb_shape_input_selected_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_input_selected_unchecked(
+        c: *mut xcb_connection_t,
+        destination_window: xcb_window_t,
+    ) -> xcb_shape_input_selected_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_input_selected_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_shape_input_selected_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_shape_input_selected_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_get_rectangles_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_get_rectangles(
+        c: *mut xcb_connection_t,
+        window: xcb_window_t,
+        source_kind: xcb_shape_kind_t,
+    ) -> xcb_shape_get_rectangles_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_get_rectangles_unchecked(
+        c: *mut xcb_connection_t,
+        window: xcb_window_t,
+        source_kind: xcb_shape_kind_t,
+    ) -> xcb_shape_get_rectangles_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_get_rectangles_rectangles(
+        R: *const xcb_shape_get_rectangles_reply_t,
+    ) -> *mut xcb_rectangle_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_get_rectangles_rectangles_length(
+        R: *const xcb_shape_get_rectangles_reply_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_get_rectangles_rectangles_iterator(
+        R: *const xcb_shape_get_rectangles_reply_t,
+    ) -> xcb_rectangle_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_shape_get_rectangles_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_shape_get_rectangles_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_shape_get_rectangles_reply_t;
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
