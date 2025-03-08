@@ -411,6 +411,7 @@ pub enum KeybindingAction {
     ResizeWindow(Dimension, i32),
     SwitchToWorkspace(u32),
     MoveFocusedWindowToWorkspace(u32),
+    KillFocusedWindow,
 }
 
 #[allow(dead_code)]
@@ -481,6 +482,9 @@ pub fn handle_key_press(
                 }
                 KeybindingAction::MoveFocusedWindowToWorkspace(workspace_id) => {
                     monitor.handle_move_focused_window_to_workspace(conn, config, *workspace_id);
+                }
+                KeybindingAction::KillFocusedWindow => {
+                    monitor.handle_kill_focused_window(conn, config)
                 }
             };
             break;
@@ -761,6 +765,14 @@ fn keybinding_from_string(keybinding_str: &str) -> Option<Keybinding> {
                             command
                         )
                     }
+                }
+                "kill_focused_window" => {
+                    return Some(Keybinding {
+                        modifiers,
+                        modifiers_count,
+                        keycode: keycode_maybe.unwrap(),
+                        action: KeybindingAction::KillFocusedWindow,
+                    });
                 }
                 _ => error!("no command matching string: {}", command),
             }

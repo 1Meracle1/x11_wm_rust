@@ -39,7 +39,7 @@ keybindings = [
 
     # "Alt+Shift+C         exec xcolor",
 
-    # "Alt+Q               kill_focused_window",
+    "Alt+Q               kill_focused_window",
 
     # "Alt+Shift+R         restart_window_manager",
 

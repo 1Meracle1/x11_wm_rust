@@ -4,24 +4,25 @@ use base::Rect;
 
 use crate::bindings::{
     XCB_ACCESS, XCB_ALLOC, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING, XCB_ATOM_WM_CLASS,
-    XCB_ATOM_WM_NORMAL_HINTS, XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH,
+    XCB_ATOM_WM_NORMAL_HINTS, XCB_CLIENT_MESSAGE, XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH,
     XCB_CONFIG_WINDOW_HEIGHT, XCB_CONFIG_WINDOW_WIDTH, XCB_CONFIG_WINDOW_X, XCB_CONFIG_WINDOW_Y,
     XCB_COORD_MODE_ORIGIN, XCB_COPY_FROM_PARENT, XCB_CURRENT_TIME, XCB_CURSOR, XCB_CW_CURSOR,
-    XCB_DRAWABLE, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT, XCB_GET_PROPERTY_TYPE_ANY,
-    XCB_GRAB_MODE_ASYNC, XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP, XCB_IMAGE_FORMAT_Z_PIXMAP,
-    XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION, XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS,
-    XCB_LENGTH, XCB_MAP_REQUEST, XCB_MATCH, XCB_NAME, XCB_NONE, XCB_PIXMAP, XCB_PROP_MODE_REPLACE,
-    XCB_SHAPE_SK_BOUNDING, XCB_SHAPE_SO_SET, XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT,
-    XCloseDisplay, XDefaultRootWindow, XDefineCursor, XDisplay, XGetXCBConnection, XOpenDisplay,
-    XcursorFilenameLoadCursor, xcb_arc_t, xcb_atom_t, xcb_change_gc, xcb_change_property,
-    xcb_change_window_attributes, xcb_change_window_attributes_checked, xcb_configure_window,
-    xcb_configure_window_checked, xcb_connection_has_error, xcb_connection_t, xcb_create_cursor,
-    xcb_create_cursor_checked, xcb_create_gc, xcb_create_gc_checked, xcb_create_pixmap,
-    xcb_create_pixmap_checked, xcb_create_window, xcb_cursor_context_free, xcb_cursor_context_new,
-    xcb_cursor_context_t, xcb_cursor_load_cursor, xcb_cursor_t, xcb_cw_t, xcb_disconnect,
-    xcb_event_mask_t, xcb_ewmh_connection_t, xcb_ewmh_get_atoms_reply_t,
-    xcb_ewmh_get_atoms_reply_wipe, xcb_ewmh_get_cardinal_reply, xcb_ewmh_get_wm_desktop,
-    xcb_ewmh_get_wm_strut_partial, xcb_ewmh_get_wm_strut_partial_reply,
+    XCB_DRAWABLE, XCB_EVENT_MASK_NO_EVENT, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT,
+    XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC, XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP,
+    XCB_IMAGE_FORMAT_Z_PIXMAP, XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION,
+    XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS, XCB_LENGTH, XCB_MAP_REQUEST, XCB_MATCH, XCB_NAME,
+    XCB_NONE, XCB_PIXMAP, XCB_PROP_MODE_REPLACE, XCB_SHAPE_SK_BOUNDING, XCB_SHAPE_SO_SET,
+    XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT, XCloseDisplay, XDefaultRootWindow, XDefineCursor,
+    XDisplay, XGetXCBConnection, XOpenDisplay, XcursorFilenameLoadCursor, xcb_arc_t, xcb_atom_t,
+    xcb_change_gc, xcb_change_property, xcb_change_window_attributes,
+    xcb_change_window_attributes_checked, xcb_client_message_data_t, xcb_client_message_event_t,
+    xcb_configure_window, xcb_configure_window_checked, xcb_connection_has_error, xcb_connection_t,
+    xcb_create_cursor, xcb_create_cursor_checked, xcb_create_gc, xcb_create_gc_checked,
+    xcb_create_pixmap, xcb_create_pixmap_checked, xcb_create_window, xcb_cursor_context_free,
+    xcb_cursor_context_new, xcb_cursor_context_t, xcb_cursor_load_cursor, xcb_cursor_t, xcb_cw_t,
+    xcb_destroy_window, xcb_disconnect, xcb_event_mask_t, xcb_ewmh_connection_t,
+    xcb_ewmh_get_atoms_reply_t, xcb_ewmh_get_atoms_reply_wipe, xcb_ewmh_get_cardinal_reply,
+    xcb_ewmh_get_wm_desktop, xcb_ewmh_get_wm_strut_partial, xcb_ewmh_get_wm_strut_partial_reply,
     xcb_ewmh_get_wm_window_type, xcb_ewmh_get_wm_window_type_reply, xcb_ewmh_init_atoms,
     xcb_ewmh_init_atoms_replies, xcb_ewmh_set_supported_checked, xcb_ewmh_wm_strut_partial_t,
     xcb_flush, xcb_focus_in_event_t, xcb_focus_out_event_t, xcb_free_gc, xcb_free_pixmap, xcb_gc_t,
@@ -33,8 +34,8 @@ use crate::bindings::{
     xcb_key_press_event_t, xcb_keycode_t, xcb_map_request_event_t, xcb_map_window, xcb_mod_mask_t,
     xcb_notify_mode_t, xcb_pixmap_t, xcb_point_t, xcb_poll_for_event, xcb_poly_fill_arc,
     xcb_poly_fill_rectangle, xcb_poly_point, xcb_put_image, xcb_rectangle_t, xcb_request_check,
-    xcb_screen_t, xcb_set_input_focus, xcb_setup_roots_iterator, xcb_shape_mask, xcb_size_hints_t,
-    xcb_unmap_window, xcb_window_t,
+    xcb_screen_t, xcb_send_event, xcb_set_input_focus, xcb_setup_roots_iterator, xcb_shape_mask,
+    xcb_size_hints_t, xcb_unmap_window, xcb_window_t,
 };
 
 #[derive(Debug)]
@@ -1056,6 +1057,87 @@ impl Connection {
                 mask,
             )
         };
+    }
+
+    #[allow(dead_code)]
+    pub fn window_destroy_gracefully(&self, window: xcb_window_t) {
+        const WM_PROTOCOLS_ATOM_NAME: &str = "WM_PROTOCOLS";
+        const WM_DELETE_WINDOW_ATOM_NAME: &str = "WM_DELETE_WINDOW";
+        let atoms = self.intern_atoms([WM_PROTOCOLS_ATOM_NAME, WM_DELETE_WINDOW_ATOM_NAME]);
+        if atoms.contains_key(WM_PROTOCOLS_ATOM_NAME)
+            && atoms.contains_key(WM_DELETE_WINDOW_ATOM_NAME)
+        {
+            let protocols_atom = *atoms.get(WM_PROTOCOLS_ATOM_NAME).unwrap();
+            let delete_atom = *atoms.get(WM_DELETE_WINDOW_ATOM_NAME).unwrap();
+
+            let mut error: *mut xcb_generic_error_t = std::ptr::null_mut();
+            let reply = unsafe {
+                xcb_get_property_reply(
+                    self.conn,
+                    xcb_get_property(self.conn, 0, window, protocols_atom, XCB_ATOM_ATOM, 0, 32),
+                    &mut error,
+                )
+            };
+            if !reply.is_null() && error.is_null() {
+                let atoms = unsafe { xcb_get_property_value(reply) as *mut xcb_atom_t };
+                let atoms_count = unsafe { xcb_get_property_value_length(reply) as usize };
+                if !atoms.is_null() {
+                    let mut found = false;
+                    for index in 0..atoms_count {
+                        unsafe {
+                            let atom = atoms.add(index);
+                            if *atom == delete_atom {
+                                found = true;
+                                break;
+                            }
+                        }
+                    }
+                    if found {
+                        let message_data = xcb_client_message_data_t {
+                            data32: [delete_atom, XCB_CURRENT_TIME, 0, 0, 0],
+                        };
+                        let event = xcb_client_message_event_t {
+                            response_type: XCB_CLIENT_MESSAGE as u8,
+                            format: 32,
+                            sequence: 0,
+                            window,
+                            type_: protocols_atom,
+                            data: message_data,
+                        };
+                        unsafe {
+                            xcb_send_event(
+                                self.conn,
+                                0,
+                                window,
+                                XCB_EVENT_MASK_NO_EVENT,
+                                &event as *const xcb_client_message_event_t as *const i8,
+                            )
+                        };
+                        return;
+                    }
+                }
+            }
+        }
+        unsafe {
+            xcb_destroy_window(self.conn, window);
+        }
+    }
+
+    #[allow(dead_code)]
+    pub fn window_exists(&self, window: xcb_window_t) -> bool {
+        let attrs_reply = unsafe {
+            xcb_get_window_attributes_reply(
+                self.conn,
+                xcb_get_window_attributes(self.conn, window),
+                std::ptr::null_mut(),
+            )
+        };
+        !attrs_reply.is_null()
+    }
+
+    #[allow(dead_code)]
+    pub fn window_destroy(&self, window: xcb_window_t) {
+        unsafe { xcb_destroy_window(self.conn, window) };
     }
 }
 

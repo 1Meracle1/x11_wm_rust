@@ -1,4 +1,4 @@
-use std::u32;
+use std::{time::UNIX_EPOCH, u32};
 
 use base::Rect;
 use log::{error, trace};
@@ -22,6 +22,7 @@ pub struct Monitor {
     pub workspaces: Vec<Workspace>,
     pub docked: WindowsCollection,
     pub focused_workspace_idx: usize,
+    pub to_check_deleted: Vec<(xcb_window_t, u64)>, // window and timestamp when it was requested to be deleted
 }
 
 impl Monitor {
@@ -31,6 +32,7 @@ impl Monitor {
             workspaces: vec![Workspace::new(1, true)],
             docked: WindowsCollection::new(1),
             focused_workspace_idx: 0,
+            to_check_deleted: vec![],
         }
     }
 
@@ -167,6 +169,9 @@ impl Monitor {
             return;
         }
         trace!("focus_out {}", window);
+        if !conn.window_exists(window) {
+            return;
+        }
         conn.change_window_attrs(
             window,
             XCB_CW_BORDER_PIXEL,
@@ -341,25 +346,13 @@ impl Monitor {
                     self.workspaces
                         .get_mut(new_focused_workspace_idx)
                         .unwrap()
-                        .handle_existing_normal_window(
-                            window,
-                            rect,
-                            &avail_rect,
-                            conn,
-                            config,
-                        );
+                        .handle_existing_normal_window(window, rect, &avail_rect, conn, config);
                 }
                 WindowType::Floating => {
                     self.workspaces
                         .get_mut(new_focused_workspace_idx)
                         .unwrap()
-                        .handle_new_floating_window(
-                            window,
-                            rect,
-                            &avail_rect,
-                            conn,
-                            config,
-                        );
+                        .handle_new_floating_window(window, rect, &avail_rect, conn, config);
                 }
                 WindowType::Docked => todo!(),
             }
@@ -374,5 +367,50 @@ impl Monitor {
         }
 
         conn.flush();
+    }
+
+    pub fn handle_kill_focused_window(&mut self, conn: &Connection, config: &Config) {
+        let avail_rect = self
+            .rect
+            .available_rect_after_adding_rects(self.docked.rect_iter());
+        if let Some((window, _, _)) = self
+            .workspaces
+            .get_mut(self.focused_workspace_idx)
+            .unwrap()
+            .pop_focused_window(&avail_rect, conn, config)
+        {
+            trace!("requested to kill focused window {}", window);
+            if let Some(_) = self.to_check_deleted.iter().find(|w| w.0 == window) {
+                return;
+            }
+            conn.window_destroy_gracefully(window);
+        }
+        conn.flush();
+    }
+
+    /// destroy windows that still exist after more than 5 seconds since request for graceful deletion was issued
+    pub fn check_deleted(&mut self, conn: &Connection) {
+        if self.to_check_deleted.is_empty() {
+            return;
+        }
+        let timestamp_now = std::time::SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_secs();
+        let mut index: usize = 0;
+        while index < self.to_check_deleted.len() {
+            let (window, timestamp_requested) = self.to_check_deleted[index];
+            if conn.window_exists(window) {
+                if timestamp_now > timestamp_requested && timestamp_now - timestamp_requested >= 5 {
+                    conn.window_destroy(window);
+                    self.to_check_deleted.remove(index);
+                    continue;
+                }
+            } else {
+                self.to_check_deleted.remove(index);
+                continue;
+            }
+            index += 1;
+        }
     }
 }

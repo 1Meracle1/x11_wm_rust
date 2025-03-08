@@ -113,6 +113,8 @@ fn main() {
             }
         }
 
+        monitor.check_deleted(&conn);
+
         let end_frame_time = Instant::now();
         let delta_duration = end_frame_time - start_frame_time;
         if delta_duration < frame_duration {
