@@ -1,5 +1,3 @@
-#![feature(let_chains)]
-
 use std::{
     process, thread,
     time::{Duration, Instant},
@@ -17,7 +15,7 @@ use x11_bindings::{
         XCB_CW_EVENT_MASK, XCB_EVENT_MASK_POINTER_MOTION, XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY,
         XCB_EVENT_MASK_SUBSTRUCTURE_REDIRECT,
     },
-    connection::{self, Connection},
+    connection::{self, Connection, XcbErrors, XcbEvents},
 };
 
 mod config;
@@ -84,11 +82,10 @@ fn main() {
 
     conn.flush();
 
-    let frame_duration = Duration::from_nanos(16_666_667);
+    // let (tx, rx) = std::sync::mpsc::channel::<Option<Result<XcbEvents, XcbErrors>>>();
+    // let xcb_loop_handle = std::thread::spawn(move || {
     loop {
-        let start_frame_time = Instant::now();
-
-        if let Some(event_res) = conn.poll_for_event() {
+        if let Some(event_res) = conn.wait_for_event() {
             match event_res {
                 Ok(event) => match event {
                     connection::XcbEvents::KeyPress { modifier, keycode } => handle_key_press(
@@ -108,17 +105,35 @@ fn main() {
                     connection::XcbEvents::FocusOut { window, mode } => {
                         monitor.handle_focus_out(&conn, &config, window, mode)
                     }
+                    connection::XcbEvents::MotionNotify { x, y } => {
+                        // if monitor.cursor_position_within(x, y) {
+                        //     monitor.set_focused_window_under_cursor(x, y, &conn, &config);
+                        // }
+                        // trace!("MotionNotify x: {}, y: {}", x, y)
+                    }
+                    connection::XcbEvents::EnterNotify { window } => {
+                        trace!("EnterNotify: window: {}", window);
+                        monitor.handle_enter_notify(window, &conn, &config);
+                    }
+                    connection::XcbEvents::LeaveNotify { window } => {
+                        trace!("LeaveNotify window: {}", window);
+                    }
                 },
                 Err(error) => warn!("Error event: {:?}", error),
-            }
+            };
         }
-
         monitor.check_deleted(&conn);
-
-        let end_frame_time = Instant::now();
-        let delta_duration = end_frame_time - start_frame_time;
-        if delta_duration < frame_duration {
-            thread::sleep(frame_duration - delta_duration);
-        }
     }
+    // });
+
+    // let frame_duration = Duration::from_nanos(16_666_667);
+    // loop {
+    //     let start_frame_time = Instant::now();
+
+    //     let end_frame_time = Instant::now();
+    //     let delta_duration = end_frame_time - start_frame_time;
+    //     if delta_duration < frame_duration {
+    //         thread::sleep(frame_duration - delta_duration);
+    //     }
+    // }
 }

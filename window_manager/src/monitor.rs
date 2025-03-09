@@ -18,11 +18,11 @@ use crate::{
 #[allow(dead_code)]
 #[derive(Debug)]
 pub struct Monitor {
-    pub rect: Rect,
-    pub workspaces: Vec<Workspace>,
-    pub docked: WindowsCollection,
-    pub focused_workspace_idx: usize,
-    pub to_check_deleted: Vec<(xcb_window_t, u64)>, // window and timestamp when it was requested to be deleted
+    rect: Rect,
+    workspaces: Vec<Workspace>,
+    docked: WindowsCollection,
+    focused_workspace_idx: usize,
+    to_check_deleted: Vec<(xcb_window_t, u64)>, // window and timestamp when it was requested to be deleted
 }
 
 impl Monitor {
@@ -135,6 +135,7 @@ impl Monitor {
         window: xcb_window_t,
         mode: xcb_notify_mode_t,
     ) {
+        trace!("focus_in {}", window);
         if mode == XCB_NOTIFY_MODE_GRAB || mode == XCB_NOTIFY_MODE_UNGRAB {
             // trace!("ignoring focus_in notification due to mode either being GRAB or UNGRAB");
             return;
@@ -143,13 +144,12 @@ impl Monitor {
             // trace!("ignoring focus_in notification due to window being root");
             return;
         }
-        trace!("focus_in {}", window);
 
-        conn.change_window_attrs(
-            window,
-            XCB_CW_BORDER_PIXEL,
-            config.border_color_active_int.unwrap(),
-        );
+        self.workspaces
+            .get(self.focused_workspace_idx)
+            .unwrap()
+            .handle_focus_in(window, conn, config);
+
         conn.flush();
     }
 
@@ -160,6 +160,7 @@ impl Monitor {
         window: xcb_window_t,
         mode: xcb_notify_mode_t,
     ) {
+        trace!("focus_out {}", window);
         if mode == XCB_NOTIFY_MODE_GRAB || mode == XCB_NOTIFY_MODE_UNGRAB {
             // trace!("ignoring focus_out notification due to mode either being GRAB or UNGRAB");
             return;
@@ -168,7 +169,6 @@ impl Monitor {
             // trace!("ignoring focus_out notification due to window being root");
             return;
         }
-        trace!("focus_out {}", window);
         if !conn.window_exists(window) {
             return;
         }
@@ -412,5 +412,38 @@ impl Monitor {
             }
             index += 1;
         }
+    }
+
+    // #[inline]
+    // pub fn cursor_position_within(&self, x: i32, y: i32) -> bool {
+    //     self.rect.point_within(x, y)
+    // }
+
+    // #[inline]
+    // pub fn set_focused_window_under_cursor(
+    //     &mut self,
+    //     x: i32,
+    //     y: i32,
+    //     conn: &Connection,
+    //     config: &Config,
+    // ) {
+    //     self.workspaces
+    //         .get_mut(self.focused_workspace_idx)
+    //         .unwrap()
+    //         .set_focused_window_under_cursor(x, y, conn, config);
+    // }
+
+    #[inline]
+    pub fn handle_enter_notify(
+        &mut self,
+        window: xcb_window_t,
+        conn: &Connection,
+        config: &Config,
+    ) {
+        self.workspaces
+            .get_mut(self.focused_workspace_idx)
+            .unwrap()
+            .handle_enter_notify(window, conn, config);
+        conn.flush();
     }
 }

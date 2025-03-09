@@ -3,7 +3,10 @@ use std::i32;
 use base::Rect;
 use log::{trace, warn};
 use x11_bindings::{
-    bindings::{XCB_CW_BORDER_PIXEL, XCB_CW_EVENT_MASK, XCB_EVENT_MASK_FOCUS_CHANGE, xcb_window_t},
+    bindings::{
+        XCB_CW_BORDER_PIXEL, XCB_CW_EVENT_MASK, XCB_EVENT_MASK_ENTER_WINDOW,
+        XCB_EVENT_MASK_FOCUS_CHANGE, XCB_EVENT_MASK_LEAVE_WINDOW, xcb_window_t,
+    },
     connection::WindowType,
 };
 
@@ -13,12 +16,13 @@ use crate::{config::Config, connection::Connection, window::WindowsCollection};
 #[derive(Debug)]
 pub struct Workspace {
     pub id: u32,
-    pub normal: WindowsCollection,
-    pub floating: WindowsCollection,
-    pub docked: WindowsCollection,
-    pub focused_idx: usize,
-    pub focused_type: WindowType,
-    pub is_visible: bool,
+    normal: WindowsCollection,
+    floating: WindowsCollection,
+    docked: WindowsCollection,
+    focused_idx: usize,
+    focused_type: WindowType,
+    is_visible: bool,
+    focused_via_keyboard: bool,
 }
 
 impl Workspace {
@@ -31,6 +35,7 @@ impl Workspace {
             focused_idx: 0,
             focused_type: WindowType::Normal,
             is_visible,
+            focused_via_keyboard: false,
         }
     }
 
@@ -95,6 +100,15 @@ impl Workspace {
 
         self.floating.add(window, window_rect, true);
         self.set_focused(window, WindowType::Floating, conn, config);
+        self.focused_via_keyboard = true;
+    }
+
+    pub fn raise_all_floating_windows(&self, conn: &Connection) {
+        for (&window, _, &visible) in self.floating.iter() {
+            if visible {
+                conn.window_raise(window);
+            }
+        }
     }
 
     pub fn handle_new_normal_window(
@@ -150,6 +164,7 @@ impl Workspace {
             .for_each(|(w, rect, _)| conn.window_configure(*w, rect, config.border_size));
         self.fix_visibility(&avail_rect, conn);
         self.set_focused(window, WindowType::Normal, conn, config);
+        self.focused_via_keyboard = true;
     }
 
     pub fn handle_existing_normal_window(
@@ -206,6 +221,7 @@ impl Workspace {
             conn.unmap_window(window);
         }
         self.set_focused(window, WindowType::Normal, conn, config);
+        self.focused_via_keyboard = true;
     }
 
     pub fn handle_new_docked_window(
@@ -248,6 +264,7 @@ impl Workspace {
                         self.fix_visibility(monitor_rect, conn);
                     }
                     self.set_focused_by_index(new_focused_idx, self.focused_type, conn, config);
+                    self.focused_via_keyboard = true;
                 }
             }
             WindowType::Floating => {
@@ -291,6 +308,7 @@ impl Workspace {
                         self.fix_visibility(monitor_rect, conn);
                     }
                     self.set_focused_by_index(new_focused_idx, self.focused_type, conn, config);
+                    self.focused_via_keyboard = true;
                 }
             }
             WindowType::Floating => {
@@ -339,6 +357,7 @@ impl Workspace {
                         }
                         self.fix_visibility(monitor_rect, conn);
                     }
+                    self.focused_via_keyboard = true;
                 }
             }
             WindowType::Floating => {
@@ -391,6 +410,7 @@ impl Workspace {
                         }
                         self.fix_visibility(monitor_rect, conn);
                     }
+                    self.focused_via_keyboard = true;
                 }
             }
             WindowType::Floating => {
@@ -453,7 +473,11 @@ impl Workspace {
             XCB_CW_BORDER_PIXEL,
             config.border_color_active_int.unwrap(),
         );
-        conn.change_window_attrs(window, XCB_CW_EVENT_MASK, XCB_EVENT_MASK_FOCUS_CHANGE);
+        conn.change_window_attrs(
+            window,
+            XCB_CW_EVENT_MASK,
+            XCB_EVENT_MASK_FOCUS_CHANGE | XCB_EVENT_MASK_ENTER_WINDOW | XCB_EVENT_MASK_LEAVE_WINDOW,
+        );
         if self.is_visible {
             trace!("apply focus to {}", window);
             conn.window_set_input_focus(window);
@@ -507,6 +531,7 @@ impl Workspace {
                 }
 
                 self.fix_visibility(monitor_rect, conn);
+                self.focused_via_keyboard = true;
             }
             WindowType::Floating => {
                 trace!("horizontal resize window event received when floating window is focused");
@@ -611,6 +636,7 @@ impl Workspace {
             };
             self.set_focused_by_index(focused_idx, self.focused_type, conn, config);
         }
+        self.focused_via_keyboard = true;
     }
 
     pub fn hide_all_windows(
@@ -680,6 +706,7 @@ impl Workspace {
                     self.set_focused_by_index(0, WindowType::Floating, conn, config);
                 }
                 self.fix_existing_normal_windows(&avail_rect, conn, config);
+                self.focused_via_keyboard = true;
 
                 Some((removed_window, removed_window_rect, WindowType::Normal))
             }
@@ -713,6 +740,7 @@ impl Workspace {
                             config,
                         );
                         self.fix_existing_normal_windows(&avail_rect, conn, config);
+                        self.focused_via_keyboard = true;
                     }
                 }
                 Some((removed_window, removed_window_rect, WindowType::Floating))
@@ -722,6 +750,134 @@ impl Workspace {
         }
     }
 
+    // pub fn set_focused_window_under_cursor(
+    //     &mut self,
+    //     x: i32,
+    //     y: i32,
+    //     conn: &Connection,
+    //     config: &Config,
+    // ) {
+    //     if let Some((&window, _, _)) = self
+    //         .floating
+    //         .iter()
+    //         .find(|(_, rect, visible)| **visible && rect.point_within(x, y))
+    //     {
+    //         if self.focused_type == WindowType::Floating {
+    //             if let Some(currently_focused) = self.floating.at_window(self.focused_idx) {
+    //                 if window == currently_focused {
+    //                     if self.focused_via_keyboard {
+    //                         self.focused_via_keyboard = false;
+    //                     }
+    //                     return;
+    //                 }
+    //             }
+    //         }
+    //         self.set_focused(window, WindowType::Floating, conn, config);
+    //         return;
+    //     }
+    //     if let Some((&window, _, _)) = self
+    //         .normal
+    //         .iter()
+    //         .find(|(_, rect, visible)| **visible && rect.point_within(x, y))
+    //     {
+    //         if self.focused_type == WindowType::Normal {
+    //             if let Some(currently_focused) = self.normal.at_window(self.focused_idx) {
+    //                 if window == currently_focused {
+    //                     if self.focused_via_keyboard {
+    //                         self.focused_via_keyboard = false;
+    //                     }
+    //                     return;
+    //                 }
+    //             }
+    //         }
+    //         self.set_focused(window, WindowType::Normal, conn, config);
+    //         return;
+    //     }
+    //     if let Some((&window, _, _)) = self
+    //         .docked
+    //         .iter()
+    //         .find(|(_, rect, visible)| **visible && rect.point_within(x, y))
+    //     {
+    //         if self.focused_type == WindowType::Docked {
+    //             if let Some(currently_focused) = self.docked.at_window(self.focused_idx) {
+    //                 if window == currently_focused {
+    //                     if self.focused_via_keyboard {
+    //                         self.focused_via_keyboard = false;
+    //                     }
+    //                     return;
+    //                 }
+    //             }
+    //         }
+    //         self.set_focused(window, WindowType::Docked, conn, config);
+    //         return;
+    //     }
+    // }
+
+    pub fn handle_enter_notify(
+        &mut self,
+        window: xcb_window_t,
+        conn: &Connection,
+        config: &Config,
+    ) {
+        if self.focused_via_keyboard {
+            match self.focused_type {
+                WindowType::Normal => {
+                    if let Some(currently_focused) = self.normal.at_window(self.focused_idx) {
+                        if currently_focused == window {
+                            self.focused_via_keyboard = false;
+                        }
+                    }
+                }
+                WindowType::Floating => {
+                    if let Some(currently_focused) = self.floating.at_window(self.focused_idx) {
+                        if currently_focused == window {
+                            self.focused_via_keyboard = false;
+                        }
+                    }
+                }
+                WindowType::Docked => {
+                    if let Some(currently_focused) = self.docked.at_window(self.focused_idx) {
+                        if currently_focused == window {
+                            self.focused_via_keyboard = false;
+                        }
+                    }
+                }
+            }
+            return;
+        }
+
+        if let Some(index) = self.floating.index_of(window) {
+            if window != self.floating.index_window(self.focused_idx) {
+                self.set_focused_by_index_window(index, window, WindowType::Floating, conn, config);
+            }
+            return;
+        }
+        if let Some(index) = self.normal.index_of(window) {
+            if window != self.normal.index_window(self.focused_idx) {
+                self.set_focused_by_index_window(index, window, WindowType::Normal, conn, config);
+            }
+            return;
+        }
+        if let Some(index) = self.docked.index_of(window) {
+            if window != self.docked.index_window(self.focused_idx) {
+                self.set_focused_by_index_window(index, window, WindowType::Docked, conn, config);
+            }
+            return;
+        }
+    }
+
+    pub fn handle_focus_in(&self, window: xcb_window_t, conn: &Connection, config: &Config) {
+        conn.change_window_attrs(
+            window,
+            XCB_CW_BORDER_PIXEL,
+            config.border_color_active_int.unwrap(),
+        );
+        if self.focused_type != WindowType::Floating {
+            self.raise_all_floating_windows(conn);
+        }
+    }
+
+    #[inline]
     fn available_rectangle(&self, monitor_rect: &Rect, config: &Config) -> Rect {
         let mut avail_rect = Rect {
             x: monitor_rect.x + config.outer_gap_horiz as i32,

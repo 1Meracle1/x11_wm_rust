@@ -36,6 +36,15 @@ impl Rect {
     }
 
     #[allow(dead_code)]
+    #[inline]
+    pub fn point_within(&self, x: i32, y: i32) -> bool {
+        x >= self.x
+            && x <= self.x + self.width as i32
+            && y >= self.y
+            && y <= self.y + self.height as i32
+    }
+
+    #[allow(dead_code)]
     pub fn clamp_to(&self, parent: &Rect) -> Rect {
         let x = self.x.clamp(parent.x, parent.x + parent.width as i32);
         let y = self.y.clamp(parent.y, parent.y + parent.height as i32);
