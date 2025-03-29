@@ -162,7 +162,7 @@ impl Workspace {
         self.normal
             .iter()
             .for_each(|(w, rect, _)| conn.window_configure(*w, rect, config.border_size));
-        self.fix_visibility(&avail_rect, conn);
+        self.fix_windows_visibility(&avail_rect, conn);
         self.set_focused(window, WindowType::Normal, conn, config);
         self.focused_via_keyboard = true;
     }
@@ -216,7 +216,7 @@ impl Workspace {
             .iter()
             .for_each(|(w, rect, _)| conn.window_configure(*w, rect, config.border_size));
         if self.is_visible {
-            self.fix_visibility(monitor_rect, conn);
+            self.fix_windows_visibility(monitor_rect, conn);
         } else {
             conn.unmap_window(window);
         }
@@ -261,7 +261,7 @@ impl Workspace {
                             rect.x += move_right_x;
                             conn.window_configure(*window, rect, config.border_size);
                         }
-                        self.fix_visibility(monitor_rect, conn);
+                        self.fix_windows_visibility(monitor_rect, conn);
                     }
                     self.set_focused_by_index(new_focused_idx, self.focused_type, conn, config);
                     self.focused_via_keyboard = true;
@@ -305,7 +305,7 @@ impl Workspace {
                             rect.x -= move_left_x;
                             conn.window_configure(*window, rect, config.border_size);
                         }
-                        self.fix_visibility(monitor_rect, conn);
+                        self.fix_windows_visibility(monitor_rect, conn);
                     }
                     self.set_focused_by_index(new_focused_idx, self.focused_type, conn, config);
                     self.focused_via_keyboard = true;
@@ -332,20 +332,18 @@ impl Workspace {
                 if self.focused_idx > 0 {
                     self.normal
                         .swap_windows(self.focused_idx - 1, self.focused_idx);
+                    self.normal
+                        .swap_visibles(self.focused_idx - 1, self.focused_idx);
 
                     let (lhs_window, lhs_rect) = self.normal.at(self.focused_idx - 1).unwrap();
                     let (rhs_window, rhs_rect) = self.normal.at(self.focused_idx).unwrap();
-                    conn.window_configure(lhs_window, lhs_rect, config.border_size);
-                    conn.window_configure(rhs_window, rhs_rect, config.border_size);
 
-                    self.normal.sort_by_rect_x_asc();
                     self.focused_idx = self.focused_idx - 1;
 
                     let avail_rect = self.available_rectangle(monitor_rect, config);
                     let move_right_x = {
-                        let focused_rect = self.normal.at_rect(self.focused_idx).unwrap();
-                        if focused_rect.x < avail_rect.x {
-                            avail_rect.x - focused_rect.x
+                        if lhs_rect.x < avail_rect.x {
+                            avail_rect.x - lhs_rect.x
                         } else {
                             0
                         }
@@ -355,7 +353,10 @@ impl Workspace {
                             rect.x += move_right_x;
                             conn.window_configure(*window, &rect, config.border_size);
                         }
-                        self.fix_visibility(monitor_rect, conn);
+                        self.fix_windows_visibility(monitor_rect, conn);
+                    } else {
+                        conn.window_configure(lhs_window, lhs_rect, config.border_size);
+                        conn.window_configure(rhs_window, rhs_rect, config.border_size);
                     }
                     self.focused_via_keyboard = true;
                 }
@@ -381,22 +382,20 @@ impl Workspace {
                 if self.focused_idx < self.normal.len() - 1 {
                     self.normal
                         .swap_windows(self.focused_idx, self.focused_idx + 1);
+                    self.normal
+                        .swap_visibles(self.focused_idx, self.focused_idx + 1);
 
                     let (lhs_window, lhs_rect) = self.normal.at(self.focused_idx).unwrap();
                     let (rhs_window, rhs_rect) = self.normal.at(self.focused_idx + 1).unwrap();
-                    conn.window_configure(rhs_window, rhs_rect, config.border_size);
-                    conn.window_configure(lhs_window, lhs_rect, config.border_size);
 
-                    self.normal.sort_by_rect_x_asc();
                     self.focused_idx = self.focused_idx + 1;
 
                     let avail_rect = self.available_rectangle(monitor_rect, config);
                     let move_left_x = {
-                        let focused_rect = self.normal.index_rect(self.focused_idx);
-                        if focused_rect.x + focused_rect.width as i32
+                        if rhs_rect.x + rhs_rect.width as i32
                             > avail_rect.x + avail_rect.width as i32
                         {
-                            focused_rect.x + focused_rect.width as i32
+                            rhs_rect.x + rhs_rect.width as i32
                                 - avail_rect.x
                                 - avail_rect.width as i32
                         } else {
@@ -408,7 +407,10 @@ impl Workspace {
                             rect.x -= move_left_x;
                             conn.window_configure(*window, rect, config.border_size);
                         }
-                        self.fix_visibility(monitor_rect, conn);
+                        self.fix_windows_visibility(monitor_rect, conn);
+                    } else {
+                        conn.window_configure(lhs_window, lhs_rect, config.border_size);
+                        conn.window_configure(rhs_window, rhs_rect, config.border_size);
                     }
                     self.focused_via_keyboard = true;
                 }
@@ -530,7 +532,7 @@ impl Workspace {
                     conn.window_configure(*window, rect, config.border_size);
                 }
 
-                self.fix_visibility(monitor_rect, conn);
+                self.fix_windows_visibility(monitor_rect, conn);
                 self.focused_via_keyboard = true;
             }
             WindowType::Floating => {
@@ -872,9 +874,9 @@ impl Workspace {
             XCB_CW_BORDER_PIXEL,
             config.border_color_active_int.unwrap(),
         );
-        if self.focused_type != WindowType::Floating {
-            self.raise_all_floating_windows(conn);
-        }
+        // if self.focused_type != WindowType::Floating {
+        //     self.raise_all_floating_windows(conn);
+        // }
     }
 
     #[inline]
@@ -920,21 +922,19 @@ impl Workspace {
             .for_each(|(window, rect, _)| conn.window_configure(*window, rect, config.border_size));
 
         if self.is_visible {
-            self.fix_visibility(avail_rect, conn);
+            self.fix_windows_visibility(avail_rect, conn);
         }
     }
 
-    fn fix_visibility(&mut self, monitor_rect: &Rect, conn: &Connection) {
-        for (window, rect, visible) in self.normal.iter_mut() {
-            if rect.intersects_with(monitor_rect) {
-                if !*visible {
-                    *visible = true;
-                    conn.map_window(*window);
-                }
-            } else {
-                if *visible {
-                    *visible = false;
-                    conn.unmap_window(*window);
+    fn fix_windows_visibility(&mut self, monitor_rect: &Rect, conn: &Connection) {
+        for (&mut window, rect, visible) in self.normal.iter_mut() {
+            let intersects = rect.intersects_with(monitor_rect);
+            if intersects != *visible {
+                *visible = intersects;
+                if intersects {
+                    conn.map_window(window);
+                } else {
+                    conn.unmap_window(window);
                 }
             }
         }

@@ -133,6 +133,11 @@ impl WindowsCollection {
     }
 
     #[inline]
+    pub fn swap_visibles(&mut self, index_lhs: usize, index_rhs: usize) {
+        self.visibles.swap(index_lhs, index_rhs);
+    }
+
+    #[inline]
     pub fn iter(&self) -> WindowsCollectionIter<'_> {
         WindowsCollectionIter {
             windows_iter: self.windows.iter(),

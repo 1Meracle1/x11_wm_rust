@@ -6,6 +6,14 @@
     "configurations": [
         {
             "type": "lldb",
+            "request": "launch",
+            "name": "Launch imgui_cpp",
+            "program": "${workspaceFolder}/imgui_cpp/imgui_cpp",
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
             "request": "attach",
             "name": "Attach",
             "program": "${workspaceFolder}/target/debug/window_manager",

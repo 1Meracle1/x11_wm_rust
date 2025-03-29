@@ -1,2 +1,2 @@
-picom --config picom.conf &
+# picom --config picom.conf &
 exec target/debug/window_manager

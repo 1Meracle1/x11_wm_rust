@@ -1,8 +1,3 @@
-use std::{
-    process, thread,
-    time::{Duration, Instant},
-};
-
 use config::{Config, ConfigErrors};
 use env_logger::Env;
 use keybindings::{
@@ -15,7 +10,7 @@ use x11_bindings::{
         XCB_CW_EVENT_MASK, XCB_EVENT_MASK_POINTER_MOTION, XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY,
         XCB_EVENT_MASK_SUBSTRUCTURE_REDIRECT,
     },
-    connection::{self, Connection, XcbErrors, XcbEvents},
+    connection::{self, Connection},
 };
 
 mod config;
@@ -30,7 +25,7 @@ fn main() {
         .write_style_or("MY_LOG_STYLE", "always");
     env_logger::init_from_env(env);
 
-    let pid = process::id();
+    let pid = std::process::id();
     info!("PID: {}", pid);
 
     let config = Config::new("config.toml")
@@ -82,8 +77,6 @@ fn main() {
 
     conn.flush();
 
-    // let (tx, rx) = std::sync::mpsc::channel::<Option<Result<XcbEvents, XcbErrors>>>();
-    // let xcb_loop_handle = std::thread::spawn(move || {
     loop {
         if let Some(event_res) = conn.wait_for_event() {
             match event_res {
@@ -105,7 +98,7 @@ fn main() {
                     connection::XcbEvents::FocusOut { window, mode } => {
                         monitor.handle_focus_out(&conn, &config, window, mode)
                     }
-                    connection::XcbEvents::MotionNotify { x, y } => {
+                    connection::XcbEvents::MotionNotify { x: _, y: _ } => {
                         // if monitor.cursor_position_within(x, y) {
                         //     monitor.set_focused_window_under_cursor(x, y, &conn, &config);
                         // }
@@ -124,16 +117,4 @@ fn main() {
         }
         monitor.check_deleted(&conn);
     }
-    // });
-
-    // let frame_duration = Duration::from_nanos(16_666_667);
-    // loop {
-    //     let start_frame_time = Instant::now();
-
-    //     let end_frame_time = Instant::now();
-    //     let delta_duration = end_frame_time - start_frame_time;
-    //     if delta_duration < frame_duration {
-    //         thread::sleep(frame_duration - delta_duration);
-    //     }
-    // }
 }
