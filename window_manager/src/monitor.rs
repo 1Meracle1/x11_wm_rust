@@ -190,16 +190,31 @@ impl Monitor {
         let avail_rect = self
             .rect
             .available_rect_after_adding_rects(self.docked.rect_iter());
-        let focused_workspace = self.workspaces.get_mut(self.focused_workspace_idx).unwrap();
         match direction {
-            Direction::Left => {
-                focused_workspace.handle_change_focus_window_left(conn, config, &avail_rect)
+            Direction::Left => self
+                .workspaces
+                .get_mut(self.focused_workspace_idx)
+                .unwrap()
+                .handle_change_focus_window_left(conn, config, &avail_rect),
+            Direction::Right => self
+                .workspaces
+                .get_mut(self.focused_workspace_idx)
+                .unwrap()
+                .handle_change_focus_window_right(conn, config, &avail_rect),
+            Direction::Up => {
+                let focused_workspace_id =
+                    self.workspaces.get(self.focused_workspace_idx).unwrap().id;
+                if focused_workspace_id > 1 {
+                    self.handle_switch_to_workspace(conn, config, focused_workspace_id - 1);
+                }
             }
-            Direction::Right => {
-                focused_workspace.handle_change_focus_window_right(conn, config, &avail_rect)
+            Direction::Down => {
+                let focused_workspace_id =
+                    self.workspaces.get(self.focused_workspace_idx).unwrap().id;
+                if focused_workspace_id < 9 {
+                    self.handle_switch_to_workspace(conn, config, focused_workspace_id + 1);
+                }
             }
-            Direction::Up => todo!(),
-            Direction::Down => todo!(),
         };
         conn.flush();
     }
@@ -209,14 +224,47 @@ impl Monitor {
         let avail_rect = self
             .rect
             .available_rect_after_adding_rects(self.docked.rect_iter());
-        let focused_workspace = self.workspaces.get_mut(self.focused_workspace_idx).unwrap();
         match direction {
-            Direction::Left => focused_workspace.handle_move_window_left(conn, config, &avail_rect),
-            Direction::Right => {
-                focused_workspace.handle_move_window_right(conn, config, &avail_rect)
+            Direction::Left => self
+                .workspaces
+                .get_mut(self.focused_workspace_idx)
+                .unwrap()
+                .handle_move_window_left(conn, config, &avail_rect),
+            Direction::Right => self
+                .workspaces
+                .get_mut(self.focused_workspace_idx)
+                .unwrap()
+                .handle_move_window_right(conn, config, &avail_rect),
+            Direction::Up => {
+                let focused_workspace_id = self
+                    .workspaces
+                    .get_mut(self.focused_workspace_idx)
+                    .unwrap()
+                    .id;
+                if focused_workspace_id > 1 {
+                    self.handle_move_focused_window_to_workspace(
+                        conn,
+                        config,
+                        focused_workspace_id - 1,
+                        true,
+                    );
+                }
             }
-            Direction::Up => todo!(),
-            Direction::Down => todo!(),
+            Direction::Down => {
+                let focused_workspace_id = self
+                    .workspaces
+                    .get_mut(self.focused_workspace_idx)
+                    .unwrap()
+                    .id;
+                if focused_workspace_id < 9 {
+                    self.handle_move_focused_window_to_workspace(
+                        conn,
+                        config,
+                        focused_workspace_id + 1,
+                        true,
+                    );
+                }
+            }
         };
         conn.flush();
     }
@@ -302,6 +350,7 @@ impl Monitor {
         conn: &Connection,
         config: &Config,
         workspace_id: u32,
+        switch_to_new_workspace: bool,
     ) {
         let focused_workspace_id = self.workspaces.get(self.focused_workspace_idx).unwrap().id;
         trace!(
@@ -314,33 +363,23 @@ impl Monitor {
         let avail_rect = self
             .rect
             .available_rect_after_adding_rects(self.docked.rect_iter());
-
-        if config.switch_to_workspace_on_focused_window_moved {
-            let hide_below = workspace_id < focused_workspace_id;
-            self.workspaces
-                .get_mut(self.focused_workspace_idx)
-                .unwrap()
-                .hide_all_windows(&avail_rect, conn, config, hide_below);
-        }
-
-        let new_focused_workspace_idx = if let Some((idx, _)) = self
-            .workspaces
-            .iter()
-            .enumerate()
-            .find(|(_, w)| w.id == workspace_id)
-        {
-            idx
-        } else {
-            self.workspaces.push(Workspace::new(workspace_id, false));
-            self.workspaces.len() - 1
-        };
-
         if let Some((window, rect, window_type)) = self
             .workspaces
             .get_mut(self.focused_workspace_idx)
             .unwrap()
             .pop_focused_window(&avail_rect, conn, config)
         {
+            let new_focused_workspace_idx = if let Some((idx, _)) = self
+                .workspaces
+                .iter()
+                .enumerate()
+                .find(|(_, w)| w.id == workspace_id)
+            {
+                idx
+            } else {
+                self.workspaces.push(Workspace::new(workspace_id, false));
+                self.workspaces.len() - 1
+            };
             match window_type {
                 WindowType::Normal => {
                     self.workspaces
@@ -356,17 +395,24 @@ impl Monitor {
                 }
                 WindowType::Docked => todo!(),
             }
+            if switch_to_new_workspace {
+                self.workspaces
+                    .get_mut(self.focused_workspace_idx)
+                    .unwrap()
+                    .hide_all_windows(
+                        &avail_rect,
+                        conn,
+                        config,
+                        workspace_id < focused_workspace_id,
+                    );
+                self.focused_workspace_idx = new_focused_workspace_idx;
+                self.workspaces
+                    .get_mut(self.focused_workspace_idx)
+                    .unwrap()
+                    .show_all_windows(&avail_rect, conn, config);
+            }
+            conn.flush();
         }
-
-        if config.switch_to_workspace_on_focused_window_moved {
-            self.focused_workspace_idx = new_focused_workspace_idx;
-            self.workspaces
-                .get_mut(self.focused_workspace_idx)
-                .unwrap()
-                .show_all_windows(&avail_rect, conn, config);
-        }
-
-        conn.flush();
     }
 
     pub fn handle_kill_focused_window(&mut self, conn: &Connection, config: &Config) {

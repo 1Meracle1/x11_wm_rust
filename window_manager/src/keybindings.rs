@@ -481,7 +481,12 @@ pub fn handle_key_press(
                     monitor.handle_switch_to_workspace(conn, config, *workspace_id)
                 }
                 KeybindingAction::MoveFocusedWindowToWorkspace(workspace_id) => {
-                    monitor.handle_move_focused_window_to_workspace(conn, config, *workspace_id);
+                    monitor.handle_move_focused_window_to_workspace(
+                        conn,
+                        config,
+                        *workspace_id,
+                        config.switch_to_workspace_on_focused_window_moved,
+                    );
                 }
                 KeybindingAction::KillFocusedWindow => {
                     monitor.handle_kill_focused_window(conn, config)
