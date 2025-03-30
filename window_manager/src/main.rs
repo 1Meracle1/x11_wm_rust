@@ -7,8 +7,8 @@ use log::{error, info, trace, warn};
 use monitor::Monitor;
 use x11_bindings::{
     bindings::{
-        XCB_CW_EVENT_MASK, XCB_EVENT_MASK_POINTER_MOTION, XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY,
-        XCB_EVENT_MASK_SUBSTRUCTURE_REDIRECT,
+        XCB_BUTTON_MASK_1, XCB_CW_EVENT_MASK, XCB_EVENT_MASK_POINTER_MOTION,
+        XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY, XCB_EVENT_MASK_SUBSTRUCTURE_REDIRECT,
     },
     connection::{self, Connection},
 };
@@ -41,9 +41,7 @@ fn main() {
     if let Err(err) = conn.change_window_attrs_checked(
         conn.root(),
         XCB_CW_EVENT_MASK,
-        XCB_EVENT_MASK_SUBSTRUCTURE_REDIRECT
-            | XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY
-            | XCB_EVENT_MASK_POINTER_MOTION,
+        XCB_EVENT_MASK_SUBSTRUCTURE_REDIRECT | XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY,
     ) {
         error!("Failed to acquire control over the root window.");
         error!("Error details: {}", err);
@@ -98,18 +96,22 @@ fn main() {
                     connection::XcbEvents::FocusOut { window, mode } => {
                         monitor.handle_focus_out(&conn, &config, window, mode)
                     }
-                    connection::XcbEvents::MotionNotify { x: _, y: _ } => {
-                        // if monitor.cursor_position_within(x, y) {
-                        //     monitor.set_focused_window_under_cursor(x, y, &conn, &config);
-                        // }
-                        // trace!("MotionNotify x: {}, y: {}", x, y)
-                    }
                     connection::XcbEvents::EnterNotify { window } => {
                         trace!("EnterNotify: window: {}", window);
                         monitor.handle_enter_notify(window, &conn, &config);
                     }
                     connection::XcbEvents::LeaveNotify { window } => {
                         trace!("LeaveNotify window: {}", window);
+                    }
+                    connection::XcbEvents::ButtonPress { x: _, y: _ } => {}
+                    connection::XcbEvents::ButtonRelease { x: _, y: _ } => {}
+                    connection::XcbEvents::MotionNotify {
+                        x,
+                        y,
+                        window,
+                        state,
+                    } => {
+                        monitor.handle_motion_notify(x, y, window, state, &conn, &config);
                     }
                 },
                 Err(error) => warn!("Error event: {:?}", error),

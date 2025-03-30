@@ -114,16 +114,19 @@ impl WindowsCollection {
 
     #[inline]
     pub fn index_rect(&self, index: usize) -> &Rect {
+        assert!(index < self.rects.len());
         &self.rects[index]
     }
 
     #[inline]
     pub fn index_window(&self, index: usize) -> xcb_window_t {
+        assert!(index < self.windows.len());
         self.windows[index]
     }
 
     #[inline]
     pub fn update_rect_at(&mut self, index: usize, new_rect: Rect) {
+        assert!(index < self.rects.len());
         self.rects[index] = new_rect;
     }
 

@@ -1,6 +1,8 @@
 #!/bin/fish
 
 #RUSTFLAGS="-Zsanitizer=address" cargo build || exit
+export RUST_BACKTRACE=1
+
 cargo build -p window_manager || exit
 
 set XEPHYR $(whereis -b Xephyr | sed -E 's/^.*: ?//')

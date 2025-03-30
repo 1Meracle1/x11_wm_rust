@@ -2107,12 +2107,12 @@ const _: () = {
         [::std::mem::offset_of!(xcb_key_press_event_t, pad0) - 31usize];
 };
 pub type xcb_key_release_event_t = xcb_key_press_event_t;
-pub const xcb_button_mask_t_XCB_BUTTON_MASK_1: xcb_button_mask_t = 256;
-pub const xcb_button_mask_t_XCB_BUTTON_MASK_2: xcb_button_mask_t = 512;
-pub const xcb_button_mask_t_XCB_BUTTON_MASK_3: xcb_button_mask_t = 1024;
-pub const xcb_button_mask_t_XCB_BUTTON_MASK_4: xcb_button_mask_t = 2048;
-pub const xcb_button_mask_t_XCB_BUTTON_MASK_5: xcb_button_mask_t = 4096;
-pub const xcb_button_mask_t_XCB_BUTTON_MASK_ANY: xcb_button_mask_t = 32768;
+pub const XCB_BUTTON_MASK_1: xcb_button_mask_t = 256;
+pub const XCB_BUTTON_MASK_2: xcb_button_mask_t = 512;
+pub const XCB_BUTTON_MASK_3: xcb_button_mask_t = 1024;
+pub const XCB_BUTTON_MASK_4: xcb_button_mask_t = 2048;
+pub const XCB_BUTTON_MASK_5: xcb_button_mask_t = 4096;
+pub const XCB_BUTTON_MASK_ANY: xcb_button_mask_t = 32768;
 pub type xcb_button_mask_t = ::std::os::raw::c_uint;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]

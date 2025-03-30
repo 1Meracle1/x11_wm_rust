@@ -4,19 +4,20 @@ use base::Rect;
 
 use crate::bindings::{
     XCB_ACCESS, XCB_ALLOC, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING, XCB_ATOM_WM_CLASS,
-    XCB_ATOM_WM_NORMAL_HINTS, XCB_CLIENT_MESSAGE, XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH,
-    XCB_CONFIG_WINDOW_HEIGHT, XCB_CONFIG_WINDOW_STACK_MODE, XCB_CONFIG_WINDOW_WIDTH,
-    XCB_CONFIG_WINDOW_X, XCB_CONFIG_WINDOW_Y, XCB_COORD_MODE_ORIGIN, XCB_COPY_FROM_PARENT,
-    XCB_CURRENT_TIME, XCB_CURSOR, XCB_CW_CURSOR, XCB_DRAWABLE, XCB_ENTER_NOTIFY,
-    XCB_EVENT_MASK_NO_EVENT, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT,
-    XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC, XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP,
-    XCB_IMAGE_FORMAT_Z_PIXMAP, XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION,
-    XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS, XCB_LEAVE_NOTIFY, XCB_LENGTH, XCB_MAP_REQUEST,
-    XCB_MATCH, XCB_MOTION_NOTIFY, XCB_NAME, XCB_NONE, XCB_PIXMAP, XCB_PROP_MODE_REPLACE,
-    XCB_SHAPE_SK_BOUNDING, XCB_SHAPE_SO_SET, XCB_STACK_MODE_ABOVE, XCB_WINDOW,
-    XCB_WINDOW_CLASS_INPUT_OUTPUT, XCloseDisplay, XDefaultRootWindow, XDefineCursor, XDisplay,
-    XGetXCBConnection, XOpenDisplay, XcursorFilenameLoadCursor, xcb_arc_t, xcb_atom_t,
-    xcb_change_gc, xcb_change_property, xcb_change_window_attributes,
+    XCB_ATOM_WM_NORMAL_HINTS, XCB_BUTTON_PRESS, XCB_BUTTON_RELEASE, XCB_CLIENT_MESSAGE,
+    XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH, XCB_CONFIG_WINDOW_HEIGHT,
+    XCB_CONFIG_WINDOW_STACK_MODE, XCB_CONFIG_WINDOW_WIDTH, XCB_CONFIG_WINDOW_X,
+    XCB_CONFIG_WINDOW_Y, XCB_COORD_MODE_ORIGIN, XCB_COPY_FROM_PARENT, XCB_CURRENT_TIME, XCB_CURSOR,
+    XCB_CW_CURSOR, XCB_DRAWABLE, XCB_ENTER_NOTIFY, XCB_EVENT_MASK_NO_EVENT, XCB_FOCUS_IN,
+    XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT, XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC,
+    XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP, XCB_IMAGE_FORMAT_Z_PIXMAP,
+    XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION, XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS,
+    XCB_LEAVE_NOTIFY, XCB_LENGTH, XCB_MAP_REQUEST, XCB_MATCH, XCB_MOTION_NOTIFY, XCB_NAME,
+    XCB_NONE, XCB_PIXMAP, XCB_PROP_MODE_REPLACE, XCB_SHAPE_SK_BOUNDING, XCB_SHAPE_SO_SET,
+    XCB_STACK_MODE_ABOVE, XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT, XCloseDisplay,
+    XDefaultRootWindow, XDefineCursor, XDisplay, XGetXCBConnection, XOpenDisplay,
+    XcursorFilenameLoadCursor, xcb_arc_t, xcb_atom_t, xcb_button_press_event_t,
+    xcb_button_release_event_t, xcb_change_gc, xcb_change_property, xcb_change_window_attributes,
     xcb_change_window_attributes_checked, xcb_client_message_data_t, xcb_client_message_event_t,
     xcb_configure_window, xcb_configure_window_checked, xcb_connection_has_error, xcb_connection_t,
     xcb_create_cursor, xcb_create_cursor_checked, xcb_create_gc, xcb_create_gc_checked,
@@ -1386,12 +1387,22 @@ pub enum XcbEvents {
     MotionNotify {
         x: i32,
         y: i32,
+        window: xcb_window_t,
+        state: u32,
     },
     EnterNotify {
         window: xcb_window_t,
     },
     LeaveNotify {
         window: xcb_window_t,
+    },
+    ButtonPress {
+        x: i32,
+        y: i32,
+    },
+    ButtonRelease {
+        x: i32,
+        y: i32,
     },
 }
 
@@ -1450,7 +1461,26 @@ impl Connection {
             }
             XCB_MOTION_NOTIFY => {
                 let event = generic_event as *mut xcb_motion_notify_event_t;
+                // println!("{:#?}", unsafe { *event });
                 Some(Ok(XcbEvents::MotionNotify {
+                    x: unsafe { *event }.event_x as i32,
+                    y: unsafe { *event }.event_y as i32,
+                    window: unsafe { *event }.event,
+                    state: unsafe { *event }.state as u32,
+                }))
+            }
+            XCB_BUTTON_PRESS => {
+                let event = generic_event as *mut xcb_button_press_event_t;
+                println!("XCB_BUTTON_PRESS: {:#?}", unsafe { *event });
+                Some(Ok(XcbEvents::ButtonPress {
+                    x: unsafe { *event }.event_x as i32,
+                    y: unsafe { *event }.event_y as i32,
+                }))
+            }
+            XCB_BUTTON_RELEASE => {
+                let event = generic_event as *mut xcb_button_release_event_t;
+                println!("XCB_BUTTON_RELEASE: {:#?}", unsafe { *event });
+                Some(Ok(XcbEvents::ButtonRelease {
                     x: unsafe { *event }.event_x as i32,
                     y: unsafe { *event }.event_y as i32,
                 }))
