@@ -81,8 +81,8 @@ impl Workspace {
             let mut adjusted_rect = rect.clone();
             for other_rect in self.floating.rect_iter() {
                 if other_rect.x == rect.x && other_rect.y == rect.y {
-                    adjusted_rect.x += 10;
-                    adjusted_rect.y += 10;
+                    adjusted_rect.x += 20;
+                    adjusted_rect.y += 20;
 
                     if adjusted_rect.x
                         + (adjusted_rect.width + config.border_size + config.outer_gap_horiz) as i32
@@ -1024,8 +1024,10 @@ impl Workspace {
 #[derive(Debug)]
 struct DraggedWindow {
     window: xcb_window_t,
-    x: i32,
-    y: i32,
+    index: usize,
+    window_type: WindowType,
+    offset_x: i32,
+    offset_y: i32,
 }
 
 impl Workspace {
@@ -1040,11 +1042,11 @@ impl Workspace {
     ) {
         let is_alt_pressed = (state as u32 & XCB_MOD_MASK_1) == XCB_MOD_MASK_1;
         if is_alt_pressed {
-            if let Some(window_type) = {
-                if self.floating.index_of(window).is_some() {
-                    Some(WindowType::Normal)
-                } else if self.normal.index_of(window).is_some() {
-                    Some(WindowType::Floating)
+            if let Some((window_type, index)) = {
+                if let Some(index) = self.floating.index_of(window) {
+                    Some((WindowType::Floating, index))
+                } else if let Some(index) = self.normal.index_of(window) {
+                    Some((WindowType::Normal, index))
                 } else {
                     None
                 }
@@ -1058,6 +1060,8 @@ impl Workspace {
                     if let Err(err) = conn.grab_pointer(
                         XCB_EVENT_MASK_POINTER_MOTION | XCB_EVENT_MASK_BUTTON_RELEASE,
                         window,
+                        window,
+                        // x11_bindings::bindings::XCB_NONE,
                     ) {
                         warn!(
                             "failed to grab pointer to drag window {}, err: {}, is_alt_pressed: {}",
@@ -1068,7 +1072,17 @@ impl Workspace {
                             "start dragging window {}, is_alt_pressed: {}",
                             window, is_alt_pressed
                         );
-                        self.dragged_window = Some(DraggedWindow { window, x, y });
+                        let window_x = self.floating.index_rect(index).x;
+                        let window_y = self.floating.index_rect(index).y;
+                        let offset_x = x - window_x;
+                        let offset_y = y - window_y;
+                        self.dragged_window = Some(DraggedWindow {
+                            window,
+                            index,
+                            window_type,
+                            offset_x,
+                            offset_y,
+                        });
                     }
                     conn.flush();
                 }
@@ -1102,13 +1116,16 @@ impl Workspace {
             "MotionNotify x: {}, y: {}, window: {}, is_alt_pressed: {}, left_button: {}",
             x, y, window, is_alt_pressed, is_left_button_pressed
         );
-        // if window != conn.root()
-        // {
-        //     if self.focused_type == WindowType::Floating {
-
-        //     }
-        //     conn.flush();
-        // }
+        if let Some(dragged_window) = &self.dragged_window {
+            if dragged_window.window == window {
+                let mut new_rect = self.floating.index_rect(dragged_window.index).clone();
+                new_rect.x += x - dragged_window.offset_x;
+                new_rect.y += y - dragged_window.offset_y;
+                *self.floating.index_rect_mut(dragged_window.index) = new_rect.clone();
+                conn.window_configure(window, &new_rect, config.border_size);
+                conn.flush();
+            }
+        }
     }
 
     fn reset_dragged_window_state(&mut self, conn: &Connection) {

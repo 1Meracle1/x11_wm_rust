@@ -3,7 +3,7 @@ use std::{collections::HashMap, ffi::CString, mem::MaybeUninit};
 use base::Rect;
 
 use crate::bindings::{
-    XCB_ACCESS, XCB_ALLOC, XCB_ALLOW_REPLAY_KEYBOARD, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING,
+    XCB_ACCESS, XCB_ALLOC, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING,
     XCB_ATOM_WM_CLASS, XCB_ATOM_WM_NORMAL_HINTS, XCB_BUTTON_PRESS, XCB_BUTTON_RELEASE,
     XCB_CLIENT_MESSAGE, XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH, XCB_CONFIG_WINDOW_HEIGHT,
     XCB_CONFIG_WINDOW_STACK_MODE, XCB_CONFIG_WINDOW_WIDTH, XCB_CONFIG_WINDOW_X,
@@ -244,13 +244,14 @@ impl Connection {
     pub fn grab_pointer(
         &self,
         mask_pass_through: xcb_event_mask_t,
+        window: xcb_window_t,
         window_stay_in: xcb_window_t,
     ) -> Result<(), ConnectionError> {
         let cookie = unsafe {
             xcb_grab_pointer(
                 self.conn,
                 0 as u8, /* get all pointer events specified by the following mask */
-                self.root(),
+                window,
                 mask_pass_through as u16, /* which events to let through */
                 XCB_GRAB_MODE_ASYNC as u8,
                 XCB_GRAB_MODE_ASYNC as u8,
