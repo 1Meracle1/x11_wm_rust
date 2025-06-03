@@ -5048,14 +5048,14 @@ const _: () = {
     ["Offset of field: xcb_ungrab_key_request_t::pad0"]
         [::std::mem::offset_of!(xcb_ungrab_key_request_t, pad0) - 10usize];
 };
-pub const xcb_allow_t_XCB_ALLOW_ASYNC_POINTER: xcb_allow_t = 0;
-pub const xcb_allow_t_XCB_ALLOW_SYNC_POINTER: xcb_allow_t = 1;
-pub const xcb_allow_t_XCB_ALLOW_REPLAY_POINTER: xcb_allow_t = 2;
-pub const xcb_allow_t_XCB_ALLOW_ASYNC_KEYBOARD: xcb_allow_t = 3;
-pub const xcb_allow_t_XCB_ALLOW_SYNC_KEYBOARD: xcb_allow_t = 4;
-pub const xcb_allow_t_XCB_ALLOW_REPLAY_KEYBOARD: xcb_allow_t = 5;
-pub const xcb_allow_t_XCB_ALLOW_ASYNC_BOTH: xcb_allow_t = 6;
-pub const xcb_allow_t_XCB_ALLOW_SYNC_BOTH: xcb_allow_t = 7;
+pub const XCB_ALLOW_ASYNC_POINTER: xcb_allow_t = 0;
+pub const XCB_ALLOW_SYNC_POINTER: xcb_allow_t = 1;
+pub const XCB_ALLOW_REPLAY_POINTER: xcb_allow_t = 2;
+pub const XCB_ALLOW_ASYNC_KEYBOARD: xcb_allow_t = 3;
+pub const XCB_ALLOW_SYNC_KEYBOARD: xcb_allow_t = 4;
+pub const XCB_ALLOW_REPLAY_KEYBOARD: xcb_allow_t = 5;
+pub const XCB_ALLOW_ASYNC_BOTH: xcb_allow_t = 6;
+pub const XCB_ALLOW_SYNC_BOTH: xcb_allow_t = 7;
 pub type xcb_allow_t = ::std::os::raw::c_uint;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]

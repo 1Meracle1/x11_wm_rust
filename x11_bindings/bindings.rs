@@ -1698,10 +1698,12 @@ pub struct __pthread_cond_s {
     pub __g1_orig_size: ::std::os::raw::c_uint,
     pub __wrefs: ::std::os::raw::c_uint,
     pub __g_signals: [::std::os::raw::c_uint; 2usize],
+    pub __unused_initialized_1: ::std::os::raw::c_uint,
+    pub __unused_initialized_2: ::std::os::raw::c_uint,
 }
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
-    ["Size of __pthread_cond_s"][::std::mem::size_of::<__pthread_cond_s>() - 40usize];
+    ["Size of __pthread_cond_s"][::std::mem::size_of::<__pthread_cond_s>() - 48usize];
     ["Alignment of __pthread_cond_s"][::std::mem::align_of::<__pthread_cond_s>() - 8usize];
     ["Offset of field: __pthread_cond_s::__wseq"]
         [::std::mem::offset_of!(__pthread_cond_s, __wseq) - 0usize];
@@ -1715,6 +1717,10 @@ const _: () = {
         [::std::mem::offset_of!(__pthread_cond_s, __wrefs) - 28usize];
     ["Offset of field: __pthread_cond_s::__g_signals"]
         [::std::mem::offset_of!(__pthread_cond_s, __g_signals) - 32usize];
+    ["Offset of field: __pthread_cond_s::__unused_initialized_1"]
+        [::std::mem::offset_of!(__pthread_cond_s, __unused_initialized_1) - 40usize];
+    ["Offset of field: __pthread_cond_s::__unused_initialized_2"]
+        [::std::mem::offset_of!(__pthread_cond_s, __unused_initialized_2) - 44usize];
 };
 pub type __tss_t = ::std::os::raw::c_uint;
 pub type __thrd_t = ::std::os::raw::c_ulong;

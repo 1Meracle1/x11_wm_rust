@@ -3,14 +3,13 @@ use env_logger::Env;
 use keybindings::{
     execute_command_from_str, handle_key_press, keybindings_from_config, keybindings_grab,
 };
-use log::{error, info, trace, warn};
+use log::{error, info, warn};
 use monitor::Monitor;
 use x11_bindings::{
     bindings::{
-        XCB_BUTTON_MASK_1, XCB_CW_EVENT_MASK, XCB_EVENT_MASK_POINTER_MOTION,
-        XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY, XCB_EVENT_MASK_SUBSTRUCTURE_REDIRECT,
+        XCB_CW_EVENT_MASK, XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY, XCB_EVENT_MASK_SUBSTRUCTURE_REDIRECT,
     },
-    connection::{self, Connection},
+    connection::{self, Connection, MouseButton},
 };
 
 mod config;
@@ -59,19 +58,8 @@ fn main() {
     keybindings_grab(&keybindings, &conn);
     // trace!("keybindings: {:#?}", keybindings);
 
-    conn.grab_pointer(XCB_EVENT_MASK_POINTER_MOTION);
-    if let Some(cursor_filepath) = &config.custom_cursor_filepath {
-        if let Err(err) = conn.set_cursor_filename(cursor_filepath.as_str()) {
-            error!(
-                "failed to set cursor from filename: {}, error: {:?}",
-                cursor_filepath, err
-            );
-            trace!("falling back to default left_ptr cursor to the root window");
-            conn.change_cursor("left_ptr");
-        }
-    } else {
-        conn.change_cursor("left_ptr");
-    }
+    conn.change_cursor("left_ptr");
+    conn.grab_button(MouseButton::Left);
 
     conn.flush();
 
@@ -97,14 +85,15 @@ fn main() {
                         monitor.handle_focus_out(&conn, &config, window, mode)
                     }
                     connection::XcbEvents::EnterNotify { window } => {
-                        trace!("EnterNotify: window: {}", window);
                         monitor.handle_enter_notify(window, &conn, &config);
                     }
-                    connection::XcbEvents::LeaveNotify { window } => {
-                        trace!("LeaveNotify window: {}", window);
+                    connection::XcbEvents::LeaveNotify { window: _ } => {}
+                    connection::XcbEvents::ButtonPress { x, y, window, state } => {
+                        monitor.handle_button_press(x, y, window, state, &conn, &config);
                     }
-                    connection::XcbEvents::ButtonPress { x: _, y: _ } => {}
-                    connection::XcbEvents::ButtonRelease { x: _, y: _ } => {}
+                    connection::XcbEvents::ButtonRelease { x: _, y: _ } => {
+                        monitor.handle_button_release(&conn, &config);
+                    }
                     connection::XcbEvents::MotionNotify {
                         x,
                         y,

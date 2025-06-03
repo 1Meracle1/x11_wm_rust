@@ -3,21 +3,22 @@ use std::{collections::HashMap, ffi::CString, mem::MaybeUninit};
 use base::Rect;
 
 use crate::bindings::{
-    XCB_ACCESS, XCB_ALLOC, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING, XCB_ATOM_WM_CLASS,
-    XCB_ATOM_WM_NORMAL_HINTS, XCB_BUTTON_PRESS, XCB_BUTTON_RELEASE, XCB_CLIENT_MESSAGE,
-    XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH, XCB_CONFIG_WINDOW_HEIGHT,
+    XCB_ACCESS, XCB_ALLOC, XCB_ALLOW_REPLAY_KEYBOARD, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING,
+    XCB_ATOM_WM_CLASS, XCB_ATOM_WM_NORMAL_HINTS, XCB_BUTTON_PRESS, XCB_BUTTON_RELEASE,
+    XCB_CLIENT_MESSAGE, XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH, XCB_CONFIG_WINDOW_HEIGHT,
     XCB_CONFIG_WINDOW_STACK_MODE, XCB_CONFIG_WINDOW_WIDTH, XCB_CONFIG_WINDOW_X,
     XCB_CONFIG_WINDOW_Y, XCB_COORD_MODE_ORIGIN, XCB_COPY_FROM_PARENT, XCB_CURRENT_TIME, XCB_CURSOR,
-    XCB_CW_CURSOR, XCB_DRAWABLE, XCB_ENTER_NOTIFY, XCB_EVENT_MASK_NO_EVENT, XCB_FOCUS_IN,
-    XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT, XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC,
-    XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP, XCB_IMAGE_FORMAT_Z_PIXMAP,
-    XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION, XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS,
-    XCB_LEAVE_NOTIFY, XCB_LENGTH, XCB_MAP_REQUEST, XCB_MATCH, XCB_MOTION_NOTIFY, XCB_NAME,
-    XCB_NONE, XCB_PIXMAP, XCB_PROP_MODE_REPLACE, XCB_SHAPE_SK_BOUNDING, XCB_SHAPE_SO_SET,
-    XCB_STACK_MODE_ABOVE, XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT, XCloseDisplay,
-    XDefaultRootWindow, XDefineCursor, XDisplay, XGetXCBConnection, XOpenDisplay,
-    XcursorFilenameLoadCursor, xcb_arc_t, xcb_atom_t, xcb_button_press_event_t,
-    xcb_button_release_event_t, xcb_change_gc, xcb_change_property, xcb_change_window_attributes,
+    XCB_CW_CURSOR, XCB_DRAWABLE, XCB_ENTER_NOTIFY, XCB_EVENT_MASK_BUTTON_PRESS,
+    XCB_EVENT_MASK_NO_EVENT, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT,
+    XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC, XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP,
+    XCB_IMAGE_FORMAT_Z_PIXMAP, XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION,
+    XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS, XCB_LEAVE_NOTIFY, XCB_LENGTH, XCB_MAP_REQUEST,
+    XCB_MATCH, XCB_MOD_MASK_ANY, XCB_MOTION_NOTIFY, XCB_NAME, XCB_NONE, XCB_PIXMAP,
+    XCB_PROP_MODE_REPLACE, XCB_SHAPE_SK_BOUNDING, XCB_SHAPE_SO_SET, XCB_STACK_MODE_ABOVE,
+    XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT, XCloseDisplay, XDefaultRootWindow, XDefineCursor,
+    XDisplay, XGetXCBConnection, XOpenDisplay, XcursorFilenameLoadCursor, xcb_allow_events,
+    xcb_allow_t, xcb_arc_t, xcb_atom_t, xcb_button_press_event_t, xcb_button_release_event_t,
+    xcb_change_gc, xcb_change_property, xcb_change_window_attributes,
     xcb_change_window_attributes_checked, xcb_client_message_data_t, xcb_client_message_event_t,
     xcb_configure_window, xcb_configure_window_checked, xcb_connection_has_error, xcb_connection_t,
     xcb_create_cursor, xcb_create_cursor_checked, xcb_create_gc, xcb_create_gc_checked,
@@ -32,15 +33,16 @@ use crate::bindings::{
     xcb_focus_out_event_t, xcb_free_gc, xcb_free_pixmap, xcb_gc_t, xcb_gcontext_t, xcb_generate_id,
     xcb_generic_error_t, xcb_generic_event_t, xcb_get_property, xcb_get_property_reply,
     xcb_get_property_value, xcb_get_property_value_length, xcb_get_setup,
-    xcb_get_window_attributes, xcb_get_window_attributes_reply, xcb_grab_key, xcb_grab_pointer,
-    xcb_icccm_set_wm_normal_hints, xcb_image_create, xcb_image_create_native, xcb_image_destroy,
-    xcb_image_put, xcb_intern_atom, xcb_intern_atom_cookie_t, xcb_intern_atom_reply,
-    xcb_key_press_event_t, xcb_keycode_t, xcb_leave_notify_event_t, xcb_map_request_event_t,
-    xcb_map_window, xcb_mod_mask_t, xcb_motion_notify_event_t, xcb_notify_mode_t, xcb_pixmap_t,
-    xcb_point_t, xcb_poll_for_event, xcb_poly_fill_arc, xcb_poly_fill_rectangle, xcb_poly_point,
-    xcb_put_image, xcb_rectangle_t, xcb_request_check, xcb_screen_t, xcb_send_event,
-    xcb_set_input_focus, xcb_setup_roots_iterator, xcb_shape_mask, xcb_size_hints_t,
-    xcb_unmap_window, xcb_wait_for_event, xcb_window_t,
+    xcb_get_window_attributes, xcb_get_window_attributes_reply, xcb_grab_button, xcb_grab_key,
+    xcb_grab_pointer, xcb_grab_pointer_reply, xcb_icccm_set_wm_normal_hints, xcb_image_create,
+    xcb_image_create_native, xcb_image_destroy, xcb_image_put, xcb_intern_atom,
+    xcb_intern_atom_cookie_t, xcb_intern_atom_reply, xcb_key_press_event_t, xcb_keycode_t,
+    xcb_leave_notify_event_t, xcb_map_request_event_t, xcb_map_window, xcb_mod_mask_t,
+    xcb_motion_notify_event_t, xcb_notify_mode_t, xcb_pixmap_t, xcb_point_t, xcb_poll_for_event,
+    xcb_poly_fill_arc, xcb_poly_fill_rectangle, xcb_poly_point, xcb_put_image, xcb_rectangle_t,
+    xcb_request_check, xcb_screen_t, xcb_send_event, xcb_set_input_focus, xcb_setup_roots_iterator,
+    xcb_shape_mask, xcb_size_hints_t, xcb_ungrab_pointer, xcb_unmap_window, xcb_wait_for_event,
+    xcb_window_t,
 };
 
 #[derive(Debug)]
@@ -50,6 +52,7 @@ pub enum ConnectionError {
     UnableToInitEwmh,
     UnableToSetSupportedEwmhAtoms,
     UnableToChangeWindowAttrs((xcb_window_t, String)),
+    UnableToGrabPointer((xcb_window_t, String)),
 }
 
 impl std::fmt::Display for ConnectionError {
@@ -68,6 +71,11 @@ impl std::fmt::Display for ConnectionError {
             ConnectionError::UnableToSetSupportedEwmhAtoms => {
                 write!(f, "Unable to set supported EWMH atoms")
             }
+            ConnectionError::UnableToGrabPointer((window, err)) => write!(
+                f,
+                "Unable to grab pointer for window {}, error {}",
+                window, err
+            ),
         }
     }
 }
@@ -233,21 +241,45 @@ impl Connection {
         };
     }
 
-    #[allow(dead_code)]
-    pub fn grab_pointer(&self, mask: xcb_event_mask_t) {
-        unsafe {
+    pub fn grab_pointer(
+        &self,
+        mask_pass_through: xcb_event_mask_t,
+        window_stay_in: xcb_window_t,
+    ) -> Result<(), ConnectionError> {
+        let cookie = unsafe {
             xcb_grab_pointer(
                 self.conn,
-                1 as u8,
+                0 as u8, /* get all pointer events specified by the following mask */
                 self.root(),
-                mask as u16,
+                mask_pass_through as u16, /* which events to let through */
                 XCB_GRAB_MODE_ASYNC as u8,
                 XCB_GRAB_MODE_ASYNC as u8,
-                XCB_NONE,
+                window_stay_in, /* confine_to = in which window should the cursor stay */
                 XCB_NONE,
                 XCB_CURRENT_TIME,
             )
         };
+        let mut error: *mut xcb_generic_error_t = std::ptr::null_mut();
+        let reply = unsafe { xcb_grab_pointer_reply(self.conn, cookie, &mut error) };
+        _ = reply;
+        if !error.is_null() {
+            Err(ConnectionError::UnableToGrabPointer((
+                window_stay_in,
+                format!("{:?}", error),
+            )))
+        } else {
+            Ok(())
+        }
+    }
+
+    #[inline]
+    pub fn ungrab_pointer(&self) {
+        unsafe { xcb_ungrab_pointer(self.conn, XCB_CURRENT_TIME) };
+    }
+
+    #[allow(dead_code)]
+    pub fn allow_events(&self, mask: xcb_allow_t) {
+        unsafe { xcb_allow_events(self.conn, mask as u8, XCB_CURRENT_TIME) };
     }
 
     #[allow(dead_code)]
@@ -602,19 +634,16 @@ impl Connection {
         atoms
     }
 
-    #[allow(dead_code)]
     #[inline]
     pub fn map_window(&self, window: xcb_window_t) {
         unsafe { xcb_map_window(self.conn, window) };
     }
 
-    #[allow(dead_code)]
     #[inline]
     pub fn unmap_window(&self, window: xcb_window_t) {
         unsafe { xcb_unmap_window(self.conn, window) };
     }
 
-    #[allow(dead_code)]
     #[inline]
     pub fn window_configure(&self, window: xcb_window_t, rect: &Rect, border_width: u32) {
         let values = [
@@ -638,7 +667,6 @@ impl Connection {
         };
     }
 
-    #[allow(dead_code)]
     #[inline]
     pub fn window_raise(&self, window: xcb_window_t) {
         let values = [XCB_STACK_MODE_ABOVE];
@@ -652,7 +680,6 @@ impl Connection {
         };
     }
 
-    #[allow(dead_code)]
     pub fn window_configure_checked(
         &self,
         window: xcb_window_t,
@@ -1212,6 +1239,31 @@ impl Connection {
     }
 }
 
+#[repr(u8)]
+pub enum MouseButton {
+    Left,
+    Right,
+}
+
+impl Connection {
+    pub fn grab_button(&self, mouse_button: MouseButton) {
+        unsafe {
+            xcb_grab_button(
+                self.conn,
+                0,
+                self.root(),
+                XCB_EVENT_MASK_BUTTON_PRESS as u16,
+                XCB_GRAB_MODE_ASYNC as u8,
+                XCB_GRAB_MODE_ASYNC as u8,
+                XCB_NONE,
+                XCB_NONE,
+                mouse_button as u8,
+                XCB_MOD_MASK_ANY as u16,
+            )
+        };
+    }
+}
+
 #[derive(Debug)]
 pub struct XcbError {
     pub error_code: u8,
@@ -1399,6 +1451,8 @@ pub enum XcbEvents {
     ButtonPress {
         x: i32,
         y: i32,
+        window: xcb_window_t,
+        state: u16,
     },
     ButtonRelease {
         x: i32,
@@ -1461,7 +1515,6 @@ impl Connection {
             }
             XCB_MOTION_NOTIFY => {
                 let event = generic_event as *mut xcb_motion_notify_event_t;
-                // println!("{:#?}", unsafe { *event });
                 Some(Ok(XcbEvents::MotionNotify {
                     x: unsafe { *event }.event_x as i32,
                     y: unsafe { *event }.event_y as i32,
@@ -1475,11 +1528,13 @@ impl Connection {
                 Some(Ok(XcbEvents::ButtonPress {
                     x: unsafe { *event }.event_x as i32,
                     y: unsafe { *event }.event_y as i32,
+                    window: unsafe { *event }.child,
+                    state: unsafe { *event }.state,
                 }))
             }
             XCB_BUTTON_RELEASE => {
                 let event = generic_event as *mut xcb_button_release_event_t;
-                println!("XCB_BUTTON_RELEASE: {:#?}", unsafe { *event });
+                // println!("XCB_BUTTON_RELEASE: {:#?}", unsafe { *event });
                 Some(Ok(XcbEvents::ButtonRelease {
                     x: unsafe { *event }.event_x as i32,
                     y: unsafe { *event }.event_y as i32,

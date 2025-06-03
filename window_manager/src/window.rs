@@ -113,20 +113,27 @@ impl WindowsCollection {
     }
 
     #[inline]
+    pub fn index(&self, index: usize) -> (xcb_window_t, &Rect) {
+        (self.windows[index], &self.rects[index])
+    }
+
+    #[inline]
     pub fn index_rect(&self, index: usize) -> &Rect {
-        assert!(index < self.rects.len());
         &self.rects[index]
     }
 
     #[inline]
+    pub fn index_rect_mut(&mut self, index: usize) -> &mut Rect {
+        &mut self.rects[index]
+    }
+
+    #[inline]
     pub fn index_window(&self, index: usize) -> xcb_window_t {
-        assert!(index < self.windows.len());
         self.windows[index]
     }
 
     #[inline]
     pub fn update_rect_at(&mut self, index: usize, new_rect: Rect) {
-        assert!(index < self.rects.len());
         self.rects[index] = new_rect;
     }
 
@@ -138,6 +145,11 @@ impl WindowsCollection {
     #[inline]
     pub fn swap_visibles(&mut self, index_lhs: usize, index_rhs: usize) {
         self.visibles.swap(index_lhs, index_rhs);
+    }
+
+    #[inline]
+    pub fn swap_rects(&mut self, index_lhs: usize, index_rhs: usize) {
+        self.rects.swap(index_lhs, index_rhs);
     }
 
     #[inline]

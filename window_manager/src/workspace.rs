@@ -4,9 +4,9 @@ use base::Rect;
 use log::{trace, warn};
 use x11_bindings::{
     bindings::{
-        XCB_BUTTON_MASK_1, XCB_BUTTON_MASK_3, XCB_CW_BORDER_PIXEL, XCB_CW_EVENT_MASK,
-        XCB_EVENT_MASK_BUTTON_MOTION, XCB_EVENT_MASK_ENTER_WINDOW, XCB_EVENT_MASK_FOCUS_CHANGE,
-        XCB_EVENT_MASK_LEAVE_WINDOW, XCB_MOD_MASK_1, xcb_window_t,
+        XCB_BUTTON_MASK_1, XCB_CW_BORDER_PIXEL, XCB_CW_EVENT_MASK, XCB_EVENT_MASK_BUTTON_MOTION,
+        XCB_EVENT_MASK_BUTTON_RELEASE, XCB_EVENT_MASK_ENTER_WINDOW, XCB_EVENT_MASK_FOCUS_CHANGE,
+        XCB_EVENT_MASK_LEAVE_WINDOW, XCB_EVENT_MASK_POINTER_MOTION, XCB_MOD_MASK_1, xcb_window_t,
     },
     connection::WindowType,
 };
@@ -24,8 +24,8 @@ pub struct Workspace {
     focused_type: WindowType,
     is_visible: bool,
     focused_via_keyboard: bool,
-    motion_active: bool,
     motion_start_pos: (i32, i32),
+    dragged_window: Option<DraggedWindow>,
 }
 
 impl Workspace {
@@ -39,8 +39,8 @@ impl Workspace {
             focused_type: WindowType::Normal,
             is_visible,
             focused_via_keyboard: false,
-            motion_active: false,
             motion_start_pos: (0, 0),
+            dragged_window: None,
         }
     }
 
@@ -79,8 +79,8 @@ impl Workspace {
             self.floating.sort_by_rect_x_asc();
             self.floating.sort_by_rect_y_asc();
             let mut adjusted_rect = rect.clone();
-            for rect in self.floating.rect_iter() {
-                if rect.x == rect.x && rect.y == rect.y {
+            for other_rect in self.floating.rect_iter() {
+                if other_rect.x == rect.x && other_rect.y == rect.y {
                     adjusted_rect.x += 10;
                     adjusted_rect.y += 10;
 
@@ -116,15 +116,16 @@ impl Workspace {
         self.floating.add(window, window_rect, true);
         self.set_focused(window, WindowType::Floating, conn, config);
         self.focused_via_keyboard = true;
+        self.reset_dragged_window_state(conn);
     }
 
-    pub fn raise_all_floating_windows(&self, conn: &Connection) {
-        for (&window, _, &visible) in self.floating.iter() {
-            if visible {
-                conn.window_raise(window);
-            }
-        }
-    }
+    // pub fn raise_all_floating_windows(&self, conn: &Connection) {
+    //     for (&window, _, &visible) in self.floating.iter() {
+    //         if visible {
+    //             conn.window_raise(window);
+    //         }
+    //     }
+    // }
 
     pub fn handle_new_normal_window(
         &mut self,
@@ -175,10 +176,7 @@ impl Workspace {
         conn.change_window_attrs(
             window,
             XCB_CW_EVENT_MASK,
-            XCB_EVENT_MASK_FOCUS_CHANGE
-                | XCB_EVENT_MASK_ENTER_WINDOW
-                | XCB_EVENT_MASK_LEAVE_WINDOW
-                | XCB_EVENT_MASK_BUTTON_MOTION,
+            XCB_EVENT_MASK_FOCUS_CHANGE | XCB_EVENT_MASK_ENTER_WINDOW | XCB_EVENT_MASK_LEAVE_WINDOW,
         );
 
         self.normal.add(window, window_rect, false);
@@ -189,6 +187,7 @@ impl Workspace {
         self.fix_windows_visibility(&avail_rect, conn);
         self.set_focused(window, WindowType::Normal, conn, config);
         self.focused_via_keyboard = true;
+        self.reset_dragged_window_state(conn);
     }
 
     pub fn handle_existing_normal_window(
@@ -246,6 +245,7 @@ impl Workspace {
         }
         self.set_focused(window, WindowType::Normal, conn, config);
         self.focused_via_keyboard = true;
+        self.reset_dragged_window_state(conn);
     }
 
     pub fn handle_new_docked_window(
@@ -259,6 +259,7 @@ impl Workspace {
         conn.window_configure(window, &magnified_rect, 0);
         conn.map_window(window);
         self.docked.add(window, magnified_rect, true);
+        self.reset_dragged_window_state(conn);
     }
 
     pub fn handle_change_focus_window_left(
@@ -289,6 +290,7 @@ impl Workspace {
                     }
                     self.set_focused_by_index(new_focused_idx, self.focused_type, conn, config);
                     self.focused_via_keyboard = true;
+                    self.reset_dragged_window_state(conn);
                 }
             }
             WindowType::Floating => {
@@ -333,6 +335,7 @@ impl Workspace {
                     }
                     self.set_focused_by_index(new_focused_idx, self.focused_type, conn, config);
                     self.focused_via_keyboard = true;
+                    self.reset_dragged_window_state(conn);
                 }
             }
             WindowType::Floating => {
@@ -354,35 +357,59 @@ impl Workspace {
         match self.focused_type {
             WindowType::Normal if self.focused_idx < self.normal.len() => {
                 if self.focused_idx > 0 {
-                    self.normal
-                        .swap_windows(self.focused_idx - 1, self.focused_idx);
-                    self.normal
-                        .swap_visibles(self.focused_idx - 1, self.focused_idx);
-
-                    let (lhs_window, lhs_rect) = self.normal.at(self.focused_idx - 1).unwrap();
-                    let (rhs_window, rhs_rect) = self.normal.at(self.focused_idx).unwrap();
-
-                    self.focused_idx = self.focused_idx - 1;
-
+                    let currently_focused_idx = self.focused_idx;
+                    let target_idx = self.focused_idx - 1;
                     let avail_rect = self.available_rectangle(monitor_rect, config);
+
+                    self.normal.swap_windows(target_idx, currently_focused_idx);
+                    self.normal.swap_visibles(target_idx, currently_focused_idx);
+
+                    {
+                        let current_width = self.normal.index_rect(currently_focused_idx).width;
+                        let target_width = self.normal.index_rect(target_idx).width;
+                        self.normal.index_rect_mut(target_idx).width = current_width;
+                        self.normal.index_rect_mut(currently_focused_idx).width = target_width;
+                        if current_width != target_width {
+                            self.normal.index_rect_mut(currently_focused_idx).x +=
+                                current_width as i32 - target_width as i32;
+                        }
+                    }
+                    self.focused_idx = target_idx;
+
+                    let (win_newly_focused, rect_newly_focused) = self.normal.index(target_idx);
+
+                    let (win_prev_focused, rect_prev_focused) =
+                        self.normal.index(currently_focused_idx);
+
+                    // adjust viewport if required
                     let move_right_x = {
-                        if lhs_rect.x < avail_rect.x {
-                            avail_rect.x - lhs_rect.x
+                        let focused_rect_after_swap = self.normal.index_rect(self.focused_idx);
+                        if focused_rect_after_swap.x < avail_rect.x {
+                            avail_rect.x - focused_rect_after_swap.x
                         } else {
                             0
                         }
                     };
-                    if move_right_x > 0 {
+                    if move_right_x != 0 {
                         for (window, rect, _) in self.normal.iter_mut() {
                             rect.x += move_right_x;
                             conn.window_configure(*window, &rect, config.border_size);
                         }
                         self.fix_windows_visibility(monitor_rect, conn);
                     } else {
-                        conn.window_configure(lhs_window, lhs_rect, config.border_size);
-                        conn.window_configure(rhs_window, rhs_rect, config.border_size);
+                        conn.window_configure(
+                            win_newly_focused,
+                            rect_newly_focused,
+                            config.border_size,
+                        );
+                        conn.window_configure(
+                            win_prev_focused,
+                            rect_prev_focused,
+                            config.border_size,
+                        );
                     }
                     self.focused_via_keyboard = true;
+                    self.reset_dragged_window_state(conn);
                 }
             }
             WindowType::Floating => {
@@ -404,22 +431,36 @@ impl Workspace {
         match self.focused_type {
             WindowType::Normal if self.focused_idx < self.normal.len() => {
                 if self.focused_idx < self.normal.len() - 1 {
-                    self.normal
-                        .swap_windows(self.focused_idx, self.focused_idx + 1);
-                    self.normal
-                        .swap_visibles(self.focused_idx, self.focused_idx + 1);
-
-                    let (lhs_window, lhs_rect) = self.normal.at(self.focused_idx).unwrap();
-                    let (rhs_window, rhs_rect) = self.normal.at(self.focused_idx + 1).unwrap();
-
-                    self.focused_idx = self.focused_idx + 1;
-
+                    let currently_focused_idx = self.focused_idx;
+                    let target_idx = self.focused_idx + 1;
                     let avail_rect = self.available_rectangle(monitor_rect, config);
+
+                    self.normal.swap_windows(target_idx, currently_focused_idx);
+                    self.normal.swap_visibles(target_idx, currently_focused_idx);
+
+                    {
+                        let current_width = self.normal.index_rect(currently_focused_idx).width;
+                        let target_width = self.normal.index_rect(target_idx).width;
+                        self.normal.index_rect_mut(target_idx).width = current_width;
+                        self.normal.index_rect_mut(currently_focused_idx).width = target_width;
+                        if current_width != target_width {
+                            self.normal.index_rect_mut(target_idx).x +=
+                                target_width as i32 - current_width as i32;
+                        }
+                    }
+                    self.focused_idx = target_idx;
+
+                    let (win_newly_focused, rect_newly_focused) = self.normal.index(target_idx);
+
+                    let (win_prev_focused, rect_prev_focused) =
+                        self.normal.index(currently_focused_idx);
+
+                    // adjust viewport if required
                     let move_left_x = {
-                        if rhs_rect.x + rhs_rect.width as i32
+                        if rect_newly_focused.x + rect_newly_focused.width as i32
                             > avail_rect.x + avail_rect.width as i32
                         {
-                            rhs_rect.x + rhs_rect.width as i32
+                            rect_newly_focused.x + rect_newly_focused.width as i32
                                 - avail_rect.x
                                 - avail_rect.width as i32
                         } else {
@@ -433,10 +474,19 @@ impl Workspace {
                         }
                         self.fix_windows_visibility(monitor_rect, conn);
                     } else {
-                        conn.window_configure(lhs_window, lhs_rect, config.border_size);
-                        conn.window_configure(rhs_window, rhs_rect, config.border_size);
+                        conn.window_configure(
+                            win_newly_focused,
+                            rect_newly_focused,
+                            config.border_size,
+                        );
+                        conn.window_configure(
+                            win_prev_focused,
+                            rect_prev_focused,
+                            config.border_size,
+                        );
                     }
                     self.focused_via_keyboard = true;
+                    self.reset_dragged_window_state(conn);
                 }
             }
             WindowType::Floating => {
@@ -494,7 +544,6 @@ impl Workspace {
     ) {
         self.focused_idx = index;
         self.focused_type = window_type;
-
         conn.change_window_attrs(
             window,
             XCB_CW_BORDER_PIXEL,
@@ -503,6 +552,9 @@ impl Workspace {
         if self.is_visible {
             trace!("apply focus to {}", window);
             conn.window_set_input_focus(window);
+            if window_type == WindowType::Floating {
+                conn.window_raise(window);
+            }
         }
     }
 
@@ -554,6 +606,7 @@ impl Workspace {
 
                 self.fix_windows_visibility(monitor_rect, conn);
                 self.focused_via_keyboard = true;
+                self.reset_dragged_window_state(conn);
             }
             WindowType::Floating => {
                 trace!("horizontal resize window event received when floating window is focused");
@@ -659,6 +712,7 @@ impl Workspace {
             self.set_focused_by_index(focused_idx, self.focused_type, conn, config);
         }
         self.focused_via_keyboard = true;
+        self.reset_dragged_window_state(conn);
     }
 
     pub fn hide_all_windows(
@@ -704,6 +758,7 @@ impl Workspace {
             conn.window_configure(window, &rect, config.border_size);
             conn.unmap_window(window);
         }
+        self.reset_dragged_window_state(conn);
     }
 
     pub fn pop_focused_window(
@@ -729,6 +784,7 @@ impl Workspace {
                 }
                 self.fix_existing_normal_windows(&avail_rect, conn, config);
                 self.focused_via_keyboard = true;
+                self.reset_dragged_window_state(conn);
 
                 Some((removed_window, removed_window_rect, WindowType::Normal))
             }
@@ -765,6 +821,7 @@ impl Workspace {
                         self.focused_via_keyboard = true;
                     }
                 }
+                self.reset_dragged_window_state(conn);
                 Some((removed_window, removed_window_rect, WindowType::Floating))
             }
             WindowType::Docked => None,
@@ -834,63 +891,6 @@ impl Workspace {
         // if self.focused_type != WindowType::Floating {
         //     self.raise_all_floating_windows(conn);
         // }
-    }
-
-    pub fn handle_motion_notify(
-        &mut self,
-        x: i32,
-        y: i32,
-        window: xcb_window_t,
-        state: u32,
-        conn: &Connection,
-        config: &Config,
-    ) {
-        let is_alt_pressed = (state & XCB_MOD_MASK_1) == XCB_MOD_MASK_1;
-        let is_left_button_pressed = (state & XCB_BUTTON_MASK_1) == XCB_BUTTON_MASK_1;
-        let is_right_button_pressed = (state & XCB_BUTTON_MASK_3) == XCB_BUTTON_MASK_3;
-        trace!(
-            "MotionNotify x: {}, y: {}, window: {}, is_alt_pressed: {}, left_button: {}, right_button: {}",
-            x, y, window, is_alt_pressed, is_left_button_pressed, is_right_button_pressed
-        );
-        if is_alt_pressed
-            && (is_left_button_pressed || is_right_button_pressed)
-            && window != conn.root()
-        {
-            if let Some(window_type) = {
-                if self.floating.index_of(window).is_some() {
-                    Some(WindowType::Normal)
-                } else if self.normal.index_of(window).is_some() {
-                    Some(WindowType::Floating)
-                } else {
-                    None
-                }
-            } {
-                if let Some(focused_window) = match self.focused_type {
-                    WindowType::Normal => self.normal.at_window(self.focused_idx),
-                    WindowType::Floating => self.floating.at_window(self.focused_idx),
-                    WindowType::Docked => self.docked.at_window(self.focused_idx),
-                } {
-                    if focused_window != window {
-                        self.set_focused(window, window_type, conn, config);
-                    }
-                }
-                if !self.motion_active {
-                    self.motion_active = true;
-                    self.motion_start_pos = (x, y);
-                }
-                if window_type == WindowType::Floating {
-                    if is_left_button_pressed {
-                        
-                    } else if is_right_button_pressed {
-                    }
-                }
-                conn.flush();
-            } else {
-                self.motion_active = false;
-            }
-        } else {
-            self.motion_active = false;
-        }
     }
 
     #[inline]
@@ -1019,4 +1019,102 @@ impl Workspace {
     //     conn.free_gc(gc);
     //     conn.free_pixmap(pixmap);
     // }
+}
+
+#[derive(Debug)]
+struct DraggedWindow {
+    window: xcb_window_t,
+    x: i32,
+    y: i32,
+}
+
+impl Workspace {
+    pub fn handle_button_press(
+        &mut self,
+        x: i32,
+        y: i32,
+        window: xcb_window_t,
+        state: u16,
+        conn: &Connection,
+        config: &Config,
+    ) {
+        let is_alt_pressed = (state as u32 & XCB_MOD_MASK_1) == XCB_MOD_MASK_1;
+        if is_alt_pressed {
+            if let Some(window_type) = {
+                if self.floating.index_of(window).is_some() {
+                    Some(WindowType::Normal)
+                } else if self.normal.index_of(window).is_some() {
+                    Some(WindowType::Floating)
+                } else {
+                    None
+                }
+            } {
+                if window_type == WindowType::Floating {
+                    if self.focused_type != WindowType::Floating
+                        || self.floating.at_window(self.focused_idx).unwrap() != window
+                    {
+                        self.set_focused(window, window_type, conn, config);
+                    }
+                    if let Err(err) = conn.grab_pointer(
+                        XCB_EVENT_MASK_POINTER_MOTION | XCB_EVENT_MASK_BUTTON_RELEASE,
+                        window,
+                    ) {
+                        warn!(
+                            "failed to grab pointer to drag window {}, err: {}, is_alt_pressed: {}",
+                            window, err, is_alt_pressed
+                        );
+                    } else {
+                        trace!(
+                            "start dragging window {}, is_alt_pressed: {}",
+                            window, is_alt_pressed
+                        );
+                        self.dragged_window = Some(DraggedWindow { window, x, y });
+                    }
+                    conn.flush();
+                }
+            }
+        }
+    }
+
+    pub fn handle_button_release(&mut self, conn: &Connection, config: &Config) {
+        trace!("Button release");
+        self.reset_dragged_window_state(conn);
+        conn.flush();
+    }
+
+    pub fn handle_motion_notify(
+        &mut self,
+        x: i32,
+        y: i32,
+        window: xcb_window_t,
+        state: u32,
+        conn: &Connection,
+        config: &Config,
+    ) {
+        let is_alt_pressed = (state & XCB_MOD_MASK_1) == XCB_MOD_MASK_1;
+        let is_left_button_pressed = (state & XCB_BUTTON_MASK_1) == XCB_BUTTON_MASK_1;
+        if !is_alt_pressed || !is_left_button_pressed {
+            self.reset_dragged_window_state(conn);
+            conn.flush();
+            return;
+        }
+        trace!(
+            "MotionNotify x: {}, y: {}, window: {}, is_alt_pressed: {}, left_button: {}",
+            x, y, window, is_alt_pressed, is_left_button_pressed
+        );
+        // if window != conn.root()
+        // {
+        //     if self.focused_type == WindowType::Floating {
+
+        //     }
+        //     conn.flush();
+        // }
+    }
+
+    fn reset_dragged_window_state(&mut self, conn: &Connection) {
+        if self.dragged_window.is_some() {
+            conn.ungrab_pointer();
+            self.dragged_window = None;
+        }
+    }
 }

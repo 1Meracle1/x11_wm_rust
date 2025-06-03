@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 fn main() {
     // Tell cargo to invalidate the built crate whenever the wrapper changes
-    println!("cargo:rerun-if-changed=xcb_wrapper.h");
+    println!("cargo:rerun-if-changed=x11_headers.h");
 
     for lib in [
         "X11",
@@ -22,7 +22,7 @@ fn main() {
     // Generate bindings
     let bindings = bindgen::Builder::default()
         // The input header we want to generate bindings for
-        .header("xcb_wrapper.h")
+        .header("x11_headers.h")
         // Tell cargo to invalidate the built crate whenever any of the
         // included header files changed
         .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
