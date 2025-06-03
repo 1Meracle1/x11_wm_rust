@@ -1104,6 +1104,7 @@ impl Workspace {
         state: u32,
         conn: &Connection,
         config: &Config,
+        monitor_rect: &Rect,
     ) {
         let is_alt_pressed = (state & XCB_MOD_MASK_1) == XCB_MOD_MASK_1;
         let is_left_button_pressed = (state & XCB_BUTTON_MASK_1) == XCB_BUTTON_MASK_1;
@@ -1118,9 +1119,18 @@ impl Workspace {
         );
         if let Some(dragged_window) = &self.dragged_window {
             if dragged_window.window == window {
+                let avail_rect = self.available_rectangle(monitor_rect, config);
                 let mut new_rect = self.floating.index_rect(dragged_window.index).clone();
                 new_rect.x += x - dragged_window.offset_x;
                 new_rect.y += y - dragged_window.offset_y;
+                new_rect.x = new_rect.x.clamp(
+                    avail_rect.x,
+                    avail_rect.x + avail_rect.width as i32 - new_rect.width as i32,
+                );
+                new_rect.y = new_rect.y.clamp(
+                    avail_rect.y,
+                    avail_rect.y + avail_rect.height as i32 - new_rect.height as i32,
+                );
                 *self.floating.index_rect_mut(dragged_window.index) = new_rect.clone();
                 conn.window_configure(window, &new_rect, config.border_size);
                 conn.flush();

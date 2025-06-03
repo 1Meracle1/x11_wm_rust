@@ -503,10 +503,13 @@ impl Monitor {
         conn: &Connection,
         config: &Config,
     ) {
+        let avail_rect = self
+            .rect
+            .available_rect_after_adding_rects(self.docked.rect_iter());
         self.workspaces
             .get_mut(self.focused_workspace_idx)
             .unwrap()
-            .handle_motion_notify(x, y, window, state, conn, config);
+            .handle_motion_notify(x, y, window, state, conn, config, &avail_rect);
     }
 
     pub fn handle_button_press(
