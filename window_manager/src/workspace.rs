@@ -4,9 +4,10 @@ use base::Rect;
 use log::{trace, warn};
 use x11_bindings::{
     bindings::{
-        XCB_BUTTON_MASK_1, XCB_CW_BORDER_PIXEL, XCB_CW_EVENT_MASK, XCB_EVENT_MASK_BUTTON_MOTION,
-        XCB_EVENT_MASK_BUTTON_RELEASE, XCB_EVENT_MASK_ENTER_WINDOW, XCB_EVENT_MASK_FOCUS_CHANGE,
-        XCB_EVENT_MASK_LEAVE_WINDOW, XCB_EVENT_MASK_POINTER_MOTION, XCB_MOD_MASK_1, xcb_window_t,
+        XCB_BUTTON_MASK_1, XCB_BUTTON_MASK_3, XCB_CW_BORDER_PIXEL, XCB_CW_EVENT_MASK,
+        XCB_EVENT_MASK_BUTTON_MOTION, XCB_EVENT_MASK_BUTTON_RELEASE, XCB_EVENT_MASK_ENTER_WINDOW,
+        XCB_EVENT_MASK_FOCUS_CHANGE, XCB_EVENT_MASK_LEAVE_WINDOW, XCB_EVENT_MASK_POINTER_MOTION,
+        XCB_MOD_MASK_1, xcb_button_t, xcb_window_t,
     },
     connection::WindowType,
 };
@@ -25,7 +26,7 @@ pub struct Workspace {
     is_visible: bool,
     focused_via_keyboard: bool,
     motion_start_pos: (i32, i32),
-    dragged_window: Option<DraggedWindow>,
+    window_mouse_interaction: Option<WindowMouseInteraction>,
 }
 
 impl Workspace {
@@ -40,7 +41,7 @@ impl Workspace {
             is_visible,
             focused_via_keyboard: false,
             motion_start_pos: (0, 0),
-            dragged_window: None,
+            window_mouse_interaction: None,
         }
     }
 
@@ -116,7 +117,7 @@ impl Workspace {
         self.floating.add(window, window_rect, true);
         self.set_focused(window, WindowType::Floating, conn, config);
         self.focused_via_keyboard = true;
-        self.reset_dragged_window_state(conn);
+        self.reset_window_interaction_state(conn);
     }
 
     // pub fn raise_all_floating_windows(&self, conn: &Connection) {
@@ -187,7 +188,7 @@ impl Workspace {
         self.fix_windows_visibility(&avail_rect, conn);
         self.set_focused(window, WindowType::Normal, conn, config);
         self.focused_via_keyboard = true;
-        self.reset_dragged_window_state(conn);
+        self.reset_window_interaction_state(conn);
     }
 
     pub fn handle_existing_normal_window(
@@ -245,7 +246,7 @@ impl Workspace {
         }
         self.set_focused(window, WindowType::Normal, conn, config);
         self.focused_via_keyboard = true;
-        self.reset_dragged_window_state(conn);
+        self.reset_window_interaction_state(conn);
     }
 
     pub fn handle_new_docked_window(
@@ -259,7 +260,7 @@ impl Workspace {
         conn.window_configure(window, &magnified_rect, 0);
         conn.map_window(window);
         self.docked.add(window, magnified_rect, true);
-        self.reset_dragged_window_state(conn);
+        self.reset_window_interaction_state(conn);
     }
 
     pub fn handle_change_focus_window_left(
@@ -290,7 +291,7 @@ impl Workspace {
                     }
                     self.set_focused_by_index(new_focused_idx, self.focused_type, conn, config);
                     self.focused_via_keyboard = true;
-                    self.reset_dragged_window_state(conn);
+                    self.reset_window_interaction_state(conn);
                 }
             }
             WindowType::Floating => {
@@ -335,7 +336,7 @@ impl Workspace {
                     }
                     self.set_focused_by_index(new_focused_idx, self.focused_type, conn, config);
                     self.focused_via_keyboard = true;
-                    self.reset_dragged_window_state(conn);
+                    self.reset_window_interaction_state(conn);
                 }
             }
             WindowType::Floating => {
@@ -409,7 +410,7 @@ impl Workspace {
                         );
                     }
                     self.focused_via_keyboard = true;
-                    self.reset_dragged_window_state(conn);
+                    self.reset_window_interaction_state(conn);
                 }
             }
             WindowType::Floating => {
@@ -486,7 +487,7 @@ impl Workspace {
                         );
                     }
                     self.focused_via_keyboard = true;
-                    self.reset_dragged_window_state(conn);
+                    self.reset_window_interaction_state(conn);
                 }
             }
             WindowType::Floating => {
@@ -606,7 +607,7 @@ impl Workspace {
 
                 self.fix_windows_visibility(monitor_rect, conn);
                 self.focused_via_keyboard = true;
-                self.reset_dragged_window_state(conn);
+                self.reset_window_interaction_state(conn);
             }
             WindowType::Floating => {
                 trace!("horizontal resize window event received when floating window is focused");
@@ -712,7 +713,7 @@ impl Workspace {
             self.set_focused_by_index(focused_idx, self.focused_type, conn, config);
         }
         self.focused_via_keyboard = true;
-        self.reset_dragged_window_state(conn);
+        self.reset_window_interaction_state(conn);
     }
 
     pub fn hide_all_windows(
@@ -758,7 +759,7 @@ impl Workspace {
             conn.window_configure(window, &rect, config.border_size);
             conn.unmap_window(window);
         }
-        self.reset_dragged_window_state(conn);
+        self.reset_window_interaction_state(conn);
     }
 
     pub fn pop_focused_window(
@@ -784,7 +785,7 @@ impl Workspace {
                 }
                 self.fix_existing_normal_windows(&avail_rect, conn, config);
                 self.focused_via_keyboard = true;
-                self.reset_dragged_window_state(conn);
+                self.reset_window_interaction_state(conn);
 
                 Some((removed_window, removed_window_rect, WindowType::Normal))
             }
@@ -821,7 +822,7 @@ impl Workspace {
                         self.focused_via_keyboard = true;
                     }
                 }
-                self.reset_dragged_window_state(conn);
+                self.reset_window_interaction_state(conn);
                 Some((removed_window, removed_window_rect, WindowType::Floating))
             }
             WindowType::Docked => None,
@@ -1022,12 +1023,19 @@ impl Workspace {
 }
 
 #[derive(Debug)]
-struct DraggedWindow {
-    window: xcb_window_t,
-    index: usize,
-    window_type: WindowType,
-    offset_x: i32,
-    offset_y: i32,
+enum WindowMouseInteraction {
+    Move {
+        window: xcb_window_t,
+        index: usize,
+        offset_x: i32,
+        offset_y: i32,
+    },
+    Resize {
+        window: xcb_window_t,
+        index: usize,
+        offset_x: i32,
+        offset_y: i32,
+    },
 }
 
 impl Workspace {
@@ -1037,11 +1045,14 @@ impl Workspace {
         y: i32,
         window: xcb_window_t,
         state: u16,
+        detail: xcb_button_t,
         conn: &Connection,
         config: &Config,
     ) {
         let is_alt_pressed = (state as u32 & XCB_MOD_MASK_1) == XCB_MOD_MASK_1;
-        if is_alt_pressed {
+        let is_left_button_pressed = detail == 1;
+        let is_right_button_pressed = detail == 3;
+        if is_alt_pressed && (is_left_button_pressed || is_right_button_pressed) {
             if let Some((window_type, index)) = {
                 if let Some(index) = self.floating.index_of(window) {
                     Some((WindowType::Floating, index))
@@ -1061,7 +1072,6 @@ impl Workspace {
                         XCB_EVENT_MASK_POINTER_MOTION | XCB_EVENT_MASK_BUTTON_RELEASE,
                         window,
                         window,
-                        // x11_bindings::bindings::XCB_NONE,
                     ) {
                         warn!(
                             "failed to grab pointer to drag window {}, err: {}, is_alt_pressed: {}",
@@ -1076,13 +1086,21 @@ impl Workspace {
                         let window_y = self.floating.index_rect(index).y;
                         let offset_x = x - window_x;
                         let offset_y = y - window_y;
-                        self.dragged_window = Some(DraggedWindow {
-                            window,
-                            index,
-                            window_type,
-                            offset_x,
-                            offset_y,
-                        });
+                        if is_left_button_pressed {
+                            self.window_mouse_interaction = Some(WindowMouseInteraction::Move {
+                                window,
+                                index,
+                                offset_x,
+                                offset_y,
+                            })
+                        } else {
+                            self.window_mouse_interaction = Some(WindowMouseInteraction::Resize {
+                                window,
+                                index,
+                                offset_x,
+                                offset_y,
+                            })
+                        }
                     }
                     conn.flush();
                 }
@@ -1090,9 +1108,9 @@ impl Workspace {
         }
     }
 
-    pub fn handle_button_release(&mut self, conn: &Connection, config: &Config) {
+    pub fn handle_button_release(&mut self, conn: &Connection) {
         trace!("Button release");
-        self.reset_dragged_window_state(conn);
+        self.reset_window_interaction_state(conn);
         conn.flush();
     }
 
@@ -1100,7 +1118,7 @@ impl Workspace {
         &mut self,
         x: i32,
         y: i32,
-        window: xcb_window_t,
+        window_id: xcb_window_t,
         state: u32,
         conn: &Connection,
         config: &Config,
@@ -1108,40 +1126,83 @@ impl Workspace {
     ) {
         let is_alt_pressed = (state & XCB_MOD_MASK_1) == XCB_MOD_MASK_1;
         let is_left_button_pressed = (state & XCB_BUTTON_MASK_1) == XCB_BUTTON_MASK_1;
-        if !is_alt_pressed || !is_left_button_pressed {
-            self.reset_dragged_window_state(conn);
-            conn.flush();
-            return;
-        }
+        let is_right_button_pressed = (state & XCB_BUTTON_MASK_3) == XCB_BUTTON_MASK_3;
         trace!(
-            "MotionNotify x: {}, y: {}, window: {}, is_alt_pressed: {}, left_button: {}",
-            x, y, window, is_alt_pressed, is_left_button_pressed
+            "MotionNotify x: {}, y: {}, window: {}, is_alt_pressed: {}, left_button: {}, right_button: {}",
+            x, y, window_id, is_alt_pressed, is_left_button_pressed, is_right_button_pressed
         );
-        if let Some(dragged_window) = &self.dragged_window {
-            if dragged_window.window == window {
-                let avail_rect = self.available_rectangle(monitor_rect, config);
-                let mut new_rect = self.floating.index_rect(dragged_window.index).clone();
-                new_rect.x += x - dragged_window.offset_x;
-                new_rect.y += y - dragged_window.offset_y;
-                new_rect.x = new_rect.x.clamp(
-                    avail_rect.x,
-                    avail_rect.x + avail_rect.width as i32 - new_rect.width as i32,
-                );
-                new_rect.y = new_rect.y.clamp(
-                    avail_rect.y,
-                    avail_rect.y + avail_rect.height as i32 - new_rect.height as i32,
-                );
-                *self.floating.index_rect_mut(dragged_window.index) = new_rect.clone();
-                conn.window_configure(window, &new_rect, config.border_size);
-                conn.flush();
+        if let Some(interaction) = &self.window_mouse_interaction {
+            match interaction {
+                WindowMouseInteraction::Move {
+                    window,
+                    index,
+                    offset_x,
+                    offset_y,
+                } => {
+                    if !is_left_button_pressed || *window != window_id {
+                        self.reset_window_interaction_state(conn);
+                        conn.flush();
+                    } else {
+                        let avail_rect = self.available_rectangle(monitor_rect, config);
+                        let mut new_rect = self.floating.index_rect(*index).clone();
+                        new_rect.x += x - offset_x;
+                        new_rect.y += y - offset_y;
+                        new_rect.x = new_rect.x.clamp(
+                            avail_rect.x,
+                            avail_rect.x + avail_rect.width as i32 - new_rect.width as i32,
+                        );
+                        new_rect.y = new_rect.y.clamp(
+                            avail_rect.y,
+                            avail_rect.y + avail_rect.height as i32 - new_rect.height as i32,
+                        );
+                        *self.floating.index_rect_mut(*index) = new_rect.clone();
+                        conn.window_configure(*window, &new_rect, config.border_size);
+                        conn.flush();
+                    }
+                }
+                WindowMouseInteraction::Resize {
+                    window,
+                    index,
+                    offset_x,
+                    offset_y,
+                } => {
+                    if !is_right_button_pressed || *window != window_id {
+                        self.reset_window_interaction_state(conn);
+                        conn.flush();
+                    } else {
+                        let avail_rect = self.available_rectangle(monitor_rect, config);
+                        let mut new_rect = self.floating.index_rect(*index).clone();
+
+                        let new_width = x;
+                        let new_height = y;
+                        new_rect.width = new_width
+                            .clamp(config.minimum_width_tiling as i32, avail_rect.width as i32)
+                            as u32;
+                        new_rect.height = new_height.clamp(
+                            config.minimum_height_tiling as i32,
+                            avail_rect.height as i32,
+                        ) as u32;
+
+                        *self.floating.index_rect_mut(*index) = new_rect.clone();
+                        conn.window_configure(*window, &new_rect, config.border_size);
+                        conn.flush();
+
+                        self.window_mouse_interaction = Some(WindowMouseInteraction::Resize {
+                            window: *window,
+                            index: *index,
+                            offset_x: *offset_x,
+                            offset_y: *offset_y,
+                        })
+                    }
+                }
             }
         }
     }
 
-    fn reset_dragged_window_state(&mut self, conn: &Connection) {
-        if self.dragged_window.is_some() {
+    fn reset_window_interaction_state(&mut self, conn: &Connection) {
+        if self.window_mouse_interaction.is_some() {
             conn.ungrab_pointer();
-            self.dragged_window = None;
+            self.window_mouse_interaction = None;
         }
     }
 }

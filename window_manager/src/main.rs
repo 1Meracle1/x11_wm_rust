@@ -88,11 +88,11 @@ fn main() {
                         monitor.handle_enter_notify(window, &conn, &config);
                     }
                     connection::XcbEvents::LeaveNotify { window: _ } => {}
-                    connection::XcbEvents::ButtonPress { x, y, window, state } => {
-                        monitor.handle_button_press(x, y, window, state, &conn, &config);
+                    connection::XcbEvents::ButtonPress { x, y, window, state, detail } => {
+                        monitor.handle_button_press(x, y, window, state, detail, &conn, &config);
                     }
                     connection::XcbEvents::ButtonRelease { x: _, y: _ } => {
-                        monitor.handle_button_release(&conn, &config);
+                        monitor.handle_button_release(&conn);
                     }
                     connection::XcbEvents::MotionNotify {
                         x,

@@ -3,8 +3,7 @@ use std::{time::UNIX_EPOCH, u32};
 use base::Rect;
 use log::{error, trace};
 use x11_bindings::bindings::{
-    XCB_CW_BORDER_PIXEL, XCB_NOTIFY_MODE_GRAB, XCB_NOTIFY_MODE_UNGRAB, xcb_notify_mode_t,
-    xcb_window_t,
+    xcb_button_t, xcb_notify_mode_t, xcb_window_t, XCB_CW_BORDER_PIXEL, XCB_NOTIFY_MODE_GRAB, XCB_NOTIFY_MODE_UNGRAB
 };
 
 use crate::{
@@ -518,19 +517,20 @@ impl Monitor {
         y: i32,
         window: xcb_window_t,
         state: u16,
+        detail: xcb_button_t,
         conn: &Connection,
         config: &Config,
     ) {
         self.workspaces
             .get_mut(self.focused_workspace_idx)
             .unwrap()
-            .handle_button_press(x, y, window, state, conn, config);
+            .handle_button_press(x, y, window, state, detail, conn, config);
     }
 
-    pub fn handle_button_release(&mut self, conn: &Connection, config: &Config) {
+    pub fn handle_button_release(&mut self, conn: &Connection) {
         self.workspaces
             .get_mut(self.focused_workspace_idx)
             .unwrap()
-            .handle_button_release(conn, config);
+            .handle_button_release(conn);
     }
 }

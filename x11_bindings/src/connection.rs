@@ -3,46 +3,7 @@ use std::{collections::HashMap, ffi::CString, mem::MaybeUninit};
 use base::Rect;
 
 use crate::bindings::{
-    XCB_ACCESS, XCB_ALLOC, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING,
-    XCB_ATOM_WM_CLASS, XCB_ATOM_WM_NORMAL_HINTS, XCB_BUTTON_PRESS, XCB_BUTTON_RELEASE,
-    XCB_CLIENT_MESSAGE, XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH, XCB_CONFIG_WINDOW_HEIGHT,
-    XCB_CONFIG_WINDOW_STACK_MODE, XCB_CONFIG_WINDOW_WIDTH, XCB_CONFIG_WINDOW_X,
-    XCB_CONFIG_WINDOW_Y, XCB_COORD_MODE_ORIGIN, XCB_COPY_FROM_PARENT, XCB_CURRENT_TIME, XCB_CURSOR,
-    XCB_CW_CURSOR, XCB_DRAWABLE, XCB_ENTER_NOTIFY, XCB_EVENT_MASK_BUTTON_PRESS,
-    XCB_EVENT_MASK_NO_EVENT, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT,
-    XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC, XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP,
-    XCB_IMAGE_FORMAT_Z_PIXMAP, XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION,
-    XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS, XCB_LEAVE_NOTIFY, XCB_LENGTH, XCB_MAP_REQUEST,
-    XCB_MATCH, XCB_MOD_MASK_ANY, XCB_MOTION_NOTIFY, XCB_NAME, XCB_NONE, XCB_PIXMAP,
-    XCB_PROP_MODE_REPLACE, XCB_SHAPE_SK_BOUNDING, XCB_SHAPE_SO_SET, XCB_STACK_MODE_ABOVE,
-    XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT, XCloseDisplay, XDefaultRootWindow, XDefineCursor,
-    XDisplay, XGetXCBConnection, XOpenDisplay, XcursorFilenameLoadCursor, xcb_allow_events,
-    xcb_allow_t, xcb_arc_t, xcb_atom_t, xcb_button_press_event_t, xcb_button_release_event_t,
-    xcb_change_gc, xcb_change_property, xcb_change_window_attributes,
-    xcb_change_window_attributes_checked, xcb_client_message_data_t, xcb_client_message_event_t,
-    xcb_configure_window, xcb_configure_window_checked, xcb_connection_has_error, xcb_connection_t,
-    xcb_create_cursor, xcb_create_cursor_checked, xcb_create_gc, xcb_create_gc_checked,
-    xcb_create_pixmap, xcb_create_pixmap_checked, xcb_create_window, xcb_cursor_context_free,
-    xcb_cursor_context_new, xcb_cursor_context_t, xcb_cursor_load_cursor, xcb_cursor_t, xcb_cw_t,
-    xcb_destroy_window, xcb_disconnect, xcb_enter_notify_event_t, xcb_event_mask_t,
-    xcb_ewmh_connection_t, xcb_ewmh_get_atoms_reply_t, xcb_ewmh_get_atoms_reply_wipe,
-    xcb_ewmh_get_cardinal_reply, xcb_ewmh_get_wm_desktop, xcb_ewmh_get_wm_strut_partial,
-    xcb_ewmh_get_wm_strut_partial_reply, xcb_ewmh_get_wm_window_type,
-    xcb_ewmh_get_wm_window_type_reply, xcb_ewmh_init_atoms, xcb_ewmh_init_atoms_replies,
-    xcb_ewmh_set_supported_checked, xcb_ewmh_wm_strut_partial_t, xcb_flush, xcb_focus_in_event_t,
-    xcb_focus_out_event_t, xcb_free_gc, xcb_free_pixmap, xcb_gc_t, xcb_gcontext_t, xcb_generate_id,
-    xcb_generic_error_t, xcb_generic_event_t, xcb_get_property, xcb_get_property_reply,
-    xcb_get_property_value, xcb_get_property_value_length, xcb_get_setup,
-    xcb_get_window_attributes, xcb_get_window_attributes_reply, xcb_grab_button, xcb_grab_key,
-    xcb_grab_pointer, xcb_grab_pointer_reply, xcb_icccm_set_wm_normal_hints, xcb_image_create,
-    xcb_image_create_native, xcb_image_destroy, xcb_image_put, xcb_intern_atom,
-    xcb_intern_atom_cookie_t, xcb_intern_atom_reply, xcb_key_press_event_t, xcb_keycode_t,
-    xcb_leave_notify_event_t, xcb_map_request_event_t, xcb_map_window, xcb_mod_mask_t,
-    xcb_motion_notify_event_t, xcb_notify_mode_t, xcb_pixmap_t, xcb_point_t, xcb_poll_for_event,
-    xcb_poly_fill_arc, xcb_poly_fill_rectangle, xcb_poly_point, xcb_put_image, xcb_rectangle_t,
-    xcb_request_check, xcb_screen_t, xcb_send_event, xcb_set_input_focus, xcb_setup_roots_iterator,
-    xcb_shape_mask, xcb_size_hints_t, xcb_ungrab_pointer, xcb_unmap_window, xcb_wait_for_event,
-    xcb_window_t,
+    xcb_allow_events, xcb_allow_t, xcb_arc_t, xcb_atom_t, xcb_button_press_event_t, xcb_button_release_event_t, xcb_button_t, xcb_change_gc, xcb_change_property, xcb_change_window_attributes, xcb_change_window_attributes_checked, xcb_client_message_data_t, xcb_client_message_event_t, xcb_configure_window, xcb_configure_window_checked, xcb_connection_has_error, xcb_connection_t, xcb_create_cursor, xcb_create_cursor_checked, xcb_create_gc, xcb_create_gc_checked, xcb_create_pixmap, xcb_create_pixmap_checked, xcb_create_window, xcb_cursor_context_free, xcb_cursor_context_new, xcb_cursor_context_t, xcb_cursor_load_cursor, xcb_cursor_t, xcb_cw_t, xcb_destroy_window, xcb_disconnect, xcb_enter_notify_event_t, xcb_event_mask_t, xcb_ewmh_connection_t, xcb_ewmh_get_atoms_reply_t, xcb_ewmh_get_atoms_reply_wipe, xcb_ewmh_get_cardinal_reply, xcb_ewmh_get_wm_desktop, xcb_ewmh_get_wm_strut_partial, xcb_ewmh_get_wm_strut_partial_reply, xcb_ewmh_get_wm_window_type, xcb_ewmh_get_wm_window_type_reply, xcb_ewmh_init_atoms, xcb_ewmh_init_atoms_replies, xcb_ewmh_set_supported_checked, xcb_ewmh_wm_strut_partial_t, xcb_flush, xcb_focus_in_event_t, xcb_focus_out_event_t, xcb_free_gc, xcb_free_pixmap, xcb_gc_t, xcb_gcontext_t, xcb_generate_id, xcb_generic_error_t, xcb_generic_event_t, xcb_get_property, xcb_get_property_reply, xcb_get_property_value, xcb_get_property_value_length, xcb_get_setup, xcb_get_window_attributes, xcb_get_window_attributes_reply, xcb_grab_button, xcb_grab_key, xcb_grab_pointer, xcb_grab_pointer_reply, xcb_icccm_set_wm_normal_hints, xcb_image_create, xcb_image_create_native, xcb_image_destroy, xcb_image_put, xcb_intern_atom, xcb_intern_atom_cookie_t, xcb_intern_atom_reply, xcb_key_press_event_t, xcb_keycode_t, xcb_leave_notify_event_t, xcb_map_request_event_t, xcb_map_window, xcb_mod_mask_t, xcb_motion_notify_event_t, xcb_notify_mode_t, xcb_pixmap_t, xcb_point_t, xcb_poll_for_event, xcb_poly_fill_arc, xcb_poly_fill_rectangle, xcb_poly_point, xcb_put_image, xcb_rectangle_t, xcb_request_check, xcb_screen_t, xcb_send_event, xcb_set_input_focus, xcb_setup_roots_iterator, xcb_shape_mask, xcb_size_hints_t, xcb_ungrab_pointer, xcb_unmap_window, xcb_wait_for_event, xcb_window_t, XCloseDisplay, XDefaultRootWindow, XDefineCursor, XDisplay, XGetXCBConnection, XOpenDisplay, XcursorFilenameLoadCursor, XCB_ACCESS, XCB_ALLOC, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING, XCB_ATOM_WM_CLASS, XCB_ATOM_WM_NORMAL_HINTS, XCB_BUTTON_PRESS, XCB_BUTTON_RELEASE, XCB_CLIENT_MESSAGE, XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH, XCB_CONFIG_WINDOW_HEIGHT, XCB_CONFIG_WINDOW_STACK_MODE, XCB_CONFIG_WINDOW_WIDTH, XCB_CONFIG_WINDOW_X, XCB_CONFIG_WINDOW_Y, XCB_COORD_MODE_ORIGIN, XCB_COPY_FROM_PARENT, XCB_CURRENT_TIME, XCB_CURSOR, XCB_CW_CURSOR, XCB_DRAWABLE, XCB_ENTER_NOTIFY, XCB_EVENT_MASK_BUTTON_PRESS, XCB_EVENT_MASK_NO_EVENT, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC, XCB_G_CONTEXT, XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP, XCB_IMAGE_FORMAT_Z_PIXMAP, XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION, XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS, XCB_LEAVE_NOTIFY, XCB_LENGTH, XCB_MAP_REQUEST, XCB_MATCH, XCB_MOD_MASK_ANY, XCB_MOTION_NOTIFY, XCB_NAME, XCB_NONE, XCB_PIXMAP, XCB_PROP_MODE_REPLACE, XCB_SHAPE_SK_BOUNDING, XCB_SHAPE_SO_SET, XCB_STACK_MODE_ABOVE, XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT
 };
 
 #[derive(Debug)]
@@ -1454,6 +1415,7 @@ pub enum XcbEvents {
         y: i32,
         window: xcb_window_t,
         state: u16,
+        detail: xcb_button_t,
     },
     ButtonRelease {
         x: i32,
@@ -1531,6 +1493,7 @@ impl Connection {
                     y: unsafe { *event }.event_y as i32,
                     window: unsafe { *event }.child,
                     state: unsafe { *event }.state,
+                    detail: unsafe { *event }.detail,
                 }))
             }
             XCB_BUTTON_RELEASE => {
