@@ -11,60 +11,61 @@ startup_commands = [
 ]
 
 keybindings = [
-    "Alt+Left            focus_window left",
-    "Alt+Right           focus_window right",
-    "Alt+Up              focus_window up",
-    "Alt+Down            focus_window down",
+  "Alt+Left            focus_window left",
+  "Alt+Right           focus_window right",
+  "Alt+Up              focus_window up",
+  "Alt+Down            focus_window down",
 
-    "Alt+H               focus_window left",
-    "Alt+L               focus_window right",
-    "Alt+K               focus_window up",
-    "Alt+J               focus_window down",
+  "Alt+H               focus_window left",
+  "Alt+L               focus_window right",
+  "Alt+K               focus_window up",
+  "Alt+J               focus_window down",
 
-    "Alt+Ctrl+H          move_window left  15",
-    "Alt+Ctrl+L          move_window right 15",
-    "Alt+Ctrl+K          move_window up    15",
-    "Alt+Ctrl+J          move_window down  15",
+  "Alt+Ctrl+H          move_window left  15",
+  "Alt+Ctrl+L          move_window right 15",
+  "Alt+Ctrl+K          move_window up    15",
+  "Alt+Ctrl+J          move_window down  15",
 
-    "Alt+Shift+H         window_size_change horizontal  30",
-    "Alt+Shift+L         window_size_change horizontal  -30",
-    # "Alt+Shift+J         window_size_change vertical    15",
-    # "Alt+Shift+K         window_size_change vertical    15",
+  "Alt+Shift+H         window_size_change horizontal  30",
+  "Alt+Shift+L         window_size_change horizontal  -30",
+  # "Alt+Shift+J         window_size_change vertical    15",
+  # "Alt+Shift+K         window_size_change vertical    15",
 
-    "Alt+Enter           exec alacritty",
-    "Alt+B               exec cargo run -p testbed_window -- docked bottom X11_docked_bottom_window",
-    "Alt+T               exec cargo run -p testbed_window -- docked top X11_docked_top_window",
+  "Alt+Enter           exec alacritty",
+  "Alt+B               exec cargo run -p testbed_window -- docked bottom X11_docked_bottom_window",
+  "Alt+T               exec cargo run -p testbed_window -- docked top X11_docked_top_window",
 
-    "Alt+Shift+D         exec dmenu",
+  "Alt+D               exec dmenu_run -i -fn 'NotoMonoRegular:bold:pixelsize=14'",
+  "Alt+Shift+D         exec dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'",
 
-    # "Alt+Shift+C         exec xcolor",
+  # "Alt+Shift+C         exec xcolor",
 
-    "Alt+Q               kill_focused_window",
+  "Alt+Q               kill_focused_window",
 
-    # "Alt+Shift+R         restart_window_manager",
+  # "Alt+Shift+R         restart_window_manager",
 
-    # "Alt+Shift+E         exec prompt_exit_window_manager",
-    # "Alt+Shift+Q         exit_window_manager",
+  # "Alt+Shift+E         exec prompt_exit_window_manager",
+  # "Alt+Shift+Q         exit_window_manager",
 
-    "Alt+1               switch_to_workspace 1",
-    "Alt+2               switch_to_workspace 2",
-    "Alt+3               switch_to_workspace 3",
-    "Alt+4               switch_to_workspace 4",
-    "Alt+5               switch_to_workspace 5",
-    "Alt+6               switch_to_workspace 6",
-    "Alt+7               switch_to_workspace 7",
-    "Alt+8               switch_to_workspace 8",
-    "Alt+9               switch_to_workspace 9",
+  "Alt+1               switch_to_workspace 1",
+  "Alt+2               switch_to_workspace 2",
+  "Alt+3               switch_to_workspace 3",
+  "Alt+4               switch_to_workspace 4",
+  "Alt+5               switch_to_workspace 5",
+  "Alt+6               switch_to_workspace 6",
+  "Alt+7               switch_to_workspace 7",
+  "Alt+8               switch_to_workspace 8",
+  "Alt+9               switch_to_workspace 9",
 
-    "Alt+Shift+1         move_focused_window_to_workspace 1",
-    "Alt+Shift+2         move_focused_window_to_workspace 2",
-    "Alt+Shift+3         move_focused_window_to_workspace 3",
-    "Alt+Shift+4         move_focused_window_to_workspace 4",
-    "Alt+Shift+5         move_focused_window_to_workspace 5",
-    "Alt+Shift+6         move_focused_window_to_workspace 6",
-    "Alt+Shift+7         move_focused_window_to_workspace 7",
-    "Alt+Shift+8         move_focused_window_to_workspace 8",
-    "Alt+Shift+9         move_focused_window_to_workspace 9",
+  "Alt+Shift+1         move_focused_window_to_workspace 1",
+  "Alt+Shift+2         move_focused_window_to_workspace 2",
+  "Alt+Shift+3         move_focused_window_to_workspace 3",
+  "Alt+Shift+4         move_focused_window_to_workspace 4",
+  "Alt+Shift+5         move_focused_window_to_workspace 5",
+  "Alt+Shift+6         move_focused_window_to_workspace 6",
+  "Alt+Shift+7         move_focused_window_to_workspace 7",
+  "Alt+Shift+8         move_focused_window_to_workspace 8",
+  "Alt+Shift+9         move_focused_window_to_workspace 9",
 ]
 
 
@@ -83,3 +84,5 @@ border_color_active_str = "#82948c"
 # custom_cursor_filepath = "data/cursors/starter-lights-pack_32x32.cursor"
 
 switch_to_workspace_on_focused_window_moved = false
+
+override_to_floating = []

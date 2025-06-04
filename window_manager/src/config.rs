@@ -3,7 +3,6 @@ use std::{fs, io, path::Path};
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
-#[allow(dead_code)]
 pub struct Config {
     pub startup_commands: Vec<String>,
     pub keybindings: Vec<String>,
@@ -18,12 +17,12 @@ pub struct Config {
     pub border_color_active_str: Option<String>,
     pub border_color_inactive_int: Option<u32>,
     pub border_color_active_int: Option<u32>,
-    pub custom_cursor_filepath: Option<String>,
     pub switch_to_workspace_on_focused_window_moved: bool,
+    pub override_to_floating: Vec<String>,
 }
 
-#[derive(Debug)]
 #[allow(dead_code)]
+#[derive(Debug)]
 pub enum ConfigErrors {
     FileNotFound(io::Error),
     TomlParseError(toml::de::Error),
@@ -31,7 +30,6 @@ pub enum ConfigErrors {
 }
 
 impl Config {
-    #[allow(dead_code)]
     pub fn new(path: &str) -> Result<Self, ConfigErrors> {
         match fs::read_to_string(Path::new(path)) {
             Ok(config_data) => match toml::from_str::<Config>(&config_data) {
@@ -80,10 +78,6 @@ impl Config {
         }
     }
 
-    // #[allow(dead_code)]
-    // pub fn from_paths_or_default
-
-    #[allow(dead_code)]
     fn try_color_from_str(color_str: &str) -> Option<u32> {
         // take only first 6 characters as xcb_change_window_attributes supports only 24-bit color range
         let hex = color_str.trim_start_matches('#').chars().take(6).collect::<String>();
@@ -129,7 +123,7 @@ impl Default for Config {
                 "Alt+D               exec cmake_debug_build/testbed_window -window-type=docked -docked-location=bottom",
                 "Alt+T               exec cmake_debug_build/testbed_window -window-type=docked -docked-location=top",
             
-                "Alt+Shift+D         exec dmenu",
+                "Alt+D               exec dmenu_run -i -nb '#191919' -nf 'orange' -sb 'orange' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'",
             
                 "Alt+Q               kill_focused_window",
             
@@ -169,8 +163,8 @@ impl Default for Config {
             border_color_active_str: None,
             border_color_inactive_int: Self::try_color_from_str("#2b2b29"),
             border_color_active_int: Self::try_color_from_str("#a38b43"),
-            custom_cursor_filepath: None,
             switch_to_workspace_on_focused_window_moved: false,
+            override_to_floating: [""].iter().map(|e|e.to_string()).collect(),
         }
     }
 }

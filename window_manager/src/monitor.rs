@@ -3,7 +3,8 @@ use std::{time::UNIX_EPOCH, u32};
 use base::Rect;
 use log::{error, trace};
 use x11_bindings::bindings::{
-    xcb_button_t, xcb_notify_mode_t, xcb_window_t, XCB_CW_BORDER_PIXEL, XCB_NOTIFY_MODE_GRAB, XCB_NOTIFY_MODE_UNGRAB
+    XCB_CW_BORDER_PIXEL, XCB_NOTIFY_MODE_GRAB, XCB_NOTIFY_MODE_UNGRAB, xcb_button_t,
+    xcb_notify_mode_t, xcb_window_t,
 };
 
 use crate::{
@@ -22,6 +23,7 @@ pub struct Monitor {
     docked: WindowsCollection,
     focused_workspace_idx: usize,
     to_check_deleted: Vec<(xcb_window_t, u64)>, // window and timestamp when it was requested to be deleted
+    dmenu_window: Option<xcb_window_t>,
 }
 
 impl Monitor {
@@ -32,6 +34,7 @@ impl Monitor {
             docked: WindowsCollection::new(1),
             focused_workspace_idx: 0,
             to_check_deleted: vec![],
+            dmenu_window: None,
         }
     }
 
@@ -42,17 +45,35 @@ impl Monitor {
             return;
         }
 
+        let avail_rect = self
+            .rect
+            .available_rect_after_adding_rects(self.docked.rect_iter());
+
+        let maybe_rect_hints = conn.window_rect_hints(window);
+        trace!("window rect hints: {:?}", maybe_rect_hints);
+
         let requested_workspace = conn.window_requested_workspace(window);
+
         if let Some((class_name, instance_name)) = conn.window_class_instance_names(window) {
             trace!(
                 "window class name: {}, instance name: {}",
                 class_name, instance_name
             );
+            if class_name.contains("dmenu") {
+                self.dmenu_window = Some(window);
+                let rect = Rect {
+                    x: 0,
+                    y: 0,
+                    width: self.rect.width,
+                    height: 25,
+                };
+                conn.window_configure(window, &rect, 0);
+                conn.map_window(window);
+                conn.window_raise(window);
+                conn.flush();
+                return;
+            }
         }
-
-        let avail_rect = self
-            .rect
-            .available_rect_after_adding_rects(self.docked.rect_iter());
 
         let window_type = conn.window_type(window);
         trace!("Window type: {:?}", window_type);
@@ -65,12 +86,7 @@ impl Monitor {
             WindowType::Floating => {
                 let focused_workspace =
                     self.workspaces.get_mut(self.focused_workspace_idx).unwrap();
-                let base_window_rect = if let Some(rect_hints) = conn.window_rect_hints(window) {
-                    trace!("window rect hints: {:?}", rect_hints);
-                    rect_hints
-                } else {
-                    Rect::default()
-                };
+                let base_window_rect = maybe_rect_hints.or_else(|| Some(Rect::default())).unwrap();
                 focused_workspace.handle_new_floating_window(
                     window,
                     base_window_rect,
