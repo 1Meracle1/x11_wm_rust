@@ -123,7 +123,7 @@ impl Default for Config {
                 "Alt+D               exec cmake_debug_build/testbed_window -window-type=docked -docked-location=bottom",
                 "Alt+T               exec cmake_debug_build/testbed_window -window-type=docked -docked-location=top",
             
-                "Alt+D               exec dmenu_run -i -nb '#191919' -nf 'orange' -sb 'orange' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'",
+                "Alt+D               exec dmenu_run -i 'NotoMonoRegular:bold:pixelsize=14'",
             
                 "Alt+Q               kill_focused_window",
             

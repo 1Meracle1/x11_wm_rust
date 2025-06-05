@@ -12,6 +12,8 @@ use x11_bindings::{
     connection::{self, Connection, MouseButton},
 };
 
+use crate::keybindings::keybindings_ungrab;
+
 mod config;
 mod keybindings;
 mod monitor;
@@ -27,7 +29,7 @@ fn main() {
     let pid = std::process::id();
     info!("PID: {}", pid);
 
-    let config = Config::new("config.toml")
+    let mut config = Config::new("config.toml")
         .or_else(|err| {
             error!("Failed init config from file, error: {:?}", err);
             warn!("Initializing config from default values.");
@@ -54,7 +56,7 @@ fn main() {
         execute_command_from_str(cmd_str);
     }
 
-    let keybindings = keybindings_from_config(&config);
+    let mut keybindings = keybindings_from_config(&config);
     keybindings_grab(&keybindings, &conn);
     // trace!("keybindings: {:#?}", keybindings);
 
@@ -63,6 +65,7 @@ fn main() {
 
     conn.flush();
 
+    let mut requested_config_reload = false;
     loop {
         if let Some(event_res) = conn.wait_for_event() {
             match event_res {
@@ -74,6 +77,7 @@ fn main() {
                         &mut monitor,
                         modifier,
                         keycode,
+                        &mut requested_config_reload,
                     ),
                     connection::XcbEvents::MapRequst { window } => {
                         monitor.handle_map_request(&conn, &config, window)
@@ -88,7 +92,13 @@ fn main() {
                         monitor.handle_enter_notify(window, &conn, &config);
                     }
                     connection::XcbEvents::LeaveNotify { window: _ } => {}
-                    connection::XcbEvents::ButtonPress { x, y, window, state, detail } => {
+                    connection::XcbEvents::ButtonPress {
+                        x,
+                        y,
+                        window,
+                        state,
+                        detail,
+                    } => {
                         monitor.handle_button_press(x, y, window, state, detail, &conn, &config);
                     }
                     connection::XcbEvents::ButtonRelease { x: _, y: _ } => {
@@ -107,5 +117,40 @@ fn main() {
             };
         }
         monitor.check_deleted(&conn);
+
+        if requested_config_reload {
+            requested_config_reload = false;
+            info!("requested config reload");
+
+            match Config::new("config.toml") {
+                Ok(new_config) => {
+                    info!("updated config parsed successfully: {:#?}", new_config);
+
+                    if config.startup_commands != new_config.startup_commands {
+                        let diff = config.startup_commands.iter().filter(|exist_cmd| {
+                            new_config
+                                .startup_commands
+                                .iter()
+                                .find(|new_cmd| new_cmd == exist_cmd)
+                                .is_none()
+                        });
+                        for cmd_str in diff {
+                            execute_command_from_str(cmd_str);
+                        }
+                    }
+
+                    let new_keybindings = keybindings_from_config(&config);
+                    if keybindings != new_keybindings {
+                        keybindings_ungrab(&keybindings, &conn);
+                        keybindings = new_keybindings;
+                        keybindings_grab(&keybindings, &conn);
+                    }
+
+                    monitor.remap_windows_with_upd_config(&conn, &config, &new_config);
+                    config = new_config;
+                }
+                Err(err) => error!("Failed to reload config from file, error: {:?}", err),
+            }
+        }
     }
 }

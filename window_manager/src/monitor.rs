@@ -38,6 +38,20 @@ impl Monitor {
         }
     }
 
+    pub fn remap_windows_with_upd_config(
+        &mut self,
+        conn: &Connection,
+        old_config: &Config,
+        config: &Config,
+    ) {
+        let avail_rect = self
+            .rect
+            .available_rect_after_adding_rects(self.docked.rect_iter());
+        self.workspaces
+            .iter_mut()
+            .for_each(|w| w.remap_windows_with_upd_config(conn, old_config, config, &avail_rect));
+    }
+
     pub fn handle_map_request(&mut self, conn: &Connection, config: &Config, window: xcb_window_t) {
         trace!("map request: {}", window);
         if conn.has_override_redirect(window) {
@@ -54,7 +68,8 @@ impl Monitor {
 
         let requested_workspace = conn.window_requested_workspace(window);
 
-        if let Some((class_name, instance_name)) = conn.window_class_instance_names(window) {
+        let class_instance_maybe = conn.window_class_instance_names(window);
+        if let Some((class_name, instance_name)) = &class_instance_maybe {
             trace!(
                 "window class name: {}, instance name: {}",
                 class_name, instance_name
@@ -75,8 +90,18 @@ impl Monitor {
             }
         }
 
-        let window_type = conn.window_type(window);
+        let mut window_type = conn.window_type(window);
         trace!("Window type: {:?}", window_type);
+        if let Some((class_name, instance_name)) = &class_instance_maybe {
+            if config
+                .override_to_floating
+                .iter()
+                .find(|name| *name == class_name || *name == instance_name)
+                .is_some()
+            {
+                window_type = WindowType::Floating;
+            }
+        }
         match window_type {
             WindowType::Normal => {
                 let focused_workspace =

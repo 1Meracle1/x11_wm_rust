@@ -14,7 +14,6 @@ use x11_bindings::{
 
 use crate::{config::Config, connection::Connection, window::WindowsCollection};
 
-#[allow(dead_code)]
 #[derive(Debug)]
 pub struct Workspace {
     pub id: u32,
@@ -25,7 +24,6 @@ pub struct Workspace {
     focused_type: WindowType,
     is_visible: bool,
     focused_via_keyboard: bool,
-    motion_start_pos: (i32, i32),
     window_mouse_interaction: Option<WindowMouseInteraction>,
 }
 
@@ -40,7 +38,6 @@ impl Workspace {
             focused_type: WindowType::Normal,
             is_visible,
             focused_via_keyboard: false,
-            motion_start_pos: (0, 0),
             window_mouse_interaction: None,
         }
     }
@@ -297,7 +294,7 @@ impl Workspace {
             WindowType::Floating => {
                 trace!("change focus window left event received when floating window is focused");
             }
-            WindowType::Docked => todo!(),
+            WindowType::Docked => {}
             _ => {
                 warn!("change focus window left when no window is focused");
             }
@@ -342,7 +339,7 @@ impl Workspace {
             WindowType::Floating => {
                 trace!("change focus window left event received when floating window is focused");
             }
-            WindowType::Docked => todo!(),
+            WindowType::Docked => {}
             _ => {
                 warn!("change focus window left when no window is focused");
             }
@@ -416,7 +413,7 @@ impl Workspace {
             WindowType::Floating => {
                 trace!("move window left event received when floating window is focused");
             }
-            WindowType::Docked => todo!(),
+            WindowType::Docked => {}
             _ => {
                 warn!("move window left when docked window is focused");
             }
@@ -493,7 +490,7 @@ impl Workspace {
             WindowType::Floating => {
                 trace!("move window left event received when floating window is focused");
             }
-            WindowType::Docked => todo!(),
+            WindowType::Docked => {}
             _ => {
                 warn!("move window left when docked window is focused");
             }
@@ -612,7 +609,7 @@ impl Workspace {
             WindowType::Floating => {
                 trace!("horizontal resize window event received when floating window is focused");
             }
-            WindowType::Docked => todo!(),
+            WindowType::Docked => {}
             _ => {
                 warn!("horizontal resize window when docked window is focused");
             }
@@ -892,6 +889,80 @@ impl Workspace {
         // if self.focused_type != WindowType::Floating {
         //     self.raise_all_floating_windows(conn);
         // }
+    }
+
+    pub fn remap_windows_with_upd_config(
+        &mut self,
+        conn: &Connection,
+        old_config: &Config,
+        config: &Config,
+        monitor_rect: &Rect,
+    ) {
+        let old_avail_rect = self.available_rectangle(monitor_rect, old_config);
+        let avail_rect = self.available_rectangle(monitor_rect, config);
+        if old_avail_rect != avail_rect || old_config.border_size != config.border_size {
+            self.normal.rect_iter_mut().for_each(|r| {
+                r.y = avail_rect.y + config.border_size as i32;
+                if r.y + r.height as i32 > avail_rect.y + avail_rect.height as i32 {
+                    let delta = r.y + r.height as i32 - (avail_rect.y + avail_rect.height as i32);
+                    debug_assert!(delta > 0 && delta < r.height as i32);
+                    r.height -= delta as u32;
+                }
+            });
+            self.fix_existing_normal_windows(&avail_rect, conn, config);
+        }
+
+        let focused_window_maybe = match self.focused_type {
+            WindowType::Normal => self.normal.at_window(self.focused_idx),
+            WindowType::Floating => self.floating.at_window(self.focused_idx),
+            WindowType::Docked => None,
+        };
+        if old_config.border_color_active_int != config.border_color_active_int {
+            if let Some(focused_window) = focused_window_maybe {
+                conn.change_window_attrs(
+                    focused_window,
+                    XCB_CW_BORDER_PIXEL,
+                    config.border_color_active_int.unwrap(),
+                );
+            }
+        }
+        if old_config.border_color_inactive_int != config.border_color_inactive_int {
+            if let Some(focused_window) = focused_window_maybe {
+                self.normal.window_iter().for_each(|w| {
+                    if *w != focused_window {
+                        conn.change_window_attrs(
+                            *w,
+                            XCB_CW_BORDER_PIXEL,
+                            config.border_color_inactive_int.unwrap(),
+                        )
+                    }
+                });
+                self.floating.window_iter().for_each(|w| {
+                    if *w != focused_window {
+                        conn.change_window_attrs(
+                            *w,
+                            XCB_CW_BORDER_PIXEL,
+                            config.border_color_inactive_int.unwrap(),
+                        )
+                    }
+                });
+            } else {
+                self.normal.window_iter().for_each(|w| {
+                    conn.change_window_attrs(
+                        *w,
+                        XCB_CW_BORDER_PIXEL,
+                        config.border_color_inactive_int.unwrap(),
+                    )
+                });
+                self.floating.window_iter().for_each(|w| {
+                    conn.change_window_attrs(
+                        *w,
+                        XCB_CW_BORDER_PIXEL,
+                        config.border_color_inactive_int.unwrap(),
+                    )
+                });
+            }
+        }
     }
 
     #[inline]

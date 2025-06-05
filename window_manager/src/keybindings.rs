@@ -13,7 +13,7 @@ use crate::{config::Config, monitor::Monitor};
 
 #[allow(non_camel_case_types)]
 #[repr(u8)]
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Keycodes {
     Escape = 9,
     Num_1 = 10,
@@ -403,7 +403,7 @@ pub enum Dimension {
 }
 
 #[allow(dead_code)]
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum KeybindingAction {
     Exec(String),
     FocusWindow(Direction),
@@ -412,10 +412,11 @@ pub enum KeybindingAction {
     SwitchToWorkspace(u32),
     MoveFocusedWindowToWorkspace(u32),
     KillFocusedWindow,
+    ConfigReload,
 }
 
 #[allow(dead_code)]
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct Keybinding {
     pub modifiers: xcb_mod_mask_t,
     pub modifiers_count: usize,
@@ -449,6 +450,7 @@ pub fn handle_key_press(
     monitor: &mut Monitor,
     modifier: u16,
     keycode: xcb_keycode_t,
+    requested_config_reload: &mut bool,
 ) {
     trace!(
         "handle key press, modifier: {}, keycode: {}",
@@ -491,6 +493,7 @@ pub fn handle_key_press(
                 KeybindingAction::KillFocusedWindow => {
                     monitor.handle_kill_focused_window(conn, config)
                 }
+                KeybindingAction::ConfigReload => *requested_config_reload = true,
             };
             break;
         }
@@ -509,6 +512,24 @@ pub fn keybindings_grab(keybindings: &Vec<Keybinding>, conn: &Connection) {
             keybinding.keycode as u8,
         );
         conn.grab_key(
+            keybinding.modifiers | XCB_MOD_MASK_2 | XCB_MOD_MASK_LOCK,
+            keybinding.keycode as u8,
+        );
+    }
+}
+
+pub fn keybindings_ungrab(keybindings: &Vec<Keybinding>, conn: &Connection) {
+    for keybinding in keybindings {
+        conn.ungrab_key(keybinding.modifiers, keybinding.keycode as u8);
+        conn.ungrab_key(
+            keybinding.modifiers | XCB_MOD_MASK_2,
+            keybinding.keycode as u8,
+        );
+        conn.ungrab_key(
+            keybinding.modifiers | XCB_MOD_MASK_LOCK,
+            keybinding.keycode as u8,
+        );
+        conn.ungrab_key(
             keybinding.modifiers | XCB_MOD_MASK_2 | XCB_MOD_MASK_LOCK,
             keybinding.keycode as u8,
         );
@@ -777,6 +798,14 @@ fn keybinding_from_string(keybinding_str: &str) -> Option<Keybinding> {
                         modifiers_count,
                         keycode: keycode_maybe.unwrap(),
                         action: KeybindingAction::KillFocusedWindow,
+                    });
+                }
+                "config_reload" => {
+                    return Some(Keybinding {
+                        modifiers,
+                        modifiers_count,
+                        keycode: keycode_maybe.unwrap(),
+                        action: KeybindingAction::ConfigReload,
                     });
                 }
                 _ => error!("no command matching string: {}", command),
