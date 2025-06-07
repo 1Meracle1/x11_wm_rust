@@ -1,13 +1,14 @@
 startup_commands = [
   "setxkbmap -layout us,ru,pl -option grp:alt_space_toggle",
-  # "feh --bg-center data/wallpapers/wallpaper.png",
-  "feh --bg-scale data/wallpapers/solid8.jpg",
-  # "feh --bg-scale data/wallpapers/default24.jpg",
+  # "feh --bg-scale data/wallpapers/wallpaper.png",
+  # "feh --bg-scale data/wallpapers/default10.jpg",
+  "feh --bg-scale data/wallpapers/default24.jpg",
   # "picom --config ~/.config/i3/picom.conf",
   "alacritty",
   "target/debug/testbed_window floating X11_floating_window",
   "target/debug/testbed_window floating X11_floating_window",
-  "target/debug/testbed_window docked bottom X11_docked_bottom_window",
+  # "target/debug/testbed_window docked bottom X11_docked_bottom_window",
+  "x11_bar_imgui_cpp/build/x11_bar_imgui_cpp"
 ]
 
 keybindings = [
@@ -27,7 +28,7 @@ keybindings = [
   "Alt+Ctrl+J          move_window down  15",
 
   "Alt+Shift+H         window_size_change horizontal  30",
-  "Alt+Shift+L         window_size_change horizontal  -30",
+  "Alt+Shift+L         window_size_change horizontal -30",
   # "Alt+Shift+J         window_size_change vertical    15",
   # "Alt+Shift+K         window_size_change vertical    15",
 

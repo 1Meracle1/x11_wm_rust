@@ -15,6 +15,10 @@ fn main() {
         "xcb-randr",
         "xcb-image",
         "xcb-shape",
+        "X11-xcb",
+        "xkbcommon",
+        "xkbcommon-x11",
+        "xcb-xkb",
     ] {
         println!("cargo:rustc-link-lib={}", lib);
     }

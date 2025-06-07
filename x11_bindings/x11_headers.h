@@ -10,3 +10,7 @@
 #include <X11/Xcursor/Xcursor.h>
 #include <xcb/xcb_image.h>
 #include <xcb/shape.h>
+#include <xcb/xkb.h>
+#include <xkbcommon/xkbcommon.h>
+#include <xkbcommon/xkbcommon-x11.h>
+#include <X11/XKBlib.h>

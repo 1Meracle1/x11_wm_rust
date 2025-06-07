@@ -550,9 +550,9 @@ impl Workspace {
         if self.is_visible {
             trace!("apply focus to {}", window);
             conn.window_set_input_focus(window);
-            if window_type == WindowType::Floating {
-                conn.window_raise(window);
-            }
+            // if window_type == WindowType::Floating {
+            conn.window_raise(window);
+            // }
         }
     }
 
@@ -861,21 +861,21 @@ impl Workspace {
         }
 
         if let Some(index) = self.floating.index_of(window) {
-            if Some(window) != self.floating.at_window(self.focused_idx) {
-                self.set_focused_by_index_window(index, window, WindowType::Floating, conn, config);
-            }
+            // if Some(window) != self.floating.at_window(self.focused_idx) {
+            self.set_focused_by_index_window(index, window, WindowType::Floating, conn, config);
+            // }
             return;
         }
         if let Some(index) = self.normal.index_of(window) {
-            if Some(window) != self.normal.at_window(self.focused_idx) {
-                self.set_focused_by_index_window(index, window, WindowType::Normal, conn, config);
-            }
+            // if Some(window) != self.normal.at_window(self.focused_idx) {
+            self.set_focused_by_index_window(index, window, WindowType::Normal, conn, config);
+            // }
             return;
         }
         if let Some(index) = self.docked.index_of(window) {
-            if Some(window) != self.docked.at_window(self.focused_idx) {
-                self.set_focused_by_index_window(index, window, WindowType::Docked, conn, config);
-            }
+            // if Some(window) != self.docked.at_window(self.focused_idx) {
+            self.set_focused_by_index_window(index, window, WindowType::Docked, conn, config);
+            // }
             return;
         }
     }

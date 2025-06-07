@@ -1,3 +1,4 @@
 /target
 /bindings
-vulkan_renderer.c
+/x11_bar_imgui_cpp/build
+x11_bar_imgui_cpp/imgui.ini

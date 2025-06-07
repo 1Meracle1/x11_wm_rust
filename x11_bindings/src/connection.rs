@@ -3,7 +3,54 @@ use std::{collections::HashMap, ffi::CString, mem::MaybeUninit};
 use base::Rect;
 
 use crate::bindings::{
-    xcb_allow_events, xcb_allow_t, xcb_arc_t, xcb_atom_t, xcb_button_press_event_t, xcb_button_release_event_t, xcb_button_t, xcb_change_gc, xcb_change_property, xcb_change_window_attributes, xcb_change_window_attributes_checked, xcb_client_message_data_t, xcb_client_message_event_t, xcb_configure_window, xcb_configure_window_checked, xcb_connection_has_error, xcb_connection_t, xcb_create_cursor, xcb_create_cursor_checked, xcb_create_gc, xcb_create_gc_checked, xcb_create_pixmap, xcb_create_pixmap_checked, xcb_create_window, xcb_cursor_context_free, xcb_cursor_context_new, xcb_cursor_context_t, xcb_cursor_load_cursor, xcb_cursor_t, xcb_cw_t, xcb_destroy_window, xcb_disconnect, xcb_enter_notify_event_t, xcb_event_mask_t, xcb_ewmh_connection_t, xcb_ewmh_get_atoms_reply_t, xcb_ewmh_get_atoms_reply_wipe, xcb_ewmh_get_cardinal_reply, xcb_ewmh_get_wm_desktop, xcb_ewmh_get_wm_strut_partial, xcb_ewmh_get_wm_strut_partial_reply, xcb_ewmh_get_wm_window_type, xcb_ewmh_get_wm_window_type_reply, xcb_ewmh_init_atoms, xcb_ewmh_init_atoms_replies, xcb_ewmh_set_supported_checked, xcb_ewmh_wm_strut_partial_t, xcb_flush, xcb_focus_in_event_t, xcb_focus_out_event_t, xcb_free_gc, xcb_free_pixmap, xcb_gc_t, xcb_gcontext_t, xcb_generate_id, xcb_generic_error_t, xcb_generic_event_t, xcb_get_property, xcb_get_property_reply, xcb_get_property_value, xcb_get_property_value_length, xcb_get_setup, xcb_get_window_attributes, xcb_get_window_attributes_reply, xcb_grab_button, xcb_grab_key, xcb_grab_pointer, xcb_grab_pointer_reply, xcb_icccm_set_wm_normal_hints, xcb_image_create, xcb_image_create_native, xcb_image_destroy, xcb_image_put, xcb_intern_atom, xcb_intern_atom_cookie_t, xcb_intern_atom_reply, xcb_key_press_event_t, xcb_keycode_t, xcb_leave_notify_event_t, xcb_map_request_event_t, xcb_map_window, xcb_mod_mask_t, xcb_motion_notify_event_t, xcb_notify_mode_t, xcb_pixmap_t, xcb_point_t, xcb_poll_for_event, xcb_poly_fill_arc, xcb_poly_fill_rectangle, xcb_poly_point, xcb_put_image, xcb_rectangle_t, xcb_request_check, xcb_screen_t, xcb_send_event, xcb_set_input_focus, xcb_setup_roots_iterator, xcb_shape_mask, xcb_size_hints_t, xcb_ungrab_key, xcb_ungrab_pointer, xcb_unmap_window, xcb_wait_for_event, xcb_window_t, XCloseDisplay, XDefaultRootWindow, XDefineCursor, XDisplay, XGetXCBConnection, XOpenDisplay, XcursorFilenameLoadCursor, XCB_ACCESS, XCB_ALLOC, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING, XCB_ATOM_WM_CLASS, XCB_ATOM_WM_NORMAL_HINTS, XCB_BUTTON_PRESS, XCB_BUTTON_RELEASE, XCB_CLIENT_MESSAGE, XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH, XCB_CONFIG_WINDOW_HEIGHT, XCB_CONFIG_WINDOW_STACK_MODE, XCB_CONFIG_WINDOW_WIDTH, XCB_CONFIG_WINDOW_X, XCB_CONFIG_WINDOW_Y, XCB_COORD_MODE_ORIGIN, XCB_COPY_FROM_PARENT, XCB_CURRENT_TIME, XCB_CURSOR, XCB_CW_CURSOR, XCB_DRAWABLE, XCB_ENTER_NOTIFY, XCB_EVENT_MASK_BUTTON_PRESS, XCB_EVENT_MASK_NO_EVENT, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC, XCB_G_CONTEXT, XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP, XCB_IMAGE_FORMAT_Z_PIXMAP, XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION, XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS, XCB_LEAVE_NOTIFY, XCB_LENGTH, XCB_MAP_REQUEST, XCB_MATCH, XCB_MOD_MASK_ANY, XCB_MOTION_NOTIFY, XCB_NAME, XCB_NONE, XCB_PIXMAP, XCB_PROP_MODE_REPLACE, XCB_SHAPE_SK_BOUNDING, XCB_SHAPE_SO_SET, XCB_STACK_MODE_ABOVE, XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT
+    XCB_ACCESS, XCB_ALLOC, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING, XCB_ATOM_WM_CLASS,
+    XCB_ATOM_WM_NORMAL_HINTS, XCB_BUTTON_PRESS, XCB_BUTTON_RELEASE, XCB_CLIENT_MESSAGE,
+    XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH, XCB_CONFIG_WINDOW_HEIGHT,
+    XCB_CONFIG_WINDOW_STACK_MODE, XCB_CONFIG_WINDOW_WIDTH, XCB_CONFIG_WINDOW_X,
+    XCB_CONFIG_WINDOW_Y, XCB_COORD_MODE_ORIGIN, XCB_COPY_FROM_PARENT, XCB_CURRENT_TIME, XCB_CURSOR,
+    XCB_CW_CURSOR, XCB_DRAWABLE, XCB_ENTER_NOTIFY, XCB_EVENT_MASK_BUTTON_PRESS,
+    XCB_EVENT_MASK_NO_EVENT, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT,
+    XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC, XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP,
+    XCB_IMAGE_FORMAT_Z_PIXMAP, XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION,
+    XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS, XCB_LEAVE_NOTIFY, XCB_LENGTH, XCB_MAP_REQUEST,
+    XCB_MATCH, XCB_MOD_MASK_ANY, XCB_MOTION_NOTIFY, XCB_NAME, XCB_NONE, XCB_PIXMAP,
+    XCB_PROP_MODE_REPLACE, XCB_SHAPE_SK_BOUNDING, XCB_SHAPE_SO_SET, XCB_STACK_MODE_ABOVE,
+    XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT, XCB_XKB_EVENT_TYPE_CONTROLS_NOTIFY,
+    XCB_XKB_EVENT_TYPE_NAMES_NOTIFY, XCB_XKB_EVENT_TYPE_STATE_NOTIFY, XCB_XKB_STATE_NOTIFY,
+    XCloseDisplay, XDefaultRootWindow, XDefineCursor, XDisplay, XFree, XGetAtomName,
+    XGetXCBConnection, XKB_CONTEXT_NO_FLAGS, XKB_KEYMAP_COMPILE_NO_FLAGS,
+    XKB_KEYMAP_FORMAT_TEXT_V1, XKB_X11_MIN_MAJOR_XKB_VERSION, XKB_X11_MIN_MINOR_XKB_VERSION,
+    XKB_X11_SETUP_XKB_EXTENSION_NO_FLAGS, XOpenDisplay, XcursorFilenameLoadCursor,
+    XkbAllControlsMaskConst, XkbAllocKeyboard, XkbFreeKeyboard, XkbGetControls, XkbGetNames,
+    XkbGroupNamesMask, XkbSymbolsNameMask, xcb_allow_events, xcb_allow_t, xcb_arc_t, xcb_atom_t,
+    xcb_button_press_event_t, xcb_button_release_event_t, xcb_button_t, xcb_change_gc,
+    xcb_change_property, xcb_change_window_attributes, xcb_change_window_attributes_checked,
+    xcb_client_message_data_t, xcb_client_message_event_t, xcb_configure_window,
+    xcb_configure_window_checked, xcb_connection_has_error, xcb_connection_t, xcb_create_cursor,
+    xcb_create_cursor_checked, xcb_create_gc, xcb_create_gc_checked, xcb_create_pixmap,
+    xcb_create_pixmap_checked, xcb_create_window, xcb_cursor_context_free, xcb_cursor_context_new,
+    xcb_cursor_context_t, xcb_cursor_load_cursor, xcb_cursor_t, xcb_cw_t, xcb_destroy_window,
+    xcb_disconnect, xcb_enter_notify_event_t, xcb_event_mask_t, xcb_ewmh_connection_t,
+    xcb_ewmh_get_atoms_reply_t, xcb_ewmh_get_atoms_reply_wipe, xcb_ewmh_get_cardinal_reply,
+    xcb_ewmh_get_wm_desktop, xcb_ewmh_get_wm_strut_partial, xcb_ewmh_get_wm_strut_partial_reply,
+    xcb_ewmh_get_wm_window_type, xcb_ewmh_get_wm_window_type_reply, xcb_ewmh_init_atoms,
+    xcb_ewmh_init_atoms_replies, xcb_ewmh_set_supported_checked, xcb_ewmh_wm_strut_partial_t,
+    xcb_flush, xcb_focus_in_event_t, xcb_focus_out_event_t, xcb_free_gc, xcb_free_pixmap, xcb_gc_t,
+    xcb_gcontext_t, xcb_generate_id, xcb_generic_error_t, xcb_generic_event_t, xcb_get_property,
+    xcb_get_property_reply, xcb_get_property_value, xcb_get_property_value_length, xcb_get_setup,
+    xcb_get_window_attributes, xcb_get_window_attributes_reply, xcb_grab_button, xcb_grab_key,
+    xcb_grab_pointer, xcb_grab_pointer_reply, xcb_icccm_set_wm_normal_hints, xcb_image_create,
+    xcb_image_create_native, xcb_image_destroy, xcb_image_put, xcb_intern_atom,
+    xcb_intern_atom_cookie_t, xcb_intern_atom_reply, xcb_key_press_event_t, xcb_keycode_t,
+    xcb_leave_notify_event_t, xcb_map_request_event_t, xcb_map_window, xcb_mod_mask_t,
+    xcb_motion_notify_event_t, xcb_notify_mode_t, xcb_pixmap_t, xcb_point_t, xcb_poll_for_event,
+    xcb_poly_fill_arc, xcb_poly_fill_rectangle, xcb_poly_point, xcb_put_image, xcb_rectangle_t,
+    xcb_request_check, xcb_screen_t, xcb_send_event, xcb_set_input_focus, xcb_setup_roots_iterator,
+    xcb_shape_mask, xcb_size_hints_t, xcb_ungrab_key, xcb_ungrab_pointer, xcb_unmap_window,
+    xcb_wait_for_event, xcb_window_t, xcb_xkb_select_events, xcb_xkb_state_notify_event_t,
+    xkb_context, xkb_context_new, xkb_keymap, xkb_keymap_get_as_string, xkb_state,
+    xkb_state_update_mask, xkb_x11_get_core_keyboard_device_id, xkb_x11_keymap_new_from_device,
+    xkb_x11_setup_xkb_extension, xkb_x11_state_new_from_device,
 };
 
 #[derive(Debug)]
@@ -47,6 +94,11 @@ pub struct Connection {
     conn: *mut xcb_connection_t,
     screen: *mut xcb_screen_t,
     ewmh: *mut xcb_ewmh_connection_t,
+    xkb_event_base: u8,
+    xkb_device_id: i32,
+    xkb_context: *mut xkb_context,
+    xkb_keymap: *mut xkb_keymap,
+    xkb_state: *mut xkb_state,
 }
 
 // unsafe impl Send for Connection {}
@@ -111,11 +163,56 @@ impl Connection {
             return Err(ConnectionError::UnableToSetSupportedEwmhAtoms);
         }
 
+        let mut xkb_event_base: u8 = 0;
+        unsafe {
+            xkb_x11_setup_xkb_extension(
+                conn,
+                XKB_X11_MIN_MAJOR_XKB_VERSION as u16,
+                XKB_X11_MIN_MINOR_XKB_VERSION as u16,
+                XKB_X11_SETUP_XKB_EXTENSION_NO_FLAGS,
+                std::ptr::null_mut(),
+                std::ptr::null_mut(),
+                &mut xkb_event_base,
+                std::ptr::null_mut(),
+            );
+        }
+        let xkb_device_id = unsafe { xkb_x11_get_core_keyboard_device_id(conn) };
+        let xkb_context = unsafe { xkb_context_new(XKB_CONTEXT_NO_FLAGS) };
+        let xkb_keymap = unsafe {
+            xkb_x11_keymap_new_from_device(
+                xkb_context,
+                conn,
+                xkb_device_id,
+                XKB_KEYMAP_COMPILE_NO_FLAGS,
+            )
+        };
+        let xkb_state = unsafe { xkb_x11_state_new_from_device(xkb_keymap, conn, xkb_device_id) };
+        let mask = XCB_XKB_EVENT_TYPE_STATE_NOTIFY
+            | XCB_XKB_EVENT_TYPE_CONTROLS_NOTIFY
+            | XCB_XKB_EVENT_TYPE_NAMES_NOTIFY;
+        unsafe {
+            xcb_xkb_select_events(
+                conn,
+                xkb_device_id as u16,
+                mask as u16,
+                0,
+                mask as u16,
+                0,
+                0,
+                std::ptr::null_mut(),
+            )
+        };
+
         Ok(Self {
             display,
             conn,
             screen,
             ewmh,
+            xkb_event_base,
+            xkb_device_id,
+            xkb_context,
+            xkb_keymap,
+            xkb_state,
         })
     }
 }
@@ -128,13 +225,11 @@ impl Drop for Connection {
 }
 
 impl Connection {
-    #[allow(dead_code)]
     #[inline]
     pub fn root(&self) -> xcb_window_t {
         unsafe { *self.screen }.root
     }
 
-    #[allow(dead_code)]
     #[inline]
     pub fn screen(&self) -> xcb_screen_t {
         unsafe { *self.screen }
@@ -702,14 +797,7 @@ impl Connection {
     }
 
     pub fn ungrab_key(&self, modifiers: xcb_mod_mask_t, keycode: xcb_keycode_t) {
-        unsafe {
-            xcb_ungrab_key(
-                self.conn,
-                keycode as u8,
-                self.root(),
-                modifiers as u16,
-            )
-        };
+        unsafe { xcb_ungrab_key(self.conn, keycode as u8, self.root(), modifiers as u16) };
     }
 
     #[allow(dead_code)]
@@ -1300,97 +1388,6 @@ impl From<*mut xcb_generic_error_t> for XcbErrors {
     }
 }
 
-// impl std::fmt::Display for XcbErrors {
-//     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-//         match self {
-//             XcbErrors::Window(err) => write!(
-//                 f,
-//                 "XcbErrors::Window{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::Pixmap(err) => write!(
-//                 f,
-//                 "XcbErrors::Pixmap{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::Atom(err) => write!(
-//                 f,
-//                 "XcbErrors::Atom{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::Cursor(err) => write!(
-//                 f,
-//                 "XcbErrors::Cursor{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::Font(err) => write!(
-//                 f,
-//                 "XcbErrors::Font{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::Match(err) => write!(
-//                 f,
-//                 "XcbErrors::Match{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::Drawable(err) => write!(
-//                 f,
-//                 "XcbErrors::Drawable{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::Access(err) => write!(
-//                 f,
-//                 "XcbErrors::Access{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::Alloc(err) => write!(
-//                 f,
-//                 "XcbErrors::Alloc{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::Colormap(err) => write!(
-//                 f,
-//                 "XcbErrors::Colormap{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::GContext(err) => write!(
-//                 f,
-//                 "XcbErrors::GContext{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::IdChoice(err) => write!(
-//                 f,
-//                 "XcbErrors::IdChoice{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::Name(err) => write!(
-//                 f,
-//                 "XcbErrors::Name{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::Length(err) => write!(
-//                 f,
-//                 "XcbErrors::Length{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::Implementation(err) => write!(
-//                 f,
-//                 "XcbErrors::Implementation{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::UnknownError(err) => write!(
-//                 f,
-//                 "XcbErrors::UnknownError{{error_code: {}, major_code: {}, minor_code: {}}}",
-//                 err.error_code, err.major_code, err.minor_code
-//             ),
-//             XcbErrors::FailedToCreateImage => {
-//                 write!(f, "XcbErrors::FailedToCreateNativeImage")
-//             }
-//         }
-//     }
-// }
-
-#[allow(dead_code)]
 #[derive(Debug)]
 pub enum XcbEvents {
     KeyPress {
@@ -1431,10 +1428,12 @@ pub enum XcbEvents {
         x: i32,
         y: i32,
     },
+    XkbStateNotify {
+        event: *mut xcb_xkb_state_notify_event_t,
+    },
 }
 
 impl Connection {
-    #[allow(dead_code)]
     pub fn wait_for_event(&self) -> Option<Result<XcbEvents, XcbErrors>> {
         let generic_event = unsafe { xcb_wait_for_event(self.conn) };
         self.process_event(generic_event)
@@ -1452,6 +1451,17 @@ impl Connection {
     ) -> Option<Result<XcbEvents, XcbErrors>> {
         if generic_event.is_null() {
             return None;
+        }
+        if unsafe { *generic_event }.response_type == self.xkb_event_base {
+            let xkb_event = generic_event as *mut xcb_xkb_state_notify_event_t;
+            let xkb_type = unsafe { *xkb_event }.xkbType as u32;
+            return match xkb_type {
+                XCB_XKB_STATE_NOTIFY => Some(Ok(XcbEvents::XkbStateNotify { event: xkb_event })),
+                _ => {
+                    println!("xkb_event type: {}", xkb_type);
+                    None
+                }
+            };
         }
         let event_type = unsafe { *generic_event }.response_type & !0x80;
         match event_type as u32 {
@@ -1497,7 +1507,6 @@ impl Connection {
             }
             XCB_BUTTON_PRESS => {
                 let event = generic_event as *mut xcb_button_press_event_t;
-                println!("XCB_BUTTON_PRESS: {:#?}", unsafe { *event });
                 Some(Ok(XcbEvents::ButtonPress {
                     x: unsafe { *event }.event_x as i32,
                     y: unsafe { *event }.event_y as i32,
@@ -1508,7 +1517,6 @@ impl Connection {
             }
             XCB_BUTTON_RELEASE => {
                 let event = generic_event as *mut xcb_button_release_event_t;
-                // println!("XCB_BUTTON_RELEASE: {:#?}", unsafe { *event });
                 Some(Ok(XcbEvents::ButtonRelease {
                     x: unsafe { *event }.event_x as i32,
                     y: unsafe { *event }.event_y as i32,
@@ -1528,5 +1536,98 @@ impl Connection {
             }
             _ => None,
         }
+    }
+}
+
+impl Connection {
+    pub fn xkb_state_update_mask(&self, state_notify_event: *mut xcb_xkb_state_notify_event_t) {
+        unsafe {
+            if (*state_notify_event).xkbType == XCB_XKB_STATE_NOTIFY as u8 {
+                xkb_state_update_mask(
+                    self.xkb_state,
+                    (*state_notify_event).mods as u32,
+                    (*state_notify_event).latchedMods as u32,
+                    (*state_notify_event).lockedMods as u32,
+                    (*state_notify_event).baseGroup as u32,
+                    (*state_notify_event).latchedGroup as u32,
+                    (*state_notify_event).lockedGroup as u32,
+                );
+            }
+        };
+    }
+
+    pub fn xkb_keymap_get_as_string(&self) -> Option<Result<String, std::str::Utf8Error>> {
+        let cstr_ptr =
+            unsafe { xkb_keymap_get_as_string(self.xkb_keymap, XKB_KEYMAP_FORMAT_TEXT_V1) };
+        if cstr_ptr.is_null() {
+            None
+        } else {
+            let cstr = unsafe { std::ffi::CStr::from_ptr(cstr_ptr) };
+            Some(cstr.to_str().map(|s| s.to_owned()))
+        }
+    }
+
+    // pub fn xkb_layout_name(
+    //     &self,
+    //     idx: xkb_layout_index_t,
+    // ) -> Option<Result<String, std::str::Utf8Error>> {
+    //     let cstr_ptr = unsafe { xkb_keymap_layout_get_name(self.xkb_keymap, idx) };
+    //     if cstr_ptr.is_null() {
+    //         None
+    //     } else {
+    //         let cstr = unsafe { std::ffi::CStr::from_ptr(cstr_ptr) };
+    //         Some(cstr.to_str().map(|s| s.to_owned()))
+    //     }
+    // }
+
+    pub fn xkb_get_layout_names(&self) -> Vec<String> {
+        let mut layout_names = Vec::new();
+        unsafe {
+            let keyboard = XkbAllocKeyboard();
+            (*keyboard).dpy = self.display;
+            XkbGetControls(self.display, XkbAllControlsMaskConst as u64, keyboard);
+            XkbGetNames(self.display, XkbSymbolsNameMask, keyboard);
+            XkbGetNames(self.display, XkbGroupNamesMask, keyboard);
+
+            let num_groups = (*(*keyboard).ctrls).num_groups as usize;
+
+            let symbols = (*(*keyboard).names).symbols;
+            let symbol_names_cstr_ptr = XGetAtomName(self.display, symbols);
+            let symbol_names_cstr = std::ffi::CStr::from_ptr(symbol_names_cstr_ptr);
+            if let Ok(symbol_names) = symbol_names_cstr.to_str() {
+                let parts = symbol_names.split('+');
+                for part in parts {
+                    if !part.starts_with("pc")
+                        && !part.starts_with("inet")
+                        && !part.starts_with("group")
+                    {
+                        let layout_name = if part.contains('(') {
+                            part.chars().take_while(|c| *c != '(').collect()
+                        } else if part.contains(':') {
+                            part.chars().take_while(|c| *c != ':').collect()
+                        } else {
+                            part.to_owned()
+                        };
+                        layout_names.push(layout_name);
+                    }
+                }
+            } else {
+                let groups = (*(*keyboard).names).groups;
+                for group_atom in &groups[0..num_groups] {
+                    let group_name_cstr_ptr = XGetAtomName(self.display, *group_atom);
+                    let group_name_cstr = std::ffi::CStr::from_ptr(group_name_cstr_ptr);
+                    if let Ok(group_name) = group_name_cstr.to_str() {
+                        layout_names.push(group_name.to_owned());
+                    } else {
+                        layout_names.push("None".to_owned());
+                    }
+                    XFree(group_name_cstr_ptr as *mut ::std::os::raw::c_void);
+                }
+            }
+            XFree(symbol_names_cstr_ptr as *mut ::std::os::raw::c_void);
+
+            XkbFreeKeyboard(keyboard, 0, 1);
+        };
+        layout_names
     }
 }

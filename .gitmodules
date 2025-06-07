@@ -1,0 +1,6 @@
+[submodule "x11_bar_imgui_cpp/external/glfw"]
+	path = x11_bar_imgui_cpp/external/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "x11_bar_imgui_cpp/external/imgui"]
+	path = x11_bar_imgui_cpp/external/imgui
+	url = https://github.com/ocornut/imgui.git

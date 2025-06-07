@@ -1,0 +1,13 @@
+BasedOnStyle: LLVM
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+BreakBeforeBraces: Allman
+IndentWidth: 4
+PointerAlignment: Left
+SortIncludes: false
+ColumnLimit: 120
+UseTab: Never
+AlignConsecutiveDeclarations: true
+AlignConsecutiveAssignments: true
+BinPackParameters: false
+# BinPackArguments: false

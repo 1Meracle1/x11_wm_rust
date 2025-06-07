@@ -1365,6 +1365,3042 @@ pub const XCB_SHAPE_QUERY_EXTENTS: u32 = 5;
 pub const XCB_SHAPE_SELECT_INPUT: u32 = 6;
 pub const XCB_SHAPE_INPUT_SELECTED: u32 = 7;
 pub const XCB_SHAPE_GET_RECTANGLES: u32 = 8;
+pub const XCB_XKB_MAJOR_VERSION: u32 = 1;
+pub const XCB_XKB_MINOR_VERSION: u32 = 0;
+pub const XCB_XKB_KEYBOARD: u32 = 0;
+pub const XCB_XKB_USE_EXTENSION: u32 = 0;
+pub const XCB_XKB_SELECT_EVENTS: u32 = 1;
+pub const XCB_XKB_BELL: u32 = 3;
+pub const XCB_XKB_GET_STATE: u32 = 4;
+pub const XCB_XKB_LATCH_LOCK_STATE: u32 = 5;
+pub const XCB_XKB_GET_CONTROLS: u32 = 6;
+pub const XCB_XKB_SET_CONTROLS: u32 = 7;
+pub const XCB_XKB_GET_MAP: u32 = 8;
+pub const XCB_XKB_SET_MAP: u32 = 9;
+pub const XCB_XKB_GET_COMPAT_MAP: u32 = 10;
+pub const XCB_XKB_SET_COMPAT_MAP: u32 = 11;
+pub const XCB_XKB_GET_INDICATOR_STATE: u32 = 12;
+pub const XCB_XKB_GET_INDICATOR_MAP: u32 = 13;
+pub const XCB_XKB_SET_INDICATOR_MAP: u32 = 14;
+pub const XCB_XKB_GET_NAMED_INDICATOR: u32 = 15;
+pub const XCB_XKB_SET_NAMED_INDICATOR: u32 = 16;
+pub const XCB_XKB_GET_NAMES: u32 = 17;
+pub const XCB_XKB_SET_NAMES: u32 = 18;
+pub const XCB_XKB_PER_CLIENT_FLAGS: u32 = 21;
+pub const XCB_XKB_LIST_COMPONENTS: u32 = 22;
+pub const XCB_XKB_GET_KBD_BY_NAME: u32 = 23;
+pub const XCB_XKB_GET_DEVICE_INFO: u32 = 24;
+pub const XCB_XKB_SET_DEVICE_INFO: u32 = 25;
+pub const XCB_XKB_SET_DEBUGGING_FLAGS: u32 = 101;
+pub const XCB_XKB_NEW_KEYBOARD_NOTIFY: u32 = 0;
+pub const XCB_XKB_MAP_NOTIFY: u32 = 1;
+pub const XCB_XKB_STATE_NOTIFY: u32 = 2;
+pub const XCB_XKB_CONTROLS_NOTIFY: u32 = 3;
+pub const XCB_XKB_INDICATOR_STATE_NOTIFY: u32 = 4;
+pub const XCB_XKB_INDICATOR_MAP_NOTIFY: u32 = 5;
+pub const XCB_XKB_NAMES_NOTIFY: u32 = 6;
+pub const XCB_XKB_COMPAT_MAP_NOTIFY: u32 = 7;
+pub const XCB_XKB_BELL_NOTIFY: u32 = 8;
+pub const XCB_XKB_ACTION_MESSAGE: u32 = 9;
+pub const XCB_XKB_ACCESS_X_NOTIFY: u32 = 10;
+pub const XCB_XKB_EXTENSION_DEVICE_NOTIFY: u32 = 11;
+pub const __bool_true_false_are_defined: u32 = 1;
+pub const true_: u32 = 1;
+pub const false_: u32 = 0;
+pub const XKB_MOD_NAME_SHIFT: &[u8; 6] = b"Shift\0";
+pub const XKB_MOD_NAME_CAPS: &[u8; 5] = b"Lock\0";
+pub const XKB_MOD_NAME_CTRL: &[u8; 8] = b"Control\0";
+pub const XKB_MOD_NAME_MOD1: &[u8; 5] = b"Mod1\0";
+pub const XKB_MOD_NAME_MOD2: &[u8; 5] = b"Mod2\0";
+pub const XKB_MOD_NAME_MOD3: &[u8; 5] = b"Mod3\0";
+pub const XKB_MOD_NAME_MOD4: &[u8; 5] = b"Mod4\0";
+pub const XKB_MOD_NAME_MOD5: &[u8; 5] = b"Mod5\0";
+pub const XKB_MOD_NAME_ALT: &[u8; 5] = b"Mod1\0";
+pub const XKB_MOD_NAME_LOGO: &[u8; 5] = b"Mod4\0";
+pub const XKB_MOD_NAME_NUM: &[u8; 5] = b"Mod2\0";
+pub const XKB_VMOD_NAME_ALT: &[u8; 4] = b"Alt\0";
+pub const XKB_VMOD_NAME_HYPER: &[u8; 6] = b"Hyper\0";
+pub const XKB_VMOD_NAME_LEVEL3: &[u8; 11] = b"LevelThree\0";
+pub const XKB_VMOD_NAME_LEVEL5: &[u8; 10] = b"LevelFive\0";
+pub const XKB_VMOD_NAME_META: &[u8; 5] = b"Meta\0";
+pub const XKB_VMOD_NAME_NUM: &[u8; 8] = b"NumLock\0";
+pub const XKB_VMOD_NAME_SCROLL: &[u8; 11] = b"ScrollLock\0";
+pub const XKB_VMOD_NAME_SUPER: &[u8; 6] = b"Super\0";
+pub const XKB_LED_NAME_NUM: &[u8; 9] = b"Num Lock\0";
+pub const XKB_LED_NAME_CAPS: &[u8; 10] = b"Caps Lock\0";
+pub const XKB_LED_NAME_SCROLL: &[u8; 12] = b"Scroll Lock\0";
+pub const XKB_LED_NAME_COMPOSE: &[u8; 8] = b"Compose\0";
+pub const XKB_LED_NAME_KANA: &[u8; 5] = b"Kana\0";
+pub const XKB_KEY_NoSymbol: u32 = 0;
+pub const XKB_KEY_VoidSymbol: u32 = 16777215;
+pub const XKB_KEY_BackSpace: u32 = 65288;
+pub const XKB_KEY_Tab: u32 = 65289;
+pub const XKB_KEY_Linefeed: u32 = 65290;
+pub const XKB_KEY_Clear: u32 = 65291;
+pub const XKB_KEY_Return: u32 = 65293;
+pub const XKB_KEY_Pause: u32 = 65299;
+pub const XKB_KEY_Scroll_Lock: u32 = 65300;
+pub const XKB_KEY_Sys_Req: u32 = 65301;
+pub const XKB_KEY_Escape: u32 = 65307;
+pub const XKB_KEY_Delete: u32 = 65535;
+pub const XKB_KEY_Multi_key: u32 = 65312;
+pub const XKB_KEY_Codeinput: u32 = 65335;
+pub const XKB_KEY_SingleCandidate: u32 = 65340;
+pub const XKB_KEY_MultipleCandidate: u32 = 65341;
+pub const XKB_KEY_PreviousCandidate: u32 = 65342;
+pub const XKB_KEY_Kanji: u32 = 65313;
+pub const XKB_KEY_Muhenkan: u32 = 65314;
+pub const XKB_KEY_Henkan_Mode: u32 = 65315;
+pub const XKB_KEY_Henkan: u32 = 65315;
+pub const XKB_KEY_Romaji: u32 = 65316;
+pub const XKB_KEY_Hiragana: u32 = 65317;
+pub const XKB_KEY_Katakana: u32 = 65318;
+pub const XKB_KEY_Hiragana_Katakana: u32 = 65319;
+pub const XKB_KEY_Zenkaku: u32 = 65320;
+pub const XKB_KEY_Hankaku: u32 = 65321;
+pub const XKB_KEY_Zenkaku_Hankaku: u32 = 65322;
+pub const XKB_KEY_Touroku: u32 = 65323;
+pub const XKB_KEY_Massyo: u32 = 65324;
+pub const XKB_KEY_Kana_Lock: u32 = 65325;
+pub const XKB_KEY_Kana_Shift: u32 = 65326;
+pub const XKB_KEY_Eisu_Shift: u32 = 65327;
+pub const XKB_KEY_Eisu_toggle: u32 = 65328;
+pub const XKB_KEY_Kanji_Bangou: u32 = 65335;
+pub const XKB_KEY_Zen_Koho: u32 = 65341;
+pub const XKB_KEY_Mae_Koho: u32 = 65342;
+pub const XKB_KEY_Home: u32 = 65360;
+pub const XKB_KEY_Left: u32 = 65361;
+pub const XKB_KEY_Up: u32 = 65362;
+pub const XKB_KEY_Right: u32 = 65363;
+pub const XKB_KEY_Down: u32 = 65364;
+pub const XKB_KEY_Prior: u32 = 65365;
+pub const XKB_KEY_Page_Up: u32 = 65365;
+pub const XKB_KEY_Next: u32 = 65366;
+pub const XKB_KEY_Page_Down: u32 = 65366;
+pub const XKB_KEY_End: u32 = 65367;
+pub const XKB_KEY_Begin: u32 = 65368;
+pub const XKB_KEY_Select: u32 = 65376;
+pub const XKB_KEY_Print: u32 = 65377;
+pub const XKB_KEY_Execute: u32 = 65378;
+pub const XKB_KEY_Insert: u32 = 65379;
+pub const XKB_KEY_Undo: u32 = 65381;
+pub const XKB_KEY_Redo: u32 = 65382;
+pub const XKB_KEY_Menu: u32 = 65383;
+pub const XKB_KEY_Find: u32 = 65384;
+pub const XKB_KEY_Cancel: u32 = 65385;
+pub const XKB_KEY_Help: u32 = 65386;
+pub const XKB_KEY_Break: u32 = 65387;
+pub const XKB_KEY_Mode_switch: u32 = 65406;
+pub const XKB_KEY_script_switch: u32 = 65406;
+pub const XKB_KEY_Num_Lock: u32 = 65407;
+pub const XKB_KEY_KP_Space: u32 = 65408;
+pub const XKB_KEY_KP_Tab: u32 = 65417;
+pub const XKB_KEY_KP_Enter: u32 = 65421;
+pub const XKB_KEY_KP_F1: u32 = 65425;
+pub const XKB_KEY_KP_F2: u32 = 65426;
+pub const XKB_KEY_KP_F3: u32 = 65427;
+pub const XKB_KEY_KP_F4: u32 = 65428;
+pub const XKB_KEY_KP_Home: u32 = 65429;
+pub const XKB_KEY_KP_Left: u32 = 65430;
+pub const XKB_KEY_KP_Up: u32 = 65431;
+pub const XKB_KEY_KP_Right: u32 = 65432;
+pub const XKB_KEY_KP_Down: u32 = 65433;
+pub const XKB_KEY_KP_Prior: u32 = 65434;
+pub const XKB_KEY_KP_Page_Up: u32 = 65434;
+pub const XKB_KEY_KP_Next: u32 = 65435;
+pub const XKB_KEY_KP_Page_Down: u32 = 65435;
+pub const XKB_KEY_KP_End: u32 = 65436;
+pub const XKB_KEY_KP_Begin: u32 = 65437;
+pub const XKB_KEY_KP_Insert: u32 = 65438;
+pub const XKB_KEY_KP_Delete: u32 = 65439;
+pub const XKB_KEY_KP_Equal: u32 = 65469;
+pub const XKB_KEY_KP_Multiply: u32 = 65450;
+pub const XKB_KEY_KP_Add: u32 = 65451;
+pub const XKB_KEY_KP_Separator: u32 = 65452;
+pub const XKB_KEY_KP_Subtract: u32 = 65453;
+pub const XKB_KEY_KP_Decimal: u32 = 65454;
+pub const XKB_KEY_KP_Divide: u32 = 65455;
+pub const XKB_KEY_KP_0: u32 = 65456;
+pub const XKB_KEY_KP_1: u32 = 65457;
+pub const XKB_KEY_KP_2: u32 = 65458;
+pub const XKB_KEY_KP_3: u32 = 65459;
+pub const XKB_KEY_KP_4: u32 = 65460;
+pub const XKB_KEY_KP_5: u32 = 65461;
+pub const XKB_KEY_KP_6: u32 = 65462;
+pub const XKB_KEY_KP_7: u32 = 65463;
+pub const XKB_KEY_KP_8: u32 = 65464;
+pub const XKB_KEY_KP_9: u32 = 65465;
+pub const XKB_KEY_F1: u32 = 65470;
+pub const XKB_KEY_F2: u32 = 65471;
+pub const XKB_KEY_F3: u32 = 65472;
+pub const XKB_KEY_F4: u32 = 65473;
+pub const XKB_KEY_F5: u32 = 65474;
+pub const XKB_KEY_F6: u32 = 65475;
+pub const XKB_KEY_F7: u32 = 65476;
+pub const XKB_KEY_F8: u32 = 65477;
+pub const XKB_KEY_F9: u32 = 65478;
+pub const XKB_KEY_F10: u32 = 65479;
+pub const XKB_KEY_F11: u32 = 65480;
+pub const XKB_KEY_L1: u32 = 65480;
+pub const XKB_KEY_F12: u32 = 65481;
+pub const XKB_KEY_L2: u32 = 65481;
+pub const XKB_KEY_F13: u32 = 65482;
+pub const XKB_KEY_L3: u32 = 65482;
+pub const XKB_KEY_F14: u32 = 65483;
+pub const XKB_KEY_L4: u32 = 65483;
+pub const XKB_KEY_F15: u32 = 65484;
+pub const XKB_KEY_L5: u32 = 65484;
+pub const XKB_KEY_F16: u32 = 65485;
+pub const XKB_KEY_L6: u32 = 65485;
+pub const XKB_KEY_F17: u32 = 65486;
+pub const XKB_KEY_L7: u32 = 65486;
+pub const XKB_KEY_F18: u32 = 65487;
+pub const XKB_KEY_L8: u32 = 65487;
+pub const XKB_KEY_F19: u32 = 65488;
+pub const XKB_KEY_L9: u32 = 65488;
+pub const XKB_KEY_F20: u32 = 65489;
+pub const XKB_KEY_L10: u32 = 65489;
+pub const XKB_KEY_F21: u32 = 65490;
+pub const XKB_KEY_R1: u32 = 65490;
+pub const XKB_KEY_F22: u32 = 65491;
+pub const XKB_KEY_R2: u32 = 65491;
+pub const XKB_KEY_F23: u32 = 65492;
+pub const XKB_KEY_R3: u32 = 65492;
+pub const XKB_KEY_F24: u32 = 65493;
+pub const XKB_KEY_R4: u32 = 65493;
+pub const XKB_KEY_F25: u32 = 65494;
+pub const XKB_KEY_R5: u32 = 65494;
+pub const XKB_KEY_F26: u32 = 65495;
+pub const XKB_KEY_R6: u32 = 65495;
+pub const XKB_KEY_F27: u32 = 65496;
+pub const XKB_KEY_R7: u32 = 65496;
+pub const XKB_KEY_F28: u32 = 65497;
+pub const XKB_KEY_R8: u32 = 65497;
+pub const XKB_KEY_F29: u32 = 65498;
+pub const XKB_KEY_R9: u32 = 65498;
+pub const XKB_KEY_F30: u32 = 65499;
+pub const XKB_KEY_R10: u32 = 65499;
+pub const XKB_KEY_F31: u32 = 65500;
+pub const XKB_KEY_R11: u32 = 65500;
+pub const XKB_KEY_F32: u32 = 65501;
+pub const XKB_KEY_R12: u32 = 65501;
+pub const XKB_KEY_F33: u32 = 65502;
+pub const XKB_KEY_R13: u32 = 65502;
+pub const XKB_KEY_F34: u32 = 65503;
+pub const XKB_KEY_R14: u32 = 65503;
+pub const XKB_KEY_F35: u32 = 65504;
+pub const XKB_KEY_R15: u32 = 65504;
+pub const XKB_KEY_Shift_L: u32 = 65505;
+pub const XKB_KEY_Shift_R: u32 = 65506;
+pub const XKB_KEY_Control_L: u32 = 65507;
+pub const XKB_KEY_Control_R: u32 = 65508;
+pub const XKB_KEY_Caps_Lock: u32 = 65509;
+pub const XKB_KEY_Shift_Lock: u32 = 65510;
+pub const XKB_KEY_Meta_L: u32 = 65511;
+pub const XKB_KEY_Meta_R: u32 = 65512;
+pub const XKB_KEY_Alt_L: u32 = 65513;
+pub const XKB_KEY_Alt_R: u32 = 65514;
+pub const XKB_KEY_Super_L: u32 = 65515;
+pub const XKB_KEY_Super_R: u32 = 65516;
+pub const XKB_KEY_Hyper_L: u32 = 65517;
+pub const XKB_KEY_Hyper_R: u32 = 65518;
+pub const XKB_KEY_ISO_Lock: u32 = 65025;
+pub const XKB_KEY_ISO_Level2_Latch: u32 = 65026;
+pub const XKB_KEY_ISO_Level3_Shift: u32 = 65027;
+pub const XKB_KEY_ISO_Level3_Latch: u32 = 65028;
+pub const XKB_KEY_ISO_Level3_Lock: u32 = 65029;
+pub const XKB_KEY_ISO_Level5_Shift: u32 = 65041;
+pub const XKB_KEY_ISO_Level5_Latch: u32 = 65042;
+pub const XKB_KEY_ISO_Level5_Lock: u32 = 65043;
+pub const XKB_KEY_ISO_Group_Shift: u32 = 65406;
+pub const XKB_KEY_ISO_Group_Latch: u32 = 65030;
+pub const XKB_KEY_ISO_Group_Lock: u32 = 65031;
+pub const XKB_KEY_ISO_Next_Group: u32 = 65032;
+pub const XKB_KEY_ISO_Next_Group_Lock: u32 = 65033;
+pub const XKB_KEY_ISO_Prev_Group: u32 = 65034;
+pub const XKB_KEY_ISO_Prev_Group_Lock: u32 = 65035;
+pub const XKB_KEY_ISO_First_Group: u32 = 65036;
+pub const XKB_KEY_ISO_First_Group_Lock: u32 = 65037;
+pub const XKB_KEY_ISO_Last_Group: u32 = 65038;
+pub const XKB_KEY_ISO_Last_Group_Lock: u32 = 65039;
+pub const XKB_KEY_ISO_Left_Tab: u32 = 65056;
+pub const XKB_KEY_ISO_Move_Line_Up: u32 = 65057;
+pub const XKB_KEY_ISO_Move_Line_Down: u32 = 65058;
+pub const XKB_KEY_ISO_Partial_Line_Up: u32 = 65059;
+pub const XKB_KEY_ISO_Partial_Line_Down: u32 = 65060;
+pub const XKB_KEY_ISO_Partial_Space_Left: u32 = 65061;
+pub const XKB_KEY_ISO_Partial_Space_Right: u32 = 65062;
+pub const XKB_KEY_ISO_Set_Margin_Left: u32 = 65063;
+pub const XKB_KEY_ISO_Set_Margin_Right: u32 = 65064;
+pub const XKB_KEY_ISO_Release_Margin_Left: u32 = 65065;
+pub const XKB_KEY_ISO_Release_Margin_Right: u32 = 65066;
+pub const XKB_KEY_ISO_Release_Both_Margins: u32 = 65067;
+pub const XKB_KEY_ISO_Fast_Cursor_Left: u32 = 65068;
+pub const XKB_KEY_ISO_Fast_Cursor_Right: u32 = 65069;
+pub const XKB_KEY_ISO_Fast_Cursor_Up: u32 = 65070;
+pub const XKB_KEY_ISO_Fast_Cursor_Down: u32 = 65071;
+pub const XKB_KEY_ISO_Continuous_Underline: u32 = 65072;
+pub const XKB_KEY_ISO_Discontinuous_Underline: u32 = 65073;
+pub const XKB_KEY_ISO_Emphasize: u32 = 65074;
+pub const XKB_KEY_ISO_Center_Object: u32 = 65075;
+pub const XKB_KEY_ISO_Enter: u32 = 65076;
+pub const XKB_KEY_dead_grave: u32 = 65104;
+pub const XKB_KEY_dead_acute: u32 = 65105;
+pub const XKB_KEY_dead_circumflex: u32 = 65106;
+pub const XKB_KEY_dead_tilde: u32 = 65107;
+pub const XKB_KEY_dead_perispomeni: u32 = 65107;
+pub const XKB_KEY_dead_macron: u32 = 65108;
+pub const XKB_KEY_dead_breve: u32 = 65109;
+pub const XKB_KEY_dead_abovedot: u32 = 65110;
+pub const XKB_KEY_dead_diaeresis: u32 = 65111;
+pub const XKB_KEY_dead_abovering: u32 = 65112;
+pub const XKB_KEY_dead_doubleacute: u32 = 65113;
+pub const XKB_KEY_dead_caron: u32 = 65114;
+pub const XKB_KEY_dead_cedilla: u32 = 65115;
+pub const XKB_KEY_dead_ogonek: u32 = 65116;
+pub const XKB_KEY_dead_iota: u32 = 65117;
+pub const XKB_KEY_dead_voiced_sound: u32 = 65118;
+pub const XKB_KEY_dead_semivoiced_sound: u32 = 65119;
+pub const XKB_KEY_dead_belowdot: u32 = 65120;
+pub const XKB_KEY_dead_hook: u32 = 65121;
+pub const XKB_KEY_dead_horn: u32 = 65122;
+pub const XKB_KEY_dead_stroke: u32 = 65123;
+pub const XKB_KEY_dead_abovecomma: u32 = 65124;
+pub const XKB_KEY_dead_psili: u32 = 65124;
+pub const XKB_KEY_dead_abovereversedcomma: u32 = 65125;
+pub const XKB_KEY_dead_dasia: u32 = 65125;
+pub const XKB_KEY_dead_doublegrave: u32 = 65126;
+pub const XKB_KEY_dead_belowring: u32 = 65127;
+pub const XKB_KEY_dead_belowmacron: u32 = 65128;
+pub const XKB_KEY_dead_belowcircumflex: u32 = 65129;
+pub const XKB_KEY_dead_belowtilde: u32 = 65130;
+pub const XKB_KEY_dead_belowbreve: u32 = 65131;
+pub const XKB_KEY_dead_belowdiaeresis: u32 = 65132;
+pub const XKB_KEY_dead_invertedbreve: u32 = 65133;
+pub const XKB_KEY_dead_belowcomma: u32 = 65134;
+pub const XKB_KEY_dead_currency: u32 = 65135;
+pub const XKB_KEY_dead_lowline: u32 = 65168;
+pub const XKB_KEY_dead_aboveverticalline: u32 = 65169;
+pub const XKB_KEY_dead_belowverticalline: u32 = 65170;
+pub const XKB_KEY_dead_longsolidusoverlay: u32 = 65171;
+pub const XKB_KEY_dead_a: u32 = 65152;
+pub const XKB_KEY_dead_A: u32 = 65153;
+pub const XKB_KEY_dead_e: u32 = 65154;
+pub const XKB_KEY_dead_E: u32 = 65155;
+pub const XKB_KEY_dead_i: u32 = 65156;
+pub const XKB_KEY_dead_I: u32 = 65157;
+pub const XKB_KEY_dead_o: u32 = 65158;
+pub const XKB_KEY_dead_O: u32 = 65159;
+pub const XKB_KEY_dead_u: u32 = 65160;
+pub const XKB_KEY_dead_U: u32 = 65161;
+pub const XKB_KEY_dead_small_schwa: u32 = 65162;
+pub const XKB_KEY_dead_schwa: u32 = 65162;
+pub const XKB_KEY_dead_capital_schwa: u32 = 65163;
+pub const XKB_KEY_dead_SCHWA: u32 = 65163;
+pub const XKB_KEY_dead_greek: u32 = 65164;
+pub const XKB_KEY_dead_hamza: u32 = 65165;
+pub const XKB_KEY_First_Virtual_Screen: u32 = 65232;
+pub const XKB_KEY_Prev_Virtual_Screen: u32 = 65233;
+pub const XKB_KEY_Next_Virtual_Screen: u32 = 65234;
+pub const XKB_KEY_Last_Virtual_Screen: u32 = 65236;
+pub const XKB_KEY_Terminate_Server: u32 = 65237;
+pub const XKB_KEY_AccessX_Enable: u32 = 65136;
+pub const XKB_KEY_AccessX_Feedback_Enable: u32 = 65137;
+pub const XKB_KEY_RepeatKeys_Enable: u32 = 65138;
+pub const XKB_KEY_SlowKeys_Enable: u32 = 65139;
+pub const XKB_KEY_BounceKeys_Enable: u32 = 65140;
+pub const XKB_KEY_StickyKeys_Enable: u32 = 65141;
+pub const XKB_KEY_MouseKeys_Enable: u32 = 65142;
+pub const XKB_KEY_MouseKeys_Accel_Enable: u32 = 65143;
+pub const XKB_KEY_Overlay1_Enable: u32 = 65144;
+pub const XKB_KEY_Overlay2_Enable: u32 = 65145;
+pub const XKB_KEY_AudibleBell_Enable: u32 = 65146;
+pub const XKB_KEY_Pointer_Left: u32 = 65248;
+pub const XKB_KEY_Pointer_Right: u32 = 65249;
+pub const XKB_KEY_Pointer_Up: u32 = 65250;
+pub const XKB_KEY_Pointer_Down: u32 = 65251;
+pub const XKB_KEY_Pointer_UpLeft: u32 = 65252;
+pub const XKB_KEY_Pointer_UpRight: u32 = 65253;
+pub const XKB_KEY_Pointer_DownLeft: u32 = 65254;
+pub const XKB_KEY_Pointer_DownRight: u32 = 65255;
+pub const XKB_KEY_Pointer_Button_Dflt: u32 = 65256;
+pub const XKB_KEY_Pointer_Button1: u32 = 65257;
+pub const XKB_KEY_Pointer_Button2: u32 = 65258;
+pub const XKB_KEY_Pointer_Button3: u32 = 65259;
+pub const XKB_KEY_Pointer_Button4: u32 = 65260;
+pub const XKB_KEY_Pointer_Button5: u32 = 65261;
+pub const XKB_KEY_Pointer_DblClick_Dflt: u32 = 65262;
+pub const XKB_KEY_Pointer_DblClick1: u32 = 65263;
+pub const XKB_KEY_Pointer_DblClick2: u32 = 65264;
+pub const XKB_KEY_Pointer_DblClick3: u32 = 65265;
+pub const XKB_KEY_Pointer_DblClick4: u32 = 65266;
+pub const XKB_KEY_Pointer_DblClick5: u32 = 65267;
+pub const XKB_KEY_Pointer_Drag_Dflt: u32 = 65268;
+pub const XKB_KEY_Pointer_Drag1: u32 = 65269;
+pub const XKB_KEY_Pointer_Drag2: u32 = 65270;
+pub const XKB_KEY_Pointer_Drag3: u32 = 65271;
+pub const XKB_KEY_Pointer_Drag4: u32 = 65272;
+pub const XKB_KEY_Pointer_Drag5: u32 = 65277;
+pub const XKB_KEY_Pointer_EnableKeys: u32 = 65273;
+pub const XKB_KEY_Pointer_Accelerate: u32 = 65274;
+pub const XKB_KEY_Pointer_DfltBtnNext: u32 = 65275;
+pub const XKB_KEY_Pointer_DfltBtnPrev: u32 = 65276;
+pub const XKB_KEY_ch: u32 = 65184;
+pub const XKB_KEY_Ch: u32 = 65185;
+pub const XKB_KEY_CH: u32 = 65186;
+pub const XKB_KEY_c_h: u32 = 65187;
+pub const XKB_KEY_C_h: u32 = 65188;
+pub const XKB_KEY_C_H: u32 = 65189;
+pub const XKB_KEY_3270_Duplicate: u32 = 64769;
+pub const XKB_KEY_3270_FieldMark: u32 = 64770;
+pub const XKB_KEY_3270_Right2: u32 = 64771;
+pub const XKB_KEY_3270_Left2: u32 = 64772;
+pub const XKB_KEY_3270_BackTab: u32 = 64773;
+pub const XKB_KEY_3270_EraseEOF: u32 = 64774;
+pub const XKB_KEY_3270_EraseInput: u32 = 64775;
+pub const XKB_KEY_3270_Reset: u32 = 64776;
+pub const XKB_KEY_3270_Quit: u32 = 64777;
+pub const XKB_KEY_3270_PA1: u32 = 64778;
+pub const XKB_KEY_3270_PA2: u32 = 64779;
+pub const XKB_KEY_3270_PA3: u32 = 64780;
+pub const XKB_KEY_3270_Test: u32 = 64781;
+pub const XKB_KEY_3270_Attn: u32 = 64782;
+pub const XKB_KEY_3270_CursorBlink: u32 = 64783;
+pub const XKB_KEY_3270_AltCursor: u32 = 64784;
+pub const XKB_KEY_3270_KeyClick: u32 = 64785;
+pub const XKB_KEY_3270_Jump: u32 = 64786;
+pub const XKB_KEY_3270_Ident: u32 = 64787;
+pub const XKB_KEY_3270_Rule: u32 = 64788;
+pub const XKB_KEY_3270_Copy: u32 = 64789;
+pub const XKB_KEY_3270_Play: u32 = 64790;
+pub const XKB_KEY_3270_Setup: u32 = 64791;
+pub const XKB_KEY_3270_Record: u32 = 64792;
+pub const XKB_KEY_3270_ChangeScreen: u32 = 64793;
+pub const XKB_KEY_3270_DeleteWord: u32 = 64794;
+pub const XKB_KEY_3270_ExSelect: u32 = 64795;
+pub const XKB_KEY_3270_CursorSelect: u32 = 64796;
+pub const XKB_KEY_3270_PrintScreen: u32 = 64797;
+pub const XKB_KEY_3270_Enter: u32 = 64798;
+pub const XKB_KEY_space: u32 = 32;
+pub const XKB_KEY_exclam: u32 = 33;
+pub const XKB_KEY_quotedbl: u32 = 34;
+pub const XKB_KEY_numbersign: u32 = 35;
+pub const XKB_KEY_dollar: u32 = 36;
+pub const XKB_KEY_percent: u32 = 37;
+pub const XKB_KEY_ampersand: u32 = 38;
+pub const XKB_KEY_apostrophe: u32 = 39;
+pub const XKB_KEY_quoteright: u32 = 39;
+pub const XKB_KEY_parenleft: u32 = 40;
+pub const XKB_KEY_parenright: u32 = 41;
+pub const XKB_KEY_asterisk: u32 = 42;
+pub const XKB_KEY_plus: u32 = 43;
+pub const XKB_KEY_comma: u32 = 44;
+pub const XKB_KEY_minus: u32 = 45;
+pub const XKB_KEY_period: u32 = 46;
+pub const XKB_KEY_slash: u32 = 47;
+pub const XKB_KEY_0: u32 = 48;
+pub const XKB_KEY_1: u32 = 49;
+pub const XKB_KEY_2: u32 = 50;
+pub const XKB_KEY_3: u32 = 51;
+pub const XKB_KEY_4: u32 = 52;
+pub const XKB_KEY_5: u32 = 53;
+pub const XKB_KEY_6: u32 = 54;
+pub const XKB_KEY_7: u32 = 55;
+pub const XKB_KEY_8: u32 = 56;
+pub const XKB_KEY_9: u32 = 57;
+pub const XKB_KEY_colon: u32 = 58;
+pub const XKB_KEY_semicolon: u32 = 59;
+pub const XKB_KEY_less: u32 = 60;
+pub const XKB_KEY_equal: u32 = 61;
+pub const XKB_KEY_greater: u32 = 62;
+pub const XKB_KEY_question: u32 = 63;
+pub const XKB_KEY_at: u32 = 64;
+pub const XKB_KEY_A: u32 = 65;
+pub const XKB_KEY_B: u32 = 66;
+pub const XKB_KEY_C: u32 = 67;
+pub const XKB_KEY_D: u32 = 68;
+pub const XKB_KEY_E: u32 = 69;
+pub const XKB_KEY_F: u32 = 70;
+pub const XKB_KEY_G: u32 = 71;
+pub const XKB_KEY_H: u32 = 72;
+pub const XKB_KEY_I: u32 = 73;
+pub const XKB_KEY_J: u32 = 74;
+pub const XKB_KEY_K: u32 = 75;
+pub const XKB_KEY_L: u32 = 76;
+pub const XKB_KEY_M: u32 = 77;
+pub const XKB_KEY_N: u32 = 78;
+pub const XKB_KEY_O: u32 = 79;
+pub const XKB_KEY_P: u32 = 80;
+pub const XKB_KEY_Q: u32 = 81;
+pub const XKB_KEY_R: u32 = 82;
+pub const XKB_KEY_S: u32 = 83;
+pub const XKB_KEY_T: u32 = 84;
+pub const XKB_KEY_U: u32 = 85;
+pub const XKB_KEY_V: u32 = 86;
+pub const XKB_KEY_W: u32 = 87;
+pub const XKB_KEY_X: u32 = 88;
+pub const XKB_KEY_Y: u32 = 89;
+pub const XKB_KEY_Z: u32 = 90;
+pub const XKB_KEY_bracketleft: u32 = 91;
+pub const XKB_KEY_backslash: u32 = 92;
+pub const XKB_KEY_bracketright: u32 = 93;
+pub const XKB_KEY_asciicircum: u32 = 94;
+pub const XKB_KEY_underscore: u32 = 95;
+pub const XKB_KEY_grave: u32 = 96;
+pub const XKB_KEY_quoteleft: u32 = 96;
+pub const XKB_KEY_a: u32 = 97;
+pub const XKB_KEY_b: u32 = 98;
+pub const XKB_KEY_c: u32 = 99;
+pub const XKB_KEY_d: u32 = 100;
+pub const XKB_KEY_e: u32 = 101;
+pub const XKB_KEY_f: u32 = 102;
+pub const XKB_KEY_g: u32 = 103;
+pub const XKB_KEY_h: u32 = 104;
+pub const XKB_KEY_i: u32 = 105;
+pub const XKB_KEY_j: u32 = 106;
+pub const XKB_KEY_k: u32 = 107;
+pub const XKB_KEY_l: u32 = 108;
+pub const XKB_KEY_m: u32 = 109;
+pub const XKB_KEY_n: u32 = 110;
+pub const XKB_KEY_o: u32 = 111;
+pub const XKB_KEY_p: u32 = 112;
+pub const XKB_KEY_q: u32 = 113;
+pub const XKB_KEY_r: u32 = 114;
+pub const XKB_KEY_s: u32 = 115;
+pub const XKB_KEY_t: u32 = 116;
+pub const XKB_KEY_u: u32 = 117;
+pub const XKB_KEY_v: u32 = 118;
+pub const XKB_KEY_w: u32 = 119;
+pub const XKB_KEY_x: u32 = 120;
+pub const XKB_KEY_y: u32 = 121;
+pub const XKB_KEY_z: u32 = 122;
+pub const XKB_KEY_braceleft: u32 = 123;
+pub const XKB_KEY_bar: u32 = 124;
+pub const XKB_KEY_braceright: u32 = 125;
+pub const XKB_KEY_asciitilde: u32 = 126;
+pub const XKB_KEY_nobreakspace: u32 = 160;
+pub const XKB_KEY_exclamdown: u32 = 161;
+pub const XKB_KEY_cent: u32 = 162;
+pub const XKB_KEY_sterling: u32 = 163;
+pub const XKB_KEY_currency: u32 = 164;
+pub const XKB_KEY_yen: u32 = 165;
+pub const XKB_KEY_brokenbar: u32 = 166;
+pub const XKB_KEY_section: u32 = 167;
+pub const XKB_KEY_diaeresis: u32 = 168;
+pub const XKB_KEY_copyright: u32 = 169;
+pub const XKB_KEY_ordfeminine: u32 = 170;
+pub const XKB_KEY_guillemotleft: u32 = 171;
+pub const XKB_KEY_guillemetleft: u32 = 171;
+pub const XKB_KEY_notsign: u32 = 172;
+pub const XKB_KEY_hyphen: u32 = 173;
+pub const XKB_KEY_registered: u32 = 174;
+pub const XKB_KEY_macron: u32 = 175;
+pub const XKB_KEY_degree: u32 = 176;
+pub const XKB_KEY_plusminus: u32 = 177;
+pub const XKB_KEY_twosuperior: u32 = 178;
+pub const XKB_KEY_threesuperior: u32 = 179;
+pub const XKB_KEY_acute: u32 = 180;
+pub const XKB_KEY_mu: u32 = 181;
+pub const XKB_KEY_paragraph: u32 = 182;
+pub const XKB_KEY_periodcentered: u32 = 183;
+pub const XKB_KEY_cedilla: u32 = 184;
+pub const XKB_KEY_onesuperior: u32 = 185;
+pub const XKB_KEY_masculine: u32 = 186;
+pub const XKB_KEY_ordmasculine: u32 = 186;
+pub const XKB_KEY_guillemotright: u32 = 187;
+pub const XKB_KEY_guillemetright: u32 = 187;
+pub const XKB_KEY_onequarter: u32 = 188;
+pub const XKB_KEY_onehalf: u32 = 189;
+pub const XKB_KEY_threequarters: u32 = 190;
+pub const XKB_KEY_questiondown: u32 = 191;
+pub const XKB_KEY_Agrave: u32 = 192;
+pub const XKB_KEY_Aacute: u32 = 193;
+pub const XKB_KEY_Acircumflex: u32 = 194;
+pub const XKB_KEY_Atilde: u32 = 195;
+pub const XKB_KEY_Adiaeresis: u32 = 196;
+pub const XKB_KEY_Aring: u32 = 197;
+pub const XKB_KEY_AE: u32 = 198;
+pub const XKB_KEY_Ccedilla: u32 = 199;
+pub const XKB_KEY_Egrave: u32 = 200;
+pub const XKB_KEY_Eacute: u32 = 201;
+pub const XKB_KEY_Ecircumflex: u32 = 202;
+pub const XKB_KEY_Ediaeresis: u32 = 203;
+pub const XKB_KEY_Igrave: u32 = 204;
+pub const XKB_KEY_Iacute: u32 = 205;
+pub const XKB_KEY_Icircumflex: u32 = 206;
+pub const XKB_KEY_Idiaeresis: u32 = 207;
+pub const XKB_KEY_ETH: u32 = 208;
+pub const XKB_KEY_Eth: u32 = 208;
+pub const XKB_KEY_Ntilde: u32 = 209;
+pub const XKB_KEY_Ograve: u32 = 210;
+pub const XKB_KEY_Oacute: u32 = 211;
+pub const XKB_KEY_Ocircumflex: u32 = 212;
+pub const XKB_KEY_Otilde: u32 = 213;
+pub const XKB_KEY_Odiaeresis: u32 = 214;
+pub const XKB_KEY_multiply: u32 = 215;
+pub const XKB_KEY_Oslash: u32 = 216;
+pub const XKB_KEY_Ooblique: u32 = 216;
+pub const XKB_KEY_Ugrave: u32 = 217;
+pub const XKB_KEY_Uacute: u32 = 218;
+pub const XKB_KEY_Ucircumflex: u32 = 219;
+pub const XKB_KEY_Udiaeresis: u32 = 220;
+pub const XKB_KEY_Yacute: u32 = 221;
+pub const XKB_KEY_THORN: u32 = 222;
+pub const XKB_KEY_Thorn: u32 = 222;
+pub const XKB_KEY_ssharp: u32 = 223;
+pub const XKB_KEY_agrave: u32 = 224;
+pub const XKB_KEY_aacute: u32 = 225;
+pub const XKB_KEY_acircumflex: u32 = 226;
+pub const XKB_KEY_atilde: u32 = 227;
+pub const XKB_KEY_adiaeresis: u32 = 228;
+pub const XKB_KEY_aring: u32 = 229;
+pub const XKB_KEY_ae: u32 = 230;
+pub const XKB_KEY_ccedilla: u32 = 231;
+pub const XKB_KEY_egrave: u32 = 232;
+pub const XKB_KEY_eacute: u32 = 233;
+pub const XKB_KEY_ecircumflex: u32 = 234;
+pub const XKB_KEY_ediaeresis: u32 = 235;
+pub const XKB_KEY_igrave: u32 = 236;
+pub const XKB_KEY_iacute: u32 = 237;
+pub const XKB_KEY_icircumflex: u32 = 238;
+pub const XKB_KEY_idiaeresis: u32 = 239;
+pub const XKB_KEY_eth: u32 = 240;
+pub const XKB_KEY_ntilde: u32 = 241;
+pub const XKB_KEY_ograve: u32 = 242;
+pub const XKB_KEY_oacute: u32 = 243;
+pub const XKB_KEY_ocircumflex: u32 = 244;
+pub const XKB_KEY_otilde: u32 = 245;
+pub const XKB_KEY_odiaeresis: u32 = 246;
+pub const XKB_KEY_division: u32 = 247;
+pub const XKB_KEY_oslash: u32 = 248;
+pub const XKB_KEY_ooblique: u32 = 248;
+pub const XKB_KEY_ugrave: u32 = 249;
+pub const XKB_KEY_uacute: u32 = 250;
+pub const XKB_KEY_ucircumflex: u32 = 251;
+pub const XKB_KEY_udiaeresis: u32 = 252;
+pub const XKB_KEY_yacute: u32 = 253;
+pub const XKB_KEY_thorn: u32 = 254;
+pub const XKB_KEY_ydiaeresis: u32 = 255;
+pub const XKB_KEY_Aogonek: u32 = 417;
+pub const XKB_KEY_breve: u32 = 418;
+pub const XKB_KEY_Lstroke: u32 = 419;
+pub const XKB_KEY_Lcaron: u32 = 421;
+pub const XKB_KEY_Sacute: u32 = 422;
+pub const XKB_KEY_Scaron: u32 = 425;
+pub const XKB_KEY_Scedilla: u32 = 426;
+pub const XKB_KEY_Tcaron: u32 = 427;
+pub const XKB_KEY_Zacute: u32 = 428;
+pub const XKB_KEY_Zcaron: u32 = 430;
+pub const XKB_KEY_Zabovedot: u32 = 431;
+pub const XKB_KEY_aogonek: u32 = 433;
+pub const XKB_KEY_ogonek: u32 = 434;
+pub const XKB_KEY_lstroke: u32 = 435;
+pub const XKB_KEY_lcaron: u32 = 437;
+pub const XKB_KEY_sacute: u32 = 438;
+pub const XKB_KEY_caron: u32 = 439;
+pub const XKB_KEY_scaron: u32 = 441;
+pub const XKB_KEY_scedilla: u32 = 442;
+pub const XKB_KEY_tcaron: u32 = 443;
+pub const XKB_KEY_zacute: u32 = 444;
+pub const XKB_KEY_doubleacute: u32 = 445;
+pub const XKB_KEY_zcaron: u32 = 446;
+pub const XKB_KEY_zabovedot: u32 = 447;
+pub const XKB_KEY_Racute: u32 = 448;
+pub const XKB_KEY_Abreve: u32 = 451;
+pub const XKB_KEY_Lacute: u32 = 453;
+pub const XKB_KEY_Cacute: u32 = 454;
+pub const XKB_KEY_Ccaron: u32 = 456;
+pub const XKB_KEY_Eogonek: u32 = 458;
+pub const XKB_KEY_Ecaron: u32 = 460;
+pub const XKB_KEY_Dcaron: u32 = 463;
+pub const XKB_KEY_Dstroke: u32 = 464;
+pub const XKB_KEY_Nacute: u32 = 465;
+pub const XKB_KEY_Ncaron: u32 = 466;
+pub const XKB_KEY_Odoubleacute: u32 = 469;
+pub const XKB_KEY_Rcaron: u32 = 472;
+pub const XKB_KEY_Uring: u32 = 473;
+pub const XKB_KEY_Udoubleacute: u32 = 475;
+pub const XKB_KEY_Tcedilla: u32 = 478;
+pub const XKB_KEY_racute: u32 = 480;
+pub const XKB_KEY_abreve: u32 = 483;
+pub const XKB_KEY_lacute: u32 = 485;
+pub const XKB_KEY_cacute: u32 = 486;
+pub const XKB_KEY_ccaron: u32 = 488;
+pub const XKB_KEY_eogonek: u32 = 490;
+pub const XKB_KEY_ecaron: u32 = 492;
+pub const XKB_KEY_dcaron: u32 = 495;
+pub const XKB_KEY_dstroke: u32 = 496;
+pub const XKB_KEY_nacute: u32 = 497;
+pub const XKB_KEY_ncaron: u32 = 498;
+pub const XKB_KEY_odoubleacute: u32 = 501;
+pub const XKB_KEY_rcaron: u32 = 504;
+pub const XKB_KEY_uring: u32 = 505;
+pub const XKB_KEY_udoubleacute: u32 = 507;
+pub const XKB_KEY_tcedilla: u32 = 510;
+pub const XKB_KEY_abovedot: u32 = 511;
+pub const XKB_KEY_Hstroke: u32 = 673;
+pub const XKB_KEY_Hcircumflex: u32 = 678;
+pub const XKB_KEY_Iabovedot: u32 = 681;
+pub const XKB_KEY_Gbreve: u32 = 683;
+pub const XKB_KEY_Jcircumflex: u32 = 684;
+pub const XKB_KEY_hstroke: u32 = 689;
+pub const XKB_KEY_hcircumflex: u32 = 694;
+pub const XKB_KEY_idotless: u32 = 697;
+pub const XKB_KEY_gbreve: u32 = 699;
+pub const XKB_KEY_jcircumflex: u32 = 700;
+pub const XKB_KEY_Cabovedot: u32 = 709;
+pub const XKB_KEY_Ccircumflex: u32 = 710;
+pub const XKB_KEY_Gabovedot: u32 = 725;
+pub const XKB_KEY_Gcircumflex: u32 = 728;
+pub const XKB_KEY_Ubreve: u32 = 733;
+pub const XKB_KEY_Scircumflex: u32 = 734;
+pub const XKB_KEY_cabovedot: u32 = 741;
+pub const XKB_KEY_ccircumflex: u32 = 742;
+pub const XKB_KEY_gabovedot: u32 = 757;
+pub const XKB_KEY_gcircumflex: u32 = 760;
+pub const XKB_KEY_ubreve: u32 = 765;
+pub const XKB_KEY_scircumflex: u32 = 766;
+pub const XKB_KEY_kra: u32 = 930;
+pub const XKB_KEY_kappa: u32 = 930;
+pub const XKB_KEY_Rcedilla: u32 = 931;
+pub const XKB_KEY_Itilde: u32 = 933;
+pub const XKB_KEY_Lcedilla: u32 = 934;
+pub const XKB_KEY_Emacron: u32 = 938;
+pub const XKB_KEY_Gcedilla: u32 = 939;
+pub const XKB_KEY_Tslash: u32 = 940;
+pub const XKB_KEY_rcedilla: u32 = 947;
+pub const XKB_KEY_itilde: u32 = 949;
+pub const XKB_KEY_lcedilla: u32 = 950;
+pub const XKB_KEY_emacron: u32 = 954;
+pub const XKB_KEY_gcedilla: u32 = 955;
+pub const XKB_KEY_tslash: u32 = 956;
+pub const XKB_KEY_ENG: u32 = 957;
+pub const XKB_KEY_eng: u32 = 959;
+pub const XKB_KEY_Amacron: u32 = 960;
+pub const XKB_KEY_Iogonek: u32 = 967;
+pub const XKB_KEY_Eabovedot: u32 = 972;
+pub const XKB_KEY_Imacron: u32 = 975;
+pub const XKB_KEY_Ncedilla: u32 = 977;
+pub const XKB_KEY_Omacron: u32 = 978;
+pub const XKB_KEY_Kcedilla: u32 = 979;
+pub const XKB_KEY_Uogonek: u32 = 985;
+pub const XKB_KEY_Utilde: u32 = 989;
+pub const XKB_KEY_Umacron: u32 = 990;
+pub const XKB_KEY_amacron: u32 = 992;
+pub const XKB_KEY_iogonek: u32 = 999;
+pub const XKB_KEY_eabovedot: u32 = 1004;
+pub const XKB_KEY_imacron: u32 = 1007;
+pub const XKB_KEY_ncedilla: u32 = 1009;
+pub const XKB_KEY_omacron: u32 = 1010;
+pub const XKB_KEY_kcedilla: u32 = 1011;
+pub const XKB_KEY_uogonek: u32 = 1017;
+pub const XKB_KEY_utilde: u32 = 1021;
+pub const XKB_KEY_umacron: u32 = 1022;
+pub const XKB_KEY_Wcircumflex: u32 = 16777588;
+pub const XKB_KEY_wcircumflex: u32 = 16777589;
+pub const XKB_KEY_Ycircumflex: u32 = 16777590;
+pub const XKB_KEY_ycircumflex: u32 = 16777591;
+pub const XKB_KEY_Babovedot: u32 = 16784898;
+pub const XKB_KEY_babovedot: u32 = 16784899;
+pub const XKB_KEY_Dabovedot: u32 = 16784906;
+pub const XKB_KEY_dabovedot: u32 = 16784907;
+pub const XKB_KEY_Fabovedot: u32 = 16784926;
+pub const XKB_KEY_fabovedot: u32 = 16784927;
+pub const XKB_KEY_Mabovedot: u32 = 16784960;
+pub const XKB_KEY_mabovedot: u32 = 16784961;
+pub const XKB_KEY_Pabovedot: u32 = 16784982;
+pub const XKB_KEY_pabovedot: u32 = 16784983;
+pub const XKB_KEY_Sabovedot: u32 = 16784992;
+pub const XKB_KEY_sabovedot: u32 = 16784993;
+pub const XKB_KEY_Tabovedot: u32 = 16785002;
+pub const XKB_KEY_tabovedot: u32 = 16785003;
+pub const XKB_KEY_Wgrave: u32 = 16785024;
+pub const XKB_KEY_wgrave: u32 = 16785025;
+pub const XKB_KEY_Wacute: u32 = 16785026;
+pub const XKB_KEY_wacute: u32 = 16785027;
+pub const XKB_KEY_Wdiaeresis: u32 = 16785028;
+pub const XKB_KEY_wdiaeresis: u32 = 16785029;
+pub const XKB_KEY_Ygrave: u32 = 16785138;
+pub const XKB_KEY_ygrave: u32 = 16785139;
+pub const XKB_KEY_OE: u32 = 5052;
+pub const XKB_KEY_oe: u32 = 5053;
+pub const XKB_KEY_Ydiaeresis: u32 = 5054;
+pub const XKB_KEY_overline: u32 = 1150;
+pub const XKB_KEY_kana_fullstop: u32 = 1185;
+pub const XKB_KEY_kana_openingbracket: u32 = 1186;
+pub const XKB_KEY_kana_closingbracket: u32 = 1187;
+pub const XKB_KEY_kana_comma: u32 = 1188;
+pub const XKB_KEY_kana_conjunctive: u32 = 1189;
+pub const XKB_KEY_kana_middledot: u32 = 1189;
+pub const XKB_KEY_kana_WO: u32 = 1190;
+pub const XKB_KEY_kana_a: u32 = 1191;
+pub const XKB_KEY_kana_i: u32 = 1192;
+pub const XKB_KEY_kana_u: u32 = 1193;
+pub const XKB_KEY_kana_e: u32 = 1194;
+pub const XKB_KEY_kana_o: u32 = 1195;
+pub const XKB_KEY_kana_ya: u32 = 1196;
+pub const XKB_KEY_kana_yu: u32 = 1197;
+pub const XKB_KEY_kana_yo: u32 = 1198;
+pub const XKB_KEY_kana_tsu: u32 = 1199;
+pub const XKB_KEY_kana_tu: u32 = 1199;
+pub const XKB_KEY_prolongedsound: u32 = 1200;
+pub const XKB_KEY_kana_A: u32 = 1201;
+pub const XKB_KEY_kana_I: u32 = 1202;
+pub const XKB_KEY_kana_U: u32 = 1203;
+pub const XKB_KEY_kana_E: u32 = 1204;
+pub const XKB_KEY_kana_O: u32 = 1205;
+pub const XKB_KEY_kana_KA: u32 = 1206;
+pub const XKB_KEY_kana_KI: u32 = 1207;
+pub const XKB_KEY_kana_KU: u32 = 1208;
+pub const XKB_KEY_kana_KE: u32 = 1209;
+pub const XKB_KEY_kana_KO: u32 = 1210;
+pub const XKB_KEY_kana_SA: u32 = 1211;
+pub const XKB_KEY_kana_SHI: u32 = 1212;
+pub const XKB_KEY_kana_SU: u32 = 1213;
+pub const XKB_KEY_kana_SE: u32 = 1214;
+pub const XKB_KEY_kana_SO: u32 = 1215;
+pub const XKB_KEY_kana_TA: u32 = 1216;
+pub const XKB_KEY_kana_CHI: u32 = 1217;
+pub const XKB_KEY_kana_TI: u32 = 1217;
+pub const XKB_KEY_kana_TSU: u32 = 1218;
+pub const XKB_KEY_kana_TU: u32 = 1218;
+pub const XKB_KEY_kana_TE: u32 = 1219;
+pub const XKB_KEY_kana_TO: u32 = 1220;
+pub const XKB_KEY_kana_NA: u32 = 1221;
+pub const XKB_KEY_kana_NI: u32 = 1222;
+pub const XKB_KEY_kana_NU: u32 = 1223;
+pub const XKB_KEY_kana_NE: u32 = 1224;
+pub const XKB_KEY_kana_NO: u32 = 1225;
+pub const XKB_KEY_kana_HA: u32 = 1226;
+pub const XKB_KEY_kana_HI: u32 = 1227;
+pub const XKB_KEY_kana_FU: u32 = 1228;
+pub const XKB_KEY_kana_HU: u32 = 1228;
+pub const XKB_KEY_kana_HE: u32 = 1229;
+pub const XKB_KEY_kana_HO: u32 = 1230;
+pub const XKB_KEY_kana_MA: u32 = 1231;
+pub const XKB_KEY_kana_MI: u32 = 1232;
+pub const XKB_KEY_kana_MU: u32 = 1233;
+pub const XKB_KEY_kana_ME: u32 = 1234;
+pub const XKB_KEY_kana_MO: u32 = 1235;
+pub const XKB_KEY_kana_YA: u32 = 1236;
+pub const XKB_KEY_kana_YU: u32 = 1237;
+pub const XKB_KEY_kana_YO: u32 = 1238;
+pub const XKB_KEY_kana_RA: u32 = 1239;
+pub const XKB_KEY_kana_RI: u32 = 1240;
+pub const XKB_KEY_kana_RU: u32 = 1241;
+pub const XKB_KEY_kana_RE: u32 = 1242;
+pub const XKB_KEY_kana_RO: u32 = 1243;
+pub const XKB_KEY_kana_WA: u32 = 1244;
+pub const XKB_KEY_kana_N: u32 = 1245;
+pub const XKB_KEY_voicedsound: u32 = 1246;
+pub const XKB_KEY_semivoicedsound: u32 = 1247;
+pub const XKB_KEY_kana_switch: u32 = 65406;
+pub const XKB_KEY_Farsi_0: u32 = 16778992;
+pub const XKB_KEY_Farsi_1: u32 = 16778993;
+pub const XKB_KEY_Farsi_2: u32 = 16778994;
+pub const XKB_KEY_Farsi_3: u32 = 16778995;
+pub const XKB_KEY_Farsi_4: u32 = 16778996;
+pub const XKB_KEY_Farsi_5: u32 = 16778997;
+pub const XKB_KEY_Farsi_6: u32 = 16778998;
+pub const XKB_KEY_Farsi_7: u32 = 16778999;
+pub const XKB_KEY_Farsi_8: u32 = 16779000;
+pub const XKB_KEY_Farsi_9: u32 = 16779001;
+pub const XKB_KEY_Arabic_percent: u32 = 16778858;
+pub const XKB_KEY_Arabic_superscript_alef: u32 = 16778864;
+pub const XKB_KEY_Arabic_tteh: u32 = 16778873;
+pub const XKB_KEY_Arabic_peh: u32 = 16778878;
+pub const XKB_KEY_Arabic_tcheh: u32 = 16778886;
+pub const XKB_KEY_Arabic_ddal: u32 = 16778888;
+pub const XKB_KEY_Arabic_rreh: u32 = 16778897;
+pub const XKB_KEY_Arabic_comma: u32 = 1452;
+pub const XKB_KEY_Arabic_fullstop: u32 = 16778964;
+pub const XKB_KEY_Arabic_0: u32 = 16778848;
+pub const XKB_KEY_Arabic_1: u32 = 16778849;
+pub const XKB_KEY_Arabic_2: u32 = 16778850;
+pub const XKB_KEY_Arabic_3: u32 = 16778851;
+pub const XKB_KEY_Arabic_4: u32 = 16778852;
+pub const XKB_KEY_Arabic_5: u32 = 16778853;
+pub const XKB_KEY_Arabic_6: u32 = 16778854;
+pub const XKB_KEY_Arabic_7: u32 = 16778855;
+pub const XKB_KEY_Arabic_8: u32 = 16778856;
+pub const XKB_KEY_Arabic_9: u32 = 16778857;
+pub const XKB_KEY_Arabic_semicolon: u32 = 1467;
+pub const XKB_KEY_Arabic_question_mark: u32 = 1471;
+pub const XKB_KEY_Arabic_hamza: u32 = 1473;
+pub const XKB_KEY_Arabic_maddaonalef: u32 = 1474;
+pub const XKB_KEY_Arabic_hamzaonalef: u32 = 1475;
+pub const XKB_KEY_Arabic_hamzaonwaw: u32 = 1476;
+pub const XKB_KEY_Arabic_hamzaunderalef: u32 = 1477;
+pub const XKB_KEY_Arabic_hamzaonyeh: u32 = 1478;
+pub const XKB_KEY_Arabic_alef: u32 = 1479;
+pub const XKB_KEY_Arabic_beh: u32 = 1480;
+pub const XKB_KEY_Arabic_tehmarbuta: u32 = 1481;
+pub const XKB_KEY_Arabic_teh: u32 = 1482;
+pub const XKB_KEY_Arabic_theh: u32 = 1483;
+pub const XKB_KEY_Arabic_jeem: u32 = 1484;
+pub const XKB_KEY_Arabic_hah: u32 = 1485;
+pub const XKB_KEY_Arabic_khah: u32 = 1486;
+pub const XKB_KEY_Arabic_dal: u32 = 1487;
+pub const XKB_KEY_Arabic_thal: u32 = 1488;
+pub const XKB_KEY_Arabic_ra: u32 = 1489;
+pub const XKB_KEY_Arabic_zain: u32 = 1490;
+pub const XKB_KEY_Arabic_seen: u32 = 1491;
+pub const XKB_KEY_Arabic_sheen: u32 = 1492;
+pub const XKB_KEY_Arabic_sad: u32 = 1493;
+pub const XKB_KEY_Arabic_dad: u32 = 1494;
+pub const XKB_KEY_Arabic_tah: u32 = 1495;
+pub const XKB_KEY_Arabic_zah: u32 = 1496;
+pub const XKB_KEY_Arabic_ain: u32 = 1497;
+pub const XKB_KEY_Arabic_ghain: u32 = 1498;
+pub const XKB_KEY_Arabic_tatweel: u32 = 1504;
+pub const XKB_KEY_Arabic_feh: u32 = 1505;
+pub const XKB_KEY_Arabic_qaf: u32 = 1506;
+pub const XKB_KEY_Arabic_kaf: u32 = 1507;
+pub const XKB_KEY_Arabic_lam: u32 = 1508;
+pub const XKB_KEY_Arabic_meem: u32 = 1509;
+pub const XKB_KEY_Arabic_noon: u32 = 1510;
+pub const XKB_KEY_Arabic_ha: u32 = 1511;
+pub const XKB_KEY_Arabic_heh: u32 = 1511;
+pub const XKB_KEY_Arabic_waw: u32 = 1512;
+pub const XKB_KEY_Arabic_alefmaksura: u32 = 1513;
+pub const XKB_KEY_Arabic_yeh: u32 = 1514;
+pub const XKB_KEY_Arabic_fathatan: u32 = 1515;
+pub const XKB_KEY_Arabic_dammatan: u32 = 1516;
+pub const XKB_KEY_Arabic_kasratan: u32 = 1517;
+pub const XKB_KEY_Arabic_fatha: u32 = 1518;
+pub const XKB_KEY_Arabic_damma: u32 = 1519;
+pub const XKB_KEY_Arabic_kasra: u32 = 1520;
+pub const XKB_KEY_Arabic_shadda: u32 = 1521;
+pub const XKB_KEY_Arabic_sukun: u32 = 1522;
+pub const XKB_KEY_Arabic_madda_above: u32 = 16778835;
+pub const XKB_KEY_Arabic_hamza_above: u32 = 16778836;
+pub const XKB_KEY_Arabic_hamza_below: u32 = 16778837;
+pub const XKB_KEY_Arabic_jeh: u32 = 16778904;
+pub const XKB_KEY_Arabic_veh: u32 = 16778916;
+pub const XKB_KEY_Arabic_keheh: u32 = 16778921;
+pub const XKB_KEY_Arabic_gaf: u32 = 16778927;
+pub const XKB_KEY_Arabic_noon_ghunna: u32 = 16778938;
+pub const XKB_KEY_Arabic_heh_doachashmee: u32 = 16778942;
+pub const XKB_KEY_Farsi_yeh: u32 = 16778956;
+pub const XKB_KEY_Arabic_farsi_yeh: u32 = 16778956;
+pub const XKB_KEY_Arabic_yeh_baree: u32 = 16778962;
+pub const XKB_KEY_Arabic_heh_goal: u32 = 16778945;
+pub const XKB_KEY_Arabic_switch: u32 = 65406;
+pub const XKB_KEY_Cyrillic_GHE_bar: u32 = 16778386;
+pub const XKB_KEY_Cyrillic_ghe_bar: u32 = 16778387;
+pub const XKB_KEY_Cyrillic_ZHE_descender: u32 = 16778390;
+pub const XKB_KEY_Cyrillic_zhe_descender: u32 = 16778391;
+pub const XKB_KEY_Cyrillic_KA_descender: u32 = 16778394;
+pub const XKB_KEY_Cyrillic_ka_descender: u32 = 16778395;
+pub const XKB_KEY_Cyrillic_KA_vertstroke: u32 = 16778396;
+pub const XKB_KEY_Cyrillic_ka_vertstroke: u32 = 16778397;
+pub const XKB_KEY_Cyrillic_EN_descender: u32 = 16778402;
+pub const XKB_KEY_Cyrillic_en_descender: u32 = 16778403;
+pub const XKB_KEY_Cyrillic_U_straight: u32 = 16778414;
+pub const XKB_KEY_Cyrillic_u_straight: u32 = 16778415;
+pub const XKB_KEY_Cyrillic_U_straight_bar: u32 = 16778416;
+pub const XKB_KEY_Cyrillic_u_straight_bar: u32 = 16778417;
+pub const XKB_KEY_Cyrillic_HA_descender: u32 = 16778418;
+pub const XKB_KEY_Cyrillic_ha_descender: u32 = 16778419;
+pub const XKB_KEY_Cyrillic_CHE_descender: u32 = 16778422;
+pub const XKB_KEY_Cyrillic_che_descender: u32 = 16778423;
+pub const XKB_KEY_Cyrillic_CHE_vertstroke: u32 = 16778424;
+pub const XKB_KEY_Cyrillic_che_vertstroke: u32 = 16778425;
+pub const XKB_KEY_Cyrillic_SHHA: u32 = 16778426;
+pub const XKB_KEY_Cyrillic_shha: u32 = 16778427;
+pub const XKB_KEY_Cyrillic_SCHWA: u32 = 16778456;
+pub const XKB_KEY_Cyrillic_schwa: u32 = 16778457;
+pub const XKB_KEY_Cyrillic_I_macron: u32 = 16778466;
+pub const XKB_KEY_Cyrillic_i_macron: u32 = 16778467;
+pub const XKB_KEY_Cyrillic_O_bar: u32 = 16778472;
+pub const XKB_KEY_Cyrillic_o_bar: u32 = 16778473;
+pub const XKB_KEY_Cyrillic_U_macron: u32 = 16778478;
+pub const XKB_KEY_Cyrillic_u_macron: u32 = 16778479;
+pub const XKB_KEY_Serbian_dje: u32 = 1697;
+pub const XKB_KEY_Macedonia_gje: u32 = 1698;
+pub const XKB_KEY_Cyrillic_io: u32 = 1699;
+pub const XKB_KEY_Ukrainian_ie: u32 = 1700;
+pub const XKB_KEY_Ukranian_je: u32 = 1700;
+pub const XKB_KEY_Macedonia_dse: u32 = 1701;
+pub const XKB_KEY_Ukrainian_i: u32 = 1702;
+pub const XKB_KEY_Ukranian_i: u32 = 1702;
+pub const XKB_KEY_Ukrainian_yi: u32 = 1703;
+pub const XKB_KEY_Ukranian_yi: u32 = 1703;
+pub const XKB_KEY_Cyrillic_je: u32 = 1704;
+pub const XKB_KEY_Serbian_je: u32 = 1704;
+pub const XKB_KEY_Cyrillic_lje: u32 = 1705;
+pub const XKB_KEY_Serbian_lje: u32 = 1705;
+pub const XKB_KEY_Cyrillic_nje: u32 = 1706;
+pub const XKB_KEY_Serbian_nje: u32 = 1706;
+pub const XKB_KEY_Serbian_tshe: u32 = 1707;
+pub const XKB_KEY_Macedonia_kje: u32 = 1708;
+pub const XKB_KEY_Ukrainian_ghe_with_upturn: u32 = 1709;
+pub const XKB_KEY_Byelorussian_shortu: u32 = 1710;
+pub const XKB_KEY_Cyrillic_dzhe: u32 = 1711;
+pub const XKB_KEY_Serbian_dze: u32 = 1711;
+pub const XKB_KEY_numerosign: u32 = 1712;
+pub const XKB_KEY_Serbian_DJE: u32 = 1713;
+pub const XKB_KEY_Macedonia_GJE: u32 = 1714;
+pub const XKB_KEY_Cyrillic_IO: u32 = 1715;
+pub const XKB_KEY_Ukrainian_IE: u32 = 1716;
+pub const XKB_KEY_Ukranian_JE: u32 = 1716;
+pub const XKB_KEY_Macedonia_DSE: u32 = 1717;
+pub const XKB_KEY_Ukrainian_I: u32 = 1718;
+pub const XKB_KEY_Ukranian_I: u32 = 1718;
+pub const XKB_KEY_Ukrainian_YI: u32 = 1719;
+pub const XKB_KEY_Ukranian_YI: u32 = 1719;
+pub const XKB_KEY_Cyrillic_JE: u32 = 1720;
+pub const XKB_KEY_Serbian_JE: u32 = 1720;
+pub const XKB_KEY_Cyrillic_LJE: u32 = 1721;
+pub const XKB_KEY_Serbian_LJE: u32 = 1721;
+pub const XKB_KEY_Cyrillic_NJE: u32 = 1722;
+pub const XKB_KEY_Serbian_NJE: u32 = 1722;
+pub const XKB_KEY_Serbian_TSHE: u32 = 1723;
+pub const XKB_KEY_Macedonia_KJE: u32 = 1724;
+pub const XKB_KEY_Ukrainian_GHE_WITH_UPTURN: u32 = 1725;
+pub const XKB_KEY_Byelorussian_SHORTU: u32 = 1726;
+pub const XKB_KEY_Cyrillic_DZHE: u32 = 1727;
+pub const XKB_KEY_Serbian_DZE: u32 = 1727;
+pub const XKB_KEY_Cyrillic_yu: u32 = 1728;
+pub const XKB_KEY_Cyrillic_a: u32 = 1729;
+pub const XKB_KEY_Cyrillic_be: u32 = 1730;
+pub const XKB_KEY_Cyrillic_tse: u32 = 1731;
+pub const XKB_KEY_Cyrillic_de: u32 = 1732;
+pub const XKB_KEY_Cyrillic_ie: u32 = 1733;
+pub const XKB_KEY_Cyrillic_ef: u32 = 1734;
+pub const XKB_KEY_Cyrillic_ghe: u32 = 1735;
+pub const XKB_KEY_Cyrillic_ha: u32 = 1736;
+pub const XKB_KEY_Cyrillic_i: u32 = 1737;
+pub const XKB_KEY_Cyrillic_shorti: u32 = 1738;
+pub const XKB_KEY_Cyrillic_ka: u32 = 1739;
+pub const XKB_KEY_Cyrillic_el: u32 = 1740;
+pub const XKB_KEY_Cyrillic_em: u32 = 1741;
+pub const XKB_KEY_Cyrillic_en: u32 = 1742;
+pub const XKB_KEY_Cyrillic_o: u32 = 1743;
+pub const XKB_KEY_Cyrillic_pe: u32 = 1744;
+pub const XKB_KEY_Cyrillic_ya: u32 = 1745;
+pub const XKB_KEY_Cyrillic_er: u32 = 1746;
+pub const XKB_KEY_Cyrillic_es: u32 = 1747;
+pub const XKB_KEY_Cyrillic_te: u32 = 1748;
+pub const XKB_KEY_Cyrillic_u: u32 = 1749;
+pub const XKB_KEY_Cyrillic_zhe: u32 = 1750;
+pub const XKB_KEY_Cyrillic_ve: u32 = 1751;
+pub const XKB_KEY_Cyrillic_softsign: u32 = 1752;
+pub const XKB_KEY_Cyrillic_yeru: u32 = 1753;
+pub const XKB_KEY_Cyrillic_ze: u32 = 1754;
+pub const XKB_KEY_Cyrillic_sha: u32 = 1755;
+pub const XKB_KEY_Cyrillic_e: u32 = 1756;
+pub const XKB_KEY_Cyrillic_shcha: u32 = 1757;
+pub const XKB_KEY_Cyrillic_che: u32 = 1758;
+pub const XKB_KEY_Cyrillic_hardsign: u32 = 1759;
+pub const XKB_KEY_Cyrillic_YU: u32 = 1760;
+pub const XKB_KEY_Cyrillic_A: u32 = 1761;
+pub const XKB_KEY_Cyrillic_BE: u32 = 1762;
+pub const XKB_KEY_Cyrillic_TSE: u32 = 1763;
+pub const XKB_KEY_Cyrillic_DE: u32 = 1764;
+pub const XKB_KEY_Cyrillic_IE: u32 = 1765;
+pub const XKB_KEY_Cyrillic_EF: u32 = 1766;
+pub const XKB_KEY_Cyrillic_GHE: u32 = 1767;
+pub const XKB_KEY_Cyrillic_HA: u32 = 1768;
+pub const XKB_KEY_Cyrillic_I: u32 = 1769;
+pub const XKB_KEY_Cyrillic_SHORTI: u32 = 1770;
+pub const XKB_KEY_Cyrillic_KA: u32 = 1771;
+pub const XKB_KEY_Cyrillic_EL: u32 = 1772;
+pub const XKB_KEY_Cyrillic_EM: u32 = 1773;
+pub const XKB_KEY_Cyrillic_EN: u32 = 1774;
+pub const XKB_KEY_Cyrillic_O: u32 = 1775;
+pub const XKB_KEY_Cyrillic_PE: u32 = 1776;
+pub const XKB_KEY_Cyrillic_YA: u32 = 1777;
+pub const XKB_KEY_Cyrillic_ER: u32 = 1778;
+pub const XKB_KEY_Cyrillic_ES: u32 = 1779;
+pub const XKB_KEY_Cyrillic_TE: u32 = 1780;
+pub const XKB_KEY_Cyrillic_U: u32 = 1781;
+pub const XKB_KEY_Cyrillic_ZHE: u32 = 1782;
+pub const XKB_KEY_Cyrillic_VE: u32 = 1783;
+pub const XKB_KEY_Cyrillic_SOFTSIGN: u32 = 1784;
+pub const XKB_KEY_Cyrillic_YERU: u32 = 1785;
+pub const XKB_KEY_Cyrillic_ZE: u32 = 1786;
+pub const XKB_KEY_Cyrillic_SHA: u32 = 1787;
+pub const XKB_KEY_Cyrillic_E: u32 = 1788;
+pub const XKB_KEY_Cyrillic_SHCHA: u32 = 1789;
+pub const XKB_KEY_Cyrillic_CHE: u32 = 1790;
+pub const XKB_KEY_Cyrillic_HARDSIGN: u32 = 1791;
+pub const XKB_KEY_Greek_ALPHAaccent: u32 = 1953;
+pub const XKB_KEY_Greek_EPSILONaccent: u32 = 1954;
+pub const XKB_KEY_Greek_ETAaccent: u32 = 1955;
+pub const XKB_KEY_Greek_IOTAaccent: u32 = 1956;
+pub const XKB_KEY_Greek_IOTAdieresis: u32 = 1957;
+pub const XKB_KEY_Greek_IOTAdiaeresis: u32 = 1957;
+pub const XKB_KEY_Greek_OMICRONaccent: u32 = 1959;
+pub const XKB_KEY_Greek_UPSILONaccent: u32 = 1960;
+pub const XKB_KEY_Greek_UPSILONdieresis: u32 = 1961;
+pub const XKB_KEY_Greek_OMEGAaccent: u32 = 1963;
+pub const XKB_KEY_Greek_accentdieresis: u32 = 1966;
+pub const XKB_KEY_Greek_horizbar: u32 = 1967;
+pub const XKB_KEY_Greek_alphaaccent: u32 = 1969;
+pub const XKB_KEY_Greek_epsilonaccent: u32 = 1970;
+pub const XKB_KEY_Greek_etaaccent: u32 = 1971;
+pub const XKB_KEY_Greek_iotaaccent: u32 = 1972;
+pub const XKB_KEY_Greek_iotadieresis: u32 = 1973;
+pub const XKB_KEY_Greek_iotaaccentdieresis: u32 = 1974;
+pub const XKB_KEY_Greek_omicronaccent: u32 = 1975;
+pub const XKB_KEY_Greek_upsilonaccent: u32 = 1976;
+pub const XKB_KEY_Greek_upsilondieresis: u32 = 1977;
+pub const XKB_KEY_Greek_upsilonaccentdieresis: u32 = 1978;
+pub const XKB_KEY_Greek_omegaaccent: u32 = 1979;
+pub const XKB_KEY_Greek_ALPHA: u32 = 1985;
+pub const XKB_KEY_Greek_BETA: u32 = 1986;
+pub const XKB_KEY_Greek_GAMMA: u32 = 1987;
+pub const XKB_KEY_Greek_DELTA: u32 = 1988;
+pub const XKB_KEY_Greek_EPSILON: u32 = 1989;
+pub const XKB_KEY_Greek_ZETA: u32 = 1990;
+pub const XKB_KEY_Greek_ETA: u32 = 1991;
+pub const XKB_KEY_Greek_THETA: u32 = 1992;
+pub const XKB_KEY_Greek_IOTA: u32 = 1993;
+pub const XKB_KEY_Greek_KAPPA: u32 = 1994;
+pub const XKB_KEY_Greek_LAMDA: u32 = 1995;
+pub const XKB_KEY_Greek_LAMBDA: u32 = 1995;
+pub const XKB_KEY_Greek_MU: u32 = 1996;
+pub const XKB_KEY_Greek_NU: u32 = 1997;
+pub const XKB_KEY_Greek_XI: u32 = 1998;
+pub const XKB_KEY_Greek_OMICRON: u32 = 1999;
+pub const XKB_KEY_Greek_PI: u32 = 2000;
+pub const XKB_KEY_Greek_RHO: u32 = 2001;
+pub const XKB_KEY_Greek_SIGMA: u32 = 2002;
+pub const XKB_KEY_Greek_TAU: u32 = 2004;
+pub const XKB_KEY_Greek_UPSILON: u32 = 2005;
+pub const XKB_KEY_Greek_PHI: u32 = 2006;
+pub const XKB_KEY_Greek_CHI: u32 = 2007;
+pub const XKB_KEY_Greek_PSI: u32 = 2008;
+pub const XKB_KEY_Greek_OMEGA: u32 = 2009;
+pub const XKB_KEY_Greek_alpha: u32 = 2017;
+pub const XKB_KEY_Greek_beta: u32 = 2018;
+pub const XKB_KEY_Greek_gamma: u32 = 2019;
+pub const XKB_KEY_Greek_delta: u32 = 2020;
+pub const XKB_KEY_Greek_epsilon: u32 = 2021;
+pub const XKB_KEY_Greek_zeta: u32 = 2022;
+pub const XKB_KEY_Greek_eta: u32 = 2023;
+pub const XKB_KEY_Greek_theta: u32 = 2024;
+pub const XKB_KEY_Greek_iota: u32 = 2025;
+pub const XKB_KEY_Greek_kappa: u32 = 2026;
+pub const XKB_KEY_Greek_lamda: u32 = 2027;
+pub const XKB_KEY_Greek_lambda: u32 = 2027;
+pub const XKB_KEY_Greek_mu: u32 = 2028;
+pub const XKB_KEY_Greek_nu: u32 = 2029;
+pub const XKB_KEY_Greek_xi: u32 = 2030;
+pub const XKB_KEY_Greek_omicron: u32 = 2031;
+pub const XKB_KEY_Greek_pi: u32 = 2032;
+pub const XKB_KEY_Greek_rho: u32 = 2033;
+pub const XKB_KEY_Greek_sigma: u32 = 2034;
+pub const XKB_KEY_Greek_finalsmallsigma: u32 = 2035;
+pub const XKB_KEY_Greek_tau: u32 = 2036;
+pub const XKB_KEY_Greek_upsilon: u32 = 2037;
+pub const XKB_KEY_Greek_phi: u32 = 2038;
+pub const XKB_KEY_Greek_chi: u32 = 2039;
+pub const XKB_KEY_Greek_psi: u32 = 2040;
+pub const XKB_KEY_Greek_omega: u32 = 2041;
+pub const XKB_KEY_Greek_switch: u32 = 65406;
+pub const XKB_KEY_leftradical: u32 = 2209;
+pub const XKB_KEY_topleftradical: u32 = 2210;
+pub const XKB_KEY_horizconnector: u32 = 2211;
+pub const XKB_KEY_topintegral: u32 = 2212;
+pub const XKB_KEY_botintegral: u32 = 2213;
+pub const XKB_KEY_vertconnector: u32 = 2214;
+pub const XKB_KEY_topleftsqbracket: u32 = 2215;
+pub const XKB_KEY_botleftsqbracket: u32 = 2216;
+pub const XKB_KEY_toprightsqbracket: u32 = 2217;
+pub const XKB_KEY_botrightsqbracket: u32 = 2218;
+pub const XKB_KEY_topleftparens: u32 = 2219;
+pub const XKB_KEY_botleftparens: u32 = 2220;
+pub const XKB_KEY_toprightparens: u32 = 2221;
+pub const XKB_KEY_botrightparens: u32 = 2222;
+pub const XKB_KEY_leftmiddlecurlybrace: u32 = 2223;
+pub const XKB_KEY_rightmiddlecurlybrace: u32 = 2224;
+pub const XKB_KEY_topleftsummation: u32 = 2225;
+pub const XKB_KEY_botleftsummation: u32 = 2226;
+pub const XKB_KEY_topvertsummationconnector: u32 = 2227;
+pub const XKB_KEY_botvertsummationconnector: u32 = 2228;
+pub const XKB_KEY_toprightsummation: u32 = 2229;
+pub const XKB_KEY_botrightsummation: u32 = 2230;
+pub const XKB_KEY_rightmiddlesummation: u32 = 2231;
+pub const XKB_KEY_lessthanequal: u32 = 2236;
+pub const XKB_KEY_notequal: u32 = 2237;
+pub const XKB_KEY_greaterthanequal: u32 = 2238;
+pub const XKB_KEY_integral: u32 = 2239;
+pub const XKB_KEY_therefore: u32 = 2240;
+pub const XKB_KEY_variation: u32 = 2241;
+pub const XKB_KEY_infinity: u32 = 2242;
+pub const XKB_KEY_nabla: u32 = 2245;
+pub const XKB_KEY_approximate: u32 = 2248;
+pub const XKB_KEY_similarequal: u32 = 2249;
+pub const XKB_KEY_ifonlyif: u32 = 2253;
+pub const XKB_KEY_implies: u32 = 2254;
+pub const XKB_KEY_identical: u32 = 2255;
+pub const XKB_KEY_radical: u32 = 2262;
+pub const XKB_KEY_includedin: u32 = 2266;
+pub const XKB_KEY_includes: u32 = 2267;
+pub const XKB_KEY_intersection: u32 = 2268;
+pub const XKB_KEY_union: u32 = 2269;
+pub const XKB_KEY_logicaland: u32 = 2270;
+pub const XKB_KEY_logicalor: u32 = 2271;
+pub const XKB_KEY_partialderivative: u32 = 2287;
+pub const XKB_KEY_function: u32 = 2294;
+pub const XKB_KEY_leftarrow: u32 = 2299;
+pub const XKB_KEY_uparrow: u32 = 2300;
+pub const XKB_KEY_rightarrow: u32 = 2301;
+pub const XKB_KEY_downarrow: u32 = 2302;
+pub const XKB_KEY_blank: u32 = 2527;
+pub const XKB_KEY_soliddiamond: u32 = 2528;
+pub const XKB_KEY_checkerboard: u32 = 2529;
+pub const XKB_KEY_ht: u32 = 2530;
+pub const XKB_KEY_ff: u32 = 2531;
+pub const XKB_KEY_cr: u32 = 2532;
+pub const XKB_KEY_lf: u32 = 2533;
+pub const XKB_KEY_nl: u32 = 2536;
+pub const XKB_KEY_vt: u32 = 2537;
+pub const XKB_KEY_lowrightcorner: u32 = 2538;
+pub const XKB_KEY_uprightcorner: u32 = 2539;
+pub const XKB_KEY_upleftcorner: u32 = 2540;
+pub const XKB_KEY_lowleftcorner: u32 = 2541;
+pub const XKB_KEY_crossinglines: u32 = 2542;
+pub const XKB_KEY_horizlinescan1: u32 = 2543;
+pub const XKB_KEY_horizlinescan3: u32 = 2544;
+pub const XKB_KEY_horizlinescan5: u32 = 2545;
+pub const XKB_KEY_horizlinescan7: u32 = 2546;
+pub const XKB_KEY_horizlinescan9: u32 = 2547;
+pub const XKB_KEY_leftt: u32 = 2548;
+pub const XKB_KEY_rightt: u32 = 2549;
+pub const XKB_KEY_bott: u32 = 2550;
+pub const XKB_KEY_topt: u32 = 2551;
+pub const XKB_KEY_vertbar: u32 = 2552;
+pub const XKB_KEY_emspace: u32 = 2721;
+pub const XKB_KEY_enspace: u32 = 2722;
+pub const XKB_KEY_em3space: u32 = 2723;
+pub const XKB_KEY_em4space: u32 = 2724;
+pub const XKB_KEY_digitspace: u32 = 2725;
+pub const XKB_KEY_punctspace: u32 = 2726;
+pub const XKB_KEY_thinspace: u32 = 2727;
+pub const XKB_KEY_hairspace: u32 = 2728;
+pub const XKB_KEY_emdash: u32 = 2729;
+pub const XKB_KEY_endash: u32 = 2730;
+pub const XKB_KEY_signifblank: u32 = 2732;
+pub const XKB_KEY_ellipsis: u32 = 2734;
+pub const XKB_KEY_doubbaselinedot: u32 = 2735;
+pub const XKB_KEY_onethird: u32 = 2736;
+pub const XKB_KEY_twothirds: u32 = 2737;
+pub const XKB_KEY_onefifth: u32 = 2738;
+pub const XKB_KEY_twofifths: u32 = 2739;
+pub const XKB_KEY_threefifths: u32 = 2740;
+pub const XKB_KEY_fourfifths: u32 = 2741;
+pub const XKB_KEY_onesixth: u32 = 2742;
+pub const XKB_KEY_fivesixths: u32 = 2743;
+pub const XKB_KEY_careof: u32 = 2744;
+pub const XKB_KEY_figdash: u32 = 2747;
+pub const XKB_KEY_leftanglebracket: u32 = 2748;
+pub const XKB_KEY_decimalpoint: u32 = 2749;
+pub const XKB_KEY_rightanglebracket: u32 = 2750;
+pub const XKB_KEY_marker: u32 = 2751;
+pub const XKB_KEY_oneeighth: u32 = 2755;
+pub const XKB_KEY_threeeighths: u32 = 2756;
+pub const XKB_KEY_fiveeighths: u32 = 2757;
+pub const XKB_KEY_seveneighths: u32 = 2758;
+pub const XKB_KEY_trademark: u32 = 2761;
+pub const XKB_KEY_signaturemark: u32 = 2762;
+pub const XKB_KEY_trademarkincircle: u32 = 2763;
+pub const XKB_KEY_leftopentriangle: u32 = 2764;
+pub const XKB_KEY_rightopentriangle: u32 = 2765;
+pub const XKB_KEY_emopencircle: u32 = 2766;
+pub const XKB_KEY_emopenrectangle: u32 = 2767;
+pub const XKB_KEY_leftsinglequotemark: u32 = 2768;
+pub const XKB_KEY_rightsinglequotemark: u32 = 2769;
+pub const XKB_KEY_leftdoublequotemark: u32 = 2770;
+pub const XKB_KEY_rightdoublequotemark: u32 = 2771;
+pub const XKB_KEY_prescription: u32 = 2772;
+pub const XKB_KEY_permille: u32 = 2773;
+pub const XKB_KEY_minutes: u32 = 2774;
+pub const XKB_KEY_seconds: u32 = 2775;
+pub const XKB_KEY_latincross: u32 = 2777;
+pub const XKB_KEY_hexagram: u32 = 2778;
+pub const XKB_KEY_filledrectbullet: u32 = 2779;
+pub const XKB_KEY_filledlefttribullet: u32 = 2780;
+pub const XKB_KEY_filledrighttribullet: u32 = 2781;
+pub const XKB_KEY_emfilledcircle: u32 = 2782;
+pub const XKB_KEY_emfilledrect: u32 = 2783;
+pub const XKB_KEY_enopencircbullet: u32 = 2784;
+pub const XKB_KEY_enopensquarebullet: u32 = 2785;
+pub const XKB_KEY_openrectbullet: u32 = 2786;
+pub const XKB_KEY_opentribulletup: u32 = 2787;
+pub const XKB_KEY_opentribulletdown: u32 = 2788;
+pub const XKB_KEY_openstar: u32 = 2789;
+pub const XKB_KEY_enfilledcircbullet: u32 = 2790;
+pub const XKB_KEY_enfilledsqbullet: u32 = 2791;
+pub const XKB_KEY_filledtribulletup: u32 = 2792;
+pub const XKB_KEY_filledtribulletdown: u32 = 2793;
+pub const XKB_KEY_leftpointer: u32 = 2794;
+pub const XKB_KEY_rightpointer: u32 = 2795;
+pub const XKB_KEY_club: u32 = 2796;
+pub const XKB_KEY_diamond: u32 = 2797;
+pub const XKB_KEY_heart: u32 = 2798;
+pub const XKB_KEY_maltesecross: u32 = 2800;
+pub const XKB_KEY_dagger: u32 = 2801;
+pub const XKB_KEY_doubledagger: u32 = 2802;
+pub const XKB_KEY_checkmark: u32 = 2803;
+pub const XKB_KEY_ballotcross: u32 = 2804;
+pub const XKB_KEY_musicalsharp: u32 = 2805;
+pub const XKB_KEY_musicalflat: u32 = 2806;
+pub const XKB_KEY_malesymbol: u32 = 2807;
+pub const XKB_KEY_femalesymbol: u32 = 2808;
+pub const XKB_KEY_telephone: u32 = 2809;
+pub const XKB_KEY_telephonerecorder: u32 = 2810;
+pub const XKB_KEY_phonographcopyright: u32 = 2811;
+pub const XKB_KEY_caret: u32 = 2812;
+pub const XKB_KEY_singlelowquotemark: u32 = 2813;
+pub const XKB_KEY_doublelowquotemark: u32 = 2814;
+pub const XKB_KEY_cursor: u32 = 2815;
+pub const XKB_KEY_leftcaret: u32 = 2979;
+pub const XKB_KEY_rightcaret: u32 = 2982;
+pub const XKB_KEY_downcaret: u32 = 2984;
+pub const XKB_KEY_upcaret: u32 = 2985;
+pub const XKB_KEY_overbar: u32 = 3008;
+pub const XKB_KEY_downtack: u32 = 3010;
+pub const XKB_KEY_upshoe: u32 = 3011;
+pub const XKB_KEY_downstile: u32 = 3012;
+pub const XKB_KEY_underbar: u32 = 3014;
+pub const XKB_KEY_jot: u32 = 3018;
+pub const XKB_KEY_quad: u32 = 3020;
+pub const XKB_KEY_uptack: u32 = 3022;
+pub const XKB_KEY_circle: u32 = 3023;
+pub const XKB_KEY_upstile: u32 = 3027;
+pub const XKB_KEY_downshoe: u32 = 3030;
+pub const XKB_KEY_rightshoe: u32 = 3032;
+pub const XKB_KEY_leftshoe: u32 = 3034;
+pub const XKB_KEY_lefttack: u32 = 3036;
+pub const XKB_KEY_righttack: u32 = 3068;
+pub const XKB_KEY_hebrew_doublelowline: u32 = 3295;
+pub const XKB_KEY_hebrew_aleph: u32 = 3296;
+pub const XKB_KEY_hebrew_bet: u32 = 3297;
+pub const XKB_KEY_hebrew_beth: u32 = 3297;
+pub const XKB_KEY_hebrew_gimel: u32 = 3298;
+pub const XKB_KEY_hebrew_gimmel: u32 = 3298;
+pub const XKB_KEY_hebrew_dalet: u32 = 3299;
+pub const XKB_KEY_hebrew_daleth: u32 = 3299;
+pub const XKB_KEY_hebrew_he: u32 = 3300;
+pub const XKB_KEY_hebrew_waw: u32 = 3301;
+pub const XKB_KEY_hebrew_zain: u32 = 3302;
+pub const XKB_KEY_hebrew_zayin: u32 = 3302;
+pub const XKB_KEY_hebrew_chet: u32 = 3303;
+pub const XKB_KEY_hebrew_het: u32 = 3303;
+pub const XKB_KEY_hebrew_tet: u32 = 3304;
+pub const XKB_KEY_hebrew_teth: u32 = 3304;
+pub const XKB_KEY_hebrew_yod: u32 = 3305;
+pub const XKB_KEY_hebrew_finalkaph: u32 = 3306;
+pub const XKB_KEY_hebrew_kaph: u32 = 3307;
+pub const XKB_KEY_hebrew_lamed: u32 = 3308;
+pub const XKB_KEY_hebrew_finalmem: u32 = 3309;
+pub const XKB_KEY_hebrew_mem: u32 = 3310;
+pub const XKB_KEY_hebrew_finalnun: u32 = 3311;
+pub const XKB_KEY_hebrew_nun: u32 = 3312;
+pub const XKB_KEY_hebrew_samech: u32 = 3313;
+pub const XKB_KEY_hebrew_samekh: u32 = 3313;
+pub const XKB_KEY_hebrew_ayin: u32 = 3314;
+pub const XKB_KEY_hebrew_finalpe: u32 = 3315;
+pub const XKB_KEY_hebrew_pe: u32 = 3316;
+pub const XKB_KEY_hebrew_finalzade: u32 = 3317;
+pub const XKB_KEY_hebrew_finalzadi: u32 = 3317;
+pub const XKB_KEY_hebrew_zade: u32 = 3318;
+pub const XKB_KEY_hebrew_zadi: u32 = 3318;
+pub const XKB_KEY_hebrew_qoph: u32 = 3319;
+pub const XKB_KEY_hebrew_kuf: u32 = 3319;
+pub const XKB_KEY_hebrew_resh: u32 = 3320;
+pub const XKB_KEY_hebrew_shin: u32 = 3321;
+pub const XKB_KEY_hebrew_taw: u32 = 3322;
+pub const XKB_KEY_hebrew_taf: u32 = 3322;
+pub const XKB_KEY_Hebrew_switch: u32 = 65406;
+pub const XKB_KEY_Thai_kokai: u32 = 3489;
+pub const XKB_KEY_Thai_khokhai: u32 = 3490;
+pub const XKB_KEY_Thai_khokhuat: u32 = 3491;
+pub const XKB_KEY_Thai_khokhwai: u32 = 3492;
+pub const XKB_KEY_Thai_khokhon: u32 = 3493;
+pub const XKB_KEY_Thai_khorakhang: u32 = 3494;
+pub const XKB_KEY_Thai_ngongu: u32 = 3495;
+pub const XKB_KEY_Thai_chochan: u32 = 3496;
+pub const XKB_KEY_Thai_choching: u32 = 3497;
+pub const XKB_KEY_Thai_chochang: u32 = 3498;
+pub const XKB_KEY_Thai_soso: u32 = 3499;
+pub const XKB_KEY_Thai_chochoe: u32 = 3500;
+pub const XKB_KEY_Thai_yoying: u32 = 3501;
+pub const XKB_KEY_Thai_dochada: u32 = 3502;
+pub const XKB_KEY_Thai_topatak: u32 = 3503;
+pub const XKB_KEY_Thai_thothan: u32 = 3504;
+pub const XKB_KEY_Thai_thonangmontho: u32 = 3505;
+pub const XKB_KEY_Thai_thophuthao: u32 = 3506;
+pub const XKB_KEY_Thai_nonen: u32 = 3507;
+pub const XKB_KEY_Thai_dodek: u32 = 3508;
+pub const XKB_KEY_Thai_totao: u32 = 3509;
+pub const XKB_KEY_Thai_thothung: u32 = 3510;
+pub const XKB_KEY_Thai_thothahan: u32 = 3511;
+pub const XKB_KEY_Thai_thothong: u32 = 3512;
+pub const XKB_KEY_Thai_nonu: u32 = 3513;
+pub const XKB_KEY_Thai_bobaimai: u32 = 3514;
+pub const XKB_KEY_Thai_popla: u32 = 3515;
+pub const XKB_KEY_Thai_phophung: u32 = 3516;
+pub const XKB_KEY_Thai_fofa: u32 = 3517;
+pub const XKB_KEY_Thai_phophan: u32 = 3518;
+pub const XKB_KEY_Thai_fofan: u32 = 3519;
+pub const XKB_KEY_Thai_phosamphao: u32 = 3520;
+pub const XKB_KEY_Thai_moma: u32 = 3521;
+pub const XKB_KEY_Thai_yoyak: u32 = 3522;
+pub const XKB_KEY_Thai_rorua: u32 = 3523;
+pub const XKB_KEY_Thai_ru: u32 = 3524;
+pub const XKB_KEY_Thai_loling: u32 = 3525;
+pub const XKB_KEY_Thai_lu: u32 = 3526;
+pub const XKB_KEY_Thai_wowaen: u32 = 3527;
+pub const XKB_KEY_Thai_sosala: u32 = 3528;
+pub const XKB_KEY_Thai_sorusi: u32 = 3529;
+pub const XKB_KEY_Thai_sosua: u32 = 3530;
+pub const XKB_KEY_Thai_hohip: u32 = 3531;
+pub const XKB_KEY_Thai_lochula: u32 = 3532;
+pub const XKB_KEY_Thai_oang: u32 = 3533;
+pub const XKB_KEY_Thai_honokhuk: u32 = 3534;
+pub const XKB_KEY_Thai_paiyannoi: u32 = 3535;
+pub const XKB_KEY_Thai_saraa: u32 = 3536;
+pub const XKB_KEY_Thai_maihanakat: u32 = 3537;
+pub const XKB_KEY_Thai_saraaa: u32 = 3538;
+pub const XKB_KEY_Thai_saraam: u32 = 3539;
+pub const XKB_KEY_Thai_sarai: u32 = 3540;
+pub const XKB_KEY_Thai_saraii: u32 = 3541;
+pub const XKB_KEY_Thai_saraue: u32 = 3542;
+pub const XKB_KEY_Thai_sarauee: u32 = 3543;
+pub const XKB_KEY_Thai_sarau: u32 = 3544;
+pub const XKB_KEY_Thai_sarauu: u32 = 3545;
+pub const XKB_KEY_Thai_phinthu: u32 = 3546;
+pub const XKB_KEY_Thai_maihanakat_maitho: u32 = 3550;
+pub const XKB_KEY_Thai_baht: u32 = 3551;
+pub const XKB_KEY_Thai_sarae: u32 = 3552;
+pub const XKB_KEY_Thai_saraae: u32 = 3553;
+pub const XKB_KEY_Thai_sarao: u32 = 3554;
+pub const XKB_KEY_Thai_saraaimaimuan: u32 = 3555;
+pub const XKB_KEY_Thai_saraaimaimalai: u32 = 3556;
+pub const XKB_KEY_Thai_lakkhangyao: u32 = 3557;
+pub const XKB_KEY_Thai_maiyamok: u32 = 3558;
+pub const XKB_KEY_Thai_maitaikhu: u32 = 3559;
+pub const XKB_KEY_Thai_maiek: u32 = 3560;
+pub const XKB_KEY_Thai_maitho: u32 = 3561;
+pub const XKB_KEY_Thai_maitri: u32 = 3562;
+pub const XKB_KEY_Thai_maichattawa: u32 = 3563;
+pub const XKB_KEY_Thai_thanthakhat: u32 = 3564;
+pub const XKB_KEY_Thai_nikhahit: u32 = 3565;
+pub const XKB_KEY_Thai_leksun: u32 = 3568;
+pub const XKB_KEY_Thai_leknung: u32 = 3569;
+pub const XKB_KEY_Thai_leksong: u32 = 3570;
+pub const XKB_KEY_Thai_leksam: u32 = 3571;
+pub const XKB_KEY_Thai_leksi: u32 = 3572;
+pub const XKB_KEY_Thai_lekha: u32 = 3573;
+pub const XKB_KEY_Thai_lekhok: u32 = 3574;
+pub const XKB_KEY_Thai_lekchet: u32 = 3575;
+pub const XKB_KEY_Thai_lekpaet: u32 = 3576;
+pub const XKB_KEY_Thai_lekkao: u32 = 3577;
+pub const XKB_KEY_Hangul: u32 = 65329;
+pub const XKB_KEY_Hangul_Start: u32 = 65330;
+pub const XKB_KEY_Hangul_End: u32 = 65331;
+pub const XKB_KEY_Hangul_Hanja: u32 = 65332;
+pub const XKB_KEY_Hangul_Jamo: u32 = 65333;
+pub const XKB_KEY_Hangul_Romaja: u32 = 65334;
+pub const XKB_KEY_Hangul_Codeinput: u32 = 65335;
+pub const XKB_KEY_Hangul_Jeonja: u32 = 65336;
+pub const XKB_KEY_Hangul_Banja: u32 = 65337;
+pub const XKB_KEY_Hangul_PreHanja: u32 = 65338;
+pub const XKB_KEY_Hangul_PostHanja: u32 = 65339;
+pub const XKB_KEY_Hangul_SingleCandidate: u32 = 65340;
+pub const XKB_KEY_Hangul_MultipleCandidate: u32 = 65341;
+pub const XKB_KEY_Hangul_PreviousCandidate: u32 = 65342;
+pub const XKB_KEY_Hangul_Special: u32 = 65343;
+pub const XKB_KEY_Hangul_switch: u32 = 65406;
+pub const XKB_KEY_Hangul_Kiyeog: u32 = 3745;
+pub const XKB_KEY_Hangul_SsangKiyeog: u32 = 3746;
+pub const XKB_KEY_Hangul_KiyeogSios: u32 = 3747;
+pub const XKB_KEY_Hangul_Nieun: u32 = 3748;
+pub const XKB_KEY_Hangul_NieunJieuj: u32 = 3749;
+pub const XKB_KEY_Hangul_NieunHieuh: u32 = 3750;
+pub const XKB_KEY_Hangul_Dikeud: u32 = 3751;
+pub const XKB_KEY_Hangul_SsangDikeud: u32 = 3752;
+pub const XKB_KEY_Hangul_Rieul: u32 = 3753;
+pub const XKB_KEY_Hangul_RieulKiyeog: u32 = 3754;
+pub const XKB_KEY_Hangul_RieulMieum: u32 = 3755;
+pub const XKB_KEY_Hangul_RieulPieub: u32 = 3756;
+pub const XKB_KEY_Hangul_RieulSios: u32 = 3757;
+pub const XKB_KEY_Hangul_RieulTieut: u32 = 3758;
+pub const XKB_KEY_Hangul_RieulPhieuf: u32 = 3759;
+pub const XKB_KEY_Hangul_RieulHieuh: u32 = 3760;
+pub const XKB_KEY_Hangul_Mieum: u32 = 3761;
+pub const XKB_KEY_Hangul_Pieub: u32 = 3762;
+pub const XKB_KEY_Hangul_SsangPieub: u32 = 3763;
+pub const XKB_KEY_Hangul_PieubSios: u32 = 3764;
+pub const XKB_KEY_Hangul_Sios: u32 = 3765;
+pub const XKB_KEY_Hangul_SsangSios: u32 = 3766;
+pub const XKB_KEY_Hangul_Ieung: u32 = 3767;
+pub const XKB_KEY_Hangul_Jieuj: u32 = 3768;
+pub const XKB_KEY_Hangul_SsangJieuj: u32 = 3769;
+pub const XKB_KEY_Hangul_Cieuc: u32 = 3770;
+pub const XKB_KEY_Hangul_Khieuq: u32 = 3771;
+pub const XKB_KEY_Hangul_Tieut: u32 = 3772;
+pub const XKB_KEY_Hangul_Phieuf: u32 = 3773;
+pub const XKB_KEY_Hangul_Hieuh: u32 = 3774;
+pub const XKB_KEY_Hangul_A: u32 = 3775;
+pub const XKB_KEY_Hangul_AE: u32 = 3776;
+pub const XKB_KEY_Hangul_YA: u32 = 3777;
+pub const XKB_KEY_Hangul_YAE: u32 = 3778;
+pub const XKB_KEY_Hangul_EO: u32 = 3779;
+pub const XKB_KEY_Hangul_E: u32 = 3780;
+pub const XKB_KEY_Hangul_YEO: u32 = 3781;
+pub const XKB_KEY_Hangul_YE: u32 = 3782;
+pub const XKB_KEY_Hangul_O: u32 = 3783;
+pub const XKB_KEY_Hangul_WA: u32 = 3784;
+pub const XKB_KEY_Hangul_WAE: u32 = 3785;
+pub const XKB_KEY_Hangul_OE: u32 = 3786;
+pub const XKB_KEY_Hangul_YO: u32 = 3787;
+pub const XKB_KEY_Hangul_U: u32 = 3788;
+pub const XKB_KEY_Hangul_WEO: u32 = 3789;
+pub const XKB_KEY_Hangul_WE: u32 = 3790;
+pub const XKB_KEY_Hangul_WI: u32 = 3791;
+pub const XKB_KEY_Hangul_YU: u32 = 3792;
+pub const XKB_KEY_Hangul_EU: u32 = 3793;
+pub const XKB_KEY_Hangul_YI: u32 = 3794;
+pub const XKB_KEY_Hangul_I: u32 = 3795;
+pub const XKB_KEY_Hangul_J_Kiyeog: u32 = 3796;
+pub const XKB_KEY_Hangul_J_SsangKiyeog: u32 = 3797;
+pub const XKB_KEY_Hangul_J_KiyeogSios: u32 = 3798;
+pub const XKB_KEY_Hangul_J_Nieun: u32 = 3799;
+pub const XKB_KEY_Hangul_J_NieunJieuj: u32 = 3800;
+pub const XKB_KEY_Hangul_J_NieunHieuh: u32 = 3801;
+pub const XKB_KEY_Hangul_J_Dikeud: u32 = 3802;
+pub const XKB_KEY_Hangul_J_Rieul: u32 = 3803;
+pub const XKB_KEY_Hangul_J_RieulKiyeog: u32 = 3804;
+pub const XKB_KEY_Hangul_J_RieulMieum: u32 = 3805;
+pub const XKB_KEY_Hangul_J_RieulPieub: u32 = 3806;
+pub const XKB_KEY_Hangul_J_RieulSios: u32 = 3807;
+pub const XKB_KEY_Hangul_J_RieulTieut: u32 = 3808;
+pub const XKB_KEY_Hangul_J_RieulPhieuf: u32 = 3809;
+pub const XKB_KEY_Hangul_J_RieulHieuh: u32 = 3810;
+pub const XKB_KEY_Hangul_J_Mieum: u32 = 3811;
+pub const XKB_KEY_Hangul_J_Pieub: u32 = 3812;
+pub const XKB_KEY_Hangul_J_PieubSios: u32 = 3813;
+pub const XKB_KEY_Hangul_J_Sios: u32 = 3814;
+pub const XKB_KEY_Hangul_J_SsangSios: u32 = 3815;
+pub const XKB_KEY_Hangul_J_Ieung: u32 = 3816;
+pub const XKB_KEY_Hangul_J_Jieuj: u32 = 3817;
+pub const XKB_KEY_Hangul_J_Cieuc: u32 = 3818;
+pub const XKB_KEY_Hangul_J_Khieuq: u32 = 3819;
+pub const XKB_KEY_Hangul_J_Tieut: u32 = 3820;
+pub const XKB_KEY_Hangul_J_Phieuf: u32 = 3821;
+pub const XKB_KEY_Hangul_J_Hieuh: u32 = 3822;
+pub const XKB_KEY_Hangul_RieulYeorinHieuh: u32 = 3823;
+pub const XKB_KEY_Hangul_SunkyeongeumMieum: u32 = 3824;
+pub const XKB_KEY_Hangul_SunkyeongeumPieub: u32 = 3825;
+pub const XKB_KEY_Hangul_PanSios: u32 = 3826;
+pub const XKB_KEY_Hangul_KkogjiDalrinIeung: u32 = 3827;
+pub const XKB_KEY_Hangul_SunkyeongeumPhieuf: u32 = 3828;
+pub const XKB_KEY_Hangul_YeorinHieuh: u32 = 3829;
+pub const XKB_KEY_Hangul_AraeA: u32 = 3830;
+pub const XKB_KEY_Hangul_AraeAE: u32 = 3831;
+pub const XKB_KEY_Hangul_J_PanSios: u32 = 3832;
+pub const XKB_KEY_Hangul_J_KkogjiDalrinIeung: u32 = 3833;
+pub const XKB_KEY_Hangul_J_YeorinHieuh: u32 = 3834;
+pub const XKB_KEY_Korean_Won: u32 = 3839;
+pub const XKB_KEY_Armenian_ligature_ew: u32 = 16778631;
+pub const XKB_KEY_Armenian_full_stop: u32 = 16778633;
+pub const XKB_KEY_Armenian_verjaket: u32 = 16778633;
+pub const XKB_KEY_Armenian_separation_mark: u32 = 16778589;
+pub const XKB_KEY_Armenian_but: u32 = 16778589;
+pub const XKB_KEY_Armenian_hyphen: u32 = 16778634;
+pub const XKB_KEY_Armenian_yentamna: u32 = 16778634;
+pub const XKB_KEY_Armenian_exclam: u32 = 16778588;
+pub const XKB_KEY_Armenian_amanak: u32 = 16778588;
+pub const XKB_KEY_Armenian_accent: u32 = 16778587;
+pub const XKB_KEY_Armenian_shesht: u32 = 16778587;
+pub const XKB_KEY_Armenian_question: u32 = 16778590;
+pub const XKB_KEY_Armenian_paruyk: u32 = 16778590;
+pub const XKB_KEY_Armenian_AYB: u32 = 16778545;
+pub const XKB_KEY_Armenian_ayb: u32 = 16778593;
+pub const XKB_KEY_Armenian_BEN: u32 = 16778546;
+pub const XKB_KEY_Armenian_ben: u32 = 16778594;
+pub const XKB_KEY_Armenian_GIM: u32 = 16778547;
+pub const XKB_KEY_Armenian_gim: u32 = 16778595;
+pub const XKB_KEY_Armenian_DA: u32 = 16778548;
+pub const XKB_KEY_Armenian_da: u32 = 16778596;
+pub const XKB_KEY_Armenian_YECH: u32 = 16778549;
+pub const XKB_KEY_Armenian_yech: u32 = 16778597;
+pub const XKB_KEY_Armenian_ZA: u32 = 16778550;
+pub const XKB_KEY_Armenian_za: u32 = 16778598;
+pub const XKB_KEY_Armenian_E: u32 = 16778551;
+pub const XKB_KEY_Armenian_e: u32 = 16778599;
+pub const XKB_KEY_Armenian_AT: u32 = 16778552;
+pub const XKB_KEY_Armenian_at: u32 = 16778600;
+pub const XKB_KEY_Armenian_TO: u32 = 16778553;
+pub const XKB_KEY_Armenian_to: u32 = 16778601;
+pub const XKB_KEY_Armenian_ZHE: u32 = 16778554;
+pub const XKB_KEY_Armenian_zhe: u32 = 16778602;
+pub const XKB_KEY_Armenian_INI: u32 = 16778555;
+pub const XKB_KEY_Armenian_ini: u32 = 16778603;
+pub const XKB_KEY_Armenian_LYUN: u32 = 16778556;
+pub const XKB_KEY_Armenian_lyun: u32 = 16778604;
+pub const XKB_KEY_Armenian_KHE: u32 = 16778557;
+pub const XKB_KEY_Armenian_khe: u32 = 16778605;
+pub const XKB_KEY_Armenian_TSA: u32 = 16778558;
+pub const XKB_KEY_Armenian_tsa: u32 = 16778606;
+pub const XKB_KEY_Armenian_KEN: u32 = 16778559;
+pub const XKB_KEY_Armenian_ken: u32 = 16778607;
+pub const XKB_KEY_Armenian_HO: u32 = 16778560;
+pub const XKB_KEY_Armenian_ho: u32 = 16778608;
+pub const XKB_KEY_Armenian_DZA: u32 = 16778561;
+pub const XKB_KEY_Armenian_dza: u32 = 16778609;
+pub const XKB_KEY_Armenian_GHAT: u32 = 16778562;
+pub const XKB_KEY_Armenian_ghat: u32 = 16778610;
+pub const XKB_KEY_Armenian_TCHE: u32 = 16778563;
+pub const XKB_KEY_Armenian_tche: u32 = 16778611;
+pub const XKB_KEY_Armenian_MEN: u32 = 16778564;
+pub const XKB_KEY_Armenian_men: u32 = 16778612;
+pub const XKB_KEY_Armenian_HI: u32 = 16778565;
+pub const XKB_KEY_Armenian_hi: u32 = 16778613;
+pub const XKB_KEY_Armenian_NU: u32 = 16778566;
+pub const XKB_KEY_Armenian_nu: u32 = 16778614;
+pub const XKB_KEY_Armenian_SHA: u32 = 16778567;
+pub const XKB_KEY_Armenian_sha: u32 = 16778615;
+pub const XKB_KEY_Armenian_VO: u32 = 16778568;
+pub const XKB_KEY_Armenian_vo: u32 = 16778616;
+pub const XKB_KEY_Armenian_CHA: u32 = 16778569;
+pub const XKB_KEY_Armenian_cha: u32 = 16778617;
+pub const XKB_KEY_Armenian_PE: u32 = 16778570;
+pub const XKB_KEY_Armenian_pe: u32 = 16778618;
+pub const XKB_KEY_Armenian_JE: u32 = 16778571;
+pub const XKB_KEY_Armenian_je: u32 = 16778619;
+pub const XKB_KEY_Armenian_RA: u32 = 16778572;
+pub const XKB_KEY_Armenian_ra: u32 = 16778620;
+pub const XKB_KEY_Armenian_SE: u32 = 16778573;
+pub const XKB_KEY_Armenian_se: u32 = 16778621;
+pub const XKB_KEY_Armenian_VEV: u32 = 16778574;
+pub const XKB_KEY_Armenian_vev: u32 = 16778622;
+pub const XKB_KEY_Armenian_TYUN: u32 = 16778575;
+pub const XKB_KEY_Armenian_tyun: u32 = 16778623;
+pub const XKB_KEY_Armenian_RE: u32 = 16778576;
+pub const XKB_KEY_Armenian_re: u32 = 16778624;
+pub const XKB_KEY_Armenian_TSO: u32 = 16778577;
+pub const XKB_KEY_Armenian_tso: u32 = 16778625;
+pub const XKB_KEY_Armenian_VYUN: u32 = 16778578;
+pub const XKB_KEY_Armenian_vyun: u32 = 16778626;
+pub const XKB_KEY_Armenian_PYUR: u32 = 16778579;
+pub const XKB_KEY_Armenian_pyur: u32 = 16778627;
+pub const XKB_KEY_Armenian_KE: u32 = 16778580;
+pub const XKB_KEY_Armenian_ke: u32 = 16778628;
+pub const XKB_KEY_Armenian_O: u32 = 16778581;
+pub const XKB_KEY_Armenian_o: u32 = 16778629;
+pub const XKB_KEY_Armenian_FE: u32 = 16778582;
+pub const XKB_KEY_Armenian_fe: u32 = 16778630;
+pub const XKB_KEY_Armenian_apostrophe: u32 = 16778586;
+pub const XKB_KEY_Georgian_an: u32 = 16781520;
+pub const XKB_KEY_Georgian_ban: u32 = 16781521;
+pub const XKB_KEY_Georgian_gan: u32 = 16781522;
+pub const XKB_KEY_Georgian_don: u32 = 16781523;
+pub const XKB_KEY_Georgian_en: u32 = 16781524;
+pub const XKB_KEY_Georgian_vin: u32 = 16781525;
+pub const XKB_KEY_Georgian_zen: u32 = 16781526;
+pub const XKB_KEY_Georgian_tan: u32 = 16781527;
+pub const XKB_KEY_Georgian_in: u32 = 16781528;
+pub const XKB_KEY_Georgian_kan: u32 = 16781529;
+pub const XKB_KEY_Georgian_las: u32 = 16781530;
+pub const XKB_KEY_Georgian_man: u32 = 16781531;
+pub const XKB_KEY_Georgian_nar: u32 = 16781532;
+pub const XKB_KEY_Georgian_on: u32 = 16781533;
+pub const XKB_KEY_Georgian_par: u32 = 16781534;
+pub const XKB_KEY_Georgian_zhar: u32 = 16781535;
+pub const XKB_KEY_Georgian_rae: u32 = 16781536;
+pub const XKB_KEY_Georgian_san: u32 = 16781537;
+pub const XKB_KEY_Georgian_tar: u32 = 16781538;
+pub const XKB_KEY_Georgian_un: u32 = 16781539;
+pub const XKB_KEY_Georgian_phar: u32 = 16781540;
+pub const XKB_KEY_Georgian_khar: u32 = 16781541;
+pub const XKB_KEY_Georgian_ghan: u32 = 16781542;
+pub const XKB_KEY_Georgian_qar: u32 = 16781543;
+pub const XKB_KEY_Georgian_shin: u32 = 16781544;
+pub const XKB_KEY_Georgian_chin: u32 = 16781545;
+pub const XKB_KEY_Georgian_can: u32 = 16781546;
+pub const XKB_KEY_Georgian_jil: u32 = 16781547;
+pub const XKB_KEY_Georgian_cil: u32 = 16781548;
+pub const XKB_KEY_Georgian_char: u32 = 16781549;
+pub const XKB_KEY_Georgian_xan: u32 = 16781550;
+pub const XKB_KEY_Georgian_jhan: u32 = 16781551;
+pub const XKB_KEY_Georgian_hae: u32 = 16781552;
+pub const XKB_KEY_Georgian_he: u32 = 16781553;
+pub const XKB_KEY_Georgian_hie: u32 = 16781554;
+pub const XKB_KEY_Georgian_we: u32 = 16781555;
+pub const XKB_KEY_Georgian_har: u32 = 16781556;
+pub const XKB_KEY_Georgian_hoe: u32 = 16781557;
+pub const XKB_KEY_Georgian_fi: u32 = 16781558;
+pub const XKB_KEY_Xabovedot: u32 = 16785034;
+pub const XKB_KEY_Ibreve: u32 = 16777516;
+pub const XKB_KEY_Zstroke: u32 = 16777653;
+pub const XKB_KEY_Gcaron: u32 = 16777702;
+pub const XKB_KEY_Ocaron: u32 = 16777681;
+pub const XKB_KEY_Obarred: u32 = 16777631;
+pub const XKB_KEY_xabovedot: u32 = 16785035;
+pub const XKB_KEY_ibreve: u32 = 16777517;
+pub const XKB_KEY_zstroke: u32 = 16777654;
+pub const XKB_KEY_gcaron: u32 = 16777703;
+pub const XKB_KEY_ocaron: u32 = 16777682;
+pub const XKB_KEY_obarred: u32 = 16777845;
+pub const XKB_KEY_SCHWA: u32 = 16777615;
+pub const XKB_KEY_schwa: u32 = 16777817;
+pub const XKB_KEY_EZH: u32 = 16777655;
+pub const XKB_KEY_ezh: u32 = 16777874;
+pub const XKB_KEY_Lbelowdot: u32 = 16784950;
+pub const XKB_KEY_lbelowdot: u32 = 16784951;
+pub const XKB_KEY_Abelowdot: u32 = 16785056;
+pub const XKB_KEY_abelowdot: u32 = 16785057;
+pub const XKB_KEY_Ahook: u32 = 16785058;
+pub const XKB_KEY_ahook: u32 = 16785059;
+pub const XKB_KEY_Acircumflexacute: u32 = 16785060;
+pub const XKB_KEY_acircumflexacute: u32 = 16785061;
+pub const XKB_KEY_Acircumflexgrave: u32 = 16785062;
+pub const XKB_KEY_acircumflexgrave: u32 = 16785063;
+pub const XKB_KEY_Acircumflexhook: u32 = 16785064;
+pub const XKB_KEY_acircumflexhook: u32 = 16785065;
+pub const XKB_KEY_Acircumflextilde: u32 = 16785066;
+pub const XKB_KEY_acircumflextilde: u32 = 16785067;
+pub const XKB_KEY_Acircumflexbelowdot: u32 = 16785068;
+pub const XKB_KEY_acircumflexbelowdot: u32 = 16785069;
+pub const XKB_KEY_Abreveacute: u32 = 16785070;
+pub const XKB_KEY_abreveacute: u32 = 16785071;
+pub const XKB_KEY_Abrevegrave: u32 = 16785072;
+pub const XKB_KEY_abrevegrave: u32 = 16785073;
+pub const XKB_KEY_Abrevehook: u32 = 16785074;
+pub const XKB_KEY_abrevehook: u32 = 16785075;
+pub const XKB_KEY_Abrevetilde: u32 = 16785076;
+pub const XKB_KEY_abrevetilde: u32 = 16785077;
+pub const XKB_KEY_Abrevebelowdot: u32 = 16785078;
+pub const XKB_KEY_abrevebelowdot: u32 = 16785079;
+pub const XKB_KEY_Ebelowdot: u32 = 16785080;
+pub const XKB_KEY_ebelowdot: u32 = 16785081;
+pub const XKB_KEY_Ehook: u32 = 16785082;
+pub const XKB_KEY_ehook: u32 = 16785083;
+pub const XKB_KEY_Etilde: u32 = 16785084;
+pub const XKB_KEY_etilde: u32 = 16785085;
+pub const XKB_KEY_Ecircumflexacute: u32 = 16785086;
+pub const XKB_KEY_ecircumflexacute: u32 = 16785087;
+pub const XKB_KEY_Ecircumflexgrave: u32 = 16785088;
+pub const XKB_KEY_ecircumflexgrave: u32 = 16785089;
+pub const XKB_KEY_Ecircumflexhook: u32 = 16785090;
+pub const XKB_KEY_ecircumflexhook: u32 = 16785091;
+pub const XKB_KEY_Ecircumflextilde: u32 = 16785092;
+pub const XKB_KEY_ecircumflextilde: u32 = 16785093;
+pub const XKB_KEY_Ecircumflexbelowdot: u32 = 16785094;
+pub const XKB_KEY_ecircumflexbelowdot: u32 = 16785095;
+pub const XKB_KEY_Ihook: u32 = 16785096;
+pub const XKB_KEY_ihook: u32 = 16785097;
+pub const XKB_KEY_Ibelowdot: u32 = 16785098;
+pub const XKB_KEY_ibelowdot: u32 = 16785099;
+pub const XKB_KEY_Obelowdot: u32 = 16785100;
+pub const XKB_KEY_obelowdot: u32 = 16785101;
+pub const XKB_KEY_Ohook: u32 = 16785102;
+pub const XKB_KEY_ohook: u32 = 16785103;
+pub const XKB_KEY_Ocircumflexacute: u32 = 16785104;
+pub const XKB_KEY_ocircumflexacute: u32 = 16785105;
+pub const XKB_KEY_Ocircumflexgrave: u32 = 16785106;
+pub const XKB_KEY_ocircumflexgrave: u32 = 16785107;
+pub const XKB_KEY_Ocircumflexhook: u32 = 16785108;
+pub const XKB_KEY_ocircumflexhook: u32 = 16785109;
+pub const XKB_KEY_Ocircumflextilde: u32 = 16785110;
+pub const XKB_KEY_ocircumflextilde: u32 = 16785111;
+pub const XKB_KEY_Ocircumflexbelowdot: u32 = 16785112;
+pub const XKB_KEY_ocircumflexbelowdot: u32 = 16785113;
+pub const XKB_KEY_Ohornacute: u32 = 16785114;
+pub const XKB_KEY_ohornacute: u32 = 16785115;
+pub const XKB_KEY_Ohorngrave: u32 = 16785116;
+pub const XKB_KEY_ohorngrave: u32 = 16785117;
+pub const XKB_KEY_Ohornhook: u32 = 16785118;
+pub const XKB_KEY_ohornhook: u32 = 16785119;
+pub const XKB_KEY_Ohorntilde: u32 = 16785120;
+pub const XKB_KEY_ohorntilde: u32 = 16785121;
+pub const XKB_KEY_Ohornbelowdot: u32 = 16785122;
+pub const XKB_KEY_ohornbelowdot: u32 = 16785123;
+pub const XKB_KEY_Ubelowdot: u32 = 16785124;
+pub const XKB_KEY_ubelowdot: u32 = 16785125;
+pub const XKB_KEY_Uhook: u32 = 16785126;
+pub const XKB_KEY_uhook: u32 = 16785127;
+pub const XKB_KEY_Uhornacute: u32 = 16785128;
+pub const XKB_KEY_uhornacute: u32 = 16785129;
+pub const XKB_KEY_Uhorngrave: u32 = 16785130;
+pub const XKB_KEY_uhorngrave: u32 = 16785131;
+pub const XKB_KEY_Uhornhook: u32 = 16785132;
+pub const XKB_KEY_uhornhook: u32 = 16785133;
+pub const XKB_KEY_Uhorntilde: u32 = 16785134;
+pub const XKB_KEY_uhorntilde: u32 = 16785135;
+pub const XKB_KEY_Uhornbelowdot: u32 = 16785136;
+pub const XKB_KEY_uhornbelowdot: u32 = 16785137;
+pub const XKB_KEY_Ybelowdot: u32 = 16785140;
+pub const XKB_KEY_ybelowdot: u32 = 16785141;
+pub const XKB_KEY_Yhook: u32 = 16785142;
+pub const XKB_KEY_yhook: u32 = 16785143;
+pub const XKB_KEY_Ytilde: u32 = 16785144;
+pub const XKB_KEY_ytilde: u32 = 16785145;
+pub const XKB_KEY_Ohorn: u32 = 16777632;
+pub const XKB_KEY_ohorn: u32 = 16777633;
+pub const XKB_KEY_Uhorn: u32 = 16777647;
+pub const XKB_KEY_uhorn: u32 = 16777648;
+pub const XKB_KEY_combining_tilde: u32 = 16777987;
+pub const XKB_KEY_combining_grave: u32 = 16777984;
+pub const XKB_KEY_combining_acute: u32 = 16777985;
+pub const XKB_KEY_combining_hook: u32 = 16777993;
+pub const XKB_KEY_combining_belowdot: u32 = 16778019;
+pub const XKB_KEY_EcuSign: u32 = 16785568;
+pub const XKB_KEY_ColonSign: u32 = 16785569;
+pub const XKB_KEY_CruzeiroSign: u32 = 16785570;
+pub const XKB_KEY_FFrancSign: u32 = 16785571;
+pub const XKB_KEY_LiraSign: u32 = 16785572;
+pub const XKB_KEY_MillSign: u32 = 16785573;
+pub const XKB_KEY_NairaSign: u32 = 16785574;
+pub const XKB_KEY_PesetaSign: u32 = 16785575;
+pub const XKB_KEY_RupeeSign: u32 = 16785576;
+pub const XKB_KEY_WonSign: u32 = 16785577;
+pub const XKB_KEY_NewSheqelSign: u32 = 16785578;
+pub const XKB_KEY_DongSign: u32 = 16785579;
+pub const XKB_KEY_EuroSign: u32 = 8364;
+pub const XKB_KEY_zerosuperior: u32 = 16785520;
+pub const XKB_KEY_foursuperior: u32 = 16785524;
+pub const XKB_KEY_fivesuperior: u32 = 16785525;
+pub const XKB_KEY_sixsuperior: u32 = 16785526;
+pub const XKB_KEY_sevensuperior: u32 = 16785527;
+pub const XKB_KEY_eightsuperior: u32 = 16785528;
+pub const XKB_KEY_ninesuperior: u32 = 16785529;
+pub const XKB_KEY_zerosubscript: u32 = 16785536;
+pub const XKB_KEY_onesubscript: u32 = 16785537;
+pub const XKB_KEY_twosubscript: u32 = 16785538;
+pub const XKB_KEY_threesubscript: u32 = 16785539;
+pub const XKB_KEY_foursubscript: u32 = 16785540;
+pub const XKB_KEY_fivesubscript: u32 = 16785541;
+pub const XKB_KEY_sixsubscript: u32 = 16785542;
+pub const XKB_KEY_sevensubscript: u32 = 16785543;
+pub const XKB_KEY_eightsubscript: u32 = 16785544;
+pub const XKB_KEY_ninesubscript: u32 = 16785545;
+pub const XKB_KEY_partdifferential: u32 = 16785922;
+pub const XKB_KEY_emptyset: u32 = 16785925;
+pub const XKB_KEY_elementof: u32 = 16785928;
+pub const XKB_KEY_notelementof: u32 = 16785929;
+pub const XKB_KEY_containsas: u32 = 16785931;
+pub const XKB_KEY_squareroot: u32 = 16785946;
+pub const XKB_KEY_cuberoot: u32 = 16785947;
+pub const XKB_KEY_fourthroot: u32 = 16785948;
+pub const XKB_KEY_dintegral: u32 = 16785964;
+pub const XKB_KEY_tintegral: u32 = 16785965;
+pub const XKB_KEY_because: u32 = 16785973;
+pub const XKB_KEY_approxeq: u32 = 16785992;
+pub const XKB_KEY_notapproxeq: u32 = 16785991;
+pub const XKB_KEY_notidentical: u32 = 16786018;
+pub const XKB_KEY_stricteq: u32 = 16786019;
+pub const XKB_KEY_braille_dot_1: u32 = 65521;
+pub const XKB_KEY_braille_dot_2: u32 = 65522;
+pub const XKB_KEY_braille_dot_3: u32 = 65523;
+pub const XKB_KEY_braille_dot_4: u32 = 65524;
+pub const XKB_KEY_braille_dot_5: u32 = 65525;
+pub const XKB_KEY_braille_dot_6: u32 = 65526;
+pub const XKB_KEY_braille_dot_7: u32 = 65527;
+pub const XKB_KEY_braille_dot_8: u32 = 65528;
+pub const XKB_KEY_braille_dot_9: u32 = 65529;
+pub const XKB_KEY_braille_dot_10: u32 = 65530;
+pub const XKB_KEY_braille_blank: u32 = 16787456;
+pub const XKB_KEY_braille_dots_1: u32 = 16787457;
+pub const XKB_KEY_braille_dots_2: u32 = 16787458;
+pub const XKB_KEY_braille_dots_12: u32 = 16787459;
+pub const XKB_KEY_braille_dots_3: u32 = 16787460;
+pub const XKB_KEY_braille_dots_13: u32 = 16787461;
+pub const XKB_KEY_braille_dots_23: u32 = 16787462;
+pub const XKB_KEY_braille_dots_123: u32 = 16787463;
+pub const XKB_KEY_braille_dots_4: u32 = 16787464;
+pub const XKB_KEY_braille_dots_14: u32 = 16787465;
+pub const XKB_KEY_braille_dots_24: u32 = 16787466;
+pub const XKB_KEY_braille_dots_124: u32 = 16787467;
+pub const XKB_KEY_braille_dots_34: u32 = 16787468;
+pub const XKB_KEY_braille_dots_134: u32 = 16787469;
+pub const XKB_KEY_braille_dots_234: u32 = 16787470;
+pub const XKB_KEY_braille_dots_1234: u32 = 16787471;
+pub const XKB_KEY_braille_dots_5: u32 = 16787472;
+pub const XKB_KEY_braille_dots_15: u32 = 16787473;
+pub const XKB_KEY_braille_dots_25: u32 = 16787474;
+pub const XKB_KEY_braille_dots_125: u32 = 16787475;
+pub const XKB_KEY_braille_dots_35: u32 = 16787476;
+pub const XKB_KEY_braille_dots_135: u32 = 16787477;
+pub const XKB_KEY_braille_dots_235: u32 = 16787478;
+pub const XKB_KEY_braille_dots_1235: u32 = 16787479;
+pub const XKB_KEY_braille_dots_45: u32 = 16787480;
+pub const XKB_KEY_braille_dots_145: u32 = 16787481;
+pub const XKB_KEY_braille_dots_245: u32 = 16787482;
+pub const XKB_KEY_braille_dots_1245: u32 = 16787483;
+pub const XKB_KEY_braille_dots_345: u32 = 16787484;
+pub const XKB_KEY_braille_dots_1345: u32 = 16787485;
+pub const XKB_KEY_braille_dots_2345: u32 = 16787486;
+pub const XKB_KEY_braille_dots_12345: u32 = 16787487;
+pub const XKB_KEY_braille_dots_6: u32 = 16787488;
+pub const XKB_KEY_braille_dots_16: u32 = 16787489;
+pub const XKB_KEY_braille_dots_26: u32 = 16787490;
+pub const XKB_KEY_braille_dots_126: u32 = 16787491;
+pub const XKB_KEY_braille_dots_36: u32 = 16787492;
+pub const XKB_KEY_braille_dots_136: u32 = 16787493;
+pub const XKB_KEY_braille_dots_236: u32 = 16787494;
+pub const XKB_KEY_braille_dots_1236: u32 = 16787495;
+pub const XKB_KEY_braille_dots_46: u32 = 16787496;
+pub const XKB_KEY_braille_dots_146: u32 = 16787497;
+pub const XKB_KEY_braille_dots_246: u32 = 16787498;
+pub const XKB_KEY_braille_dots_1246: u32 = 16787499;
+pub const XKB_KEY_braille_dots_346: u32 = 16787500;
+pub const XKB_KEY_braille_dots_1346: u32 = 16787501;
+pub const XKB_KEY_braille_dots_2346: u32 = 16787502;
+pub const XKB_KEY_braille_dots_12346: u32 = 16787503;
+pub const XKB_KEY_braille_dots_56: u32 = 16787504;
+pub const XKB_KEY_braille_dots_156: u32 = 16787505;
+pub const XKB_KEY_braille_dots_256: u32 = 16787506;
+pub const XKB_KEY_braille_dots_1256: u32 = 16787507;
+pub const XKB_KEY_braille_dots_356: u32 = 16787508;
+pub const XKB_KEY_braille_dots_1356: u32 = 16787509;
+pub const XKB_KEY_braille_dots_2356: u32 = 16787510;
+pub const XKB_KEY_braille_dots_12356: u32 = 16787511;
+pub const XKB_KEY_braille_dots_456: u32 = 16787512;
+pub const XKB_KEY_braille_dots_1456: u32 = 16787513;
+pub const XKB_KEY_braille_dots_2456: u32 = 16787514;
+pub const XKB_KEY_braille_dots_12456: u32 = 16787515;
+pub const XKB_KEY_braille_dots_3456: u32 = 16787516;
+pub const XKB_KEY_braille_dots_13456: u32 = 16787517;
+pub const XKB_KEY_braille_dots_23456: u32 = 16787518;
+pub const XKB_KEY_braille_dots_123456: u32 = 16787519;
+pub const XKB_KEY_braille_dots_7: u32 = 16787520;
+pub const XKB_KEY_braille_dots_17: u32 = 16787521;
+pub const XKB_KEY_braille_dots_27: u32 = 16787522;
+pub const XKB_KEY_braille_dots_127: u32 = 16787523;
+pub const XKB_KEY_braille_dots_37: u32 = 16787524;
+pub const XKB_KEY_braille_dots_137: u32 = 16787525;
+pub const XKB_KEY_braille_dots_237: u32 = 16787526;
+pub const XKB_KEY_braille_dots_1237: u32 = 16787527;
+pub const XKB_KEY_braille_dots_47: u32 = 16787528;
+pub const XKB_KEY_braille_dots_147: u32 = 16787529;
+pub const XKB_KEY_braille_dots_247: u32 = 16787530;
+pub const XKB_KEY_braille_dots_1247: u32 = 16787531;
+pub const XKB_KEY_braille_dots_347: u32 = 16787532;
+pub const XKB_KEY_braille_dots_1347: u32 = 16787533;
+pub const XKB_KEY_braille_dots_2347: u32 = 16787534;
+pub const XKB_KEY_braille_dots_12347: u32 = 16787535;
+pub const XKB_KEY_braille_dots_57: u32 = 16787536;
+pub const XKB_KEY_braille_dots_157: u32 = 16787537;
+pub const XKB_KEY_braille_dots_257: u32 = 16787538;
+pub const XKB_KEY_braille_dots_1257: u32 = 16787539;
+pub const XKB_KEY_braille_dots_357: u32 = 16787540;
+pub const XKB_KEY_braille_dots_1357: u32 = 16787541;
+pub const XKB_KEY_braille_dots_2357: u32 = 16787542;
+pub const XKB_KEY_braille_dots_12357: u32 = 16787543;
+pub const XKB_KEY_braille_dots_457: u32 = 16787544;
+pub const XKB_KEY_braille_dots_1457: u32 = 16787545;
+pub const XKB_KEY_braille_dots_2457: u32 = 16787546;
+pub const XKB_KEY_braille_dots_12457: u32 = 16787547;
+pub const XKB_KEY_braille_dots_3457: u32 = 16787548;
+pub const XKB_KEY_braille_dots_13457: u32 = 16787549;
+pub const XKB_KEY_braille_dots_23457: u32 = 16787550;
+pub const XKB_KEY_braille_dots_123457: u32 = 16787551;
+pub const XKB_KEY_braille_dots_67: u32 = 16787552;
+pub const XKB_KEY_braille_dots_167: u32 = 16787553;
+pub const XKB_KEY_braille_dots_267: u32 = 16787554;
+pub const XKB_KEY_braille_dots_1267: u32 = 16787555;
+pub const XKB_KEY_braille_dots_367: u32 = 16787556;
+pub const XKB_KEY_braille_dots_1367: u32 = 16787557;
+pub const XKB_KEY_braille_dots_2367: u32 = 16787558;
+pub const XKB_KEY_braille_dots_12367: u32 = 16787559;
+pub const XKB_KEY_braille_dots_467: u32 = 16787560;
+pub const XKB_KEY_braille_dots_1467: u32 = 16787561;
+pub const XKB_KEY_braille_dots_2467: u32 = 16787562;
+pub const XKB_KEY_braille_dots_12467: u32 = 16787563;
+pub const XKB_KEY_braille_dots_3467: u32 = 16787564;
+pub const XKB_KEY_braille_dots_13467: u32 = 16787565;
+pub const XKB_KEY_braille_dots_23467: u32 = 16787566;
+pub const XKB_KEY_braille_dots_123467: u32 = 16787567;
+pub const XKB_KEY_braille_dots_567: u32 = 16787568;
+pub const XKB_KEY_braille_dots_1567: u32 = 16787569;
+pub const XKB_KEY_braille_dots_2567: u32 = 16787570;
+pub const XKB_KEY_braille_dots_12567: u32 = 16787571;
+pub const XKB_KEY_braille_dots_3567: u32 = 16787572;
+pub const XKB_KEY_braille_dots_13567: u32 = 16787573;
+pub const XKB_KEY_braille_dots_23567: u32 = 16787574;
+pub const XKB_KEY_braille_dots_123567: u32 = 16787575;
+pub const XKB_KEY_braille_dots_4567: u32 = 16787576;
+pub const XKB_KEY_braille_dots_14567: u32 = 16787577;
+pub const XKB_KEY_braille_dots_24567: u32 = 16787578;
+pub const XKB_KEY_braille_dots_124567: u32 = 16787579;
+pub const XKB_KEY_braille_dots_34567: u32 = 16787580;
+pub const XKB_KEY_braille_dots_134567: u32 = 16787581;
+pub const XKB_KEY_braille_dots_234567: u32 = 16787582;
+pub const XKB_KEY_braille_dots_1234567: u32 = 16787583;
+pub const XKB_KEY_braille_dots_8: u32 = 16787584;
+pub const XKB_KEY_braille_dots_18: u32 = 16787585;
+pub const XKB_KEY_braille_dots_28: u32 = 16787586;
+pub const XKB_KEY_braille_dots_128: u32 = 16787587;
+pub const XKB_KEY_braille_dots_38: u32 = 16787588;
+pub const XKB_KEY_braille_dots_138: u32 = 16787589;
+pub const XKB_KEY_braille_dots_238: u32 = 16787590;
+pub const XKB_KEY_braille_dots_1238: u32 = 16787591;
+pub const XKB_KEY_braille_dots_48: u32 = 16787592;
+pub const XKB_KEY_braille_dots_148: u32 = 16787593;
+pub const XKB_KEY_braille_dots_248: u32 = 16787594;
+pub const XKB_KEY_braille_dots_1248: u32 = 16787595;
+pub const XKB_KEY_braille_dots_348: u32 = 16787596;
+pub const XKB_KEY_braille_dots_1348: u32 = 16787597;
+pub const XKB_KEY_braille_dots_2348: u32 = 16787598;
+pub const XKB_KEY_braille_dots_12348: u32 = 16787599;
+pub const XKB_KEY_braille_dots_58: u32 = 16787600;
+pub const XKB_KEY_braille_dots_158: u32 = 16787601;
+pub const XKB_KEY_braille_dots_258: u32 = 16787602;
+pub const XKB_KEY_braille_dots_1258: u32 = 16787603;
+pub const XKB_KEY_braille_dots_358: u32 = 16787604;
+pub const XKB_KEY_braille_dots_1358: u32 = 16787605;
+pub const XKB_KEY_braille_dots_2358: u32 = 16787606;
+pub const XKB_KEY_braille_dots_12358: u32 = 16787607;
+pub const XKB_KEY_braille_dots_458: u32 = 16787608;
+pub const XKB_KEY_braille_dots_1458: u32 = 16787609;
+pub const XKB_KEY_braille_dots_2458: u32 = 16787610;
+pub const XKB_KEY_braille_dots_12458: u32 = 16787611;
+pub const XKB_KEY_braille_dots_3458: u32 = 16787612;
+pub const XKB_KEY_braille_dots_13458: u32 = 16787613;
+pub const XKB_KEY_braille_dots_23458: u32 = 16787614;
+pub const XKB_KEY_braille_dots_123458: u32 = 16787615;
+pub const XKB_KEY_braille_dots_68: u32 = 16787616;
+pub const XKB_KEY_braille_dots_168: u32 = 16787617;
+pub const XKB_KEY_braille_dots_268: u32 = 16787618;
+pub const XKB_KEY_braille_dots_1268: u32 = 16787619;
+pub const XKB_KEY_braille_dots_368: u32 = 16787620;
+pub const XKB_KEY_braille_dots_1368: u32 = 16787621;
+pub const XKB_KEY_braille_dots_2368: u32 = 16787622;
+pub const XKB_KEY_braille_dots_12368: u32 = 16787623;
+pub const XKB_KEY_braille_dots_468: u32 = 16787624;
+pub const XKB_KEY_braille_dots_1468: u32 = 16787625;
+pub const XKB_KEY_braille_dots_2468: u32 = 16787626;
+pub const XKB_KEY_braille_dots_12468: u32 = 16787627;
+pub const XKB_KEY_braille_dots_3468: u32 = 16787628;
+pub const XKB_KEY_braille_dots_13468: u32 = 16787629;
+pub const XKB_KEY_braille_dots_23468: u32 = 16787630;
+pub const XKB_KEY_braille_dots_123468: u32 = 16787631;
+pub const XKB_KEY_braille_dots_568: u32 = 16787632;
+pub const XKB_KEY_braille_dots_1568: u32 = 16787633;
+pub const XKB_KEY_braille_dots_2568: u32 = 16787634;
+pub const XKB_KEY_braille_dots_12568: u32 = 16787635;
+pub const XKB_KEY_braille_dots_3568: u32 = 16787636;
+pub const XKB_KEY_braille_dots_13568: u32 = 16787637;
+pub const XKB_KEY_braille_dots_23568: u32 = 16787638;
+pub const XKB_KEY_braille_dots_123568: u32 = 16787639;
+pub const XKB_KEY_braille_dots_4568: u32 = 16787640;
+pub const XKB_KEY_braille_dots_14568: u32 = 16787641;
+pub const XKB_KEY_braille_dots_24568: u32 = 16787642;
+pub const XKB_KEY_braille_dots_124568: u32 = 16787643;
+pub const XKB_KEY_braille_dots_34568: u32 = 16787644;
+pub const XKB_KEY_braille_dots_134568: u32 = 16787645;
+pub const XKB_KEY_braille_dots_234568: u32 = 16787646;
+pub const XKB_KEY_braille_dots_1234568: u32 = 16787647;
+pub const XKB_KEY_braille_dots_78: u32 = 16787648;
+pub const XKB_KEY_braille_dots_178: u32 = 16787649;
+pub const XKB_KEY_braille_dots_278: u32 = 16787650;
+pub const XKB_KEY_braille_dots_1278: u32 = 16787651;
+pub const XKB_KEY_braille_dots_378: u32 = 16787652;
+pub const XKB_KEY_braille_dots_1378: u32 = 16787653;
+pub const XKB_KEY_braille_dots_2378: u32 = 16787654;
+pub const XKB_KEY_braille_dots_12378: u32 = 16787655;
+pub const XKB_KEY_braille_dots_478: u32 = 16787656;
+pub const XKB_KEY_braille_dots_1478: u32 = 16787657;
+pub const XKB_KEY_braille_dots_2478: u32 = 16787658;
+pub const XKB_KEY_braille_dots_12478: u32 = 16787659;
+pub const XKB_KEY_braille_dots_3478: u32 = 16787660;
+pub const XKB_KEY_braille_dots_13478: u32 = 16787661;
+pub const XKB_KEY_braille_dots_23478: u32 = 16787662;
+pub const XKB_KEY_braille_dots_123478: u32 = 16787663;
+pub const XKB_KEY_braille_dots_578: u32 = 16787664;
+pub const XKB_KEY_braille_dots_1578: u32 = 16787665;
+pub const XKB_KEY_braille_dots_2578: u32 = 16787666;
+pub const XKB_KEY_braille_dots_12578: u32 = 16787667;
+pub const XKB_KEY_braille_dots_3578: u32 = 16787668;
+pub const XKB_KEY_braille_dots_13578: u32 = 16787669;
+pub const XKB_KEY_braille_dots_23578: u32 = 16787670;
+pub const XKB_KEY_braille_dots_123578: u32 = 16787671;
+pub const XKB_KEY_braille_dots_4578: u32 = 16787672;
+pub const XKB_KEY_braille_dots_14578: u32 = 16787673;
+pub const XKB_KEY_braille_dots_24578: u32 = 16787674;
+pub const XKB_KEY_braille_dots_124578: u32 = 16787675;
+pub const XKB_KEY_braille_dots_34578: u32 = 16787676;
+pub const XKB_KEY_braille_dots_134578: u32 = 16787677;
+pub const XKB_KEY_braille_dots_234578: u32 = 16787678;
+pub const XKB_KEY_braille_dots_1234578: u32 = 16787679;
+pub const XKB_KEY_braille_dots_678: u32 = 16787680;
+pub const XKB_KEY_braille_dots_1678: u32 = 16787681;
+pub const XKB_KEY_braille_dots_2678: u32 = 16787682;
+pub const XKB_KEY_braille_dots_12678: u32 = 16787683;
+pub const XKB_KEY_braille_dots_3678: u32 = 16787684;
+pub const XKB_KEY_braille_dots_13678: u32 = 16787685;
+pub const XKB_KEY_braille_dots_23678: u32 = 16787686;
+pub const XKB_KEY_braille_dots_123678: u32 = 16787687;
+pub const XKB_KEY_braille_dots_4678: u32 = 16787688;
+pub const XKB_KEY_braille_dots_14678: u32 = 16787689;
+pub const XKB_KEY_braille_dots_24678: u32 = 16787690;
+pub const XKB_KEY_braille_dots_124678: u32 = 16787691;
+pub const XKB_KEY_braille_dots_34678: u32 = 16787692;
+pub const XKB_KEY_braille_dots_134678: u32 = 16787693;
+pub const XKB_KEY_braille_dots_234678: u32 = 16787694;
+pub const XKB_KEY_braille_dots_1234678: u32 = 16787695;
+pub const XKB_KEY_braille_dots_5678: u32 = 16787696;
+pub const XKB_KEY_braille_dots_15678: u32 = 16787697;
+pub const XKB_KEY_braille_dots_25678: u32 = 16787698;
+pub const XKB_KEY_braille_dots_125678: u32 = 16787699;
+pub const XKB_KEY_braille_dots_35678: u32 = 16787700;
+pub const XKB_KEY_braille_dots_135678: u32 = 16787701;
+pub const XKB_KEY_braille_dots_235678: u32 = 16787702;
+pub const XKB_KEY_braille_dots_1235678: u32 = 16787703;
+pub const XKB_KEY_braille_dots_45678: u32 = 16787704;
+pub const XKB_KEY_braille_dots_145678: u32 = 16787705;
+pub const XKB_KEY_braille_dots_245678: u32 = 16787706;
+pub const XKB_KEY_braille_dots_1245678: u32 = 16787707;
+pub const XKB_KEY_braille_dots_345678: u32 = 16787708;
+pub const XKB_KEY_braille_dots_1345678: u32 = 16787709;
+pub const XKB_KEY_braille_dots_2345678: u32 = 16787710;
+pub const XKB_KEY_braille_dots_12345678: u32 = 16787711;
+pub const XKB_KEY_Sinh_ng: u32 = 16780674;
+pub const XKB_KEY_Sinh_h2: u32 = 16780675;
+pub const XKB_KEY_Sinh_a: u32 = 16780677;
+pub const XKB_KEY_Sinh_aa: u32 = 16780678;
+pub const XKB_KEY_Sinh_ae: u32 = 16780679;
+pub const XKB_KEY_Sinh_aee: u32 = 16780680;
+pub const XKB_KEY_Sinh_i: u32 = 16780681;
+pub const XKB_KEY_Sinh_ii: u32 = 16780682;
+pub const XKB_KEY_Sinh_u: u32 = 16780683;
+pub const XKB_KEY_Sinh_uu: u32 = 16780684;
+pub const XKB_KEY_Sinh_ri: u32 = 16780685;
+pub const XKB_KEY_Sinh_rii: u32 = 16780686;
+pub const XKB_KEY_Sinh_lu: u32 = 16780687;
+pub const XKB_KEY_Sinh_luu: u32 = 16780688;
+pub const XKB_KEY_Sinh_e: u32 = 16780689;
+pub const XKB_KEY_Sinh_ee: u32 = 16780690;
+pub const XKB_KEY_Sinh_ai: u32 = 16780691;
+pub const XKB_KEY_Sinh_o: u32 = 16780692;
+pub const XKB_KEY_Sinh_oo: u32 = 16780693;
+pub const XKB_KEY_Sinh_au: u32 = 16780694;
+pub const XKB_KEY_Sinh_ka: u32 = 16780698;
+pub const XKB_KEY_Sinh_kha: u32 = 16780699;
+pub const XKB_KEY_Sinh_ga: u32 = 16780700;
+pub const XKB_KEY_Sinh_gha: u32 = 16780701;
+pub const XKB_KEY_Sinh_ng2: u32 = 16780702;
+pub const XKB_KEY_Sinh_nga: u32 = 16780703;
+pub const XKB_KEY_Sinh_ca: u32 = 16780704;
+pub const XKB_KEY_Sinh_cha: u32 = 16780705;
+pub const XKB_KEY_Sinh_ja: u32 = 16780706;
+pub const XKB_KEY_Sinh_jha: u32 = 16780707;
+pub const XKB_KEY_Sinh_nya: u32 = 16780708;
+pub const XKB_KEY_Sinh_jnya: u32 = 16780709;
+pub const XKB_KEY_Sinh_nja: u32 = 16780710;
+pub const XKB_KEY_Sinh_tta: u32 = 16780711;
+pub const XKB_KEY_Sinh_ttha: u32 = 16780712;
+pub const XKB_KEY_Sinh_dda: u32 = 16780713;
+pub const XKB_KEY_Sinh_ddha: u32 = 16780714;
+pub const XKB_KEY_Sinh_nna: u32 = 16780715;
+pub const XKB_KEY_Sinh_ndda: u32 = 16780716;
+pub const XKB_KEY_Sinh_tha: u32 = 16780717;
+pub const XKB_KEY_Sinh_thha: u32 = 16780718;
+pub const XKB_KEY_Sinh_dha: u32 = 16780719;
+pub const XKB_KEY_Sinh_dhha: u32 = 16780720;
+pub const XKB_KEY_Sinh_na: u32 = 16780721;
+pub const XKB_KEY_Sinh_ndha: u32 = 16780723;
+pub const XKB_KEY_Sinh_pa: u32 = 16780724;
+pub const XKB_KEY_Sinh_pha: u32 = 16780725;
+pub const XKB_KEY_Sinh_ba: u32 = 16780726;
+pub const XKB_KEY_Sinh_bha: u32 = 16780727;
+pub const XKB_KEY_Sinh_ma: u32 = 16780728;
+pub const XKB_KEY_Sinh_mba: u32 = 16780729;
+pub const XKB_KEY_Sinh_ya: u32 = 16780730;
+pub const XKB_KEY_Sinh_ra: u32 = 16780731;
+pub const XKB_KEY_Sinh_la: u32 = 16780733;
+pub const XKB_KEY_Sinh_va: u32 = 16780736;
+pub const XKB_KEY_Sinh_sha: u32 = 16780737;
+pub const XKB_KEY_Sinh_ssha: u32 = 16780738;
+pub const XKB_KEY_Sinh_sa: u32 = 16780739;
+pub const XKB_KEY_Sinh_ha: u32 = 16780740;
+pub const XKB_KEY_Sinh_lla: u32 = 16780741;
+pub const XKB_KEY_Sinh_fa: u32 = 16780742;
+pub const XKB_KEY_Sinh_al: u32 = 16780746;
+pub const XKB_KEY_Sinh_aa2: u32 = 16780751;
+pub const XKB_KEY_Sinh_ae2: u32 = 16780752;
+pub const XKB_KEY_Sinh_aee2: u32 = 16780753;
+pub const XKB_KEY_Sinh_i2: u32 = 16780754;
+pub const XKB_KEY_Sinh_ii2: u32 = 16780755;
+pub const XKB_KEY_Sinh_u2: u32 = 16780756;
+pub const XKB_KEY_Sinh_uu2: u32 = 16780758;
+pub const XKB_KEY_Sinh_ru2: u32 = 16780760;
+pub const XKB_KEY_Sinh_e2: u32 = 16780761;
+pub const XKB_KEY_Sinh_ee2: u32 = 16780762;
+pub const XKB_KEY_Sinh_ai2: u32 = 16780763;
+pub const XKB_KEY_Sinh_o2: u32 = 16780764;
+pub const XKB_KEY_Sinh_oo2: u32 = 16780765;
+pub const XKB_KEY_Sinh_au2: u32 = 16780766;
+pub const XKB_KEY_Sinh_lu2: u32 = 16780767;
+pub const XKB_KEY_Sinh_ruu2: u32 = 16780786;
+pub const XKB_KEY_Sinh_luu2: u32 = 16780787;
+pub const XKB_KEY_Sinh_kunddaliya: u32 = 16780788;
+pub const XKB_KEY_XF86ModeLock: u32 = 269025025;
+pub const XKB_KEY_XF86MonBrightnessUp: u32 = 269025026;
+pub const XKB_KEY_XF86MonBrightnessDown: u32 = 269025027;
+pub const XKB_KEY_XF86KbdLightOnOff: u32 = 269025028;
+pub const XKB_KEY_XF86KbdBrightnessUp: u32 = 269025029;
+pub const XKB_KEY_XF86KbdBrightnessDown: u32 = 269025030;
+pub const XKB_KEY_XF86MonBrightnessCycle: u32 = 269025031;
+pub const XKB_KEY_XF86Standby: u32 = 269025040;
+pub const XKB_KEY_XF86AudioLowerVolume: u32 = 269025041;
+pub const XKB_KEY_XF86AudioMute: u32 = 269025042;
+pub const XKB_KEY_XF86AudioRaiseVolume: u32 = 269025043;
+pub const XKB_KEY_XF86AudioPlay: u32 = 269025044;
+pub const XKB_KEY_XF86AudioStop: u32 = 269025045;
+pub const XKB_KEY_XF86AudioPrev: u32 = 269025046;
+pub const XKB_KEY_XF86AudioNext: u32 = 269025047;
+pub const XKB_KEY_XF86HomePage: u32 = 269025048;
+pub const XKB_KEY_XF86Mail: u32 = 269025049;
+pub const XKB_KEY_XF86Start: u32 = 269025050;
+pub const XKB_KEY_XF86Search: u32 = 269025051;
+pub const XKB_KEY_XF86AudioRecord: u32 = 269025052;
+pub const XKB_KEY_XF86Calculator: u32 = 269025053;
+pub const XKB_KEY_XF86Memo: u32 = 269025054;
+pub const XKB_KEY_XF86ToDoList: u32 = 269025055;
+pub const XKB_KEY_XF86Calendar: u32 = 269025056;
+pub const XKB_KEY_XF86PowerDown: u32 = 269025057;
+pub const XKB_KEY_XF86ContrastAdjust: u32 = 269025058;
+pub const XKB_KEY_XF86RockerUp: u32 = 269025059;
+pub const XKB_KEY_XF86RockerDown: u32 = 269025060;
+pub const XKB_KEY_XF86RockerEnter: u32 = 269025061;
+pub const XKB_KEY_XF86Back: u32 = 269025062;
+pub const XKB_KEY_XF86Forward: u32 = 269025063;
+pub const XKB_KEY_XF86Stop: u32 = 269025064;
+pub const XKB_KEY_XF86Refresh: u32 = 269025065;
+pub const XKB_KEY_XF86PowerOff: u32 = 269025066;
+pub const XKB_KEY_XF86WakeUp: u32 = 269025067;
+pub const XKB_KEY_XF86Eject: u32 = 269025068;
+pub const XKB_KEY_XF86ScreenSaver: u32 = 269025069;
+pub const XKB_KEY_XF86WWW: u32 = 269025070;
+pub const XKB_KEY_XF86Sleep: u32 = 269025071;
+pub const XKB_KEY_XF86Favorites: u32 = 269025072;
+pub const XKB_KEY_XF86AudioPause: u32 = 269025073;
+pub const XKB_KEY_XF86AudioMedia: u32 = 269025074;
+pub const XKB_KEY_XF86MyComputer: u32 = 269025075;
+pub const XKB_KEY_XF86VendorHome: u32 = 269025076;
+pub const XKB_KEY_XF86LightBulb: u32 = 269025077;
+pub const XKB_KEY_XF86Shop: u32 = 269025078;
+pub const XKB_KEY_XF86History: u32 = 269025079;
+pub const XKB_KEY_XF86OpenURL: u32 = 269025080;
+pub const XKB_KEY_XF86AddFavorite: u32 = 269025081;
+pub const XKB_KEY_XF86HotLinks: u32 = 269025082;
+pub const XKB_KEY_XF86BrightnessAdjust: u32 = 269025083;
+pub const XKB_KEY_XF86Finance: u32 = 269025084;
+pub const XKB_KEY_XF86Community: u32 = 269025085;
+pub const XKB_KEY_XF86AudioRewind: u32 = 269025086;
+pub const XKB_KEY_XF86BackForward: u32 = 269025087;
+pub const XKB_KEY_XF86Launch0: u32 = 269025088;
+pub const XKB_KEY_XF86Launch1: u32 = 269025089;
+pub const XKB_KEY_XF86Launch2: u32 = 269025090;
+pub const XKB_KEY_XF86Launch3: u32 = 269025091;
+pub const XKB_KEY_XF86Launch4: u32 = 269025092;
+pub const XKB_KEY_XF86Launch5: u32 = 269025093;
+pub const XKB_KEY_XF86Launch6: u32 = 269025094;
+pub const XKB_KEY_XF86Launch7: u32 = 269025095;
+pub const XKB_KEY_XF86Launch8: u32 = 269025096;
+pub const XKB_KEY_XF86Launch9: u32 = 269025097;
+pub const XKB_KEY_XF86LaunchA: u32 = 269025098;
+pub const XKB_KEY_XF86LaunchB: u32 = 269025099;
+pub const XKB_KEY_XF86LaunchC: u32 = 269025100;
+pub const XKB_KEY_XF86LaunchD: u32 = 269025101;
+pub const XKB_KEY_XF86LaunchE: u32 = 269025102;
+pub const XKB_KEY_XF86LaunchF: u32 = 269025103;
+pub const XKB_KEY_XF86ApplicationLeft: u32 = 269025104;
+pub const XKB_KEY_XF86ApplicationRight: u32 = 269025105;
+pub const XKB_KEY_XF86Book: u32 = 269025106;
+pub const XKB_KEY_XF86CD: u32 = 269025107;
+pub const XKB_KEY_XF86Calculater: u32 = 269025108;
+pub const XKB_KEY_XF86Clear: u32 = 269025109;
+pub const XKB_KEY_XF86Close: u32 = 269025110;
+pub const XKB_KEY_XF86Copy: u32 = 269025111;
+pub const XKB_KEY_XF86Cut: u32 = 269025112;
+pub const XKB_KEY_XF86Display: u32 = 269025113;
+pub const XKB_KEY_XF86DOS: u32 = 269025114;
+pub const XKB_KEY_XF86Documents: u32 = 269025115;
+pub const XKB_KEY_XF86Excel: u32 = 269025116;
+pub const XKB_KEY_XF86Explorer: u32 = 269025117;
+pub const XKB_KEY_XF86Game: u32 = 269025118;
+pub const XKB_KEY_XF86Go: u32 = 269025119;
+pub const XKB_KEY_XF86iTouch: u32 = 269025120;
+pub const XKB_KEY_XF86LogOff: u32 = 269025121;
+pub const XKB_KEY_XF86Market: u32 = 269025122;
+pub const XKB_KEY_XF86Meeting: u32 = 269025123;
+pub const XKB_KEY_XF86MenuKB: u32 = 269025125;
+pub const XKB_KEY_XF86MenuPB: u32 = 269025126;
+pub const XKB_KEY_XF86MySites: u32 = 269025127;
+pub const XKB_KEY_XF86New: u32 = 269025128;
+pub const XKB_KEY_XF86News: u32 = 269025129;
+pub const XKB_KEY_XF86OfficeHome: u32 = 269025130;
+pub const XKB_KEY_XF86Open: u32 = 269025131;
+pub const XKB_KEY_XF86Option: u32 = 269025132;
+pub const XKB_KEY_XF86Paste: u32 = 269025133;
+pub const XKB_KEY_XF86Phone: u32 = 269025134;
+pub const XKB_KEY_XF86Q: u32 = 269025136;
+pub const XKB_KEY_XF86Reply: u32 = 269025138;
+pub const XKB_KEY_XF86Reload: u32 = 269025139;
+pub const XKB_KEY_XF86RotateWindows: u32 = 269025140;
+pub const XKB_KEY_XF86RotationPB: u32 = 269025141;
+pub const XKB_KEY_XF86RotationKB: u32 = 269025142;
+pub const XKB_KEY_XF86Save: u32 = 269025143;
+pub const XKB_KEY_XF86ScrollUp: u32 = 269025144;
+pub const XKB_KEY_XF86ScrollDown: u32 = 269025145;
+pub const XKB_KEY_XF86ScrollClick: u32 = 269025146;
+pub const XKB_KEY_XF86Send: u32 = 269025147;
+pub const XKB_KEY_XF86Spell: u32 = 269025148;
+pub const XKB_KEY_XF86SplitScreen: u32 = 269025149;
+pub const XKB_KEY_XF86Support: u32 = 269025150;
+pub const XKB_KEY_XF86TaskPane: u32 = 269025151;
+pub const XKB_KEY_XF86Terminal: u32 = 269025152;
+pub const XKB_KEY_XF86Tools: u32 = 269025153;
+pub const XKB_KEY_XF86Travel: u32 = 269025154;
+pub const XKB_KEY_XF86UserPB: u32 = 269025156;
+pub const XKB_KEY_XF86User1KB: u32 = 269025157;
+pub const XKB_KEY_XF86User2KB: u32 = 269025158;
+pub const XKB_KEY_XF86Video: u32 = 269025159;
+pub const XKB_KEY_XF86WheelButton: u32 = 269025160;
+pub const XKB_KEY_XF86Word: u32 = 269025161;
+pub const XKB_KEY_XF86Xfer: u32 = 269025162;
+pub const XKB_KEY_XF86ZoomIn: u32 = 269025163;
+pub const XKB_KEY_XF86ZoomOut: u32 = 269025164;
+pub const XKB_KEY_XF86Away: u32 = 269025165;
+pub const XKB_KEY_XF86Messenger: u32 = 269025166;
+pub const XKB_KEY_XF86WebCam: u32 = 269025167;
+pub const XKB_KEY_XF86MailForward: u32 = 269025168;
+pub const XKB_KEY_XF86Pictures: u32 = 269025169;
+pub const XKB_KEY_XF86Music: u32 = 269025170;
+pub const XKB_KEY_XF86Battery: u32 = 269025171;
+pub const XKB_KEY_XF86Bluetooth: u32 = 269025172;
+pub const XKB_KEY_XF86WLAN: u32 = 269025173;
+pub const XKB_KEY_XF86UWB: u32 = 269025174;
+pub const XKB_KEY_XF86AudioForward: u32 = 269025175;
+pub const XKB_KEY_XF86AudioRepeat: u32 = 269025176;
+pub const XKB_KEY_XF86AudioRandomPlay: u32 = 269025177;
+pub const XKB_KEY_XF86Subtitle: u32 = 269025178;
+pub const XKB_KEY_XF86AudioCycleTrack: u32 = 269025179;
+pub const XKB_KEY_XF86CycleAngle: u32 = 269025180;
+pub const XKB_KEY_XF86FrameBack: u32 = 269025181;
+pub const XKB_KEY_XF86FrameForward: u32 = 269025182;
+pub const XKB_KEY_XF86Time: u32 = 269025183;
+pub const XKB_KEY_XF86Select: u32 = 269025184;
+pub const XKB_KEY_XF86View: u32 = 269025185;
+pub const XKB_KEY_XF86TopMenu: u32 = 269025186;
+pub const XKB_KEY_XF86Red: u32 = 269025187;
+pub const XKB_KEY_XF86Green: u32 = 269025188;
+pub const XKB_KEY_XF86Yellow: u32 = 269025189;
+pub const XKB_KEY_XF86Blue: u32 = 269025190;
+pub const XKB_KEY_XF86Suspend: u32 = 269025191;
+pub const XKB_KEY_XF86Hibernate: u32 = 269025192;
+pub const XKB_KEY_XF86TouchpadToggle: u32 = 269025193;
+pub const XKB_KEY_XF86TouchpadOn: u32 = 269025200;
+pub const XKB_KEY_XF86TouchpadOff: u32 = 269025201;
+pub const XKB_KEY_XF86AudioMicMute: u32 = 269025202;
+pub const XKB_KEY_XF86Keyboard: u32 = 269025203;
+pub const XKB_KEY_XF86WWAN: u32 = 269025204;
+pub const XKB_KEY_XF86RFKill: u32 = 269025205;
+pub const XKB_KEY_XF86AudioPreset: u32 = 269025206;
+pub const XKB_KEY_XF86RotationLockToggle: u32 = 269025207;
+pub const XKB_KEY_XF86FullScreen: u32 = 269025208;
+pub const XKB_KEY_XF86Switch_VT_1: u32 = 269024769;
+pub const XKB_KEY_XF86Switch_VT_2: u32 = 269024770;
+pub const XKB_KEY_XF86Switch_VT_3: u32 = 269024771;
+pub const XKB_KEY_XF86Switch_VT_4: u32 = 269024772;
+pub const XKB_KEY_XF86Switch_VT_5: u32 = 269024773;
+pub const XKB_KEY_XF86Switch_VT_6: u32 = 269024774;
+pub const XKB_KEY_XF86Switch_VT_7: u32 = 269024775;
+pub const XKB_KEY_XF86Switch_VT_8: u32 = 269024776;
+pub const XKB_KEY_XF86Switch_VT_9: u32 = 269024777;
+pub const XKB_KEY_XF86Switch_VT_10: u32 = 269024778;
+pub const XKB_KEY_XF86Switch_VT_11: u32 = 269024779;
+pub const XKB_KEY_XF86Switch_VT_12: u32 = 269024780;
+pub const XKB_KEY_XF86Ungrab: u32 = 269024800;
+pub const XKB_KEY_XF86ClearGrab: u32 = 269024801;
+pub const XKB_KEY_XF86Next_VMode: u32 = 269024802;
+pub const XKB_KEY_XF86Prev_VMode: u32 = 269024803;
+pub const XKB_KEY_XF86LogWindowTree: u32 = 269024804;
+pub const XKB_KEY_XF86LogGrabInfo: u32 = 269024805;
+pub const XKB_KEY_XF86BrightnessAuto: u32 = 268964084;
+pub const XKB_KEY_XF86DisplayOff: u32 = 268964085;
+pub const XKB_KEY_XF86Info: u32 = 268964198;
+pub const XKB_KEY_XF86AspectRatio: u32 = 268964215;
+pub const XKB_KEY_XF86DVD: u32 = 268964229;
+pub const XKB_KEY_XF86Audio: u32 = 268964232;
+pub const XKB_KEY_XF86ChannelUp: u32 = 268964242;
+pub const XKB_KEY_XF86ChannelDown: u32 = 268964243;
+pub const XKB_KEY_XF86Break: u32 = 268964251;
+pub const XKB_KEY_XF86VideoPhone: u32 = 268964256;
+pub const XKB_KEY_XF86ZoomReset: u32 = 268964260;
+pub const XKB_KEY_XF86Editor: u32 = 268964262;
+pub const XKB_KEY_XF86GraphicsEditor: u32 = 268964264;
+pub const XKB_KEY_XF86Presentation: u32 = 268964265;
+pub const XKB_KEY_XF86Database: u32 = 268964266;
+pub const XKB_KEY_XF86Voicemail: u32 = 268964268;
+pub const XKB_KEY_XF86Addressbook: u32 = 268964269;
+pub const XKB_KEY_XF86DisplayToggle: u32 = 268964271;
+pub const XKB_KEY_XF86SpellCheck: u32 = 268964272;
+pub const XKB_KEY_XF86ContextMenu: u32 = 268964278;
+pub const XKB_KEY_XF86MediaRepeat: u32 = 268964279;
+pub const XKB_KEY_XF8610ChannelsUp: u32 = 268964280;
+pub const XKB_KEY_XF8610ChannelsDown: u32 = 268964281;
+pub const XKB_KEY_XF86Images: u32 = 268964282;
+pub const XKB_KEY_XF86NotificationCenter: u32 = 268964284;
+pub const XKB_KEY_XF86PickupPhone: u32 = 268964285;
+pub const XKB_KEY_XF86HangupPhone: u32 = 268964286;
+pub const XKB_KEY_XF86Fn: u32 = 268964304;
+pub const XKB_KEY_XF86Fn_Esc: u32 = 268964305;
+pub const XKB_KEY_XF86FnRightShift: u32 = 268964325;
+pub const XKB_KEY_XF86Numeric0: u32 = 268964352;
+pub const XKB_KEY_XF86Numeric1: u32 = 268964353;
+pub const XKB_KEY_XF86Numeric2: u32 = 268964354;
+pub const XKB_KEY_XF86Numeric3: u32 = 268964355;
+pub const XKB_KEY_XF86Numeric4: u32 = 268964356;
+pub const XKB_KEY_XF86Numeric5: u32 = 268964357;
+pub const XKB_KEY_XF86Numeric6: u32 = 268964358;
+pub const XKB_KEY_XF86Numeric7: u32 = 268964359;
+pub const XKB_KEY_XF86Numeric8: u32 = 268964360;
+pub const XKB_KEY_XF86Numeric9: u32 = 268964361;
+pub const XKB_KEY_XF86NumericStar: u32 = 268964362;
+pub const XKB_KEY_XF86NumericPound: u32 = 268964363;
+pub const XKB_KEY_XF86NumericA: u32 = 268964364;
+pub const XKB_KEY_XF86NumericB: u32 = 268964365;
+pub const XKB_KEY_XF86NumericC: u32 = 268964366;
+pub const XKB_KEY_XF86NumericD: u32 = 268964367;
+pub const XKB_KEY_XF86CameraFocus: u32 = 268964368;
+pub const XKB_KEY_XF86WPSButton: u32 = 268964369;
+pub const XKB_KEY_XF86CameraZoomIn: u32 = 268964373;
+pub const XKB_KEY_XF86CameraZoomOut: u32 = 268964374;
+pub const XKB_KEY_XF86CameraUp: u32 = 268964375;
+pub const XKB_KEY_XF86CameraDown: u32 = 268964376;
+pub const XKB_KEY_XF86CameraLeft: u32 = 268964377;
+pub const XKB_KEY_XF86CameraRight: u32 = 268964378;
+pub const XKB_KEY_XF86AttendantOn: u32 = 268964379;
+pub const XKB_KEY_XF86AttendantOff: u32 = 268964380;
+pub const XKB_KEY_XF86AttendantToggle: u32 = 268964381;
+pub const XKB_KEY_XF86LightsToggle: u32 = 268964382;
+pub const XKB_KEY_XF86ALSToggle: u32 = 268964400;
+pub const XKB_KEY_XF86RefreshRateToggle: u32 = 268964402;
+pub const XKB_KEY_XF86Buttonconfig: u32 = 268964416;
+pub const XKB_KEY_XF86Taskmanager: u32 = 268964417;
+pub const XKB_KEY_XF86Journal: u32 = 268964418;
+pub const XKB_KEY_XF86ControlPanel: u32 = 268964419;
+pub const XKB_KEY_XF86AppSelect: u32 = 268964420;
+pub const XKB_KEY_XF86Screensaver: u32 = 268964421;
+pub const XKB_KEY_XF86VoiceCommand: u32 = 268964422;
+pub const XKB_KEY_XF86Assistant: u32 = 268964423;
+pub const XKB_KEY_XF86EmojiPicker: u32 = 268964425;
+pub const XKB_KEY_XF86Dictate: u32 = 268964426;
+pub const XKB_KEY_XF86CameraAccessEnable: u32 = 268964427;
+pub const XKB_KEY_XF86CameraAccessDisable: u32 = 268964428;
+pub const XKB_KEY_XF86CameraAccessToggle: u32 = 268964429;
+pub const XKB_KEY_XF86Accessibility: u32 = 268964430;
+pub const XKB_KEY_XF86DoNotDisturb: u32 = 268964431;
+pub const XKB_KEY_XF86BrightnessMin: u32 = 268964432;
+pub const XKB_KEY_XF86BrightnessMax: u32 = 268964433;
+pub const XKB_KEY_XF86KbdInputAssistPrev: u32 = 268964448;
+pub const XKB_KEY_XF86KbdInputAssistNext: u32 = 268964449;
+pub const XKB_KEY_XF86KbdInputAssistPrevgroup: u32 = 268964450;
+pub const XKB_KEY_XF86KbdInputAssistNextgroup: u32 = 268964451;
+pub const XKB_KEY_XF86KbdInputAssistAccept: u32 = 268964452;
+pub const XKB_KEY_XF86KbdInputAssistCancel: u32 = 268964453;
+pub const XKB_KEY_XF86RightUp: u32 = 268964454;
+pub const XKB_KEY_XF86RightDown: u32 = 268964455;
+pub const XKB_KEY_XF86LeftUp: u32 = 268964456;
+pub const XKB_KEY_XF86LeftDown: u32 = 268964457;
+pub const XKB_KEY_XF86RootMenu: u32 = 268964458;
+pub const XKB_KEY_XF86MediaTopMenu: u32 = 268964459;
+pub const XKB_KEY_XF86Numeric11: u32 = 268964460;
+pub const XKB_KEY_XF86Numeric12: u32 = 268964461;
+pub const XKB_KEY_XF86AudioDesc: u32 = 268964462;
+pub const XKB_KEY_XF863DMode: u32 = 268964463;
+pub const XKB_KEY_XF86NextFavorite: u32 = 268964464;
+pub const XKB_KEY_XF86StopRecord: u32 = 268964465;
+pub const XKB_KEY_XF86PauseRecord: u32 = 268964466;
+pub const XKB_KEY_XF86VOD: u32 = 268964467;
+pub const XKB_KEY_XF86Unmute: u32 = 268964468;
+pub const XKB_KEY_XF86FastReverse: u32 = 268964469;
+pub const XKB_KEY_XF86SlowReverse: u32 = 268964470;
+pub const XKB_KEY_XF86Data: u32 = 268964471;
+pub const XKB_KEY_XF86OnScreenKeyboard: u32 = 268964472;
+pub const XKB_KEY_XF86PrivacyScreenToggle: u32 = 268964473;
+pub const XKB_KEY_XF86SelectiveScreenshot: u32 = 268964474;
+pub const XKB_KEY_XF86NextElement: u32 = 268964475;
+pub const XKB_KEY_XF86PreviousElement: u32 = 268964476;
+pub const XKB_KEY_XF86AutopilotEngageToggle: u32 = 268964477;
+pub const XKB_KEY_XF86MarkWaypoint: u32 = 268964478;
+pub const XKB_KEY_XF86Sos: u32 = 268964479;
+pub const XKB_KEY_XF86NavChart: u32 = 268964480;
+pub const XKB_KEY_XF86FishingChart: u32 = 268964481;
+pub const XKB_KEY_XF86SingleRangeRadar: u32 = 268964482;
+pub const XKB_KEY_XF86DualRangeRadar: u32 = 268964483;
+pub const XKB_KEY_XF86RadarOverlay: u32 = 268964484;
+pub const XKB_KEY_XF86TraditionalSonar: u32 = 268964485;
+pub const XKB_KEY_XF86ClearvuSonar: u32 = 268964486;
+pub const XKB_KEY_XF86SidevuSonar: u32 = 268964487;
+pub const XKB_KEY_XF86NavInfo: u32 = 268964488;
+pub const XKB_KEY_XF86Macro1: u32 = 268964496;
+pub const XKB_KEY_XF86Macro2: u32 = 268964497;
+pub const XKB_KEY_XF86Macro3: u32 = 268964498;
+pub const XKB_KEY_XF86Macro4: u32 = 268964499;
+pub const XKB_KEY_XF86Macro5: u32 = 268964500;
+pub const XKB_KEY_XF86Macro6: u32 = 268964501;
+pub const XKB_KEY_XF86Macro7: u32 = 268964502;
+pub const XKB_KEY_XF86Macro8: u32 = 268964503;
+pub const XKB_KEY_XF86Macro9: u32 = 268964504;
+pub const XKB_KEY_XF86Macro10: u32 = 268964505;
+pub const XKB_KEY_XF86Macro11: u32 = 268964506;
+pub const XKB_KEY_XF86Macro12: u32 = 268964507;
+pub const XKB_KEY_XF86Macro13: u32 = 268964508;
+pub const XKB_KEY_XF86Macro14: u32 = 268964509;
+pub const XKB_KEY_XF86Macro15: u32 = 268964510;
+pub const XKB_KEY_XF86Macro16: u32 = 268964511;
+pub const XKB_KEY_XF86Macro17: u32 = 268964512;
+pub const XKB_KEY_XF86Macro18: u32 = 268964513;
+pub const XKB_KEY_XF86Macro19: u32 = 268964514;
+pub const XKB_KEY_XF86Macro20: u32 = 268964515;
+pub const XKB_KEY_XF86Macro21: u32 = 268964516;
+pub const XKB_KEY_XF86Macro22: u32 = 268964517;
+pub const XKB_KEY_XF86Macro23: u32 = 268964518;
+pub const XKB_KEY_XF86Macro24: u32 = 268964519;
+pub const XKB_KEY_XF86Macro25: u32 = 268964520;
+pub const XKB_KEY_XF86Macro26: u32 = 268964521;
+pub const XKB_KEY_XF86Macro27: u32 = 268964522;
+pub const XKB_KEY_XF86Macro28: u32 = 268964523;
+pub const XKB_KEY_XF86Macro29: u32 = 268964524;
+pub const XKB_KEY_XF86Macro30: u32 = 268964525;
+pub const XKB_KEY_XF86MacroRecordStart: u32 = 268964528;
+pub const XKB_KEY_XF86MacroRecordStop: u32 = 268964529;
+pub const XKB_KEY_XF86MacroPresetCycle: u32 = 268964530;
+pub const XKB_KEY_XF86MacroPreset1: u32 = 268964531;
+pub const XKB_KEY_XF86MacroPreset2: u32 = 268964532;
+pub const XKB_KEY_XF86MacroPreset3: u32 = 268964533;
+pub const XKB_KEY_XF86KbdLcdMenu1: u32 = 268964536;
+pub const XKB_KEY_XF86KbdLcdMenu2: u32 = 268964537;
+pub const XKB_KEY_XF86KbdLcdMenu3: u32 = 268964538;
+pub const XKB_KEY_XF86KbdLcdMenu4: u32 = 268964539;
+pub const XKB_KEY_XF86KbdLcdMenu5: u32 = 268964540;
+pub const XKB_KEY_SunFA_Grave: u32 = 268828416;
+pub const XKB_KEY_SunFA_Circum: u32 = 268828417;
+pub const XKB_KEY_SunFA_Tilde: u32 = 268828418;
+pub const XKB_KEY_SunFA_Acute: u32 = 268828419;
+pub const XKB_KEY_SunFA_Diaeresis: u32 = 268828420;
+pub const XKB_KEY_SunFA_Cedilla: u32 = 268828421;
+pub const XKB_KEY_SunF36: u32 = 268828432;
+pub const XKB_KEY_SunF37: u32 = 268828433;
+pub const XKB_KEY_SunSys_Req: u32 = 268828512;
+pub const XKB_KEY_SunPrint_Screen: u32 = 65377;
+pub const XKB_KEY_SunCompose: u32 = 65312;
+pub const XKB_KEY_SunAltGraph: u32 = 65406;
+pub const XKB_KEY_SunPageUp: u32 = 65365;
+pub const XKB_KEY_SunPageDown: u32 = 65366;
+pub const XKB_KEY_SunUndo: u32 = 65381;
+pub const XKB_KEY_SunAgain: u32 = 65382;
+pub const XKB_KEY_SunFind: u32 = 65384;
+pub const XKB_KEY_SunStop: u32 = 65385;
+pub const XKB_KEY_SunProps: u32 = 268828528;
+pub const XKB_KEY_SunFront: u32 = 268828529;
+pub const XKB_KEY_SunCopy: u32 = 268828530;
+pub const XKB_KEY_SunOpen: u32 = 268828531;
+pub const XKB_KEY_SunPaste: u32 = 268828532;
+pub const XKB_KEY_SunCut: u32 = 268828533;
+pub const XKB_KEY_SunPowerSwitch: u32 = 268828534;
+pub const XKB_KEY_SunAudioLowerVolume: u32 = 268828535;
+pub const XKB_KEY_SunAudioMute: u32 = 268828536;
+pub const XKB_KEY_SunAudioRaiseVolume: u32 = 268828537;
+pub const XKB_KEY_SunVideoDegauss: u32 = 268828538;
+pub const XKB_KEY_SunVideoLowerBrightness: u32 = 268828539;
+pub const XKB_KEY_SunVideoRaiseBrightness: u32 = 268828540;
+pub const XKB_KEY_SunPowerSwitchShift: u32 = 268828541;
+pub const XKB_KEY_Dring_accent: u32 = 268500656;
+pub const XKB_KEY_Dcircumflex_accent: u32 = 268500574;
+pub const XKB_KEY_Dcedilla_accent: u32 = 268500524;
+pub const XKB_KEY_Dacute_accent: u32 = 268500519;
+pub const XKB_KEY_Dgrave_accent: u32 = 268500576;
+pub const XKB_KEY_Dtilde: u32 = 268500606;
+pub const XKB_KEY_Ddiaeresis: u32 = 268500514;
+pub const XKB_KEY_DRemove: u32 = 268500736;
+pub const XKB_KEY_hpClearLine: u32 = 268500847;
+pub const XKB_KEY_hpInsertLine: u32 = 268500848;
+pub const XKB_KEY_hpDeleteLine: u32 = 268500849;
+pub const XKB_KEY_hpInsertChar: u32 = 268500850;
+pub const XKB_KEY_hpDeleteChar: u32 = 268500851;
+pub const XKB_KEY_hpBackTab: u32 = 268500852;
+pub const XKB_KEY_hpKP_BackTab: u32 = 268500853;
+pub const XKB_KEY_hpModelock1: u32 = 268500808;
+pub const XKB_KEY_hpModelock2: u32 = 268500809;
+pub const XKB_KEY_hpReset: u32 = 268500844;
+pub const XKB_KEY_hpSystem: u32 = 268500845;
+pub const XKB_KEY_hpUser: u32 = 268500846;
+pub const XKB_KEY_hpmute_acute: u32 = 268435624;
+pub const XKB_KEY_hpmute_grave: u32 = 268435625;
+pub const XKB_KEY_hpmute_asciicircum: u32 = 268435626;
+pub const XKB_KEY_hpmute_diaeresis: u32 = 268435627;
+pub const XKB_KEY_hpmute_asciitilde: u32 = 268435628;
+pub const XKB_KEY_hplira: u32 = 268435631;
+pub const XKB_KEY_hpguilder: u32 = 268435646;
+pub const XKB_KEY_hpYdiaeresis: u32 = 268435694;
+pub const XKB_KEY_hpIO: u32 = 268435694;
+pub const XKB_KEY_hplongminus: u32 = 268435702;
+pub const XKB_KEY_hpblock: u32 = 268435708;
+pub const XKB_KEY_osfCopy: u32 = 268762882;
+pub const XKB_KEY_osfCut: u32 = 268762883;
+pub const XKB_KEY_osfPaste: u32 = 268762884;
+pub const XKB_KEY_osfBackTab: u32 = 268762887;
+pub const XKB_KEY_osfBackSpace: u32 = 268762888;
+pub const XKB_KEY_osfClear: u32 = 268762891;
+pub const XKB_KEY_osfEscape: u32 = 268762907;
+pub const XKB_KEY_osfAddMode: u32 = 268762929;
+pub const XKB_KEY_osfPrimaryPaste: u32 = 268762930;
+pub const XKB_KEY_osfQuickPaste: u32 = 268762931;
+pub const XKB_KEY_osfPageLeft: u32 = 268762944;
+pub const XKB_KEY_osfPageUp: u32 = 268762945;
+pub const XKB_KEY_osfPageDown: u32 = 268762946;
+pub const XKB_KEY_osfPageRight: u32 = 268762947;
+pub const XKB_KEY_osfActivate: u32 = 268762948;
+pub const XKB_KEY_osfMenuBar: u32 = 268762949;
+pub const XKB_KEY_osfLeft: u32 = 268762961;
+pub const XKB_KEY_osfUp: u32 = 268762962;
+pub const XKB_KEY_osfRight: u32 = 268762963;
+pub const XKB_KEY_osfDown: u32 = 268762964;
+pub const XKB_KEY_osfEndLine: u32 = 268762967;
+pub const XKB_KEY_osfBeginLine: u32 = 268762968;
+pub const XKB_KEY_osfEndData: u32 = 268762969;
+pub const XKB_KEY_osfBeginData: u32 = 268762970;
+pub const XKB_KEY_osfPrevMenu: u32 = 268762971;
+pub const XKB_KEY_osfNextMenu: u32 = 268762972;
+pub const XKB_KEY_osfPrevField: u32 = 268762973;
+pub const XKB_KEY_osfNextField: u32 = 268762974;
+pub const XKB_KEY_osfSelect: u32 = 268762976;
+pub const XKB_KEY_osfInsert: u32 = 268762979;
+pub const XKB_KEY_osfUndo: u32 = 268762981;
+pub const XKB_KEY_osfMenu: u32 = 268762983;
+pub const XKB_KEY_osfCancel: u32 = 268762985;
+pub const XKB_KEY_osfHelp: u32 = 268762986;
+pub const XKB_KEY_osfSelectAll: u32 = 268762993;
+pub const XKB_KEY_osfDeselectAll: u32 = 268762994;
+pub const XKB_KEY_osfReselect: u32 = 268762995;
+pub const XKB_KEY_osfExtend: u32 = 268762996;
+pub const XKB_KEY_osfRestore: u32 = 268763000;
+pub const XKB_KEY_osfDelete: u32 = 268763135;
+pub const XKB_KEY_Reset: u32 = 268500844;
+pub const XKB_KEY_System: u32 = 268500845;
+pub const XKB_KEY_User: u32 = 268500846;
+pub const XKB_KEY_ClearLine: u32 = 268500847;
+pub const XKB_KEY_InsertLine: u32 = 268500848;
+pub const XKB_KEY_DeleteLine: u32 = 268500849;
+pub const XKB_KEY_InsertChar: u32 = 268500850;
+pub const XKB_KEY_DeleteChar: u32 = 268500851;
+pub const XKB_KEY_BackTab: u32 = 268500852;
+pub const XKB_KEY_KP_BackTab: u32 = 268500853;
+pub const XKB_KEY_Ext16bit_L: u32 = 268500854;
+pub const XKB_KEY_Ext16bit_R: u32 = 268500855;
+pub const XKB_KEY_mute_acute: u32 = 268435624;
+pub const XKB_KEY_mute_grave: u32 = 268435625;
+pub const XKB_KEY_mute_asciicircum: u32 = 268435626;
+pub const XKB_KEY_mute_diaeresis: u32 = 268435627;
+pub const XKB_KEY_mute_asciitilde: u32 = 268435628;
+pub const XKB_KEY_lira: u32 = 268435631;
+pub const XKB_KEY_guilder: u32 = 268435646;
+pub const XKB_KEY_IO: u32 = 268435694;
+pub const XKB_KEY_longminus: u32 = 268435702;
+pub const XKB_KEY_block: u32 = 268435708;
+pub const XKB_KEYCODE_INVALID: u32 = 4294967295;
+pub const XKB_LAYOUT_INVALID: u32 = 4294967295;
+pub const XKB_LEVEL_INVALID: u32 = 4294967295;
+pub const XKB_MOD_INVALID: u32 = 4294967295;
+pub const XKB_LED_INVALID: u32 = 4294967295;
+pub const XKB_KEYCODE_MAX: u32 = 4294967294;
+pub const XKB_KEYSYM_MAX: u32 = 536870911;
+pub const XKB_GROUP_INVALID: u32 = 4294967295;
+pub const XKB_X11_MIN_MAJOR_XKB_VERSION: u32 = 1;
+pub const XKB_X11_MIN_MINOR_XKB_VERSION: u32 = 0;
+pub const X_kbUseExtension: u32 = 0;
+pub const X_kbSelectEvents: u32 = 1;
+pub const X_kbBell: u32 = 3;
+pub const X_kbGetState: u32 = 4;
+pub const X_kbLatchLockState: u32 = 5;
+pub const X_kbGetControls: u32 = 6;
+pub const X_kbSetControls: u32 = 7;
+pub const X_kbGetMap: u32 = 8;
+pub const X_kbSetMap: u32 = 9;
+pub const X_kbGetCompatMap: u32 = 10;
+pub const X_kbSetCompatMap: u32 = 11;
+pub const X_kbGetIndicatorState: u32 = 12;
+pub const X_kbGetIndicatorMap: u32 = 13;
+pub const X_kbSetIndicatorMap: u32 = 14;
+pub const X_kbGetNamedIndicator: u32 = 15;
+pub const X_kbSetNamedIndicator: u32 = 16;
+pub const X_kbGetNames: u32 = 17;
+pub const X_kbSetNames: u32 = 18;
+pub const X_kbGetGeometry: u32 = 19;
+pub const X_kbSetGeometry: u32 = 20;
+pub const X_kbPerClientFlags: u32 = 21;
+pub const X_kbListComponents: u32 = 22;
+pub const X_kbGetKbdByName: u32 = 23;
+pub const X_kbGetDeviceInfo: u32 = 24;
+pub const X_kbSetDeviceInfo: u32 = 25;
+pub const X_kbSetDebuggingFlags: u32 = 101;
+pub const XkbEventCode: u32 = 0;
+pub const XkbNumberEvents: u32 = 1;
+pub const XkbNewKeyboardNotify: u32 = 0;
+pub const XkbMapNotify: u32 = 1;
+pub const XkbStateNotify: u32 = 2;
+pub const XkbControlsNotify: u32 = 3;
+pub const XkbIndicatorStateNotify: u32 = 4;
+pub const XkbIndicatorMapNotify: u32 = 5;
+pub const XkbNamesNotify: u32 = 6;
+pub const XkbCompatMapNotify: u32 = 7;
+pub const XkbBellNotify: u32 = 8;
+pub const XkbActionMessage: u32 = 9;
+pub const XkbAccessXNotify: u32 = 10;
+pub const XkbExtensionDeviceNotify: u32 = 11;
+pub const XkbNewKeyboardNotifyMask: u32 = 1;
+pub const XkbMapNotifyMask: u32 = 2;
+pub const XkbStateNotifyMask: u32 = 4;
+pub const XkbControlsNotifyMask: u32 = 8;
+pub const XkbIndicatorStateNotifyMask: u32 = 16;
+pub const XkbIndicatorMapNotifyMask: u32 = 32;
+pub const XkbNamesNotifyMask: u32 = 64;
+pub const XkbCompatMapNotifyMask: u32 = 128;
+pub const XkbBellNotifyMask: u32 = 256;
+pub const XkbActionMessageMask: u32 = 512;
+pub const XkbAccessXNotifyMask: u32 = 1024;
+pub const XkbExtensionDeviceNotifyMask: u32 = 2048;
+pub const XkbAllEventsMask: u32 = 4095;
+pub const XkbNKN_KeycodesMask: u32 = 1;
+pub const XkbNKN_GeometryMask: u32 = 2;
+pub const XkbNKN_DeviceIDMask: u32 = 4;
+pub const XkbAllNewKeyboardEventsMask: u32 = 7;
+pub const XkbAXN_SKPress: u32 = 0;
+pub const XkbAXN_SKAccept: u32 = 1;
+pub const XkbAXN_SKReject: u32 = 2;
+pub const XkbAXN_SKRelease: u32 = 3;
+pub const XkbAXN_BKAccept: u32 = 4;
+pub const XkbAXN_BKReject: u32 = 5;
+pub const XkbAXN_AXKWarning: u32 = 6;
+pub const XkbAXN_SKPressMask: u32 = 1;
+pub const XkbAXN_SKAcceptMask: u32 = 2;
+pub const XkbAXN_SKRejectMask: u32 = 4;
+pub const XkbAXN_SKReleaseMask: u32 = 8;
+pub const XkbAXN_BKAcceptMask: u32 = 16;
+pub const XkbAXN_BKRejectMask: u32 = 32;
+pub const XkbAXN_AXKWarningMask: u32 = 64;
+pub const XkbAllAccessXEventsMask: u32 = 127;
+pub const XkbAllBellEventsMask: u32 = 1;
+pub const XkbAllActionMessagesMask: u32 = 1;
+pub const XkbKeyboard: u32 = 0;
+pub const XkbNumberErrors: u32 = 1;
+pub const XkbErr_BadDevice: u32 = 255;
+pub const XkbErr_BadClass: u32 = 254;
+pub const XkbErr_BadId: u32 = 253;
+pub const XkbClientMapMask: u32 = 1;
+pub const XkbServerMapMask: u32 = 2;
+pub const XkbCompatMapMask: u32 = 4;
+pub const XkbIndicatorMapMask: u32 = 8;
+pub const XkbNamesMask: u32 = 16;
+pub const XkbGeometryMask: u32 = 32;
+pub const XkbControlsMask: u32 = 64;
+pub const XkbAllComponentsMask: u32 = 127;
+pub const XkbModifierStateMask: u32 = 1;
+pub const XkbModifierBaseMask: u32 = 2;
+pub const XkbModifierLatchMask: u32 = 4;
+pub const XkbModifierLockMask: u32 = 8;
+pub const XkbGroupStateMask: u32 = 16;
+pub const XkbGroupBaseMask: u32 = 32;
+pub const XkbGroupLatchMask: u32 = 64;
+pub const XkbGroupLockMask: u32 = 128;
+pub const XkbCompatStateMask: u32 = 256;
+pub const XkbGrabModsMask: u32 = 512;
+pub const XkbCompatGrabModsMask: u32 = 1024;
+pub const XkbLookupModsMask: u32 = 2048;
+pub const XkbCompatLookupModsMask: u32 = 4096;
+pub const XkbPointerButtonMask: u32 = 8192;
+pub const XkbAllStateComponentsMask: u32 = 16383;
+pub const XkbRepeatKeysMask: u32 = 1;
+pub const XkbSlowKeysMask: u32 = 2;
+pub const XkbBounceKeysMask: u32 = 4;
+pub const XkbStickyKeysMask: u32 = 8;
+pub const XkbMouseKeysMask: u32 = 16;
+pub const XkbMouseKeysAccelMask: u32 = 32;
+pub const XkbAccessXKeysMask: u32 = 64;
+pub const XkbAccessXTimeoutMask: u32 = 128;
+pub const XkbAccessXFeedbackMask: u32 = 256;
+pub const XkbAudibleBellMask: u32 = 512;
+pub const XkbOverlay1Mask: u32 = 1024;
+pub const XkbOverlay2Mask: u32 = 2048;
+pub const XkbIgnoreGroupLockMask: u32 = 4096;
+pub const XkbGroupsWrapMask: u32 = 134217728;
+pub const XkbInternalModsMask: u32 = 268435456;
+pub const XkbIgnoreLockModsMask: u32 = 536870912;
+pub const XkbPerKeyRepeatMask: u32 = 1073741824;
+pub const XkbControlsEnabledMask: u32 = 2147483648;
+pub const XkbAccessXOptionsMask: u32 = 264;
+pub const XkbAllBooleanCtrlsMask: u32 = 8191;
+pub const XkbAllControlsMask: u32 = 4160757759;
+pub const XkbAllControlEventsMask: u32 = 4160757759;
+pub const XkbAX_SKPressFBMask: u32 = 1;
+pub const XkbAX_SKAcceptFBMask: u32 = 2;
+pub const XkbAX_FeatureFBMask: u32 = 4;
+pub const XkbAX_SlowWarnFBMask: u32 = 8;
+pub const XkbAX_IndicatorFBMask: u32 = 16;
+pub const XkbAX_StickyKeysFBMask: u32 = 32;
+pub const XkbAX_TwoKeysMask: u32 = 64;
+pub const XkbAX_LatchToLockMask: u32 = 128;
+pub const XkbAX_SKReleaseFBMask: u32 = 256;
+pub const XkbAX_SKRejectFBMask: u32 = 512;
+pub const XkbAX_BKRejectFBMask: u32 = 1024;
+pub const XkbAX_DumbBellFBMask: u32 = 2048;
+pub const XkbAX_FBOptionsMask: u32 = 3903;
+pub const XkbAX_SKOptionsMask: u32 = 192;
+pub const XkbAX_AllOptionsMask: u32 = 4095;
+pub const XkbUseCoreKbd: u32 = 256;
+pub const XkbUseCorePtr: u32 = 512;
+pub const XkbDfltXIClass: u32 = 768;
+pub const XkbDfltXIId: u32 = 1024;
+pub const XkbAllXIClasses: u32 = 1280;
+pub const XkbAllXIIds: u32 = 1536;
+pub const XkbXINone: u32 = 65280;
+pub const XkbNoModifier: u32 = 255;
+pub const XkbNoShiftLevel: u32 = 255;
+pub const XkbNoShape: u32 = 255;
+pub const XkbNoIndicator: u32 = 255;
+pub const XkbNoModifierMask: u32 = 0;
+pub const XkbAllModifiersMask: u32 = 255;
+pub const XkbAllVirtualModsMask: u32 = 65535;
+pub const XkbNumKbdGroups: u32 = 4;
+pub const XkbMaxKbdGroup: u32 = 3;
+pub const XkbMaxMouseKeysBtn: u32 = 4;
+pub const XkbGroup1Index: u32 = 0;
+pub const XkbGroup2Index: u32 = 1;
+pub const XkbGroup3Index: u32 = 2;
+pub const XkbGroup4Index: u32 = 3;
+pub const XkbAnyGroup: u32 = 254;
+pub const XkbAllGroups: u32 = 255;
+pub const XkbGroup1Mask: u32 = 1;
+pub const XkbGroup2Mask: u32 = 2;
+pub const XkbGroup3Mask: u32 = 4;
+pub const XkbGroup4Mask: u32 = 8;
+pub const XkbAnyGroupMask: u32 = 128;
+pub const XkbAllGroupsMask: u32 = 15;
+pub const XkbWrapIntoRange: u32 = 0;
+pub const XkbClampIntoRange: u32 = 64;
+pub const XkbRedirectIntoRange: u32 = 128;
+pub const XkbSA_ClearLocks: u32 = 1;
+pub const XkbSA_LatchToLock: u32 = 2;
+pub const XkbSA_LockNoLock: u32 = 1;
+pub const XkbSA_LockNoUnlock: u32 = 2;
+pub const XkbSA_UseModMapMods: u32 = 4;
+pub const XkbSA_GroupAbsolute: u32 = 4;
+pub const XkbSA_UseDfltButton: u32 = 0;
+pub const XkbSA_NoAcceleration: u32 = 1;
+pub const XkbSA_MoveAbsoluteX: u32 = 2;
+pub const XkbSA_MoveAbsoluteY: u32 = 4;
+pub const XkbSA_ISODfltIsGroup: u32 = 128;
+pub const XkbSA_ISONoAffectMods: u32 = 64;
+pub const XkbSA_ISONoAffectGroup: u32 = 32;
+pub const XkbSA_ISONoAffectPtr: u32 = 16;
+pub const XkbSA_ISONoAffectCtrls: u32 = 8;
+pub const XkbSA_ISOAffectMask: u32 = 120;
+pub const XkbSA_MessageOnPress: u32 = 1;
+pub const XkbSA_MessageOnRelease: u32 = 2;
+pub const XkbSA_MessageGenKeyEvent: u32 = 4;
+pub const XkbSA_AffectDfltBtn: u32 = 1;
+pub const XkbSA_DfltBtnAbsolute: u32 = 4;
+pub const XkbSA_SwitchApplication: u32 = 1;
+pub const XkbSA_SwitchAbsolute: u32 = 4;
+pub const XkbSA_IgnoreVal: u32 = 0;
+pub const XkbSA_SetValMin: u32 = 16;
+pub const XkbSA_SetValCenter: u32 = 32;
+pub const XkbSA_SetValMax: u32 = 48;
+pub const XkbSA_SetValRelative: u32 = 64;
+pub const XkbSA_SetValAbsolute: u32 = 80;
+pub const XkbSA_ValOpMask: u32 = 112;
+pub const XkbSA_ValScaleMask: u32 = 7;
+pub const XkbSA_NoAction: u32 = 0;
+pub const XkbSA_SetMods: u32 = 1;
+pub const XkbSA_LatchMods: u32 = 2;
+pub const XkbSA_LockMods: u32 = 3;
+pub const XkbSA_SetGroup: u32 = 4;
+pub const XkbSA_LatchGroup: u32 = 5;
+pub const XkbSA_LockGroup: u32 = 6;
+pub const XkbSA_MovePtr: u32 = 7;
+pub const XkbSA_PtrBtn: u32 = 8;
+pub const XkbSA_LockPtrBtn: u32 = 9;
+pub const XkbSA_SetPtrDflt: u32 = 10;
+pub const XkbSA_ISOLock: u32 = 11;
+pub const XkbSA_Terminate: u32 = 12;
+pub const XkbSA_SwitchScreen: u32 = 13;
+pub const XkbSA_SetControls: u32 = 14;
+pub const XkbSA_LockControls: u32 = 15;
+pub const XkbSA_ActionMessage: u32 = 16;
+pub const XkbSA_RedirectKey: u32 = 17;
+pub const XkbSA_DeviceBtn: u32 = 18;
+pub const XkbSA_LockDeviceBtn: u32 = 19;
+pub const XkbSA_DeviceValuator: u32 = 20;
+pub const XkbSA_LastAction: u32 = 20;
+pub const XkbSA_NumActions: u32 = 21;
+pub const XkbSA_XFree86Private: u32 = 134;
+pub const XkbSA_BreakLatch: u32 = 1045249;
+pub const XkbKB_Permanent: u32 = 128;
+pub const XkbKB_OpMask: u32 = 127;
+pub const XkbKB_Default: u32 = 0;
+pub const XkbKB_Lock: u32 = 1;
+pub const XkbKB_RadioGroup: u32 = 2;
+pub const XkbKB_Overlay1: u32 = 3;
+pub const XkbKB_Overlay2: u32 = 4;
+pub const XkbKB_RGAllowNone: u32 = 128;
+pub const XkbMinLegalKeyCode: u32 = 8;
+pub const XkbMaxLegalKeyCode: u32 = 255;
+pub const XkbMaxKeyCount: u32 = 248;
+pub const XkbPerKeyBitArraySize: u32 = 32;
+pub const XkbNumModifiers: u32 = 8;
+pub const XkbNumVirtualMods: u32 = 16;
+pub const XkbNumIndicators: u32 = 32;
+pub const XkbAllIndicatorsMask: u32 = 4294967295;
+pub const XkbMaxRadioGroups: u32 = 32;
+pub const XkbAllRadioGroupsMask: u32 = 4294967295;
+pub const XkbMaxShiftLevel: u32 = 63;
+pub const XkbMaxSymsPerKey: u32 = 252;
+pub const XkbRGMaxMembers: u32 = 12;
+pub const XkbActionMessageLength: u32 = 6;
+pub const XkbKeyNameLength: u32 = 4;
+pub const XkbMaxRedirectCount: u32 = 8;
+pub const XkbGeomPtsPerMM: u32 = 10;
+pub const XkbGeomMaxColors: u32 = 32;
+pub const XkbGeomMaxLabelColors: u32 = 3;
+pub const XkbGeomMaxPriority: u32 = 255;
+pub const XkbOneLevelIndex: u32 = 0;
+pub const XkbTwoLevelIndex: u32 = 1;
+pub const XkbAlphabeticIndex: u32 = 2;
+pub const XkbKeypadIndex: u32 = 3;
+pub const XkbLastRequiredType: u32 = 3;
+pub const XkbNumRequiredTypes: u32 = 4;
+pub const XkbMaxKeyTypes: u32 = 255;
+pub const XkbOneLevelMask: u32 = 1;
+pub const XkbTwoLevelMask: u32 = 2;
+pub const XkbAlphabeticMask: u32 = 4;
+pub const XkbKeypadMask: u32 = 8;
+pub const XkbAllRequiredTypes: u32 = 15;
+pub const XkbName: &[u8; 10] = b"XKEYBOARD\0";
+pub const XkbMajorVersion: u32 = 1;
+pub const XkbMinorVersion: u32 = 0;
+pub const XkbExplicitKeyTypesMask: u32 = 15;
+pub const XkbExplicitKeyType1Mask: u32 = 1;
+pub const XkbExplicitKeyType2Mask: u32 = 2;
+pub const XkbExplicitKeyType3Mask: u32 = 4;
+pub const XkbExplicitKeyType4Mask: u32 = 8;
+pub const XkbExplicitInterpretMask: u32 = 16;
+pub const XkbExplicitAutoRepeatMask: u32 = 32;
+pub const XkbExplicitBehaviorMask: u32 = 64;
+pub const XkbExplicitVModMapMask: u32 = 128;
+pub const XkbAllExplicitMask: u32 = 255;
+pub const XkbKeyTypesMask: u32 = 1;
+pub const XkbKeySymsMask: u32 = 2;
+pub const XkbModifierMapMask: u32 = 4;
+pub const XkbExplicitComponentsMask: u32 = 8;
+pub const XkbKeyActionsMask: u32 = 16;
+pub const XkbKeyBehaviorsMask: u32 = 32;
+pub const XkbVirtualModsMask: u32 = 64;
+pub const XkbVirtualModMapMask: u32 = 128;
+pub const XkbAllClientInfoMask: u32 = 7;
+pub const XkbAllServerInfoMask: u32 = 248;
+pub const XkbAllMapComponentsMask: u32 = 255;
+pub const XkbSI_AutoRepeat: u32 = 1;
+pub const XkbSI_LockingKey: u32 = 2;
+pub const XkbSI_LevelOneOnly: u32 = 128;
+pub const XkbSI_OpMask: u32 = 127;
+pub const XkbSI_NoneOf: u32 = 0;
+pub const XkbSI_AnyOfOrNone: u32 = 1;
+pub const XkbSI_AnyOf: u32 = 2;
+pub const XkbSI_AllOf: u32 = 3;
+pub const XkbSI_Exactly: u32 = 4;
+pub const XkbIM_NoExplicit: u32 = 128;
+pub const XkbIM_NoAutomatic: u32 = 64;
+pub const XkbIM_LEDDrivesKB: u32 = 32;
+pub const XkbIM_UseBase: u32 = 1;
+pub const XkbIM_UseLatched: u32 = 2;
+pub const XkbIM_UseLocked: u32 = 4;
+pub const XkbIM_UseEffective: u32 = 8;
+pub const XkbIM_UseCompat: u32 = 16;
+pub const XkbIM_UseNone: u32 = 0;
+pub const XkbIM_UseAnyGroup: u32 = 15;
+pub const XkbIM_UseAnyMods: u32 = 31;
+pub const XkbSymInterpMask: u32 = 1;
+pub const XkbGroupCompatMask: u32 = 2;
+pub const XkbAllCompatMask: u32 = 3;
+pub const XkbKeycodesNameMask: u32 = 1;
+pub const XkbGeometryNameMask: u32 = 2;
+pub const XkbSymbolsNameMask: u32 = 4;
+pub const XkbPhysSymbolsNameMask: u32 = 8;
+pub const XkbTypesNameMask: u32 = 16;
+pub const XkbCompatNameMask: u32 = 32;
+pub const XkbKeyTypeNamesMask: u32 = 64;
+pub const XkbKTLevelNamesMask: u32 = 128;
+pub const XkbIndicatorNamesMask: u32 = 256;
+pub const XkbKeyNamesMask: u32 = 512;
+pub const XkbKeyAliasesMask: u32 = 1024;
+pub const XkbVirtualModNamesMask: u32 = 2048;
+pub const XkbGroupNamesMask: u32 = 4096;
+pub const XkbRGNamesMask: u32 = 8192;
+pub const XkbComponentNamesMask: u32 = 63;
+pub const XkbAllNamesMask: u32 = 16383;
+pub const XkbGBN_TypesMask: u32 = 1;
+pub const XkbGBN_CompatMapMask: u32 = 2;
+pub const XkbGBN_ClientSymbolsMask: u32 = 4;
+pub const XkbGBN_ServerSymbolsMask: u32 = 8;
+pub const XkbGBN_SymbolsMask: u32 = 12;
+pub const XkbGBN_IndicatorMapMask: u32 = 16;
+pub const XkbGBN_KeyNamesMask: u32 = 32;
+pub const XkbGBN_GeometryMask: u32 = 64;
+pub const XkbGBN_OtherNamesMask: u32 = 128;
+pub const XkbGBN_AllComponentsMask: u32 = 255;
+pub const XkbLC_Hidden: u32 = 1;
+pub const XkbLC_Default: u32 = 2;
+pub const XkbLC_Partial: u32 = 4;
+pub const XkbLC_AlphanumericKeys: u32 = 256;
+pub const XkbLC_ModifierKeys: u32 = 512;
+pub const XkbLC_KeypadKeys: u32 = 1024;
+pub const XkbLC_FunctionKeys: u32 = 2048;
+pub const XkbLC_AlternateGroup: u32 = 4096;
+pub const XkbXI_KeyboardsMask: u32 = 1;
+pub const XkbXI_ButtonActionsMask: u32 = 2;
+pub const XkbXI_IndicatorNamesMask: u32 = 4;
+pub const XkbXI_IndicatorMapsMask: u32 = 8;
+pub const XkbXI_IndicatorStateMask: u32 = 16;
+pub const XkbXI_UnsupportedFeatureMask: u32 = 32768;
+pub const XkbXI_AllFeaturesMask: u32 = 31;
+pub const XkbXI_AllDeviceFeaturesMask: u32 = 30;
+pub const XkbXI_IndicatorsMask: u32 = 28;
+pub const XkbAllExtensionDeviceEventsMask: u32 = 32799;
+pub const XkbPCF_DetectableAutoRepeatMask: u32 = 1;
+pub const XkbPCF_GrabsUseXKBStateMask: u32 = 2;
+pub const XkbPCF_AutoResetControlsMask: u32 = 4;
+pub const XkbPCF_LookupStateWhenGrabbed: u32 = 8;
+pub const XkbPCF_SendEventUsesXKBState: u32 = 16;
+pub const XkbPCF_AllFlagsMask: u32 = 31;
+pub const XkbDF_DisableLocks: u32 = 1;
+pub const XkbAnyActionDataSize: u32 = 7;
+pub const XkbOD_Success: u32 = 0;
+pub const XkbOD_BadLibraryVersion: u32 = 1;
+pub const XkbOD_ConnectionRefused: u32 = 2;
+pub const XkbOD_NonXkbServer: u32 = 3;
+pub const XkbOD_BadServerVersion: u32 = 4;
+pub const XkbLC_ForceLatin1Lookup: u32 = 1;
+pub const XkbLC_ConsumeLookupMods: u32 = 2;
+pub const XkbLC_AlwaysConsumeShiftAndLock: u32 = 4;
+pub const XkbLC_IgnoreNewKeyboards: u32 = 8;
+pub const XkbLC_ControlFallback: u32 = 16;
+pub const XkbLC_ConsumeKeysOnComposeFail: u32 = 536870912;
+pub const XkbLC_ComposeLED: u32 = 1073741824;
+pub const XkbLC_BeepOnComposeFail: u32 = 2147483648;
+pub const XkbLC_AllComposeControls: u32 = 3221225472;
+pub const XkbLC_AllControls: u32 = 3221225503;
 pub type __u_char = ::std::os::raw::c_uchar;
 pub type __u_short = ::std::os::raw::c_ushort;
 pub type __u_int = ::std::os::raw::c_uint;
@@ -38393,6 +41429,13271 @@ unsafe extern "C" {
         cookie: xcb_shape_get_rectangles_cookie_t,
         e: *mut *mut xcb_generic_error_t,
     ) -> *mut xcb_shape_get_rectangles_reply_t;
+}
+unsafe extern "C" {
+    pub static mut xcb_xkb_id: xcb_extension_t;
+}
+pub const xcb_xkb_const_t_XCB_XKB_CONST_MAX_LEGAL_KEY_CODE: xcb_xkb_const_t = 255;
+pub const xcb_xkb_const_t_XCB_XKB_CONST_PER_KEY_BIT_ARRAY_SIZE: xcb_xkb_const_t = 32;
+pub const xcb_xkb_const_t_XCB_XKB_CONST_KEY_NAME_LENGTH: xcb_xkb_const_t = 4;
+pub type xcb_xkb_const_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_event_type_t_XCB_XKB_EVENT_TYPE_NEW_KEYBOARD_NOTIFY: xcb_xkb_event_type_t = 1;
+pub const xcb_xkb_event_type_t_XCB_XKB_EVENT_TYPE_MAP_NOTIFY: xcb_xkb_event_type_t = 2;
+pub const xcb_xkb_event_type_t_XCB_XKB_EVENT_TYPE_STATE_NOTIFY: xcb_xkb_event_type_t = 4;
+pub const xcb_xkb_event_type_t_XCB_XKB_EVENT_TYPE_CONTROLS_NOTIFY: xcb_xkb_event_type_t = 8;
+pub const xcb_xkb_event_type_t_XCB_XKB_EVENT_TYPE_INDICATOR_STATE_NOTIFY: xcb_xkb_event_type_t = 16;
+pub const xcb_xkb_event_type_t_XCB_XKB_EVENT_TYPE_INDICATOR_MAP_NOTIFY: xcb_xkb_event_type_t = 32;
+pub const xcb_xkb_event_type_t_XCB_XKB_EVENT_TYPE_NAMES_NOTIFY: xcb_xkb_event_type_t = 64;
+pub const xcb_xkb_event_type_t_XCB_XKB_EVENT_TYPE_COMPAT_MAP_NOTIFY: xcb_xkb_event_type_t = 128;
+pub const xcb_xkb_event_type_t_XCB_XKB_EVENT_TYPE_BELL_NOTIFY: xcb_xkb_event_type_t = 256;
+pub const xcb_xkb_event_type_t_XCB_XKB_EVENT_TYPE_ACTION_MESSAGE: xcb_xkb_event_type_t = 512;
+pub const xcb_xkb_event_type_t_XCB_XKB_EVENT_TYPE_ACCESS_X_NOTIFY: xcb_xkb_event_type_t = 1024;
+pub const xcb_xkb_event_type_t_XCB_XKB_EVENT_TYPE_EXTENSION_DEVICE_NOTIFY: xcb_xkb_event_type_t =
+    2048;
+pub type xcb_xkb_event_type_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_nkn_detail_t_XCB_XKB_NKN_DETAIL_KEYCODES: xcb_xkb_nkn_detail_t = 1;
+pub const xcb_xkb_nkn_detail_t_XCB_XKB_NKN_DETAIL_GEOMETRY: xcb_xkb_nkn_detail_t = 2;
+pub const xcb_xkb_nkn_detail_t_XCB_XKB_NKN_DETAIL_DEVICE_ID: xcb_xkb_nkn_detail_t = 4;
+pub type xcb_xkb_nkn_detail_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_axn_detail_t_XCB_XKB_AXN_DETAIL_SK_PRESS: xcb_xkb_axn_detail_t = 1;
+pub const xcb_xkb_axn_detail_t_XCB_XKB_AXN_DETAIL_SK_ACCEPT: xcb_xkb_axn_detail_t = 2;
+pub const xcb_xkb_axn_detail_t_XCB_XKB_AXN_DETAIL_SK_REJECT: xcb_xkb_axn_detail_t = 4;
+pub const xcb_xkb_axn_detail_t_XCB_XKB_AXN_DETAIL_SK_RELEASE: xcb_xkb_axn_detail_t = 8;
+pub const xcb_xkb_axn_detail_t_XCB_XKB_AXN_DETAIL_BK_ACCEPT: xcb_xkb_axn_detail_t = 16;
+pub const xcb_xkb_axn_detail_t_XCB_XKB_AXN_DETAIL_BK_REJECT: xcb_xkb_axn_detail_t = 32;
+pub const xcb_xkb_axn_detail_t_XCB_XKB_AXN_DETAIL_AXK_WARNING: xcb_xkb_axn_detail_t = 64;
+pub type xcb_xkb_axn_detail_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_map_part_t_XCB_XKB_MAP_PART_KEY_TYPES: xcb_xkb_map_part_t = 1;
+pub const xcb_xkb_map_part_t_XCB_XKB_MAP_PART_KEY_SYMS: xcb_xkb_map_part_t = 2;
+pub const xcb_xkb_map_part_t_XCB_XKB_MAP_PART_MODIFIER_MAP: xcb_xkb_map_part_t = 4;
+pub const xcb_xkb_map_part_t_XCB_XKB_MAP_PART_EXPLICIT_COMPONENTS: xcb_xkb_map_part_t = 8;
+pub const xcb_xkb_map_part_t_XCB_XKB_MAP_PART_KEY_ACTIONS: xcb_xkb_map_part_t = 16;
+pub const xcb_xkb_map_part_t_XCB_XKB_MAP_PART_KEY_BEHAVIORS: xcb_xkb_map_part_t = 32;
+pub const xcb_xkb_map_part_t_XCB_XKB_MAP_PART_VIRTUAL_MODS: xcb_xkb_map_part_t = 64;
+pub const xcb_xkb_map_part_t_XCB_XKB_MAP_PART_VIRTUAL_MOD_MAP: xcb_xkb_map_part_t = 128;
+pub type xcb_xkb_map_part_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_set_map_flags_t_XCB_XKB_SET_MAP_FLAGS_RESIZE_TYPES: xcb_xkb_set_map_flags_t = 1;
+pub const xcb_xkb_set_map_flags_t_XCB_XKB_SET_MAP_FLAGS_RECOMPUTE_ACTIONS: xcb_xkb_set_map_flags_t =
+    2;
+pub type xcb_xkb_set_map_flags_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_state_part_t_XCB_XKB_STATE_PART_MODIFIER_STATE: xcb_xkb_state_part_t = 1;
+pub const xcb_xkb_state_part_t_XCB_XKB_STATE_PART_MODIFIER_BASE: xcb_xkb_state_part_t = 2;
+pub const xcb_xkb_state_part_t_XCB_XKB_STATE_PART_MODIFIER_LATCH: xcb_xkb_state_part_t = 4;
+pub const xcb_xkb_state_part_t_XCB_XKB_STATE_PART_MODIFIER_LOCK: xcb_xkb_state_part_t = 8;
+pub const xcb_xkb_state_part_t_XCB_XKB_STATE_PART_GROUP_STATE: xcb_xkb_state_part_t = 16;
+pub const xcb_xkb_state_part_t_XCB_XKB_STATE_PART_GROUP_BASE: xcb_xkb_state_part_t = 32;
+pub const xcb_xkb_state_part_t_XCB_XKB_STATE_PART_GROUP_LATCH: xcb_xkb_state_part_t = 64;
+pub const xcb_xkb_state_part_t_XCB_XKB_STATE_PART_GROUP_LOCK: xcb_xkb_state_part_t = 128;
+pub const xcb_xkb_state_part_t_XCB_XKB_STATE_PART_COMPAT_STATE: xcb_xkb_state_part_t = 256;
+pub const xcb_xkb_state_part_t_XCB_XKB_STATE_PART_GRAB_MODS: xcb_xkb_state_part_t = 512;
+pub const xcb_xkb_state_part_t_XCB_XKB_STATE_PART_COMPAT_GRAB_MODS: xcb_xkb_state_part_t = 1024;
+pub const xcb_xkb_state_part_t_XCB_XKB_STATE_PART_LOOKUP_MODS: xcb_xkb_state_part_t = 2048;
+pub const xcb_xkb_state_part_t_XCB_XKB_STATE_PART_COMPAT_LOOKUP_MODS: xcb_xkb_state_part_t = 4096;
+pub const xcb_xkb_state_part_t_XCB_XKB_STATE_PART_POINTER_BUTTONS: xcb_xkb_state_part_t = 8192;
+pub type xcb_xkb_state_part_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_bool_ctrl_t_XCB_XKB_BOOL_CTRL_REPEAT_KEYS: xcb_xkb_bool_ctrl_t = 1;
+pub const xcb_xkb_bool_ctrl_t_XCB_XKB_BOOL_CTRL_SLOW_KEYS: xcb_xkb_bool_ctrl_t = 2;
+pub const xcb_xkb_bool_ctrl_t_XCB_XKB_BOOL_CTRL_BOUNCE_KEYS: xcb_xkb_bool_ctrl_t = 4;
+pub const xcb_xkb_bool_ctrl_t_XCB_XKB_BOOL_CTRL_STICKY_KEYS: xcb_xkb_bool_ctrl_t = 8;
+pub const xcb_xkb_bool_ctrl_t_XCB_XKB_BOOL_CTRL_MOUSE_KEYS: xcb_xkb_bool_ctrl_t = 16;
+pub const xcb_xkb_bool_ctrl_t_XCB_XKB_BOOL_CTRL_MOUSE_KEYS_ACCEL: xcb_xkb_bool_ctrl_t = 32;
+pub const xcb_xkb_bool_ctrl_t_XCB_XKB_BOOL_CTRL_ACCESS_X_KEYS: xcb_xkb_bool_ctrl_t = 64;
+pub const xcb_xkb_bool_ctrl_t_XCB_XKB_BOOL_CTRL_ACCESS_X_TIMEOUT_MASK: xcb_xkb_bool_ctrl_t = 128;
+pub const xcb_xkb_bool_ctrl_t_XCB_XKB_BOOL_CTRL_ACCESS_X_FEEDBACK_MASK: xcb_xkb_bool_ctrl_t = 256;
+pub const xcb_xkb_bool_ctrl_t_XCB_XKB_BOOL_CTRL_AUDIBLE_BELL_MASK: xcb_xkb_bool_ctrl_t = 512;
+pub const xcb_xkb_bool_ctrl_t_XCB_XKB_BOOL_CTRL_OVERLAY_1_MASK: xcb_xkb_bool_ctrl_t = 1024;
+pub const xcb_xkb_bool_ctrl_t_XCB_XKB_BOOL_CTRL_OVERLAY_2_MASK: xcb_xkb_bool_ctrl_t = 2048;
+pub const xcb_xkb_bool_ctrl_t_XCB_XKB_BOOL_CTRL_IGNORE_GROUP_LOCK_MASK: xcb_xkb_bool_ctrl_t = 4096;
+pub type xcb_xkb_bool_ctrl_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_control_t_XCB_XKB_CONTROL_GROUPS_WRAP: xcb_xkb_control_t = 134217728;
+pub const xcb_xkb_control_t_XCB_XKB_CONTROL_INTERNAL_MODS: xcb_xkb_control_t = 268435456;
+pub const xcb_xkb_control_t_XCB_XKB_CONTROL_IGNORE_LOCK_MODS: xcb_xkb_control_t = 536870912;
+pub const xcb_xkb_control_t_XCB_XKB_CONTROL_PER_KEY_REPEAT: xcb_xkb_control_t = 1073741824;
+pub const xcb_xkb_control_t_XCB_XKB_CONTROL_CONTROLS_ENABLED: xcb_xkb_control_t = 2147483648;
+pub type xcb_xkb_control_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_ax_option_t_XCB_XKB_AX_OPTION_SK_PRESS_FB: xcb_xkb_ax_option_t = 1;
+pub const xcb_xkb_ax_option_t_XCB_XKB_AX_OPTION_SK_ACCEPT_FB: xcb_xkb_ax_option_t = 2;
+pub const xcb_xkb_ax_option_t_XCB_XKB_AX_OPTION_FEATURE_FB: xcb_xkb_ax_option_t = 4;
+pub const xcb_xkb_ax_option_t_XCB_XKB_AX_OPTION_SLOW_WARN_FB: xcb_xkb_ax_option_t = 8;
+pub const xcb_xkb_ax_option_t_XCB_XKB_AX_OPTION_INDICATOR_FB: xcb_xkb_ax_option_t = 16;
+pub const xcb_xkb_ax_option_t_XCB_XKB_AX_OPTION_STICKY_KEYS_FB: xcb_xkb_ax_option_t = 32;
+pub const xcb_xkb_ax_option_t_XCB_XKB_AX_OPTION_TWO_KEYS: xcb_xkb_ax_option_t = 64;
+pub const xcb_xkb_ax_option_t_XCB_XKB_AX_OPTION_LATCH_TO_LOCK: xcb_xkb_ax_option_t = 128;
+pub const xcb_xkb_ax_option_t_XCB_XKB_AX_OPTION_SK_RELEASE_FB: xcb_xkb_ax_option_t = 256;
+pub const xcb_xkb_ax_option_t_XCB_XKB_AX_OPTION_SK_REJECT_FB: xcb_xkb_ax_option_t = 512;
+pub const xcb_xkb_ax_option_t_XCB_XKB_AX_OPTION_BK_REJECT_FB: xcb_xkb_ax_option_t = 1024;
+pub const xcb_xkb_ax_option_t_XCB_XKB_AX_OPTION_DUMB_BELL: xcb_xkb_ax_option_t = 2048;
+pub type xcb_xkb_ax_option_t = ::std::os::raw::c_uint;
+pub type xcb_xkb_device_spec_t = u16;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_device_spec_iterator_t {
+    pub data: *mut xcb_xkb_device_spec_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_device_spec_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_device_spec_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_device_spec_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_device_spec_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_device_spec_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_device_spec_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_device_spec_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_device_spec_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_device_spec_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_device_spec_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_led_class_result_t_XCB_XKB_LED_CLASS_RESULT_KBD_FEEDBACK_CLASS:
+    xcb_xkb_led_class_result_t = 0;
+pub const xcb_xkb_led_class_result_t_XCB_XKB_LED_CLASS_RESULT_LED_FEEDBACK_CLASS:
+    xcb_xkb_led_class_result_t = 4;
+pub type xcb_xkb_led_class_result_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_led_class_t_XCB_XKB_LED_CLASS_KBD_FEEDBACK_CLASS: xcb_xkb_led_class_t = 0;
+pub const xcb_xkb_led_class_t_XCB_XKB_LED_CLASS_LED_FEEDBACK_CLASS: xcb_xkb_led_class_t = 4;
+pub const xcb_xkb_led_class_t_XCB_XKB_LED_CLASS_DFLT_XI_CLASS: xcb_xkb_led_class_t = 768;
+pub const xcb_xkb_led_class_t_XCB_XKB_LED_CLASS_ALL_XI_CLASSES: xcb_xkb_led_class_t = 1280;
+pub type xcb_xkb_led_class_t = ::std::os::raw::c_uint;
+pub type xcb_xkb_led_class_spec_t = u16;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_led_class_spec_iterator_t {
+    pub data: *mut xcb_xkb_led_class_spec_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_led_class_spec_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_led_class_spec_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_led_class_spec_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_led_class_spec_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_led_class_spec_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_led_class_spec_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_led_class_spec_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_led_class_spec_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_led_class_spec_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_led_class_spec_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_bell_class_result_t_XCB_XKB_BELL_CLASS_RESULT_KBD_FEEDBACK_CLASS:
+    xcb_xkb_bell_class_result_t = 0;
+pub const xcb_xkb_bell_class_result_t_XCB_XKB_BELL_CLASS_RESULT_BELL_FEEDBACK_CLASS:
+    xcb_xkb_bell_class_result_t = 5;
+pub type xcb_xkb_bell_class_result_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_bell_class_t_XCB_XKB_BELL_CLASS_KBD_FEEDBACK_CLASS: xcb_xkb_bell_class_t = 0;
+pub const xcb_xkb_bell_class_t_XCB_XKB_BELL_CLASS_BELL_FEEDBACK_CLASS: xcb_xkb_bell_class_t = 5;
+pub const xcb_xkb_bell_class_t_XCB_XKB_BELL_CLASS_DFLT_XI_CLASS: xcb_xkb_bell_class_t = 768;
+pub type xcb_xkb_bell_class_t = ::std::os::raw::c_uint;
+pub type xcb_xkb_bell_class_spec_t = u16;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_bell_class_spec_iterator_t {
+    pub data: *mut xcb_xkb_bell_class_spec_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_bell_class_spec_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_bell_class_spec_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_bell_class_spec_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_bell_class_spec_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_bell_class_spec_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_bell_class_spec_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_bell_class_spec_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_bell_class_spec_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_bell_class_spec_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_bell_class_spec_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_id_t_XCB_XKB_ID_USE_CORE_KBD: xcb_xkb_id_t = 256;
+pub const xcb_xkb_id_t_XCB_XKB_ID_USE_CORE_PTR: xcb_xkb_id_t = 512;
+pub const xcb_xkb_id_t_XCB_XKB_ID_DFLT_XI_CLASS: xcb_xkb_id_t = 768;
+pub const xcb_xkb_id_t_XCB_XKB_ID_DFLT_XI_ID: xcb_xkb_id_t = 1024;
+pub const xcb_xkb_id_t_XCB_XKB_ID_ALL_XI_CLASS: xcb_xkb_id_t = 1280;
+pub const xcb_xkb_id_t_XCB_XKB_ID_ALL_XI_ID: xcb_xkb_id_t = 1536;
+pub const xcb_xkb_id_t_XCB_XKB_ID_XI_NONE: xcb_xkb_id_t = 65280;
+pub type xcb_xkb_id_t = ::std::os::raw::c_uint;
+pub type xcb_xkb_id_spec_t = u16;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_id_spec_iterator_t {
+    pub data: *mut xcb_xkb_id_spec_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_id_spec_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_id_spec_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_id_spec_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_id_spec_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_id_spec_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_id_spec_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_id_spec_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_id_spec_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_id_spec_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_id_spec_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_group_t_XCB_XKB_GROUP_1: xcb_xkb_group_t = 0;
+pub const xcb_xkb_group_t_XCB_XKB_GROUP_2: xcb_xkb_group_t = 1;
+pub const xcb_xkb_group_t_XCB_XKB_GROUP_3: xcb_xkb_group_t = 2;
+pub const xcb_xkb_group_t_XCB_XKB_GROUP_4: xcb_xkb_group_t = 3;
+pub type xcb_xkb_group_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_groups_t_XCB_XKB_GROUPS_ANY: xcb_xkb_groups_t = 254;
+pub const xcb_xkb_groups_t_XCB_XKB_GROUPS_ALL: xcb_xkb_groups_t = 255;
+pub type xcb_xkb_groups_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_set_of_group_t_XCB_XKB_SET_OF_GROUP_GROUP_1: xcb_xkb_set_of_group_t = 1;
+pub const xcb_xkb_set_of_group_t_XCB_XKB_SET_OF_GROUP_GROUP_2: xcb_xkb_set_of_group_t = 2;
+pub const xcb_xkb_set_of_group_t_XCB_XKB_SET_OF_GROUP_GROUP_3: xcb_xkb_set_of_group_t = 4;
+pub const xcb_xkb_set_of_group_t_XCB_XKB_SET_OF_GROUP_GROUP_4: xcb_xkb_set_of_group_t = 8;
+pub type xcb_xkb_set_of_group_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_set_of_groups_t_XCB_XKB_SET_OF_GROUPS_ANY: xcb_xkb_set_of_groups_t = 128;
+pub type xcb_xkb_set_of_groups_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_groups_wrap_t_XCB_XKB_GROUPS_WRAP_WRAP_INTO_RANGE: xcb_xkb_groups_wrap_t = 0;
+pub const xcb_xkb_groups_wrap_t_XCB_XKB_GROUPS_WRAP_CLAMP_INTO_RANGE: xcb_xkb_groups_wrap_t = 64;
+pub const xcb_xkb_groups_wrap_t_XCB_XKB_GROUPS_WRAP_REDIRECT_INTO_RANGE: xcb_xkb_groups_wrap_t =
+    128;
+pub type xcb_xkb_groups_wrap_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_v_mods_high_t_XCB_XKB_V_MODS_HIGH_15: xcb_xkb_v_mods_high_t = 128;
+pub const xcb_xkb_v_mods_high_t_XCB_XKB_V_MODS_HIGH_14: xcb_xkb_v_mods_high_t = 64;
+pub const xcb_xkb_v_mods_high_t_XCB_XKB_V_MODS_HIGH_13: xcb_xkb_v_mods_high_t = 32;
+pub const xcb_xkb_v_mods_high_t_XCB_XKB_V_MODS_HIGH_12: xcb_xkb_v_mods_high_t = 16;
+pub const xcb_xkb_v_mods_high_t_XCB_XKB_V_MODS_HIGH_11: xcb_xkb_v_mods_high_t = 8;
+pub const xcb_xkb_v_mods_high_t_XCB_XKB_V_MODS_HIGH_10: xcb_xkb_v_mods_high_t = 4;
+pub const xcb_xkb_v_mods_high_t_XCB_XKB_V_MODS_HIGH_9: xcb_xkb_v_mods_high_t = 2;
+pub const xcb_xkb_v_mods_high_t_XCB_XKB_V_MODS_HIGH_8: xcb_xkb_v_mods_high_t = 1;
+pub type xcb_xkb_v_mods_high_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_v_mods_low_t_XCB_XKB_V_MODS_LOW_7: xcb_xkb_v_mods_low_t = 128;
+pub const xcb_xkb_v_mods_low_t_XCB_XKB_V_MODS_LOW_6: xcb_xkb_v_mods_low_t = 64;
+pub const xcb_xkb_v_mods_low_t_XCB_XKB_V_MODS_LOW_5: xcb_xkb_v_mods_low_t = 32;
+pub const xcb_xkb_v_mods_low_t_XCB_XKB_V_MODS_LOW_4: xcb_xkb_v_mods_low_t = 16;
+pub const xcb_xkb_v_mods_low_t_XCB_XKB_V_MODS_LOW_3: xcb_xkb_v_mods_low_t = 8;
+pub const xcb_xkb_v_mods_low_t_XCB_XKB_V_MODS_LOW_2: xcb_xkb_v_mods_low_t = 4;
+pub const xcb_xkb_v_mods_low_t_XCB_XKB_V_MODS_LOW_1: xcb_xkb_v_mods_low_t = 2;
+pub const xcb_xkb_v_mods_low_t_XCB_XKB_V_MODS_LOW_0: xcb_xkb_v_mods_low_t = 1;
+pub type xcb_xkb_v_mods_low_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_15: xcb_xkb_v_mod_t = 32768;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_14: xcb_xkb_v_mod_t = 16384;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_13: xcb_xkb_v_mod_t = 8192;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_12: xcb_xkb_v_mod_t = 4096;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_11: xcb_xkb_v_mod_t = 2048;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_10: xcb_xkb_v_mod_t = 1024;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_9: xcb_xkb_v_mod_t = 512;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_8: xcb_xkb_v_mod_t = 256;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_7: xcb_xkb_v_mod_t = 128;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_6: xcb_xkb_v_mod_t = 64;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_5: xcb_xkb_v_mod_t = 32;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_4: xcb_xkb_v_mod_t = 16;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_3: xcb_xkb_v_mod_t = 8;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_2: xcb_xkb_v_mod_t = 4;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_1: xcb_xkb_v_mod_t = 2;
+pub const xcb_xkb_v_mod_t_XCB_XKB_V_MOD_0: xcb_xkb_v_mod_t = 1;
+pub type xcb_xkb_v_mod_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_explicit_t_XCB_XKB_EXPLICIT_V_MOD_MAP: xcb_xkb_explicit_t = 128;
+pub const xcb_xkb_explicit_t_XCB_XKB_EXPLICIT_BEHAVIOR: xcb_xkb_explicit_t = 64;
+pub const xcb_xkb_explicit_t_XCB_XKB_EXPLICIT_AUTO_REPEAT: xcb_xkb_explicit_t = 32;
+pub const xcb_xkb_explicit_t_XCB_XKB_EXPLICIT_INTERPRET: xcb_xkb_explicit_t = 16;
+pub const xcb_xkb_explicit_t_XCB_XKB_EXPLICIT_KEY_TYPE_4: xcb_xkb_explicit_t = 8;
+pub const xcb_xkb_explicit_t_XCB_XKB_EXPLICIT_KEY_TYPE_3: xcb_xkb_explicit_t = 4;
+pub const xcb_xkb_explicit_t_XCB_XKB_EXPLICIT_KEY_TYPE_2: xcb_xkb_explicit_t = 2;
+pub const xcb_xkb_explicit_t_XCB_XKB_EXPLICIT_KEY_TYPE_1: xcb_xkb_explicit_t = 1;
+pub type xcb_xkb_explicit_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_sym_interpret_match_t_XCB_XKB_SYM_INTERPRET_MATCH_NONE_OF:
+    xcb_xkb_sym_interpret_match_t = 0;
+pub const xcb_xkb_sym_interpret_match_t_XCB_XKB_SYM_INTERPRET_MATCH_ANY_OF_OR_NONE:
+    xcb_xkb_sym_interpret_match_t = 1;
+pub const xcb_xkb_sym_interpret_match_t_XCB_XKB_SYM_INTERPRET_MATCH_ANY_OF:
+    xcb_xkb_sym_interpret_match_t = 2;
+pub const xcb_xkb_sym_interpret_match_t_XCB_XKB_SYM_INTERPRET_MATCH_ALL_OF:
+    xcb_xkb_sym_interpret_match_t = 3;
+pub const xcb_xkb_sym_interpret_match_t_XCB_XKB_SYM_INTERPRET_MATCH_EXACTLY:
+    xcb_xkb_sym_interpret_match_t = 4;
+pub type xcb_xkb_sym_interpret_match_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_sym_interp_match_t_XCB_XKB_SYM_INTERP_MATCH_LEVEL_ONE_ONLY:
+    xcb_xkb_sym_interp_match_t = 128;
+pub const xcb_xkb_sym_interp_match_t_XCB_XKB_SYM_INTERP_MATCH_OP_MASK: xcb_xkb_sym_interp_match_t =
+    127;
+pub type xcb_xkb_sym_interp_match_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_im_flag_t_XCB_XKB_IM_FLAG_NO_EXPLICIT: xcb_xkb_im_flag_t = 128;
+pub const xcb_xkb_im_flag_t_XCB_XKB_IM_FLAG_NO_AUTOMATIC: xcb_xkb_im_flag_t = 64;
+pub const xcb_xkb_im_flag_t_XCB_XKB_IM_FLAG_LED_DRIVES_KB: xcb_xkb_im_flag_t = 32;
+pub type xcb_xkb_im_flag_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_im_mods_which_t_XCB_XKB_IM_MODS_WHICH_USE_COMPAT: xcb_xkb_im_mods_which_t = 16;
+pub const xcb_xkb_im_mods_which_t_XCB_XKB_IM_MODS_WHICH_USE_EFFECTIVE: xcb_xkb_im_mods_which_t = 8;
+pub const xcb_xkb_im_mods_which_t_XCB_XKB_IM_MODS_WHICH_USE_LOCKED: xcb_xkb_im_mods_which_t = 4;
+pub const xcb_xkb_im_mods_which_t_XCB_XKB_IM_MODS_WHICH_USE_LATCHED: xcb_xkb_im_mods_which_t = 2;
+pub const xcb_xkb_im_mods_which_t_XCB_XKB_IM_MODS_WHICH_USE_BASE: xcb_xkb_im_mods_which_t = 1;
+pub type xcb_xkb_im_mods_which_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_im_groups_which_t_XCB_XKB_IM_GROUPS_WHICH_USE_COMPAT: xcb_xkb_im_groups_which_t =
+    16;
+pub const xcb_xkb_im_groups_which_t_XCB_XKB_IM_GROUPS_WHICH_USE_EFFECTIVE:
+    xcb_xkb_im_groups_which_t = 8;
+pub const xcb_xkb_im_groups_which_t_XCB_XKB_IM_GROUPS_WHICH_USE_LOCKED: xcb_xkb_im_groups_which_t =
+    4;
+pub const xcb_xkb_im_groups_which_t_XCB_XKB_IM_GROUPS_WHICH_USE_LATCHED: xcb_xkb_im_groups_which_t =
+    2;
+pub const xcb_xkb_im_groups_which_t_XCB_XKB_IM_GROUPS_WHICH_USE_BASE: xcb_xkb_im_groups_which_t = 1;
+pub type xcb_xkb_im_groups_which_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_indicator_map_t {
+    pub flags: u8,
+    pub whichGroups: u8,
+    pub groups: u8,
+    pub whichMods: u8,
+    pub mods: u8,
+    pub realMods: u8,
+    pub vmods: u16,
+    pub ctrls: u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_indicator_map_t"][::std::mem::size_of::<xcb_xkb_indicator_map_t>() - 12usize];
+    ["Alignment of xcb_xkb_indicator_map_t"]
+        [::std::mem::align_of::<xcb_xkb_indicator_map_t>() - 4usize];
+    ["Offset of field: xcb_xkb_indicator_map_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_t, flags) - 0usize];
+    ["Offset of field: xcb_xkb_indicator_map_t::whichGroups"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_t, whichGroups) - 1usize];
+    ["Offset of field: xcb_xkb_indicator_map_t::groups"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_t, groups) - 2usize];
+    ["Offset of field: xcb_xkb_indicator_map_t::whichMods"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_t, whichMods) - 3usize];
+    ["Offset of field: xcb_xkb_indicator_map_t::mods"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_t, mods) - 4usize];
+    ["Offset of field: xcb_xkb_indicator_map_t::realMods"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_t, realMods) - 5usize];
+    ["Offset of field: xcb_xkb_indicator_map_t::vmods"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_t, vmods) - 6usize];
+    ["Offset of field: xcb_xkb_indicator_map_t::ctrls"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_t, ctrls) - 8usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_indicator_map_iterator_t {
+    pub data: *mut xcb_xkb_indicator_map_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_indicator_map_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_indicator_map_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_indicator_map_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_indicator_map_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_indicator_map_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_indicator_map_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_indicator_map_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_cm_detail_t_XCB_XKB_CM_DETAIL_SYM_INTERP: xcb_xkb_cm_detail_t = 1;
+pub const xcb_xkb_cm_detail_t_XCB_XKB_CM_DETAIL_GROUP_COMPAT: xcb_xkb_cm_detail_t = 2;
+pub type xcb_xkb_cm_detail_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_name_detail_t_XCB_XKB_NAME_DETAIL_KEYCODES: xcb_xkb_name_detail_t = 1;
+pub const xcb_xkb_name_detail_t_XCB_XKB_NAME_DETAIL_GEOMETRY: xcb_xkb_name_detail_t = 2;
+pub const xcb_xkb_name_detail_t_XCB_XKB_NAME_DETAIL_SYMBOLS: xcb_xkb_name_detail_t = 4;
+pub const xcb_xkb_name_detail_t_XCB_XKB_NAME_DETAIL_PHYS_SYMBOLS: xcb_xkb_name_detail_t = 8;
+pub const xcb_xkb_name_detail_t_XCB_XKB_NAME_DETAIL_TYPES: xcb_xkb_name_detail_t = 16;
+pub const xcb_xkb_name_detail_t_XCB_XKB_NAME_DETAIL_COMPAT: xcb_xkb_name_detail_t = 32;
+pub const xcb_xkb_name_detail_t_XCB_XKB_NAME_DETAIL_KEY_TYPE_NAMES: xcb_xkb_name_detail_t = 64;
+pub const xcb_xkb_name_detail_t_XCB_XKB_NAME_DETAIL_KT_LEVEL_NAMES: xcb_xkb_name_detail_t = 128;
+pub const xcb_xkb_name_detail_t_XCB_XKB_NAME_DETAIL_INDICATOR_NAMES: xcb_xkb_name_detail_t = 256;
+pub const xcb_xkb_name_detail_t_XCB_XKB_NAME_DETAIL_KEY_NAMES: xcb_xkb_name_detail_t = 512;
+pub const xcb_xkb_name_detail_t_XCB_XKB_NAME_DETAIL_KEY_ALIASES: xcb_xkb_name_detail_t = 1024;
+pub const xcb_xkb_name_detail_t_XCB_XKB_NAME_DETAIL_VIRTUAL_MOD_NAMES: xcb_xkb_name_detail_t = 2048;
+pub const xcb_xkb_name_detail_t_XCB_XKB_NAME_DETAIL_GROUP_NAMES: xcb_xkb_name_detail_t = 4096;
+pub const xcb_xkb_name_detail_t_XCB_XKB_NAME_DETAIL_RG_NAMES: xcb_xkb_name_detail_t = 8192;
+pub type xcb_xkb_name_detail_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_gbn_detail_t_XCB_XKB_GBN_DETAIL_TYPES: xcb_xkb_gbn_detail_t = 1;
+pub const xcb_xkb_gbn_detail_t_XCB_XKB_GBN_DETAIL_COMPAT_MAP: xcb_xkb_gbn_detail_t = 2;
+pub const xcb_xkb_gbn_detail_t_XCB_XKB_GBN_DETAIL_CLIENT_SYMBOLS: xcb_xkb_gbn_detail_t = 4;
+pub const xcb_xkb_gbn_detail_t_XCB_XKB_GBN_DETAIL_SERVER_SYMBOLS: xcb_xkb_gbn_detail_t = 8;
+pub const xcb_xkb_gbn_detail_t_XCB_XKB_GBN_DETAIL_INDICATOR_MAPS: xcb_xkb_gbn_detail_t = 16;
+pub const xcb_xkb_gbn_detail_t_XCB_XKB_GBN_DETAIL_KEY_NAMES: xcb_xkb_gbn_detail_t = 32;
+pub const xcb_xkb_gbn_detail_t_XCB_XKB_GBN_DETAIL_GEOMETRY: xcb_xkb_gbn_detail_t = 64;
+pub const xcb_xkb_gbn_detail_t_XCB_XKB_GBN_DETAIL_OTHER_NAMES: xcb_xkb_gbn_detail_t = 128;
+pub type xcb_xkb_gbn_detail_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_xi_feature_t_XCB_XKB_XI_FEATURE_KEYBOARDS: xcb_xkb_xi_feature_t = 1;
+pub const xcb_xkb_xi_feature_t_XCB_XKB_XI_FEATURE_BUTTON_ACTIONS: xcb_xkb_xi_feature_t = 2;
+pub const xcb_xkb_xi_feature_t_XCB_XKB_XI_FEATURE_INDICATOR_NAMES: xcb_xkb_xi_feature_t = 4;
+pub const xcb_xkb_xi_feature_t_XCB_XKB_XI_FEATURE_INDICATOR_MAPS: xcb_xkb_xi_feature_t = 8;
+pub const xcb_xkb_xi_feature_t_XCB_XKB_XI_FEATURE_INDICATOR_STATE: xcb_xkb_xi_feature_t = 16;
+pub type xcb_xkb_xi_feature_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_per_client_flag_t_XCB_XKB_PER_CLIENT_FLAG_DETECTABLE_AUTO_REPEAT:
+    xcb_xkb_per_client_flag_t = 1;
+pub const xcb_xkb_per_client_flag_t_XCB_XKB_PER_CLIENT_FLAG_GRABS_USE_XKB_STATE:
+    xcb_xkb_per_client_flag_t = 2;
+pub const xcb_xkb_per_client_flag_t_XCB_XKB_PER_CLIENT_FLAG_AUTO_RESET_CONTROLS:
+    xcb_xkb_per_client_flag_t = 4;
+pub const xcb_xkb_per_client_flag_t_XCB_XKB_PER_CLIENT_FLAG_LOOKUP_STATE_WHEN_GRABBED:
+    xcb_xkb_per_client_flag_t = 8;
+pub const xcb_xkb_per_client_flag_t_XCB_XKB_PER_CLIENT_FLAG_SEND_EVENT_USES_XKB_STATE:
+    xcb_xkb_per_client_flag_t = 16;
+pub type xcb_xkb_per_client_flag_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_mod_def_t {
+    pub mask: u8,
+    pub realMods: u8,
+    pub vmods: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_mod_def_t"][::std::mem::size_of::<xcb_xkb_mod_def_t>() - 4usize];
+    ["Alignment of xcb_xkb_mod_def_t"][::std::mem::align_of::<xcb_xkb_mod_def_t>() - 2usize];
+    ["Offset of field: xcb_xkb_mod_def_t::mask"]
+        [::std::mem::offset_of!(xcb_xkb_mod_def_t, mask) - 0usize];
+    ["Offset of field: xcb_xkb_mod_def_t::realMods"]
+        [::std::mem::offset_of!(xcb_xkb_mod_def_t, realMods) - 1usize];
+    ["Offset of field: xcb_xkb_mod_def_t::vmods"]
+        [::std::mem::offset_of!(xcb_xkb_mod_def_t, vmods) - 2usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_mod_def_iterator_t {
+    pub data: *mut xcb_xkb_mod_def_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_mod_def_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_mod_def_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_mod_def_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_mod_def_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_mod_def_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_mod_def_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_mod_def_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_mod_def_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_mod_def_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_mod_def_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_key_name_t {
+    pub name: [::std::os::raw::c_char; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_key_name_t"][::std::mem::size_of::<xcb_xkb_key_name_t>() - 4usize];
+    ["Alignment of xcb_xkb_key_name_t"][::std::mem::align_of::<xcb_xkb_key_name_t>() - 1usize];
+    ["Offset of field: xcb_xkb_key_name_t::name"]
+        [::std::mem::offset_of!(xcb_xkb_key_name_t, name) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_key_name_iterator_t {
+    pub data: *mut xcb_xkb_key_name_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_key_name_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_key_name_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_key_name_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_key_name_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_key_name_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_key_name_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_key_name_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_key_name_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_key_name_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_key_name_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_key_alias_t {
+    pub real: [::std::os::raw::c_char; 4usize],
+    pub alias: [::std::os::raw::c_char; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_key_alias_t"][::std::mem::size_of::<xcb_xkb_key_alias_t>() - 8usize];
+    ["Alignment of xcb_xkb_key_alias_t"][::std::mem::align_of::<xcb_xkb_key_alias_t>() - 1usize];
+    ["Offset of field: xcb_xkb_key_alias_t::real"]
+        [::std::mem::offset_of!(xcb_xkb_key_alias_t, real) - 0usize];
+    ["Offset of field: xcb_xkb_key_alias_t::alias"]
+        [::std::mem::offset_of!(xcb_xkb_key_alias_t, alias) - 4usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_key_alias_iterator_t {
+    pub data: *mut xcb_xkb_key_alias_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_key_alias_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_key_alias_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_key_alias_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_key_alias_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_key_alias_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_key_alias_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_key_alias_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_key_alias_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_key_alias_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_key_alias_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_counted_string_16_t {
+    pub length: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_counted_string_16_t"]
+        [::std::mem::size_of::<xcb_xkb_counted_string_16_t>() - 2usize];
+    ["Alignment of xcb_xkb_counted_string_16_t"]
+        [::std::mem::align_of::<xcb_xkb_counted_string_16_t>() - 2usize];
+    ["Offset of field: xcb_xkb_counted_string_16_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_counted_string_16_t, length) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_counted_string_16_iterator_t {
+    pub data: *mut xcb_xkb_counted_string_16_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_counted_string_16_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_counted_string_16_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_counted_string_16_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_counted_string_16_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_counted_string_16_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_counted_string_16_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_counted_string_16_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_counted_string_16_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_counted_string_16_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_counted_string_16_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_kt_map_entry_t {
+    pub active: u8,
+    pub mods_mask: u8,
+    pub level: u8,
+    pub mods_mods: u8,
+    pub mods_vmods: u16,
+    pub pad0: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_kt_map_entry_t"][::std::mem::size_of::<xcb_xkb_kt_map_entry_t>() - 8usize];
+    ["Alignment of xcb_xkb_kt_map_entry_t"]
+        [::std::mem::align_of::<xcb_xkb_kt_map_entry_t>() - 2usize];
+    ["Offset of field: xcb_xkb_kt_map_entry_t::active"]
+        [::std::mem::offset_of!(xcb_xkb_kt_map_entry_t, active) - 0usize];
+    ["Offset of field: xcb_xkb_kt_map_entry_t::mods_mask"]
+        [::std::mem::offset_of!(xcb_xkb_kt_map_entry_t, mods_mask) - 1usize];
+    ["Offset of field: xcb_xkb_kt_map_entry_t::level"]
+        [::std::mem::offset_of!(xcb_xkb_kt_map_entry_t, level) - 2usize];
+    ["Offset of field: xcb_xkb_kt_map_entry_t::mods_mods"]
+        [::std::mem::offset_of!(xcb_xkb_kt_map_entry_t, mods_mods) - 3usize];
+    ["Offset of field: xcb_xkb_kt_map_entry_t::mods_vmods"]
+        [::std::mem::offset_of!(xcb_xkb_kt_map_entry_t, mods_vmods) - 4usize];
+    ["Offset of field: xcb_xkb_kt_map_entry_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_kt_map_entry_t, pad0) - 6usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_kt_map_entry_iterator_t {
+    pub data: *mut xcb_xkb_kt_map_entry_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_kt_map_entry_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_kt_map_entry_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_kt_map_entry_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_kt_map_entry_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_kt_map_entry_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_kt_map_entry_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_kt_map_entry_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_kt_map_entry_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_kt_map_entry_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_kt_map_entry_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_key_type_t {
+    pub mods_mask: u8,
+    pub mods_mods: u8,
+    pub mods_vmods: u16,
+    pub numLevels: u8,
+    pub nMapEntries: u8,
+    pub hasPreserve: u8,
+    pub pad0: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_key_type_t"][::std::mem::size_of::<xcb_xkb_key_type_t>() - 8usize];
+    ["Alignment of xcb_xkb_key_type_t"][::std::mem::align_of::<xcb_xkb_key_type_t>() - 2usize];
+    ["Offset of field: xcb_xkb_key_type_t::mods_mask"]
+        [::std::mem::offset_of!(xcb_xkb_key_type_t, mods_mask) - 0usize];
+    ["Offset of field: xcb_xkb_key_type_t::mods_mods"]
+        [::std::mem::offset_of!(xcb_xkb_key_type_t, mods_mods) - 1usize];
+    ["Offset of field: xcb_xkb_key_type_t::mods_vmods"]
+        [::std::mem::offset_of!(xcb_xkb_key_type_t, mods_vmods) - 2usize];
+    ["Offset of field: xcb_xkb_key_type_t::numLevels"]
+        [::std::mem::offset_of!(xcb_xkb_key_type_t, numLevels) - 4usize];
+    ["Offset of field: xcb_xkb_key_type_t::nMapEntries"]
+        [::std::mem::offset_of!(xcb_xkb_key_type_t, nMapEntries) - 5usize];
+    ["Offset of field: xcb_xkb_key_type_t::hasPreserve"]
+        [::std::mem::offset_of!(xcb_xkb_key_type_t, hasPreserve) - 6usize];
+    ["Offset of field: xcb_xkb_key_type_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_key_type_t, pad0) - 7usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_key_type_iterator_t {
+    pub data: *mut xcb_xkb_key_type_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_key_type_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_key_type_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_key_type_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_key_type_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_key_type_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_key_type_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_key_type_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_key_type_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_key_type_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_key_type_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_key_sym_map_t {
+    pub kt_index: [u8; 4usize],
+    pub groupInfo: u8,
+    pub width: u8,
+    pub nSyms: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_key_sym_map_t"][::std::mem::size_of::<xcb_xkb_key_sym_map_t>() - 8usize];
+    ["Alignment of xcb_xkb_key_sym_map_t"]
+        [::std::mem::align_of::<xcb_xkb_key_sym_map_t>() - 2usize];
+    ["Offset of field: xcb_xkb_key_sym_map_t::kt_index"]
+        [::std::mem::offset_of!(xcb_xkb_key_sym_map_t, kt_index) - 0usize];
+    ["Offset of field: xcb_xkb_key_sym_map_t::groupInfo"]
+        [::std::mem::offset_of!(xcb_xkb_key_sym_map_t, groupInfo) - 4usize];
+    ["Offset of field: xcb_xkb_key_sym_map_t::width"]
+        [::std::mem::offset_of!(xcb_xkb_key_sym_map_t, width) - 5usize];
+    ["Offset of field: xcb_xkb_key_sym_map_t::nSyms"]
+        [::std::mem::offset_of!(xcb_xkb_key_sym_map_t, nSyms) - 6usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_key_sym_map_iterator_t {
+    pub data: *mut xcb_xkb_key_sym_map_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_key_sym_map_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_key_sym_map_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_key_sym_map_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_key_sym_map_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_key_sym_map_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_key_sym_map_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_key_sym_map_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_key_sym_map_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_key_sym_map_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_key_sym_map_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_common_behavior_t {
+    pub type_: u8,
+    pub data: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_common_behavior_t"]
+        [::std::mem::size_of::<xcb_xkb_common_behavior_t>() - 2usize];
+    ["Alignment of xcb_xkb_common_behavior_t"]
+        [::std::mem::align_of::<xcb_xkb_common_behavior_t>() - 1usize];
+    ["Offset of field: xcb_xkb_common_behavior_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_common_behavior_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_common_behavior_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_common_behavior_t, data) - 1usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_common_behavior_iterator_t {
+    pub data: *mut xcb_xkb_common_behavior_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_common_behavior_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_common_behavior_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_common_behavior_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_common_behavior_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_common_behavior_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_common_behavior_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_common_behavior_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_common_behavior_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_common_behavior_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_common_behavior_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_default_behavior_t {
+    pub type_: u8,
+    pub pad0: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_default_behavior_t"]
+        [::std::mem::size_of::<xcb_xkb_default_behavior_t>() - 2usize];
+    ["Alignment of xcb_xkb_default_behavior_t"]
+        [::std::mem::align_of::<xcb_xkb_default_behavior_t>() - 1usize];
+    ["Offset of field: xcb_xkb_default_behavior_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_default_behavior_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_default_behavior_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_default_behavior_t, pad0) - 1usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_default_behavior_iterator_t {
+    pub data: *mut xcb_xkb_default_behavior_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_default_behavior_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_default_behavior_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_default_behavior_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_default_behavior_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_default_behavior_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_default_behavior_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_default_behavior_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_default_behavior_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_default_behavior_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_default_behavior_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_lock_behavior_t {
+    pub type_: u8,
+    pub pad0: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_lock_behavior_t"][::std::mem::size_of::<xcb_xkb_lock_behavior_t>() - 2usize];
+    ["Alignment of xcb_xkb_lock_behavior_t"]
+        [::std::mem::align_of::<xcb_xkb_lock_behavior_t>() - 1usize];
+    ["Offset of field: xcb_xkb_lock_behavior_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_lock_behavior_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_lock_behavior_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_lock_behavior_t, pad0) - 1usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_lock_behavior_iterator_t {
+    pub data: *mut xcb_xkb_lock_behavior_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_lock_behavior_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_lock_behavior_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_lock_behavior_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_lock_behavior_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_lock_behavior_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_lock_behavior_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_lock_behavior_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_lock_behavior_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_lock_behavior_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_lock_behavior_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_radio_group_behavior_t {
+    pub type_: u8,
+    pub group: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_radio_group_behavior_t"]
+        [::std::mem::size_of::<xcb_xkb_radio_group_behavior_t>() - 2usize];
+    ["Alignment of xcb_xkb_radio_group_behavior_t"]
+        [::std::mem::align_of::<xcb_xkb_radio_group_behavior_t>() - 1usize];
+    ["Offset of field: xcb_xkb_radio_group_behavior_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_radio_group_behavior_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_radio_group_behavior_t::group"]
+        [::std::mem::offset_of!(xcb_xkb_radio_group_behavior_t, group) - 1usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_radio_group_behavior_iterator_t {
+    pub data: *mut xcb_xkb_radio_group_behavior_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_radio_group_behavior_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_radio_group_behavior_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_radio_group_behavior_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_radio_group_behavior_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_radio_group_behavior_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_radio_group_behavior_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_radio_group_behavior_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_radio_group_behavior_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_radio_group_behavior_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_radio_group_behavior_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_overlay_behavior_t {
+    pub type_: u8,
+    pub key: xcb_keycode_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_overlay_behavior_t"]
+        [::std::mem::size_of::<xcb_xkb_overlay_behavior_t>() - 2usize];
+    ["Alignment of xcb_xkb_overlay_behavior_t"]
+        [::std::mem::align_of::<xcb_xkb_overlay_behavior_t>() - 1usize];
+    ["Offset of field: xcb_xkb_overlay_behavior_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_behavior_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_overlay_behavior_t::key"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_behavior_t, key) - 1usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_overlay_behavior_iterator_t {
+    pub data: *mut xcb_xkb_overlay_behavior_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_overlay_behavior_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_overlay_behavior_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_overlay_behavior_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_overlay_behavior_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_overlay_behavior_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_behavior_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_overlay_behavior_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_behavior_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_overlay_behavior_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_behavior_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_permament_lock_behavior_t {
+    pub type_: u8,
+    pub pad0: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_permament_lock_behavior_t"]
+        [::std::mem::size_of::<xcb_xkb_permament_lock_behavior_t>() - 2usize];
+    ["Alignment of xcb_xkb_permament_lock_behavior_t"]
+        [::std::mem::align_of::<xcb_xkb_permament_lock_behavior_t>() - 1usize];
+    ["Offset of field: xcb_xkb_permament_lock_behavior_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_permament_lock_behavior_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_permament_lock_behavior_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_permament_lock_behavior_t, pad0) - 1usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_permament_lock_behavior_iterator_t {
+    pub data: *mut xcb_xkb_permament_lock_behavior_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_permament_lock_behavior_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_permament_lock_behavior_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_permament_lock_behavior_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_permament_lock_behavior_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_permament_lock_behavior_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_permament_lock_behavior_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_permament_lock_behavior_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_permament_lock_behavior_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_permament_lock_behavior_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_permament_lock_behavior_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_permament_radio_group_behavior_t {
+    pub type_: u8,
+    pub group: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_permament_radio_group_behavior_t"]
+        [::std::mem::size_of::<xcb_xkb_permament_radio_group_behavior_t>() - 2usize];
+    ["Alignment of xcb_xkb_permament_radio_group_behavior_t"]
+        [::std::mem::align_of::<xcb_xkb_permament_radio_group_behavior_t>() - 1usize];
+    ["Offset of field: xcb_xkb_permament_radio_group_behavior_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_permament_radio_group_behavior_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_permament_radio_group_behavior_t::group"]
+        [::std::mem::offset_of!(xcb_xkb_permament_radio_group_behavior_t, group) - 1usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_permament_radio_group_behavior_iterator_t {
+    pub data: *mut xcb_xkb_permament_radio_group_behavior_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_permament_radio_group_behavior_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_permament_radio_group_behavior_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_permament_radio_group_behavior_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_permament_radio_group_behavior_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_permament_radio_group_behavior_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_permament_radio_group_behavior_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_permament_radio_group_behavior_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_permament_radio_group_behavior_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_permament_radio_group_behavior_iterator_t::index"][::std::mem::offset_of!(
+        xcb_xkb_permament_radio_group_behavior_iterator_t,
+        index
+    ) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_permament_overlay_behavior_t {
+    pub type_: u8,
+    pub key: xcb_keycode_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_permament_overlay_behavior_t"]
+        [::std::mem::size_of::<xcb_xkb_permament_overlay_behavior_t>() - 2usize];
+    ["Alignment of xcb_xkb_permament_overlay_behavior_t"]
+        [::std::mem::align_of::<xcb_xkb_permament_overlay_behavior_t>() - 1usize];
+    ["Offset of field: xcb_xkb_permament_overlay_behavior_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_permament_overlay_behavior_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_permament_overlay_behavior_t::key"]
+        [::std::mem::offset_of!(xcb_xkb_permament_overlay_behavior_t, key) - 1usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_permament_overlay_behavior_iterator_t {
+    pub data: *mut xcb_xkb_permament_overlay_behavior_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_permament_overlay_behavior_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_permament_overlay_behavior_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_permament_overlay_behavior_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_permament_overlay_behavior_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_permament_overlay_behavior_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_permament_overlay_behavior_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_permament_overlay_behavior_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_permament_overlay_behavior_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_permament_overlay_behavior_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_permament_overlay_behavior_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union xcb_xkb_behavior_t {
+    pub common: xcb_xkb_common_behavior_t,
+    pub _default: xcb_xkb_default_behavior_t,
+    pub lock: xcb_xkb_lock_behavior_t,
+    pub radioGroup: xcb_xkb_radio_group_behavior_t,
+    pub overlay1: xcb_xkb_overlay_behavior_t,
+    pub overlay2: xcb_xkb_overlay_behavior_t,
+    pub permamentLock: xcb_xkb_permament_lock_behavior_t,
+    pub permamentRadioGroup: xcb_xkb_permament_radio_group_behavior_t,
+    pub permamentOverlay1: xcb_xkb_permament_overlay_behavior_t,
+    pub permamentOverlay2: xcb_xkb_permament_overlay_behavior_t,
+    pub type_: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_behavior_t"][::std::mem::size_of::<xcb_xkb_behavior_t>() - 2usize];
+    ["Alignment of xcb_xkb_behavior_t"][::std::mem::align_of::<xcb_xkb_behavior_t>() - 1usize];
+    ["Offset of field: xcb_xkb_behavior_t::common"]
+        [::std::mem::offset_of!(xcb_xkb_behavior_t, common) - 0usize];
+    ["Offset of field: xcb_xkb_behavior_t::_default"]
+        [::std::mem::offset_of!(xcb_xkb_behavior_t, _default) - 0usize];
+    ["Offset of field: xcb_xkb_behavior_t::lock"]
+        [::std::mem::offset_of!(xcb_xkb_behavior_t, lock) - 0usize];
+    ["Offset of field: xcb_xkb_behavior_t::radioGroup"]
+        [::std::mem::offset_of!(xcb_xkb_behavior_t, radioGroup) - 0usize];
+    ["Offset of field: xcb_xkb_behavior_t::overlay1"]
+        [::std::mem::offset_of!(xcb_xkb_behavior_t, overlay1) - 0usize];
+    ["Offset of field: xcb_xkb_behavior_t::overlay2"]
+        [::std::mem::offset_of!(xcb_xkb_behavior_t, overlay2) - 0usize];
+    ["Offset of field: xcb_xkb_behavior_t::permamentLock"]
+        [::std::mem::offset_of!(xcb_xkb_behavior_t, permamentLock) - 0usize];
+    ["Offset of field: xcb_xkb_behavior_t::permamentRadioGroup"]
+        [::std::mem::offset_of!(xcb_xkb_behavior_t, permamentRadioGroup) - 0usize];
+    ["Offset of field: xcb_xkb_behavior_t::permamentOverlay1"]
+        [::std::mem::offset_of!(xcb_xkb_behavior_t, permamentOverlay1) - 0usize];
+    ["Offset of field: xcb_xkb_behavior_t::permamentOverlay2"]
+        [::std::mem::offset_of!(xcb_xkb_behavior_t, permamentOverlay2) - 0usize];
+    ["Offset of field: xcb_xkb_behavior_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_behavior_t, type_) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_behavior_iterator_t {
+    pub data: *mut xcb_xkb_behavior_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_behavior_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_behavior_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_behavior_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_behavior_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_behavior_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_behavior_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_behavior_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_behavior_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_behavior_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_behavior_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_behavior_type_t_XCB_XKB_BEHAVIOR_TYPE_DEFAULT: xcb_xkb_behavior_type_t = 0;
+pub const xcb_xkb_behavior_type_t_XCB_XKB_BEHAVIOR_TYPE_LOCK: xcb_xkb_behavior_type_t = 1;
+pub const xcb_xkb_behavior_type_t_XCB_XKB_BEHAVIOR_TYPE_RADIO_GROUP: xcb_xkb_behavior_type_t = 2;
+pub const xcb_xkb_behavior_type_t_XCB_XKB_BEHAVIOR_TYPE_OVERLAY_1: xcb_xkb_behavior_type_t = 3;
+pub const xcb_xkb_behavior_type_t_XCB_XKB_BEHAVIOR_TYPE_OVERLAY_2: xcb_xkb_behavior_type_t = 4;
+pub const xcb_xkb_behavior_type_t_XCB_XKB_BEHAVIOR_TYPE_PERMAMENT_LOCK: xcb_xkb_behavior_type_t =
+    129;
+pub const xcb_xkb_behavior_type_t_XCB_XKB_BEHAVIOR_TYPE_PERMAMENT_RADIO_GROUP:
+    xcb_xkb_behavior_type_t = 130;
+pub const xcb_xkb_behavior_type_t_XCB_XKB_BEHAVIOR_TYPE_PERMAMENT_OVERLAY_1:
+    xcb_xkb_behavior_type_t = 131;
+pub const xcb_xkb_behavior_type_t_XCB_XKB_BEHAVIOR_TYPE_PERMAMENT_OVERLAY_2:
+    xcb_xkb_behavior_type_t = 132;
+pub type xcb_xkb_behavior_type_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct xcb_xkb_set_behavior_t {
+    pub keycode: xcb_keycode_t,
+    pub behavior: xcb_xkb_behavior_t,
+    pub pad0: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_behavior_t"][::std::mem::size_of::<xcb_xkb_set_behavior_t>() - 4usize];
+    ["Alignment of xcb_xkb_set_behavior_t"]
+        [::std::mem::align_of::<xcb_xkb_set_behavior_t>() - 1usize];
+    ["Offset of field: xcb_xkb_set_behavior_t::keycode"]
+        [::std::mem::offset_of!(xcb_xkb_set_behavior_t, keycode) - 0usize];
+    ["Offset of field: xcb_xkb_set_behavior_t::behavior"]
+        [::std::mem::offset_of!(xcb_xkb_set_behavior_t, behavior) - 1usize];
+    ["Offset of field: xcb_xkb_set_behavior_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_set_behavior_t, pad0) - 3usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_behavior_iterator_t {
+    pub data: *mut xcb_xkb_set_behavior_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_behavior_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_set_behavior_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_set_behavior_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_set_behavior_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_set_behavior_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_set_behavior_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_set_behavior_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_set_behavior_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_set_behavior_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_set_behavior_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_explicit_t {
+    pub keycode: xcb_keycode_t,
+    pub explicit: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_explicit_t"][::std::mem::size_of::<xcb_xkb_set_explicit_t>() - 2usize];
+    ["Alignment of xcb_xkb_set_explicit_t"]
+        [::std::mem::align_of::<xcb_xkb_set_explicit_t>() - 1usize];
+    ["Offset of field: xcb_xkb_set_explicit_t::keycode"]
+        [::std::mem::offset_of!(xcb_xkb_set_explicit_t, keycode) - 0usize];
+    ["Offset of field: xcb_xkb_set_explicit_t::explicit"]
+        [::std::mem::offset_of!(xcb_xkb_set_explicit_t, explicit) - 1usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_explicit_iterator_t {
+    pub data: *mut xcb_xkb_set_explicit_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_explicit_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_set_explicit_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_set_explicit_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_set_explicit_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_set_explicit_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_set_explicit_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_set_explicit_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_set_explicit_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_set_explicit_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_set_explicit_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_key_mod_map_t {
+    pub keycode: xcb_keycode_t,
+    pub mods: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_key_mod_map_t"][::std::mem::size_of::<xcb_xkb_key_mod_map_t>() - 2usize];
+    ["Alignment of xcb_xkb_key_mod_map_t"]
+        [::std::mem::align_of::<xcb_xkb_key_mod_map_t>() - 1usize];
+    ["Offset of field: xcb_xkb_key_mod_map_t::keycode"]
+        [::std::mem::offset_of!(xcb_xkb_key_mod_map_t, keycode) - 0usize];
+    ["Offset of field: xcb_xkb_key_mod_map_t::mods"]
+        [::std::mem::offset_of!(xcb_xkb_key_mod_map_t, mods) - 1usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_key_mod_map_iterator_t {
+    pub data: *mut xcb_xkb_key_mod_map_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_key_mod_map_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_key_mod_map_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_key_mod_map_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_key_mod_map_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_key_mod_map_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_key_mod_map_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_key_mod_map_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_key_mod_map_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_key_mod_map_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_key_mod_map_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_key_v_mod_map_t {
+    pub keycode: xcb_keycode_t,
+    pub pad0: u8,
+    pub vmods: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_key_v_mod_map_t"][::std::mem::size_of::<xcb_xkb_key_v_mod_map_t>() - 4usize];
+    ["Alignment of xcb_xkb_key_v_mod_map_t"]
+        [::std::mem::align_of::<xcb_xkb_key_v_mod_map_t>() - 2usize];
+    ["Offset of field: xcb_xkb_key_v_mod_map_t::keycode"]
+        [::std::mem::offset_of!(xcb_xkb_key_v_mod_map_t, keycode) - 0usize];
+    ["Offset of field: xcb_xkb_key_v_mod_map_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_key_v_mod_map_t, pad0) - 1usize];
+    ["Offset of field: xcb_xkb_key_v_mod_map_t::vmods"]
+        [::std::mem::offset_of!(xcb_xkb_key_v_mod_map_t, vmods) - 2usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_key_v_mod_map_iterator_t {
+    pub data: *mut xcb_xkb_key_v_mod_map_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_key_v_mod_map_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_key_v_mod_map_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_key_v_mod_map_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_key_v_mod_map_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_key_v_mod_map_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_key_v_mod_map_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_key_v_mod_map_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_key_v_mod_map_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_key_v_mod_map_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_key_v_mod_map_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_kt_set_map_entry_t {
+    pub level: u8,
+    pub realMods: u8,
+    pub virtualMods: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_kt_set_map_entry_t"]
+        [::std::mem::size_of::<xcb_xkb_kt_set_map_entry_t>() - 4usize];
+    ["Alignment of xcb_xkb_kt_set_map_entry_t"]
+        [::std::mem::align_of::<xcb_xkb_kt_set_map_entry_t>() - 2usize];
+    ["Offset of field: xcb_xkb_kt_set_map_entry_t::level"]
+        [::std::mem::offset_of!(xcb_xkb_kt_set_map_entry_t, level) - 0usize];
+    ["Offset of field: xcb_xkb_kt_set_map_entry_t::realMods"]
+        [::std::mem::offset_of!(xcb_xkb_kt_set_map_entry_t, realMods) - 1usize];
+    ["Offset of field: xcb_xkb_kt_set_map_entry_t::virtualMods"]
+        [::std::mem::offset_of!(xcb_xkb_kt_set_map_entry_t, virtualMods) - 2usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_kt_set_map_entry_iterator_t {
+    pub data: *mut xcb_xkb_kt_set_map_entry_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_kt_set_map_entry_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_kt_set_map_entry_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_kt_set_map_entry_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_kt_set_map_entry_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_kt_set_map_entry_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_kt_set_map_entry_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_kt_set_map_entry_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_kt_set_map_entry_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_kt_set_map_entry_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_kt_set_map_entry_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_key_type_t {
+    pub mask: u8,
+    pub realMods: u8,
+    pub virtualMods: u16,
+    pub numLevels: u8,
+    pub nMapEntries: u8,
+    pub preserve: u8,
+    pub pad0: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_key_type_t"][::std::mem::size_of::<xcb_xkb_set_key_type_t>() - 8usize];
+    ["Alignment of xcb_xkb_set_key_type_t"]
+        [::std::mem::align_of::<xcb_xkb_set_key_type_t>() - 2usize];
+    ["Offset of field: xcb_xkb_set_key_type_t::mask"]
+        [::std::mem::offset_of!(xcb_xkb_set_key_type_t, mask) - 0usize];
+    ["Offset of field: xcb_xkb_set_key_type_t::realMods"]
+        [::std::mem::offset_of!(xcb_xkb_set_key_type_t, realMods) - 1usize];
+    ["Offset of field: xcb_xkb_set_key_type_t::virtualMods"]
+        [::std::mem::offset_of!(xcb_xkb_set_key_type_t, virtualMods) - 2usize];
+    ["Offset of field: xcb_xkb_set_key_type_t::numLevels"]
+        [::std::mem::offset_of!(xcb_xkb_set_key_type_t, numLevels) - 4usize];
+    ["Offset of field: xcb_xkb_set_key_type_t::nMapEntries"]
+        [::std::mem::offset_of!(xcb_xkb_set_key_type_t, nMapEntries) - 5usize];
+    ["Offset of field: xcb_xkb_set_key_type_t::preserve"]
+        [::std::mem::offset_of!(xcb_xkb_set_key_type_t, preserve) - 6usize];
+    ["Offset of field: xcb_xkb_set_key_type_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_set_key_type_t, pad0) - 7usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_key_type_iterator_t {
+    pub data: *mut xcb_xkb_set_key_type_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_key_type_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_set_key_type_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_set_key_type_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_set_key_type_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_set_key_type_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_set_key_type_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_set_key_type_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_set_key_type_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_set_key_type_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_set_key_type_iterator_t, index) - 12usize];
+};
+pub type xcb_xkb_string8_t = ::std::os::raw::c_char;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_string8_iterator_t {
+    pub data: *mut xcb_xkb_string8_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_string8_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_string8_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_string8_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_string8_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_string8_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_string8_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_string8_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_string8_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_string8_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_string8_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_outline_t {
+    pub nPoints: u8,
+    pub cornerRadius: u8,
+    pub pad0: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_outline_t"][::std::mem::size_of::<xcb_xkb_outline_t>() - 4usize];
+    ["Alignment of xcb_xkb_outline_t"][::std::mem::align_of::<xcb_xkb_outline_t>() - 1usize];
+    ["Offset of field: xcb_xkb_outline_t::nPoints"]
+        [::std::mem::offset_of!(xcb_xkb_outline_t, nPoints) - 0usize];
+    ["Offset of field: xcb_xkb_outline_t::cornerRadius"]
+        [::std::mem::offset_of!(xcb_xkb_outline_t, cornerRadius) - 1usize];
+    ["Offset of field: xcb_xkb_outline_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_outline_t, pad0) - 2usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_outline_iterator_t {
+    pub data: *mut xcb_xkb_outline_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_outline_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_outline_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_outline_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_outline_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_outline_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_outline_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_outline_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_outline_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_outline_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_outline_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_shape_t {
+    pub name: xcb_atom_t,
+    pub nOutlines: u8,
+    pub primaryNdx: u8,
+    pub approxNdx: u8,
+    pub pad0: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_shape_t"][::std::mem::size_of::<xcb_xkb_shape_t>() - 8usize];
+    ["Alignment of xcb_xkb_shape_t"][::std::mem::align_of::<xcb_xkb_shape_t>() - 4usize];
+    ["Offset of field: xcb_xkb_shape_t::name"]
+        [::std::mem::offset_of!(xcb_xkb_shape_t, name) - 0usize];
+    ["Offset of field: xcb_xkb_shape_t::nOutlines"]
+        [::std::mem::offset_of!(xcb_xkb_shape_t, nOutlines) - 4usize];
+    ["Offset of field: xcb_xkb_shape_t::primaryNdx"]
+        [::std::mem::offset_of!(xcb_xkb_shape_t, primaryNdx) - 5usize];
+    ["Offset of field: xcb_xkb_shape_t::approxNdx"]
+        [::std::mem::offset_of!(xcb_xkb_shape_t, approxNdx) - 6usize];
+    ["Offset of field: xcb_xkb_shape_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_shape_t, pad0) - 7usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_shape_iterator_t {
+    pub data: *mut xcb_xkb_shape_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_shape_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_shape_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_shape_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_shape_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_shape_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_shape_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_shape_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_shape_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_shape_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_shape_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_key_t {
+    pub name: [xcb_xkb_string8_t; 4usize],
+    pub gap: i16,
+    pub shapeNdx: u8,
+    pub colorNdx: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_key_t"][::std::mem::size_of::<xcb_xkb_key_t>() - 8usize];
+    ["Alignment of xcb_xkb_key_t"][::std::mem::align_of::<xcb_xkb_key_t>() - 2usize];
+    ["Offset of field: xcb_xkb_key_t::name"][::std::mem::offset_of!(xcb_xkb_key_t, name) - 0usize];
+    ["Offset of field: xcb_xkb_key_t::gap"][::std::mem::offset_of!(xcb_xkb_key_t, gap) - 4usize];
+    ["Offset of field: xcb_xkb_key_t::shapeNdx"]
+        [::std::mem::offset_of!(xcb_xkb_key_t, shapeNdx) - 6usize];
+    ["Offset of field: xcb_xkb_key_t::colorNdx"]
+        [::std::mem::offset_of!(xcb_xkb_key_t, colorNdx) - 7usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_key_iterator_t {
+    pub data: *mut xcb_xkb_key_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_key_iterator_t"][::std::mem::size_of::<xcb_xkb_key_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_key_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_key_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_key_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_key_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_key_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_key_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_key_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_key_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_overlay_key_t {
+    pub over: [xcb_xkb_string8_t; 4usize],
+    pub under: [xcb_xkb_string8_t; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_overlay_key_t"][::std::mem::size_of::<xcb_xkb_overlay_key_t>() - 8usize];
+    ["Alignment of xcb_xkb_overlay_key_t"]
+        [::std::mem::align_of::<xcb_xkb_overlay_key_t>() - 1usize];
+    ["Offset of field: xcb_xkb_overlay_key_t::over"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_key_t, over) - 0usize];
+    ["Offset of field: xcb_xkb_overlay_key_t::under"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_key_t, under) - 4usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_overlay_key_iterator_t {
+    pub data: *mut xcb_xkb_overlay_key_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_overlay_key_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_overlay_key_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_overlay_key_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_overlay_key_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_overlay_key_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_key_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_overlay_key_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_key_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_overlay_key_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_key_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_overlay_row_t {
+    pub rowUnder: u8,
+    pub nKeys: u8,
+    pub pad0: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_overlay_row_t"][::std::mem::size_of::<xcb_xkb_overlay_row_t>() - 4usize];
+    ["Alignment of xcb_xkb_overlay_row_t"]
+        [::std::mem::align_of::<xcb_xkb_overlay_row_t>() - 1usize];
+    ["Offset of field: xcb_xkb_overlay_row_t::rowUnder"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_row_t, rowUnder) - 0usize];
+    ["Offset of field: xcb_xkb_overlay_row_t::nKeys"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_row_t, nKeys) - 1usize];
+    ["Offset of field: xcb_xkb_overlay_row_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_row_t, pad0) - 2usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_overlay_row_iterator_t {
+    pub data: *mut xcb_xkb_overlay_row_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_overlay_row_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_overlay_row_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_overlay_row_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_overlay_row_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_overlay_row_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_row_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_overlay_row_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_row_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_overlay_row_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_row_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_overlay_t {
+    pub name: xcb_atom_t,
+    pub nRows: u8,
+    pub pad0: [u8; 3usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_overlay_t"][::std::mem::size_of::<xcb_xkb_overlay_t>() - 8usize];
+    ["Alignment of xcb_xkb_overlay_t"][::std::mem::align_of::<xcb_xkb_overlay_t>() - 4usize];
+    ["Offset of field: xcb_xkb_overlay_t::name"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_t, name) - 0usize];
+    ["Offset of field: xcb_xkb_overlay_t::nRows"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_t, nRows) - 4usize];
+    ["Offset of field: xcb_xkb_overlay_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_t, pad0) - 5usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_overlay_iterator_t {
+    pub data: *mut xcb_xkb_overlay_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_overlay_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_overlay_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_overlay_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_overlay_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_overlay_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_overlay_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_overlay_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_overlay_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_row_t {
+    pub top: i16,
+    pub left: i16,
+    pub nKeys: u8,
+    pub vertical: u8,
+    pub pad0: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_row_t"][::std::mem::size_of::<xcb_xkb_row_t>() - 8usize];
+    ["Alignment of xcb_xkb_row_t"][::std::mem::align_of::<xcb_xkb_row_t>() - 2usize];
+    ["Offset of field: xcb_xkb_row_t::top"][::std::mem::offset_of!(xcb_xkb_row_t, top) - 0usize];
+    ["Offset of field: xcb_xkb_row_t::left"][::std::mem::offset_of!(xcb_xkb_row_t, left) - 2usize];
+    ["Offset of field: xcb_xkb_row_t::nKeys"]
+        [::std::mem::offset_of!(xcb_xkb_row_t, nKeys) - 4usize];
+    ["Offset of field: xcb_xkb_row_t::vertical"]
+        [::std::mem::offset_of!(xcb_xkb_row_t, vertical) - 5usize];
+    ["Offset of field: xcb_xkb_row_t::pad0"][::std::mem::offset_of!(xcb_xkb_row_t, pad0) - 6usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_row_iterator_t {
+    pub data: *mut xcb_xkb_row_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_row_iterator_t"][::std::mem::size_of::<xcb_xkb_row_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_row_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_row_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_row_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_row_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_row_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_row_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_row_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_row_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_doodad_type_t_XCB_XKB_DOODAD_TYPE_OUTLINE: xcb_xkb_doodad_type_t = 1;
+pub const xcb_xkb_doodad_type_t_XCB_XKB_DOODAD_TYPE_SOLID: xcb_xkb_doodad_type_t = 2;
+pub const xcb_xkb_doodad_type_t_XCB_XKB_DOODAD_TYPE_TEXT: xcb_xkb_doodad_type_t = 3;
+pub const xcb_xkb_doodad_type_t_XCB_XKB_DOODAD_TYPE_INDICATOR: xcb_xkb_doodad_type_t = 4;
+pub const xcb_xkb_doodad_type_t_XCB_XKB_DOODAD_TYPE_LOGO: xcb_xkb_doodad_type_t = 5;
+pub type xcb_xkb_doodad_type_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_listing_t {
+    pub flags: u16,
+    pub length: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_listing_t"][::std::mem::size_of::<xcb_xkb_listing_t>() - 4usize];
+    ["Alignment of xcb_xkb_listing_t"][::std::mem::align_of::<xcb_xkb_listing_t>() - 2usize];
+    ["Offset of field: xcb_xkb_listing_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_listing_t, flags) - 0usize];
+    ["Offset of field: xcb_xkb_listing_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_listing_t, length) - 2usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_listing_iterator_t {
+    pub data: *mut xcb_xkb_listing_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_listing_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_listing_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_listing_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_listing_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_listing_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_listing_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_listing_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_listing_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_listing_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_listing_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_device_led_info_t {
+    pub ledClass: xcb_xkb_led_class_spec_t,
+    pub ledID: xcb_xkb_id_spec_t,
+    pub namesPresent: u32,
+    pub mapsPresent: u32,
+    pub physIndicators: u32,
+    pub state: u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_device_led_info_t"]
+        [::std::mem::size_of::<xcb_xkb_device_led_info_t>() - 20usize];
+    ["Alignment of xcb_xkb_device_led_info_t"]
+        [::std::mem::align_of::<xcb_xkb_device_led_info_t>() - 4usize];
+    ["Offset of field: xcb_xkb_device_led_info_t::ledClass"]
+        [::std::mem::offset_of!(xcb_xkb_device_led_info_t, ledClass) - 0usize];
+    ["Offset of field: xcb_xkb_device_led_info_t::ledID"]
+        [::std::mem::offset_of!(xcb_xkb_device_led_info_t, ledID) - 2usize];
+    ["Offset of field: xcb_xkb_device_led_info_t::namesPresent"]
+        [::std::mem::offset_of!(xcb_xkb_device_led_info_t, namesPresent) - 4usize];
+    ["Offset of field: xcb_xkb_device_led_info_t::mapsPresent"]
+        [::std::mem::offset_of!(xcb_xkb_device_led_info_t, mapsPresent) - 8usize];
+    ["Offset of field: xcb_xkb_device_led_info_t::physIndicators"]
+        [::std::mem::offset_of!(xcb_xkb_device_led_info_t, physIndicators) - 12usize];
+    ["Offset of field: xcb_xkb_device_led_info_t::state"]
+        [::std::mem::offset_of!(xcb_xkb_device_led_info_t, state) - 16usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_device_led_info_iterator_t {
+    pub data: *mut xcb_xkb_device_led_info_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_device_led_info_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_device_led_info_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_device_led_info_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_device_led_info_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_device_led_info_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_device_led_info_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_device_led_info_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_device_led_info_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_device_led_info_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_device_led_info_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_error_t_XCB_XKB_ERROR_BAD_DEVICE: xcb_xkb_error_t = 255;
+pub const xcb_xkb_error_t_XCB_XKB_ERROR_BAD_CLASS: xcb_xkb_error_t = 254;
+pub const xcb_xkb_error_t_XCB_XKB_ERROR_BAD_ID: xcb_xkb_error_t = 253;
+pub type xcb_xkb_error_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_keyboard_error_t {
+    pub response_type: u8,
+    pub error_code: u8,
+    pub sequence: u16,
+    pub value: u32,
+    pub minorOpcode: u16,
+    pub majorOpcode: u8,
+    pub pad0: [u8; 21usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_keyboard_error_t"]
+        [::std::mem::size_of::<xcb_xkb_keyboard_error_t>() - 32usize];
+    ["Alignment of xcb_xkb_keyboard_error_t"]
+        [::std::mem::align_of::<xcb_xkb_keyboard_error_t>() - 4usize];
+    ["Offset of field: xcb_xkb_keyboard_error_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_keyboard_error_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_keyboard_error_t::error_code"]
+        [::std::mem::offset_of!(xcb_xkb_keyboard_error_t, error_code) - 1usize];
+    ["Offset of field: xcb_xkb_keyboard_error_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_keyboard_error_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_keyboard_error_t::value"]
+        [::std::mem::offset_of!(xcb_xkb_keyboard_error_t, value) - 4usize];
+    ["Offset of field: xcb_xkb_keyboard_error_t::minorOpcode"]
+        [::std::mem::offset_of!(xcb_xkb_keyboard_error_t, minorOpcode) - 8usize];
+    ["Offset of field: xcb_xkb_keyboard_error_t::majorOpcode"]
+        [::std::mem::offset_of!(xcb_xkb_keyboard_error_t, majorOpcode) - 10usize];
+    ["Offset of field: xcb_xkb_keyboard_error_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_keyboard_error_t, pad0) - 11usize];
+};
+pub const xcb_xkb_sa_t_XCB_XKB_SA_CLEAR_LOCKS: xcb_xkb_sa_t = 1;
+pub const xcb_xkb_sa_t_XCB_XKB_SA_LATCH_TO_LOCK: xcb_xkb_sa_t = 2;
+pub const xcb_xkb_sa_t_XCB_XKB_SA_USE_MOD_MAP_MODS: xcb_xkb_sa_t = 4;
+pub const xcb_xkb_sa_t_XCB_XKB_SA_GROUP_ABSOLUTE: xcb_xkb_sa_t = 4;
+pub type xcb_xkb_sa_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_NO_ACTION: xcb_xkb_sa_type_t = 0;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_SET_MODS: xcb_xkb_sa_type_t = 1;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_LATCH_MODS: xcb_xkb_sa_type_t = 2;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_LOCK_MODS: xcb_xkb_sa_type_t = 3;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_SET_GROUP: xcb_xkb_sa_type_t = 4;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_LATCH_GROUP: xcb_xkb_sa_type_t = 5;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_LOCK_GROUP: xcb_xkb_sa_type_t = 6;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_MOVE_PTR: xcb_xkb_sa_type_t = 7;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_PTR_BTN: xcb_xkb_sa_type_t = 8;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_LOCK_PTR_BTN: xcb_xkb_sa_type_t = 9;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_SET_PTR_DFLT: xcb_xkb_sa_type_t = 10;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_ISO_LOCK: xcb_xkb_sa_type_t = 11;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_TERMINATE: xcb_xkb_sa_type_t = 12;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_SWITCH_SCREEN: xcb_xkb_sa_type_t = 13;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_SET_CONTROLS: xcb_xkb_sa_type_t = 14;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_LOCK_CONTROLS: xcb_xkb_sa_type_t = 15;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_ACTION_MESSAGE: xcb_xkb_sa_type_t = 16;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_REDIRECT_KEY: xcb_xkb_sa_type_t = 17;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_DEVICE_BTN: xcb_xkb_sa_type_t = 18;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_LOCK_DEVICE_BTN: xcb_xkb_sa_type_t = 19;
+pub const xcb_xkb_sa_type_t_XCB_XKB_SA_TYPE_DEVICE_VALUATOR: xcb_xkb_sa_type_t = 20;
+pub type xcb_xkb_sa_type_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_no_action_t {
+    pub type_: u8,
+    pub pad0: [u8; 7usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_no_action_t"][::std::mem::size_of::<xcb_xkb_sa_no_action_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_no_action_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_no_action_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_no_action_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_no_action_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_no_action_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_no_action_t, pad0) - 1usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_no_action_iterator_t {
+    pub data: *mut xcb_xkb_sa_no_action_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_no_action_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_no_action_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_no_action_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_no_action_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_no_action_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_no_action_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_no_action_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_no_action_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_no_action_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_no_action_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_set_mods_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub mask: u8,
+    pub realMods: u8,
+    pub vmodsHigh: u8,
+    pub vmodsLow: u8,
+    pub pad0: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_set_mods_t"][::std::mem::size_of::<xcb_xkb_sa_set_mods_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_set_mods_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_set_mods_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_set_mods_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_mods_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_set_mods_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_mods_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_set_mods_t::mask"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_mods_t, mask) - 2usize];
+    ["Offset of field: xcb_xkb_sa_set_mods_t::realMods"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_mods_t, realMods) - 3usize];
+    ["Offset of field: xcb_xkb_sa_set_mods_t::vmodsHigh"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_mods_t, vmodsHigh) - 4usize];
+    ["Offset of field: xcb_xkb_sa_set_mods_t::vmodsLow"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_mods_t, vmodsLow) - 5usize];
+    ["Offset of field: xcb_xkb_sa_set_mods_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_mods_t, pad0) - 6usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_set_mods_iterator_t {
+    pub data: *mut xcb_xkb_sa_set_mods_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_set_mods_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_set_mods_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_set_mods_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_set_mods_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_set_mods_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_mods_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_set_mods_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_mods_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_set_mods_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_mods_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_latch_mods_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub mask: u8,
+    pub realMods: u8,
+    pub vmodsHigh: u8,
+    pub vmodsLow: u8,
+    pub pad0: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_latch_mods_t"][::std::mem::size_of::<xcb_xkb_sa_latch_mods_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_latch_mods_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_latch_mods_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_latch_mods_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_mods_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_latch_mods_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_mods_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_latch_mods_t::mask"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_mods_t, mask) - 2usize];
+    ["Offset of field: xcb_xkb_sa_latch_mods_t::realMods"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_mods_t, realMods) - 3usize];
+    ["Offset of field: xcb_xkb_sa_latch_mods_t::vmodsHigh"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_mods_t, vmodsHigh) - 4usize];
+    ["Offset of field: xcb_xkb_sa_latch_mods_t::vmodsLow"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_mods_t, vmodsLow) - 5usize];
+    ["Offset of field: xcb_xkb_sa_latch_mods_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_mods_t, pad0) - 6usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_latch_mods_iterator_t {
+    pub data: *mut xcb_xkb_sa_latch_mods_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_latch_mods_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_latch_mods_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_latch_mods_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_latch_mods_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_latch_mods_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_mods_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_latch_mods_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_mods_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_latch_mods_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_mods_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_lock_mods_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub mask: u8,
+    pub realMods: u8,
+    pub vmodsHigh: u8,
+    pub vmodsLow: u8,
+    pub pad0: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_lock_mods_t"][::std::mem::size_of::<xcb_xkb_sa_lock_mods_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_lock_mods_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_lock_mods_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_lock_mods_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_mods_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_lock_mods_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_mods_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_lock_mods_t::mask"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_mods_t, mask) - 2usize];
+    ["Offset of field: xcb_xkb_sa_lock_mods_t::realMods"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_mods_t, realMods) - 3usize];
+    ["Offset of field: xcb_xkb_sa_lock_mods_t::vmodsHigh"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_mods_t, vmodsHigh) - 4usize];
+    ["Offset of field: xcb_xkb_sa_lock_mods_t::vmodsLow"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_mods_t, vmodsLow) - 5usize];
+    ["Offset of field: xcb_xkb_sa_lock_mods_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_mods_t, pad0) - 6usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_lock_mods_iterator_t {
+    pub data: *mut xcb_xkb_sa_lock_mods_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_lock_mods_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_lock_mods_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_lock_mods_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_lock_mods_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_lock_mods_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_mods_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_lock_mods_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_mods_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_lock_mods_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_mods_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_set_group_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub group: i8,
+    pub pad0: [u8; 5usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_set_group_t"][::std::mem::size_of::<xcb_xkb_sa_set_group_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_set_group_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_set_group_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_set_group_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_group_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_set_group_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_group_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_set_group_t::group"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_group_t, group) - 2usize];
+    ["Offset of field: xcb_xkb_sa_set_group_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_group_t, pad0) - 3usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_set_group_iterator_t {
+    pub data: *mut xcb_xkb_sa_set_group_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_set_group_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_set_group_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_set_group_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_set_group_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_set_group_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_group_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_set_group_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_group_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_set_group_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_group_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_latch_group_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub group: i8,
+    pub pad0: [u8; 5usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_latch_group_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_latch_group_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_latch_group_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_latch_group_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_latch_group_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_group_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_latch_group_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_group_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_latch_group_t::group"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_group_t, group) - 2usize];
+    ["Offset of field: xcb_xkb_sa_latch_group_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_group_t, pad0) - 3usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_latch_group_iterator_t {
+    pub data: *mut xcb_xkb_sa_latch_group_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_latch_group_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_latch_group_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_latch_group_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_latch_group_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_latch_group_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_group_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_latch_group_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_group_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_latch_group_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_latch_group_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_lock_group_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub group: i8,
+    pub pad0: [u8; 5usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_lock_group_t"][::std::mem::size_of::<xcb_xkb_sa_lock_group_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_lock_group_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_lock_group_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_lock_group_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_group_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_lock_group_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_group_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_lock_group_t::group"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_group_t, group) - 2usize];
+    ["Offset of field: xcb_xkb_sa_lock_group_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_group_t, pad0) - 3usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_lock_group_iterator_t {
+    pub data: *mut xcb_xkb_sa_lock_group_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_lock_group_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_lock_group_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_lock_group_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_lock_group_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_lock_group_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_group_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_lock_group_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_group_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_lock_group_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_group_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_sa_move_ptr_flag_t_XCB_XKB_SA_MOVE_PTR_FLAG_NO_ACCELERATION:
+    xcb_xkb_sa_move_ptr_flag_t = 1;
+pub const xcb_xkb_sa_move_ptr_flag_t_XCB_XKB_SA_MOVE_PTR_FLAG_MOVE_ABSOLUTE_X:
+    xcb_xkb_sa_move_ptr_flag_t = 2;
+pub const xcb_xkb_sa_move_ptr_flag_t_XCB_XKB_SA_MOVE_PTR_FLAG_MOVE_ABSOLUTE_Y:
+    xcb_xkb_sa_move_ptr_flag_t = 4;
+pub type xcb_xkb_sa_move_ptr_flag_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_move_ptr_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub xHigh: i8,
+    pub xLow: u8,
+    pub yHigh: i8,
+    pub yLow: u8,
+    pub pad0: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_move_ptr_t"][::std::mem::size_of::<xcb_xkb_sa_move_ptr_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_move_ptr_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_move_ptr_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_move_ptr_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_move_ptr_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_move_ptr_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_move_ptr_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_move_ptr_t::xHigh"]
+        [::std::mem::offset_of!(xcb_xkb_sa_move_ptr_t, xHigh) - 2usize];
+    ["Offset of field: xcb_xkb_sa_move_ptr_t::xLow"]
+        [::std::mem::offset_of!(xcb_xkb_sa_move_ptr_t, xLow) - 3usize];
+    ["Offset of field: xcb_xkb_sa_move_ptr_t::yHigh"]
+        [::std::mem::offset_of!(xcb_xkb_sa_move_ptr_t, yHigh) - 4usize];
+    ["Offset of field: xcb_xkb_sa_move_ptr_t::yLow"]
+        [::std::mem::offset_of!(xcb_xkb_sa_move_ptr_t, yLow) - 5usize];
+    ["Offset of field: xcb_xkb_sa_move_ptr_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_move_ptr_t, pad0) - 6usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_move_ptr_iterator_t {
+    pub data: *mut xcb_xkb_sa_move_ptr_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_move_ptr_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_move_ptr_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_move_ptr_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_move_ptr_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_move_ptr_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_move_ptr_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_move_ptr_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_move_ptr_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_move_ptr_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_move_ptr_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_ptr_btn_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub count: u8,
+    pub button: u8,
+    pub pad0: [u8; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_ptr_btn_t"][::std::mem::size_of::<xcb_xkb_sa_ptr_btn_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_ptr_btn_t"][::std::mem::align_of::<xcb_xkb_sa_ptr_btn_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_ptr_btn_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_ptr_btn_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_ptr_btn_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_ptr_btn_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_ptr_btn_t::count"]
+        [::std::mem::offset_of!(xcb_xkb_sa_ptr_btn_t, count) - 2usize];
+    ["Offset of field: xcb_xkb_sa_ptr_btn_t::button"]
+        [::std::mem::offset_of!(xcb_xkb_sa_ptr_btn_t, button) - 3usize];
+    ["Offset of field: xcb_xkb_sa_ptr_btn_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_ptr_btn_t, pad0) - 4usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_ptr_btn_iterator_t {
+    pub data: *mut xcb_xkb_sa_ptr_btn_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_ptr_btn_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_ptr_btn_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_ptr_btn_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_ptr_btn_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_ptr_btn_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_ptr_btn_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_ptr_btn_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_ptr_btn_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_ptr_btn_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_ptr_btn_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_lock_ptr_btn_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub pad0: u8,
+    pub button: u8,
+    pub pad1: [u8; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_lock_ptr_btn_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_lock_ptr_btn_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_lock_ptr_btn_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_lock_ptr_btn_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_lock_ptr_btn_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_ptr_btn_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_lock_ptr_btn_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_ptr_btn_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_lock_ptr_btn_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_ptr_btn_t, pad0) - 2usize];
+    ["Offset of field: xcb_xkb_sa_lock_ptr_btn_t::button"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_ptr_btn_t, button) - 3usize];
+    ["Offset of field: xcb_xkb_sa_lock_ptr_btn_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_ptr_btn_t, pad1) - 4usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_lock_ptr_btn_iterator_t {
+    pub data: *mut xcb_xkb_sa_lock_ptr_btn_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_lock_ptr_btn_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_lock_ptr_btn_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_lock_ptr_btn_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_lock_ptr_btn_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_lock_ptr_btn_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_ptr_btn_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_lock_ptr_btn_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_ptr_btn_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_lock_ptr_btn_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_ptr_btn_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_sa_set_ptr_dflt_flag_t_XCB_XKB_SA_SET_PTR_DFLT_FLAG_DFLT_BTN_ABSOLUTE:
+    xcb_xkb_sa_set_ptr_dflt_flag_t = 4;
+pub const xcb_xkb_sa_set_ptr_dflt_flag_t_XCB_XKB_SA_SET_PTR_DFLT_FLAG_AFFECT_DFLT_BUTTON:
+    xcb_xkb_sa_set_ptr_dflt_flag_t = 1;
+pub type xcb_xkb_sa_set_ptr_dflt_flag_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_set_ptr_dflt_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub affect: u8,
+    pub value: i8,
+    pub pad0: [u8; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_set_ptr_dflt_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_set_ptr_dflt_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_set_ptr_dflt_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_set_ptr_dflt_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_set_ptr_dflt_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_ptr_dflt_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_set_ptr_dflt_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_ptr_dflt_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_set_ptr_dflt_t::affect"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_ptr_dflt_t, affect) - 2usize];
+    ["Offset of field: xcb_xkb_sa_set_ptr_dflt_t::value"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_ptr_dflt_t, value) - 3usize];
+    ["Offset of field: xcb_xkb_sa_set_ptr_dflt_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_ptr_dflt_t, pad0) - 4usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_set_ptr_dflt_iterator_t {
+    pub data: *mut xcb_xkb_sa_set_ptr_dflt_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_set_ptr_dflt_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_set_ptr_dflt_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_set_ptr_dflt_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_set_ptr_dflt_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_set_ptr_dflt_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_ptr_dflt_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_set_ptr_dflt_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_ptr_dflt_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_set_ptr_dflt_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_ptr_dflt_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_sa_iso_lock_flag_t_XCB_XKB_SA_ISO_LOCK_FLAG_NO_LOCK: xcb_xkb_sa_iso_lock_flag_t =
+    1;
+pub const xcb_xkb_sa_iso_lock_flag_t_XCB_XKB_SA_ISO_LOCK_FLAG_NO_UNLOCK:
+    xcb_xkb_sa_iso_lock_flag_t = 2;
+pub const xcb_xkb_sa_iso_lock_flag_t_XCB_XKB_SA_ISO_LOCK_FLAG_USE_MOD_MAP_MODS:
+    xcb_xkb_sa_iso_lock_flag_t = 4;
+pub const xcb_xkb_sa_iso_lock_flag_t_XCB_XKB_SA_ISO_LOCK_FLAG_GROUP_ABSOLUTE:
+    xcb_xkb_sa_iso_lock_flag_t = 4;
+pub const xcb_xkb_sa_iso_lock_flag_t_XCB_XKB_SA_ISO_LOCK_FLAG_ISO_DFLT_IS_GROUP:
+    xcb_xkb_sa_iso_lock_flag_t = 8;
+pub type xcb_xkb_sa_iso_lock_flag_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_sa_iso_lock_no_affect_t_XCB_XKB_SA_ISO_LOCK_NO_AFFECT_CTRLS:
+    xcb_xkb_sa_iso_lock_no_affect_t = 8;
+pub const xcb_xkb_sa_iso_lock_no_affect_t_XCB_XKB_SA_ISO_LOCK_NO_AFFECT_PTR:
+    xcb_xkb_sa_iso_lock_no_affect_t = 16;
+pub const xcb_xkb_sa_iso_lock_no_affect_t_XCB_XKB_SA_ISO_LOCK_NO_AFFECT_GROUP:
+    xcb_xkb_sa_iso_lock_no_affect_t = 32;
+pub const xcb_xkb_sa_iso_lock_no_affect_t_XCB_XKB_SA_ISO_LOCK_NO_AFFECT_MODS:
+    xcb_xkb_sa_iso_lock_no_affect_t = 64;
+pub type xcb_xkb_sa_iso_lock_no_affect_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_iso_lock_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub mask: u8,
+    pub realMods: u8,
+    pub group: i8,
+    pub affect: u8,
+    pub vmodsHigh: u8,
+    pub vmodsLow: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_iso_lock_t"][::std::mem::size_of::<xcb_xkb_sa_iso_lock_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_iso_lock_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_iso_lock_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_iso_lock_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_iso_lock_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_iso_lock_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_iso_lock_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_iso_lock_t::mask"]
+        [::std::mem::offset_of!(xcb_xkb_sa_iso_lock_t, mask) - 2usize];
+    ["Offset of field: xcb_xkb_sa_iso_lock_t::realMods"]
+        [::std::mem::offset_of!(xcb_xkb_sa_iso_lock_t, realMods) - 3usize];
+    ["Offset of field: xcb_xkb_sa_iso_lock_t::group"]
+        [::std::mem::offset_of!(xcb_xkb_sa_iso_lock_t, group) - 4usize];
+    ["Offset of field: xcb_xkb_sa_iso_lock_t::affect"]
+        [::std::mem::offset_of!(xcb_xkb_sa_iso_lock_t, affect) - 5usize];
+    ["Offset of field: xcb_xkb_sa_iso_lock_t::vmodsHigh"]
+        [::std::mem::offset_of!(xcb_xkb_sa_iso_lock_t, vmodsHigh) - 6usize];
+    ["Offset of field: xcb_xkb_sa_iso_lock_t::vmodsLow"]
+        [::std::mem::offset_of!(xcb_xkb_sa_iso_lock_t, vmodsLow) - 7usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_iso_lock_iterator_t {
+    pub data: *mut xcb_xkb_sa_iso_lock_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_iso_lock_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_iso_lock_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_iso_lock_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_iso_lock_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_iso_lock_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_iso_lock_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_iso_lock_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_iso_lock_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_iso_lock_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_iso_lock_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_terminate_t {
+    pub type_: u8,
+    pub pad0: [u8; 7usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_terminate_t"][::std::mem::size_of::<xcb_xkb_sa_terminate_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_terminate_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_terminate_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_terminate_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_terminate_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_terminate_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_terminate_t, pad0) - 1usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_terminate_iterator_t {
+    pub data: *mut xcb_xkb_sa_terminate_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_terminate_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_terminate_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_terminate_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_terminate_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_terminate_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_terminate_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_terminate_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_terminate_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_terminate_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_terminate_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_switch_screen_flag_t_XCB_XKB_SWITCH_SCREEN_FLAG_APPLICATION:
+    xcb_xkb_switch_screen_flag_t = 1;
+pub const xcb_xkb_switch_screen_flag_t_XCB_XKB_SWITCH_SCREEN_FLAG_ABSOLUTE:
+    xcb_xkb_switch_screen_flag_t = 4;
+pub type xcb_xkb_switch_screen_flag_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_switch_screen_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub newScreen: i8,
+    pub pad0: [u8; 5usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_switch_screen_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_switch_screen_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_switch_screen_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_switch_screen_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_switch_screen_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_switch_screen_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_switch_screen_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_switch_screen_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_switch_screen_t::newScreen"]
+        [::std::mem::offset_of!(xcb_xkb_sa_switch_screen_t, newScreen) - 2usize];
+    ["Offset of field: xcb_xkb_sa_switch_screen_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_switch_screen_t, pad0) - 3usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_switch_screen_iterator_t {
+    pub data: *mut xcb_xkb_sa_switch_screen_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_switch_screen_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_switch_screen_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_switch_screen_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_switch_screen_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_switch_screen_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_switch_screen_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_switch_screen_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_switch_screen_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_switch_screen_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_switch_screen_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_bool_ctrls_high_t_XCB_XKB_BOOL_CTRLS_HIGH_ACCESS_X_FEEDBACK:
+    xcb_xkb_bool_ctrls_high_t = 1;
+pub const xcb_xkb_bool_ctrls_high_t_XCB_XKB_BOOL_CTRLS_HIGH_AUDIBLE_BELL:
+    xcb_xkb_bool_ctrls_high_t = 2;
+pub const xcb_xkb_bool_ctrls_high_t_XCB_XKB_BOOL_CTRLS_HIGH_OVERLAY_1: xcb_xkb_bool_ctrls_high_t =
+    4;
+pub const xcb_xkb_bool_ctrls_high_t_XCB_XKB_BOOL_CTRLS_HIGH_OVERLAY_2: xcb_xkb_bool_ctrls_high_t =
+    8;
+pub const xcb_xkb_bool_ctrls_high_t_XCB_XKB_BOOL_CTRLS_HIGH_IGNORE_GROUP_LOCK:
+    xcb_xkb_bool_ctrls_high_t = 16;
+pub type xcb_xkb_bool_ctrls_high_t = ::std::os::raw::c_uint;
+pub const xcb_xkb_bool_ctrls_low_t_XCB_XKB_BOOL_CTRLS_LOW_REPEAT_KEYS: xcb_xkb_bool_ctrls_low_t = 1;
+pub const xcb_xkb_bool_ctrls_low_t_XCB_XKB_BOOL_CTRLS_LOW_SLOW_KEYS: xcb_xkb_bool_ctrls_low_t = 2;
+pub const xcb_xkb_bool_ctrls_low_t_XCB_XKB_BOOL_CTRLS_LOW_BOUNCE_KEYS: xcb_xkb_bool_ctrls_low_t = 4;
+pub const xcb_xkb_bool_ctrls_low_t_XCB_XKB_BOOL_CTRLS_LOW_STICKY_KEYS: xcb_xkb_bool_ctrls_low_t = 8;
+pub const xcb_xkb_bool_ctrls_low_t_XCB_XKB_BOOL_CTRLS_LOW_MOUSE_KEYS: xcb_xkb_bool_ctrls_low_t = 16;
+pub const xcb_xkb_bool_ctrls_low_t_XCB_XKB_BOOL_CTRLS_LOW_MOUSE_KEYS_ACCEL:
+    xcb_xkb_bool_ctrls_low_t = 32;
+pub const xcb_xkb_bool_ctrls_low_t_XCB_XKB_BOOL_CTRLS_LOW_ACCESS_X_KEYS: xcb_xkb_bool_ctrls_low_t =
+    64;
+pub const xcb_xkb_bool_ctrls_low_t_XCB_XKB_BOOL_CTRLS_LOW_ACCESS_X_TIMEOUT:
+    xcb_xkb_bool_ctrls_low_t = 128;
+pub type xcb_xkb_bool_ctrls_low_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_set_controls_t {
+    pub type_: u8,
+    pub pad0: [u8; 3usize],
+    pub boolCtrlsHigh: u8,
+    pub boolCtrlsLow: u8,
+    pub pad1: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_set_controls_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_set_controls_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_set_controls_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_set_controls_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_set_controls_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_controls_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_set_controls_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_controls_t, pad0) - 1usize];
+    ["Offset of field: xcb_xkb_sa_set_controls_t::boolCtrlsHigh"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_controls_t, boolCtrlsHigh) - 4usize];
+    ["Offset of field: xcb_xkb_sa_set_controls_t::boolCtrlsLow"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_controls_t, boolCtrlsLow) - 5usize];
+    ["Offset of field: xcb_xkb_sa_set_controls_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_controls_t, pad1) - 6usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_set_controls_iterator_t {
+    pub data: *mut xcb_xkb_sa_set_controls_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_set_controls_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_set_controls_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_set_controls_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_set_controls_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_set_controls_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_controls_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_set_controls_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_controls_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_set_controls_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_set_controls_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_lock_controls_t {
+    pub type_: u8,
+    pub pad0: [u8; 3usize],
+    pub boolCtrlsHigh: u8,
+    pub boolCtrlsLow: u8,
+    pub pad1: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_lock_controls_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_lock_controls_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_lock_controls_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_lock_controls_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_lock_controls_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_controls_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_lock_controls_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_controls_t, pad0) - 1usize];
+    ["Offset of field: xcb_xkb_sa_lock_controls_t::boolCtrlsHigh"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_controls_t, boolCtrlsHigh) - 4usize];
+    ["Offset of field: xcb_xkb_sa_lock_controls_t::boolCtrlsLow"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_controls_t, boolCtrlsLow) - 5usize];
+    ["Offset of field: xcb_xkb_sa_lock_controls_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_controls_t, pad1) - 6usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_lock_controls_iterator_t {
+    pub data: *mut xcb_xkb_sa_lock_controls_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_lock_controls_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_lock_controls_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_lock_controls_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_lock_controls_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_lock_controls_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_controls_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_lock_controls_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_controls_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_lock_controls_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_controls_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_action_message_flag_t_XCB_XKB_ACTION_MESSAGE_FLAG_ON_PRESS:
+    xcb_xkb_action_message_flag_t = 1;
+pub const xcb_xkb_action_message_flag_t_XCB_XKB_ACTION_MESSAGE_FLAG_ON_RELEASE:
+    xcb_xkb_action_message_flag_t = 2;
+pub const xcb_xkb_action_message_flag_t_XCB_XKB_ACTION_MESSAGE_FLAG_GEN_KEY_EVENT:
+    xcb_xkb_action_message_flag_t = 4;
+pub type xcb_xkb_action_message_flag_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_action_message_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub message: [u8; 6usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_action_message_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_action_message_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_action_message_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_action_message_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_action_message_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_action_message_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_action_message_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_action_message_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_action_message_t::message"]
+        [::std::mem::offset_of!(xcb_xkb_sa_action_message_t, message) - 2usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_action_message_iterator_t {
+    pub data: *mut xcb_xkb_sa_action_message_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_action_message_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_action_message_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_action_message_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_action_message_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_action_message_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_action_message_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_action_message_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_action_message_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_action_message_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_action_message_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_redirect_key_t {
+    pub type_: u8,
+    pub newkey: xcb_keycode_t,
+    pub mask: u8,
+    pub realModifiers: u8,
+    pub vmodsMaskHigh: u8,
+    pub vmodsMaskLow: u8,
+    pub vmodsHigh: u8,
+    pub vmodsLow: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_redirect_key_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_redirect_key_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_redirect_key_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_redirect_key_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_redirect_key_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_redirect_key_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_redirect_key_t::newkey"]
+        [::std::mem::offset_of!(xcb_xkb_sa_redirect_key_t, newkey) - 1usize];
+    ["Offset of field: xcb_xkb_sa_redirect_key_t::mask"]
+        [::std::mem::offset_of!(xcb_xkb_sa_redirect_key_t, mask) - 2usize];
+    ["Offset of field: xcb_xkb_sa_redirect_key_t::realModifiers"]
+        [::std::mem::offset_of!(xcb_xkb_sa_redirect_key_t, realModifiers) - 3usize];
+    ["Offset of field: xcb_xkb_sa_redirect_key_t::vmodsMaskHigh"]
+        [::std::mem::offset_of!(xcb_xkb_sa_redirect_key_t, vmodsMaskHigh) - 4usize];
+    ["Offset of field: xcb_xkb_sa_redirect_key_t::vmodsMaskLow"]
+        [::std::mem::offset_of!(xcb_xkb_sa_redirect_key_t, vmodsMaskLow) - 5usize];
+    ["Offset of field: xcb_xkb_sa_redirect_key_t::vmodsHigh"]
+        [::std::mem::offset_of!(xcb_xkb_sa_redirect_key_t, vmodsHigh) - 6usize];
+    ["Offset of field: xcb_xkb_sa_redirect_key_t::vmodsLow"]
+        [::std::mem::offset_of!(xcb_xkb_sa_redirect_key_t, vmodsLow) - 7usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_redirect_key_iterator_t {
+    pub data: *mut xcb_xkb_sa_redirect_key_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_redirect_key_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_redirect_key_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_redirect_key_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_redirect_key_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_redirect_key_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_redirect_key_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_redirect_key_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_redirect_key_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_redirect_key_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_redirect_key_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_device_btn_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub count: u8,
+    pub button: u8,
+    pub device: u8,
+    pub pad0: [u8; 3usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_device_btn_t"][::std::mem::size_of::<xcb_xkb_sa_device_btn_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_device_btn_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_device_btn_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_device_btn_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_btn_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_device_btn_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_btn_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_device_btn_t::count"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_btn_t, count) - 2usize];
+    ["Offset of field: xcb_xkb_sa_device_btn_t::button"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_btn_t, button) - 3usize];
+    ["Offset of field: xcb_xkb_sa_device_btn_t::device"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_btn_t, device) - 4usize];
+    ["Offset of field: xcb_xkb_sa_device_btn_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_btn_t, pad0) - 5usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_device_btn_iterator_t {
+    pub data: *mut xcb_xkb_sa_device_btn_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_device_btn_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_device_btn_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_device_btn_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_device_btn_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_device_btn_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_btn_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_device_btn_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_btn_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_device_btn_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_btn_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_lock_device_flags_t_XCB_XKB_LOCK_DEVICE_FLAGS_NO_LOCK:
+    xcb_xkb_lock_device_flags_t = 1;
+pub const xcb_xkb_lock_device_flags_t_XCB_XKB_LOCK_DEVICE_FLAGS_NO_UNLOCK:
+    xcb_xkb_lock_device_flags_t = 2;
+pub type xcb_xkb_lock_device_flags_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_lock_device_btn_t {
+    pub type_: u8,
+    pub flags: u8,
+    pub pad0: u8,
+    pub button: u8,
+    pub device: u8,
+    pub pad1: [u8; 3usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_lock_device_btn_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_lock_device_btn_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_lock_device_btn_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_lock_device_btn_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_lock_device_btn_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_device_btn_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_lock_device_btn_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_device_btn_t, flags) - 1usize];
+    ["Offset of field: xcb_xkb_sa_lock_device_btn_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_device_btn_t, pad0) - 2usize];
+    ["Offset of field: xcb_xkb_sa_lock_device_btn_t::button"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_device_btn_t, button) - 3usize];
+    ["Offset of field: xcb_xkb_sa_lock_device_btn_t::device"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_device_btn_t, device) - 4usize];
+    ["Offset of field: xcb_xkb_sa_lock_device_btn_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_device_btn_t, pad1) - 5usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_lock_device_btn_iterator_t {
+    pub data: *mut xcb_xkb_sa_lock_device_btn_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_lock_device_btn_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_lock_device_btn_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_lock_device_btn_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_lock_device_btn_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_lock_device_btn_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_device_btn_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_lock_device_btn_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_device_btn_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_lock_device_btn_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_lock_device_btn_iterator_t, index) - 12usize];
+};
+pub const xcb_xkb_sa_val_what_t_XCB_XKB_SA_VAL_WHAT_IGNORE_VAL: xcb_xkb_sa_val_what_t = 0;
+pub const xcb_xkb_sa_val_what_t_XCB_XKB_SA_VAL_WHAT_SET_VAL_MIN: xcb_xkb_sa_val_what_t = 1;
+pub const xcb_xkb_sa_val_what_t_XCB_XKB_SA_VAL_WHAT_SET_VAL_CENTER: xcb_xkb_sa_val_what_t = 2;
+pub const xcb_xkb_sa_val_what_t_XCB_XKB_SA_VAL_WHAT_SET_VAL_MAX: xcb_xkb_sa_val_what_t = 3;
+pub const xcb_xkb_sa_val_what_t_XCB_XKB_SA_VAL_WHAT_SET_VAL_RELATIVE: xcb_xkb_sa_val_what_t = 4;
+pub const xcb_xkb_sa_val_what_t_XCB_XKB_SA_VAL_WHAT_SET_VAL_ABSOLUTE: xcb_xkb_sa_val_what_t = 5;
+pub type xcb_xkb_sa_val_what_t = ::std::os::raw::c_uint;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_device_valuator_t {
+    pub type_: u8,
+    pub device: u8,
+    pub val1what: u8,
+    pub val1index: u8,
+    pub val1value: u8,
+    pub val2what: u8,
+    pub val2index: u8,
+    pub val2value: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_device_valuator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_device_valuator_t>() - 8usize];
+    ["Alignment of xcb_xkb_sa_device_valuator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_device_valuator_t>() - 1usize];
+    ["Offset of field: xcb_xkb_sa_device_valuator_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_valuator_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_sa_device_valuator_t::device"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_valuator_t, device) - 1usize];
+    ["Offset of field: xcb_xkb_sa_device_valuator_t::val1what"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_valuator_t, val1what) - 2usize];
+    ["Offset of field: xcb_xkb_sa_device_valuator_t::val1index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_valuator_t, val1index) - 3usize];
+    ["Offset of field: xcb_xkb_sa_device_valuator_t::val1value"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_valuator_t, val1value) - 4usize];
+    ["Offset of field: xcb_xkb_sa_device_valuator_t::val2what"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_valuator_t, val2what) - 5usize];
+    ["Offset of field: xcb_xkb_sa_device_valuator_t::val2index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_valuator_t, val2index) - 6usize];
+    ["Offset of field: xcb_xkb_sa_device_valuator_t::val2value"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_valuator_t, val2value) - 7usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sa_device_valuator_iterator_t {
+    pub data: *mut xcb_xkb_sa_device_valuator_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sa_device_valuator_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sa_device_valuator_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sa_device_valuator_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sa_device_valuator_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sa_device_valuator_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_valuator_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sa_device_valuator_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_valuator_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sa_device_valuator_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sa_device_valuator_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_si_action_t {
+    pub type_: u8,
+    pub data: [u8; 7usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_si_action_t"][::std::mem::size_of::<xcb_xkb_si_action_t>() - 8usize];
+    ["Alignment of xcb_xkb_si_action_t"][::std::mem::align_of::<xcb_xkb_si_action_t>() - 1usize];
+    ["Offset of field: xcb_xkb_si_action_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_si_action_t, type_) - 0usize];
+    ["Offset of field: xcb_xkb_si_action_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_si_action_t, data) - 1usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_si_action_iterator_t {
+    pub data: *mut xcb_xkb_si_action_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_si_action_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_si_action_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_si_action_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_si_action_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_si_action_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_si_action_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_si_action_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_si_action_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_si_action_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_si_action_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sym_interpret_t {
+    pub sym: xcb_keysym_t,
+    pub mods: u8,
+    pub match_: u8,
+    pub virtualMod: u8,
+    pub flags: u8,
+    pub action: xcb_xkb_si_action_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sym_interpret_t"][::std::mem::size_of::<xcb_xkb_sym_interpret_t>() - 16usize];
+    ["Alignment of xcb_xkb_sym_interpret_t"]
+        [::std::mem::align_of::<xcb_xkb_sym_interpret_t>() - 4usize];
+    ["Offset of field: xcb_xkb_sym_interpret_t::sym"]
+        [::std::mem::offset_of!(xcb_xkb_sym_interpret_t, sym) - 0usize];
+    ["Offset of field: xcb_xkb_sym_interpret_t::mods"]
+        [::std::mem::offset_of!(xcb_xkb_sym_interpret_t, mods) - 4usize];
+    ["Offset of field: xcb_xkb_sym_interpret_t::match_"]
+        [::std::mem::offset_of!(xcb_xkb_sym_interpret_t, match_) - 5usize];
+    ["Offset of field: xcb_xkb_sym_interpret_t::virtualMod"]
+        [::std::mem::offset_of!(xcb_xkb_sym_interpret_t, virtualMod) - 6usize];
+    ["Offset of field: xcb_xkb_sym_interpret_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_sym_interpret_t, flags) - 7usize];
+    ["Offset of field: xcb_xkb_sym_interpret_t::action"]
+        [::std::mem::offset_of!(xcb_xkb_sym_interpret_t, action) - 8usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_sym_interpret_iterator_t {
+    pub data: *mut xcb_xkb_sym_interpret_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_sym_interpret_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_sym_interpret_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_sym_interpret_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_sym_interpret_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_sym_interpret_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_sym_interpret_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_sym_interpret_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_sym_interpret_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_sym_interpret_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_sym_interpret_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union xcb_xkb_action_t {
+    pub noaction: xcb_xkb_sa_no_action_t,
+    pub setmods: xcb_xkb_sa_set_mods_t,
+    pub latchmods: xcb_xkb_sa_latch_mods_t,
+    pub lockmods: xcb_xkb_sa_lock_mods_t,
+    pub setgroup: xcb_xkb_sa_set_group_t,
+    pub latchgroup: xcb_xkb_sa_latch_group_t,
+    pub lockgroup: xcb_xkb_sa_lock_group_t,
+    pub moveptr: xcb_xkb_sa_move_ptr_t,
+    pub ptrbtn: xcb_xkb_sa_ptr_btn_t,
+    pub lockptrbtn: xcb_xkb_sa_lock_ptr_btn_t,
+    pub setptrdflt: xcb_xkb_sa_set_ptr_dflt_t,
+    pub isolock: xcb_xkb_sa_iso_lock_t,
+    pub terminate: xcb_xkb_sa_terminate_t,
+    pub switchscreen: xcb_xkb_sa_switch_screen_t,
+    pub setcontrols: xcb_xkb_sa_set_controls_t,
+    pub lockcontrols: xcb_xkb_sa_lock_controls_t,
+    pub message: xcb_xkb_sa_action_message_t,
+    pub redirect: xcb_xkb_sa_redirect_key_t,
+    pub devbtn: xcb_xkb_sa_device_btn_t,
+    pub lockdevbtn: xcb_xkb_sa_lock_device_btn_t,
+    pub devval: xcb_xkb_sa_device_valuator_t,
+    pub type_: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_action_t"][::std::mem::size_of::<xcb_xkb_action_t>() - 8usize];
+    ["Alignment of xcb_xkb_action_t"][::std::mem::align_of::<xcb_xkb_action_t>() - 1usize];
+    ["Offset of field: xcb_xkb_action_t::noaction"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, noaction) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::setmods"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, setmods) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::latchmods"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, latchmods) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::lockmods"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, lockmods) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::setgroup"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, setgroup) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::latchgroup"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, latchgroup) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::lockgroup"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, lockgroup) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::moveptr"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, moveptr) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::ptrbtn"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, ptrbtn) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::lockptrbtn"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, lockptrbtn) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::setptrdflt"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, setptrdflt) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::isolock"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, isolock) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::terminate"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, terminate) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::switchscreen"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, switchscreen) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::setcontrols"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, setcontrols) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::lockcontrols"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, lockcontrols) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::message"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, message) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::redirect"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, redirect) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::devbtn"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, devbtn) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::lockdevbtn"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, lockdevbtn) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::devval"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, devval) - 0usize];
+    ["Offset of field: xcb_xkb_action_t::type_"]
+        [::std::mem::offset_of!(xcb_xkb_action_t, type_) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_action_iterator_t {
+    pub data: *mut xcb_xkb_action_t,
+    pub rem: ::std::os::raw::c_int,
+    pub index: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_action_iterator_t"]
+        [::std::mem::size_of::<xcb_xkb_action_iterator_t>() - 16usize];
+    ["Alignment of xcb_xkb_action_iterator_t"]
+        [::std::mem::align_of::<xcb_xkb_action_iterator_t>() - 8usize];
+    ["Offset of field: xcb_xkb_action_iterator_t::data"]
+        [::std::mem::offset_of!(xcb_xkb_action_iterator_t, data) - 0usize];
+    ["Offset of field: xcb_xkb_action_iterator_t::rem"]
+        [::std::mem::offset_of!(xcb_xkb_action_iterator_t, rem) - 8usize];
+    ["Offset of field: xcb_xkb_action_iterator_t::index"]
+        [::std::mem::offset_of!(xcb_xkb_action_iterator_t, index) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_use_extension_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_use_extension_cookie_t"]
+        [::std::mem::size_of::<xcb_xkb_use_extension_cookie_t>() - 4usize];
+    ["Alignment of xcb_xkb_use_extension_cookie_t"]
+        [::std::mem::align_of::<xcb_xkb_use_extension_cookie_t>() - 4usize];
+    ["Offset of field: xcb_xkb_use_extension_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_use_extension_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_use_extension_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub wantedMajor: u16,
+    pub wantedMinor: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_use_extension_request_t"]
+        [::std::mem::size_of::<xcb_xkb_use_extension_request_t>() - 8usize];
+    ["Alignment of xcb_xkb_use_extension_request_t"]
+        [::std::mem::align_of::<xcb_xkb_use_extension_request_t>() - 2usize];
+    ["Offset of field: xcb_xkb_use_extension_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_use_extension_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_use_extension_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_use_extension_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_use_extension_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_use_extension_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_use_extension_request_t::wantedMajor"]
+        [::std::mem::offset_of!(xcb_xkb_use_extension_request_t, wantedMajor) - 4usize];
+    ["Offset of field: xcb_xkb_use_extension_request_t::wantedMinor"]
+        [::std::mem::offset_of!(xcb_xkb_use_extension_request_t, wantedMinor) - 6usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_use_extension_reply_t {
+    pub response_type: u8,
+    pub supported: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub serverMajor: u16,
+    pub serverMinor: u16,
+    pub pad0: [u8; 20usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_use_extension_reply_t"]
+        [::std::mem::size_of::<xcb_xkb_use_extension_reply_t>() - 32usize];
+    ["Alignment of xcb_xkb_use_extension_reply_t"]
+        [::std::mem::align_of::<xcb_xkb_use_extension_reply_t>() - 4usize];
+    ["Offset of field: xcb_xkb_use_extension_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_use_extension_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_use_extension_reply_t::supported"]
+        [::std::mem::offset_of!(xcb_xkb_use_extension_reply_t, supported) - 1usize];
+    ["Offset of field: xcb_xkb_use_extension_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_use_extension_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_use_extension_reply_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_use_extension_reply_t, length) - 4usize];
+    ["Offset of field: xcb_xkb_use_extension_reply_t::serverMajor"]
+        [::std::mem::offset_of!(xcb_xkb_use_extension_reply_t, serverMajor) - 8usize];
+    ["Offset of field: xcb_xkb_use_extension_reply_t::serverMinor"]
+        [::std::mem::offset_of!(xcb_xkb_use_extension_reply_t, serverMinor) - 10usize];
+    ["Offset of field: xcb_xkb_use_extension_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_use_extension_reply_t, pad0) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_select_events_details_t {
+    pub affectNewKeyboard: u16,
+    pub newKeyboardDetails: u16,
+    pub affectState: u16,
+    pub stateDetails: u16,
+    pub affectCtrls: u32,
+    pub ctrlDetails: u32,
+    pub affectIndicatorState: u32,
+    pub indicatorStateDetails: u32,
+    pub affectIndicatorMap: u32,
+    pub indicatorMapDetails: u32,
+    pub affectNames: u16,
+    pub namesDetails: u16,
+    pub affectCompat: u8,
+    pub compatDetails: u8,
+    pub affectBell: u8,
+    pub bellDetails: u8,
+    pub affectMsgDetails: u8,
+    pub msgDetails: u8,
+    pub affectAccessX: u16,
+    pub accessXDetails: u16,
+    pub affectExtDev: u16,
+    pub extdevDetails: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_select_events_details_t"]
+        [::std::mem::size_of::<xcb_xkb_select_events_details_t>() - 52usize];
+    ["Alignment of xcb_xkb_select_events_details_t"]
+        [::std::mem::align_of::<xcb_xkb_select_events_details_t>() - 4usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::affectNewKeyboard"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, affectNewKeyboard) - 0usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::newKeyboardDetails"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, newKeyboardDetails) - 2usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::affectState"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, affectState) - 4usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::stateDetails"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, stateDetails) - 6usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::affectCtrls"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, affectCtrls) - 8usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::ctrlDetails"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, ctrlDetails) - 12usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::affectIndicatorState"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, affectIndicatorState) - 16usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::indicatorStateDetails"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, indicatorStateDetails) - 20usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::affectIndicatorMap"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, affectIndicatorMap) - 24usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::indicatorMapDetails"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, indicatorMapDetails) - 28usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::affectNames"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, affectNames) - 32usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::namesDetails"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, namesDetails) - 34usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::affectCompat"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, affectCompat) - 36usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::compatDetails"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, compatDetails) - 37usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::affectBell"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, affectBell) - 38usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::bellDetails"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, bellDetails) - 39usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::affectMsgDetails"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, affectMsgDetails) - 40usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::msgDetails"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, msgDetails) - 41usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::affectAccessX"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, affectAccessX) - 42usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::accessXDetails"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, accessXDetails) - 44usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::affectExtDev"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, affectExtDev) - 46usize];
+    ["Offset of field: xcb_xkb_select_events_details_t::extdevDetails"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_details_t, extdevDetails) - 48usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_select_events_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub affectWhich: u16,
+    pub clear: u16,
+    pub selectAll: u16,
+    pub affectMap: u16,
+    pub map: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_select_events_request_t"]
+        [::std::mem::size_of::<xcb_xkb_select_events_request_t>() - 16usize];
+    ["Alignment of xcb_xkb_select_events_request_t"]
+        [::std::mem::align_of::<xcb_xkb_select_events_request_t>() - 2usize];
+    ["Offset of field: xcb_xkb_select_events_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_select_events_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_select_events_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_select_events_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_select_events_request_t::affectWhich"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_request_t, affectWhich) - 6usize];
+    ["Offset of field: xcb_xkb_select_events_request_t::clear"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_request_t, clear) - 8usize];
+    ["Offset of field: xcb_xkb_select_events_request_t::selectAll"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_request_t, selectAll) - 10usize];
+    ["Offset of field: xcb_xkb_select_events_request_t::affectMap"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_request_t, affectMap) - 12usize];
+    ["Offset of field: xcb_xkb_select_events_request_t::map"]
+        [::std::mem::offset_of!(xcb_xkb_select_events_request_t, map) - 14usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_bell_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub bellClass: xcb_xkb_bell_class_spec_t,
+    pub bellID: xcb_xkb_id_spec_t,
+    pub percent: i8,
+    pub forceSound: u8,
+    pub eventOnly: u8,
+    pub pad0: u8,
+    pub pitch: i16,
+    pub duration: i16,
+    pub pad1: [u8; 2usize],
+    pub name: xcb_atom_t,
+    pub window: xcb_window_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_bell_request_t"][::std::mem::size_of::<xcb_xkb_bell_request_t>() - 28usize];
+    ["Alignment of xcb_xkb_bell_request_t"]
+        [::std::mem::align_of::<xcb_xkb_bell_request_t>() - 4usize];
+    ["Offset of field: xcb_xkb_bell_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_bell_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_bell_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_bell_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_bell_request_t::bellClass"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, bellClass) - 6usize];
+    ["Offset of field: xcb_xkb_bell_request_t::bellID"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, bellID) - 8usize];
+    ["Offset of field: xcb_xkb_bell_request_t::percent"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, percent) - 10usize];
+    ["Offset of field: xcb_xkb_bell_request_t::forceSound"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, forceSound) - 11usize];
+    ["Offset of field: xcb_xkb_bell_request_t::eventOnly"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, eventOnly) - 12usize];
+    ["Offset of field: xcb_xkb_bell_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, pad0) - 13usize];
+    ["Offset of field: xcb_xkb_bell_request_t::pitch"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, pitch) - 14usize];
+    ["Offset of field: xcb_xkb_bell_request_t::duration"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, duration) - 16usize];
+    ["Offset of field: xcb_xkb_bell_request_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, pad1) - 18usize];
+    ["Offset of field: xcb_xkb_bell_request_t::name"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, name) - 20usize];
+    ["Offset of field: xcb_xkb_bell_request_t::window"]
+        [::std::mem::offset_of!(xcb_xkb_bell_request_t, window) - 24usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_state_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_state_cookie_t"]
+        [::std::mem::size_of::<xcb_xkb_get_state_cookie_t>() - 4usize];
+    ["Alignment of xcb_xkb_get_state_cookie_t"]
+        [::std::mem::align_of::<xcb_xkb_get_state_cookie_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_state_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_state_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub pad0: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_state_request_t"]
+        [::std::mem::size_of::<xcb_xkb_get_state_request_t>() - 8usize];
+    ["Alignment of xcb_xkb_get_state_request_t"]
+        [::std::mem::align_of::<xcb_xkb_get_state_request_t>() - 2usize];
+    ["Offset of field: xcb_xkb_get_state_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_get_state_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_get_state_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_get_state_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_get_state_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_request_t, pad0) - 6usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_state_reply_t {
+    pub response_type: u8,
+    pub deviceID: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub mods: u8,
+    pub baseMods: u8,
+    pub latchedMods: u8,
+    pub lockedMods: u8,
+    pub group: u8,
+    pub lockedGroup: u8,
+    pub baseGroup: i16,
+    pub latchedGroup: i16,
+    pub compatState: u8,
+    pub grabMods: u8,
+    pub compatGrabMods: u8,
+    pub lookupMods: u8,
+    pub compatLookupMods: u8,
+    pub pad0: u8,
+    pub ptrBtnState: u16,
+    pub pad1: [u8; 6usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_state_reply_t"]
+        [::std::mem::size_of::<xcb_xkb_get_state_reply_t>() - 32usize];
+    ["Alignment of xcb_xkb_get_state_reply_t"]
+        [::std::mem::align_of::<xcb_xkb_get_state_reply_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, deviceID) - 1usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, length) - 4usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::mods"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, mods) - 8usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::baseMods"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, baseMods) - 9usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::latchedMods"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, latchedMods) - 10usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::lockedMods"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, lockedMods) - 11usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::group"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, group) - 12usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::lockedGroup"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, lockedGroup) - 13usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::baseGroup"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, baseGroup) - 14usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::latchedGroup"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, latchedGroup) - 16usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::compatState"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, compatState) - 18usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::grabMods"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, grabMods) - 19usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::compatGrabMods"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, compatGrabMods) - 20usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::lookupMods"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, lookupMods) - 21usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::compatLookupMods"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, compatLookupMods) - 22usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, pad0) - 23usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::ptrBtnState"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, ptrBtnState) - 24usize];
+    ["Offset of field: xcb_xkb_get_state_reply_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_get_state_reply_t, pad1) - 26usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_latch_lock_state_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub affectModLocks: u8,
+    pub modLocks: u8,
+    pub lockGroup: u8,
+    pub groupLock: u8,
+    pub affectModLatches: u8,
+    pub pad0: u8,
+    pub pad1: u8,
+    pub latchGroup: u8,
+    pub groupLatch: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_latch_lock_state_request_t"]
+        [::std::mem::size_of::<xcb_xkb_latch_lock_state_request_t>() - 16usize];
+    ["Alignment of xcb_xkb_latch_lock_state_request_t"]
+        [::std::mem::align_of::<xcb_xkb_latch_lock_state_request_t>() - 2usize];
+    ["Offset of field: xcb_xkb_latch_lock_state_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_latch_lock_state_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_latch_lock_state_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_latch_lock_state_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_latch_lock_state_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_latch_lock_state_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_latch_lock_state_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_latch_lock_state_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_latch_lock_state_request_t::affectModLocks"]
+        [::std::mem::offset_of!(xcb_xkb_latch_lock_state_request_t, affectModLocks) - 6usize];
+    ["Offset of field: xcb_xkb_latch_lock_state_request_t::modLocks"]
+        [::std::mem::offset_of!(xcb_xkb_latch_lock_state_request_t, modLocks) - 7usize];
+    ["Offset of field: xcb_xkb_latch_lock_state_request_t::lockGroup"]
+        [::std::mem::offset_of!(xcb_xkb_latch_lock_state_request_t, lockGroup) - 8usize];
+    ["Offset of field: xcb_xkb_latch_lock_state_request_t::groupLock"]
+        [::std::mem::offset_of!(xcb_xkb_latch_lock_state_request_t, groupLock) - 9usize];
+    ["Offset of field: xcb_xkb_latch_lock_state_request_t::affectModLatches"]
+        [::std::mem::offset_of!(xcb_xkb_latch_lock_state_request_t, affectModLatches) - 10usize];
+    ["Offset of field: xcb_xkb_latch_lock_state_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_latch_lock_state_request_t, pad0) - 11usize];
+    ["Offset of field: xcb_xkb_latch_lock_state_request_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_latch_lock_state_request_t, pad1) - 12usize];
+    ["Offset of field: xcb_xkb_latch_lock_state_request_t::latchGroup"]
+        [::std::mem::offset_of!(xcb_xkb_latch_lock_state_request_t, latchGroup) - 13usize];
+    ["Offset of field: xcb_xkb_latch_lock_state_request_t::groupLatch"]
+        [::std::mem::offset_of!(xcb_xkb_latch_lock_state_request_t, groupLatch) - 14usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_controls_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_controls_cookie_t"]
+        [::std::mem::size_of::<xcb_xkb_get_controls_cookie_t>() - 4usize];
+    ["Alignment of xcb_xkb_get_controls_cookie_t"]
+        [::std::mem::align_of::<xcb_xkb_get_controls_cookie_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_controls_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_controls_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub pad0: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_controls_request_t"]
+        [::std::mem::size_of::<xcb_xkb_get_controls_request_t>() - 8usize];
+    ["Alignment of xcb_xkb_get_controls_request_t"]
+        [::std::mem::align_of::<xcb_xkb_get_controls_request_t>() - 2usize];
+    ["Offset of field: xcb_xkb_get_controls_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_get_controls_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_get_controls_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_get_controls_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_get_controls_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_request_t, pad0) - 6usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_controls_reply_t {
+    pub response_type: u8,
+    pub deviceID: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub mouseKeysDfltBtn: u8,
+    pub numGroups: u8,
+    pub groupsWrap: u8,
+    pub internalModsMask: u8,
+    pub ignoreLockModsMask: u8,
+    pub internalModsRealMods: u8,
+    pub ignoreLockModsRealMods: u8,
+    pub pad0: u8,
+    pub internalModsVmods: u16,
+    pub ignoreLockModsVmods: u16,
+    pub repeatDelay: u16,
+    pub repeatInterval: u16,
+    pub slowKeysDelay: u16,
+    pub debounceDelay: u16,
+    pub mouseKeysDelay: u16,
+    pub mouseKeysInterval: u16,
+    pub mouseKeysTimeToMax: u16,
+    pub mouseKeysMaxSpeed: u16,
+    pub mouseKeysCurve: i16,
+    pub accessXOption: u16,
+    pub accessXTimeout: u16,
+    pub accessXTimeoutOptionsMask: u16,
+    pub accessXTimeoutOptionsValues: u16,
+    pub pad1: [u8; 2usize],
+    pub accessXTimeoutMask: u32,
+    pub accessXTimeoutValues: u32,
+    pub enabledControls: u32,
+    pub perKeyRepeat: [u8; 32usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_controls_reply_t"]
+        [::std::mem::size_of::<xcb_xkb_get_controls_reply_t>() - 92usize];
+    ["Alignment of xcb_xkb_get_controls_reply_t"]
+        [::std::mem::align_of::<xcb_xkb_get_controls_reply_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, deviceID) - 1usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, length) - 4usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::mouseKeysDfltBtn"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, mouseKeysDfltBtn) - 8usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::numGroups"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, numGroups) - 9usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::groupsWrap"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, groupsWrap) - 10usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::internalModsMask"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, internalModsMask) - 11usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::ignoreLockModsMask"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, ignoreLockModsMask) - 12usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::internalModsRealMods"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, internalModsRealMods) - 13usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::ignoreLockModsRealMods"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, ignoreLockModsRealMods) - 14usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, pad0) - 15usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::internalModsVmods"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, internalModsVmods) - 16usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::ignoreLockModsVmods"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, ignoreLockModsVmods) - 18usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::repeatDelay"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, repeatDelay) - 20usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::repeatInterval"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, repeatInterval) - 22usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::slowKeysDelay"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, slowKeysDelay) - 24usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::debounceDelay"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, debounceDelay) - 26usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::mouseKeysDelay"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, mouseKeysDelay) - 28usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::mouseKeysInterval"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, mouseKeysInterval) - 30usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::mouseKeysTimeToMax"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, mouseKeysTimeToMax) - 32usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::mouseKeysMaxSpeed"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, mouseKeysMaxSpeed) - 34usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::mouseKeysCurve"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, mouseKeysCurve) - 36usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::accessXOption"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, accessXOption) - 38usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::accessXTimeout"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, accessXTimeout) - 40usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::accessXTimeoutOptionsMask"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, accessXTimeoutOptionsMask) - 42usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::accessXTimeoutOptionsValues"][::std::mem::offset_of!(
+        xcb_xkb_get_controls_reply_t,
+        accessXTimeoutOptionsValues
+    ) - 44usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, pad1) - 46usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::accessXTimeoutMask"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, accessXTimeoutMask) - 48usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::accessXTimeoutValues"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, accessXTimeoutValues) - 52usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::enabledControls"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, enabledControls) - 56usize];
+    ["Offset of field: xcb_xkb_get_controls_reply_t::perKeyRepeat"]
+        [::std::mem::offset_of!(xcb_xkb_get_controls_reply_t, perKeyRepeat) - 60usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_controls_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub affectInternalRealMods: u8,
+    pub internalRealMods: u8,
+    pub affectIgnoreLockRealMods: u8,
+    pub ignoreLockRealMods: u8,
+    pub affectInternalVirtualMods: u16,
+    pub internalVirtualMods: u16,
+    pub affectIgnoreLockVirtualMods: u16,
+    pub ignoreLockVirtualMods: u16,
+    pub mouseKeysDfltBtn: u8,
+    pub groupsWrap: u8,
+    pub accessXOptions: u16,
+    pub pad0: [u8; 2usize],
+    pub affectEnabledControls: u32,
+    pub enabledControls: u32,
+    pub changeControls: u32,
+    pub repeatDelay: u16,
+    pub repeatInterval: u16,
+    pub slowKeysDelay: u16,
+    pub debounceDelay: u16,
+    pub mouseKeysDelay: u16,
+    pub mouseKeysInterval: u16,
+    pub mouseKeysTimeToMax: u16,
+    pub mouseKeysMaxSpeed: u16,
+    pub mouseKeysCurve: i16,
+    pub accessXTimeout: u16,
+    pub accessXTimeoutMask: u32,
+    pub accessXTimeoutValues: u32,
+    pub accessXTimeoutOptionsMask: u16,
+    pub accessXTimeoutOptionsValues: u16,
+    pub perKeyRepeat: [u8; 32usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_controls_request_t"]
+        [::std::mem::size_of::<xcb_xkb_set_controls_request_t>() - 100usize];
+    ["Alignment of xcb_xkb_set_controls_request_t"]
+        [::std::mem::align_of::<xcb_xkb_set_controls_request_t>() - 4usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::affectInternalRealMods"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, affectInternalRealMods) - 6usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::internalRealMods"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, internalRealMods) - 7usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::affectIgnoreLockRealMods"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, affectIgnoreLockRealMods) - 8usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::ignoreLockRealMods"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, ignoreLockRealMods) - 9usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::affectInternalVirtualMods"][::std::mem::offset_of!(
+        xcb_xkb_set_controls_request_t,
+        affectInternalVirtualMods
+    ) - 10usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::internalVirtualMods"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, internalVirtualMods) - 12usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::affectIgnoreLockVirtualMods"][::std::mem::offset_of!(
+        xcb_xkb_set_controls_request_t,
+        affectIgnoreLockVirtualMods
+    ) - 14usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::ignoreLockVirtualMods"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, ignoreLockVirtualMods) - 16usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::mouseKeysDfltBtn"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, mouseKeysDfltBtn) - 18usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::groupsWrap"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, groupsWrap) - 19usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::accessXOptions"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, accessXOptions) - 20usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, pad0) - 22usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::affectEnabledControls"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, affectEnabledControls) - 24usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::enabledControls"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, enabledControls) - 28usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::changeControls"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, changeControls) - 32usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::repeatDelay"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, repeatDelay) - 36usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::repeatInterval"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, repeatInterval) - 38usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::slowKeysDelay"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, slowKeysDelay) - 40usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::debounceDelay"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, debounceDelay) - 42usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::mouseKeysDelay"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, mouseKeysDelay) - 44usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::mouseKeysInterval"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, mouseKeysInterval) - 46usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::mouseKeysTimeToMax"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, mouseKeysTimeToMax) - 48usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::mouseKeysMaxSpeed"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, mouseKeysMaxSpeed) - 50usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::mouseKeysCurve"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, mouseKeysCurve) - 52usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::accessXTimeout"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, accessXTimeout) - 54usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::accessXTimeoutMask"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, accessXTimeoutMask) - 56usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::accessXTimeoutValues"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, accessXTimeoutValues) - 60usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::accessXTimeoutOptionsMask"][::std::mem::offset_of!(
+        xcb_xkb_set_controls_request_t,
+        accessXTimeoutOptionsMask
+    ) - 64usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::accessXTimeoutOptionsValues"][::std::mem::offset_of!(
+        xcb_xkb_set_controls_request_t,
+        accessXTimeoutOptionsValues
+    ) - 66usize];
+    ["Offset of field: xcb_xkb_set_controls_request_t::perKeyRepeat"]
+        [::std::mem::offset_of!(xcb_xkb_set_controls_request_t, perKeyRepeat) - 68usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_map_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_map_cookie_t"]
+        [::std::mem::size_of::<xcb_xkb_get_map_cookie_t>() - 4usize];
+    ["Alignment of xcb_xkb_get_map_cookie_t"]
+        [::std::mem::align_of::<xcb_xkb_get_map_cookie_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_map_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_map_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub full: u16,
+    pub partial: u16,
+    pub firstType: u8,
+    pub nTypes: u8,
+    pub firstKeySym: xcb_keycode_t,
+    pub nKeySyms: u8,
+    pub firstKeyAction: xcb_keycode_t,
+    pub nKeyActions: u8,
+    pub firstKeyBehavior: xcb_keycode_t,
+    pub nKeyBehaviors: u8,
+    pub virtualMods: u16,
+    pub firstKeyExplicit: xcb_keycode_t,
+    pub nKeyExplicit: u8,
+    pub firstModMapKey: xcb_keycode_t,
+    pub nModMapKeys: u8,
+    pub firstVModMapKey: xcb_keycode_t,
+    pub nVModMapKeys: u8,
+    pub pad0: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_map_request_t"]
+        [::std::mem::size_of::<xcb_xkb_get_map_request_t>() - 28usize];
+    ["Alignment of xcb_xkb_get_map_request_t"]
+        [::std::mem::align_of::<xcb_xkb_get_map_request_t>() - 2usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::full"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, full) - 6usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::partial"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, partial) - 8usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::firstType"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, firstType) - 10usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::nTypes"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, nTypes) - 11usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::firstKeySym"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, firstKeySym) - 12usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::nKeySyms"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, nKeySyms) - 13usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::firstKeyAction"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, firstKeyAction) - 14usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::nKeyActions"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, nKeyActions) - 15usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::firstKeyBehavior"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, firstKeyBehavior) - 16usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::nKeyBehaviors"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, nKeyBehaviors) - 17usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::virtualMods"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, virtualMods) - 18usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::firstKeyExplicit"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, firstKeyExplicit) - 20usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::nKeyExplicit"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, nKeyExplicit) - 21usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::firstModMapKey"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, firstModMapKey) - 22usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::nModMapKeys"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, nModMapKeys) - 23usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::firstVModMapKey"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, firstVModMapKey) - 24usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::nVModMapKeys"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, nVModMapKeys) - 25usize];
+    ["Offset of field: xcb_xkb_get_map_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_request_t, pad0) - 26usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_map_map_t {
+    pub types_rtrn: *mut xcb_xkb_key_type_t,
+    pub syms_rtrn: *mut xcb_xkb_key_sym_map_t,
+    pub acts_rtrn_count: *mut u8,
+    pub pad2: *mut u8,
+    pub acts_rtrn_acts: *mut xcb_xkb_action_t,
+    pub behaviors_rtrn: *mut xcb_xkb_set_behavior_t,
+    pub vmods_rtrn: *mut u8,
+    pub pad3: *mut u8,
+    pub explicit_rtrn: *mut xcb_xkb_set_explicit_t,
+    pub pad4: *mut u8,
+    pub modmap_rtrn: *mut xcb_xkb_key_mod_map_t,
+    pub pad5: *mut u8,
+    pub vmodmap_rtrn: *mut xcb_xkb_key_v_mod_map_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_map_map_t"][::std::mem::size_of::<xcb_xkb_get_map_map_t>() - 104usize];
+    ["Alignment of xcb_xkb_get_map_map_t"]
+        [::std::mem::align_of::<xcb_xkb_get_map_map_t>() - 8usize];
+    ["Offset of field: xcb_xkb_get_map_map_t::types_rtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_map_t, types_rtrn) - 0usize];
+    ["Offset of field: xcb_xkb_get_map_map_t::syms_rtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_map_t, syms_rtrn) - 8usize];
+    ["Offset of field: xcb_xkb_get_map_map_t::acts_rtrn_count"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_map_t, acts_rtrn_count) - 16usize];
+    ["Offset of field: xcb_xkb_get_map_map_t::pad2"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_map_t, pad2) - 24usize];
+    ["Offset of field: xcb_xkb_get_map_map_t::acts_rtrn_acts"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_map_t, acts_rtrn_acts) - 32usize];
+    ["Offset of field: xcb_xkb_get_map_map_t::behaviors_rtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_map_t, behaviors_rtrn) - 40usize];
+    ["Offset of field: xcb_xkb_get_map_map_t::vmods_rtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_map_t, vmods_rtrn) - 48usize];
+    ["Offset of field: xcb_xkb_get_map_map_t::pad3"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_map_t, pad3) - 56usize];
+    ["Offset of field: xcb_xkb_get_map_map_t::explicit_rtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_map_t, explicit_rtrn) - 64usize];
+    ["Offset of field: xcb_xkb_get_map_map_t::pad4"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_map_t, pad4) - 72usize];
+    ["Offset of field: xcb_xkb_get_map_map_t::modmap_rtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_map_t, modmap_rtrn) - 80usize];
+    ["Offset of field: xcb_xkb_get_map_map_t::pad5"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_map_t, pad5) - 88usize];
+    ["Offset of field: xcb_xkb_get_map_map_t::vmodmap_rtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_map_t, vmodmap_rtrn) - 96usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_map_reply_t {
+    pub response_type: u8,
+    pub deviceID: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub pad0: [u8; 2usize],
+    pub minKeyCode: xcb_keycode_t,
+    pub maxKeyCode: xcb_keycode_t,
+    pub present: u16,
+    pub firstType: u8,
+    pub nTypes: u8,
+    pub totalTypes: u8,
+    pub firstKeySym: xcb_keycode_t,
+    pub totalSyms: u16,
+    pub nKeySyms: u8,
+    pub firstKeyAction: xcb_keycode_t,
+    pub totalActions: u16,
+    pub nKeyActions: u8,
+    pub firstKeyBehavior: xcb_keycode_t,
+    pub nKeyBehaviors: u8,
+    pub totalKeyBehaviors: u8,
+    pub firstKeyExplicit: xcb_keycode_t,
+    pub nKeyExplicit: u8,
+    pub totalKeyExplicit: u8,
+    pub firstModMapKey: xcb_keycode_t,
+    pub nModMapKeys: u8,
+    pub totalModMapKeys: u8,
+    pub firstVModMapKey: xcb_keycode_t,
+    pub nVModMapKeys: u8,
+    pub totalVModMapKeys: u8,
+    pub pad1: u8,
+    pub virtualMods: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_map_reply_t"][::std::mem::size_of::<xcb_xkb_get_map_reply_t>() - 40usize];
+    ["Alignment of xcb_xkb_get_map_reply_t"]
+        [::std::mem::align_of::<xcb_xkb_get_map_reply_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, deviceID) - 1usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, length) - 4usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, pad0) - 8usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::minKeyCode"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, minKeyCode) - 10usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::maxKeyCode"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, maxKeyCode) - 11usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::present"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, present) - 12usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::firstType"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, firstType) - 14usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::nTypes"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, nTypes) - 15usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::totalTypes"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, totalTypes) - 16usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::firstKeySym"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, firstKeySym) - 17usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::totalSyms"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, totalSyms) - 18usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::nKeySyms"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, nKeySyms) - 20usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::firstKeyAction"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, firstKeyAction) - 21usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::totalActions"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, totalActions) - 22usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::nKeyActions"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, nKeyActions) - 24usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::firstKeyBehavior"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, firstKeyBehavior) - 25usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::nKeyBehaviors"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, nKeyBehaviors) - 26usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::totalKeyBehaviors"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, totalKeyBehaviors) - 27usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::firstKeyExplicit"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, firstKeyExplicit) - 28usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::nKeyExplicit"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, nKeyExplicit) - 29usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::totalKeyExplicit"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, totalKeyExplicit) - 30usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::firstModMapKey"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, firstModMapKey) - 31usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::nModMapKeys"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, nModMapKeys) - 32usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::totalModMapKeys"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, totalModMapKeys) - 33usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::firstVModMapKey"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, firstVModMapKey) - 34usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::nVModMapKeys"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, nVModMapKeys) - 35usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::totalVModMapKeys"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, totalVModMapKeys) - 36usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, pad1) - 37usize];
+    ["Offset of field: xcb_xkb_get_map_reply_t::virtualMods"]
+        [::std::mem::offset_of!(xcb_xkb_get_map_reply_t, virtualMods) - 38usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_map_values_t {
+    pub types: *mut xcb_xkb_set_key_type_t,
+    pub syms: *mut xcb_xkb_key_sym_map_t,
+    pub actionsCount: *mut u8,
+    pub actions: *mut xcb_xkb_action_t,
+    pub behaviors: *mut xcb_xkb_set_behavior_t,
+    pub vmods: *mut u8,
+    pub explicit: *mut xcb_xkb_set_explicit_t,
+    pub modmap: *mut xcb_xkb_key_mod_map_t,
+    pub vmodmap: *mut xcb_xkb_key_v_mod_map_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_map_values_t"]
+        [::std::mem::size_of::<xcb_xkb_set_map_values_t>() - 72usize];
+    ["Alignment of xcb_xkb_set_map_values_t"]
+        [::std::mem::align_of::<xcb_xkb_set_map_values_t>() - 8usize];
+    ["Offset of field: xcb_xkb_set_map_values_t::types"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_values_t, types) - 0usize];
+    ["Offset of field: xcb_xkb_set_map_values_t::syms"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_values_t, syms) - 8usize];
+    ["Offset of field: xcb_xkb_set_map_values_t::actionsCount"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_values_t, actionsCount) - 16usize];
+    ["Offset of field: xcb_xkb_set_map_values_t::actions"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_values_t, actions) - 24usize];
+    ["Offset of field: xcb_xkb_set_map_values_t::behaviors"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_values_t, behaviors) - 32usize];
+    ["Offset of field: xcb_xkb_set_map_values_t::vmods"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_values_t, vmods) - 40usize];
+    ["Offset of field: xcb_xkb_set_map_values_t::explicit"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_values_t, explicit) - 48usize];
+    ["Offset of field: xcb_xkb_set_map_values_t::modmap"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_values_t, modmap) - 56usize];
+    ["Offset of field: xcb_xkb_set_map_values_t::vmodmap"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_values_t, vmodmap) - 64usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_map_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub present: u16,
+    pub flags: u16,
+    pub minKeyCode: xcb_keycode_t,
+    pub maxKeyCode: xcb_keycode_t,
+    pub firstType: u8,
+    pub nTypes: u8,
+    pub firstKeySym: xcb_keycode_t,
+    pub nKeySyms: u8,
+    pub totalSyms: u16,
+    pub firstKeyAction: xcb_keycode_t,
+    pub nKeyActions: u8,
+    pub totalActions: u16,
+    pub firstKeyBehavior: xcb_keycode_t,
+    pub nKeyBehaviors: u8,
+    pub totalKeyBehaviors: u8,
+    pub firstKeyExplicit: xcb_keycode_t,
+    pub nKeyExplicit: u8,
+    pub totalKeyExplicit: u8,
+    pub firstModMapKey: xcb_keycode_t,
+    pub nModMapKeys: u8,
+    pub totalModMapKeys: u8,
+    pub firstVModMapKey: xcb_keycode_t,
+    pub nVModMapKeys: u8,
+    pub totalVModMapKeys: u8,
+    pub virtualMods: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_map_request_t"]
+        [::std::mem::size_of::<xcb_xkb_set_map_request_t>() - 36usize];
+    ["Alignment of xcb_xkb_set_map_request_t"]
+        [::std::mem::align_of::<xcb_xkb_set_map_request_t>() - 2usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::present"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, present) - 6usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, flags) - 8usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::minKeyCode"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, minKeyCode) - 10usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::maxKeyCode"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, maxKeyCode) - 11usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::firstType"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, firstType) - 12usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::nTypes"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, nTypes) - 13usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::firstKeySym"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, firstKeySym) - 14usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::nKeySyms"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, nKeySyms) - 15usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::totalSyms"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, totalSyms) - 16usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::firstKeyAction"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, firstKeyAction) - 18usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::nKeyActions"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, nKeyActions) - 19usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::totalActions"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, totalActions) - 20usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::firstKeyBehavior"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, firstKeyBehavior) - 22usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::nKeyBehaviors"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, nKeyBehaviors) - 23usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::totalKeyBehaviors"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, totalKeyBehaviors) - 24usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::firstKeyExplicit"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, firstKeyExplicit) - 25usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::nKeyExplicit"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, nKeyExplicit) - 26usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::totalKeyExplicit"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, totalKeyExplicit) - 27usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::firstModMapKey"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, firstModMapKey) - 28usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::nModMapKeys"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, nModMapKeys) - 29usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::totalModMapKeys"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, totalModMapKeys) - 30usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::firstVModMapKey"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, firstVModMapKey) - 31usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::nVModMapKeys"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, nVModMapKeys) - 32usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::totalVModMapKeys"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, totalVModMapKeys) - 33usize];
+    ["Offset of field: xcb_xkb_set_map_request_t::virtualMods"]
+        [::std::mem::offset_of!(xcb_xkb_set_map_request_t, virtualMods) - 34usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_compat_map_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_compat_map_cookie_t"]
+        [::std::mem::size_of::<xcb_xkb_get_compat_map_cookie_t>() - 4usize];
+    ["Alignment of xcb_xkb_get_compat_map_cookie_t"]
+        [::std::mem::align_of::<xcb_xkb_get_compat_map_cookie_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_compat_map_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_compat_map_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub groups: u8,
+    pub getAllSI: u8,
+    pub firstSI: u16,
+    pub nSI: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_compat_map_request_t"]
+        [::std::mem::size_of::<xcb_xkb_get_compat_map_request_t>() - 12usize];
+    ["Alignment of xcb_xkb_get_compat_map_request_t"]
+        [::std::mem::align_of::<xcb_xkb_get_compat_map_request_t>() - 2usize];
+    ["Offset of field: xcb_xkb_get_compat_map_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_get_compat_map_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_get_compat_map_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_get_compat_map_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_get_compat_map_request_t::groups"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_request_t, groups) - 6usize];
+    ["Offset of field: xcb_xkb_get_compat_map_request_t::getAllSI"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_request_t, getAllSI) - 7usize];
+    ["Offset of field: xcb_xkb_get_compat_map_request_t::firstSI"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_request_t, firstSI) - 8usize];
+    ["Offset of field: xcb_xkb_get_compat_map_request_t::nSI"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_request_t, nSI) - 10usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_compat_map_reply_t {
+    pub response_type: u8,
+    pub deviceID: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub groupsRtrn: u8,
+    pub pad0: u8,
+    pub firstSIRtrn: u16,
+    pub nSIRtrn: u16,
+    pub nTotalSI: u16,
+    pub pad1: [u8; 16usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_compat_map_reply_t"]
+        [::std::mem::size_of::<xcb_xkb_get_compat_map_reply_t>() - 32usize];
+    ["Alignment of xcb_xkb_get_compat_map_reply_t"]
+        [::std::mem::align_of::<xcb_xkb_get_compat_map_reply_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_compat_map_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_get_compat_map_reply_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_reply_t, deviceID) - 1usize];
+    ["Offset of field: xcb_xkb_get_compat_map_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_get_compat_map_reply_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_reply_t, length) - 4usize];
+    ["Offset of field: xcb_xkb_get_compat_map_reply_t::groupsRtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_reply_t, groupsRtrn) - 8usize];
+    ["Offset of field: xcb_xkb_get_compat_map_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_reply_t, pad0) - 9usize];
+    ["Offset of field: xcb_xkb_get_compat_map_reply_t::firstSIRtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_reply_t, firstSIRtrn) - 10usize];
+    ["Offset of field: xcb_xkb_get_compat_map_reply_t::nSIRtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_reply_t, nSIRtrn) - 12usize];
+    ["Offset of field: xcb_xkb_get_compat_map_reply_t::nTotalSI"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_reply_t, nTotalSI) - 14usize];
+    ["Offset of field: xcb_xkb_get_compat_map_reply_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_get_compat_map_reply_t, pad1) - 16usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_compat_map_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub pad0: u8,
+    pub recomputeActions: u8,
+    pub truncateSI: u8,
+    pub groups: u8,
+    pub firstSI: u16,
+    pub nSI: u16,
+    pub pad1: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_compat_map_request_t"]
+        [::std::mem::size_of::<xcb_xkb_set_compat_map_request_t>() - 16usize];
+    ["Alignment of xcb_xkb_set_compat_map_request_t"]
+        [::std::mem::align_of::<xcb_xkb_set_compat_map_request_t>() - 2usize];
+    ["Offset of field: xcb_xkb_set_compat_map_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_compat_map_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_set_compat_map_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_compat_map_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_set_compat_map_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_set_compat_map_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_set_compat_map_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_set_compat_map_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_set_compat_map_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_set_compat_map_request_t, pad0) - 6usize];
+    ["Offset of field: xcb_xkb_set_compat_map_request_t::recomputeActions"]
+        [::std::mem::offset_of!(xcb_xkb_set_compat_map_request_t, recomputeActions) - 7usize];
+    ["Offset of field: xcb_xkb_set_compat_map_request_t::truncateSI"]
+        [::std::mem::offset_of!(xcb_xkb_set_compat_map_request_t, truncateSI) - 8usize];
+    ["Offset of field: xcb_xkb_set_compat_map_request_t::groups"]
+        [::std::mem::offset_of!(xcb_xkb_set_compat_map_request_t, groups) - 9usize];
+    ["Offset of field: xcb_xkb_set_compat_map_request_t::firstSI"]
+        [::std::mem::offset_of!(xcb_xkb_set_compat_map_request_t, firstSI) - 10usize];
+    ["Offset of field: xcb_xkb_set_compat_map_request_t::nSI"]
+        [::std::mem::offset_of!(xcb_xkb_set_compat_map_request_t, nSI) - 12usize];
+    ["Offset of field: xcb_xkb_set_compat_map_request_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_set_compat_map_request_t, pad1) - 14usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_indicator_state_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_indicator_state_cookie_t"]
+        [::std::mem::size_of::<xcb_xkb_get_indicator_state_cookie_t>() - 4usize];
+    ["Alignment of xcb_xkb_get_indicator_state_cookie_t"]
+        [::std::mem::align_of::<xcb_xkb_get_indicator_state_cookie_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_indicator_state_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_state_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_indicator_state_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub pad0: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_indicator_state_request_t"]
+        [::std::mem::size_of::<xcb_xkb_get_indicator_state_request_t>() - 8usize];
+    ["Alignment of xcb_xkb_get_indicator_state_request_t"]
+        [::std::mem::align_of::<xcb_xkb_get_indicator_state_request_t>() - 2usize];
+    ["Offset of field: xcb_xkb_get_indicator_state_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_state_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_get_indicator_state_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_state_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_get_indicator_state_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_state_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_get_indicator_state_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_state_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_get_indicator_state_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_state_request_t, pad0) - 6usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_indicator_state_reply_t {
+    pub response_type: u8,
+    pub deviceID: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub state: u32,
+    pub pad0: [u8; 20usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_indicator_state_reply_t"]
+        [::std::mem::size_of::<xcb_xkb_get_indicator_state_reply_t>() - 32usize];
+    ["Alignment of xcb_xkb_get_indicator_state_reply_t"]
+        [::std::mem::align_of::<xcb_xkb_get_indicator_state_reply_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_indicator_state_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_state_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_get_indicator_state_reply_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_state_reply_t, deviceID) - 1usize];
+    ["Offset of field: xcb_xkb_get_indicator_state_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_state_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_get_indicator_state_reply_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_state_reply_t, length) - 4usize];
+    ["Offset of field: xcb_xkb_get_indicator_state_reply_t::state"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_state_reply_t, state) - 8usize];
+    ["Offset of field: xcb_xkb_get_indicator_state_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_state_reply_t, pad0) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_indicator_map_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_indicator_map_cookie_t"]
+        [::std::mem::size_of::<xcb_xkb_get_indicator_map_cookie_t>() - 4usize];
+    ["Alignment of xcb_xkb_get_indicator_map_cookie_t"]
+        [::std::mem::align_of::<xcb_xkb_get_indicator_map_cookie_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_indicator_map_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub pad0: [u8; 2usize],
+    pub which: u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_indicator_map_request_t"]
+        [::std::mem::size_of::<xcb_xkb_get_indicator_map_request_t>() - 12usize];
+    ["Alignment of xcb_xkb_get_indicator_map_request_t"]
+        [::std::mem::align_of::<xcb_xkb_get_indicator_map_request_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_request_t, pad0) - 6usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_request_t::which"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_request_t, which) - 8usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_indicator_map_reply_t {
+    pub response_type: u8,
+    pub deviceID: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub which: u32,
+    pub realIndicators: u32,
+    pub nIndicators: u8,
+    pub pad0: [u8; 15usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_indicator_map_reply_t"]
+        [::std::mem::size_of::<xcb_xkb_get_indicator_map_reply_t>() - 32usize];
+    ["Alignment of xcb_xkb_get_indicator_map_reply_t"]
+        [::std::mem::align_of::<xcb_xkb_get_indicator_map_reply_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_reply_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_reply_t, deviceID) - 1usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_reply_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_reply_t, length) - 4usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_reply_t::which"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_reply_t, which) - 8usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_reply_t::realIndicators"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_reply_t, realIndicators) - 12usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_reply_t::nIndicators"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_reply_t, nIndicators) - 16usize];
+    ["Offset of field: xcb_xkb_get_indicator_map_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_indicator_map_reply_t, pad0) - 17usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_indicator_map_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub pad0: [u8; 2usize],
+    pub which: u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_indicator_map_request_t"]
+        [::std::mem::size_of::<xcb_xkb_set_indicator_map_request_t>() - 12usize];
+    ["Alignment of xcb_xkb_set_indicator_map_request_t"]
+        [::std::mem::align_of::<xcb_xkb_set_indicator_map_request_t>() - 4usize];
+    ["Offset of field: xcb_xkb_set_indicator_map_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_indicator_map_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_set_indicator_map_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_indicator_map_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_set_indicator_map_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_set_indicator_map_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_set_indicator_map_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_set_indicator_map_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_set_indicator_map_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_set_indicator_map_request_t, pad0) - 6usize];
+    ["Offset of field: xcb_xkb_set_indicator_map_request_t::which"]
+        [::std::mem::offset_of!(xcb_xkb_set_indicator_map_request_t, which) - 8usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_named_indicator_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_named_indicator_cookie_t"]
+        [::std::mem::size_of::<xcb_xkb_get_named_indicator_cookie_t>() - 4usize];
+    ["Alignment of xcb_xkb_get_named_indicator_cookie_t"]
+        [::std::mem::align_of::<xcb_xkb_get_named_indicator_cookie_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_named_indicator_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub ledClass: xcb_xkb_led_class_spec_t,
+    pub ledID: xcb_xkb_id_spec_t,
+    pub pad0: [u8; 2usize],
+    pub indicator: xcb_atom_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_named_indicator_request_t"]
+        [::std::mem::size_of::<xcb_xkb_get_named_indicator_request_t>() - 16usize];
+    ["Alignment of xcb_xkb_get_named_indicator_request_t"]
+        [::std::mem::align_of::<xcb_xkb_get_named_indicator_request_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_request_t::ledClass"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_request_t, ledClass) - 6usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_request_t::ledID"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_request_t, ledID) - 8usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_request_t, pad0) - 10usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_request_t::indicator"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_request_t, indicator) - 12usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_named_indicator_reply_t {
+    pub response_type: u8,
+    pub deviceID: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub indicator: xcb_atom_t,
+    pub found: u8,
+    pub on: u8,
+    pub realIndicator: u8,
+    pub ndx: u8,
+    pub map_flags: u8,
+    pub map_whichGroups: u8,
+    pub map_groups: u8,
+    pub map_whichMods: u8,
+    pub map_mods: u8,
+    pub map_realMods: u8,
+    pub map_vmod: u16,
+    pub map_ctrls: u32,
+    pub supported: u8,
+    pub pad0: [u8; 3usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_named_indicator_reply_t"]
+        [::std::mem::size_of::<xcb_xkb_get_named_indicator_reply_t>() - 32usize];
+    ["Alignment of xcb_xkb_get_named_indicator_reply_t"]
+        [::std::mem::align_of::<xcb_xkb_get_named_indicator_reply_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, deviceID) - 1usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, length) - 4usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::indicator"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, indicator) - 8usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::found"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, found) - 12usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::on"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, on) - 13usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::realIndicator"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, realIndicator) - 14usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::ndx"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, ndx) - 15usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::map_flags"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, map_flags) - 16usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::map_whichGroups"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, map_whichGroups) - 17usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::map_groups"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, map_groups) - 18usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::map_whichMods"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, map_whichMods) - 19usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::map_mods"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, map_mods) - 20usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::map_realMods"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, map_realMods) - 21usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::map_vmod"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, map_vmod) - 22usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::map_ctrls"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, map_ctrls) - 24usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::supported"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, supported) - 28usize];
+    ["Offset of field: xcb_xkb_get_named_indicator_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_named_indicator_reply_t, pad0) - 29usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_named_indicator_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub ledClass: xcb_xkb_led_class_spec_t,
+    pub ledID: xcb_xkb_id_spec_t,
+    pub pad0: [u8; 2usize],
+    pub indicator: xcb_atom_t,
+    pub setState: u8,
+    pub on: u8,
+    pub setMap: u8,
+    pub createMap: u8,
+    pub pad1: u8,
+    pub map_flags: u8,
+    pub map_whichGroups: u8,
+    pub map_groups: u8,
+    pub map_whichMods: u8,
+    pub map_realMods: u8,
+    pub map_vmods: u16,
+    pub map_ctrls: u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_named_indicator_request_t"]
+        [::std::mem::size_of::<xcb_xkb_set_named_indicator_request_t>() - 32usize];
+    ["Alignment of xcb_xkb_set_named_indicator_request_t"]
+        [::std::mem::align_of::<xcb_xkb_set_named_indicator_request_t>() - 4usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::ledClass"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, ledClass) - 6usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::ledID"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, ledID) - 8usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, pad0) - 10usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::indicator"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, indicator) - 12usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::setState"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, setState) - 16usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::on"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, on) - 17usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::setMap"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, setMap) - 18usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::createMap"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, createMap) - 19usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, pad1) - 20usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::map_flags"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, map_flags) - 21usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::map_whichGroups"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, map_whichGroups) - 22usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::map_groups"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, map_groups) - 23usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::map_whichMods"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, map_whichMods) - 24usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::map_realMods"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, map_realMods) - 25usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::map_vmods"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, map_vmods) - 26usize];
+    ["Offset of field: xcb_xkb_set_named_indicator_request_t::map_ctrls"]
+        [::std::mem::offset_of!(xcb_xkb_set_named_indicator_request_t, map_ctrls) - 28usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_names_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_names_cookie_t"]
+        [::std::mem::size_of::<xcb_xkb_get_names_cookie_t>() - 4usize];
+    ["Alignment of xcb_xkb_get_names_cookie_t"]
+        [::std::mem::align_of::<xcb_xkb_get_names_cookie_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_names_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_names_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub pad0: [u8; 2usize],
+    pub which: u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_names_request_t"]
+        [::std::mem::size_of::<xcb_xkb_get_names_request_t>() - 12usize];
+    ["Alignment of xcb_xkb_get_names_request_t"]
+        [::std::mem::align_of::<xcb_xkb_get_names_request_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_names_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_get_names_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_get_names_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_get_names_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_get_names_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_request_t, pad0) - 6usize];
+    ["Offset of field: xcb_xkb_get_names_request_t::which"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_request_t, which) - 8usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_names_value_list_t {
+    pub keycodesName: xcb_atom_t,
+    pub geometryName: xcb_atom_t,
+    pub symbolsName: xcb_atom_t,
+    pub physSymbolsName: xcb_atom_t,
+    pub typesName: xcb_atom_t,
+    pub compatName: xcb_atom_t,
+    pub typeNames: *mut xcb_atom_t,
+    pub nLevelsPerType: *mut u8,
+    pub pad1: *mut u8,
+    pub ktLevelNames: *mut xcb_atom_t,
+    pub indicatorNames: *mut xcb_atom_t,
+    pub virtualModNames: *mut xcb_atom_t,
+    pub groups: *mut xcb_atom_t,
+    pub keyNames: *mut xcb_xkb_key_name_t,
+    pub keyAliases: *mut xcb_xkb_key_alias_t,
+    pub radioGroupNames: *mut xcb_atom_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_names_value_list_t"]
+        [::std::mem::size_of::<xcb_xkb_get_names_value_list_t>() - 104usize];
+    ["Alignment of xcb_xkb_get_names_value_list_t"]
+        [::std::mem::align_of::<xcb_xkb_get_names_value_list_t>() - 8usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::keycodesName"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, keycodesName) - 0usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::geometryName"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, geometryName) - 4usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::symbolsName"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, symbolsName) - 8usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::physSymbolsName"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, physSymbolsName) - 12usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::typesName"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, typesName) - 16usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::compatName"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, compatName) - 20usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::typeNames"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, typeNames) - 24usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::nLevelsPerType"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, nLevelsPerType) - 32usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, pad1) - 40usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::ktLevelNames"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, ktLevelNames) - 48usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::indicatorNames"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, indicatorNames) - 56usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::virtualModNames"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, virtualModNames) - 64usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::groups"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, groups) - 72usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::keyNames"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, keyNames) - 80usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::keyAliases"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, keyAliases) - 88usize];
+    ["Offset of field: xcb_xkb_get_names_value_list_t::radioGroupNames"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_value_list_t, radioGroupNames) - 96usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_names_reply_t {
+    pub response_type: u8,
+    pub deviceID: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub which: u32,
+    pub minKeyCode: xcb_keycode_t,
+    pub maxKeyCode: xcb_keycode_t,
+    pub nTypes: u8,
+    pub groupNames: u8,
+    pub virtualMods: u16,
+    pub firstKey: xcb_keycode_t,
+    pub nKeys: u8,
+    pub indicators: u32,
+    pub nRadioGroups: u8,
+    pub nKeyAliases: u8,
+    pub nKTLevels: u16,
+    pub pad0: [u8; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_names_reply_t"]
+        [::std::mem::size_of::<xcb_xkb_get_names_reply_t>() - 32usize];
+    ["Alignment of xcb_xkb_get_names_reply_t"]
+        [::std::mem::align_of::<xcb_xkb_get_names_reply_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, deviceID) - 1usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, length) - 4usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::which"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, which) - 8usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::minKeyCode"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, minKeyCode) - 12usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::maxKeyCode"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, maxKeyCode) - 13usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::nTypes"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, nTypes) - 14usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::groupNames"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, groupNames) - 15usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::virtualMods"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, virtualMods) - 16usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::firstKey"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, firstKey) - 18usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::nKeys"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, nKeys) - 19usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::indicators"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, indicators) - 20usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::nRadioGroups"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, nRadioGroups) - 24usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::nKeyAliases"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, nKeyAliases) - 25usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::nKTLevels"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, nKTLevels) - 26usize];
+    ["Offset of field: xcb_xkb_get_names_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_names_reply_t, pad0) - 28usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_names_values_t {
+    pub keycodesName: xcb_atom_t,
+    pub geometryName: xcb_atom_t,
+    pub symbolsName: xcb_atom_t,
+    pub physSymbolsName: xcb_atom_t,
+    pub typesName: xcb_atom_t,
+    pub compatName: xcb_atom_t,
+    pub typeNames: *mut xcb_atom_t,
+    pub nLevelsPerType: *mut u8,
+    pub ktLevelNames: *mut xcb_atom_t,
+    pub indicatorNames: *mut xcb_atom_t,
+    pub virtualModNames: *mut xcb_atom_t,
+    pub groups: *mut xcb_atom_t,
+    pub keyNames: *mut xcb_xkb_key_name_t,
+    pub keyAliases: *mut xcb_xkb_key_alias_t,
+    pub radioGroupNames: *mut xcb_atom_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_names_values_t"]
+        [::std::mem::size_of::<xcb_xkb_set_names_values_t>() - 96usize];
+    ["Alignment of xcb_xkb_set_names_values_t"]
+        [::std::mem::align_of::<xcb_xkb_set_names_values_t>() - 8usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::keycodesName"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, keycodesName) - 0usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::geometryName"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, geometryName) - 4usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::symbolsName"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, symbolsName) - 8usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::physSymbolsName"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, physSymbolsName) - 12usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::typesName"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, typesName) - 16usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::compatName"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, compatName) - 20usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::typeNames"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, typeNames) - 24usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::nLevelsPerType"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, nLevelsPerType) - 32usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::ktLevelNames"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, ktLevelNames) - 40usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::indicatorNames"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, indicatorNames) - 48usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::virtualModNames"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, virtualModNames) - 56usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::groups"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, groups) - 64usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::keyNames"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, keyNames) - 72usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::keyAliases"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, keyAliases) - 80usize];
+    ["Offset of field: xcb_xkb_set_names_values_t::radioGroupNames"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_values_t, radioGroupNames) - 88usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_names_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub virtualMods: u16,
+    pub which: u32,
+    pub firstType: u8,
+    pub nTypes: u8,
+    pub firstKTLevelt: u8,
+    pub nKTLevels: u8,
+    pub indicators: u32,
+    pub groupNames: u8,
+    pub nRadioGroups: u8,
+    pub firstKey: xcb_keycode_t,
+    pub nKeys: u8,
+    pub nKeyAliases: u8,
+    pub pad0: u8,
+    pub totalKTLevelNames: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_names_request_t"]
+        [::std::mem::size_of::<xcb_xkb_set_names_request_t>() - 28usize];
+    ["Alignment of xcb_xkb_set_names_request_t"]
+        [::std::mem::align_of::<xcb_xkb_set_names_request_t>() - 4usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::virtualMods"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, virtualMods) - 6usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::which"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, which) - 8usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::firstType"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, firstType) - 12usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::nTypes"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, nTypes) - 13usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::firstKTLevelt"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, firstKTLevelt) - 14usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::nKTLevels"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, nKTLevels) - 15usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::indicators"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, indicators) - 16usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::groupNames"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, groupNames) - 20usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::nRadioGroups"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, nRadioGroups) - 21usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::firstKey"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, firstKey) - 22usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::nKeys"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, nKeys) - 23usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::nKeyAliases"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, nKeyAliases) - 24usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, pad0) - 25usize];
+    ["Offset of field: xcb_xkb_set_names_request_t::totalKTLevelNames"]
+        [::std::mem::offset_of!(xcb_xkb_set_names_request_t, totalKTLevelNames) - 26usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_per_client_flags_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_per_client_flags_cookie_t"]
+        [::std::mem::size_of::<xcb_xkb_per_client_flags_cookie_t>() - 4usize];
+    ["Alignment of xcb_xkb_per_client_flags_cookie_t"]
+        [::std::mem::align_of::<xcb_xkb_per_client_flags_cookie_t>() - 4usize];
+    ["Offset of field: xcb_xkb_per_client_flags_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_per_client_flags_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub pad0: [u8; 2usize],
+    pub change: u32,
+    pub value: u32,
+    pub ctrlsToChange: u32,
+    pub autoCtrls: u32,
+    pub autoCtrlsValues: u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_per_client_flags_request_t"]
+        [::std::mem::size_of::<xcb_xkb_per_client_flags_request_t>() - 28usize];
+    ["Alignment of xcb_xkb_per_client_flags_request_t"]
+        [::std::mem::align_of::<xcb_xkb_per_client_flags_request_t>() - 4usize];
+    ["Offset of field: xcb_xkb_per_client_flags_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_per_client_flags_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_per_client_flags_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_per_client_flags_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_per_client_flags_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_request_t, pad0) - 6usize];
+    ["Offset of field: xcb_xkb_per_client_flags_request_t::change"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_request_t, change) - 8usize];
+    ["Offset of field: xcb_xkb_per_client_flags_request_t::value"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_request_t, value) - 12usize];
+    ["Offset of field: xcb_xkb_per_client_flags_request_t::ctrlsToChange"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_request_t, ctrlsToChange) - 16usize];
+    ["Offset of field: xcb_xkb_per_client_flags_request_t::autoCtrls"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_request_t, autoCtrls) - 20usize];
+    ["Offset of field: xcb_xkb_per_client_flags_request_t::autoCtrlsValues"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_request_t, autoCtrlsValues) - 24usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_per_client_flags_reply_t {
+    pub response_type: u8,
+    pub deviceID: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub supported: u32,
+    pub value: u32,
+    pub autoCtrls: u32,
+    pub autoCtrlsValues: u32,
+    pub pad0: [u8; 8usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_per_client_flags_reply_t"]
+        [::std::mem::size_of::<xcb_xkb_per_client_flags_reply_t>() - 32usize];
+    ["Alignment of xcb_xkb_per_client_flags_reply_t"]
+        [::std::mem::align_of::<xcb_xkb_per_client_flags_reply_t>() - 4usize];
+    ["Offset of field: xcb_xkb_per_client_flags_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_per_client_flags_reply_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_reply_t, deviceID) - 1usize];
+    ["Offset of field: xcb_xkb_per_client_flags_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_per_client_flags_reply_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_reply_t, length) - 4usize];
+    ["Offset of field: xcb_xkb_per_client_flags_reply_t::supported"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_reply_t, supported) - 8usize];
+    ["Offset of field: xcb_xkb_per_client_flags_reply_t::value"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_reply_t, value) - 12usize];
+    ["Offset of field: xcb_xkb_per_client_flags_reply_t::autoCtrls"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_reply_t, autoCtrls) - 16usize];
+    ["Offset of field: xcb_xkb_per_client_flags_reply_t::autoCtrlsValues"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_reply_t, autoCtrlsValues) - 20usize];
+    ["Offset of field: xcb_xkb_per_client_flags_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_per_client_flags_reply_t, pad0) - 24usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_list_components_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_list_components_cookie_t"]
+        [::std::mem::size_of::<xcb_xkb_list_components_cookie_t>() - 4usize];
+    ["Alignment of xcb_xkb_list_components_cookie_t"]
+        [::std::mem::align_of::<xcb_xkb_list_components_cookie_t>() - 4usize];
+    ["Offset of field: xcb_xkb_list_components_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_list_components_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub maxNames: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_list_components_request_t"]
+        [::std::mem::size_of::<xcb_xkb_list_components_request_t>() - 8usize];
+    ["Alignment of xcb_xkb_list_components_request_t"]
+        [::std::mem::align_of::<xcb_xkb_list_components_request_t>() - 2usize];
+    ["Offset of field: xcb_xkb_list_components_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_list_components_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_list_components_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_list_components_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_list_components_request_t::maxNames"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_request_t, maxNames) - 6usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_list_components_reply_t {
+    pub response_type: u8,
+    pub deviceID: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub nKeymaps: u16,
+    pub nKeycodes: u16,
+    pub nTypes: u16,
+    pub nCompatMaps: u16,
+    pub nSymbols: u16,
+    pub nGeometries: u16,
+    pub extra: u16,
+    pub pad0: [u8; 10usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_list_components_reply_t"]
+        [::std::mem::size_of::<xcb_xkb_list_components_reply_t>() - 32usize];
+    ["Alignment of xcb_xkb_list_components_reply_t"]
+        [::std::mem::align_of::<xcb_xkb_list_components_reply_t>() - 4usize];
+    ["Offset of field: xcb_xkb_list_components_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_list_components_reply_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_reply_t, deviceID) - 1usize];
+    ["Offset of field: xcb_xkb_list_components_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_list_components_reply_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_reply_t, length) - 4usize];
+    ["Offset of field: xcb_xkb_list_components_reply_t::nKeymaps"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_reply_t, nKeymaps) - 8usize];
+    ["Offset of field: xcb_xkb_list_components_reply_t::nKeycodes"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_reply_t, nKeycodes) - 10usize];
+    ["Offset of field: xcb_xkb_list_components_reply_t::nTypes"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_reply_t, nTypes) - 12usize];
+    ["Offset of field: xcb_xkb_list_components_reply_t::nCompatMaps"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_reply_t, nCompatMaps) - 14usize];
+    ["Offset of field: xcb_xkb_list_components_reply_t::nSymbols"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_reply_t, nSymbols) - 16usize];
+    ["Offset of field: xcb_xkb_list_components_reply_t::nGeometries"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_reply_t, nGeometries) - 18usize];
+    ["Offset of field: xcb_xkb_list_components_reply_t::extra"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_reply_t, extra) - 20usize];
+    ["Offset of field: xcb_xkb_list_components_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_list_components_reply_t, pad0) - 22usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_kbd_by_name_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_kbd_by_name_cookie_t"]
+        [::std::mem::size_of::<xcb_xkb_get_kbd_by_name_cookie_t>() - 4usize];
+    ["Alignment of xcb_xkb_get_kbd_by_name_cookie_t"]
+        [::std::mem::align_of::<xcb_xkb_get_kbd_by_name_cookie_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_kbd_by_name_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub need: u16,
+    pub want: u16,
+    pub load: u8,
+    pub pad0: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_kbd_by_name_request_t"]
+        [::std::mem::size_of::<xcb_xkb_get_kbd_by_name_request_t>() - 12usize];
+    ["Alignment of xcb_xkb_get_kbd_by_name_request_t"]
+        [::std::mem::align_of::<xcb_xkb_get_kbd_by_name_request_t>() - 2usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_request_t::need"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_request_t, need) - 6usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_request_t::want"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_request_t, want) - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_request_t::load"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_request_t, load) - 10usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_request_t, pad0) - 11usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_kbd_by_name_replies_types_map_t {
+    pub types_rtrn: *mut xcb_xkb_key_type_t,
+    pub syms_rtrn: *mut xcb_xkb_key_sym_map_t,
+    pub acts_rtrn_count: *mut u8,
+    pub acts_rtrn_acts: *mut xcb_xkb_action_t,
+    pub behaviors_rtrn: *mut xcb_xkb_set_behavior_t,
+    pub vmods_rtrn: *mut u8,
+    pub explicit_rtrn: *mut xcb_xkb_set_explicit_t,
+    pub modmap_rtrn: *mut xcb_xkb_key_mod_map_t,
+    pub vmodmap_rtrn: *mut xcb_xkb_key_v_mod_map_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_kbd_by_name_replies_types_map_t"]
+        [::std::mem::size_of::<xcb_xkb_get_kbd_by_name_replies_types_map_t>() - 72usize];
+    ["Alignment of xcb_xkb_get_kbd_by_name_replies_types_map_t"]
+        [::std::mem::align_of::<xcb_xkb_get_kbd_by_name_replies_types_map_t>() - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_types_map_t::types_rtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_types_map_t, types_rtrn) - 0usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_types_map_t::syms_rtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_types_map_t, syms_rtrn) - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_types_map_t::acts_rtrn_count"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_types_map_t,
+        acts_rtrn_count
+    ) - 16usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_types_map_t::acts_rtrn_acts"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_types_map_t,
+        acts_rtrn_acts
+    ) - 24usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_types_map_t::behaviors_rtrn"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_types_map_t,
+        behaviors_rtrn
+    ) - 32usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_types_map_t::vmods_rtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_types_map_t, vmods_rtrn) - 40usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_types_map_t::explicit_rtrn"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_types_map_t,
+        explicit_rtrn
+    ) - 48usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_types_map_t::modmap_rtrn"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_types_map_t,
+        modmap_rtrn
+    ) - 56usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_types_map_t::vmodmap_rtrn"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_types_map_t,
+        vmodmap_rtrn
+    ) - 64usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t {
+    pub keycodesName: xcb_atom_t,
+    pub geometryName: xcb_atom_t,
+    pub symbolsName: xcb_atom_t,
+    pub physSymbolsName: xcb_atom_t,
+    pub typesName: xcb_atom_t,
+    pub compatName: xcb_atom_t,
+    pub typeNames: *mut xcb_atom_t,
+    pub nLevelsPerType: *mut u8,
+    pub ktLevelNames: *mut xcb_atom_t,
+    pub indicatorNames: *mut xcb_atom_t,
+    pub virtualModNames: *mut xcb_atom_t,
+    pub groups: *mut xcb_atom_t,
+    pub keyNames: *mut xcb_xkb_key_name_t,
+    pub keyAliases: *mut xcb_xkb_key_alias_t,
+    pub radioGroupNames: *mut xcb_atom_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t"]
+        [::std::mem::size_of::<xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t>() - 96usize];
+    ["Alignment of xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t"]
+        [::std::mem::align_of::<xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t>() - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::keycodesName"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        keycodesName
+    )
+        - 0usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::geometryName"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        geometryName
+    )
+        - 4usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::symbolsName"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        symbolsName
+    )
+        - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::physSymbolsName"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        physSymbolsName
+    )
+        - 12usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::typesName"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        typesName
+    )
+        - 16usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::compatName"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        compatName
+    )
+        - 20usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::typeNames"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        typeNames
+    )
+        - 24usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::nLevelsPerType"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        nLevelsPerType
+    )
+        - 32usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::ktLevelNames"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        ktLevelNames
+    )
+        - 40usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::indicatorNames"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        indicatorNames
+    )
+        - 48usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::virtualModNames"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        virtualModNames
+    )
+        - 56usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::groups"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        groups
+    )
+        - 64usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::keyNames"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        keyNames
+    )
+        - 72usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::keyAliases"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        keyAliases
+    )
+        - 80usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t::radioGroupNames"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+        radioGroupNames
+    )
+        - 88usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_kbd_by_name_replies_t {
+    pub types: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+    pub compat_map: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2,
+    pub indicator_maps: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3,
+    pub key_names: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+    pub geometry: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1 {
+    pub getmap_type: u8,
+    pub typeDeviceID: u8,
+    pub getmap_sequence: u16,
+    pub getmap_length: u32,
+    pub pad1: [u8; 2usize],
+    pub typeMinKeyCode: xcb_keycode_t,
+    pub typeMaxKeyCode: xcb_keycode_t,
+    pub present: u16,
+    pub firstType: u8,
+    pub nTypes: u8,
+    pub totalTypes: u8,
+    pub firstKeySym: xcb_keycode_t,
+    pub totalSyms: u16,
+    pub nKeySyms: u8,
+    pub firstKeyAction: xcb_keycode_t,
+    pub totalActions: u16,
+    pub nKeyActions: u8,
+    pub firstKeyBehavior: xcb_keycode_t,
+    pub nKeyBehaviors: u8,
+    pub totalKeyBehaviors: u8,
+    pub firstKeyExplicit: xcb_keycode_t,
+    pub nKeyExplicit: u8,
+    pub totalKeyExplicit: u8,
+    pub firstModMapKey: xcb_keycode_t,
+    pub nModMapKeys: u8,
+    pub totalModMapKeys: u8,
+    pub firstVModMapKey: xcb_keycode_t,
+    pub nVModMapKeys: u8,
+    pub totalVModMapKeys: u8,
+    pub pad2: u8,
+    pub virtualMods: u16,
+    pub map: xcb_xkb_get_kbd_by_name_replies_types_map_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1"]
+        [::std::mem::size_of::<xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1>() - 112usize];
+    ["Alignment of xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1"]
+        [::std::mem::align_of::<xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1>() - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::getmap_type"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        getmap_type
+    ) - 0usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::typeDeviceID"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        typeDeviceID
+    ) - 1usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::getmap_sequence"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        getmap_sequence
+    )
+        - 2usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::getmap_length"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        getmap_length
+    ) - 4usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1, pad1) - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::typeMinKeyCode"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        typeMinKeyCode
+    )
+        - 10usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::typeMaxKeyCode"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        typeMaxKeyCode
+    )
+        - 11usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::present"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        present
+    ) - 12usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::firstType"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        firstType
+    ) - 14usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::nTypes"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1, nTypes) - 15usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::totalTypes"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        totalTypes
+    ) - 16usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::firstKeySym"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        firstKeySym
+    ) - 17usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::totalSyms"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        totalSyms
+    ) - 18usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::nKeySyms"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        nKeySyms
+    ) - 20usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::firstKeyAction"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        firstKeyAction
+    )
+        - 21usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::totalActions"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        totalActions
+    ) - 22usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::nKeyActions"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        nKeyActions
+    ) - 24usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::firstKeyBehavior"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        firstKeyBehavior
+    )
+        - 25usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::nKeyBehaviors"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        nKeyBehaviors
+    )
+        - 26usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::totalKeyBehaviors"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        totalKeyBehaviors
+    )
+        - 27usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::firstKeyExplicit"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        firstKeyExplicit
+    )
+        - 28usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::nKeyExplicit"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        nKeyExplicit
+    ) - 29usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::totalKeyExplicit"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        totalKeyExplicit
+    )
+        - 30usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::firstModMapKey"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        firstModMapKey
+    )
+        - 31usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::nModMapKeys"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        nModMapKeys
+    ) - 32usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::totalModMapKeys"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        totalModMapKeys
+    )
+        - 33usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::firstVModMapKey"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        firstVModMapKey
+    )
+        - 34usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::nVModMapKeys"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        nVModMapKeys
+    ) - 35usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::totalVModMapKeys"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        totalVModMapKeys
+    )
+        - 36usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::pad2"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1, pad2) - 37usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::virtualMods"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1,
+        virtualMods
+    ) - 38usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1::map"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_1, map) - 40usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2 {
+    pub compatmap_type: u8,
+    pub compatDeviceID: u8,
+    pub compatmap_sequence: u16,
+    pub compatmap_length: u32,
+    pub groupsRtrn: u8,
+    pub pad7: u8,
+    pub firstSIRtrn: u16,
+    pub nSIRtrn: u16,
+    pub nTotalSI: u16,
+    pub pad8: [u8; 16usize],
+    pub si_rtrn: *mut xcb_xkb_sym_interpret_t,
+    pub group_rtrn: *mut xcb_xkb_mod_def_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2"]
+        [::std::mem::size_of::<xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2>() - 48usize];
+    ["Alignment of xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2"]
+        [::std::mem::align_of::<xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2>() - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2::compatmap_type"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2,
+        compatmap_type
+    )
+        - 0usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2::compatDeviceID"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2,
+        compatDeviceID
+    )
+        - 1usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2::compatmap_sequence"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2,
+        compatmap_sequence
+    )
+        - 2usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2::compatmap_length"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2,
+        compatmap_length
+    )
+        - 4usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2::groupsRtrn"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2,
+        groupsRtrn
+    ) - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2::pad7"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2, pad7) - 9usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2::firstSIRtrn"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2,
+        firstSIRtrn
+    ) - 10usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2::nSIRtrn"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2,
+        nSIRtrn
+    ) - 12usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2::nTotalSI"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2,
+        nTotalSI
+    ) - 14usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2::pad8"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2, pad8) - 16usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2::si_rtrn"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2,
+        si_rtrn
+    ) - 32usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2::group_rtrn"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_2,
+        group_rtrn
+    ) - 40usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3 {
+    pub indicatormap_type: u8,
+    pub indicatorDeviceID: u8,
+    pub indicatormap_sequence: u16,
+    pub indicatormap_length: u32,
+    pub which: u32,
+    pub realIndicators: u32,
+    pub nIndicators: u8,
+    pub pad9: [u8; 15usize],
+    pub maps: *mut xcb_xkb_indicator_map_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3"]
+        [::std::mem::size_of::<xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3>() - 40usize];
+    ["Alignment of xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3"]
+        [::std::mem::align_of::<xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3>() - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3::indicatormap_type"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3,
+        indicatormap_type
+    )
+        - 0usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3::indicatorDeviceID"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3,
+        indicatorDeviceID
+    )
+        - 1usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3::indicatormap_sequence"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3,
+        indicatormap_sequence
+    )
+        - 2usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3::indicatormap_length"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3,
+        indicatormap_length
+    )
+        - 4usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3::which"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3, which) - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3::realIndicators"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3,
+        realIndicators
+    )
+        - 12usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3::nIndicators"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3,
+        nIndicators
+    ) - 16usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3::pad9"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3, pad9) - 17usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3::maps"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_3, maps) - 32usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4 {
+    pub keyname_type: u8,
+    pub keyDeviceID: u8,
+    pub keyname_sequence: u16,
+    pub keyname_length: u32,
+    pub which: u32,
+    pub keyMinKeyCode: xcb_keycode_t,
+    pub keyMaxKeyCode: xcb_keycode_t,
+    pub nTypes: u8,
+    pub groupNames: u8,
+    pub virtualMods: u16,
+    pub firstKey: xcb_keycode_t,
+    pub nKeys: u8,
+    pub indicators: u32,
+    pub nRadioGroups: u8,
+    pub nKeyAliases: u8,
+    pub nKTLevels: u16,
+    pub pad10: [u8; 4usize],
+    pub valueList: xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4"]
+        [::std::mem::size_of::<xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4>() - 128usize];
+    ["Alignment of xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4"]
+        [::std::mem::align_of::<xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4>() - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::keyname_type"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+        keyname_type
+    ) - 0usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::keyDeviceID"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+        keyDeviceID
+    ) - 1usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::keyname_sequence"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+        keyname_sequence
+    )
+        - 2usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::keyname_length"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+        keyname_length
+    )
+        - 4usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::which"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4, which) - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::keyMinKeyCode"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+        keyMinKeyCode
+    )
+        - 12usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::keyMaxKeyCode"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+        keyMaxKeyCode
+    )
+        - 13usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::nTypes"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4, nTypes) - 14usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::groupNames"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+        groupNames
+    ) - 15usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::virtualMods"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+        virtualMods
+    ) - 16usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::firstKey"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+        firstKey
+    ) - 18usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::nKeys"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4, nKeys) - 19usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::indicators"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+        indicators
+    ) - 20usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::nRadioGroups"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+        nRadioGroups
+    ) - 24usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::nKeyAliases"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+        nKeyAliases
+    ) - 25usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::nKTLevels"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+        nKTLevels
+    ) - 26usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::pad10"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4, pad10) - 28usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4::valueList"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_4,
+        valueList
+    ) - 32usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5 {
+    pub geometry_type: u8,
+    pub geometryDeviceID: u8,
+    pub geometry_sequence: u16,
+    pub geometry_length: u32,
+    pub name: xcb_atom_t,
+    pub geometryFound: u8,
+    pub pad12: u8,
+    pub widthMM: u16,
+    pub heightMM: u16,
+    pub nProperties: u16,
+    pub nColors: u16,
+    pub nShapes: u16,
+    pub nSections: u16,
+    pub nDoodads: u16,
+    pub nKeyAliases: u16,
+    pub baseColorNdx: u8,
+    pub labelColorNdx: u8,
+    pub labelFont: *mut xcb_xkb_counted_string_16_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5"]
+        [::std::mem::size_of::<xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5>() - 40usize];
+    ["Alignment of xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5"]
+        [::std::mem::align_of::<xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5>() - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::geometry_type"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        geometry_type
+    ) - 0usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::geometryDeviceID"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        geometryDeviceID
+    )
+        - 1usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::geometry_sequence"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        geometry_sequence
+    )
+        - 2usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::geometry_length"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        geometry_length
+    )
+        - 4usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::name"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5, name) - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::geometryFound"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        geometryFound
+    )
+        - 12usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::pad12"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5, pad12) - 13usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::widthMM"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        widthMM
+    ) - 14usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::heightMM"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        heightMM
+    ) - 16usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::nProperties"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        nProperties
+    ) - 18usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::nColors"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        nColors
+    ) - 20usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::nShapes"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        nShapes
+    ) - 22usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::nSections"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        nSections
+    ) - 24usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::nDoodads"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        nDoodads
+    ) - 26usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::nKeyAliases"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        nKeyAliases
+    ) - 28usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::baseColorNdx"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        baseColorNdx
+    ) - 30usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::labelColorNdx"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        labelColorNdx
+    )
+        - 31usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5::labelFont"][::std::mem::offset_of!(
+        xcb_xkb_get_kbd_by_name_replies_t__bindgen_ty_5,
+        labelFont
+    ) - 32usize];
+};
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_kbd_by_name_replies_t"]
+        [::std::mem::size_of::<xcb_xkb_get_kbd_by_name_replies_t>() - 368usize];
+    ["Alignment of xcb_xkb_get_kbd_by_name_replies_t"]
+        [::std::mem::align_of::<xcb_xkb_get_kbd_by_name_replies_t>() - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t::types"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t, types) - 0usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t::compat_map"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t, compat_map) - 112usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t::indicator_maps"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t, indicator_maps) - 160usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t::key_names"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t, key_names) - 200usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_replies_t::geometry"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_replies_t, geometry) - 328usize];
+};
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map(
+        R: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_xkb_get_kbd_by_name_replies_types_map_t;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_kbd_by_name_reply_t {
+    pub response_type: u8,
+    pub deviceID: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub minKeyCode: xcb_keycode_t,
+    pub maxKeyCode: xcb_keycode_t,
+    pub loaded: u8,
+    pub newKeyboard: u8,
+    pub found: u16,
+    pub reported: u16,
+    pub pad0: [u8; 16usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_kbd_by_name_reply_t"]
+        [::std::mem::size_of::<xcb_xkb_get_kbd_by_name_reply_t>() - 32usize];
+    ["Alignment of xcb_xkb_get_kbd_by_name_reply_t"]
+        [::std::mem::align_of::<xcb_xkb_get_kbd_by_name_reply_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_reply_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_reply_t, deviceID) - 1usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_reply_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_reply_t, length) - 4usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_reply_t::minKeyCode"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_reply_t, minKeyCode) - 8usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_reply_t::maxKeyCode"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_reply_t, maxKeyCode) - 9usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_reply_t::loaded"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_reply_t, loaded) - 10usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_reply_t::newKeyboard"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_reply_t, newKeyboard) - 11usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_reply_t::found"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_reply_t, found) - 12usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_reply_t::reported"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_reply_t, reported) - 14usize];
+    ["Offset of field: xcb_xkb_get_kbd_by_name_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_kbd_by_name_reply_t, pad0) - 16usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_device_info_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_device_info_cookie_t"]
+        [::std::mem::size_of::<xcb_xkb_get_device_info_cookie_t>() - 4usize];
+    ["Alignment of xcb_xkb_get_device_info_cookie_t"]
+        [::std::mem::align_of::<xcb_xkb_get_device_info_cookie_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_device_info_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_device_info_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub wanted: u16,
+    pub allButtons: u8,
+    pub firstButton: u8,
+    pub nButtons: u8,
+    pub pad0: u8,
+    pub ledClass: xcb_xkb_led_class_spec_t,
+    pub ledID: xcb_xkb_id_spec_t,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_device_info_request_t"]
+        [::std::mem::size_of::<xcb_xkb_get_device_info_request_t>() - 16usize];
+    ["Alignment of xcb_xkb_get_device_info_request_t"]
+        [::std::mem::align_of::<xcb_xkb_get_device_info_request_t>() - 2usize];
+    ["Offset of field: xcb_xkb_get_device_info_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_get_device_info_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_get_device_info_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_get_device_info_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_get_device_info_request_t::wanted"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_request_t, wanted) - 6usize];
+    ["Offset of field: xcb_xkb_get_device_info_request_t::allButtons"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_request_t, allButtons) - 8usize];
+    ["Offset of field: xcb_xkb_get_device_info_request_t::firstButton"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_request_t, firstButton) - 9usize];
+    ["Offset of field: xcb_xkb_get_device_info_request_t::nButtons"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_request_t, nButtons) - 10usize];
+    ["Offset of field: xcb_xkb_get_device_info_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_request_t, pad0) - 11usize];
+    ["Offset of field: xcb_xkb_get_device_info_request_t::ledClass"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_request_t, ledClass) - 12usize];
+    ["Offset of field: xcb_xkb_get_device_info_request_t::ledID"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_request_t, ledID) - 14usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_get_device_info_reply_t {
+    pub response_type: u8,
+    pub deviceID: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub present: u16,
+    pub supported: u16,
+    pub unsupported: u16,
+    pub nDeviceLedFBs: u16,
+    pub firstBtnWanted: u8,
+    pub nBtnsWanted: u8,
+    pub firstBtnRtrn: u8,
+    pub nBtnsRtrn: u8,
+    pub totalBtns: u8,
+    pub hasOwnState: u8,
+    pub dfltKbdFB: u16,
+    pub dfltLedFB: u16,
+    pub pad0: [u8; 2usize],
+    pub devType: xcb_atom_t,
+    pub nameLen: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_get_device_info_reply_t"]
+        [::std::mem::size_of::<xcb_xkb_get_device_info_reply_t>() - 36usize];
+    ["Alignment of xcb_xkb_get_device_info_reply_t"]
+        [::std::mem::align_of::<xcb_xkb_get_device_info_reply_t>() - 4usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, deviceID) - 1usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, length) - 4usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::present"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, present) - 8usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::supported"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, supported) - 10usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::unsupported"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, unsupported) - 12usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::nDeviceLedFBs"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, nDeviceLedFBs) - 14usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::firstBtnWanted"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, firstBtnWanted) - 16usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::nBtnsWanted"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, nBtnsWanted) - 17usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::firstBtnRtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, firstBtnRtrn) - 18usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::nBtnsRtrn"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, nBtnsRtrn) - 19usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::totalBtns"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, totalBtns) - 20usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::hasOwnState"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, hasOwnState) - 21usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::dfltKbdFB"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, dfltKbdFB) - 22usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::dfltLedFB"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, dfltLedFB) - 24usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, pad0) - 26usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::devType"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, devType) - 28usize];
+    ["Offset of field: xcb_xkb_get_device_info_reply_t::nameLen"]
+        [::std::mem::offset_of!(xcb_xkb_get_device_info_reply_t, nameLen) - 32usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_device_info_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub deviceSpec: xcb_xkb_device_spec_t,
+    pub firstBtn: u8,
+    pub nBtns: u8,
+    pub change: u16,
+    pub nDeviceLedFBs: u16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_device_info_request_t"]
+        [::std::mem::size_of::<xcb_xkb_set_device_info_request_t>() - 12usize];
+    ["Alignment of xcb_xkb_set_device_info_request_t"]
+        [::std::mem::align_of::<xcb_xkb_set_device_info_request_t>() - 2usize];
+    ["Offset of field: xcb_xkb_set_device_info_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_device_info_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_set_device_info_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_device_info_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_set_device_info_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_set_device_info_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_set_device_info_request_t::deviceSpec"]
+        [::std::mem::offset_of!(xcb_xkb_set_device_info_request_t, deviceSpec) - 4usize];
+    ["Offset of field: xcb_xkb_set_device_info_request_t::firstBtn"]
+        [::std::mem::offset_of!(xcb_xkb_set_device_info_request_t, firstBtn) - 6usize];
+    ["Offset of field: xcb_xkb_set_device_info_request_t::nBtns"]
+        [::std::mem::offset_of!(xcb_xkb_set_device_info_request_t, nBtns) - 7usize];
+    ["Offset of field: xcb_xkb_set_device_info_request_t::change"]
+        [::std::mem::offset_of!(xcb_xkb_set_device_info_request_t, change) - 8usize];
+    ["Offset of field: xcb_xkb_set_device_info_request_t::nDeviceLedFBs"]
+        [::std::mem::offset_of!(xcb_xkb_set_device_info_request_t, nDeviceLedFBs) - 10usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_debugging_flags_cookie_t {
+    pub sequence: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_debugging_flags_cookie_t"]
+        [::std::mem::size_of::<xcb_xkb_set_debugging_flags_cookie_t>() - 4usize];
+    ["Alignment of xcb_xkb_set_debugging_flags_cookie_t"]
+        [::std::mem::align_of::<xcb_xkb_set_debugging_flags_cookie_t>() - 4usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_cookie_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_cookie_t, sequence) - 0usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_debugging_flags_request_t {
+    pub major_opcode: u8,
+    pub minor_opcode: u8,
+    pub length: u16,
+    pub msgLength: u16,
+    pub pad0: [u8; 2usize],
+    pub affectFlags: u32,
+    pub flags: u32,
+    pub affectCtrls: u32,
+    pub ctrls: u32,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_debugging_flags_request_t"]
+        [::std::mem::size_of::<xcb_xkb_set_debugging_flags_request_t>() - 24usize];
+    ["Alignment of xcb_xkb_set_debugging_flags_request_t"]
+        [::std::mem::align_of::<xcb_xkb_set_debugging_flags_request_t>() - 4usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_request_t::major_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_request_t, major_opcode) - 0usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_request_t::minor_opcode"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_request_t, minor_opcode) - 1usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_request_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_request_t, length) - 2usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_request_t::msgLength"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_request_t, msgLength) - 4usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_request_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_request_t, pad0) - 6usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_request_t::affectFlags"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_request_t, affectFlags) - 8usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_request_t::flags"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_request_t, flags) - 12usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_request_t::affectCtrls"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_request_t, affectCtrls) - 16usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_request_t::ctrls"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_request_t, ctrls) - 20usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_set_debugging_flags_reply_t {
+    pub response_type: u8,
+    pub pad0: u8,
+    pub sequence: u16,
+    pub length: u32,
+    pub currentFlags: u32,
+    pub currentCtrls: u32,
+    pub supportedFlags: u32,
+    pub supportedCtrls: u32,
+    pub pad1: [u8; 8usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_set_debugging_flags_reply_t"]
+        [::std::mem::size_of::<xcb_xkb_set_debugging_flags_reply_t>() - 32usize];
+    ["Alignment of xcb_xkb_set_debugging_flags_reply_t"]
+        [::std::mem::align_of::<xcb_xkb_set_debugging_flags_reply_t>() - 4usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_reply_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_reply_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_reply_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_reply_t, pad0) - 1usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_reply_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_reply_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_reply_t::length"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_reply_t, length) - 4usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_reply_t::currentFlags"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_reply_t, currentFlags) - 8usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_reply_t::currentCtrls"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_reply_t, currentCtrls) - 12usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_reply_t::supportedFlags"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_reply_t, supportedFlags) - 16usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_reply_t::supportedCtrls"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_reply_t, supportedCtrls) - 20usize];
+    ["Offset of field: xcb_xkb_set_debugging_flags_reply_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_set_debugging_flags_reply_t, pad1) - 24usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_new_keyboard_notify_event_t {
+    pub response_type: u8,
+    pub xkbType: u8,
+    pub sequence: u16,
+    pub time: xcb_timestamp_t,
+    pub deviceID: u8,
+    pub oldDeviceID: u8,
+    pub minKeyCode: xcb_keycode_t,
+    pub maxKeyCode: xcb_keycode_t,
+    pub oldMinKeyCode: xcb_keycode_t,
+    pub oldMaxKeyCode: xcb_keycode_t,
+    pub requestMajor: u8,
+    pub requestMinor: u8,
+    pub changed: u16,
+    pub pad0: [u8; 14usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_new_keyboard_notify_event_t"]
+        [::std::mem::size_of::<xcb_xkb_new_keyboard_notify_event_t>() - 32usize];
+    ["Alignment of xcb_xkb_new_keyboard_notify_event_t"]
+        [::std::mem::align_of::<xcb_xkb_new_keyboard_notify_event_t>() - 4usize];
+    ["Offset of field: xcb_xkb_new_keyboard_notify_event_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_new_keyboard_notify_event_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_new_keyboard_notify_event_t::xkbType"]
+        [::std::mem::offset_of!(xcb_xkb_new_keyboard_notify_event_t, xkbType) - 1usize];
+    ["Offset of field: xcb_xkb_new_keyboard_notify_event_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_new_keyboard_notify_event_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_new_keyboard_notify_event_t::time"]
+        [::std::mem::offset_of!(xcb_xkb_new_keyboard_notify_event_t, time) - 4usize];
+    ["Offset of field: xcb_xkb_new_keyboard_notify_event_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_new_keyboard_notify_event_t, deviceID) - 8usize];
+    ["Offset of field: xcb_xkb_new_keyboard_notify_event_t::oldDeviceID"]
+        [::std::mem::offset_of!(xcb_xkb_new_keyboard_notify_event_t, oldDeviceID) - 9usize];
+    ["Offset of field: xcb_xkb_new_keyboard_notify_event_t::minKeyCode"]
+        [::std::mem::offset_of!(xcb_xkb_new_keyboard_notify_event_t, minKeyCode) - 10usize];
+    ["Offset of field: xcb_xkb_new_keyboard_notify_event_t::maxKeyCode"]
+        [::std::mem::offset_of!(xcb_xkb_new_keyboard_notify_event_t, maxKeyCode) - 11usize];
+    ["Offset of field: xcb_xkb_new_keyboard_notify_event_t::oldMinKeyCode"]
+        [::std::mem::offset_of!(xcb_xkb_new_keyboard_notify_event_t, oldMinKeyCode) - 12usize];
+    ["Offset of field: xcb_xkb_new_keyboard_notify_event_t::oldMaxKeyCode"]
+        [::std::mem::offset_of!(xcb_xkb_new_keyboard_notify_event_t, oldMaxKeyCode) - 13usize];
+    ["Offset of field: xcb_xkb_new_keyboard_notify_event_t::requestMajor"]
+        [::std::mem::offset_of!(xcb_xkb_new_keyboard_notify_event_t, requestMajor) - 14usize];
+    ["Offset of field: xcb_xkb_new_keyboard_notify_event_t::requestMinor"]
+        [::std::mem::offset_of!(xcb_xkb_new_keyboard_notify_event_t, requestMinor) - 15usize];
+    ["Offset of field: xcb_xkb_new_keyboard_notify_event_t::changed"]
+        [::std::mem::offset_of!(xcb_xkb_new_keyboard_notify_event_t, changed) - 16usize];
+    ["Offset of field: xcb_xkb_new_keyboard_notify_event_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_new_keyboard_notify_event_t, pad0) - 18usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_map_notify_event_t {
+    pub response_type: u8,
+    pub xkbType: u8,
+    pub sequence: u16,
+    pub time: xcb_timestamp_t,
+    pub deviceID: u8,
+    pub ptrBtnActions: u8,
+    pub changed: u16,
+    pub minKeyCode: xcb_keycode_t,
+    pub maxKeyCode: xcb_keycode_t,
+    pub firstType: u8,
+    pub nTypes: u8,
+    pub firstKeySym: xcb_keycode_t,
+    pub nKeySyms: u8,
+    pub firstKeyAct: xcb_keycode_t,
+    pub nKeyActs: u8,
+    pub firstKeyBehavior: xcb_keycode_t,
+    pub nKeyBehavior: u8,
+    pub firstKeyExplicit: xcb_keycode_t,
+    pub nKeyExplicit: u8,
+    pub firstModMapKey: xcb_keycode_t,
+    pub nModMapKeys: u8,
+    pub firstVModMapKey: xcb_keycode_t,
+    pub nVModMapKeys: u8,
+    pub virtualMods: u16,
+    pub pad0: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_map_notify_event_t"]
+        [::std::mem::size_of::<xcb_xkb_map_notify_event_t>() - 32usize];
+    ["Alignment of xcb_xkb_map_notify_event_t"]
+        [::std::mem::align_of::<xcb_xkb_map_notify_event_t>() - 4usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::xkbType"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, xkbType) - 1usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::time"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, time) - 4usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, deviceID) - 8usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::ptrBtnActions"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, ptrBtnActions) - 9usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::changed"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, changed) - 10usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::minKeyCode"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, minKeyCode) - 12usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::maxKeyCode"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, maxKeyCode) - 13usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::firstType"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, firstType) - 14usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::nTypes"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, nTypes) - 15usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::firstKeySym"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, firstKeySym) - 16usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::nKeySyms"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, nKeySyms) - 17usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::firstKeyAct"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, firstKeyAct) - 18usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::nKeyActs"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, nKeyActs) - 19usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::firstKeyBehavior"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, firstKeyBehavior) - 20usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::nKeyBehavior"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, nKeyBehavior) - 21usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::firstKeyExplicit"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, firstKeyExplicit) - 22usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::nKeyExplicit"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, nKeyExplicit) - 23usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::firstModMapKey"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, firstModMapKey) - 24usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::nModMapKeys"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, nModMapKeys) - 25usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::firstVModMapKey"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, firstVModMapKey) - 26usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::nVModMapKeys"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, nVModMapKeys) - 27usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::virtualMods"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, virtualMods) - 28usize];
+    ["Offset of field: xcb_xkb_map_notify_event_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_map_notify_event_t, pad0) - 30usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_state_notify_event_t {
+    pub response_type: u8,
+    pub xkbType: u8,
+    pub sequence: u16,
+    pub time: xcb_timestamp_t,
+    pub deviceID: u8,
+    pub mods: u8,
+    pub baseMods: u8,
+    pub latchedMods: u8,
+    pub lockedMods: u8,
+    pub group: u8,
+    pub baseGroup: i16,
+    pub latchedGroup: i16,
+    pub lockedGroup: u8,
+    pub compatState: u8,
+    pub grabMods: u8,
+    pub compatGrabMods: u8,
+    pub lookupMods: u8,
+    pub compatLoockupMods: u8,
+    pub ptrBtnState: u16,
+    pub changed: u16,
+    pub keycode: xcb_keycode_t,
+    pub eventType: u8,
+    pub requestMajor: u8,
+    pub requestMinor: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_state_notify_event_t"]
+        [::std::mem::size_of::<xcb_xkb_state_notify_event_t>() - 32usize];
+    ["Alignment of xcb_xkb_state_notify_event_t"]
+        [::std::mem::align_of::<xcb_xkb_state_notify_event_t>() - 4usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::xkbType"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, xkbType) - 1usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::time"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, time) - 4usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, deviceID) - 8usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::mods"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, mods) - 9usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::baseMods"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, baseMods) - 10usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::latchedMods"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, latchedMods) - 11usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::lockedMods"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, lockedMods) - 12usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::group"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, group) - 13usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::baseGroup"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, baseGroup) - 14usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::latchedGroup"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, latchedGroup) - 16usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::lockedGroup"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, lockedGroup) - 18usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::compatState"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, compatState) - 19usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::grabMods"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, grabMods) - 20usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::compatGrabMods"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, compatGrabMods) - 21usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::lookupMods"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, lookupMods) - 22usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::compatLoockupMods"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, compatLoockupMods) - 23usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::ptrBtnState"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, ptrBtnState) - 24usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::changed"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, changed) - 26usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::keycode"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, keycode) - 28usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::eventType"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, eventType) - 29usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::requestMajor"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, requestMajor) - 30usize];
+    ["Offset of field: xcb_xkb_state_notify_event_t::requestMinor"]
+        [::std::mem::offset_of!(xcb_xkb_state_notify_event_t, requestMinor) - 31usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_controls_notify_event_t {
+    pub response_type: u8,
+    pub xkbType: u8,
+    pub sequence: u16,
+    pub time: xcb_timestamp_t,
+    pub deviceID: u8,
+    pub numGroups: u8,
+    pub pad0: [u8; 2usize],
+    pub changedControls: u32,
+    pub enabledControls: u32,
+    pub enabledControlChanges: u32,
+    pub keycode: xcb_keycode_t,
+    pub eventType: u8,
+    pub requestMajor: u8,
+    pub requestMinor: u8,
+    pub pad1: [u8; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_controls_notify_event_t"]
+        [::std::mem::size_of::<xcb_xkb_controls_notify_event_t>() - 32usize];
+    ["Alignment of xcb_xkb_controls_notify_event_t"]
+        [::std::mem::align_of::<xcb_xkb_controls_notify_event_t>() - 4usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::xkbType"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, xkbType) - 1usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::time"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, time) - 4usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, deviceID) - 8usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::numGroups"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, numGroups) - 9usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, pad0) - 10usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::changedControls"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, changedControls) - 12usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::enabledControls"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, enabledControls) - 16usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::enabledControlChanges"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, enabledControlChanges) - 20usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::keycode"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, keycode) - 24usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::eventType"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, eventType) - 25usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::requestMajor"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, requestMajor) - 26usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::requestMinor"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, requestMinor) - 27usize];
+    ["Offset of field: xcb_xkb_controls_notify_event_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_controls_notify_event_t, pad1) - 28usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_indicator_state_notify_event_t {
+    pub response_type: u8,
+    pub xkbType: u8,
+    pub sequence: u16,
+    pub time: xcb_timestamp_t,
+    pub deviceID: u8,
+    pub pad0: [u8; 3usize],
+    pub state: u32,
+    pub stateChanged: u32,
+    pub pad1: [u8; 12usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_indicator_state_notify_event_t"]
+        [::std::mem::size_of::<xcb_xkb_indicator_state_notify_event_t>() - 32usize];
+    ["Alignment of xcb_xkb_indicator_state_notify_event_t"]
+        [::std::mem::align_of::<xcb_xkb_indicator_state_notify_event_t>() - 4usize];
+    ["Offset of field: xcb_xkb_indicator_state_notify_event_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_state_notify_event_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_indicator_state_notify_event_t::xkbType"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_state_notify_event_t, xkbType) - 1usize];
+    ["Offset of field: xcb_xkb_indicator_state_notify_event_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_state_notify_event_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_indicator_state_notify_event_t::time"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_state_notify_event_t, time) - 4usize];
+    ["Offset of field: xcb_xkb_indicator_state_notify_event_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_state_notify_event_t, deviceID) - 8usize];
+    ["Offset of field: xcb_xkb_indicator_state_notify_event_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_state_notify_event_t, pad0) - 9usize];
+    ["Offset of field: xcb_xkb_indicator_state_notify_event_t::state"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_state_notify_event_t, state) - 12usize];
+    ["Offset of field: xcb_xkb_indicator_state_notify_event_t::stateChanged"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_state_notify_event_t, stateChanged) - 16usize];
+    ["Offset of field: xcb_xkb_indicator_state_notify_event_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_state_notify_event_t, pad1) - 20usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_indicator_map_notify_event_t {
+    pub response_type: u8,
+    pub xkbType: u8,
+    pub sequence: u16,
+    pub time: xcb_timestamp_t,
+    pub deviceID: u8,
+    pub pad0: [u8; 3usize],
+    pub state: u32,
+    pub mapChanged: u32,
+    pub pad1: [u8; 12usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_indicator_map_notify_event_t"]
+        [::std::mem::size_of::<xcb_xkb_indicator_map_notify_event_t>() - 32usize];
+    ["Alignment of xcb_xkb_indicator_map_notify_event_t"]
+        [::std::mem::align_of::<xcb_xkb_indicator_map_notify_event_t>() - 4usize];
+    ["Offset of field: xcb_xkb_indicator_map_notify_event_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_notify_event_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_indicator_map_notify_event_t::xkbType"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_notify_event_t, xkbType) - 1usize];
+    ["Offset of field: xcb_xkb_indicator_map_notify_event_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_notify_event_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_indicator_map_notify_event_t::time"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_notify_event_t, time) - 4usize];
+    ["Offset of field: xcb_xkb_indicator_map_notify_event_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_notify_event_t, deviceID) - 8usize];
+    ["Offset of field: xcb_xkb_indicator_map_notify_event_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_notify_event_t, pad0) - 9usize];
+    ["Offset of field: xcb_xkb_indicator_map_notify_event_t::state"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_notify_event_t, state) - 12usize];
+    ["Offset of field: xcb_xkb_indicator_map_notify_event_t::mapChanged"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_notify_event_t, mapChanged) - 16usize];
+    ["Offset of field: xcb_xkb_indicator_map_notify_event_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_indicator_map_notify_event_t, pad1) - 20usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_names_notify_event_t {
+    pub response_type: u8,
+    pub xkbType: u8,
+    pub sequence: u16,
+    pub time: xcb_timestamp_t,
+    pub deviceID: u8,
+    pub pad0: u8,
+    pub changed: u16,
+    pub firstType: u8,
+    pub nTypes: u8,
+    pub firstLevelName: u8,
+    pub nLevelNames: u8,
+    pub pad1: u8,
+    pub nRadioGroups: u8,
+    pub nKeyAliases: u8,
+    pub changedGroupNames: u8,
+    pub changedVirtualMods: u16,
+    pub firstKey: xcb_keycode_t,
+    pub nKeys: u8,
+    pub changedIndicators: u32,
+    pub pad2: [u8; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_names_notify_event_t"]
+        [::std::mem::size_of::<xcb_xkb_names_notify_event_t>() - 32usize];
+    ["Alignment of xcb_xkb_names_notify_event_t"]
+        [::std::mem::align_of::<xcb_xkb_names_notify_event_t>() - 4usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::xkbType"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, xkbType) - 1usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::time"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, time) - 4usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, deviceID) - 8usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, pad0) - 9usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::changed"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, changed) - 10usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::firstType"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, firstType) - 12usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::nTypes"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, nTypes) - 13usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::firstLevelName"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, firstLevelName) - 14usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::nLevelNames"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, nLevelNames) - 15usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, pad1) - 16usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::nRadioGroups"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, nRadioGroups) - 17usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::nKeyAliases"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, nKeyAliases) - 18usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::changedGroupNames"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, changedGroupNames) - 19usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::changedVirtualMods"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, changedVirtualMods) - 20usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::firstKey"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, firstKey) - 22usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::nKeys"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, nKeys) - 23usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::changedIndicators"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, changedIndicators) - 24usize];
+    ["Offset of field: xcb_xkb_names_notify_event_t::pad2"]
+        [::std::mem::offset_of!(xcb_xkb_names_notify_event_t, pad2) - 28usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_compat_map_notify_event_t {
+    pub response_type: u8,
+    pub xkbType: u8,
+    pub sequence: u16,
+    pub time: xcb_timestamp_t,
+    pub deviceID: u8,
+    pub changedGroups: u8,
+    pub firstSI: u16,
+    pub nSI: u16,
+    pub nTotalSI: u16,
+    pub pad0: [u8; 16usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_compat_map_notify_event_t"]
+        [::std::mem::size_of::<xcb_xkb_compat_map_notify_event_t>() - 32usize];
+    ["Alignment of xcb_xkb_compat_map_notify_event_t"]
+        [::std::mem::align_of::<xcb_xkb_compat_map_notify_event_t>() - 4usize];
+    ["Offset of field: xcb_xkb_compat_map_notify_event_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_compat_map_notify_event_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_compat_map_notify_event_t::xkbType"]
+        [::std::mem::offset_of!(xcb_xkb_compat_map_notify_event_t, xkbType) - 1usize];
+    ["Offset of field: xcb_xkb_compat_map_notify_event_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_compat_map_notify_event_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_compat_map_notify_event_t::time"]
+        [::std::mem::offset_of!(xcb_xkb_compat_map_notify_event_t, time) - 4usize];
+    ["Offset of field: xcb_xkb_compat_map_notify_event_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_compat_map_notify_event_t, deviceID) - 8usize];
+    ["Offset of field: xcb_xkb_compat_map_notify_event_t::changedGroups"]
+        [::std::mem::offset_of!(xcb_xkb_compat_map_notify_event_t, changedGroups) - 9usize];
+    ["Offset of field: xcb_xkb_compat_map_notify_event_t::firstSI"]
+        [::std::mem::offset_of!(xcb_xkb_compat_map_notify_event_t, firstSI) - 10usize];
+    ["Offset of field: xcb_xkb_compat_map_notify_event_t::nSI"]
+        [::std::mem::offset_of!(xcb_xkb_compat_map_notify_event_t, nSI) - 12usize];
+    ["Offset of field: xcb_xkb_compat_map_notify_event_t::nTotalSI"]
+        [::std::mem::offset_of!(xcb_xkb_compat_map_notify_event_t, nTotalSI) - 14usize];
+    ["Offset of field: xcb_xkb_compat_map_notify_event_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_compat_map_notify_event_t, pad0) - 16usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_bell_notify_event_t {
+    pub response_type: u8,
+    pub xkbType: u8,
+    pub sequence: u16,
+    pub time: xcb_timestamp_t,
+    pub deviceID: u8,
+    pub bellClass: u8,
+    pub bellID: u8,
+    pub percent: u8,
+    pub pitch: u16,
+    pub duration: u16,
+    pub name: xcb_atom_t,
+    pub window: xcb_window_t,
+    pub eventOnly: u8,
+    pub pad0: [u8; 7usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_bell_notify_event_t"]
+        [::std::mem::size_of::<xcb_xkb_bell_notify_event_t>() - 32usize];
+    ["Alignment of xcb_xkb_bell_notify_event_t"]
+        [::std::mem::align_of::<xcb_xkb_bell_notify_event_t>() - 4usize];
+    ["Offset of field: xcb_xkb_bell_notify_event_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_bell_notify_event_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_bell_notify_event_t::xkbType"]
+        [::std::mem::offset_of!(xcb_xkb_bell_notify_event_t, xkbType) - 1usize];
+    ["Offset of field: xcb_xkb_bell_notify_event_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_bell_notify_event_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_bell_notify_event_t::time"]
+        [::std::mem::offset_of!(xcb_xkb_bell_notify_event_t, time) - 4usize];
+    ["Offset of field: xcb_xkb_bell_notify_event_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_bell_notify_event_t, deviceID) - 8usize];
+    ["Offset of field: xcb_xkb_bell_notify_event_t::bellClass"]
+        [::std::mem::offset_of!(xcb_xkb_bell_notify_event_t, bellClass) - 9usize];
+    ["Offset of field: xcb_xkb_bell_notify_event_t::bellID"]
+        [::std::mem::offset_of!(xcb_xkb_bell_notify_event_t, bellID) - 10usize];
+    ["Offset of field: xcb_xkb_bell_notify_event_t::percent"]
+        [::std::mem::offset_of!(xcb_xkb_bell_notify_event_t, percent) - 11usize];
+    ["Offset of field: xcb_xkb_bell_notify_event_t::pitch"]
+        [::std::mem::offset_of!(xcb_xkb_bell_notify_event_t, pitch) - 12usize];
+    ["Offset of field: xcb_xkb_bell_notify_event_t::duration"]
+        [::std::mem::offset_of!(xcb_xkb_bell_notify_event_t, duration) - 14usize];
+    ["Offset of field: xcb_xkb_bell_notify_event_t::name"]
+        [::std::mem::offset_of!(xcb_xkb_bell_notify_event_t, name) - 16usize];
+    ["Offset of field: xcb_xkb_bell_notify_event_t::window"]
+        [::std::mem::offset_of!(xcb_xkb_bell_notify_event_t, window) - 20usize];
+    ["Offset of field: xcb_xkb_bell_notify_event_t::eventOnly"]
+        [::std::mem::offset_of!(xcb_xkb_bell_notify_event_t, eventOnly) - 24usize];
+    ["Offset of field: xcb_xkb_bell_notify_event_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_bell_notify_event_t, pad0) - 25usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_action_message_event_t {
+    pub response_type: u8,
+    pub xkbType: u8,
+    pub sequence: u16,
+    pub time: xcb_timestamp_t,
+    pub deviceID: u8,
+    pub keycode: xcb_keycode_t,
+    pub press: u8,
+    pub keyEventFollows: u8,
+    pub mods: u8,
+    pub group: u8,
+    pub message: [xcb_xkb_string8_t; 8usize],
+    pub pad0: [u8; 10usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_action_message_event_t"]
+        [::std::mem::size_of::<xcb_xkb_action_message_event_t>() - 32usize];
+    ["Alignment of xcb_xkb_action_message_event_t"]
+        [::std::mem::align_of::<xcb_xkb_action_message_event_t>() - 4usize];
+    ["Offset of field: xcb_xkb_action_message_event_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_action_message_event_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_action_message_event_t::xkbType"]
+        [::std::mem::offset_of!(xcb_xkb_action_message_event_t, xkbType) - 1usize];
+    ["Offset of field: xcb_xkb_action_message_event_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_action_message_event_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_action_message_event_t::time"]
+        [::std::mem::offset_of!(xcb_xkb_action_message_event_t, time) - 4usize];
+    ["Offset of field: xcb_xkb_action_message_event_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_action_message_event_t, deviceID) - 8usize];
+    ["Offset of field: xcb_xkb_action_message_event_t::keycode"]
+        [::std::mem::offset_of!(xcb_xkb_action_message_event_t, keycode) - 9usize];
+    ["Offset of field: xcb_xkb_action_message_event_t::press"]
+        [::std::mem::offset_of!(xcb_xkb_action_message_event_t, press) - 10usize];
+    ["Offset of field: xcb_xkb_action_message_event_t::keyEventFollows"]
+        [::std::mem::offset_of!(xcb_xkb_action_message_event_t, keyEventFollows) - 11usize];
+    ["Offset of field: xcb_xkb_action_message_event_t::mods"]
+        [::std::mem::offset_of!(xcb_xkb_action_message_event_t, mods) - 12usize];
+    ["Offset of field: xcb_xkb_action_message_event_t::group"]
+        [::std::mem::offset_of!(xcb_xkb_action_message_event_t, group) - 13usize];
+    ["Offset of field: xcb_xkb_action_message_event_t::message"]
+        [::std::mem::offset_of!(xcb_xkb_action_message_event_t, message) - 14usize];
+    ["Offset of field: xcb_xkb_action_message_event_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_action_message_event_t, pad0) - 22usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_access_x_notify_event_t {
+    pub response_type: u8,
+    pub xkbType: u8,
+    pub sequence: u16,
+    pub time: xcb_timestamp_t,
+    pub deviceID: u8,
+    pub keycode: xcb_keycode_t,
+    pub detailt: u16,
+    pub slowKeysDelay: u16,
+    pub debounceDelay: u16,
+    pub pad0: [u8; 16usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_access_x_notify_event_t"]
+        [::std::mem::size_of::<xcb_xkb_access_x_notify_event_t>() - 32usize];
+    ["Alignment of xcb_xkb_access_x_notify_event_t"]
+        [::std::mem::align_of::<xcb_xkb_access_x_notify_event_t>() - 4usize];
+    ["Offset of field: xcb_xkb_access_x_notify_event_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_access_x_notify_event_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_access_x_notify_event_t::xkbType"]
+        [::std::mem::offset_of!(xcb_xkb_access_x_notify_event_t, xkbType) - 1usize];
+    ["Offset of field: xcb_xkb_access_x_notify_event_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_access_x_notify_event_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_access_x_notify_event_t::time"]
+        [::std::mem::offset_of!(xcb_xkb_access_x_notify_event_t, time) - 4usize];
+    ["Offset of field: xcb_xkb_access_x_notify_event_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_access_x_notify_event_t, deviceID) - 8usize];
+    ["Offset of field: xcb_xkb_access_x_notify_event_t::keycode"]
+        [::std::mem::offset_of!(xcb_xkb_access_x_notify_event_t, keycode) - 9usize];
+    ["Offset of field: xcb_xkb_access_x_notify_event_t::detailt"]
+        [::std::mem::offset_of!(xcb_xkb_access_x_notify_event_t, detailt) - 10usize];
+    ["Offset of field: xcb_xkb_access_x_notify_event_t::slowKeysDelay"]
+        [::std::mem::offset_of!(xcb_xkb_access_x_notify_event_t, slowKeysDelay) - 12usize];
+    ["Offset of field: xcb_xkb_access_x_notify_event_t::debounceDelay"]
+        [::std::mem::offset_of!(xcb_xkb_access_x_notify_event_t, debounceDelay) - 14usize];
+    ["Offset of field: xcb_xkb_access_x_notify_event_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_access_x_notify_event_t, pad0) - 16usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xcb_xkb_extension_device_notify_event_t {
+    pub response_type: u8,
+    pub xkbType: u8,
+    pub sequence: u16,
+    pub time: xcb_timestamp_t,
+    pub deviceID: u8,
+    pub pad0: u8,
+    pub reason: u16,
+    pub ledClass: u16,
+    pub ledID: u16,
+    pub ledsDefined: u32,
+    pub ledState: u32,
+    pub firstButton: u8,
+    pub nButtons: u8,
+    pub supported: u16,
+    pub unsupported: u16,
+    pub pad1: [u8; 2usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xcb_xkb_extension_device_notify_event_t"]
+        [::std::mem::size_of::<xcb_xkb_extension_device_notify_event_t>() - 32usize];
+    ["Alignment of xcb_xkb_extension_device_notify_event_t"]
+        [::std::mem::align_of::<xcb_xkb_extension_device_notify_event_t>() - 4usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::response_type"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, response_type) - 0usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::xkbType"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, xkbType) - 1usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::sequence"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, sequence) - 2usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::time"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, time) - 4usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::deviceID"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, deviceID) - 8usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::pad0"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, pad0) - 9usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::reason"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, reason) - 10usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::ledClass"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, ledClass) - 12usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::ledID"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, ledID) - 14usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::ledsDefined"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, ledsDefined) - 16usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::ledState"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, ledState) - 20usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::firstButton"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, firstButton) - 24usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::nButtons"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, nButtons) - 25usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::supported"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, supported) - 26usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::unsupported"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, unsupported) - 28usize];
+    ["Offset of field: xcb_xkb_extension_device_notify_event_t::pad1"]
+        [::std::mem::offset_of!(xcb_xkb_extension_device_notify_event_t, pad1) - 30usize];
+};
+unsafe extern "C" {
+    pub fn xcb_xkb_device_spec_next(i: *mut xcb_xkb_device_spec_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_device_spec_end(i: xcb_xkb_device_spec_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_led_class_spec_next(i: *mut xcb_xkb_led_class_spec_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_led_class_spec_end(
+        i: xcb_xkb_led_class_spec_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_bell_class_spec_next(i: *mut xcb_xkb_bell_class_spec_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_bell_class_spec_end(
+        i: xcb_xkb_bell_class_spec_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_id_spec_next(i: *mut xcb_xkb_id_spec_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_id_spec_end(i: xcb_xkb_id_spec_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_indicator_map_next(i: *mut xcb_xkb_indicator_map_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_indicator_map_end(i: xcb_xkb_indicator_map_iterator_t)
+        -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_mod_def_next(i: *mut xcb_xkb_mod_def_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_mod_def_end(i: xcb_xkb_mod_def_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_name_next(i: *mut xcb_xkb_key_name_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_name_end(i: xcb_xkb_key_name_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_alias_next(i: *mut xcb_xkb_key_alias_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_alias_end(i: xcb_xkb_key_alias_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_counted_string_16_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_counted_string_16_string(
+        R: *const xcb_xkb_counted_string_16_t,
+    ) -> *mut ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_counted_string_16_string_length(
+        R: *const xcb_xkb_counted_string_16_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_counted_string_16_string_end(
+        R: *const xcb_xkb_counted_string_16_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_counted_string_16_alignment_pad(
+        R: *const xcb_xkb_counted_string_16_t,
+    ) -> *mut ::std::os::raw::c_void;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_counted_string_16_alignment_pad_length(
+        R: *const xcb_xkb_counted_string_16_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_counted_string_16_alignment_pad_end(
+        R: *const xcb_xkb_counted_string_16_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_counted_string_16_next(i: *mut xcb_xkb_counted_string_16_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_counted_string_16_end(
+        i: xcb_xkb_counted_string_16_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_kt_map_entry_next(i: *mut xcb_xkb_kt_map_entry_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_kt_map_entry_end(i: xcb_xkb_kt_map_entry_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_type_sizeof(_buffer: *const ::std::os::raw::c_void)
+        -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_type_map(R: *const xcb_xkb_key_type_t) -> *mut xcb_xkb_kt_map_entry_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_type_map_length(R: *const xcb_xkb_key_type_t) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_type_map_iterator(
+        R: *const xcb_xkb_key_type_t,
+    ) -> xcb_xkb_kt_map_entry_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_type_preserve(R: *const xcb_xkb_key_type_t) -> *mut xcb_xkb_mod_def_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_type_preserve_length(R: *const xcb_xkb_key_type_t) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_type_preserve_iterator(
+        R: *const xcb_xkb_key_type_t,
+    ) -> xcb_xkb_mod_def_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_type_next(i: *mut xcb_xkb_key_type_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_type_end(i: xcb_xkb_key_type_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_sym_map_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_sym_map_syms(R: *const xcb_xkb_key_sym_map_t) -> *mut xcb_keysym_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_sym_map_syms_length(
+        R: *const xcb_xkb_key_sym_map_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_sym_map_syms_end(R: *const xcb_xkb_key_sym_map_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_sym_map_next(i: *mut xcb_xkb_key_sym_map_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_sym_map_end(i: xcb_xkb_key_sym_map_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_common_behavior_next(i: *mut xcb_xkb_common_behavior_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_common_behavior_end(
+        i: xcb_xkb_common_behavior_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_default_behavior_next(i: *mut xcb_xkb_default_behavior_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_default_behavior_end(
+        i: xcb_xkb_default_behavior_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_lock_behavior_next(i: *mut xcb_xkb_lock_behavior_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_lock_behavior_end(i: xcb_xkb_lock_behavior_iterator_t)
+        -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_radio_group_behavior_next(i: *mut xcb_xkb_radio_group_behavior_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_radio_group_behavior_end(
+        i: xcb_xkb_radio_group_behavior_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_behavior_next(i: *mut xcb_xkb_overlay_behavior_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_behavior_end(
+        i: xcb_xkb_overlay_behavior_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_permament_lock_behavior_next(i: *mut xcb_xkb_permament_lock_behavior_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_permament_lock_behavior_end(
+        i: xcb_xkb_permament_lock_behavior_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_permament_radio_group_behavior_next(
+        i: *mut xcb_xkb_permament_radio_group_behavior_iterator_t,
+    );
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_permament_radio_group_behavior_end(
+        i: xcb_xkb_permament_radio_group_behavior_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_permament_overlay_behavior_next(
+        i: *mut xcb_xkb_permament_overlay_behavior_iterator_t,
+    );
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_permament_overlay_behavior_end(
+        i: xcb_xkb_permament_overlay_behavior_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_behavior_next(i: *mut xcb_xkb_behavior_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_behavior_end(i: xcb_xkb_behavior_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_behavior_next(i: *mut xcb_xkb_set_behavior_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_behavior_end(i: xcb_xkb_set_behavior_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_explicit_next(i: *mut xcb_xkb_set_explicit_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_explicit_end(i: xcb_xkb_set_explicit_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_mod_map_next(i: *mut xcb_xkb_key_mod_map_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_mod_map_end(i: xcb_xkb_key_mod_map_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_v_mod_map_next(i: *mut xcb_xkb_key_v_mod_map_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_v_mod_map_end(i: xcb_xkb_key_v_mod_map_iterator_t)
+        -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_kt_set_map_entry_next(i: *mut xcb_xkb_kt_set_map_entry_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_kt_set_map_entry_end(
+        i: xcb_xkb_kt_set_map_entry_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_key_type_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_key_type_entries(
+        R: *const xcb_xkb_set_key_type_t,
+    ) -> *mut xcb_xkb_kt_set_map_entry_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_key_type_entries_length(
+        R: *const xcb_xkb_set_key_type_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_key_type_entries_iterator(
+        R: *const xcb_xkb_set_key_type_t,
+    ) -> xcb_xkb_kt_set_map_entry_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_key_type_preserve_entries(
+        R: *const xcb_xkb_set_key_type_t,
+    ) -> *mut xcb_xkb_kt_set_map_entry_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_key_type_preserve_entries_length(
+        R: *const xcb_xkb_set_key_type_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_key_type_preserve_entries_iterator(
+        R: *const xcb_xkb_set_key_type_t,
+    ) -> xcb_xkb_kt_set_map_entry_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_key_type_next(i: *mut xcb_xkb_set_key_type_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_key_type_end(i: xcb_xkb_set_key_type_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_string8_next(i: *mut xcb_xkb_string8_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_string8_end(i: xcb_xkb_string8_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_outline_sizeof(_buffer: *const ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_outline_points(R: *const xcb_xkb_outline_t) -> *mut xcb_point_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_outline_points_length(R: *const xcb_xkb_outline_t) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_outline_points_iterator(R: *const xcb_xkb_outline_t) -> xcb_point_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_outline_next(i: *mut xcb_xkb_outline_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_outline_end(i: xcb_xkb_outline_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_shape_sizeof(_buffer: *const ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_shape_outlines_length(R: *const xcb_xkb_shape_t) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_shape_outlines_iterator(R: *const xcb_xkb_shape_t)
+        -> xcb_xkb_outline_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_shape_next(i: *mut xcb_xkb_shape_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_shape_end(i: xcb_xkb_shape_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_next(i: *mut xcb_xkb_key_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_key_end(i: xcb_xkb_key_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_key_next(i: *mut xcb_xkb_overlay_key_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_key_end(i: xcb_xkb_overlay_key_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_row_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_row_keys(R: *const xcb_xkb_overlay_row_t) -> *mut xcb_xkb_overlay_key_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_row_keys_length(
+        R: *const xcb_xkb_overlay_row_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_row_keys_iterator(
+        R: *const xcb_xkb_overlay_row_t,
+    ) -> xcb_xkb_overlay_key_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_row_next(i: *mut xcb_xkb_overlay_row_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_row_end(i: xcb_xkb_overlay_row_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_sizeof(_buffer: *const ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_rows_length(R: *const xcb_xkb_overlay_t) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_rows_iterator(
+        R: *const xcb_xkb_overlay_t,
+    ) -> xcb_xkb_overlay_row_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_next(i: *mut xcb_xkb_overlay_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_overlay_end(i: xcb_xkb_overlay_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_row_sizeof(_buffer: *const ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_row_keys(R: *const xcb_xkb_row_t) -> *mut xcb_xkb_key_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_row_keys_length(R: *const xcb_xkb_row_t) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_row_keys_iterator(R: *const xcb_xkb_row_t) -> xcb_xkb_key_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_row_next(i: *mut xcb_xkb_row_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_row_end(i: xcb_xkb_row_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_listing_sizeof(_buffer: *const ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_listing_string(R: *const xcb_xkb_listing_t) -> *mut xcb_xkb_string8_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_listing_string_length(R: *const xcb_xkb_listing_t) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_listing_string_end(R: *const xcb_xkb_listing_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_listing_next(i: *mut xcb_xkb_listing_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_listing_end(i: xcb_xkb_listing_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_device_led_info_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_device_led_info_names(R: *const xcb_xkb_device_led_info_t) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_device_led_info_names_length(
+        R: *const xcb_xkb_device_led_info_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_device_led_info_names_end(
+        R: *const xcb_xkb_device_led_info_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_device_led_info_maps(
+        R: *const xcb_xkb_device_led_info_t,
+    ) -> *mut xcb_xkb_indicator_map_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_device_led_info_maps_length(
+        R: *const xcb_xkb_device_led_info_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_device_led_info_maps_iterator(
+        R: *const xcb_xkb_device_led_info_t,
+    ) -> xcb_xkb_indicator_map_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_device_led_info_next(i: *mut xcb_xkb_device_led_info_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_device_led_info_end(
+        i: xcb_xkb_device_led_info_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_no_action_next(i: *mut xcb_xkb_sa_no_action_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_no_action_end(i: xcb_xkb_sa_no_action_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_set_mods_next(i: *mut xcb_xkb_sa_set_mods_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_set_mods_end(i: xcb_xkb_sa_set_mods_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_latch_mods_next(i: *mut xcb_xkb_sa_latch_mods_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_latch_mods_end(i: xcb_xkb_sa_latch_mods_iterator_t)
+        -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_lock_mods_next(i: *mut xcb_xkb_sa_lock_mods_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_lock_mods_end(i: xcb_xkb_sa_lock_mods_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_set_group_next(i: *mut xcb_xkb_sa_set_group_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_set_group_end(i: xcb_xkb_sa_set_group_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_latch_group_next(i: *mut xcb_xkb_sa_latch_group_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_latch_group_end(
+        i: xcb_xkb_sa_latch_group_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_lock_group_next(i: *mut xcb_xkb_sa_lock_group_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_lock_group_end(i: xcb_xkb_sa_lock_group_iterator_t)
+        -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_move_ptr_next(i: *mut xcb_xkb_sa_move_ptr_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_move_ptr_end(i: xcb_xkb_sa_move_ptr_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_ptr_btn_next(i: *mut xcb_xkb_sa_ptr_btn_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_ptr_btn_end(i: xcb_xkb_sa_ptr_btn_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_lock_ptr_btn_next(i: *mut xcb_xkb_sa_lock_ptr_btn_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_lock_ptr_btn_end(
+        i: xcb_xkb_sa_lock_ptr_btn_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_set_ptr_dflt_next(i: *mut xcb_xkb_sa_set_ptr_dflt_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_set_ptr_dflt_end(
+        i: xcb_xkb_sa_set_ptr_dflt_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_iso_lock_next(i: *mut xcb_xkb_sa_iso_lock_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_iso_lock_end(i: xcb_xkb_sa_iso_lock_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_terminate_next(i: *mut xcb_xkb_sa_terminate_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_terminate_end(i: xcb_xkb_sa_terminate_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_switch_screen_next(i: *mut xcb_xkb_sa_switch_screen_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_switch_screen_end(
+        i: xcb_xkb_sa_switch_screen_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_set_controls_next(i: *mut xcb_xkb_sa_set_controls_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_set_controls_end(
+        i: xcb_xkb_sa_set_controls_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_lock_controls_next(i: *mut xcb_xkb_sa_lock_controls_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_lock_controls_end(
+        i: xcb_xkb_sa_lock_controls_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_action_message_next(i: *mut xcb_xkb_sa_action_message_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_action_message_end(
+        i: xcb_xkb_sa_action_message_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_redirect_key_next(i: *mut xcb_xkb_sa_redirect_key_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_redirect_key_end(
+        i: xcb_xkb_sa_redirect_key_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_device_btn_next(i: *mut xcb_xkb_sa_device_btn_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_device_btn_end(i: xcb_xkb_sa_device_btn_iterator_t)
+        -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_lock_device_btn_next(i: *mut xcb_xkb_sa_lock_device_btn_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_lock_device_btn_end(
+        i: xcb_xkb_sa_lock_device_btn_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_device_valuator_next(i: *mut xcb_xkb_sa_device_valuator_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sa_device_valuator_end(
+        i: xcb_xkb_sa_device_valuator_iterator_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_si_action_next(i: *mut xcb_xkb_si_action_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_si_action_end(i: xcb_xkb_si_action_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sym_interpret_next(i: *mut xcb_xkb_sym_interpret_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_sym_interpret_end(i: xcb_xkb_sym_interpret_iterator_t)
+        -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_action_next(i: *mut xcb_xkb_action_iterator_t);
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_action_end(i: xcb_xkb_action_iterator_t) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_use_extension(
+        c: *mut xcb_connection_t,
+        wantedMajor: u16,
+        wantedMinor: u16,
+    ) -> xcb_xkb_use_extension_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_use_extension_unchecked(
+        c: *mut xcb_connection_t,
+        wantedMajor: u16,
+        wantedMinor: u16,
+    ) -> xcb_xkb_use_extension_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_use_extension_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_xkb_use_extension_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_xkb_use_extension_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_select_events_details_serialize(
+        _buffer: *mut *mut ::std::os::raw::c_void,
+        affectWhich: u16,
+        clear: u16,
+        selectAll: u16,
+        _aux: *const xcb_xkb_select_events_details_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_select_events_details_unpack(
+        _buffer: *const ::std::os::raw::c_void,
+        affectWhich: u16,
+        clear: u16,
+        selectAll: u16,
+        _aux: *mut xcb_xkb_select_events_details_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_select_events_details_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+        affectWhich: u16,
+        clear: u16,
+        selectAll: u16,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_select_events_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_select_events_checked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        affectWhich: u16,
+        clear: u16,
+        selectAll: u16,
+        affectMap: u16,
+        map: u16,
+        details: *const ::std::os::raw::c_void,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_select_events(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        affectWhich: u16,
+        clear: u16,
+        selectAll: u16,
+        affectMap: u16,
+        map: u16,
+        details: *const ::std::os::raw::c_void,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_select_events_aux_checked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        affectWhich: u16,
+        clear: u16,
+        selectAll: u16,
+        affectMap: u16,
+        map: u16,
+        details: *const xcb_xkb_select_events_details_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_select_events_aux(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        affectWhich: u16,
+        clear: u16,
+        selectAll: u16,
+        affectMap: u16,
+        map: u16,
+        details: *const xcb_xkb_select_events_details_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_select_events_details(
+        R: *const xcb_xkb_select_events_request_t,
+    ) -> *mut ::std::os::raw::c_void;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_bell_checked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        bellClass: xcb_xkb_bell_class_spec_t,
+        bellID: xcb_xkb_id_spec_t,
+        percent: i8,
+        forceSound: u8,
+        eventOnly: u8,
+        pitch: i16,
+        duration: i16,
+        name: xcb_atom_t,
+        window: xcb_window_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_bell(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        bellClass: xcb_xkb_bell_class_spec_t,
+        bellID: xcb_xkb_id_spec_t,
+        percent: i8,
+        forceSound: u8,
+        eventOnly: u8,
+        pitch: i16,
+        duration: i16,
+        name: xcb_atom_t,
+        window: xcb_window_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_state(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+    ) -> xcb_xkb_get_state_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_state_unchecked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+    ) -> xcb_xkb_get_state_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_state_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_xkb_get_state_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_xkb_get_state_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_latch_lock_state_checked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        affectModLocks: u8,
+        modLocks: u8,
+        lockGroup: u8,
+        groupLock: u8,
+        affectModLatches: u8,
+        latchGroup: u8,
+        groupLatch: u16,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_latch_lock_state(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        affectModLocks: u8,
+        modLocks: u8,
+        lockGroup: u8,
+        groupLock: u8,
+        affectModLatches: u8,
+        latchGroup: u8,
+        groupLatch: u16,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_controls(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+    ) -> xcb_xkb_get_controls_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_controls_unchecked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+    ) -> xcb_xkb_get_controls_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_controls_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_xkb_get_controls_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_xkb_get_controls_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_controls_checked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        affectInternalRealMods: u8,
+        internalRealMods: u8,
+        affectIgnoreLockRealMods: u8,
+        ignoreLockRealMods: u8,
+        affectInternalVirtualMods: u16,
+        internalVirtualMods: u16,
+        affectIgnoreLockVirtualMods: u16,
+        ignoreLockVirtualMods: u16,
+        mouseKeysDfltBtn: u8,
+        groupsWrap: u8,
+        accessXOptions: u16,
+        affectEnabledControls: u32,
+        enabledControls: u32,
+        changeControls: u32,
+        repeatDelay: u16,
+        repeatInterval: u16,
+        slowKeysDelay: u16,
+        debounceDelay: u16,
+        mouseKeysDelay: u16,
+        mouseKeysInterval: u16,
+        mouseKeysTimeToMax: u16,
+        mouseKeysMaxSpeed: u16,
+        mouseKeysCurve: i16,
+        accessXTimeout: u16,
+        accessXTimeoutMask: u32,
+        accessXTimeoutValues: u32,
+        accessXTimeoutOptionsMask: u16,
+        accessXTimeoutOptionsValues: u16,
+        perKeyRepeat: *const u8,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_controls(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        affectInternalRealMods: u8,
+        internalRealMods: u8,
+        affectIgnoreLockRealMods: u8,
+        ignoreLockRealMods: u8,
+        affectInternalVirtualMods: u16,
+        internalVirtualMods: u16,
+        affectIgnoreLockVirtualMods: u16,
+        ignoreLockVirtualMods: u16,
+        mouseKeysDfltBtn: u8,
+        groupsWrap: u8,
+        accessXOptions: u16,
+        affectEnabledControls: u32,
+        enabledControls: u32,
+        changeControls: u32,
+        repeatDelay: u16,
+        repeatInterval: u16,
+        slowKeysDelay: u16,
+        debounceDelay: u16,
+        mouseKeysDelay: u16,
+        mouseKeysInterval: u16,
+        mouseKeysTimeToMax: u16,
+        mouseKeysMaxSpeed: u16,
+        mouseKeysCurve: i16,
+        accessXTimeout: u16,
+        accessXTimeoutMask: u32,
+        accessXTimeoutValues: u32,
+        accessXTimeoutOptionsMask: u16,
+        accessXTimeoutOptionsValues: u16,
+        perKeyRepeat: *const u8,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_types_rtrn_length(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_types_rtrn_iterator(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> xcb_xkb_key_type_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_syms_rtrn_length(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_syms_rtrn_iterator(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> xcb_xkb_key_sym_map_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_acts_rtrn_count(S: *const xcb_xkb_get_map_map_t) -> *mut u8;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_acts_rtrn_count_length(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_acts_rtrn_count_end(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_acts_rtrn_acts(
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> *mut xcb_xkb_action_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_acts_rtrn_acts_length(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_acts_rtrn_acts_iterator(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> xcb_xkb_action_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_behaviors_rtrn(
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> *mut xcb_xkb_set_behavior_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_behaviors_rtrn_length(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_behaviors_rtrn_iterator(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> xcb_xkb_set_behavior_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_vmods_rtrn(S: *const xcb_xkb_get_map_map_t) -> *mut u8;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_vmods_rtrn_length(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_vmods_rtrn_end(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_explicit_rtrn(
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> *mut xcb_xkb_set_explicit_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_explicit_rtrn_length(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_explicit_rtrn_iterator(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> xcb_xkb_set_explicit_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_modmap_rtrn(
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> *mut xcb_xkb_key_mod_map_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_modmap_rtrn_length(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_modmap_rtrn_iterator(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> xcb_xkb_key_mod_map_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_vmodmap_rtrn(
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> *mut xcb_xkb_key_v_mod_map_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_vmodmap_rtrn_length(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_vmodmap_rtrn_iterator(
+        R: *const xcb_xkb_get_map_reply_t,
+        S: *const xcb_xkb_get_map_map_t,
+    ) -> xcb_xkb_key_v_mod_map_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_serialize(
+        _buffer: *mut *mut ::std::os::raw::c_void,
+        nTypes: u8,
+        nKeySyms: u8,
+        nKeyActions: u8,
+        totalActions: u16,
+        totalKeyBehaviors: u8,
+        virtualMods: u16,
+        totalKeyExplicit: u8,
+        totalModMapKeys: u8,
+        totalVModMapKeys: u8,
+        present: u16,
+        _aux: *const xcb_xkb_get_map_map_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_unpack(
+        _buffer: *const ::std::os::raw::c_void,
+        nTypes: u8,
+        nKeySyms: u8,
+        nKeyActions: u8,
+        totalActions: u16,
+        totalKeyBehaviors: u8,
+        virtualMods: u16,
+        totalKeyExplicit: u8,
+        totalModMapKeys: u8,
+        totalVModMapKeys: u8,
+        present: u16,
+        _aux: *mut xcb_xkb_get_map_map_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+        nTypes: u8,
+        nKeySyms: u8,
+        nKeyActions: u8,
+        totalActions: u16,
+        totalKeyBehaviors: u8,
+        virtualMods: u16,
+        totalKeyExplicit: u8,
+        totalModMapKeys: u8,
+        totalVModMapKeys: u8,
+        present: u16,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_sizeof(_buffer: *const ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        full: u16,
+        partial: u16,
+        firstType: u8,
+        nTypes: u8,
+        firstKeySym: xcb_keycode_t,
+        nKeySyms: u8,
+        firstKeyAction: xcb_keycode_t,
+        nKeyActions: u8,
+        firstKeyBehavior: xcb_keycode_t,
+        nKeyBehaviors: u8,
+        virtualMods: u16,
+        firstKeyExplicit: xcb_keycode_t,
+        nKeyExplicit: u8,
+        firstModMapKey: xcb_keycode_t,
+        nModMapKeys: u8,
+        firstVModMapKey: xcb_keycode_t,
+        nVModMapKeys: u8,
+    ) -> xcb_xkb_get_map_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_unchecked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        full: u16,
+        partial: u16,
+        firstType: u8,
+        nTypes: u8,
+        firstKeySym: xcb_keycode_t,
+        nKeySyms: u8,
+        firstKeyAction: xcb_keycode_t,
+        nKeyActions: u8,
+        firstKeyBehavior: xcb_keycode_t,
+        nKeyBehaviors: u8,
+        virtualMods: u16,
+        firstKeyExplicit: xcb_keycode_t,
+        nKeyExplicit: u8,
+        firstModMapKey: xcb_keycode_t,
+        nModMapKeys: u8,
+        firstVModMapKey: xcb_keycode_t,
+        nVModMapKeys: u8,
+    ) -> xcb_xkb_get_map_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_map(R: *const xcb_xkb_get_map_reply_t) -> *mut ::std::os::raw::c_void;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_map_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_xkb_get_map_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_xkb_get_map_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_types_length(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_types_iterator(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> xcb_xkb_set_key_type_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_syms_length(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_syms_iterator(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> xcb_xkb_key_sym_map_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_actions_count(S: *const xcb_xkb_set_map_values_t) -> *mut u8;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_actions_count_length(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_actions_count_end(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_actions(
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> *mut xcb_xkb_action_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_actions_length(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_actions_iterator(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> xcb_xkb_action_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_behaviors(
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> *mut xcb_xkb_set_behavior_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_behaviors_length(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_behaviors_iterator(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> xcb_xkb_set_behavior_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_vmods(S: *const xcb_xkb_set_map_values_t) -> *mut u8;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_vmods_length(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_vmods_end(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_explicit(
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> *mut xcb_xkb_set_explicit_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_explicit_length(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_explicit_iterator(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> xcb_xkb_set_explicit_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_modmap(
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> *mut xcb_xkb_key_mod_map_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_modmap_length(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_modmap_iterator(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> xcb_xkb_key_mod_map_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_vmodmap(
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> *mut xcb_xkb_key_v_mod_map_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_vmodmap_length(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_vmodmap_iterator(
+        R: *const xcb_xkb_set_map_request_t,
+        S: *const xcb_xkb_set_map_values_t,
+    ) -> xcb_xkb_key_v_mod_map_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_serialize(
+        _buffer: *mut *mut ::std::os::raw::c_void,
+        nTypes: u8,
+        nKeySyms: u8,
+        nKeyActions: u8,
+        totalActions: u16,
+        totalKeyBehaviors: u8,
+        virtualMods: u16,
+        totalKeyExplicit: u8,
+        totalModMapKeys: u8,
+        totalVModMapKeys: u8,
+        present: u16,
+        _aux: *const xcb_xkb_set_map_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_unpack(
+        _buffer: *const ::std::os::raw::c_void,
+        nTypes: u8,
+        nKeySyms: u8,
+        nKeyActions: u8,
+        totalActions: u16,
+        totalKeyBehaviors: u8,
+        virtualMods: u16,
+        totalKeyExplicit: u8,
+        totalModMapKeys: u8,
+        totalVModMapKeys: u8,
+        present: u16,
+        _aux: *mut xcb_xkb_set_map_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+        nTypes: u8,
+        nKeySyms: u8,
+        nKeyActions: u8,
+        totalActions: u16,
+        totalKeyBehaviors: u8,
+        virtualMods: u16,
+        totalKeyExplicit: u8,
+        totalModMapKeys: u8,
+        totalVModMapKeys: u8,
+        present: u16,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_sizeof(_buffer: *const ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_checked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        present: u16,
+        flags: u16,
+        minKeyCode: xcb_keycode_t,
+        maxKeyCode: xcb_keycode_t,
+        firstType: u8,
+        nTypes: u8,
+        firstKeySym: xcb_keycode_t,
+        nKeySyms: u8,
+        totalSyms: u16,
+        firstKeyAction: xcb_keycode_t,
+        nKeyActions: u8,
+        totalActions: u16,
+        firstKeyBehavior: xcb_keycode_t,
+        nKeyBehaviors: u8,
+        totalKeyBehaviors: u8,
+        firstKeyExplicit: xcb_keycode_t,
+        nKeyExplicit: u8,
+        totalKeyExplicit: u8,
+        firstModMapKey: xcb_keycode_t,
+        nModMapKeys: u8,
+        totalModMapKeys: u8,
+        firstVModMapKey: xcb_keycode_t,
+        nVModMapKeys: u8,
+        totalVModMapKeys: u8,
+        virtualMods: u16,
+        values: *const ::std::os::raw::c_void,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        present: u16,
+        flags: u16,
+        minKeyCode: xcb_keycode_t,
+        maxKeyCode: xcb_keycode_t,
+        firstType: u8,
+        nTypes: u8,
+        firstKeySym: xcb_keycode_t,
+        nKeySyms: u8,
+        totalSyms: u16,
+        firstKeyAction: xcb_keycode_t,
+        nKeyActions: u8,
+        totalActions: u16,
+        firstKeyBehavior: xcb_keycode_t,
+        nKeyBehaviors: u8,
+        totalKeyBehaviors: u8,
+        firstKeyExplicit: xcb_keycode_t,
+        nKeyExplicit: u8,
+        totalKeyExplicit: u8,
+        firstModMapKey: xcb_keycode_t,
+        nModMapKeys: u8,
+        totalModMapKeys: u8,
+        firstVModMapKey: xcb_keycode_t,
+        nVModMapKeys: u8,
+        totalVModMapKeys: u8,
+        virtualMods: u16,
+        values: *const ::std::os::raw::c_void,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_aux_checked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        present: u16,
+        flags: u16,
+        minKeyCode: xcb_keycode_t,
+        maxKeyCode: xcb_keycode_t,
+        firstType: u8,
+        nTypes: u8,
+        firstKeySym: xcb_keycode_t,
+        nKeySyms: u8,
+        totalSyms: u16,
+        firstKeyAction: xcb_keycode_t,
+        nKeyActions: u8,
+        totalActions: u16,
+        firstKeyBehavior: xcb_keycode_t,
+        nKeyBehaviors: u8,
+        totalKeyBehaviors: u8,
+        firstKeyExplicit: xcb_keycode_t,
+        nKeyExplicit: u8,
+        totalKeyExplicit: u8,
+        firstModMapKey: xcb_keycode_t,
+        nModMapKeys: u8,
+        totalModMapKeys: u8,
+        firstVModMapKey: xcb_keycode_t,
+        nVModMapKeys: u8,
+        totalVModMapKeys: u8,
+        virtualMods: u16,
+        values: *const xcb_xkb_set_map_values_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_aux(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        present: u16,
+        flags: u16,
+        minKeyCode: xcb_keycode_t,
+        maxKeyCode: xcb_keycode_t,
+        firstType: u8,
+        nTypes: u8,
+        firstKeySym: xcb_keycode_t,
+        nKeySyms: u8,
+        totalSyms: u16,
+        firstKeyAction: xcb_keycode_t,
+        nKeyActions: u8,
+        totalActions: u16,
+        firstKeyBehavior: xcb_keycode_t,
+        nKeyBehaviors: u8,
+        totalKeyBehaviors: u8,
+        firstKeyExplicit: xcb_keycode_t,
+        nKeyExplicit: u8,
+        totalKeyExplicit: u8,
+        firstModMapKey: xcb_keycode_t,
+        nModMapKeys: u8,
+        totalModMapKeys: u8,
+        firstVModMapKey: xcb_keycode_t,
+        nVModMapKeys: u8,
+        totalVModMapKeys: u8,
+        virtualMods: u16,
+        values: *const xcb_xkb_set_map_values_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_map_values(
+        R: *const xcb_xkb_set_map_request_t,
+    ) -> *mut ::std::os::raw::c_void;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_compat_map_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_compat_map(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        groups: u8,
+        getAllSI: u8,
+        firstSI: u16,
+        nSI: u16,
+    ) -> xcb_xkb_get_compat_map_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_compat_map_unchecked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        groups: u8,
+        getAllSI: u8,
+        firstSI: u16,
+        nSI: u16,
+    ) -> xcb_xkb_get_compat_map_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_compat_map_si_rtrn(
+        R: *const xcb_xkb_get_compat_map_reply_t,
+    ) -> *mut xcb_xkb_sym_interpret_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_compat_map_si_rtrn_length(
+        R: *const xcb_xkb_get_compat_map_reply_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_compat_map_si_rtrn_iterator(
+        R: *const xcb_xkb_get_compat_map_reply_t,
+    ) -> xcb_xkb_sym_interpret_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_compat_map_group_rtrn(
+        R: *const xcb_xkb_get_compat_map_reply_t,
+    ) -> *mut xcb_xkb_mod_def_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_compat_map_group_rtrn_length(
+        R: *const xcb_xkb_get_compat_map_reply_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_compat_map_group_rtrn_iterator(
+        R: *const xcb_xkb_get_compat_map_reply_t,
+    ) -> xcb_xkb_mod_def_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_compat_map_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_xkb_get_compat_map_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_xkb_get_compat_map_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_compat_map_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_compat_map_checked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        recomputeActions: u8,
+        truncateSI: u8,
+        groups: u8,
+        firstSI: u16,
+        nSI: u16,
+        si: *const xcb_xkb_sym_interpret_t,
+        groupMaps: *const xcb_xkb_mod_def_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_compat_map(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        recomputeActions: u8,
+        truncateSI: u8,
+        groups: u8,
+        firstSI: u16,
+        nSI: u16,
+        si: *const xcb_xkb_sym_interpret_t,
+        groupMaps: *const xcb_xkb_mod_def_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_compat_map_si(
+        R: *const xcb_xkb_set_compat_map_request_t,
+    ) -> *mut xcb_xkb_sym_interpret_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_compat_map_si_length(
+        R: *const xcb_xkb_set_compat_map_request_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_compat_map_si_iterator(
+        R: *const xcb_xkb_set_compat_map_request_t,
+    ) -> xcb_xkb_sym_interpret_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_compat_map_group_maps(
+        R: *const xcb_xkb_set_compat_map_request_t,
+    ) -> *mut xcb_xkb_mod_def_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_compat_map_group_maps_length(
+        R: *const xcb_xkb_set_compat_map_request_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_compat_map_group_maps_iterator(
+        R: *const xcb_xkb_set_compat_map_request_t,
+    ) -> xcb_xkb_mod_def_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_indicator_state(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+    ) -> xcb_xkb_get_indicator_state_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_indicator_state_unchecked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+    ) -> xcb_xkb_get_indicator_state_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_indicator_state_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_xkb_get_indicator_state_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_xkb_get_indicator_state_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_indicator_map_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_indicator_map(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        which: u32,
+    ) -> xcb_xkb_get_indicator_map_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_indicator_map_unchecked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        which: u32,
+    ) -> xcb_xkb_get_indicator_map_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_indicator_map_maps(
+        R: *const xcb_xkb_get_indicator_map_reply_t,
+    ) -> *mut xcb_xkb_indicator_map_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_indicator_map_maps_length(
+        R: *const xcb_xkb_get_indicator_map_reply_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_indicator_map_maps_iterator(
+        R: *const xcb_xkb_get_indicator_map_reply_t,
+    ) -> xcb_xkb_indicator_map_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_indicator_map_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_xkb_get_indicator_map_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_xkb_get_indicator_map_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_indicator_map_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_indicator_map_checked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        which: u32,
+        maps: *const xcb_xkb_indicator_map_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_indicator_map(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        which: u32,
+        maps: *const xcb_xkb_indicator_map_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_indicator_map_maps(
+        R: *const xcb_xkb_set_indicator_map_request_t,
+    ) -> *mut xcb_xkb_indicator_map_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_indicator_map_maps_length(
+        R: *const xcb_xkb_set_indicator_map_request_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_indicator_map_maps_iterator(
+        R: *const xcb_xkb_set_indicator_map_request_t,
+    ) -> xcb_xkb_indicator_map_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_named_indicator(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        ledClass: xcb_xkb_led_class_spec_t,
+        ledID: xcb_xkb_id_spec_t,
+        indicator: xcb_atom_t,
+    ) -> xcb_xkb_get_named_indicator_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_named_indicator_unchecked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        ledClass: xcb_xkb_led_class_spec_t,
+        ledID: xcb_xkb_id_spec_t,
+        indicator: xcb_atom_t,
+    ) -> xcb_xkb_get_named_indicator_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_named_indicator_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_xkb_get_named_indicator_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_xkb_get_named_indicator_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_named_indicator_checked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        ledClass: xcb_xkb_led_class_spec_t,
+        ledID: xcb_xkb_id_spec_t,
+        indicator: xcb_atom_t,
+        setState: u8,
+        on: u8,
+        setMap: u8,
+        createMap: u8,
+        map_flags: u8,
+        map_whichGroups: u8,
+        map_groups: u8,
+        map_whichMods: u8,
+        map_realMods: u8,
+        map_vmods: u16,
+        map_ctrls: u32,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_named_indicator(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        ledClass: xcb_xkb_led_class_spec_t,
+        ledID: xcb_xkb_id_spec_t,
+        indicator: xcb_atom_t,
+        setState: u8,
+        on: u8,
+        setMap: u8,
+        createMap: u8,
+        map_flags: u8,
+        map_whichGroups: u8,
+        map_groups: u8,
+        map_whichMods: u8,
+        map_realMods: u8,
+        map_vmods: u16,
+        map_ctrls: u32,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_type_names(
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_type_names_length(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_type_names_end(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_n_levels_per_type(
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> *mut u8;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_n_levels_per_type_length(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_n_levels_per_type_end(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_kt_level_names(
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_kt_level_names_length(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_kt_level_names_end(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_indicator_names(
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_indicator_names_length(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_indicator_names_end(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_virtual_mod_names(
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_virtual_mod_names_length(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_virtual_mod_names_end(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_groups(
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_groups_length(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_groups_end(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_key_names(
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> *mut xcb_xkb_key_name_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_key_names_length(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_key_names_iterator(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> xcb_xkb_key_name_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_key_aliases(
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> *mut xcb_xkb_key_alias_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_key_aliases_length(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_key_aliases_iterator(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> xcb_xkb_key_alias_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_radio_group_names(
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_radio_group_names_length(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_radio_group_names_end(
+        R: *const xcb_xkb_get_names_reply_t,
+        S: *const xcb_xkb_get_names_value_list_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_serialize(
+        _buffer: *mut *mut ::std::os::raw::c_void,
+        nTypes: u8,
+        indicators: u32,
+        virtualMods: u16,
+        groupNames: u8,
+        nKeys: u8,
+        nKeyAliases: u8,
+        nRadioGroups: u8,
+        which: u32,
+        _aux: *const xcb_xkb_get_names_value_list_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_unpack(
+        _buffer: *const ::std::os::raw::c_void,
+        nTypes: u8,
+        indicators: u32,
+        virtualMods: u16,
+        groupNames: u8,
+        nKeys: u8,
+        nKeyAliases: u8,
+        nRadioGroups: u8,
+        which: u32,
+        _aux: *mut xcb_xkb_get_names_value_list_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+        nTypes: u8,
+        indicators: u32,
+        virtualMods: u16,
+        groupNames: u8,
+        nKeys: u8,
+        nKeyAliases: u8,
+        nRadioGroups: u8,
+        which: u32,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        which: u32,
+    ) -> xcb_xkb_get_names_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_unchecked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        which: u32,
+    ) -> xcb_xkb_get_names_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_value_list(
+        R: *const xcb_xkb_get_names_reply_t,
+    ) -> *mut ::std::os::raw::c_void;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_names_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_xkb_get_names_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_xkb_get_names_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_type_names(
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_type_names_length(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_type_names_end(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_n_levels_per_type(
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> *mut u8;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_n_levels_per_type_length(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_n_levels_per_type_end(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_kt_level_names(
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_kt_level_names_length(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_kt_level_names_end(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_indicator_names(
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_indicator_names_length(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_indicator_names_end(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_virtual_mod_names(
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_virtual_mod_names_length(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_virtual_mod_names_end(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_groups(S: *const xcb_xkb_set_names_values_t)
+        -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_groups_length(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_groups_end(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_key_names(
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> *mut xcb_xkb_key_name_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_key_names_length(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_key_names_iterator(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> xcb_xkb_key_name_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_key_aliases(
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> *mut xcb_xkb_key_alias_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_key_aliases_length(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_key_aliases_iterator(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> xcb_xkb_key_alias_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_radio_group_names(
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_radio_group_names_length(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_radio_group_names_end(
+        R: *const xcb_xkb_set_names_request_t,
+        S: *const xcb_xkb_set_names_values_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_serialize(
+        _buffer: *mut *mut ::std::os::raw::c_void,
+        nTypes: u8,
+        indicators: u32,
+        virtualMods: u16,
+        groupNames: u8,
+        nKeys: u8,
+        nKeyAliases: u8,
+        nRadioGroups: u8,
+        which: u32,
+        _aux: *const xcb_xkb_set_names_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_unpack(
+        _buffer: *const ::std::os::raw::c_void,
+        nTypes: u8,
+        indicators: u32,
+        virtualMods: u16,
+        groupNames: u8,
+        nKeys: u8,
+        nKeyAliases: u8,
+        nRadioGroups: u8,
+        which: u32,
+        _aux: *mut xcb_xkb_set_names_values_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+        nTypes: u8,
+        indicators: u32,
+        virtualMods: u16,
+        groupNames: u8,
+        nKeys: u8,
+        nKeyAliases: u8,
+        nRadioGroups: u8,
+        which: u32,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_checked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        virtualMods: u16,
+        which: u32,
+        firstType: u8,
+        nTypes: u8,
+        firstKTLevelt: u8,
+        nKTLevels: u8,
+        indicators: u32,
+        groupNames: u8,
+        nRadioGroups: u8,
+        firstKey: xcb_keycode_t,
+        nKeys: u8,
+        nKeyAliases: u8,
+        totalKTLevelNames: u16,
+        values: *const ::std::os::raw::c_void,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        virtualMods: u16,
+        which: u32,
+        firstType: u8,
+        nTypes: u8,
+        firstKTLevelt: u8,
+        nKTLevels: u8,
+        indicators: u32,
+        groupNames: u8,
+        nRadioGroups: u8,
+        firstKey: xcb_keycode_t,
+        nKeys: u8,
+        nKeyAliases: u8,
+        totalKTLevelNames: u16,
+        values: *const ::std::os::raw::c_void,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_aux_checked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        virtualMods: u16,
+        which: u32,
+        firstType: u8,
+        nTypes: u8,
+        firstKTLevelt: u8,
+        nKTLevels: u8,
+        indicators: u32,
+        groupNames: u8,
+        nRadioGroups: u8,
+        firstKey: xcb_keycode_t,
+        nKeys: u8,
+        nKeyAliases: u8,
+        totalKTLevelNames: u16,
+        values: *const xcb_xkb_set_names_values_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_aux(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        virtualMods: u16,
+        which: u32,
+        firstType: u8,
+        nTypes: u8,
+        firstKTLevelt: u8,
+        nKTLevels: u8,
+        indicators: u32,
+        groupNames: u8,
+        nRadioGroups: u8,
+        firstKey: xcb_keycode_t,
+        nKeys: u8,
+        nKeyAliases: u8,
+        totalKTLevelNames: u16,
+        values: *const xcb_xkb_set_names_values_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_names_values(
+        R: *const xcb_xkb_set_names_request_t,
+    ) -> *mut ::std::os::raw::c_void;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_per_client_flags(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        change: u32,
+        value: u32,
+        ctrlsToChange: u32,
+        autoCtrls: u32,
+        autoCtrlsValues: u32,
+    ) -> xcb_xkb_per_client_flags_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_per_client_flags_unchecked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        change: u32,
+        value: u32,
+        ctrlsToChange: u32,
+        autoCtrls: u32,
+        autoCtrlsValues: u32,
+    ) -> xcb_xkb_per_client_flags_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_per_client_flags_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_xkb_per_client_flags_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_xkb_per_client_flags_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        maxNames: u16,
+    ) -> xcb_xkb_list_components_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_unchecked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        maxNames: u16,
+    ) -> xcb_xkb_list_components_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_keymaps_length(
+        R: *const xcb_xkb_list_components_reply_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_keymaps_iterator(
+        R: *const xcb_xkb_list_components_reply_t,
+    ) -> xcb_xkb_listing_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_keycodes_length(
+        R: *const xcb_xkb_list_components_reply_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_keycodes_iterator(
+        R: *const xcb_xkb_list_components_reply_t,
+    ) -> xcb_xkb_listing_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_types_length(
+        R: *const xcb_xkb_list_components_reply_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_types_iterator(
+        R: *const xcb_xkb_list_components_reply_t,
+    ) -> xcb_xkb_listing_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_compat_maps_length(
+        R: *const xcb_xkb_list_components_reply_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_compat_maps_iterator(
+        R: *const xcb_xkb_list_components_reply_t,
+    ) -> xcb_xkb_listing_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_symbols_length(
+        R: *const xcb_xkb_list_components_reply_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_symbols_iterator(
+        R: *const xcb_xkb_list_components_reply_t,
+    ) -> xcb_xkb_listing_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_geometries_length(
+        R: *const xcb_xkb_list_components_reply_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_geometries_iterator(
+        R: *const xcb_xkb_list_components_reply_t,
+    ) -> xcb_xkb_listing_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_list_components_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_xkb_list_components_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_xkb_list_components_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_types_rtrn_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_types_rtrn_iterator(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_xkb_key_type_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_syms_rtrn_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_syms_rtrn_iterator(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_xkb_key_sym_map_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_acts_rtrn_count(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut u8;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_acts_rtrn_count_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_acts_rtrn_count_end(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_acts_rtrn_acts(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_xkb_action_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_acts_rtrn_acts_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_acts_rtrn_acts_iterator(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_xkb_action_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_behaviors_rtrn(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_xkb_set_behavior_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_behaviors_rtrn_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_behaviors_rtrn_iterator(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_xkb_set_behavior_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_vmods_rtrn(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut u8;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_vmods_rtrn_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_vmods_rtrn_end(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_explicit_rtrn(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_xkb_set_explicit_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_explicit_rtrn_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_explicit_rtrn_iterator(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_xkb_set_explicit_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_modmap_rtrn(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_xkb_key_mod_map_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_modmap_rtrn_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_modmap_rtrn_iterator(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_xkb_key_mod_map_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_vmodmap_rtrn(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_xkb_key_v_mod_map_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_vmodmap_rtrn_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_vmodmap_rtrn_iterator(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_xkb_key_v_mod_map_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_serialize(
+        _buffer: *mut *mut ::std::os::raw::c_void,
+        nTypes: u8,
+        nKeySyms: u8,
+        nKeyActions: u8,
+        totalActions: u16,
+        totalKeyBehaviors: u8,
+        virtualMods: u16,
+        totalKeyExplicit: u8,
+        totalModMapKeys: u8,
+        totalVModMapKeys: u8,
+        present: u16,
+        _aux: *const xcb_xkb_get_kbd_by_name_replies_types_map_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_unpack(
+        _buffer: *const ::std::os::raw::c_void,
+        nTypes: u8,
+        nKeySyms: u8,
+        nKeyActions: u8,
+        totalActions: u16,
+        totalKeyBehaviors: u8,
+        virtualMods: u16,
+        totalKeyExplicit: u8,
+        totalModMapKeys: u8,
+        totalVModMapKeys: u8,
+        present: u16,
+        _aux: *mut xcb_xkb_get_kbd_by_name_replies_types_map_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_types_map_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+        nTypes: u8,
+        nKeySyms: u8,
+        nKeyActions: u8,
+        totalActions: u16,
+        totalKeyBehaviors: u8,
+        virtualMods: u16,
+        totalKeyExplicit: u8,
+        totalModMapKeys: u8,
+        totalVModMapKeys: u8,
+        present: u16,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_type_names(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_type_names_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_type_names_end(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_n_levels_per_type(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut u8;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_n_levels_per_type_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_n_levels_per_type_end(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_kt_level_names(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_kt_level_names_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_kt_level_names_end(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_indicator_names(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_indicator_names_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_indicator_names_end(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_virtual_mod_names(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_virtual_mod_names_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_virtual_mod_names_end(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_groups(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_groups_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_groups_end(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_key_names(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_xkb_key_name_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_key_names_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_key_names_iterator(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_xkb_key_name_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_key_aliases(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_xkb_key_alias_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_key_aliases_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_key_aliases_iterator(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_xkb_key_alias_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_radio_group_names(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_atom_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_radio_group_names_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_radio_group_names_end(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_serialize(
+        _buffer: *mut *mut ::std::os::raw::c_void,
+        nTypes: u8,
+        indicators: u32,
+        virtualMods: u16,
+        groupNames: u8,
+        nKeys: u8,
+        nKeyAliases: u8,
+        nRadioGroups: u8,
+        which: u32,
+        _aux: *const xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_unpack(
+        _buffer: *const ::std::os::raw::c_void,
+        nTypes: u8,
+        indicators: u32,
+        virtualMods: u16,
+        groupNames: u8,
+        nKeys: u8,
+        nKeyAliases: u8,
+        nRadioGroups: u8,
+        which: u32,
+        _aux: *mut xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+        nTypes: u8,
+        indicators: u32,
+        virtualMods: u16,
+        groupNames: u8,
+        nKeys: u8,
+        nKeyAliases: u8,
+        nRadioGroups: u8,
+        which: u32,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_compat_map_si_rtrn(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_xkb_sym_interpret_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_compat_map_si_rtrn_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_compat_map_si_rtrn_iterator(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_xkb_sym_interpret_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_compat_map_group_rtrn(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_xkb_mod_def_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_compat_map_group_rtrn_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_compat_map_group_rtrn_iterator(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_xkb_mod_def_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_indicator_maps_maps(
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_xkb_indicator_map_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_indicator_maps_maps_length(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_indicator_maps_maps_iterator(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+        S: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> xcb_xkb_indicator_map_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_key_names_value_list(
+        R: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_xkb_get_kbd_by_name_replies_key_names_value_list_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_geometry_label_font(
+        R: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> *mut xcb_xkb_counted_string_16_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_serialize(
+        _buffer: *mut *mut ::std::os::raw::c_void,
+        reported: u16,
+        _aux: *const xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_unpack(
+        _buffer: *const ::std::os::raw::c_void,
+        reported: u16,
+        _aux: *mut xcb_xkb_get_kbd_by_name_replies_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+        reported: u16,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        need: u16,
+        want: u16,
+        load: u8,
+    ) -> xcb_xkb_get_kbd_by_name_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_unchecked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        need: u16,
+        want: u16,
+        load: u8,
+    ) -> xcb_xkb_get_kbd_by_name_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_replies(
+        R: *const xcb_xkb_get_kbd_by_name_reply_t,
+    ) -> *mut ::std::os::raw::c_void;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_kbd_by_name_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_xkb_get_kbd_by_name_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_xkb_get_kbd_by_name_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_device_info_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_device_info(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        wanted: u16,
+        allButtons: u8,
+        firstButton: u8,
+        nButtons: u8,
+        ledClass: xcb_xkb_led_class_spec_t,
+        ledID: xcb_xkb_id_spec_t,
+    ) -> xcb_xkb_get_device_info_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_device_info_unchecked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        wanted: u16,
+        allButtons: u8,
+        firstButton: u8,
+        nButtons: u8,
+        ledClass: xcb_xkb_led_class_spec_t,
+        ledID: xcb_xkb_id_spec_t,
+    ) -> xcb_xkb_get_device_info_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_device_info_name(
+        R: *const xcb_xkb_get_device_info_reply_t,
+    ) -> *mut xcb_xkb_string8_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_device_info_name_length(
+        R: *const xcb_xkb_get_device_info_reply_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_device_info_name_end(
+        R: *const xcb_xkb_get_device_info_reply_t,
+    ) -> xcb_generic_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_device_info_btn_actions(
+        R: *const xcb_xkb_get_device_info_reply_t,
+    ) -> *mut xcb_xkb_action_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_device_info_btn_actions_length(
+        R: *const xcb_xkb_get_device_info_reply_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_device_info_btn_actions_iterator(
+        R: *const xcb_xkb_get_device_info_reply_t,
+    ) -> xcb_xkb_action_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_device_info_leds_length(
+        R: *const xcb_xkb_get_device_info_reply_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_device_info_leds_iterator(
+        R: *const xcb_xkb_get_device_info_reply_t,
+    ) -> xcb_xkb_device_led_info_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_get_device_info_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_xkb_get_device_info_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_xkb_get_device_info_reply_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_device_info_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_device_info_checked(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        firstBtn: u8,
+        nBtns: u8,
+        change: u16,
+        nDeviceLedFBs: u16,
+        btnActions: *const xcb_xkb_action_t,
+        leds: *const xcb_xkb_device_led_info_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_device_info(
+        c: *mut xcb_connection_t,
+        deviceSpec: xcb_xkb_device_spec_t,
+        firstBtn: u8,
+        nBtns: u8,
+        change: u16,
+        nDeviceLedFBs: u16,
+        btnActions: *const xcb_xkb_action_t,
+        leds: *const xcb_xkb_device_led_info_t,
+    ) -> xcb_void_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_device_info_btn_actions(
+        R: *const xcb_xkb_set_device_info_request_t,
+    ) -> *mut xcb_xkb_action_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_device_info_btn_actions_length(
+        R: *const xcb_xkb_set_device_info_request_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_device_info_btn_actions_iterator(
+        R: *const xcb_xkb_set_device_info_request_t,
+    ) -> xcb_xkb_action_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_device_info_leds_length(
+        R: *const xcb_xkb_set_device_info_request_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_device_info_leds_iterator(
+        R: *const xcb_xkb_set_device_info_request_t,
+    ) -> xcb_xkb_device_led_info_iterator_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_debugging_flags_sizeof(
+        _buffer: *const ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_debugging_flags(
+        c: *mut xcb_connection_t,
+        msgLength: u16,
+        affectFlags: u32,
+        flags: u32,
+        affectCtrls: u32,
+        ctrls: u32,
+        message: *const xcb_xkb_string8_t,
+    ) -> xcb_xkb_set_debugging_flags_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_debugging_flags_unchecked(
+        c: *mut xcb_connection_t,
+        msgLength: u16,
+        affectFlags: u32,
+        flags: u32,
+        affectCtrls: u32,
+        ctrls: u32,
+        message: *const xcb_xkb_string8_t,
+    ) -> xcb_xkb_set_debugging_flags_cookie_t;
+}
+unsafe extern "C" {
+    pub fn xcb_xkb_set_debugging_flags_reply(
+        c: *mut xcb_connection_t,
+        cookie: xcb_xkb_set_debugging_flags_cookie_t,
+        e: *mut *mut xcb_generic_error_t,
+    ) -> *mut xcb_xkb_set_debugging_flags_reply_t;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xkb_context {
+    _unused: [u8; 0],
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xkb_keymap {
+    _unused: [u8; 0],
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xkb_state {
+    _unused: [u8; 0],
+}
+pub type xkb_keycode_t = u32;
+pub type xkb_keysym_t = u32;
+pub type xkb_layout_index_t = u32;
+pub type xkb_layout_mask_t = u32;
+pub type xkb_level_index_t = u32;
+pub type xkb_mod_index_t = u32;
+pub type xkb_mod_mask_t = u32;
+pub type xkb_led_index_t = u32;
+pub type xkb_led_mask_t = u32;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xkb_rule_names {
+    pub rules: *const ::std::os::raw::c_char,
+    pub model: *const ::std::os::raw::c_char,
+    pub layout: *const ::std::os::raw::c_char,
+    pub variant: *const ::std::os::raw::c_char,
+    pub options: *const ::std::os::raw::c_char,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xkb_rule_names"][::std::mem::size_of::<xkb_rule_names>() - 40usize];
+    ["Alignment of xkb_rule_names"][::std::mem::align_of::<xkb_rule_names>() - 8usize];
+    ["Offset of field: xkb_rule_names::rules"]
+        [::std::mem::offset_of!(xkb_rule_names, rules) - 0usize];
+    ["Offset of field: xkb_rule_names::model"]
+        [::std::mem::offset_of!(xkb_rule_names, model) - 8usize];
+    ["Offset of field: xkb_rule_names::layout"]
+        [::std::mem::offset_of!(xkb_rule_names, layout) - 16usize];
+    ["Offset of field: xkb_rule_names::variant"]
+        [::std::mem::offset_of!(xkb_rule_names, variant) - 24usize];
+    ["Offset of field: xkb_rule_names::options"]
+        [::std::mem::offset_of!(xkb_rule_names, options) - 32usize];
+};
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct xkb_component_names {
+    pub keycodes: *mut ::std::os::raw::c_char,
+    pub compatibility: *mut ::std::os::raw::c_char,
+    pub geometry: *mut ::std::os::raw::c_char,
+    pub symbols: *mut ::std::os::raw::c_char,
+    pub types: *mut ::std::os::raw::c_char,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of xkb_component_names"][::std::mem::size_of::<xkb_component_names>() - 40usize];
+    ["Alignment of xkb_component_names"][::std::mem::align_of::<xkb_component_names>() - 8usize];
+    ["Offset of field: xkb_component_names::keycodes"]
+        [::std::mem::offset_of!(xkb_component_names, keycodes) - 0usize];
+    ["Offset of field: xkb_component_names::compatibility"]
+        [::std::mem::offset_of!(xkb_component_names, compatibility) - 8usize];
+    ["Offset of field: xkb_component_names::geometry"]
+        [::std::mem::offset_of!(xkb_component_names, geometry) - 16usize];
+    ["Offset of field: xkb_component_names::symbols"]
+        [::std::mem::offset_of!(xkb_component_names, symbols) - 24usize];
+    ["Offset of field: xkb_component_names::types"]
+        [::std::mem::offset_of!(xkb_component_names, types) - 32usize];
+};
+unsafe extern "C" {
+    pub fn xkb_components_names_from_rules(
+        context: *mut xkb_context,
+        rmlvo_in: *const xkb_rule_names,
+        rmlvo_out: *mut xkb_rule_names,
+        components_out: *mut xkb_component_names,
+    ) -> bool;
+}
+unsafe extern "C" {
+    pub fn xkb_keysym_get_name(
+        keysym: xkb_keysym_t,
+        buffer: *mut ::std::os::raw::c_char,
+        size: usize,
+    ) -> ::std::os::raw::c_int;
+}
+pub const xkb_keysym_flags_XKB_KEYSYM_NO_FLAGS: xkb_keysym_flags = 0;
+pub const xkb_keysym_flags_XKB_KEYSYM_CASE_INSENSITIVE: xkb_keysym_flags = 1;
+pub type xkb_keysym_flags = ::std::os::raw::c_uint;
+unsafe extern "C" {
+    pub fn xkb_keysym_from_name(
+        name: *const ::std::os::raw::c_char,
+        flags: xkb_keysym_flags,
+    ) -> xkb_keysym_t;
+}
+unsafe extern "C" {
+    pub fn xkb_keysym_to_utf8(
+        keysym: xkb_keysym_t,
+        buffer: *mut ::std::os::raw::c_char,
+        size: usize,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_keysym_to_utf32(keysym: xkb_keysym_t) -> u32;
+}
+unsafe extern "C" {
+    pub fn xkb_utf32_to_keysym(ucs: u32) -> xkb_keysym_t;
+}
+unsafe extern "C" {
+    pub fn xkb_keysym_to_upper(ks: xkb_keysym_t) -> xkb_keysym_t;
+}
+unsafe extern "C" {
+    pub fn xkb_keysym_to_lower(ks: xkb_keysym_t) -> xkb_keysym_t;
+}
+pub const xkb_context_flags_XKB_CONTEXT_NO_FLAGS: xkb_context_flags = 0;
+pub const xkb_context_flags_XKB_CONTEXT_NO_DEFAULT_INCLUDES: xkb_context_flags = 1;
+pub const xkb_context_flags_XKB_CONTEXT_NO_ENVIRONMENT_NAMES: xkb_context_flags = 2;
+pub const xkb_context_flags_XKB_CONTEXT_NO_SECURE_GETENV: xkb_context_flags = 4;
+pub type xkb_context_flags = ::std::os::raw::c_uint;
+unsafe extern "C" {
+    pub fn xkb_context_new(flags: xkb_context_flags) -> *mut xkb_context;
+}
+unsafe extern "C" {
+    pub fn xkb_context_ref(context: *mut xkb_context) -> *mut xkb_context;
+}
+unsafe extern "C" {
+    pub fn xkb_context_unref(context: *mut xkb_context);
+}
+unsafe extern "C" {
+    pub fn xkb_context_set_user_data(
+        context: *mut xkb_context,
+        user_data: *mut ::std::os::raw::c_void,
+    );
+}
+unsafe extern "C" {
+    pub fn xkb_context_get_user_data(context: *mut xkb_context) -> *mut ::std::os::raw::c_void;
+}
+unsafe extern "C" {
+    pub fn xkb_context_include_path_append(
+        context: *mut xkb_context,
+        path: *const ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_context_include_path_append_default(
+        context: *mut xkb_context,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_context_include_path_reset_defaults(
+        context: *mut xkb_context,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_context_include_path_clear(context: *mut xkb_context);
+}
+unsafe extern "C" {
+    pub fn xkb_context_num_include_paths(context: *mut xkb_context) -> ::std::os::raw::c_uint;
+}
+unsafe extern "C" {
+    pub fn xkb_context_include_path_get(
+        context: *mut xkb_context,
+        index: ::std::os::raw::c_uint,
+    ) -> *const ::std::os::raw::c_char;
+}
+pub const xkb_log_level_XKB_LOG_LEVEL_CRITICAL: xkb_log_level = 10;
+pub const xkb_log_level_XKB_LOG_LEVEL_ERROR: xkb_log_level = 20;
+pub const xkb_log_level_XKB_LOG_LEVEL_WARNING: xkb_log_level = 30;
+pub const xkb_log_level_XKB_LOG_LEVEL_INFO: xkb_log_level = 40;
+pub const xkb_log_level_XKB_LOG_LEVEL_DEBUG: xkb_log_level = 50;
+pub type xkb_log_level = ::std::os::raw::c_uint;
+unsafe extern "C" {
+    pub fn xkb_context_set_log_level(context: *mut xkb_context, level: xkb_log_level);
+}
+unsafe extern "C" {
+    pub fn xkb_context_get_log_level(context: *mut xkb_context) -> xkb_log_level;
+}
+unsafe extern "C" {
+    pub fn xkb_context_set_log_verbosity(
+        context: *mut xkb_context,
+        verbosity: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
+    pub fn xkb_context_get_log_verbosity(context: *mut xkb_context) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_context_set_log_fn(
+        context: *mut xkb_context,
+        log_fn: ::std::option::Option<
+            unsafe extern "C" fn(
+                context: *mut xkb_context,
+                level: xkb_log_level,
+                format: *const ::std::os::raw::c_char,
+                args: *mut __va_list_tag,
+            ),
+        >,
+    );
+}
+pub const xkb_keymap_compile_flags_XKB_KEYMAP_COMPILE_NO_FLAGS: xkb_keymap_compile_flags = 0;
+pub type xkb_keymap_compile_flags = ::std::os::raw::c_uint;
+unsafe extern "C" {
+    pub fn xkb_keymap_new_from_names(
+        context: *mut xkb_context,
+        names: *const xkb_rule_names,
+        flags: xkb_keymap_compile_flags,
+    ) -> *mut xkb_keymap;
+}
+pub const xkb_keymap_format_XKB_KEYMAP_FORMAT_TEXT_V1: xkb_keymap_format = 1;
+pub type xkb_keymap_format = ::std::os::raw::c_uint;
+unsafe extern "C" {
+    pub fn xkb_keymap_new_from_file(
+        context: *mut xkb_context,
+        file: *mut FILE,
+        format: xkb_keymap_format,
+        flags: xkb_keymap_compile_flags,
+    ) -> *mut xkb_keymap;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_new_from_string(
+        context: *mut xkb_context,
+        string: *const ::std::os::raw::c_char,
+        format: xkb_keymap_format,
+        flags: xkb_keymap_compile_flags,
+    ) -> *mut xkb_keymap;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_new_from_buffer(
+        context: *mut xkb_context,
+        buffer: *const ::std::os::raw::c_char,
+        length: usize,
+        format: xkb_keymap_format,
+        flags: xkb_keymap_compile_flags,
+    ) -> *mut xkb_keymap;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_ref(keymap: *mut xkb_keymap) -> *mut xkb_keymap;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_unref(keymap: *mut xkb_keymap);
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_get_as_string(
+        keymap: *mut xkb_keymap,
+        format: xkb_keymap_format,
+    ) -> *mut ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_min_keycode(keymap: *mut xkb_keymap) -> xkb_keycode_t;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_max_keycode(keymap: *mut xkb_keymap) -> xkb_keycode_t;
+}
+pub type xkb_keymap_key_iter_t = ::std::option::Option<
+    unsafe extern "C" fn(
+        keymap: *mut xkb_keymap,
+        key: xkb_keycode_t,
+        data: *mut ::std::os::raw::c_void,
+    ),
+>;
+unsafe extern "C" {
+    pub fn xkb_keymap_key_for_each(
+        keymap: *mut xkb_keymap,
+        iter: xkb_keymap_key_iter_t,
+        data: *mut ::std::os::raw::c_void,
+    );
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_key_get_name(
+        keymap: *mut xkb_keymap,
+        key: xkb_keycode_t,
+    ) -> *const ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_key_by_name(
+        keymap: *mut xkb_keymap,
+        name: *const ::std::os::raw::c_char,
+    ) -> xkb_keycode_t;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_num_mods(keymap: *mut xkb_keymap) -> xkb_mod_index_t;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_mod_get_name(
+        keymap: *mut xkb_keymap,
+        idx: xkb_mod_index_t,
+    ) -> *const ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_mod_get_index(
+        keymap: *mut xkb_keymap,
+        name: *const ::std::os::raw::c_char,
+    ) -> xkb_mod_index_t;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_num_layouts(keymap: *mut xkb_keymap) -> xkb_layout_index_t;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_layout_get_name(
+        keymap: *mut xkb_keymap,
+        idx: xkb_layout_index_t,
+    ) -> *const ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_layout_get_index(
+        keymap: *mut xkb_keymap,
+        name: *const ::std::os::raw::c_char,
+    ) -> xkb_layout_index_t;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_num_leds(keymap: *mut xkb_keymap) -> xkb_led_index_t;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_led_get_name(
+        keymap: *mut xkb_keymap,
+        idx: xkb_led_index_t,
+    ) -> *const ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_led_get_index(
+        keymap: *mut xkb_keymap,
+        name: *const ::std::os::raw::c_char,
+    ) -> xkb_led_index_t;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_num_layouts_for_key(
+        keymap: *mut xkb_keymap,
+        key: xkb_keycode_t,
+    ) -> xkb_layout_index_t;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_num_levels_for_key(
+        keymap: *mut xkb_keymap,
+        key: xkb_keycode_t,
+        layout: xkb_layout_index_t,
+    ) -> xkb_level_index_t;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_key_get_mods_for_level(
+        keymap: *mut xkb_keymap,
+        key: xkb_keycode_t,
+        layout: xkb_layout_index_t,
+        level: xkb_level_index_t,
+        masks_out: *mut xkb_mod_mask_t,
+        masks_size: usize,
+    ) -> usize;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_key_get_syms_by_level(
+        keymap: *mut xkb_keymap,
+        key: xkb_keycode_t,
+        layout: xkb_layout_index_t,
+        level: xkb_level_index_t,
+        syms_out: *mut *const xkb_keysym_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_keymap_key_repeats(
+        keymap: *mut xkb_keymap,
+        key: xkb_keycode_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_state_new(keymap: *mut xkb_keymap) -> *mut xkb_state;
+}
+unsafe extern "C" {
+    pub fn xkb_state_ref(state: *mut xkb_state) -> *mut xkb_state;
+}
+unsafe extern "C" {
+    pub fn xkb_state_unref(state: *mut xkb_state);
+}
+unsafe extern "C" {
+    pub fn xkb_state_get_keymap(state: *mut xkb_state) -> *mut xkb_keymap;
+}
+pub const xkb_key_direction_XKB_KEY_UP: xkb_key_direction = 0;
+pub const xkb_key_direction_XKB_KEY_DOWN: xkb_key_direction = 1;
+pub type xkb_key_direction = ::std::os::raw::c_uint;
+pub const xkb_state_component_XKB_STATE_MODS_DEPRESSED: xkb_state_component = 1;
+pub const xkb_state_component_XKB_STATE_MODS_LATCHED: xkb_state_component = 2;
+pub const xkb_state_component_XKB_STATE_MODS_LOCKED: xkb_state_component = 4;
+pub const xkb_state_component_XKB_STATE_MODS_EFFECTIVE: xkb_state_component = 8;
+pub const xkb_state_component_XKB_STATE_LAYOUT_DEPRESSED: xkb_state_component = 16;
+pub const xkb_state_component_XKB_STATE_LAYOUT_LATCHED: xkb_state_component = 32;
+pub const xkb_state_component_XKB_STATE_LAYOUT_LOCKED: xkb_state_component = 64;
+pub const xkb_state_component_XKB_STATE_LAYOUT_EFFECTIVE: xkb_state_component = 128;
+pub const xkb_state_component_XKB_STATE_LEDS: xkb_state_component = 256;
+pub type xkb_state_component = ::std::os::raw::c_uint;
+unsafe extern "C" {
+    pub fn xkb_state_update_key(
+        state: *mut xkb_state,
+        key: xkb_keycode_t,
+        direction: xkb_key_direction,
+    ) -> xkb_state_component;
+}
+unsafe extern "C" {
+    pub fn xkb_state_update_mask(
+        state: *mut xkb_state,
+        depressed_mods: xkb_mod_mask_t,
+        latched_mods: xkb_mod_mask_t,
+        locked_mods: xkb_mod_mask_t,
+        depressed_layout: xkb_layout_index_t,
+        latched_layout: xkb_layout_index_t,
+        locked_layout: xkb_layout_index_t,
+    ) -> xkb_state_component;
+}
+unsafe extern "C" {
+    pub fn xkb_state_key_get_syms(
+        state: *mut xkb_state,
+        key: xkb_keycode_t,
+        syms_out: *mut *const xkb_keysym_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_state_key_get_utf8(
+        state: *mut xkb_state,
+        key: xkb_keycode_t,
+        buffer: *mut ::std::os::raw::c_char,
+        size: usize,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_state_key_get_utf32(state: *mut xkb_state, key: xkb_keycode_t) -> u32;
+}
+unsafe extern "C" {
+    pub fn xkb_state_key_get_one_sym(state: *mut xkb_state, key: xkb_keycode_t) -> xkb_keysym_t;
+}
+unsafe extern "C" {
+    pub fn xkb_state_key_get_layout(
+        state: *mut xkb_state,
+        key: xkb_keycode_t,
+    ) -> xkb_layout_index_t;
+}
+unsafe extern "C" {
+    pub fn xkb_state_key_get_level(
+        state: *mut xkb_state,
+        key: xkb_keycode_t,
+        layout: xkb_layout_index_t,
+    ) -> xkb_level_index_t;
+}
+pub const xkb_state_match_XKB_STATE_MATCH_ANY: xkb_state_match = 1;
+pub const xkb_state_match_XKB_STATE_MATCH_ALL: xkb_state_match = 2;
+pub const xkb_state_match_XKB_STATE_MATCH_NON_EXCLUSIVE: xkb_state_match = 65536;
+pub type xkb_state_match = ::std::os::raw::c_uint;
+unsafe extern "C" {
+    pub fn xkb_state_serialize_mods(
+        state: *mut xkb_state,
+        components: xkb_state_component,
+    ) -> xkb_mod_mask_t;
+}
+unsafe extern "C" {
+    pub fn xkb_state_serialize_layout(
+        state: *mut xkb_state,
+        components: xkb_state_component,
+    ) -> xkb_layout_index_t;
+}
+unsafe extern "C" {
+    pub fn xkb_state_mod_name_is_active(
+        state: *mut xkb_state,
+        name: *const ::std::os::raw::c_char,
+        type_: xkb_state_component,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_state_mod_names_are_active(
+        state: *mut xkb_state,
+        type_: xkb_state_component,
+        match_: xkb_state_match,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_state_mod_index_is_active(
+        state: *mut xkb_state,
+        idx: xkb_mod_index_t,
+        type_: xkb_state_component,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_state_mod_indices_are_active(
+        state: *mut xkb_state,
+        type_: xkb_state_component,
+        match_: xkb_state_match,
+        ...
+    ) -> ::std::os::raw::c_int;
+}
+pub const xkb_consumed_mode_XKB_CONSUMED_MODE_XKB: xkb_consumed_mode = 0;
+pub const xkb_consumed_mode_XKB_CONSUMED_MODE_GTK: xkb_consumed_mode = 1;
+pub type xkb_consumed_mode = ::std::os::raw::c_uint;
+unsafe extern "C" {
+    pub fn xkb_state_key_get_consumed_mods2(
+        state: *mut xkb_state,
+        key: xkb_keycode_t,
+        mode: xkb_consumed_mode,
+    ) -> xkb_mod_mask_t;
+}
+unsafe extern "C" {
+    pub fn xkb_state_key_get_consumed_mods(
+        state: *mut xkb_state,
+        key: xkb_keycode_t,
+    ) -> xkb_mod_mask_t;
+}
+unsafe extern "C" {
+    pub fn xkb_state_mod_index_is_consumed2(
+        state: *mut xkb_state,
+        key: xkb_keycode_t,
+        idx: xkb_mod_index_t,
+        mode: xkb_consumed_mode,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_state_mod_index_is_consumed(
+        state: *mut xkb_state,
+        key: xkb_keycode_t,
+        idx: xkb_mod_index_t,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_state_mod_mask_remove_consumed(
+        state: *mut xkb_state,
+        key: xkb_keycode_t,
+        mask: xkb_mod_mask_t,
+    ) -> xkb_mod_mask_t;
+}
+unsafe extern "C" {
+    pub fn xkb_state_layout_name_is_active(
+        state: *mut xkb_state,
+        name: *const ::std::os::raw::c_char,
+        type_: xkb_state_component,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_state_layout_index_is_active(
+        state: *mut xkb_state,
+        idx: xkb_layout_index_t,
+        type_: xkb_state_component,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_state_led_name_is_active(
+        state: *mut xkb_state,
+        name: *const ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_state_led_index_is_active(
+        state: *mut xkb_state,
+        idx: xkb_led_index_t,
+    ) -> ::std::os::raw::c_int;
+}
+pub const xkb_x11_setup_xkb_extension_flags_XKB_X11_SETUP_XKB_EXTENSION_NO_FLAGS:
+    xkb_x11_setup_xkb_extension_flags = 0;
+pub type xkb_x11_setup_xkb_extension_flags = ::std::os::raw::c_uint;
+unsafe extern "C" {
+    pub fn xkb_x11_setup_xkb_extension(
+        connection: *mut xcb_connection_t,
+        major_xkb_version: u16,
+        minor_xkb_version: u16,
+        flags: xkb_x11_setup_xkb_extension_flags,
+        major_xkb_version_out: *mut u16,
+        minor_xkb_version_out: *mut u16,
+        base_event_out: *mut u8,
+        base_error_out: *mut u8,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn xkb_x11_get_core_keyboard_device_id(connection: *mut xcb_connection_t) -> i32;
+}
+unsafe extern "C" {
+    pub fn xkb_x11_keymap_new_from_device(
+        context: *mut xkb_context,
+        connection: *mut xcb_connection_t,
+        device_id: i32,
+        flags: xkb_keymap_compile_flags,
+    ) -> *mut xkb_keymap;
+}
+unsafe extern "C" {
+    pub fn xkb_x11_state_new_from_device(
+        keymap: *mut xkb_keymap,
+        connection: *mut xcb_connection_t,
+        device_id: i32,
+    ) -> *mut xkb_state;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbStateRec {
+    pub group: ::std::os::raw::c_uchar,
+    pub locked_group: ::std::os::raw::c_uchar,
+    pub base_group: ::std::os::raw::c_ushort,
+    pub latched_group: ::std::os::raw::c_ushort,
+    pub mods: ::std::os::raw::c_uchar,
+    pub base_mods: ::std::os::raw::c_uchar,
+    pub latched_mods: ::std::os::raw::c_uchar,
+    pub locked_mods: ::std::os::raw::c_uchar,
+    pub compat_state: ::std::os::raw::c_uchar,
+    pub grab_mods: ::std::os::raw::c_uchar,
+    pub compat_grab_mods: ::std::os::raw::c_uchar,
+    pub lookup_mods: ::std::os::raw::c_uchar,
+    pub compat_lookup_mods: ::std::os::raw::c_uchar,
+    pub ptr_buttons: ::std::os::raw::c_ushort,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbStateRec"][::std::mem::size_of::<_XkbStateRec>() - 18usize];
+    ["Alignment of _XkbStateRec"][::std::mem::align_of::<_XkbStateRec>() - 2usize];
+    ["Offset of field: _XkbStateRec::group"][::std::mem::offset_of!(_XkbStateRec, group) - 0usize];
+    ["Offset of field: _XkbStateRec::locked_group"]
+        [::std::mem::offset_of!(_XkbStateRec, locked_group) - 1usize];
+    ["Offset of field: _XkbStateRec::base_group"]
+        [::std::mem::offset_of!(_XkbStateRec, base_group) - 2usize];
+    ["Offset of field: _XkbStateRec::latched_group"]
+        [::std::mem::offset_of!(_XkbStateRec, latched_group) - 4usize];
+    ["Offset of field: _XkbStateRec::mods"][::std::mem::offset_of!(_XkbStateRec, mods) - 6usize];
+    ["Offset of field: _XkbStateRec::base_mods"]
+        [::std::mem::offset_of!(_XkbStateRec, base_mods) - 7usize];
+    ["Offset of field: _XkbStateRec::latched_mods"]
+        [::std::mem::offset_of!(_XkbStateRec, latched_mods) - 8usize];
+    ["Offset of field: _XkbStateRec::locked_mods"]
+        [::std::mem::offset_of!(_XkbStateRec, locked_mods) - 9usize];
+    ["Offset of field: _XkbStateRec::compat_state"]
+        [::std::mem::offset_of!(_XkbStateRec, compat_state) - 10usize];
+    ["Offset of field: _XkbStateRec::grab_mods"]
+        [::std::mem::offset_of!(_XkbStateRec, grab_mods) - 11usize];
+    ["Offset of field: _XkbStateRec::compat_grab_mods"]
+        [::std::mem::offset_of!(_XkbStateRec, compat_grab_mods) - 12usize];
+    ["Offset of field: _XkbStateRec::lookup_mods"]
+        [::std::mem::offset_of!(_XkbStateRec, lookup_mods) - 13usize];
+    ["Offset of field: _XkbStateRec::compat_lookup_mods"]
+        [::std::mem::offset_of!(_XkbStateRec, compat_lookup_mods) - 14usize];
+    ["Offset of field: _XkbStateRec::ptr_buttons"]
+        [::std::mem::offset_of!(_XkbStateRec, ptr_buttons) - 16usize];
+};
+pub type XkbStateRec = _XkbStateRec;
+pub type XkbStatePtr = *mut _XkbStateRec;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbMods {
+    pub mask: ::std::os::raw::c_uchar,
+    pub real_mods: ::std::os::raw::c_uchar,
+    pub vmods: ::std::os::raw::c_ushort,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbMods"][::std::mem::size_of::<_XkbMods>() - 4usize];
+    ["Alignment of _XkbMods"][::std::mem::align_of::<_XkbMods>() - 2usize];
+    ["Offset of field: _XkbMods::mask"][::std::mem::offset_of!(_XkbMods, mask) - 0usize];
+    ["Offset of field: _XkbMods::real_mods"][::std::mem::offset_of!(_XkbMods, real_mods) - 1usize];
+    ["Offset of field: _XkbMods::vmods"][::std::mem::offset_of!(_XkbMods, vmods) - 2usize];
+};
+pub type XkbModsRec = _XkbMods;
+pub type XkbModsPtr = *mut _XkbMods;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbKTMapEntry {
+    pub active: ::std::os::raw::c_int,
+    pub level: ::std::os::raw::c_uchar,
+    pub mods: XkbModsRec,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbKTMapEntry"][::std::mem::size_of::<_XkbKTMapEntry>() - 12usize];
+    ["Alignment of _XkbKTMapEntry"][::std::mem::align_of::<_XkbKTMapEntry>() - 4usize];
+    ["Offset of field: _XkbKTMapEntry::active"]
+        [::std::mem::offset_of!(_XkbKTMapEntry, active) - 0usize];
+    ["Offset of field: _XkbKTMapEntry::level"]
+        [::std::mem::offset_of!(_XkbKTMapEntry, level) - 4usize];
+    ["Offset of field: _XkbKTMapEntry::mods"]
+        [::std::mem::offset_of!(_XkbKTMapEntry, mods) - 6usize];
+};
+pub type XkbKTMapEntryRec = _XkbKTMapEntry;
+pub type XkbKTMapEntryPtr = *mut _XkbKTMapEntry;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbKeyType {
+    pub mods: XkbModsRec,
+    pub num_levels: ::std::os::raw::c_uchar,
+    pub map_count: ::std::os::raw::c_uchar,
+    pub map: XkbKTMapEntryPtr,
+    pub preserve: XkbModsPtr,
+    pub name: Atom,
+    pub level_names: *mut Atom,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbKeyType"][::std::mem::size_of::<_XkbKeyType>() - 40usize];
+    ["Alignment of _XkbKeyType"][::std::mem::align_of::<_XkbKeyType>() - 8usize];
+    ["Offset of field: _XkbKeyType::mods"][::std::mem::offset_of!(_XkbKeyType, mods) - 0usize];
+    ["Offset of field: _XkbKeyType::num_levels"]
+        [::std::mem::offset_of!(_XkbKeyType, num_levels) - 4usize];
+    ["Offset of field: _XkbKeyType::map_count"]
+        [::std::mem::offset_of!(_XkbKeyType, map_count) - 5usize];
+    ["Offset of field: _XkbKeyType::map"][::std::mem::offset_of!(_XkbKeyType, map) - 8usize];
+    ["Offset of field: _XkbKeyType::preserve"]
+        [::std::mem::offset_of!(_XkbKeyType, preserve) - 16usize];
+    ["Offset of field: _XkbKeyType::name"][::std::mem::offset_of!(_XkbKeyType, name) - 24usize];
+    ["Offset of field: _XkbKeyType::level_names"]
+        [::std::mem::offset_of!(_XkbKeyType, level_names) - 32usize];
+};
+pub type XkbKeyTypeRec = _XkbKeyType;
+pub type XkbKeyTypePtr = *mut _XkbKeyType;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbBehavior {
+    pub type_: ::std::os::raw::c_uchar,
+    pub data: ::std::os::raw::c_uchar,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbBehavior"][::std::mem::size_of::<_XkbBehavior>() - 2usize];
+    ["Alignment of _XkbBehavior"][::std::mem::align_of::<_XkbBehavior>() - 1usize];
+    ["Offset of field: _XkbBehavior::type_"][::std::mem::offset_of!(_XkbBehavior, type_) - 0usize];
+    ["Offset of field: _XkbBehavior::data"][::std::mem::offset_of!(_XkbBehavior, data) - 1usize];
+};
+pub type XkbBehavior = _XkbBehavior;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbAnyAction {
+    pub type_: ::std::os::raw::c_uchar,
+    pub data: [::std::os::raw::c_uchar; 7usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbAnyAction"][::std::mem::size_of::<_XkbAnyAction>() - 8usize];
+    ["Alignment of _XkbAnyAction"][::std::mem::align_of::<_XkbAnyAction>() - 1usize];
+    ["Offset of field: _XkbAnyAction::type_"]
+        [::std::mem::offset_of!(_XkbAnyAction, type_) - 0usize];
+    ["Offset of field: _XkbAnyAction::data"][::std::mem::offset_of!(_XkbAnyAction, data) - 1usize];
+};
+pub type XkbAnyAction = _XkbAnyAction;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbModAction {
+    pub type_: ::std::os::raw::c_uchar,
+    pub flags: ::std::os::raw::c_uchar,
+    pub mask: ::std::os::raw::c_uchar,
+    pub real_mods: ::std::os::raw::c_uchar,
+    pub vmods1: ::std::os::raw::c_uchar,
+    pub vmods2: ::std::os::raw::c_uchar,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbModAction"][::std::mem::size_of::<_XkbModAction>() - 6usize];
+    ["Alignment of _XkbModAction"][::std::mem::align_of::<_XkbModAction>() - 1usize];
+    ["Offset of field: _XkbModAction::type_"]
+        [::std::mem::offset_of!(_XkbModAction, type_) - 0usize];
+    ["Offset of field: _XkbModAction::flags"]
+        [::std::mem::offset_of!(_XkbModAction, flags) - 1usize];
+    ["Offset of field: _XkbModAction::mask"][::std::mem::offset_of!(_XkbModAction, mask) - 2usize];
+    ["Offset of field: _XkbModAction::real_mods"]
+        [::std::mem::offset_of!(_XkbModAction, real_mods) - 3usize];
+    ["Offset of field: _XkbModAction::vmods1"]
+        [::std::mem::offset_of!(_XkbModAction, vmods1) - 4usize];
+    ["Offset of field: _XkbModAction::vmods2"]
+        [::std::mem::offset_of!(_XkbModAction, vmods2) - 5usize];
+};
+pub type XkbModAction = _XkbModAction;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbGroupAction {
+    pub type_: ::std::os::raw::c_uchar,
+    pub flags: ::std::os::raw::c_uchar,
+    pub group_XXX: ::std::os::raw::c_char,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbGroupAction"][::std::mem::size_of::<_XkbGroupAction>() - 3usize];
+    ["Alignment of _XkbGroupAction"][::std::mem::align_of::<_XkbGroupAction>() - 1usize];
+    ["Offset of field: _XkbGroupAction::type_"]
+        [::std::mem::offset_of!(_XkbGroupAction, type_) - 0usize];
+    ["Offset of field: _XkbGroupAction::flags"]
+        [::std::mem::offset_of!(_XkbGroupAction, flags) - 1usize];
+    ["Offset of field: _XkbGroupAction::group_XXX"]
+        [::std::mem::offset_of!(_XkbGroupAction, group_XXX) - 2usize];
+};
+pub type XkbGroupAction = _XkbGroupAction;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbISOAction {
+    pub type_: ::std::os::raw::c_uchar,
+    pub flags: ::std::os::raw::c_uchar,
+    pub mask: ::std::os::raw::c_uchar,
+    pub real_mods: ::std::os::raw::c_uchar,
+    pub group_XXX: ::std::os::raw::c_char,
+    pub affect: ::std::os::raw::c_uchar,
+    pub vmods1: ::std::os::raw::c_uchar,
+    pub vmods2: ::std::os::raw::c_uchar,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbISOAction"][::std::mem::size_of::<_XkbISOAction>() - 8usize];
+    ["Alignment of _XkbISOAction"][::std::mem::align_of::<_XkbISOAction>() - 1usize];
+    ["Offset of field: _XkbISOAction::type_"]
+        [::std::mem::offset_of!(_XkbISOAction, type_) - 0usize];
+    ["Offset of field: _XkbISOAction::flags"]
+        [::std::mem::offset_of!(_XkbISOAction, flags) - 1usize];
+    ["Offset of field: _XkbISOAction::mask"][::std::mem::offset_of!(_XkbISOAction, mask) - 2usize];
+    ["Offset of field: _XkbISOAction::real_mods"]
+        [::std::mem::offset_of!(_XkbISOAction, real_mods) - 3usize];
+    ["Offset of field: _XkbISOAction::group_XXX"]
+        [::std::mem::offset_of!(_XkbISOAction, group_XXX) - 4usize];
+    ["Offset of field: _XkbISOAction::affect"]
+        [::std::mem::offset_of!(_XkbISOAction, affect) - 5usize];
+    ["Offset of field: _XkbISOAction::vmods1"]
+        [::std::mem::offset_of!(_XkbISOAction, vmods1) - 6usize];
+    ["Offset of field: _XkbISOAction::vmods2"]
+        [::std::mem::offset_of!(_XkbISOAction, vmods2) - 7usize];
+};
+pub type XkbISOAction = _XkbISOAction;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbPtrAction {
+    pub type_: ::std::os::raw::c_uchar,
+    pub flags: ::std::os::raw::c_uchar,
+    pub high_XXX: ::std::os::raw::c_uchar,
+    pub low_XXX: ::std::os::raw::c_uchar,
+    pub high_YYY: ::std::os::raw::c_uchar,
+    pub low_YYY: ::std::os::raw::c_uchar,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbPtrAction"][::std::mem::size_of::<_XkbPtrAction>() - 6usize];
+    ["Alignment of _XkbPtrAction"][::std::mem::align_of::<_XkbPtrAction>() - 1usize];
+    ["Offset of field: _XkbPtrAction::type_"]
+        [::std::mem::offset_of!(_XkbPtrAction, type_) - 0usize];
+    ["Offset of field: _XkbPtrAction::flags"]
+        [::std::mem::offset_of!(_XkbPtrAction, flags) - 1usize];
+    ["Offset of field: _XkbPtrAction::high_XXX"]
+        [::std::mem::offset_of!(_XkbPtrAction, high_XXX) - 2usize];
+    ["Offset of field: _XkbPtrAction::low_XXX"]
+        [::std::mem::offset_of!(_XkbPtrAction, low_XXX) - 3usize];
+    ["Offset of field: _XkbPtrAction::high_YYY"]
+        [::std::mem::offset_of!(_XkbPtrAction, high_YYY) - 4usize];
+    ["Offset of field: _XkbPtrAction::low_YYY"]
+        [::std::mem::offset_of!(_XkbPtrAction, low_YYY) - 5usize];
+};
+pub type XkbPtrAction = _XkbPtrAction;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbPtrBtnAction {
+    pub type_: ::std::os::raw::c_uchar,
+    pub flags: ::std::os::raw::c_uchar,
+    pub count: ::std::os::raw::c_uchar,
+    pub button: ::std::os::raw::c_uchar,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbPtrBtnAction"][::std::mem::size_of::<_XkbPtrBtnAction>() - 4usize];
+    ["Alignment of _XkbPtrBtnAction"][::std::mem::align_of::<_XkbPtrBtnAction>() - 1usize];
+    ["Offset of field: _XkbPtrBtnAction::type_"]
+        [::std::mem::offset_of!(_XkbPtrBtnAction, type_) - 0usize];
+    ["Offset of field: _XkbPtrBtnAction::flags"]
+        [::std::mem::offset_of!(_XkbPtrBtnAction, flags) - 1usize];
+    ["Offset of field: _XkbPtrBtnAction::count"]
+        [::std::mem::offset_of!(_XkbPtrBtnAction, count) - 2usize];
+    ["Offset of field: _XkbPtrBtnAction::button"]
+        [::std::mem::offset_of!(_XkbPtrBtnAction, button) - 3usize];
+};
+pub type XkbPtrBtnAction = _XkbPtrBtnAction;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbPtrDfltAction {
+    pub type_: ::std::os::raw::c_uchar,
+    pub flags: ::std::os::raw::c_uchar,
+    pub affect: ::std::os::raw::c_uchar,
+    pub valueXXX: ::std::os::raw::c_char,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbPtrDfltAction"][::std::mem::size_of::<_XkbPtrDfltAction>() - 4usize];
+    ["Alignment of _XkbPtrDfltAction"][::std::mem::align_of::<_XkbPtrDfltAction>() - 1usize];
+    ["Offset of field: _XkbPtrDfltAction::type_"]
+        [::std::mem::offset_of!(_XkbPtrDfltAction, type_) - 0usize];
+    ["Offset of field: _XkbPtrDfltAction::flags"]
+        [::std::mem::offset_of!(_XkbPtrDfltAction, flags) - 1usize];
+    ["Offset of field: _XkbPtrDfltAction::affect"]
+        [::std::mem::offset_of!(_XkbPtrDfltAction, affect) - 2usize];
+    ["Offset of field: _XkbPtrDfltAction::valueXXX"]
+        [::std::mem::offset_of!(_XkbPtrDfltAction, valueXXX) - 3usize];
+};
+pub type XkbPtrDfltAction = _XkbPtrDfltAction;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbSwitchScreenAction {
+    pub type_: ::std::os::raw::c_uchar,
+    pub flags: ::std::os::raw::c_uchar,
+    pub screenXXX: ::std::os::raw::c_char,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbSwitchScreenAction"][::std::mem::size_of::<_XkbSwitchScreenAction>() - 3usize];
+    ["Alignment of _XkbSwitchScreenAction"]
+        [::std::mem::align_of::<_XkbSwitchScreenAction>() - 1usize];
+    ["Offset of field: _XkbSwitchScreenAction::type_"]
+        [::std::mem::offset_of!(_XkbSwitchScreenAction, type_) - 0usize];
+    ["Offset of field: _XkbSwitchScreenAction::flags"]
+        [::std::mem::offset_of!(_XkbSwitchScreenAction, flags) - 1usize];
+    ["Offset of field: _XkbSwitchScreenAction::screenXXX"]
+        [::std::mem::offset_of!(_XkbSwitchScreenAction, screenXXX) - 2usize];
+};
+pub type XkbSwitchScreenAction = _XkbSwitchScreenAction;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbCtrlsAction {
+    pub type_: ::std::os::raw::c_uchar,
+    pub flags: ::std::os::raw::c_uchar,
+    pub ctrls3: ::std::os::raw::c_uchar,
+    pub ctrls2: ::std::os::raw::c_uchar,
+    pub ctrls1: ::std::os::raw::c_uchar,
+    pub ctrls0: ::std::os::raw::c_uchar,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbCtrlsAction"][::std::mem::size_of::<_XkbCtrlsAction>() - 6usize];
+    ["Alignment of _XkbCtrlsAction"][::std::mem::align_of::<_XkbCtrlsAction>() - 1usize];
+    ["Offset of field: _XkbCtrlsAction::type_"]
+        [::std::mem::offset_of!(_XkbCtrlsAction, type_) - 0usize];
+    ["Offset of field: _XkbCtrlsAction::flags"]
+        [::std::mem::offset_of!(_XkbCtrlsAction, flags) - 1usize];
+    ["Offset of field: _XkbCtrlsAction::ctrls3"]
+        [::std::mem::offset_of!(_XkbCtrlsAction, ctrls3) - 2usize];
+    ["Offset of field: _XkbCtrlsAction::ctrls2"]
+        [::std::mem::offset_of!(_XkbCtrlsAction, ctrls2) - 3usize];
+    ["Offset of field: _XkbCtrlsAction::ctrls1"]
+        [::std::mem::offset_of!(_XkbCtrlsAction, ctrls1) - 4usize];
+    ["Offset of field: _XkbCtrlsAction::ctrls0"]
+        [::std::mem::offset_of!(_XkbCtrlsAction, ctrls0) - 5usize];
+};
+pub type XkbCtrlsAction = _XkbCtrlsAction;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbMessageAction {
+    pub type_: ::std::os::raw::c_uchar,
+    pub flags: ::std::os::raw::c_uchar,
+    pub message: [::std::os::raw::c_uchar; 6usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbMessageAction"][::std::mem::size_of::<_XkbMessageAction>() - 8usize];
+    ["Alignment of _XkbMessageAction"][::std::mem::align_of::<_XkbMessageAction>() - 1usize];
+    ["Offset of field: _XkbMessageAction::type_"]
+        [::std::mem::offset_of!(_XkbMessageAction, type_) - 0usize];
+    ["Offset of field: _XkbMessageAction::flags"]
+        [::std::mem::offset_of!(_XkbMessageAction, flags) - 1usize];
+    ["Offset of field: _XkbMessageAction::message"]
+        [::std::mem::offset_of!(_XkbMessageAction, message) - 2usize];
+};
+pub type XkbMessageAction = _XkbMessageAction;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbRedirectKeyAction {
+    pub type_: ::std::os::raw::c_uchar,
+    pub new_key: ::std::os::raw::c_uchar,
+    pub mods_mask: ::std::os::raw::c_uchar,
+    pub mods: ::std::os::raw::c_uchar,
+    pub vmods_mask0: ::std::os::raw::c_uchar,
+    pub vmods_mask1: ::std::os::raw::c_uchar,
+    pub vmods0: ::std::os::raw::c_uchar,
+    pub vmods1: ::std::os::raw::c_uchar,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbRedirectKeyAction"][::std::mem::size_of::<_XkbRedirectKeyAction>() - 8usize];
+    ["Alignment of _XkbRedirectKeyAction"]
+        [::std::mem::align_of::<_XkbRedirectKeyAction>() - 1usize];
+    ["Offset of field: _XkbRedirectKeyAction::type_"]
+        [::std::mem::offset_of!(_XkbRedirectKeyAction, type_) - 0usize];
+    ["Offset of field: _XkbRedirectKeyAction::new_key"]
+        [::std::mem::offset_of!(_XkbRedirectKeyAction, new_key) - 1usize];
+    ["Offset of field: _XkbRedirectKeyAction::mods_mask"]
+        [::std::mem::offset_of!(_XkbRedirectKeyAction, mods_mask) - 2usize];
+    ["Offset of field: _XkbRedirectKeyAction::mods"]
+        [::std::mem::offset_of!(_XkbRedirectKeyAction, mods) - 3usize];
+    ["Offset of field: _XkbRedirectKeyAction::vmods_mask0"]
+        [::std::mem::offset_of!(_XkbRedirectKeyAction, vmods_mask0) - 4usize];
+    ["Offset of field: _XkbRedirectKeyAction::vmods_mask1"]
+        [::std::mem::offset_of!(_XkbRedirectKeyAction, vmods_mask1) - 5usize];
+    ["Offset of field: _XkbRedirectKeyAction::vmods0"]
+        [::std::mem::offset_of!(_XkbRedirectKeyAction, vmods0) - 6usize];
+    ["Offset of field: _XkbRedirectKeyAction::vmods1"]
+        [::std::mem::offset_of!(_XkbRedirectKeyAction, vmods1) - 7usize];
+};
+pub type XkbRedirectKeyAction = _XkbRedirectKeyAction;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbDeviceBtnAction {
+    pub type_: ::std::os::raw::c_uchar,
+    pub flags: ::std::os::raw::c_uchar,
+    pub count: ::std::os::raw::c_uchar,
+    pub button: ::std::os::raw::c_uchar,
+    pub device: ::std::os::raw::c_uchar,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbDeviceBtnAction"][::std::mem::size_of::<_XkbDeviceBtnAction>() - 5usize];
+    ["Alignment of _XkbDeviceBtnAction"][::std::mem::align_of::<_XkbDeviceBtnAction>() - 1usize];
+    ["Offset of field: _XkbDeviceBtnAction::type_"]
+        [::std::mem::offset_of!(_XkbDeviceBtnAction, type_) - 0usize];
+    ["Offset of field: _XkbDeviceBtnAction::flags"]
+        [::std::mem::offset_of!(_XkbDeviceBtnAction, flags) - 1usize];
+    ["Offset of field: _XkbDeviceBtnAction::count"]
+        [::std::mem::offset_of!(_XkbDeviceBtnAction, count) - 2usize];
+    ["Offset of field: _XkbDeviceBtnAction::button"]
+        [::std::mem::offset_of!(_XkbDeviceBtnAction, button) - 3usize];
+    ["Offset of field: _XkbDeviceBtnAction::device"]
+        [::std::mem::offset_of!(_XkbDeviceBtnAction, device) - 4usize];
+};
+pub type XkbDeviceBtnAction = _XkbDeviceBtnAction;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbDeviceValuatorAction {
+    pub type_: ::std::os::raw::c_uchar,
+    pub device: ::std::os::raw::c_uchar,
+    pub v1_what: ::std::os::raw::c_uchar,
+    pub v1_ndx: ::std::os::raw::c_uchar,
+    pub v1_value: ::std::os::raw::c_uchar,
+    pub v2_what: ::std::os::raw::c_uchar,
+    pub v2_ndx: ::std::os::raw::c_uchar,
+    pub v2_value: ::std::os::raw::c_uchar,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbDeviceValuatorAction"]
+        [::std::mem::size_of::<_XkbDeviceValuatorAction>() - 8usize];
+    ["Alignment of _XkbDeviceValuatorAction"]
+        [::std::mem::align_of::<_XkbDeviceValuatorAction>() - 1usize];
+    ["Offset of field: _XkbDeviceValuatorAction::type_"]
+        [::std::mem::offset_of!(_XkbDeviceValuatorAction, type_) - 0usize];
+    ["Offset of field: _XkbDeviceValuatorAction::device"]
+        [::std::mem::offset_of!(_XkbDeviceValuatorAction, device) - 1usize];
+    ["Offset of field: _XkbDeviceValuatorAction::v1_what"]
+        [::std::mem::offset_of!(_XkbDeviceValuatorAction, v1_what) - 2usize];
+    ["Offset of field: _XkbDeviceValuatorAction::v1_ndx"]
+        [::std::mem::offset_of!(_XkbDeviceValuatorAction, v1_ndx) - 3usize];
+    ["Offset of field: _XkbDeviceValuatorAction::v1_value"]
+        [::std::mem::offset_of!(_XkbDeviceValuatorAction, v1_value) - 4usize];
+    ["Offset of field: _XkbDeviceValuatorAction::v2_what"]
+        [::std::mem::offset_of!(_XkbDeviceValuatorAction, v2_what) - 5usize];
+    ["Offset of field: _XkbDeviceValuatorAction::v2_ndx"]
+        [::std::mem::offset_of!(_XkbDeviceValuatorAction, v2_ndx) - 6usize];
+    ["Offset of field: _XkbDeviceValuatorAction::v2_value"]
+        [::std::mem::offset_of!(_XkbDeviceValuatorAction, v2_value) - 7usize];
+};
+pub type XkbDeviceValuatorAction = _XkbDeviceValuatorAction;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union _XkbAction {
+    pub any: XkbAnyAction,
+    pub mods: XkbModAction,
+    pub group: XkbGroupAction,
+    pub iso: XkbISOAction,
+    pub ptr: XkbPtrAction,
+    pub btn: XkbPtrBtnAction,
+    pub dflt: XkbPtrDfltAction,
+    pub screen: XkbSwitchScreenAction,
+    pub ctrls: XkbCtrlsAction,
+    pub msg: XkbMessageAction,
+    pub redirect: XkbRedirectKeyAction,
+    pub devbtn: XkbDeviceBtnAction,
+    pub devval: XkbDeviceValuatorAction,
+    pub type_: ::std::os::raw::c_uchar,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbAction"][::std::mem::size_of::<_XkbAction>() - 8usize];
+    ["Alignment of _XkbAction"][::std::mem::align_of::<_XkbAction>() - 1usize];
+    ["Offset of field: _XkbAction::any"][::std::mem::offset_of!(_XkbAction, any) - 0usize];
+    ["Offset of field: _XkbAction::mods"][::std::mem::offset_of!(_XkbAction, mods) - 0usize];
+    ["Offset of field: _XkbAction::group"][::std::mem::offset_of!(_XkbAction, group) - 0usize];
+    ["Offset of field: _XkbAction::iso"][::std::mem::offset_of!(_XkbAction, iso) - 0usize];
+    ["Offset of field: _XkbAction::ptr"][::std::mem::offset_of!(_XkbAction, ptr) - 0usize];
+    ["Offset of field: _XkbAction::btn"][::std::mem::offset_of!(_XkbAction, btn) - 0usize];
+    ["Offset of field: _XkbAction::dflt"][::std::mem::offset_of!(_XkbAction, dflt) - 0usize];
+    ["Offset of field: _XkbAction::screen"][::std::mem::offset_of!(_XkbAction, screen) - 0usize];
+    ["Offset of field: _XkbAction::ctrls"][::std::mem::offset_of!(_XkbAction, ctrls) - 0usize];
+    ["Offset of field: _XkbAction::msg"][::std::mem::offset_of!(_XkbAction, msg) - 0usize];
+    ["Offset of field: _XkbAction::redirect"]
+        [::std::mem::offset_of!(_XkbAction, redirect) - 0usize];
+    ["Offset of field: _XkbAction::devbtn"][::std::mem::offset_of!(_XkbAction, devbtn) - 0usize];
+    ["Offset of field: _XkbAction::devval"][::std::mem::offset_of!(_XkbAction, devval) - 0usize];
+    ["Offset of field: _XkbAction::type_"][::std::mem::offset_of!(_XkbAction, type_) - 0usize];
+};
+pub type XkbAction = _XkbAction;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbControls {
+    pub mk_dflt_btn: ::std::os::raw::c_uchar,
+    pub num_groups: ::std::os::raw::c_uchar,
+    pub groups_wrap: ::std::os::raw::c_uchar,
+    pub internal: XkbModsRec,
+    pub ignore_lock: XkbModsRec,
+    pub enabled_ctrls: ::std::os::raw::c_uint,
+    pub repeat_delay: ::std::os::raw::c_ushort,
+    pub repeat_interval: ::std::os::raw::c_ushort,
+    pub slow_keys_delay: ::std::os::raw::c_ushort,
+    pub debounce_delay: ::std::os::raw::c_ushort,
+    pub mk_delay: ::std::os::raw::c_ushort,
+    pub mk_interval: ::std::os::raw::c_ushort,
+    pub mk_time_to_max: ::std::os::raw::c_ushort,
+    pub mk_max_speed: ::std::os::raw::c_ushort,
+    pub mk_curve: ::std::os::raw::c_short,
+    pub ax_options: ::std::os::raw::c_ushort,
+    pub ax_timeout: ::std::os::raw::c_ushort,
+    pub axt_opts_mask: ::std::os::raw::c_ushort,
+    pub axt_opts_values: ::std::os::raw::c_ushort,
+    pub axt_ctrls_mask: ::std::os::raw::c_uint,
+    pub axt_ctrls_values: ::std::os::raw::c_uint,
+    pub per_key_repeat: [::std::os::raw::c_uchar; 32usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbControls"][::std::mem::size_of::<_XkbControls>() - 84usize];
+    ["Alignment of _XkbControls"][::std::mem::align_of::<_XkbControls>() - 4usize];
+    ["Offset of field: _XkbControls::mk_dflt_btn"]
+        [::std::mem::offset_of!(_XkbControls, mk_dflt_btn) - 0usize];
+    ["Offset of field: _XkbControls::num_groups"]
+        [::std::mem::offset_of!(_XkbControls, num_groups) - 1usize];
+    ["Offset of field: _XkbControls::groups_wrap"]
+        [::std::mem::offset_of!(_XkbControls, groups_wrap) - 2usize];
+    ["Offset of field: _XkbControls::internal"]
+        [::std::mem::offset_of!(_XkbControls, internal) - 4usize];
+    ["Offset of field: _XkbControls::ignore_lock"]
+        [::std::mem::offset_of!(_XkbControls, ignore_lock) - 8usize];
+    ["Offset of field: _XkbControls::enabled_ctrls"]
+        [::std::mem::offset_of!(_XkbControls, enabled_ctrls) - 12usize];
+    ["Offset of field: _XkbControls::repeat_delay"]
+        [::std::mem::offset_of!(_XkbControls, repeat_delay) - 16usize];
+    ["Offset of field: _XkbControls::repeat_interval"]
+        [::std::mem::offset_of!(_XkbControls, repeat_interval) - 18usize];
+    ["Offset of field: _XkbControls::slow_keys_delay"]
+        [::std::mem::offset_of!(_XkbControls, slow_keys_delay) - 20usize];
+    ["Offset of field: _XkbControls::debounce_delay"]
+        [::std::mem::offset_of!(_XkbControls, debounce_delay) - 22usize];
+    ["Offset of field: _XkbControls::mk_delay"]
+        [::std::mem::offset_of!(_XkbControls, mk_delay) - 24usize];
+    ["Offset of field: _XkbControls::mk_interval"]
+        [::std::mem::offset_of!(_XkbControls, mk_interval) - 26usize];
+    ["Offset of field: _XkbControls::mk_time_to_max"]
+        [::std::mem::offset_of!(_XkbControls, mk_time_to_max) - 28usize];
+    ["Offset of field: _XkbControls::mk_max_speed"]
+        [::std::mem::offset_of!(_XkbControls, mk_max_speed) - 30usize];
+    ["Offset of field: _XkbControls::mk_curve"]
+        [::std::mem::offset_of!(_XkbControls, mk_curve) - 32usize];
+    ["Offset of field: _XkbControls::ax_options"]
+        [::std::mem::offset_of!(_XkbControls, ax_options) - 34usize];
+    ["Offset of field: _XkbControls::ax_timeout"]
+        [::std::mem::offset_of!(_XkbControls, ax_timeout) - 36usize];
+    ["Offset of field: _XkbControls::axt_opts_mask"]
+        [::std::mem::offset_of!(_XkbControls, axt_opts_mask) - 38usize];
+    ["Offset of field: _XkbControls::axt_opts_values"]
+        [::std::mem::offset_of!(_XkbControls, axt_opts_values) - 40usize];
+    ["Offset of field: _XkbControls::axt_ctrls_mask"]
+        [::std::mem::offset_of!(_XkbControls, axt_ctrls_mask) - 44usize];
+    ["Offset of field: _XkbControls::axt_ctrls_values"]
+        [::std::mem::offset_of!(_XkbControls, axt_ctrls_values) - 48usize];
+    ["Offset of field: _XkbControls::per_key_repeat"]
+        [::std::mem::offset_of!(_XkbControls, per_key_repeat) - 52usize];
+};
+pub type XkbControlsRec = _XkbControls;
+pub type XkbControlsPtr = *mut _XkbControls;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbServerMapRec {
+    pub num_acts: ::std::os::raw::c_ushort,
+    pub size_acts: ::std::os::raw::c_ushort,
+    pub acts: *mut XkbAction,
+    pub behaviors: *mut XkbBehavior,
+    pub key_acts: *mut ::std::os::raw::c_ushort,
+    pub explicit: *mut ::std::os::raw::c_uchar,
+    pub vmods: [::std::os::raw::c_uchar; 16usize],
+    pub vmodmap: *mut ::std::os::raw::c_ushort,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbServerMapRec"][::std::mem::size_of::<_XkbServerMapRec>() - 64usize];
+    ["Alignment of _XkbServerMapRec"][::std::mem::align_of::<_XkbServerMapRec>() - 8usize];
+    ["Offset of field: _XkbServerMapRec::num_acts"]
+        [::std::mem::offset_of!(_XkbServerMapRec, num_acts) - 0usize];
+    ["Offset of field: _XkbServerMapRec::size_acts"]
+        [::std::mem::offset_of!(_XkbServerMapRec, size_acts) - 2usize];
+    ["Offset of field: _XkbServerMapRec::acts"]
+        [::std::mem::offset_of!(_XkbServerMapRec, acts) - 8usize];
+    ["Offset of field: _XkbServerMapRec::behaviors"]
+        [::std::mem::offset_of!(_XkbServerMapRec, behaviors) - 16usize];
+    ["Offset of field: _XkbServerMapRec::key_acts"]
+        [::std::mem::offset_of!(_XkbServerMapRec, key_acts) - 24usize];
+    ["Offset of field: _XkbServerMapRec::explicit"]
+        [::std::mem::offset_of!(_XkbServerMapRec, explicit) - 32usize];
+    ["Offset of field: _XkbServerMapRec::vmods"]
+        [::std::mem::offset_of!(_XkbServerMapRec, vmods) - 40usize];
+    ["Offset of field: _XkbServerMapRec::vmodmap"]
+        [::std::mem::offset_of!(_XkbServerMapRec, vmodmap) - 56usize];
+};
+pub type XkbServerMapRec = _XkbServerMapRec;
+pub type XkbServerMapPtr = *mut _XkbServerMapRec;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbSymMapRec {
+    pub kt_index: [::std::os::raw::c_uchar; 4usize],
+    pub group_info: ::std::os::raw::c_uchar,
+    pub width: ::std::os::raw::c_uchar,
+    pub offset: ::std::os::raw::c_ushort,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbSymMapRec"][::std::mem::size_of::<_XkbSymMapRec>() - 8usize];
+    ["Alignment of _XkbSymMapRec"][::std::mem::align_of::<_XkbSymMapRec>() - 2usize];
+    ["Offset of field: _XkbSymMapRec::kt_index"]
+        [::std::mem::offset_of!(_XkbSymMapRec, kt_index) - 0usize];
+    ["Offset of field: _XkbSymMapRec::group_info"]
+        [::std::mem::offset_of!(_XkbSymMapRec, group_info) - 4usize];
+    ["Offset of field: _XkbSymMapRec::width"]
+        [::std::mem::offset_of!(_XkbSymMapRec, width) - 5usize];
+    ["Offset of field: _XkbSymMapRec::offset"]
+        [::std::mem::offset_of!(_XkbSymMapRec, offset) - 6usize];
+};
+pub type XkbSymMapRec = _XkbSymMapRec;
+pub type XkbSymMapPtr = *mut _XkbSymMapRec;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbClientMapRec {
+    pub size_types: ::std::os::raw::c_uchar,
+    pub num_types: ::std::os::raw::c_uchar,
+    pub types: XkbKeyTypePtr,
+    pub size_syms: ::std::os::raw::c_ushort,
+    pub num_syms: ::std::os::raw::c_ushort,
+    pub syms: *mut KeySym,
+    pub key_sym_map: XkbSymMapPtr,
+    pub modmap: *mut ::std::os::raw::c_uchar,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbClientMapRec"][::std::mem::size_of::<_XkbClientMapRec>() - 48usize];
+    ["Alignment of _XkbClientMapRec"][::std::mem::align_of::<_XkbClientMapRec>() - 8usize];
+    ["Offset of field: _XkbClientMapRec::size_types"]
+        [::std::mem::offset_of!(_XkbClientMapRec, size_types) - 0usize];
+    ["Offset of field: _XkbClientMapRec::num_types"]
+        [::std::mem::offset_of!(_XkbClientMapRec, num_types) - 1usize];
+    ["Offset of field: _XkbClientMapRec::types"]
+        [::std::mem::offset_of!(_XkbClientMapRec, types) - 8usize];
+    ["Offset of field: _XkbClientMapRec::size_syms"]
+        [::std::mem::offset_of!(_XkbClientMapRec, size_syms) - 16usize];
+    ["Offset of field: _XkbClientMapRec::num_syms"]
+        [::std::mem::offset_of!(_XkbClientMapRec, num_syms) - 18usize];
+    ["Offset of field: _XkbClientMapRec::syms"]
+        [::std::mem::offset_of!(_XkbClientMapRec, syms) - 24usize];
+    ["Offset of field: _XkbClientMapRec::key_sym_map"]
+        [::std::mem::offset_of!(_XkbClientMapRec, key_sym_map) - 32usize];
+    ["Offset of field: _XkbClientMapRec::modmap"]
+        [::std::mem::offset_of!(_XkbClientMapRec, modmap) - 40usize];
+};
+pub type XkbClientMapRec = _XkbClientMapRec;
+pub type XkbClientMapPtr = *mut _XkbClientMapRec;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbSymInterpretRec {
+    pub sym: KeySym,
+    pub flags: ::std::os::raw::c_uchar,
+    pub match_: ::std::os::raw::c_uchar,
+    pub mods: ::std::os::raw::c_uchar,
+    pub virtual_mod: ::std::os::raw::c_uchar,
+    pub act: XkbAnyAction,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbSymInterpretRec"][::std::mem::size_of::<_XkbSymInterpretRec>() - 24usize];
+    ["Alignment of _XkbSymInterpretRec"][::std::mem::align_of::<_XkbSymInterpretRec>() - 8usize];
+    ["Offset of field: _XkbSymInterpretRec::sym"]
+        [::std::mem::offset_of!(_XkbSymInterpretRec, sym) - 0usize];
+    ["Offset of field: _XkbSymInterpretRec::flags"]
+        [::std::mem::offset_of!(_XkbSymInterpretRec, flags) - 8usize];
+    ["Offset of field: _XkbSymInterpretRec::match_"]
+        [::std::mem::offset_of!(_XkbSymInterpretRec, match_) - 9usize];
+    ["Offset of field: _XkbSymInterpretRec::mods"]
+        [::std::mem::offset_of!(_XkbSymInterpretRec, mods) - 10usize];
+    ["Offset of field: _XkbSymInterpretRec::virtual_mod"]
+        [::std::mem::offset_of!(_XkbSymInterpretRec, virtual_mod) - 11usize];
+    ["Offset of field: _XkbSymInterpretRec::act"]
+        [::std::mem::offset_of!(_XkbSymInterpretRec, act) - 12usize];
+};
+pub type XkbSymInterpretRec = _XkbSymInterpretRec;
+pub type XkbSymInterpretPtr = *mut _XkbSymInterpretRec;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbCompatMapRec {
+    pub sym_interpret: XkbSymInterpretPtr,
+    pub groups: [XkbModsRec; 4usize],
+    pub num_si: ::std::os::raw::c_ushort,
+    pub size_si: ::std::os::raw::c_ushort,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbCompatMapRec"][::std::mem::size_of::<_XkbCompatMapRec>() - 32usize];
+    ["Alignment of _XkbCompatMapRec"][::std::mem::align_of::<_XkbCompatMapRec>() - 8usize];
+    ["Offset of field: _XkbCompatMapRec::sym_interpret"]
+        [::std::mem::offset_of!(_XkbCompatMapRec, sym_interpret) - 0usize];
+    ["Offset of field: _XkbCompatMapRec::groups"]
+        [::std::mem::offset_of!(_XkbCompatMapRec, groups) - 8usize];
+    ["Offset of field: _XkbCompatMapRec::num_si"]
+        [::std::mem::offset_of!(_XkbCompatMapRec, num_si) - 24usize];
+    ["Offset of field: _XkbCompatMapRec::size_si"]
+        [::std::mem::offset_of!(_XkbCompatMapRec, size_si) - 26usize];
+};
+pub type XkbCompatMapRec = _XkbCompatMapRec;
+pub type XkbCompatMapPtr = *mut _XkbCompatMapRec;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbIndicatorMapRec {
+    pub flags: ::std::os::raw::c_uchar,
+    pub which_groups: ::std::os::raw::c_uchar,
+    pub groups: ::std::os::raw::c_uchar,
+    pub which_mods: ::std::os::raw::c_uchar,
+    pub mods: XkbModsRec,
+    pub ctrls: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbIndicatorMapRec"][::std::mem::size_of::<_XkbIndicatorMapRec>() - 12usize];
+    ["Alignment of _XkbIndicatorMapRec"][::std::mem::align_of::<_XkbIndicatorMapRec>() - 4usize];
+    ["Offset of field: _XkbIndicatorMapRec::flags"]
+        [::std::mem::offset_of!(_XkbIndicatorMapRec, flags) - 0usize];
+    ["Offset of field: _XkbIndicatorMapRec::which_groups"]
+        [::std::mem::offset_of!(_XkbIndicatorMapRec, which_groups) - 1usize];
+    ["Offset of field: _XkbIndicatorMapRec::groups"]
+        [::std::mem::offset_of!(_XkbIndicatorMapRec, groups) - 2usize];
+    ["Offset of field: _XkbIndicatorMapRec::which_mods"]
+        [::std::mem::offset_of!(_XkbIndicatorMapRec, which_mods) - 3usize];
+    ["Offset of field: _XkbIndicatorMapRec::mods"]
+        [::std::mem::offset_of!(_XkbIndicatorMapRec, mods) - 4usize];
+    ["Offset of field: _XkbIndicatorMapRec::ctrls"]
+        [::std::mem::offset_of!(_XkbIndicatorMapRec, ctrls) - 8usize];
+};
+pub type XkbIndicatorMapRec = _XkbIndicatorMapRec;
+pub type XkbIndicatorMapPtr = *mut _XkbIndicatorMapRec;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbIndicatorRec {
+    pub phys_indicators: ::std::os::raw::c_ulong,
+    pub maps: [XkbIndicatorMapRec; 32usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbIndicatorRec"][::std::mem::size_of::<_XkbIndicatorRec>() - 392usize];
+    ["Alignment of _XkbIndicatorRec"][::std::mem::align_of::<_XkbIndicatorRec>() - 8usize];
+    ["Offset of field: _XkbIndicatorRec::phys_indicators"]
+        [::std::mem::offset_of!(_XkbIndicatorRec, phys_indicators) - 0usize];
+    ["Offset of field: _XkbIndicatorRec::maps"]
+        [::std::mem::offset_of!(_XkbIndicatorRec, maps) - 8usize];
+};
+pub type XkbIndicatorRec = _XkbIndicatorRec;
+pub type XkbIndicatorPtr = *mut _XkbIndicatorRec;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbKeyNameRec {
+    pub name: [::std::os::raw::c_char; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbKeyNameRec"][::std::mem::size_of::<_XkbKeyNameRec>() - 4usize];
+    ["Alignment of _XkbKeyNameRec"][::std::mem::align_of::<_XkbKeyNameRec>() - 1usize];
+    ["Offset of field: _XkbKeyNameRec::name"]
+        [::std::mem::offset_of!(_XkbKeyNameRec, name) - 0usize];
+};
+pub type XkbKeyNameRec = _XkbKeyNameRec;
+pub type XkbKeyNamePtr = *mut _XkbKeyNameRec;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbKeyAliasRec {
+    pub real: [::std::os::raw::c_char; 4usize],
+    pub alias: [::std::os::raw::c_char; 4usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbKeyAliasRec"][::std::mem::size_of::<_XkbKeyAliasRec>() - 8usize];
+    ["Alignment of _XkbKeyAliasRec"][::std::mem::align_of::<_XkbKeyAliasRec>() - 1usize];
+    ["Offset of field: _XkbKeyAliasRec::real"]
+        [::std::mem::offset_of!(_XkbKeyAliasRec, real) - 0usize];
+    ["Offset of field: _XkbKeyAliasRec::alias"]
+        [::std::mem::offset_of!(_XkbKeyAliasRec, alias) - 4usize];
+};
+pub type XkbKeyAliasRec = _XkbKeyAliasRec;
+pub type XkbKeyAliasPtr = *mut _XkbKeyAliasRec;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbNamesRec {
+    pub keycodes: Atom,
+    pub geometry: Atom,
+    pub symbols: Atom,
+    pub types: Atom,
+    pub compat: Atom,
+    pub vmods: [Atom; 16usize],
+    pub indicators: [Atom; 32usize],
+    pub groups: [Atom; 4usize],
+    pub keys: XkbKeyNamePtr,
+    pub key_aliases: XkbKeyAliasPtr,
+    pub radio_groups: *mut Atom,
+    pub phys_symbols: Atom,
+    pub num_keys: ::std::os::raw::c_uchar,
+    pub num_key_aliases: ::std::os::raw::c_uchar,
+    pub num_rg: ::std::os::raw::c_ushort,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbNamesRec"][::std::mem::size_of::<_XkbNamesRec>() - 496usize];
+    ["Alignment of _XkbNamesRec"][::std::mem::align_of::<_XkbNamesRec>() - 8usize];
+    ["Offset of field: _XkbNamesRec::keycodes"]
+        [::std::mem::offset_of!(_XkbNamesRec, keycodes) - 0usize];
+    ["Offset of field: _XkbNamesRec::geometry"]
+        [::std::mem::offset_of!(_XkbNamesRec, geometry) - 8usize];
+    ["Offset of field: _XkbNamesRec::symbols"]
+        [::std::mem::offset_of!(_XkbNamesRec, symbols) - 16usize];
+    ["Offset of field: _XkbNamesRec::types"][::std::mem::offset_of!(_XkbNamesRec, types) - 24usize];
+    ["Offset of field: _XkbNamesRec::compat"]
+        [::std::mem::offset_of!(_XkbNamesRec, compat) - 32usize];
+    ["Offset of field: _XkbNamesRec::vmods"][::std::mem::offset_of!(_XkbNamesRec, vmods) - 40usize];
+    ["Offset of field: _XkbNamesRec::indicators"]
+        [::std::mem::offset_of!(_XkbNamesRec, indicators) - 168usize];
+    ["Offset of field: _XkbNamesRec::groups"]
+        [::std::mem::offset_of!(_XkbNamesRec, groups) - 424usize];
+    ["Offset of field: _XkbNamesRec::keys"][::std::mem::offset_of!(_XkbNamesRec, keys) - 456usize];
+    ["Offset of field: _XkbNamesRec::key_aliases"]
+        [::std::mem::offset_of!(_XkbNamesRec, key_aliases) - 464usize];
+    ["Offset of field: _XkbNamesRec::radio_groups"]
+        [::std::mem::offset_of!(_XkbNamesRec, radio_groups) - 472usize];
+    ["Offset of field: _XkbNamesRec::phys_symbols"]
+        [::std::mem::offset_of!(_XkbNamesRec, phys_symbols) - 480usize];
+    ["Offset of field: _XkbNamesRec::num_keys"]
+        [::std::mem::offset_of!(_XkbNamesRec, num_keys) - 488usize];
+    ["Offset of field: _XkbNamesRec::num_key_aliases"]
+        [::std::mem::offset_of!(_XkbNamesRec, num_key_aliases) - 489usize];
+    ["Offset of field: _XkbNamesRec::num_rg"]
+        [::std::mem::offset_of!(_XkbNamesRec, num_rg) - 490usize];
+};
+pub type XkbNamesRec = _XkbNamesRec;
+pub type XkbNamesPtr = *mut _XkbNamesRec;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbGeometry {
+    _unused: [u8; 0],
+}
+pub type XkbGeometryPtr = *mut _XkbGeometry;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbDesc {
+    pub dpy: *mut _XDisplay,
+    pub flags: ::std::os::raw::c_ushort,
+    pub device_spec: ::std::os::raw::c_ushort,
+    pub min_key_code: KeyCode,
+    pub max_key_code: KeyCode,
+    pub ctrls: XkbControlsPtr,
+    pub server: XkbServerMapPtr,
+    pub map: XkbClientMapPtr,
+    pub indicators: XkbIndicatorPtr,
+    pub names: XkbNamesPtr,
+    pub compat: XkbCompatMapPtr,
+    pub geom: XkbGeometryPtr,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbDesc"][::std::mem::size_of::<_XkbDesc>() - 72usize];
+    ["Alignment of _XkbDesc"][::std::mem::align_of::<_XkbDesc>() - 8usize];
+    ["Offset of field: _XkbDesc::dpy"][::std::mem::offset_of!(_XkbDesc, dpy) - 0usize];
+    ["Offset of field: _XkbDesc::flags"][::std::mem::offset_of!(_XkbDesc, flags) - 8usize];
+    ["Offset of field: _XkbDesc::device_spec"]
+        [::std::mem::offset_of!(_XkbDesc, device_spec) - 10usize];
+    ["Offset of field: _XkbDesc::min_key_code"]
+        [::std::mem::offset_of!(_XkbDesc, min_key_code) - 12usize];
+    ["Offset of field: _XkbDesc::max_key_code"]
+        [::std::mem::offset_of!(_XkbDesc, max_key_code) - 13usize];
+    ["Offset of field: _XkbDesc::ctrls"][::std::mem::offset_of!(_XkbDesc, ctrls) - 16usize];
+    ["Offset of field: _XkbDesc::server"][::std::mem::offset_of!(_XkbDesc, server) - 24usize];
+    ["Offset of field: _XkbDesc::map"][::std::mem::offset_of!(_XkbDesc, map) - 32usize];
+    ["Offset of field: _XkbDesc::indicators"]
+        [::std::mem::offset_of!(_XkbDesc, indicators) - 40usize];
+    ["Offset of field: _XkbDesc::names"][::std::mem::offset_of!(_XkbDesc, names) - 48usize];
+    ["Offset of field: _XkbDesc::compat"][::std::mem::offset_of!(_XkbDesc, compat) - 56usize];
+    ["Offset of field: _XkbDesc::geom"][::std::mem::offset_of!(_XkbDesc, geom) - 64usize];
+};
+pub type XkbDescRec = _XkbDesc;
+pub type XkbDescPtr = *mut _XkbDesc;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbMapChanges {
+    pub changed: ::std::os::raw::c_ushort,
+    pub min_key_code: KeyCode,
+    pub max_key_code: KeyCode,
+    pub first_type: ::std::os::raw::c_uchar,
+    pub num_types: ::std::os::raw::c_uchar,
+    pub first_key_sym: KeyCode,
+    pub num_key_syms: ::std::os::raw::c_uchar,
+    pub first_key_act: KeyCode,
+    pub num_key_acts: ::std::os::raw::c_uchar,
+    pub first_key_behavior: KeyCode,
+    pub num_key_behaviors: ::std::os::raw::c_uchar,
+    pub first_key_explicit: KeyCode,
+    pub num_key_explicit: ::std::os::raw::c_uchar,
+    pub first_modmap_key: KeyCode,
+    pub num_modmap_keys: ::std::os::raw::c_uchar,
+    pub first_vmodmap_key: KeyCode,
+    pub num_vmodmap_keys: ::std::os::raw::c_uchar,
+    pub pad: ::std::os::raw::c_uchar,
+    pub vmods: ::std::os::raw::c_ushort,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbMapChanges"][::std::mem::size_of::<_XkbMapChanges>() - 22usize];
+    ["Alignment of _XkbMapChanges"][::std::mem::align_of::<_XkbMapChanges>() - 2usize];
+    ["Offset of field: _XkbMapChanges::changed"]
+        [::std::mem::offset_of!(_XkbMapChanges, changed) - 0usize];
+    ["Offset of field: _XkbMapChanges::min_key_code"]
+        [::std::mem::offset_of!(_XkbMapChanges, min_key_code) - 2usize];
+    ["Offset of field: _XkbMapChanges::max_key_code"]
+        [::std::mem::offset_of!(_XkbMapChanges, max_key_code) - 3usize];
+    ["Offset of field: _XkbMapChanges::first_type"]
+        [::std::mem::offset_of!(_XkbMapChanges, first_type) - 4usize];
+    ["Offset of field: _XkbMapChanges::num_types"]
+        [::std::mem::offset_of!(_XkbMapChanges, num_types) - 5usize];
+    ["Offset of field: _XkbMapChanges::first_key_sym"]
+        [::std::mem::offset_of!(_XkbMapChanges, first_key_sym) - 6usize];
+    ["Offset of field: _XkbMapChanges::num_key_syms"]
+        [::std::mem::offset_of!(_XkbMapChanges, num_key_syms) - 7usize];
+    ["Offset of field: _XkbMapChanges::first_key_act"]
+        [::std::mem::offset_of!(_XkbMapChanges, first_key_act) - 8usize];
+    ["Offset of field: _XkbMapChanges::num_key_acts"]
+        [::std::mem::offset_of!(_XkbMapChanges, num_key_acts) - 9usize];
+    ["Offset of field: _XkbMapChanges::first_key_behavior"]
+        [::std::mem::offset_of!(_XkbMapChanges, first_key_behavior) - 10usize];
+    ["Offset of field: _XkbMapChanges::num_key_behaviors"]
+        [::std::mem::offset_of!(_XkbMapChanges, num_key_behaviors) - 11usize];
+    ["Offset of field: _XkbMapChanges::first_key_explicit"]
+        [::std::mem::offset_of!(_XkbMapChanges, first_key_explicit) - 12usize];
+    ["Offset of field: _XkbMapChanges::num_key_explicit"]
+        [::std::mem::offset_of!(_XkbMapChanges, num_key_explicit) - 13usize];
+    ["Offset of field: _XkbMapChanges::first_modmap_key"]
+        [::std::mem::offset_of!(_XkbMapChanges, first_modmap_key) - 14usize];
+    ["Offset of field: _XkbMapChanges::num_modmap_keys"]
+        [::std::mem::offset_of!(_XkbMapChanges, num_modmap_keys) - 15usize];
+    ["Offset of field: _XkbMapChanges::first_vmodmap_key"]
+        [::std::mem::offset_of!(_XkbMapChanges, first_vmodmap_key) - 16usize];
+    ["Offset of field: _XkbMapChanges::num_vmodmap_keys"]
+        [::std::mem::offset_of!(_XkbMapChanges, num_vmodmap_keys) - 17usize];
+    ["Offset of field: _XkbMapChanges::pad"][::std::mem::offset_of!(_XkbMapChanges, pad) - 18usize];
+    ["Offset of field: _XkbMapChanges::vmods"]
+        [::std::mem::offset_of!(_XkbMapChanges, vmods) - 20usize];
+};
+pub type XkbMapChangesRec = _XkbMapChanges;
+pub type XkbMapChangesPtr = *mut _XkbMapChanges;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbControlsChanges {
+    pub changed_ctrls: ::std::os::raw::c_uint,
+    pub enabled_ctrls_changes: ::std::os::raw::c_uint,
+    pub num_groups_changed: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbControlsChanges"][::std::mem::size_of::<_XkbControlsChanges>() - 12usize];
+    ["Alignment of _XkbControlsChanges"][::std::mem::align_of::<_XkbControlsChanges>() - 4usize];
+    ["Offset of field: _XkbControlsChanges::changed_ctrls"]
+        [::std::mem::offset_of!(_XkbControlsChanges, changed_ctrls) - 0usize];
+    ["Offset of field: _XkbControlsChanges::enabled_ctrls_changes"]
+        [::std::mem::offset_of!(_XkbControlsChanges, enabled_ctrls_changes) - 4usize];
+    ["Offset of field: _XkbControlsChanges::num_groups_changed"]
+        [::std::mem::offset_of!(_XkbControlsChanges, num_groups_changed) - 8usize];
+};
+pub type XkbControlsChangesRec = _XkbControlsChanges;
+pub type XkbControlsChangesPtr = *mut _XkbControlsChanges;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbIndicatorChanges {
+    pub state_changes: ::std::os::raw::c_uint,
+    pub map_changes: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbIndicatorChanges"][::std::mem::size_of::<_XkbIndicatorChanges>() - 8usize];
+    ["Alignment of _XkbIndicatorChanges"][::std::mem::align_of::<_XkbIndicatorChanges>() - 4usize];
+    ["Offset of field: _XkbIndicatorChanges::state_changes"]
+        [::std::mem::offset_of!(_XkbIndicatorChanges, state_changes) - 0usize];
+    ["Offset of field: _XkbIndicatorChanges::map_changes"]
+        [::std::mem::offset_of!(_XkbIndicatorChanges, map_changes) - 4usize];
+};
+pub type XkbIndicatorChangesRec = _XkbIndicatorChanges;
+pub type XkbIndicatorChangesPtr = *mut _XkbIndicatorChanges;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbNameChanges {
+    pub changed: ::std::os::raw::c_uint,
+    pub first_type: ::std::os::raw::c_uchar,
+    pub num_types: ::std::os::raw::c_uchar,
+    pub first_lvl: ::std::os::raw::c_uchar,
+    pub num_lvls: ::std::os::raw::c_uchar,
+    pub num_aliases: ::std::os::raw::c_uchar,
+    pub num_rg: ::std::os::raw::c_uchar,
+    pub first_key: ::std::os::raw::c_uchar,
+    pub num_keys: ::std::os::raw::c_uchar,
+    pub changed_vmods: ::std::os::raw::c_ushort,
+    pub changed_indicators: ::std::os::raw::c_ulong,
+    pub changed_groups: ::std::os::raw::c_uchar,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbNameChanges"][::std::mem::size_of::<_XkbNameChanges>() - 32usize];
+    ["Alignment of _XkbNameChanges"][::std::mem::align_of::<_XkbNameChanges>() - 8usize];
+    ["Offset of field: _XkbNameChanges::changed"]
+        [::std::mem::offset_of!(_XkbNameChanges, changed) - 0usize];
+    ["Offset of field: _XkbNameChanges::first_type"]
+        [::std::mem::offset_of!(_XkbNameChanges, first_type) - 4usize];
+    ["Offset of field: _XkbNameChanges::num_types"]
+        [::std::mem::offset_of!(_XkbNameChanges, num_types) - 5usize];
+    ["Offset of field: _XkbNameChanges::first_lvl"]
+        [::std::mem::offset_of!(_XkbNameChanges, first_lvl) - 6usize];
+    ["Offset of field: _XkbNameChanges::num_lvls"]
+        [::std::mem::offset_of!(_XkbNameChanges, num_lvls) - 7usize];
+    ["Offset of field: _XkbNameChanges::num_aliases"]
+        [::std::mem::offset_of!(_XkbNameChanges, num_aliases) - 8usize];
+    ["Offset of field: _XkbNameChanges::num_rg"]
+        [::std::mem::offset_of!(_XkbNameChanges, num_rg) - 9usize];
+    ["Offset of field: _XkbNameChanges::first_key"]
+        [::std::mem::offset_of!(_XkbNameChanges, first_key) - 10usize];
+    ["Offset of field: _XkbNameChanges::num_keys"]
+        [::std::mem::offset_of!(_XkbNameChanges, num_keys) - 11usize];
+    ["Offset of field: _XkbNameChanges::changed_vmods"]
+        [::std::mem::offset_of!(_XkbNameChanges, changed_vmods) - 12usize];
+    ["Offset of field: _XkbNameChanges::changed_indicators"]
+        [::std::mem::offset_of!(_XkbNameChanges, changed_indicators) - 16usize];
+    ["Offset of field: _XkbNameChanges::changed_groups"]
+        [::std::mem::offset_of!(_XkbNameChanges, changed_groups) - 24usize];
+};
+pub type XkbNameChangesRec = _XkbNameChanges;
+pub type XkbNameChangesPtr = *mut _XkbNameChanges;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbCompatChanges {
+    pub changed_groups: ::std::os::raw::c_uchar,
+    pub first_si: ::std::os::raw::c_ushort,
+    pub num_si: ::std::os::raw::c_ushort,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbCompatChanges"][::std::mem::size_of::<_XkbCompatChanges>() - 6usize];
+    ["Alignment of _XkbCompatChanges"][::std::mem::align_of::<_XkbCompatChanges>() - 2usize];
+    ["Offset of field: _XkbCompatChanges::changed_groups"]
+        [::std::mem::offset_of!(_XkbCompatChanges, changed_groups) - 0usize];
+    ["Offset of field: _XkbCompatChanges::first_si"]
+        [::std::mem::offset_of!(_XkbCompatChanges, first_si) - 2usize];
+    ["Offset of field: _XkbCompatChanges::num_si"]
+        [::std::mem::offset_of!(_XkbCompatChanges, num_si) - 4usize];
+};
+pub type XkbCompatChangesRec = _XkbCompatChanges;
+pub type XkbCompatChangesPtr = *mut _XkbCompatChanges;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbChanges {
+    pub device_spec: ::std::os::raw::c_ushort,
+    pub state_changes: ::std::os::raw::c_ushort,
+    pub map: XkbMapChangesRec,
+    pub ctrls: XkbControlsChangesRec,
+    pub indicators: XkbIndicatorChangesRec,
+    pub names: XkbNameChangesRec,
+    pub compat: XkbCompatChangesRec,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbChanges"][::std::mem::size_of::<_XkbChanges>() - 88usize];
+    ["Alignment of _XkbChanges"][::std::mem::align_of::<_XkbChanges>() - 8usize];
+    ["Offset of field: _XkbChanges::device_spec"]
+        [::std::mem::offset_of!(_XkbChanges, device_spec) - 0usize];
+    ["Offset of field: _XkbChanges::state_changes"]
+        [::std::mem::offset_of!(_XkbChanges, state_changes) - 2usize];
+    ["Offset of field: _XkbChanges::map"][::std::mem::offset_of!(_XkbChanges, map) - 4usize];
+    ["Offset of field: _XkbChanges::ctrls"][::std::mem::offset_of!(_XkbChanges, ctrls) - 28usize];
+    ["Offset of field: _XkbChanges::indicators"]
+        [::std::mem::offset_of!(_XkbChanges, indicators) - 40usize];
+    ["Offset of field: _XkbChanges::names"][::std::mem::offset_of!(_XkbChanges, names) - 48usize];
+    ["Offset of field: _XkbChanges::compat"][::std::mem::offset_of!(_XkbChanges, compat) - 80usize];
+};
+pub type XkbChangesRec = _XkbChanges;
+pub type XkbChangesPtr = *mut _XkbChanges;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbComponentNames {
+    pub keymap: *mut ::std::os::raw::c_char,
+    pub keycodes: *mut ::std::os::raw::c_char,
+    pub types: *mut ::std::os::raw::c_char,
+    pub compat: *mut ::std::os::raw::c_char,
+    pub symbols: *mut ::std::os::raw::c_char,
+    pub geometry: *mut ::std::os::raw::c_char,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbComponentNames"][::std::mem::size_of::<_XkbComponentNames>() - 48usize];
+    ["Alignment of _XkbComponentNames"][::std::mem::align_of::<_XkbComponentNames>() - 8usize];
+    ["Offset of field: _XkbComponentNames::keymap"]
+        [::std::mem::offset_of!(_XkbComponentNames, keymap) - 0usize];
+    ["Offset of field: _XkbComponentNames::keycodes"]
+        [::std::mem::offset_of!(_XkbComponentNames, keycodes) - 8usize];
+    ["Offset of field: _XkbComponentNames::types"]
+        [::std::mem::offset_of!(_XkbComponentNames, types) - 16usize];
+    ["Offset of field: _XkbComponentNames::compat"]
+        [::std::mem::offset_of!(_XkbComponentNames, compat) - 24usize];
+    ["Offset of field: _XkbComponentNames::symbols"]
+        [::std::mem::offset_of!(_XkbComponentNames, symbols) - 32usize];
+    ["Offset of field: _XkbComponentNames::geometry"]
+        [::std::mem::offset_of!(_XkbComponentNames, geometry) - 40usize];
+};
+pub type XkbComponentNamesRec = _XkbComponentNames;
+pub type XkbComponentNamesPtr = *mut _XkbComponentNames;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbComponentName {
+    pub flags: ::std::os::raw::c_ushort,
+    pub name: *mut ::std::os::raw::c_char,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbComponentName"][::std::mem::size_of::<_XkbComponentName>() - 16usize];
+    ["Alignment of _XkbComponentName"][::std::mem::align_of::<_XkbComponentName>() - 8usize];
+    ["Offset of field: _XkbComponentName::flags"]
+        [::std::mem::offset_of!(_XkbComponentName, flags) - 0usize];
+    ["Offset of field: _XkbComponentName::name"]
+        [::std::mem::offset_of!(_XkbComponentName, name) - 8usize];
+};
+pub type XkbComponentNameRec = _XkbComponentName;
+pub type XkbComponentNamePtr = *mut _XkbComponentName;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbComponentList {
+    pub num_keymaps: ::std::os::raw::c_int,
+    pub num_keycodes: ::std::os::raw::c_int,
+    pub num_types: ::std::os::raw::c_int,
+    pub num_compat: ::std::os::raw::c_int,
+    pub num_symbols: ::std::os::raw::c_int,
+    pub num_geometry: ::std::os::raw::c_int,
+    pub keymaps: XkbComponentNamePtr,
+    pub keycodes: XkbComponentNamePtr,
+    pub types: XkbComponentNamePtr,
+    pub compat: XkbComponentNamePtr,
+    pub symbols: XkbComponentNamePtr,
+    pub geometry: XkbComponentNamePtr,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbComponentList"][::std::mem::size_of::<_XkbComponentList>() - 72usize];
+    ["Alignment of _XkbComponentList"][::std::mem::align_of::<_XkbComponentList>() - 8usize];
+    ["Offset of field: _XkbComponentList::num_keymaps"]
+        [::std::mem::offset_of!(_XkbComponentList, num_keymaps) - 0usize];
+    ["Offset of field: _XkbComponentList::num_keycodes"]
+        [::std::mem::offset_of!(_XkbComponentList, num_keycodes) - 4usize];
+    ["Offset of field: _XkbComponentList::num_types"]
+        [::std::mem::offset_of!(_XkbComponentList, num_types) - 8usize];
+    ["Offset of field: _XkbComponentList::num_compat"]
+        [::std::mem::offset_of!(_XkbComponentList, num_compat) - 12usize];
+    ["Offset of field: _XkbComponentList::num_symbols"]
+        [::std::mem::offset_of!(_XkbComponentList, num_symbols) - 16usize];
+    ["Offset of field: _XkbComponentList::num_geometry"]
+        [::std::mem::offset_of!(_XkbComponentList, num_geometry) - 20usize];
+    ["Offset of field: _XkbComponentList::keymaps"]
+        [::std::mem::offset_of!(_XkbComponentList, keymaps) - 24usize];
+    ["Offset of field: _XkbComponentList::keycodes"]
+        [::std::mem::offset_of!(_XkbComponentList, keycodes) - 32usize];
+    ["Offset of field: _XkbComponentList::types"]
+        [::std::mem::offset_of!(_XkbComponentList, types) - 40usize];
+    ["Offset of field: _XkbComponentList::compat"]
+        [::std::mem::offset_of!(_XkbComponentList, compat) - 48usize];
+    ["Offset of field: _XkbComponentList::symbols"]
+        [::std::mem::offset_of!(_XkbComponentList, symbols) - 56usize];
+    ["Offset of field: _XkbComponentList::geometry"]
+        [::std::mem::offset_of!(_XkbComponentList, geometry) - 64usize];
+};
+pub type XkbComponentListRec = _XkbComponentList;
+pub type XkbComponentListPtr = *mut _XkbComponentList;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbDeviceLedInfo {
+    pub led_class: ::std::os::raw::c_ushort,
+    pub led_id: ::std::os::raw::c_ushort,
+    pub phys_indicators: ::std::os::raw::c_uint,
+    pub maps_present: ::std::os::raw::c_uint,
+    pub names_present: ::std::os::raw::c_uint,
+    pub state: ::std::os::raw::c_uint,
+    pub names: [Atom; 32usize],
+    pub maps: [XkbIndicatorMapRec; 32usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbDeviceLedInfo"][::std::mem::size_of::<_XkbDeviceLedInfo>() - 664usize];
+    ["Alignment of _XkbDeviceLedInfo"][::std::mem::align_of::<_XkbDeviceLedInfo>() - 8usize];
+    ["Offset of field: _XkbDeviceLedInfo::led_class"]
+        [::std::mem::offset_of!(_XkbDeviceLedInfo, led_class) - 0usize];
+    ["Offset of field: _XkbDeviceLedInfo::led_id"]
+        [::std::mem::offset_of!(_XkbDeviceLedInfo, led_id) - 2usize];
+    ["Offset of field: _XkbDeviceLedInfo::phys_indicators"]
+        [::std::mem::offset_of!(_XkbDeviceLedInfo, phys_indicators) - 4usize];
+    ["Offset of field: _XkbDeviceLedInfo::maps_present"]
+        [::std::mem::offset_of!(_XkbDeviceLedInfo, maps_present) - 8usize];
+    ["Offset of field: _XkbDeviceLedInfo::names_present"]
+        [::std::mem::offset_of!(_XkbDeviceLedInfo, names_present) - 12usize];
+    ["Offset of field: _XkbDeviceLedInfo::state"]
+        [::std::mem::offset_of!(_XkbDeviceLedInfo, state) - 16usize];
+    ["Offset of field: _XkbDeviceLedInfo::names"]
+        [::std::mem::offset_of!(_XkbDeviceLedInfo, names) - 24usize];
+    ["Offset of field: _XkbDeviceLedInfo::maps"]
+        [::std::mem::offset_of!(_XkbDeviceLedInfo, maps) - 280usize];
+};
+pub type XkbDeviceLedInfoRec = _XkbDeviceLedInfo;
+pub type XkbDeviceLedInfoPtr = *mut _XkbDeviceLedInfo;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbDeviceInfo {
+    pub name: *mut ::std::os::raw::c_char,
+    pub type_: Atom,
+    pub device_spec: ::std::os::raw::c_ushort,
+    pub has_own_state: ::std::os::raw::c_int,
+    pub supported: ::std::os::raw::c_ushort,
+    pub unsupported: ::std::os::raw::c_ushort,
+    pub num_btns: ::std::os::raw::c_ushort,
+    pub btn_acts: *mut XkbAction,
+    pub sz_leds: ::std::os::raw::c_ushort,
+    pub num_leds: ::std::os::raw::c_ushort,
+    pub dflt_kbd_fb: ::std::os::raw::c_ushort,
+    pub dflt_led_fb: ::std::os::raw::c_ushort,
+    pub leds: XkbDeviceLedInfoPtr,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbDeviceInfo"][::std::mem::size_of::<_XkbDeviceInfo>() - 56usize];
+    ["Alignment of _XkbDeviceInfo"][::std::mem::align_of::<_XkbDeviceInfo>() - 8usize];
+    ["Offset of field: _XkbDeviceInfo::name"]
+        [::std::mem::offset_of!(_XkbDeviceInfo, name) - 0usize];
+    ["Offset of field: _XkbDeviceInfo::type_"]
+        [::std::mem::offset_of!(_XkbDeviceInfo, type_) - 8usize];
+    ["Offset of field: _XkbDeviceInfo::device_spec"]
+        [::std::mem::offset_of!(_XkbDeviceInfo, device_spec) - 16usize];
+    ["Offset of field: _XkbDeviceInfo::has_own_state"]
+        [::std::mem::offset_of!(_XkbDeviceInfo, has_own_state) - 20usize];
+    ["Offset of field: _XkbDeviceInfo::supported"]
+        [::std::mem::offset_of!(_XkbDeviceInfo, supported) - 24usize];
+    ["Offset of field: _XkbDeviceInfo::unsupported"]
+        [::std::mem::offset_of!(_XkbDeviceInfo, unsupported) - 26usize];
+    ["Offset of field: _XkbDeviceInfo::num_btns"]
+        [::std::mem::offset_of!(_XkbDeviceInfo, num_btns) - 28usize];
+    ["Offset of field: _XkbDeviceInfo::btn_acts"]
+        [::std::mem::offset_of!(_XkbDeviceInfo, btn_acts) - 32usize];
+    ["Offset of field: _XkbDeviceInfo::sz_leds"]
+        [::std::mem::offset_of!(_XkbDeviceInfo, sz_leds) - 40usize];
+    ["Offset of field: _XkbDeviceInfo::num_leds"]
+        [::std::mem::offset_of!(_XkbDeviceInfo, num_leds) - 42usize];
+    ["Offset of field: _XkbDeviceInfo::dflt_kbd_fb"]
+        [::std::mem::offset_of!(_XkbDeviceInfo, dflt_kbd_fb) - 44usize];
+    ["Offset of field: _XkbDeviceInfo::dflt_led_fb"]
+        [::std::mem::offset_of!(_XkbDeviceInfo, dflt_led_fb) - 46usize];
+    ["Offset of field: _XkbDeviceInfo::leds"]
+        [::std::mem::offset_of!(_XkbDeviceInfo, leds) - 48usize];
+};
+pub type XkbDeviceInfoRec = _XkbDeviceInfo;
+pub type XkbDeviceInfoPtr = *mut _XkbDeviceInfo;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbDeviceLedChanges {
+    pub led_class: ::std::os::raw::c_ushort,
+    pub led_id: ::std::os::raw::c_ushort,
+    pub defined: ::std::os::raw::c_uint,
+    pub next: *mut _XkbDeviceLedChanges,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbDeviceLedChanges"][::std::mem::size_of::<_XkbDeviceLedChanges>() - 16usize];
+    ["Alignment of _XkbDeviceLedChanges"][::std::mem::align_of::<_XkbDeviceLedChanges>() - 8usize];
+    ["Offset of field: _XkbDeviceLedChanges::led_class"]
+        [::std::mem::offset_of!(_XkbDeviceLedChanges, led_class) - 0usize];
+    ["Offset of field: _XkbDeviceLedChanges::led_id"]
+        [::std::mem::offset_of!(_XkbDeviceLedChanges, led_id) - 2usize];
+    ["Offset of field: _XkbDeviceLedChanges::defined"]
+        [::std::mem::offset_of!(_XkbDeviceLedChanges, defined) - 4usize];
+    ["Offset of field: _XkbDeviceLedChanges::next"]
+        [::std::mem::offset_of!(_XkbDeviceLedChanges, next) - 8usize];
+};
+pub type XkbDeviceLedChangesRec = _XkbDeviceLedChanges;
+pub type XkbDeviceLedChangesPtr = *mut _XkbDeviceLedChanges;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbDeviceChanges {
+    pub changed: ::std::os::raw::c_uint,
+    pub first_btn: ::std::os::raw::c_ushort,
+    pub num_btns: ::std::os::raw::c_ushort,
+    pub leds: XkbDeviceLedChangesRec,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbDeviceChanges"][::std::mem::size_of::<_XkbDeviceChanges>() - 24usize];
+    ["Alignment of _XkbDeviceChanges"][::std::mem::align_of::<_XkbDeviceChanges>() - 8usize];
+    ["Offset of field: _XkbDeviceChanges::changed"]
+        [::std::mem::offset_of!(_XkbDeviceChanges, changed) - 0usize];
+    ["Offset of field: _XkbDeviceChanges::first_btn"]
+        [::std::mem::offset_of!(_XkbDeviceChanges, first_btn) - 4usize];
+    ["Offset of field: _XkbDeviceChanges::num_btns"]
+        [::std::mem::offset_of!(_XkbDeviceChanges, num_btns) - 6usize];
+    ["Offset of field: _XkbDeviceChanges::leds"]
+        [::std::mem::offset_of!(_XkbDeviceChanges, leds) - 8usize];
+};
+pub type XkbDeviceChangesRec = _XkbDeviceChanges;
+pub type XkbDeviceChangesPtr = *mut _XkbDeviceChanges;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbAnyEvent {
+    pub type_: ::std::os::raw::c_int,
+    pub serial: ::std::os::raw::c_ulong,
+    pub send_event: ::std::os::raw::c_int,
+    pub display: *mut Display,
+    pub time: Time,
+    pub xkb_type: ::std::os::raw::c_int,
+    pub device: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbAnyEvent"][::std::mem::size_of::<_XkbAnyEvent>() - 48usize];
+    ["Alignment of _XkbAnyEvent"][::std::mem::align_of::<_XkbAnyEvent>() - 8usize];
+    ["Offset of field: _XkbAnyEvent::type_"][::std::mem::offset_of!(_XkbAnyEvent, type_) - 0usize];
+    ["Offset of field: _XkbAnyEvent::serial"]
+        [::std::mem::offset_of!(_XkbAnyEvent, serial) - 8usize];
+    ["Offset of field: _XkbAnyEvent::send_event"]
+        [::std::mem::offset_of!(_XkbAnyEvent, send_event) - 16usize];
+    ["Offset of field: _XkbAnyEvent::display"]
+        [::std::mem::offset_of!(_XkbAnyEvent, display) - 24usize];
+    ["Offset of field: _XkbAnyEvent::time"][::std::mem::offset_of!(_XkbAnyEvent, time) - 32usize];
+    ["Offset of field: _XkbAnyEvent::xkb_type"]
+        [::std::mem::offset_of!(_XkbAnyEvent, xkb_type) - 40usize];
+    ["Offset of field: _XkbAnyEvent::device"]
+        [::std::mem::offset_of!(_XkbAnyEvent, device) - 44usize];
+};
+pub type XkbAnyEvent = _XkbAnyEvent;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbNewKeyboardNotify {
+    pub type_: ::std::os::raw::c_int,
+    pub serial: ::std::os::raw::c_ulong,
+    pub send_event: ::std::os::raw::c_int,
+    pub display: *mut Display,
+    pub time: Time,
+    pub xkb_type: ::std::os::raw::c_int,
+    pub device: ::std::os::raw::c_int,
+    pub old_device: ::std::os::raw::c_int,
+    pub min_key_code: ::std::os::raw::c_int,
+    pub max_key_code: ::std::os::raw::c_int,
+    pub old_min_key_code: ::std::os::raw::c_int,
+    pub old_max_key_code: ::std::os::raw::c_int,
+    pub changed: ::std::os::raw::c_uint,
+    pub req_major: ::std::os::raw::c_char,
+    pub req_minor: ::std::os::raw::c_char,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbNewKeyboardNotify"][::std::mem::size_of::<_XkbNewKeyboardNotify>() - 80usize];
+    ["Alignment of _XkbNewKeyboardNotify"]
+        [::std::mem::align_of::<_XkbNewKeyboardNotify>() - 8usize];
+    ["Offset of field: _XkbNewKeyboardNotify::type_"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, type_) - 0usize];
+    ["Offset of field: _XkbNewKeyboardNotify::serial"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, serial) - 8usize];
+    ["Offset of field: _XkbNewKeyboardNotify::send_event"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, send_event) - 16usize];
+    ["Offset of field: _XkbNewKeyboardNotify::display"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, display) - 24usize];
+    ["Offset of field: _XkbNewKeyboardNotify::time"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, time) - 32usize];
+    ["Offset of field: _XkbNewKeyboardNotify::xkb_type"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, xkb_type) - 40usize];
+    ["Offset of field: _XkbNewKeyboardNotify::device"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, device) - 44usize];
+    ["Offset of field: _XkbNewKeyboardNotify::old_device"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, old_device) - 48usize];
+    ["Offset of field: _XkbNewKeyboardNotify::min_key_code"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, min_key_code) - 52usize];
+    ["Offset of field: _XkbNewKeyboardNotify::max_key_code"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, max_key_code) - 56usize];
+    ["Offset of field: _XkbNewKeyboardNotify::old_min_key_code"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, old_min_key_code) - 60usize];
+    ["Offset of field: _XkbNewKeyboardNotify::old_max_key_code"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, old_max_key_code) - 64usize];
+    ["Offset of field: _XkbNewKeyboardNotify::changed"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, changed) - 68usize];
+    ["Offset of field: _XkbNewKeyboardNotify::req_major"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, req_major) - 72usize];
+    ["Offset of field: _XkbNewKeyboardNotify::req_minor"]
+        [::std::mem::offset_of!(_XkbNewKeyboardNotify, req_minor) - 73usize];
+};
+pub type XkbNewKeyboardNotifyEvent = _XkbNewKeyboardNotify;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbMapNotifyEvent {
+    pub type_: ::std::os::raw::c_int,
+    pub serial: ::std::os::raw::c_ulong,
+    pub send_event: ::std::os::raw::c_int,
+    pub display: *mut Display,
+    pub time: Time,
+    pub xkb_type: ::std::os::raw::c_int,
+    pub device: ::std::os::raw::c_int,
+    pub changed: ::std::os::raw::c_uint,
+    pub flags: ::std::os::raw::c_uint,
+    pub first_type: ::std::os::raw::c_int,
+    pub num_types: ::std::os::raw::c_int,
+    pub min_key_code: KeyCode,
+    pub max_key_code: KeyCode,
+    pub first_key_sym: KeyCode,
+    pub first_key_act: KeyCode,
+    pub first_key_behavior: KeyCode,
+    pub first_key_explicit: KeyCode,
+    pub first_modmap_key: KeyCode,
+    pub first_vmodmap_key: KeyCode,
+    pub num_key_syms: ::std::os::raw::c_int,
+    pub num_key_acts: ::std::os::raw::c_int,
+    pub num_key_behaviors: ::std::os::raw::c_int,
+    pub num_key_explicit: ::std::os::raw::c_int,
+    pub num_modmap_keys: ::std::os::raw::c_int,
+    pub num_vmodmap_keys: ::std::os::raw::c_int,
+    pub vmods: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbMapNotifyEvent"][::std::mem::size_of::<_XkbMapNotifyEvent>() - 104usize];
+    ["Alignment of _XkbMapNotifyEvent"][::std::mem::align_of::<_XkbMapNotifyEvent>() - 8usize];
+    ["Offset of field: _XkbMapNotifyEvent::type_"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, type_) - 0usize];
+    ["Offset of field: _XkbMapNotifyEvent::serial"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, serial) - 8usize];
+    ["Offset of field: _XkbMapNotifyEvent::send_event"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, send_event) - 16usize];
+    ["Offset of field: _XkbMapNotifyEvent::display"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, display) - 24usize];
+    ["Offset of field: _XkbMapNotifyEvent::time"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, time) - 32usize];
+    ["Offset of field: _XkbMapNotifyEvent::xkb_type"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, xkb_type) - 40usize];
+    ["Offset of field: _XkbMapNotifyEvent::device"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, device) - 44usize];
+    ["Offset of field: _XkbMapNotifyEvent::changed"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, changed) - 48usize];
+    ["Offset of field: _XkbMapNotifyEvent::flags"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, flags) - 52usize];
+    ["Offset of field: _XkbMapNotifyEvent::first_type"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, first_type) - 56usize];
+    ["Offset of field: _XkbMapNotifyEvent::num_types"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, num_types) - 60usize];
+    ["Offset of field: _XkbMapNotifyEvent::min_key_code"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, min_key_code) - 64usize];
+    ["Offset of field: _XkbMapNotifyEvent::max_key_code"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, max_key_code) - 65usize];
+    ["Offset of field: _XkbMapNotifyEvent::first_key_sym"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, first_key_sym) - 66usize];
+    ["Offset of field: _XkbMapNotifyEvent::first_key_act"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, first_key_act) - 67usize];
+    ["Offset of field: _XkbMapNotifyEvent::first_key_behavior"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, first_key_behavior) - 68usize];
+    ["Offset of field: _XkbMapNotifyEvent::first_key_explicit"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, first_key_explicit) - 69usize];
+    ["Offset of field: _XkbMapNotifyEvent::first_modmap_key"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, first_modmap_key) - 70usize];
+    ["Offset of field: _XkbMapNotifyEvent::first_vmodmap_key"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, first_vmodmap_key) - 71usize];
+    ["Offset of field: _XkbMapNotifyEvent::num_key_syms"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, num_key_syms) - 72usize];
+    ["Offset of field: _XkbMapNotifyEvent::num_key_acts"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, num_key_acts) - 76usize];
+    ["Offset of field: _XkbMapNotifyEvent::num_key_behaviors"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, num_key_behaviors) - 80usize];
+    ["Offset of field: _XkbMapNotifyEvent::num_key_explicit"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, num_key_explicit) - 84usize];
+    ["Offset of field: _XkbMapNotifyEvent::num_modmap_keys"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, num_modmap_keys) - 88usize];
+    ["Offset of field: _XkbMapNotifyEvent::num_vmodmap_keys"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, num_vmodmap_keys) - 92usize];
+    ["Offset of field: _XkbMapNotifyEvent::vmods"]
+        [::std::mem::offset_of!(_XkbMapNotifyEvent, vmods) - 96usize];
+};
+pub type XkbMapNotifyEvent = _XkbMapNotifyEvent;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbStateNotifyEvent {
+    pub type_: ::std::os::raw::c_int,
+    pub serial: ::std::os::raw::c_ulong,
+    pub send_event: ::std::os::raw::c_int,
+    pub display: *mut Display,
+    pub time: Time,
+    pub xkb_type: ::std::os::raw::c_int,
+    pub device: ::std::os::raw::c_int,
+    pub changed: ::std::os::raw::c_uint,
+    pub group: ::std::os::raw::c_int,
+    pub base_group: ::std::os::raw::c_int,
+    pub latched_group: ::std::os::raw::c_int,
+    pub locked_group: ::std::os::raw::c_int,
+    pub mods: ::std::os::raw::c_uint,
+    pub base_mods: ::std::os::raw::c_uint,
+    pub latched_mods: ::std::os::raw::c_uint,
+    pub locked_mods: ::std::os::raw::c_uint,
+    pub compat_state: ::std::os::raw::c_int,
+    pub grab_mods: ::std::os::raw::c_uchar,
+    pub compat_grab_mods: ::std::os::raw::c_uchar,
+    pub lookup_mods: ::std::os::raw::c_uchar,
+    pub compat_lookup_mods: ::std::os::raw::c_uchar,
+    pub ptr_buttons: ::std::os::raw::c_int,
+    pub keycode: KeyCode,
+    pub event_type: ::std::os::raw::c_char,
+    pub req_major: ::std::os::raw::c_char,
+    pub req_minor: ::std::os::raw::c_char,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbStateNotifyEvent"][::std::mem::size_of::<_XkbStateNotifyEvent>() - 104usize];
+    ["Alignment of _XkbStateNotifyEvent"][::std::mem::align_of::<_XkbStateNotifyEvent>() - 8usize];
+    ["Offset of field: _XkbStateNotifyEvent::type_"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, type_) - 0usize];
+    ["Offset of field: _XkbStateNotifyEvent::serial"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, serial) - 8usize];
+    ["Offset of field: _XkbStateNotifyEvent::send_event"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, send_event) - 16usize];
+    ["Offset of field: _XkbStateNotifyEvent::display"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, display) - 24usize];
+    ["Offset of field: _XkbStateNotifyEvent::time"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, time) - 32usize];
+    ["Offset of field: _XkbStateNotifyEvent::xkb_type"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, xkb_type) - 40usize];
+    ["Offset of field: _XkbStateNotifyEvent::device"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, device) - 44usize];
+    ["Offset of field: _XkbStateNotifyEvent::changed"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, changed) - 48usize];
+    ["Offset of field: _XkbStateNotifyEvent::group"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, group) - 52usize];
+    ["Offset of field: _XkbStateNotifyEvent::base_group"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, base_group) - 56usize];
+    ["Offset of field: _XkbStateNotifyEvent::latched_group"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, latched_group) - 60usize];
+    ["Offset of field: _XkbStateNotifyEvent::locked_group"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, locked_group) - 64usize];
+    ["Offset of field: _XkbStateNotifyEvent::mods"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, mods) - 68usize];
+    ["Offset of field: _XkbStateNotifyEvent::base_mods"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, base_mods) - 72usize];
+    ["Offset of field: _XkbStateNotifyEvent::latched_mods"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, latched_mods) - 76usize];
+    ["Offset of field: _XkbStateNotifyEvent::locked_mods"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, locked_mods) - 80usize];
+    ["Offset of field: _XkbStateNotifyEvent::compat_state"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, compat_state) - 84usize];
+    ["Offset of field: _XkbStateNotifyEvent::grab_mods"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, grab_mods) - 88usize];
+    ["Offset of field: _XkbStateNotifyEvent::compat_grab_mods"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, compat_grab_mods) - 89usize];
+    ["Offset of field: _XkbStateNotifyEvent::lookup_mods"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, lookup_mods) - 90usize];
+    ["Offset of field: _XkbStateNotifyEvent::compat_lookup_mods"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, compat_lookup_mods) - 91usize];
+    ["Offset of field: _XkbStateNotifyEvent::ptr_buttons"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, ptr_buttons) - 92usize];
+    ["Offset of field: _XkbStateNotifyEvent::keycode"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, keycode) - 96usize];
+    ["Offset of field: _XkbStateNotifyEvent::event_type"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, event_type) - 97usize];
+    ["Offset of field: _XkbStateNotifyEvent::req_major"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, req_major) - 98usize];
+    ["Offset of field: _XkbStateNotifyEvent::req_minor"]
+        [::std::mem::offset_of!(_XkbStateNotifyEvent, req_minor) - 99usize];
+};
+pub type XkbStateNotifyEvent = _XkbStateNotifyEvent;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbControlsNotify {
+    pub type_: ::std::os::raw::c_int,
+    pub serial: ::std::os::raw::c_ulong,
+    pub send_event: ::std::os::raw::c_int,
+    pub display: *mut Display,
+    pub time: Time,
+    pub xkb_type: ::std::os::raw::c_int,
+    pub device: ::std::os::raw::c_int,
+    pub changed_ctrls: ::std::os::raw::c_uint,
+    pub enabled_ctrls: ::std::os::raw::c_uint,
+    pub enabled_ctrl_changes: ::std::os::raw::c_uint,
+    pub num_groups: ::std::os::raw::c_int,
+    pub keycode: KeyCode,
+    pub event_type: ::std::os::raw::c_char,
+    pub req_major: ::std::os::raw::c_char,
+    pub req_minor: ::std::os::raw::c_char,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbControlsNotify"][::std::mem::size_of::<_XkbControlsNotify>() - 72usize];
+    ["Alignment of _XkbControlsNotify"][::std::mem::align_of::<_XkbControlsNotify>() - 8usize];
+    ["Offset of field: _XkbControlsNotify::type_"]
+        [::std::mem::offset_of!(_XkbControlsNotify, type_) - 0usize];
+    ["Offset of field: _XkbControlsNotify::serial"]
+        [::std::mem::offset_of!(_XkbControlsNotify, serial) - 8usize];
+    ["Offset of field: _XkbControlsNotify::send_event"]
+        [::std::mem::offset_of!(_XkbControlsNotify, send_event) - 16usize];
+    ["Offset of field: _XkbControlsNotify::display"]
+        [::std::mem::offset_of!(_XkbControlsNotify, display) - 24usize];
+    ["Offset of field: _XkbControlsNotify::time"]
+        [::std::mem::offset_of!(_XkbControlsNotify, time) - 32usize];
+    ["Offset of field: _XkbControlsNotify::xkb_type"]
+        [::std::mem::offset_of!(_XkbControlsNotify, xkb_type) - 40usize];
+    ["Offset of field: _XkbControlsNotify::device"]
+        [::std::mem::offset_of!(_XkbControlsNotify, device) - 44usize];
+    ["Offset of field: _XkbControlsNotify::changed_ctrls"]
+        [::std::mem::offset_of!(_XkbControlsNotify, changed_ctrls) - 48usize];
+    ["Offset of field: _XkbControlsNotify::enabled_ctrls"]
+        [::std::mem::offset_of!(_XkbControlsNotify, enabled_ctrls) - 52usize];
+    ["Offset of field: _XkbControlsNotify::enabled_ctrl_changes"]
+        [::std::mem::offset_of!(_XkbControlsNotify, enabled_ctrl_changes) - 56usize];
+    ["Offset of field: _XkbControlsNotify::num_groups"]
+        [::std::mem::offset_of!(_XkbControlsNotify, num_groups) - 60usize];
+    ["Offset of field: _XkbControlsNotify::keycode"]
+        [::std::mem::offset_of!(_XkbControlsNotify, keycode) - 64usize];
+    ["Offset of field: _XkbControlsNotify::event_type"]
+        [::std::mem::offset_of!(_XkbControlsNotify, event_type) - 65usize];
+    ["Offset of field: _XkbControlsNotify::req_major"]
+        [::std::mem::offset_of!(_XkbControlsNotify, req_major) - 66usize];
+    ["Offset of field: _XkbControlsNotify::req_minor"]
+        [::std::mem::offset_of!(_XkbControlsNotify, req_minor) - 67usize];
+};
+pub type XkbControlsNotifyEvent = _XkbControlsNotify;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbIndicatorNotify {
+    pub type_: ::std::os::raw::c_int,
+    pub serial: ::std::os::raw::c_ulong,
+    pub send_event: ::std::os::raw::c_int,
+    pub display: *mut Display,
+    pub time: Time,
+    pub xkb_type: ::std::os::raw::c_int,
+    pub device: ::std::os::raw::c_int,
+    pub changed: ::std::os::raw::c_uint,
+    pub state: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbIndicatorNotify"][::std::mem::size_of::<_XkbIndicatorNotify>() - 56usize];
+    ["Alignment of _XkbIndicatorNotify"][::std::mem::align_of::<_XkbIndicatorNotify>() - 8usize];
+    ["Offset of field: _XkbIndicatorNotify::type_"]
+        [::std::mem::offset_of!(_XkbIndicatorNotify, type_) - 0usize];
+    ["Offset of field: _XkbIndicatorNotify::serial"]
+        [::std::mem::offset_of!(_XkbIndicatorNotify, serial) - 8usize];
+    ["Offset of field: _XkbIndicatorNotify::send_event"]
+        [::std::mem::offset_of!(_XkbIndicatorNotify, send_event) - 16usize];
+    ["Offset of field: _XkbIndicatorNotify::display"]
+        [::std::mem::offset_of!(_XkbIndicatorNotify, display) - 24usize];
+    ["Offset of field: _XkbIndicatorNotify::time"]
+        [::std::mem::offset_of!(_XkbIndicatorNotify, time) - 32usize];
+    ["Offset of field: _XkbIndicatorNotify::xkb_type"]
+        [::std::mem::offset_of!(_XkbIndicatorNotify, xkb_type) - 40usize];
+    ["Offset of field: _XkbIndicatorNotify::device"]
+        [::std::mem::offset_of!(_XkbIndicatorNotify, device) - 44usize];
+    ["Offset of field: _XkbIndicatorNotify::changed"]
+        [::std::mem::offset_of!(_XkbIndicatorNotify, changed) - 48usize];
+    ["Offset of field: _XkbIndicatorNotify::state"]
+        [::std::mem::offset_of!(_XkbIndicatorNotify, state) - 52usize];
+};
+pub type XkbIndicatorNotifyEvent = _XkbIndicatorNotify;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbNamesNotify {
+    pub type_: ::std::os::raw::c_int,
+    pub serial: ::std::os::raw::c_ulong,
+    pub send_event: ::std::os::raw::c_int,
+    pub display: *mut Display,
+    pub time: Time,
+    pub xkb_type: ::std::os::raw::c_int,
+    pub device: ::std::os::raw::c_int,
+    pub changed: ::std::os::raw::c_uint,
+    pub first_type: ::std::os::raw::c_int,
+    pub num_types: ::std::os::raw::c_int,
+    pub first_lvl: ::std::os::raw::c_int,
+    pub num_lvls: ::std::os::raw::c_int,
+    pub num_aliases: ::std::os::raw::c_int,
+    pub num_radio_groups: ::std::os::raw::c_int,
+    pub changed_vmods: ::std::os::raw::c_uint,
+    pub changed_groups: ::std::os::raw::c_uint,
+    pub changed_indicators: ::std::os::raw::c_uint,
+    pub first_key: ::std::os::raw::c_int,
+    pub num_keys: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbNamesNotify"][::std::mem::size_of::<_XkbNamesNotify>() - 96usize];
+    ["Alignment of _XkbNamesNotify"][::std::mem::align_of::<_XkbNamesNotify>() - 8usize];
+    ["Offset of field: _XkbNamesNotify::type_"]
+        [::std::mem::offset_of!(_XkbNamesNotify, type_) - 0usize];
+    ["Offset of field: _XkbNamesNotify::serial"]
+        [::std::mem::offset_of!(_XkbNamesNotify, serial) - 8usize];
+    ["Offset of field: _XkbNamesNotify::send_event"]
+        [::std::mem::offset_of!(_XkbNamesNotify, send_event) - 16usize];
+    ["Offset of field: _XkbNamesNotify::display"]
+        [::std::mem::offset_of!(_XkbNamesNotify, display) - 24usize];
+    ["Offset of field: _XkbNamesNotify::time"]
+        [::std::mem::offset_of!(_XkbNamesNotify, time) - 32usize];
+    ["Offset of field: _XkbNamesNotify::xkb_type"]
+        [::std::mem::offset_of!(_XkbNamesNotify, xkb_type) - 40usize];
+    ["Offset of field: _XkbNamesNotify::device"]
+        [::std::mem::offset_of!(_XkbNamesNotify, device) - 44usize];
+    ["Offset of field: _XkbNamesNotify::changed"]
+        [::std::mem::offset_of!(_XkbNamesNotify, changed) - 48usize];
+    ["Offset of field: _XkbNamesNotify::first_type"]
+        [::std::mem::offset_of!(_XkbNamesNotify, first_type) - 52usize];
+    ["Offset of field: _XkbNamesNotify::num_types"]
+        [::std::mem::offset_of!(_XkbNamesNotify, num_types) - 56usize];
+    ["Offset of field: _XkbNamesNotify::first_lvl"]
+        [::std::mem::offset_of!(_XkbNamesNotify, first_lvl) - 60usize];
+    ["Offset of field: _XkbNamesNotify::num_lvls"]
+        [::std::mem::offset_of!(_XkbNamesNotify, num_lvls) - 64usize];
+    ["Offset of field: _XkbNamesNotify::num_aliases"]
+        [::std::mem::offset_of!(_XkbNamesNotify, num_aliases) - 68usize];
+    ["Offset of field: _XkbNamesNotify::num_radio_groups"]
+        [::std::mem::offset_of!(_XkbNamesNotify, num_radio_groups) - 72usize];
+    ["Offset of field: _XkbNamesNotify::changed_vmods"]
+        [::std::mem::offset_of!(_XkbNamesNotify, changed_vmods) - 76usize];
+    ["Offset of field: _XkbNamesNotify::changed_groups"]
+        [::std::mem::offset_of!(_XkbNamesNotify, changed_groups) - 80usize];
+    ["Offset of field: _XkbNamesNotify::changed_indicators"]
+        [::std::mem::offset_of!(_XkbNamesNotify, changed_indicators) - 84usize];
+    ["Offset of field: _XkbNamesNotify::first_key"]
+        [::std::mem::offset_of!(_XkbNamesNotify, first_key) - 88usize];
+    ["Offset of field: _XkbNamesNotify::num_keys"]
+        [::std::mem::offset_of!(_XkbNamesNotify, num_keys) - 92usize];
+};
+pub type XkbNamesNotifyEvent = _XkbNamesNotify;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbCompatMapNotify {
+    pub type_: ::std::os::raw::c_int,
+    pub serial: ::std::os::raw::c_ulong,
+    pub send_event: ::std::os::raw::c_int,
+    pub display: *mut Display,
+    pub time: Time,
+    pub xkb_type: ::std::os::raw::c_int,
+    pub device: ::std::os::raw::c_int,
+    pub changed_groups: ::std::os::raw::c_uint,
+    pub first_si: ::std::os::raw::c_int,
+    pub num_si: ::std::os::raw::c_int,
+    pub num_total_si: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbCompatMapNotify"][::std::mem::size_of::<_XkbCompatMapNotify>() - 64usize];
+    ["Alignment of _XkbCompatMapNotify"][::std::mem::align_of::<_XkbCompatMapNotify>() - 8usize];
+    ["Offset of field: _XkbCompatMapNotify::type_"]
+        [::std::mem::offset_of!(_XkbCompatMapNotify, type_) - 0usize];
+    ["Offset of field: _XkbCompatMapNotify::serial"]
+        [::std::mem::offset_of!(_XkbCompatMapNotify, serial) - 8usize];
+    ["Offset of field: _XkbCompatMapNotify::send_event"]
+        [::std::mem::offset_of!(_XkbCompatMapNotify, send_event) - 16usize];
+    ["Offset of field: _XkbCompatMapNotify::display"]
+        [::std::mem::offset_of!(_XkbCompatMapNotify, display) - 24usize];
+    ["Offset of field: _XkbCompatMapNotify::time"]
+        [::std::mem::offset_of!(_XkbCompatMapNotify, time) - 32usize];
+    ["Offset of field: _XkbCompatMapNotify::xkb_type"]
+        [::std::mem::offset_of!(_XkbCompatMapNotify, xkb_type) - 40usize];
+    ["Offset of field: _XkbCompatMapNotify::device"]
+        [::std::mem::offset_of!(_XkbCompatMapNotify, device) - 44usize];
+    ["Offset of field: _XkbCompatMapNotify::changed_groups"]
+        [::std::mem::offset_of!(_XkbCompatMapNotify, changed_groups) - 48usize];
+    ["Offset of field: _XkbCompatMapNotify::first_si"]
+        [::std::mem::offset_of!(_XkbCompatMapNotify, first_si) - 52usize];
+    ["Offset of field: _XkbCompatMapNotify::num_si"]
+        [::std::mem::offset_of!(_XkbCompatMapNotify, num_si) - 56usize];
+    ["Offset of field: _XkbCompatMapNotify::num_total_si"]
+        [::std::mem::offset_of!(_XkbCompatMapNotify, num_total_si) - 60usize];
+};
+pub type XkbCompatMapNotifyEvent = _XkbCompatMapNotify;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbBellNotify {
+    pub type_: ::std::os::raw::c_int,
+    pub serial: ::std::os::raw::c_ulong,
+    pub send_event: ::std::os::raw::c_int,
+    pub display: *mut Display,
+    pub time: Time,
+    pub xkb_type: ::std::os::raw::c_int,
+    pub device: ::std::os::raw::c_int,
+    pub percent: ::std::os::raw::c_int,
+    pub pitch: ::std::os::raw::c_int,
+    pub duration: ::std::os::raw::c_int,
+    pub bell_class: ::std::os::raw::c_int,
+    pub bell_id: ::std::os::raw::c_int,
+    pub name: Atom,
+    pub window: Window,
+    pub event_only: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbBellNotify"][::std::mem::size_of::<_XkbBellNotify>() - 96usize];
+    ["Alignment of _XkbBellNotify"][::std::mem::align_of::<_XkbBellNotify>() - 8usize];
+    ["Offset of field: _XkbBellNotify::type_"]
+        [::std::mem::offset_of!(_XkbBellNotify, type_) - 0usize];
+    ["Offset of field: _XkbBellNotify::serial"]
+        [::std::mem::offset_of!(_XkbBellNotify, serial) - 8usize];
+    ["Offset of field: _XkbBellNotify::send_event"]
+        [::std::mem::offset_of!(_XkbBellNotify, send_event) - 16usize];
+    ["Offset of field: _XkbBellNotify::display"]
+        [::std::mem::offset_of!(_XkbBellNotify, display) - 24usize];
+    ["Offset of field: _XkbBellNotify::time"]
+        [::std::mem::offset_of!(_XkbBellNotify, time) - 32usize];
+    ["Offset of field: _XkbBellNotify::xkb_type"]
+        [::std::mem::offset_of!(_XkbBellNotify, xkb_type) - 40usize];
+    ["Offset of field: _XkbBellNotify::device"]
+        [::std::mem::offset_of!(_XkbBellNotify, device) - 44usize];
+    ["Offset of field: _XkbBellNotify::percent"]
+        [::std::mem::offset_of!(_XkbBellNotify, percent) - 48usize];
+    ["Offset of field: _XkbBellNotify::pitch"]
+        [::std::mem::offset_of!(_XkbBellNotify, pitch) - 52usize];
+    ["Offset of field: _XkbBellNotify::duration"]
+        [::std::mem::offset_of!(_XkbBellNotify, duration) - 56usize];
+    ["Offset of field: _XkbBellNotify::bell_class"]
+        [::std::mem::offset_of!(_XkbBellNotify, bell_class) - 60usize];
+    ["Offset of field: _XkbBellNotify::bell_id"]
+        [::std::mem::offset_of!(_XkbBellNotify, bell_id) - 64usize];
+    ["Offset of field: _XkbBellNotify::name"]
+        [::std::mem::offset_of!(_XkbBellNotify, name) - 72usize];
+    ["Offset of field: _XkbBellNotify::window"]
+        [::std::mem::offset_of!(_XkbBellNotify, window) - 80usize];
+    ["Offset of field: _XkbBellNotify::event_only"]
+        [::std::mem::offset_of!(_XkbBellNotify, event_only) - 88usize];
+};
+pub type XkbBellNotifyEvent = _XkbBellNotify;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbActionMessage {
+    pub type_: ::std::os::raw::c_int,
+    pub serial: ::std::os::raw::c_ulong,
+    pub send_event: ::std::os::raw::c_int,
+    pub display: *mut Display,
+    pub time: Time,
+    pub xkb_type: ::std::os::raw::c_int,
+    pub device: ::std::os::raw::c_int,
+    pub keycode: KeyCode,
+    pub press: ::std::os::raw::c_int,
+    pub key_event_follows: ::std::os::raw::c_int,
+    pub group: ::std::os::raw::c_int,
+    pub mods: ::std::os::raw::c_uint,
+    pub message: [::std::os::raw::c_char; 7usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbActionMessage"][::std::mem::size_of::<_XkbActionMessage>() - 80usize];
+    ["Alignment of _XkbActionMessage"][::std::mem::align_of::<_XkbActionMessage>() - 8usize];
+    ["Offset of field: _XkbActionMessage::type_"]
+        [::std::mem::offset_of!(_XkbActionMessage, type_) - 0usize];
+    ["Offset of field: _XkbActionMessage::serial"]
+        [::std::mem::offset_of!(_XkbActionMessage, serial) - 8usize];
+    ["Offset of field: _XkbActionMessage::send_event"]
+        [::std::mem::offset_of!(_XkbActionMessage, send_event) - 16usize];
+    ["Offset of field: _XkbActionMessage::display"]
+        [::std::mem::offset_of!(_XkbActionMessage, display) - 24usize];
+    ["Offset of field: _XkbActionMessage::time"]
+        [::std::mem::offset_of!(_XkbActionMessage, time) - 32usize];
+    ["Offset of field: _XkbActionMessage::xkb_type"]
+        [::std::mem::offset_of!(_XkbActionMessage, xkb_type) - 40usize];
+    ["Offset of field: _XkbActionMessage::device"]
+        [::std::mem::offset_of!(_XkbActionMessage, device) - 44usize];
+    ["Offset of field: _XkbActionMessage::keycode"]
+        [::std::mem::offset_of!(_XkbActionMessage, keycode) - 48usize];
+    ["Offset of field: _XkbActionMessage::press"]
+        [::std::mem::offset_of!(_XkbActionMessage, press) - 52usize];
+    ["Offset of field: _XkbActionMessage::key_event_follows"]
+        [::std::mem::offset_of!(_XkbActionMessage, key_event_follows) - 56usize];
+    ["Offset of field: _XkbActionMessage::group"]
+        [::std::mem::offset_of!(_XkbActionMessage, group) - 60usize];
+    ["Offset of field: _XkbActionMessage::mods"]
+        [::std::mem::offset_of!(_XkbActionMessage, mods) - 64usize];
+    ["Offset of field: _XkbActionMessage::message"]
+        [::std::mem::offset_of!(_XkbActionMessage, message) - 68usize];
+};
+pub type XkbActionMessageEvent = _XkbActionMessage;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbAccessXNotify {
+    pub type_: ::std::os::raw::c_int,
+    pub serial: ::std::os::raw::c_ulong,
+    pub send_event: ::std::os::raw::c_int,
+    pub display: *mut Display,
+    pub time: Time,
+    pub xkb_type: ::std::os::raw::c_int,
+    pub device: ::std::os::raw::c_int,
+    pub detail: ::std::os::raw::c_int,
+    pub keycode: ::std::os::raw::c_int,
+    pub sk_delay: ::std::os::raw::c_int,
+    pub debounce_delay: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbAccessXNotify"][::std::mem::size_of::<_XkbAccessXNotify>() - 64usize];
+    ["Alignment of _XkbAccessXNotify"][::std::mem::align_of::<_XkbAccessXNotify>() - 8usize];
+    ["Offset of field: _XkbAccessXNotify::type_"]
+        [::std::mem::offset_of!(_XkbAccessXNotify, type_) - 0usize];
+    ["Offset of field: _XkbAccessXNotify::serial"]
+        [::std::mem::offset_of!(_XkbAccessXNotify, serial) - 8usize];
+    ["Offset of field: _XkbAccessXNotify::send_event"]
+        [::std::mem::offset_of!(_XkbAccessXNotify, send_event) - 16usize];
+    ["Offset of field: _XkbAccessXNotify::display"]
+        [::std::mem::offset_of!(_XkbAccessXNotify, display) - 24usize];
+    ["Offset of field: _XkbAccessXNotify::time"]
+        [::std::mem::offset_of!(_XkbAccessXNotify, time) - 32usize];
+    ["Offset of field: _XkbAccessXNotify::xkb_type"]
+        [::std::mem::offset_of!(_XkbAccessXNotify, xkb_type) - 40usize];
+    ["Offset of field: _XkbAccessXNotify::device"]
+        [::std::mem::offset_of!(_XkbAccessXNotify, device) - 44usize];
+    ["Offset of field: _XkbAccessXNotify::detail"]
+        [::std::mem::offset_of!(_XkbAccessXNotify, detail) - 48usize];
+    ["Offset of field: _XkbAccessXNotify::keycode"]
+        [::std::mem::offset_of!(_XkbAccessXNotify, keycode) - 52usize];
+    ["Offset of field: _XkbAccessXNotify::sk_delay"]
+        [::std::mem::offset_of!(_XkbAccessXNotify, sk_delay) - 56usize];
+    ["Offset of field: _XkbAccessXNotify::debounce_delay"]
+        [::std::mem::offset_of!(_XkbAccessXNotify, debounce_delay) - 60usize];
+};
+pub type XkbAccessXNotifyEvent = _XkbAccessXNotify;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbExtensionDeviceNotify {
+    pub type_: ::std::os::raw::c_int,
+    pub serial: ::std::os::raw::c_ulong,
+    pub send_event: ::std::os::raw::c_int,
+    pub display: *mut Display,
+    pub time: Time,
+    pub xkb_type: ::std::os::raw::c_int,
+    pub device: ::std::os::raw::c_int,
+    pub reason: ::std::os::raw::c_uint,
+    pub supported: ::std::os::raw::c_uint,
+    pub unsupported: ::std::os::raw::c_uint,
+    pub first_btn: ::std::os::raw::c_int,
+    pub num_btns: ::std::os::raw::c_int,
+    pub leds_defined: ::std::os::raw::c_uint,
+    pub led_state: ::std::os::raw::c_uint,
+    pub led_class: ::std::os::raw::c_int,
+    pub led_id: ::std::os::raw::c_int,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbExtensionDeviceNotify"]
+        [::std::mem::size_of::<_XkbExtensionDeviceNotify>() - 88usize];
+    ["Alignment of _XkbExtensionDeviceNotify"]
+        [::std::mem::align_of::<_XkbExtensionDeviceNotify>() - 8usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::type_"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, type_) - 0usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::serial"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, serial) - 8usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::send_event"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, send_event) - 16usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::display"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, display) - 24usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::time"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, time) - 32usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::xkb_type"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, xkb_type) - 40usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::device"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, device) - 44usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::reason"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, reason) - 48usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::supported"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, supported) - 52usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::unsupported"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, unsupported) - 56usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::first_btn"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, first_btn) - 60usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::num_btns"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, num_btns) - 64usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::leds_defined"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, leds_defined) - 68usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::led_state"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, led_state) - 72usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::led_class"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, led_class) - 76usize];
+    ["Offset of field: _XkbExtensionDeviceNotify::led_id"]
+        [::std::mem::offset_of!(_XkbExtensionDeviceNotify, led_id) - 80usize];
+};
+pub type XkbExtensionDeviceNotifyEvent = _XkbExtensionDeviceNotify;
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union _XkbEvent {
+    pub type_: ::std::os::raw::c_int,
+    pub any: XkbAnyEvent,
+    pub new_kbd: XkbNewKeyboardNotifyEvent,
+    pub map: XkbMapNotifyEvent,
+    pub state: XkbStateNotifyEvent,
+    pub ctrls: XkbControlsNotifyEvent,
+    pub indicators: XkbIndicatorNotifyEvent,
+    pub names: XkbNamesNotifyEvent,
+    pub compat: XkbCompatMapNotifyEvent,
+    pub bell: XkbBellNotifyEvent,
+    pub message: XkbActionMessageEvent,
+    pub accessx: XkbAccessXNotifyEvent,
+    pub device: XkbExtensionDeviceNotifyEvent,
+    pub core: XEvent,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of _XkbEvent"][::std::mem::size_of::<_XkbEvent>() - 192usize];
+    ["Alignment of _XkbEvent"][::std::mem::align_of::<_XkbEvent>() - 8usize];
+    ["Offset of field: _XkbEvent::type_"][::std::mem::offset_of!(_XkbEvent, type_) - 0usize];
+    ["Offset of field: _XkbEvent::any"][::std::mem::offset_of!(_XkbEvent, any) - 0usize];
+    ["Offset of field: _XkbEvent::new_kbd"][::std::mem::offset_of!(_XkbEvent, new_kbd) - 0usize];
+    ["Offset of field: _XkbEvent::map"][::std::mem::offset_of!(_XkbEvent, map) - 0usize];
+    ["Offset of field: _XkbEvent::state"][::std::mem::offset_of!(_XkbEvent, state) - 0usize];
+    ["Offset of field: _XkbEvent::ctrls"][::std::mem::offset_of!(_XkbEvent, ctrls) - 0usize];
+    ["Offset of field: _XkbEvent::indicators"]
+        [::std::mem::offset_of!(_XkbEvent, indicators) - 0usize];
+    ["Offset of field: _XkbEvent::names"][::std::mem::offset_of!(_XkbEvent, names) - 0usize];
+    ["Offset of field: _XkbEvent::compat"][::std::mem::offset_of!(_XkbEvent, compat) - 0usize];
+    ["Offset of field: _XkbEvent::bell"][::std::mem::offset_of!(_XkbEvent, bell) - 0usize];
+    ["Offset of field: _XkbEvent::message"][::std::mem::offset_of!(_XkbEvent, message) - 0usize];
+    ["Offset of field: _XkbEvent::accessx"][::std::mem::offset_of!(_XkbEvent, accessx) - 0usize];
+    ["Offset of field: _XkbEvent::device"][::std::mem::offset_of!(_XkbEvent, device) - 0usize];
+    ["Offset of field: _XkbEvent::core"][::std::mem::offset_of!(_XkbEvent, core) - 0usize];
+};
+pub type XkbEvent = _XkbEvent;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct _XkbKbdDpyState {
+    _unused: [u8; 0],
+}
+pub type XkbKbdDpyStateRec = _XkbKbdDpyState;
+pub type XkbKbdDpyStatePtr = *mut _XkbKbdDpyState;
+unsafe extern "C" {
+    pub fn XkbIgnoreExtension(arg1: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbOpenDisplay(
+        arg1: *const ::std::os::raw::c_char,
+        arg2: *mut ::std::os::raw::c_int,
+        arg3: *mut ::std::os::raw::c_int,
+        arg4: *mut ::std::os::raw::c_int,
+        arg5: *mut ::std::os::raw::c_int,
+        arg6: *mut ::std::os::raw::c_int,
+    ) -> *mut Display;
+}
+unsafe extern "C" {
+    pub fn XkbQueryExtension(
+        arg1: *mut Display,
+        arg2: *mut ::std::os::raw::c_int,
+        arg3: *mut ::std::os::raw::c_int,
+        arg4: *mut ::std::os::raw::c_int,
+        arg5: *mut ::std::os::raw::c_int,
+        arg6: *mut ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbUseExtension(
+        arg1: *mut Display,
+        arg2: *mut ::std::os::raw::c_int,
+        arg3: *mut ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbLibraryVersion(
+        arg1: *mut ::std::os::raw::c_int,
+        arg2: *mut ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetXlibControls(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_uint;
+}
+unsafe extern "C" {
+    pub fn XkbGetXlibControls(arg1: *mut Display) -> ::std::os::raw::c_uint;
+}
+unsafe extern "C" {
+    pub fn XkbXlibControlsImplemented() -> ::std::os::raw::c_uint;
+}
+pub type XkbInternAtomFunc = ::std::option::Option<
+    unsafe extern "C" fn(
+        arg1: *mut Display,
+        arg2: *const ::std::os::raw::c_char,
+        arg3: ::std::os::raw::c_int,
+    ) -> Atom,
+>;
+pub type XkbGetAtomNameFunc = ::std::option::Option<
+    unsafe extern "C" fn(arg1: *mut Display, arg2: Atom) -> *mut ::std::os::raw::c_char,
+>;
+unsafe extern "C" {
+    pub fn XkbSetAtomFuncs(arg1: XkbInternAtomFunc, arg2: XkbGetAtomNameFunc);
+}
+unsafe extern "C" {
+    pub fn XkbKeycodeToKeysym(
+        arg1: *mut Display,
+        arg2: KeyCode,
+        arg3: ::std::os::raw::c_int,
+        arg4: ::std::os::raw::c_int,
+    ) -> KeySym;
+}
+unsafe extern "C" {
+    pub fn XkbKeysymToModifiers(arg1: *mut Display, arg2: KeySym) -> ::std::os::raw::c_uint;
+}
+unsafe extern "C" {
+    pub fn XkbLookupKeySym(
+        arg1: *mut Display,
+        arg2: KeyCode,
+        arg3: ::std::os::raw::c_uint,
+        arg4: *mut ::std::os::raw::c_uint,
+        arg5: *mut KeySym,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbLookupKeyBinding(
+        arg1: *mut Display,
+        arg2: KeySym,
+        arg3: ::std::os::raw::c_uint,
+        arg4: *mut ::std::os::raw::c_char,
+        arg5: ::std::os::raw::c_int,
+        arg6: *mut ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbTranslateKeyCode(
+        arg1: XkbDescPtr,
+        arg2: KeyCode,
+        arg3: ::std::os::raw::c_uint,
+        arg4: *mut ::std::os::raw::c_uint,
+        arg5: *mut KeySym,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbTranslateKeySym(
+        arg1: *mut Display,
+        arg2: *mut KeySym,
+        arg3: ::std::os::raw::c_uint,
+        arg4: *mut ::std::os::raw::c_char,
+        arg5: ::std::os::raw::c_int,
+        arg6: *mut ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetAutoRepeatRate(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetAutoRepeatRate(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: *mut ::std::os::raw::c_uint,
+        arg4: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbChangeEnabledControls(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbDeviceBell(
+        arg1: *mut Display,
+        arg2: Window,
+        arg3: ::std::os::raw::c_int,
+        arg4: ::std::os::raw::c_int,
+        arg5: ::std::os::raw::c_int,
+        arg6: ::std::os::raw::c_int,
+        arg7: Atom,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbForceDeviceBell(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_int,
+        arg3: ::std::os::raw::c_int,
+        arg4: ::std::os::raw::c_int,
+        arg5: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbDeviceBellEvent(
+        arg1: *mut Display,
+        arg2: Window,
+        arg3: ::std::os::raw::c_int,
+        arg4: ::std::os::raw::c_int,
+        arg5: ::std::os::raw::c_int,
+        arg6: ::std::os::raw::c_int,
+        arg7: Atom,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbBell(
+        arg1: *mut Display,
+        arg2: Window,
+        arg3: ::std::os::raw::c_int,
+        arg4: Atom,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbForceBell(arg1: *mut Display, arg2: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbBellEvent(
+        arg1: *mut Display,
+        arg2: Window,
+        arg3: ::std::os::raw::c_int,
+        arg4: Atom,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSelectEvents(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSelectEventDetails(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_ulong,
+        arg5: ::std::os::raw::c_ulong,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbNoteMapChanges(
+        arg1: XkbMapChangesPtr,
+        arg2: *mut XkbMapNotifyEvent,
+        arg3: ::std::os::raw::c_uint,
+    );
+}
+unsafe extern "C" {
+    pub fn XkbNoteNameChanges(
+        arg1: XkbNameChangesPtr,
+        arg2: *mut XkbNamesNotifyEvent,
+        arg3: ::std::os::raw::c_uint,
+    );
+}
+unsafe extern "C" {
+    pub fn XkbGetIndicatorState(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetDeviceIndicatorState(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+        arg5: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetIndicatorMap(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_ulong,
+        arg3: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetIndicatorMap(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_ulong,
+        arg3: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetNamedIndicator(
+        arg1: *mut Display,
+        arg2: Atom,
+        arg3: *mut ::std::os::raw::c_int,
+        arg4: *mut ::std::os::raw::c_int,
+        arg5: XkbIndicatorMapPtr,
+        arg6: *mut ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetNamedDeviceIndicator(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+        arg5: Atom,
+        arg6: *mut ::std::os::raw::c_int,
+        arg7: *mut ::std::os::raw::c_int,
+        arg8: XkbIndicatorMapPtr,
+        arg9: *mut ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetNamedIndicator(
+        arg1: *mut Display,
+        arg2: Atom,
+        arg3: ::std::os::raw::c_int,
+        arg4: ::std::os::raw::c_int,
+        arg5: ::std::os::raw::c_int,
+        arg6: XkbIndicatorMapPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetNamedDeviceIndicator(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+        arg5: Atom,
+        arg6: ::std::os::raw::c_int,
+        arg7: ::std::os::raw::c_int,
+        arg8: ::std::os::raw::c_int,
+        arg9: XkbIndicatorMapPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbLockModifiers(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbLatchModifiers(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbLockGroup(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbLatchGroup(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetServerInternalMods(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+        arg5: ::std::os::raw::c_uint,
+        arg6: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetIgnoreLockMods(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+        arg5: ::std::os::raw::c_uint,
+        arg6: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbVirtualModsToReal(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbComputeEffectiveMap(
+        arg1: XkbDescPtr,
+        arg2: XkbKeyTypePtr,
+        arg3: *mut ::std::os::raw::c_uchar,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbInitCanonicalKeyTypes(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbAllocKeyboard() -> XkbDescPtr;
+}
+unsafe extern "C" {
+    pub fn XkbFreeKeyboard(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
+    pub fn XkbAllocClientMap(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbAllocServerMap(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbFreeClientMap(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
+    pub fn XkbFreeServerMap(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
+    pub fn XkbAddKeyType(
+        arg1: XkbDescPtr,
+        arg2: Atom,
+        arg3: ::std::os::raw::c_int,
+        arg4: ::std::os::raw::c_int,
+        arg5: ::std::os::raw::c_int,
+    ) -> XkbKeyTypePtr;
+}
+unsafe extern "C" {
+    pub fn XkbAllocIndicatorMaps(arg1: XkbDescPtr) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbFreeIndicatorMaps(arg1: XkbDescPtr);
+}
+unsafe extern "C" {
+    pub fn XkbGetMap(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+    ) -> XkbDescPtr;
+}
+unsafe extern "C" {
+    pub fn XkbGetUpdatedMap(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetMapChanges(
+        arg1: *mut Display,
+        arg2: XkbDescPtr,
+        arg3: XkbMapChangesPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbRefreshKeyboardMapping(arg1: *mut XkbMapNotifyEvent) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetKeyTypes(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetKeySyms(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetKeyActions(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetKeyBehaviors(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetVirtualMods(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetKeyExplicitComponents(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetKeyModifierMap(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetKeyVirtualModMap(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbAllocControls(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbFreeControls(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
+    pub fn XkbGetControls(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_ulong,
+        arg3: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetControls(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_ulong,
+        arg3: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbNoteControlsChanges(
+        arg1: XkbControlsChangesPtr,
+        arg2: *mut XkbControlsNotifyEvent,
+        arg3: ::std::os::raw::c_uint,
+    );
+}
+unsafe extern "C" {
+    pub fn XkbAllocCompatMap(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbFreeCompatMap(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
+    pub fn XkbGetCompatMap(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetCompatMap(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: XkbDescPtr,
+        arg4: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbAddSymInterpret(
+        arg1: XkbDescPtr,
+        arg2: XkbSymInterpretPtr,
+        arg3: ::std::os::raw::c_int,
+        arg4: XkbChangesPtr,
+    ) -> XkbSymInterpretPtr;
+}
+unsafe extern "C" {
+    pub fn XkbAllocNames(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_int,
+        arg4: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetNames(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetNames(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+        arg5: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbChangeNames(
+        arg1: *mut Display,
+        arg2: XkbDescPtr,
+        arg3: XkbNameChangesPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbFreeNames(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
+    pub fn XkbGetState(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: XkbStatePtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetMap(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: XkbDescPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbChangeMap(
+        arg1: *mut Display,
+        arg2: XkbDescPtr,
+        arg3: XkbMapChangesPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetDetectableAutoRepeat(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_int,
+        arg3: *mut ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetDetectableAutoRepeat(
+        arg1: *mut Display,
+        arg2: *mut ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetAutoResetControls(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: *mut ::std::os::raw::c_uint,
+        arg4: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetAutoResetControls(
+        arg1: *mut Display,
+        arg2: *mut ::std::os::raw::c_uint,
+        arg3: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetPerClientControls(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetPerClientControls(
+        arg1: *mut Display,
+        arg2: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbCopyKeyType(arg1: XkbKeyTypePtr, arg2: XkbKeyTypePtr) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbCopyKeyTypes(
+        arg1: XkbKeyTypePtr,
+        arg2: XkbKeyTypePtr,
+        arg3: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbResizeKeyType(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_int,
+        arg3: ::std::os::raw::c_int,
+        arg4: ::std::os::raw::c_int,
+        arg5: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbResizeKeySyms(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_int,
+        arg3: ::std::os::raw::c_int,
+    ) -> *mut KeySym;
+}
+unsafe extern "C" {
+    pub fn XkbResizeKeyActions(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_int,
+        arg3: ::std::os::raw::c_int,
+    ) -> *mut XkbAction;
+}
+unsafe extern "C" {
+    pub fn XkbChangeTypesOfKey(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_int,
+        arg3: ::std::os::raw::c_int,
+        arg4: ::std::os::raw::c_uint,
+        arg5: *mut ::std::os::raw::c_int,
+        arg6: XkbMapChangesPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbChangeKeycodeRange(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_int,
+        arg3: ::std::os::raw::c_int,
+        arg4: XkbChangesPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbListComponents(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: XkbComponentNamesPtr,
+        arg4: *mut ::std::os::raw::c_int,
+    ) -> XkbComponentListPtr;
+}
+unsafe extern "C" {
+    pub fn XkbFreeComponentList(arg1: XkbComponentListPtr);
+}
+unsafe extern "C" {
+    pub fn XkbGetKeyboard(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+    ) -> XkbDescPtr;
+}
+unsafe extern "C" {
+    pub fn XkbGetKeyboardByName(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: XkbComponentNamesPtr,
+        arg4: ::std::os::raw::c_uint,
+        arg5: ::std::os::raw::c_uint,
+        arg6: ::std::os::raw::c_int,
+    ) -> XkbDescPtr;
+}
+unsafe extern "C" {
+    pub fn XkbKeyTypesForCoreSymbols(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_int,
+        arg3: *mut KeySym,
+        arg4: ::std::os::raw::c_uint,
+        arg5: *mut ::std::os::raw::c_int,
+        arg6: *mut KeySym,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbApplyCompatMapToKey(
+        arg1: XkbDescPtr,
+        arg2: KeyCode,
+        arg3: XkbChangesPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbUpdateMapFromCore(
+        arg1: XkbDescPtr,
+        arg2: KeyCode,
+        arg3: ::std::os::raw::c_int,
+        arg4: ::std::os::raw::c_int,
+        arg5: *mut KeySym,
+        arg6: XkbChangesPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbAddDeviceLedInfo(
+        arg1: XkbDeviceInfoPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+    ) -> XkbDeviceLedInfoPtr;
+}
+unsafe extern "C" {
+    pub fn XkbResizeDeviceButtonActions(
+        arg1: XkbDeviceInfoPtr,
+        arg2: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbAllocDeviceInfo(
+        arg1: ::std::os::raw::c_uint,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+    ) -> XkbDeviceInfoPtr;
+}
+unsafe extern "C" {
+    pub fn XkbFreeDeviceInfo(
+        arg1: XkbDeviceInfoPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_int,
+    );
+}
+unsafe extern "C" {
+    pub fn XkbNoteDeviceChanges(
+        arg1: XkbDeviceChangesPtr,
+        arg2: *mut XkbExtensionDeviceNotifyEvent,
+        arg3: ::std::os::raw::c_uint,
+    );
+}
+unsafe extern "C" {
+    pub fn XkbGetDeviceInfo(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+        arg5: ::std::os::raw::c_uint,
+    ) -> XkbDeviceInfoPtr;
+}
+unsafe extern "C" {
+    pub fn XkbGetDeviceInfoChanges(
+        arg1: *mut Display,
+        arg2: XkbDeviceInfoPtr,
+        arg3: XkbDeviceChangesPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetDeviceButtonActions(
+        arg1: *mut Display,
+        arg2: XkbDeviceInfoPtr,
+        arg3: ::std::os::raw::c_int,
+        arg4: ::std::os::raw::c_uint,
+        arg5: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbGetDeviceLedInfo(
+        arg1: *mut Display,
+        arg2: XkbDeviceInfoPtr,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+        arg5: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetDeviceInfo(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: XkbDeviceInfoPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbChangeDeviceInfo(
+        arg1: *mut Display,
+        arg2: XkbDeviceInfoPtr,
+        arg3: XkbDeviceChangesPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetDeviceLedInfo(
+        arg1: *mut Display,
+        arg2: XkbDeviceInfoPtr,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+        arg5: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbSetDeviceButtonActions(
+        arg1: *mut Display,
+        arg2: XkbDeviceInfoPtr,
+        arg3: ::std::os::raw::c_uint,
+        arg4: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbToControl(arg1: ::std::os::raw::c_char) -> ::std::os::raw::c_char;
+}
+unsafe extern "C" {
+    pub fn XkbSetDebuggingFlags(
+        arg1: *mut Display,
+        arg2: ::std::os::raw::c_uint,
+        arg3: ::std::os::raw::c_uint,
+        arg4: *mut ::std::os::raw::c_char,
+        arg5: ::std::os::raw::c_uint,
+        arg6: ::std::os::raw::c_uint,
+        arg7: *mut ::std::os::raw::c_uint,
+        arg8: *mut ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbApplyVirtualModChanges(
+        arg1: XkbDescPtr,
+        arg2: ::std::os::raw::c_uint,
+        arg3: XkbChangesPtr,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbUpdateActionVirtualMods(
+        arg1: XkbDescPtr,
+        arg2: *mut XkbAction,
+        arg3: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    pub fn XkbUpdateKeyTypeVirtualMods(
+        arg1: XkbDescPtr,
+        arg2: XkbKeyTypePtr,
+        arg3: ::std::os::raw::c_uint,
+        arg4: XkbChangesPtr,
+    );
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]

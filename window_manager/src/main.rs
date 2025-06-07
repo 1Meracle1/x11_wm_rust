@@ -1,3 +1,5 @@
+use std::{fs::File, io::Write, os::unix::net::UnixStream, path::Path};
+
 use config::{Config, ConfigErrors};
 use env_logger::Env;
 use keybindings::{
@@ -63,6 +65,21 @@ fn main() {
     conn.change_cursor("left_ptr");
     conn.grab_button(MouseButton::Left);
 
+    const BAR_SOCKET_PATH: &str = "/tmp/x11_bar_imgui_cpp.socket";
+    let bar_socket = Path::new(BAR_SOCKET_PATH);
+    if !bar_socket.exists() {
+        File::create(BAR_SOCKET_PATH).expect(
+            format!(
+                "failed to create bar socket file under path: {}",
+                BAR_SOCKET_PATH
+            )
+            .as_str(),
+        );
+    }
+    let mut bar_unix_stream: Option<UnixStream> = UnixStream::connect(bar_socket)
+        .map(|s| Some(s))
+        .map_or(None, |_| None);
+
     conn.flush();
 
     let mut requested_config_reload = false;
@@ -112,6 +129,29 @@ fn main() {
                     } => {
                         monitor.handle_motion_notify(x, y, window, state, &conn, &config);
                     }
+                    connection::XcbEvents::XkbStateNotify { event } => {
+                        let group_idx = unsafe { *event }.group as usize;
+                        let keyboard_layout_names = conn.xkb_get_layout_names();
+                        // info!("keyboard_layout_names: {:?}", keyboard_layout_names);
+                        if let Some(keyboard_layout_name) = keyboard_layout_names.get(group_idx) {
+                            info!("keyboard_layout_name: {}", keyboard_layout_name);
+
+                            let msg = format!("keyboard_layout_name: {}", keyboard_layout_name);
+                            if let Some(bar_unix_stream) = &mut bar_unix_stream {
+                                match bar_unix_stream.write_all(&msg.len().to_ne_bytes()) {
+                                    Ok(_) => {
+                                        if let Err(err) = bar_unix_stream.write_all(msg.as_bytes())
+                                        {
+                                            warn!("failed to send message to the bar: {}", err);
+                                        }
+                                    }
+                                    Err(err) => {
+                                        warn!("failed to send message length to the bar: {}", err)
+                                    }
+                                };
+                            }
+                        }
+                    }
                 },
                 Err(error) => warn!("Error event: {:?}", error),
             };
@@ -127,8 +167,8 @@ fn main() {
                     info!("updated config parsed successfully: {:#?}", new_config);
 
                     if config.startup_commands != new_config.startup_commands {
-                        let diff = config.startup_commands.iter().filter(|exist_cmd| {
-                            new_config
+                        let diff = new_config.startup_commands.iter().filter(|exist_cmd| {
+                            config
                                 .startup_commands
                                 .iter()
                                 .find(|new_cmd| new_cmd == exist_cmd)
