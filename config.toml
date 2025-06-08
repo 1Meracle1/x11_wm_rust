@@ -8,7 +8,8 @@ startup_commands = [
   "target/debug/testbed_window floating X11_floating_window",
   "target/debug/testbed_window floating X11_floating_window",
   # "target/debug/testbed_window docked bottom X11_docked_bottom_window",
-  "x11_bar_imgui_cpp/build/x11_bar_imgui_cpp"
+  # "sleep 10 && x11_bar_imgui_cpp/build/x11_bar_imgui_cpp",
+  "x11_bar_imgui_cpp/build/x11_bar_imgui_cpp", #RobotoMonoNerdFont-Regular
 ]
 
 keybindings = [

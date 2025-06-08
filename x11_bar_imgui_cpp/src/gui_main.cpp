@@ -1,7 +1,11 @@
 #include "gui_main.h"
 #include "imgui.h"
 #include "imgui_internal.h"
+#include "message.hpp"
 #include <cassert>
+#include <ctime>
+#include <iostream>
+#include <sstream>
 #include <xcb/xcb.h>
 #define GLFW_EXPOSE_NATIVE_X11
 #include <GLFW/glfw3native.h>
@@ -139,7 +143,13 @@ void set_app_icon()
 }
 } // namespace
 
-GUI_Main::GUI_Main(GLFWwindow* window, const char* font_path, float font_size, ScreenLocation screen_location)
+GUI_Main::GUI_Main(GLFWwindow*    window,
+                   const char*    font_path,
+                   float          font_size,
+                   ScreenLocation screen_location,
+                   int            window_height,
+                   const char*    unix_socket_path)
+    : m_unix_comm_bus(unix_socket_path)
 {
     setup_fonts(font_path, font_size);
     set_rfl_theme();
@@ -162,14 +172,14 @@ GUI_Main::GUI_Main(GLFWwindow* window, const char* font_path, float font_size, S
     {
     case ScreenLocation::Top:
     {
-        long strut[12] = {0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        long strut[12] = {0, 0, (long)window_height, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         XChangeProperty(x11_display, x11_window, atom_strut_partial, XA_CARDINAL, 32, PropModeReplace,
                         (const unsigned char*)(strut), 12);
         break;
     }
     case ScreenLocation::Bottom:
     {
-        long strut[12] = {0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0};
+        long strut[12] = {0, 0, 0, (long)window_height, 0, 0, 0, 0, 0, 0, 0, 0};
         XChangeProperty(x11_display, x11_window, atom_strut_partial, XA_CARDINAL, 32, PropModeReplace,
                         (const unsigned char*)(strut), 12);
         break;
@@ -189,6 +199,51 @@ void GUI_Main::render()
 {
     m_memory_usage.update();
     m_cpu_usage.update();
+
+    std::vector<char> bytes{};
+    while (m_unix_comm_bus.try_pop_client_message(bytes))
+    {
+        if (auto message_maybe = Message::from_bytes(bytes); message_maybe.has_value())
+        {
+            auto& message = message_maybe.value();
+            switch (message.message_type())
+            {
+            case MessageType::KeyboardLayout:
+            {
+                auto str_ptr           = message.get<MessageType::KeyboardLayout>();
+                m_keyboard_layout_name = std::move(*str_ptr);
+                break;
+            }
+            case MessageType::WorkspaceList:
+            {
+                auto workspaces = message.get<MessageType::WorkspaceList>();
+                m_workspaces    = std::move(*workspaces);
+
+                std::stringstream ss;
+                ss << "updated workspaces: [";
+                for (size_t i = 0; i < m_workspaces.size(); ++i)
+                {
+                    ss << m_workspaces[i];
+                    if (i + 1 < m_workspaces.size())
+                    {
+                        ss << ", ";
+                    }
+                }
+                ss << "]\n";
+                std::cout << ss.rdbuf();
+
+                break;
+            }
+            case MessageType::WorkspaceActive:
+            {
+                auto active_workspace = message.get<MessageType::WorkspaceActive>();
+                m_active_workspace    = *active_workspace;
+                std::cout << "updated active worskpace: " << m_active_workspace << '\n';
+                break;
+            }
+            }
+        }
+    }
 
     // Our state
     // static bool show_demo_window = false;
@@ -215,9 +270,30 @@ void GUI_Main::render()
             ImGui::Dummy(ImVec2(0.0f, text_height));
             ImGui::SameLine();
             ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+
+            for (auto workspace : m_workspaces)
+            {
+                ImGui::SameLine();
+                if (workspace == m_active_workspace)
+                {
+                    ImGui::Text("[ %d ]", workspace);
+                }
+                else
+                {
+                    ImGui::Text("  %d  ", workspace);
+                }
+                ImGui::SameLine();
+                ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+            }
             ImGui::SameLine();
-            ImGui::Text("FPS: %.1f", (double)ImGui::GetIO().Framerate);
+            ImGui::Dummy(ImVec2(50.0f, text_height));
             ImGui::SameLine();
+
+            // ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+            // ImGui::SameLine();
+            // ImGui::Text("FPS: %.1f", (double)ImGui::GetIO().Framerate);
+            // ImGui::SameLine();
+
             ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
             ImGui::SameLine();
             ImGui::Text("CPU: %3d%%", (int)m_cpu_usage.total_usage);
@@ -227,6 +303,68 @@ void GUI_Main::render()
             ImGui::Text("Memory: %ld", m_memory_usage.used_mb);
             ImGui::SameLine();
             ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+
+            if (!m_keyboard_layout_name.empty())
+            {
+                ImGui::SameLine();
+                ImGui::Text("Lang: %s", m_keyboard_layout_name.data());
+                ImGui::SameLine();
+                ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+            }
+
+            {
+                ImGui::SameLine();
+                if (m_alsa.is_muted())
+                {
+                    ImGui::Text("Vol: Muted");
+                }
+                else
+                {
+                    ImGui::Text("Vol: %3d%%", (int)m_alsa.current_volume_percentage());
+                }
+                if (ImGui::IsItemClicked())
+                {
+                    m_alsa.mute_toggle();
+                }
+                if (ImGui::IsItemHovered())
+                {
+                    auto wheel = ImGui::GetIO().MouseWheel;
+                    if (wheel > 0)
+                    {
+                        m_alsa.increase_volume();
+                    }
+                    else if (wheel < 0)
+                    {
+                        m_alsa.decrease_volume();
+                    }
+                }
+                ImGui::SameLine();
+                ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+            }
+
+            // ImGui::SameLine();
+            // ImGui::Dummy(ImVec2(100.0f, text_height));
+            // ImGui::SameLine();
+            // ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+            
+            {
+                std::time_t time_now = std::time(nullptr);
+                std::tm*    local_tm = std::localtime(&time_now);
+                char        date_buf[40];
+                char        time_buf[20];
+                std::strftime(date_buf, sizeof(date_buf), "%a, %d %b %Y", local_tm);
+                std::strftime(time_buf, sizeof(time_buf), "%I:%M %p", local_tm);
+
+                ImGui::SameLine();
+                ImGui::Text("%s", date_buf);
+                ImGui::SameLine();
+                ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+
+                ImGui::SameLine();
+                ImGui::Text("%s", time_buf);
+                ImGui::SameLine();
+                ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+            }
 
             ImGui::EndGroup();
         }

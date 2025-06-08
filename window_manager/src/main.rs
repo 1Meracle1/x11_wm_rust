@@ -1,11 +1,11 @@
-use std::{fs::File, io::Write, os::unix::net::UnixStream, path::Path};
+use std::path::Path;
 
 use config::{Config, ConfigErrors};
 use env_logger::Env;
 use keybindings::{
     execute_command_from_str, handle_key_press, keybindings_from_config, keybindings_grab,
 };
-use log::{error, info, warn};
+use log::{error, info, trace, warn};
 use monitor::Monitor;
 use x11_bindings::{
     bindings::{
@@ -14,8 +14,12 @@ use x11_bindings::{
     connection::{self, Connection, MouseButton},
 };
 
-use crate::keybindings::keybindings_ungrab;
+use crate::{
+    bar_message::{BarCommsBus, Message},
+    keybindings::{execute_command_from_str_wait, keybindings_ungrab},
+};
 
+mod bar_message;
 mod config;
 mod keybindings;
 mod monitor;
@@ -55,7 +59,16 @@ fn main() {
     let mut monitor = Monitor::new(&conn);
 
     for cmd_str in &config.startup_commands {
-        execute_command_from_str(cmd_str);
+        if cmd_str.contains(" && ") {
+            let parts = cmd_str.split(" && ").collect::<Vec<_>>();
+            parts
+                .iter()
+                .take(parts.len() - 1)
+                .for_each(|cmd_str| execute_command_from_str_wait(cmd_str));
+            execute_command_from_str(parts.last().unwrap());
+        } else {
+            execute_command_from_str(cmd_str);
+        }
     }
 
     let mut keybindings = keybindings_from_config(&config);
@@ -65,20 +78,9 @@ fn main() {
     conn.change_cursor("left_ptr");
     conn.grab_button(MouseButton::Left);
 
-    const BAR_SOCKET_PATH: &str = "/tmp/x11_bar_imgui_cpp.socket";
-    let bar_socket = Path::new(BAR_SOCKET_PATH);
-    if !bar_socket.exists() {
-        File::create(BAR_SOCKET_PATH).expect(
-            format!(
-                "failed to create bar socket file under path: {}",
-                BAR_SOCKET_PATH
-            )
-            .as_str(),
-        );
-    }
-    let mut bar_unix_stream: Option<UnixStream> = UnixStream::connect(bar_socket)
-        .map(|s| Some(s))
-        .map_or(None, |_| None);
+    const BAR_SOCKET_PATH_STR: &str = "/tmp/x11_bar_imgui_cpp.socket";
+    let bar_socket_path = Path::new(BAR_SOCKET_PATH_STR);
+    let mut bar_comms_bus = BarCommsBus::new(bar_socket_path);
 
     conn.flush();
 
@@ -95,6 +97,7 @@ fn main() {
                         modifier,
                         keycode,
                         &mut requested_config_reload,
+                        &mut bar_comms_bus,
                     ),
                     connection::XcbEvents::MapRequst { window } => {
                         monitor.handle_map_request(&conn, &config, window)
@@ -134,22 +137,9 @@ fn main() {
                         let keyboard_layout_names = conn.xkb_get_layout_names();
                         // info!("keyboard_layout_names: {:?}", keyboard_layout_names);
                         if let Some(keyboard_layout_name) = keyboard_layout_names.get(group_idx) {
-                            info!("keyboard_layout_name: {}", keyboard_layout_name);
-
-                            let msg = format!("keyboard_layout_name: {}", keyboard_layout_name);
-                            if let Some(bar_unix_stream) = &mut bar_unix_stream {
-                                match bar_unix_stream.write_all(&msg.len().to_ne_bytes()) {
-                                    Ok(_) => {
-                                        if let Err(err) = bar_unix_stream.write_all(msg.as_bytes())
-                                        {
-                                            warn!("failed to send message to the bar: {}", err);
-                                        }
-                                    }
-                                    Err(err) => {
-                                        warn!("failed to send message length to the bar: {}", err)
-                                    }
-                                };
-                            }
+                            // trace!("keyboard_layout_name: {}", keyboard_layout_name);
+                            let message = Message::KeyboardLayout(keyboard_layout_name);
+                            bar_comms_bus.send_message(message);
                         }
                     }
                 },
@@ -175,7 +165,16 @@ fn main() {
                                 .is_none()
                         });
                         for cmd_str in diff {
-                            execute_command_from_str(cmd_str);
+                            if cmd_str.contains(" && ") {
+                                let parts = cmd_str.split(" && ").collect::<Vec<_>>();
+                                parts
+                                    .iter()
+                                    .take(parts.len() - 1)
+                                    .for_each(|cmd_str| execute_command_from_str_wait(cmd_str));
+                                execute_command_from_str(parts.last().unwrap());
+                            } else {
+                                execute_command_from_str(cmd_str);
+                            }
                         }
                     }
 

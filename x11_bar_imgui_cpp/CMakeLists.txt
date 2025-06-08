@@ -123,10 +123,13 @@ list(APPEND LINKED_LIBS
 
 find_package(Freetype REQUIRED)
 
+find_package(TBB REQUIRED)
+
 add_executable(${PROJECT_NAME} 
   src/main.cpp
   src/vulkan_renderer.cpp
   src/gui_main.cpp
+  src/unix_socket.cpp
 
   ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp ${IMGUI_DIR}/backends/imgui_impl_vulkan.cpp ${IMGUI_DIR}/imgui.cpp ${IMGUI_DIR}/imgui_draw.cpp ${IMGUI_DIR}/imgui_demo.cpp ${IMGUI_DIR}/imgui_tables.cpp ${IMGUI_DIR}/imgui_widgets.cpp
   ${IMGUI_DIR}/misc/freetype/imgui_freetype.cpp
@@ -150,5 +153,5 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 target_compile_definitions(${PROJECT_NAME} PRIVATE ${DEFINES})
 target_compile_options(${PROJECT_NAME} PRIVATE ${COMPILE_OPTIONS})
 target_link_options(${PROJECT_NAME} PRIVATE ${LINK_OPTIONS})
-target_link_libraries(${PROJECT_NAME} PRIVATE ${LINKED_LIBS} ${FREETYPE_LIBRARIES} X11 xcb X11-xcb)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${LINKED_LIBS} ${FREETYPE_LIBRARIES} X11 xcb X11-xcb TBB::tbb asound)
 

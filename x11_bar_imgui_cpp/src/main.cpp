@@ -23,11 +23,12 @@ int main(int argc, char** argv)
 {
 #define Lit(str) Slice<const char>(str).chop_zero_termination()
 
-    const char* font_path       = "";
-    float       font_size       = 16.0f;
-    auto        screen_location = ScreenLocation::Top;
-    float       padding_top     = 5.0f;
-    float       window_height   = 25.0f;
+    const char* font_path        = "";
+    float       font_size        = 16.0f;
+    auto        screen_location  = ScreenLocation::Top;
+    int         padding_top      = 5;
+    int         window_height    = 25;
+    const char* unix_socket_path = "/tmp/x11_bar_imgui_cpp.socket";
 
     if (argc > 1)
     {
@@ -117,7 +118,7 @@ int main(int argc, char** argv)
     // Create window with Vulkan context
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     glfwWindowHint(GLFW_VISIBLE, false);
-    window_height      = std::max(window_height, font_size + padding_top * 2.0f);
+    window_height      = std::max(window_height, (int)font_size + padding_top * 2);
     GLFWwindow* window = glfwCreateWindow(1920, (int)window_height, "X11 bar", nullptr, nullptr);
     if (!glfwVulkanSupported())
     {
@@ -127,7 +128,7 @@ int main(int argc, char** argv)
 
     VulkanRenderer renderer(window);
 
-    GUI_Main app{window, font_path, font_size, screen_location};
+    GUI_Main app{window, font_path, font_size, screen_location, window_height, unix_socket_path};
 
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 

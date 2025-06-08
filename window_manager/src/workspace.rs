@@ -891,6 +891,26 @@ impl Workspace {
         // }
     }
 
+    pub fn reconfigure_windows_based_on_changed_available_rect(
+        &mut self,
+        conn: &Connection,
+        config: &Config,
+        monitor_rect: &Rect,
+    ) {
+        let avail_rect = self.available_rectangle(monitor_rect, config);
+        self.normal.rect_iter_mut().for_each(|rect| {
+            let y = rect
+                .y
+                .clamp(avail_rect.y, avail_rect.y + avail_rect.height as i32);
+            let height = rect
+                .height
+                .min((avail_rect.height as i32 - (avail_rect.y - y).abs()) as u32);
+            rect.y = y;
+            rect.height = height - config.border_size * 2;
+        });
+        self.fix_existing_normal_windows(&avail_rect, conn, config);
+    }
+
     pub fn remap_windows_with_upd_config(
         &mut self,
         conn: &Connection,

@@ -483,35 +483,71 @@ impl Connection {
         if error.is_null() {
             let strut = unsafe { maybe_strut.assume_init() };
             if strut.left > 0 {
-                return Some(Rect {
-                    x: 0,
-                    y: 0,
-                    width: strut.left,
-                    height: monitor_rect.height,
-                });
+                if strut.left_end_y as i32 - strut.left_start_y as i32 > 1 {
+                    return Some(Rect {
+                        x: 0,
+                        y: strut.left_start_y as i32,
+                        width: strut.left,
+                        height: strut.left_end_y - strut.left_start_y,
+                    });
+                } else {
+                    return Some(Rect {
+                        x: 0,
+                        y: strut.left_start_y as i32,
+                        width: strut.left,
+                        height: monitor_rect.height,
+                    });
+                }
             }
             if strut.right > 0 {
-                return Some(Rect {
-                    x: monitor_rect.width as i32 - strut.right as i32,
-                    y: 0,
-                    width: strut.right,
-                    height: monitor_rect.height,
-                });
+                if strut.right_end_y as i32 - strut.right_start_y as i32 > 1 {
+                    return Some(Rect {
+                        x: monitor_rect.width as i32 - strut.right as i32,
+                        y: strut.left_start_y as i32,
+                        width: strut.right,
+                        height: strut.right_end_y - strut.right_start_y,
+                    });
+                } else {
+                    return Some(Rect {
+                        x: monitor_rect.width as i32 - strut.right as i32,
+                        y: strut.right_start_y as i32,
+                        width: strut.right,
+                        height: monitor_rect.height,
+                    });
+                }
             }
             if strut.top > 0 {
+                if strut.top_end_x as i32 - strut.top_start_x as i32 > 1 {
+                    return Some(Rect {
+                        x: strut.top_start_x as i32,
+                        y: 0,
+                        width: strut.top_end_x - strut.top_start_x,
+                        height: strut.top,
+                    });
+                } else {
+                    return Some(Rect {
+                        x: strut.top_start_x as i32,
+                        y: 0,
+                        width: monitor_rect.width,
+                        height: strut.top,
+                    });
+                }
+            }
+            if strut.bottom > 0 && strut.bottom_end_x as i32 - strut.bottom_start_x as i32 > 1 {
                 return Some(Rect {
-                    x: strut.top_start_x as i32,
-                    y: 0,
-                    width: strut.top_end_x - strut.top_start_x + 1,
+                    x: strut.bottom_start_x as i32,
+                    y: monitor_rect.height as i32 - strut.bottom as i32,
+                    width: strut.bottom_end_x - strut.bottom_start_x,
                     height: strut.bottom,
                 });
+            } else {
+                return Some(Rect {
+                    x: 0,
+                    y: monitor_rect.height as i32 - 25,
+                    width: monitor_rect.width,
+                    height: 25,
+                });
             }
-            return Some(Rect {
-                x: strut.bottom_start_x as i32,
-                y: monitor_rect.height as i32 - strut.bottom as i32,
-                width: strut.bottom_end_x - strut.bottom_start_x + 1,
-                height: strut.bottom,
-            });
         }
         None
     }
@@ -1458,7 +1494,6 @@ impl Connection {
             return match xkb_type {
                 XCB_XKB_STATE_NOTIFY => Some(Ok(XcbEvents::XkbStateNotify { event: xkb_event })),
                 _ => {
-                    println!("xkb_event type: {}", xkb_type);
                     None
                 }
             };

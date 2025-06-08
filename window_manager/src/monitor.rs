@@ -8,6 +8,7 @@ use x11_bindings::bindings::{
 };
 
 use crate::{
+    bar_message::{BarCommsBus, Message},
     config::Config,
     connection::{Connection, WindowType},
     keybindings::{Dimension, Direction},
@@ -133,6 +134,16 @@ impl Monitor {
                             conn.window_configure(window, &magnified_rect, 0);
                             conn.map_window(window);
                             self.docked.add(window, magnified_rect, true);
+                            let new_avail_rect = self
+                                .rect
+                                .available_rect_after_adding_rects(self.docked.rect_iter());
+                            self.workspaces.iter_mut().for_each(|wspace| {
+                                wspace.reconfigure_windows_based_on_changed_available_rect(
+                                    conn,
+                                    config,
+                                    &new_avail_rect,
+                                )
+                            });
                         } else {
                             error!(
                                 "can't add globally docked window {} as there is no more elements that can fit on the screen",
@@ -225,6 +236,7 @@ impl Monitor {
         conn: &Connection,
         config: &Config,
         direction: Direction,
+        bar_comms_bus: &mut BarCommsBus,
     ) {
         trace!("focus window change: {:?}", direction);
         let avail_rect = self
@@ -245,21 +257,37 @@ impl Monitor {
                 let focused_workspace_id =
                     self.workspaces.get(self.focused_workspace_idx).unwrap().id;
                 if focused_workspace_id > 1 {
-                    self.handle_switch_to_workspace(conn, config, focused_workspace_id - 1);
+                    self.handle_switch_to_workspace(
+                        conn,
+                        config,
+                        focused_workspace_id - 1,
+                        bar_comms_bus,
+                    );
                 }
             }
             Direction::Down => {
                 let focused_workspace_id =
                     self.workspaces.get(self.focused_workspace_idx).unwrap().id;
                 if focused_workspace_id < 9 {
-                    self.handle_switch_to_workspace(conn, config, focused_workspace_id + 1);
+                    self.handle_switch_to_workspace(
+                        conn,
+                        config,
+                        focused_workspace_id + 1,
+                        bar_comms_bus,
+                    );
                 }
             }
         };
         conn.flush();
     }
 
-    pub fn handle_move_window(&mut self, conn: &Connection, config: &Config, direction: Direction) {
+    pub fn handle_move_window(
+        &mut self,
+        conn: &Connection,
+        config: &Config,
+        direction: Direction,
+        bar_comms_bus: &mut BarCommsBus,
+    ) {
         trace!("move window: {:?}", direction);
         let avail_rect = self
             .rect
@@ -287,6 +315,7 @@ impl Monitor {
                         config,
                         focused_workspace_id - 1,
                         true,
+                        bar_comms_bus,
                     );
                 }
             }
@@ -302,6 +331,7 @@ impl Monitor {
                         config,
                         focused_workspace_id + 1,
                         true,
+                        bar_comms_bus,
                     );
                 }
             }
@@ -346,6 +376,7 @@ impl Monitor {
         conn: &Connection,
         config: &Config,
         workspace_id: u32,
+        bar_comms_bus: &mut BarCommsBus,
     ) {
         let focused_workspace_id = self.workspaces.get(self.focused_workspace_idx).unwrap().id;
         trace!(
@@ -383,6 +414,14 @@ impl Monitor {
             .show_all_windows(&avail_rect, conn, config);
 
         conn.flush();
+
+        bar_comms_bus.send_message(Message::WorkspaceList(
+            self.workspaces
+                .iter()
+                .map(|workspace| workspace.id)
+                .collect(),
+        ));
+        bar_comms_bus.send_message(Message::WorkspaceActive(workspace_id));
     }
 
     pub fn handle_move_focused_window_to_workspace(
@@ -391,6 +430,7 @@ impl Monitor {
         config: &Config,
         workspace_id: u32,
         switch_to_new_workspace: bool,
+        bar_comms_bus: &mut BarCommsBus,
     ) {
         let focused_workspace_id = self.workspaces.get(self.focused_workspace_idx).unwrap().id;
         trace!(
@@ -450,6 +490,14 @@ impl Monitor {
                     .get_mut(self.focused_workspace_idx)
                     .unwrap()
                     .show_all_windows(&avail_rect, conn, config);
+
+                bar_comms_bus.send_message(Message::WorkspaceList(
+                    self.workspaces
+                        .iter()
+                        .map(|workspace| workspace.id)
+                        .collect(),
+                ));
+                bar_comms_bus.send_message(Message::WorkspaceActive(workspace_id));
             }
             conn.flush();
         }

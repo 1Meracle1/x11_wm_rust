@@ -1,6 +1,8 @@
 #ifndef AUDIO_APP
 #define AUDIO_APP
 
+#include "alsa.hpp"
+#include "unix_communication_bus.hpp"
 #include <GLFW/glfw3.h>
 #include <chrono>
 #include <cstdint>
@@ -50,7 +52,12 @@ struct CPU_Usage
 class GUI_Main
 {
   public:
-    explicit GUI_Main(GLFWwindow* window, const char* font_path, float font_size, ScreenLocation screen_location);
+    explicit GUI_Main(GLFWwindow*    window,
+                      const char*    font_path,
+                      float          font_size,
+                      ScreenLocation screen_location,
+                      int            window_height,
+                      const char*    unix_socket_path);
     ~GUI_Main();
 
     void render();
@@ -59,8 +66,18 @@ class GUI_Main
     xcb_connection_t* m_xcb_conn = nullptr;
     int               m_xcb_fd   = 0;
     // pollfd            m_poll_fds[1];
+
+    UnixCommunicationBus m_unix_comm_bus;
+
     Memory_Usage m_memory_usage{};
     CPU_Usage    m_cpu_usage{};
+
+    std::string m_keyboard_layout_name{};
+
+    std::vector<uint32_t> m_workspaces{1};
+    uint32_t              m_active_workspace = 1;
+
+    Alsa m_alsa{};
 };
 
 #endif
