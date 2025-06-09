@@ -1,4 +1,4 @@
-use std::{io::Write, os::unix::net::UnixStream, path::Path, slice};
+use std::{io::Write, os::unix::net::UnixStream, path::Path};
 
 use log::{trace, warn};
 

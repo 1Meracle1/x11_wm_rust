@@ -1415,9 +1415,6 @@ pub const XKB_MOD_NAME_MOD2: &[u8; 5] = b"Mod2\0";
 pub const XKB_MOD_NAME_MOD3: &[u8; 5] = b"Mod3\0";
 pub const XKB_MOD_NAME_MOD4: &[u8; 5] = b"Mod4\0";
 pub const XKB_MOD_NAME_MOD5: &[u8; 5] = b"Mod5\0";
-pub const XKB_MOD_NAME_ALT: &[u8; 5] = b"Mod1\0";
-pub const XKB_MOD_NAME_LOGO: &[u8; 5] = b"Mod4\0";
-pub const XKB_MOD_NAME_NUM: &[u8; 5] = b"Mod2\0";
 pub const XKB_VMOD_NAME_ALT: &[u8; 4] = b"Alt\0";
 pub const XKB_VMOD_NAME_HYPER: &[u8; 6] = b"Hyper\0";
 pub const XKB_VMOD_NAME_LEVEL3: &[u8; 11] = b"LevelThree\0";
@@ -1426,6 +1423,9 @@ pub const XKB_VMOD_NAME_META: &[u8; 5] = b"Meta\0";
 pub const XKB_VMOD_NAME_NUM: &[u8; 8] = b"NumLock\0";
 pub const XKB_VMOD_NAME_SCROLL: &[u8; 11] = b"ScrollLock\0";
 pub const XKB_VMOD_NAME_SUPER: &[u8; 6] = b"Super\0";
+pub const XKB_MOD_NAME_ALT: &[u8; 5] = b"Mod1\0";
+pub const XKB_MOD_NAME_LOGO: &[u8; 5] = b"Mod4\0";
+pub const XKB_MOD_NAME_NUM: &[u8; 5] = b"Mod2\0";
 pub const XKB_LED_NAME_NUM: &[u8; 9] = b"Num Lock\0";
 pub const XKB_LED_NAME_CAPS: &[u8; 10] = b"Caps Lock\0";
 pub const XKB_LED_NAME_SCROLL: &[u8; 12] = b"Scroll Lock\0";
@@ -51457,6 +51457,12 @@ unsafe extern "C" {
     ) -> xkb_mod_index_t;
 }
 unsafe extern "C" {
+    pub fn xkb_keymap_mod_get_mask(
+        keymap: *mut xkb_keymap,
+        name: *const ::std::os::raw::c_char,
+    ) -> xkb_mod_mask_t;
+}
+unsafe extern "C" {
     pub fn xkb_keymap_num_layouts(keymap: *mut xkb_keymap) -> xkb_layout_index_t;
 }
 unsafe extern "C" {
@@ -51554,6 +51560,19 @@ unsafe extern "C" {
         state: *mut xkb_state,
         key: xkb_keycode_t,
         direction: xkb_key_direction,
+    ) -> xkb_state_component;
+}
+unsafe extern "C" {
+    pub fn xkb_state_update_latched_locked(
+        state: *mut xkb_state,
+        affect_latched_mods: xkb_mod_mask_t,
+        latched_mods: xkb_mod_mask_t,
+        affect_latched_layout: bool,
+        latched_layout: i32,
+        affect_locked_mods: xkb_mod_mask_t,
+        locked_mods: xkb_mod_mask_t,
+        affect_locked_layout: bool,
+        locked_layout: i32,
     ) -> xkb_state_component;
 }
 unsafe extern "C" {

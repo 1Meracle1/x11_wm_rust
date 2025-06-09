@@ -1,4 +1,4 @@
-use std::{collections::HashMap, ffi::CString, mem::MaybeUninit};
+use std::{collections::HashMap, ffi::CString, mem::MaybeUninit, os::fd::RawFd};
 
 use base::Rect;
 
@@ -36,10 +36,11 @@ use crate::bindings::{
     xcb_ewmh_get_wm_window_type, xcb_ewmh_get_wm_window_type_reply, xcb_ewmh_init_atoms,
     xcb_ewmh_init_atoms_replies, xcb_ewmh_set_supported_checked, xcb_ewmh_wm_strut_partial_t,
     xcb_flush, xcb_focus_in_event_t, xcb_focus_out_event_t, xcb_free_gc, xcb_free_pixmap, xcb_gc_t,
-    xcb_gcontext_t, xcb_generate_id, xcb_generic_error_t, xcb_generic_event_t, xcb_get_property,
-    xcb_get_property_reply, xcb_get_property_value, xcb_get_property_value_length, xcb_get_setup,
-    xcb_get_window_attributes, xcb_get_window_attributes_reply, xcb_grab_button, xcb_grab_key,
-    xcb_grab_pointer, xcb_grab_pointer_reply, xcb_icccm_set_wm_normal_hints, xcb_image_create,
+    xcb_gcontext_t, xcb_generate_id, xcb_generic_error_t, xcb_generic_event_t,
+    xcb_get_file_descriptor, xcb_get_property, xcb_get_property_reply, xcb_get_property_value,
+    xcb_get_property_value_length, xcb_get_setup, xcb_get_window_attributes,
+    xcb_get_window_attributes_reply, xcb_grab_button, xcb_grab_key, xcb_grab_pointer,
+    xcb_grab_pointer_reply, xcb_icccm_set_wm_normal_hints, xcb_image_create,
     xcb_image_create_native, xcb_image_destroy, xcb_image_put, xcb_intern_atom,
     xcb_intern_atom_cookie_t, xcb_intern_atom_reply, xcb_key_press_event_t, xcb_keycode_t,
     xcb_leave_notify_event_t, xcb_map_request_event_t, xcb_map_window, xcb_mod_mask_t,
@@ -1470,12 +1471,15 @@ pub enum XcbEvents {
 }
 
 impl Connection {
+    pub fn get_file_descriptor(&self) -> RawFd {
+        unsafe { xcb_get_file_descriptor(self.conn) }
+    }
+
     pub fn wait_for_event(&self) -> Option<Result<XcbEvents, XcbErrors>> {
         let generic_event = unsafe { xcb_wait_for_event(self.conn) };
         self.process_event(generic_event)
     }
 
-    #[allow(dead_code)]
     pub fn poll_for_event(&self) -> Option<Result<XcbEvents, XcbErrors>> {
         let generic_event = unsafe { xcb_poll_for_event(self.conn) };
         self.process_event(generic_event)
@@ -1493,9 +1497,7 @@ impl Connection {
             let xkb_type = unsafe { *xkb_event }.xkbType as u32;
             return match xkb_type {
                 XCB_XKB_STATE_NOTIFY => Some(Ok(XcbEvents::XkbStateNotify { event: xkb_event })),
-                _ => {
-                    None
-                }
+                _ => None,
             };
         }
         let event_type = unsafe { *generic_event }.response_type & !0x80;

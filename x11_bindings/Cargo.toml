@@ -5,6 +5,7 @@ edition = "2024"
 
 [dependencies]
 base = { path = "../base" }
+libc = "0.2.172"
 
 [build-dependencies]
 bindgen = "0.71.1"
