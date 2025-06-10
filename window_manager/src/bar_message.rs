@@ -1,16 +1,21 @@
-use std::{io::Write, os::unix::net::UnixStream, path::Path};
+use std::{
+    io::{Read, Write},
+    os::{fd::{AsRawFd, RawFd}, unix::net::UnixStream},
+};
 
 use log::{trace, warn};
 
 const MESSAGE_KEYBOARD_LAYOUT_TAG: u8 = 0;
 const MESSAGE_WORKSPACE_LIST_TAG: u8 = 1;
 const MESSAGE_WORKSPACE_ACTIVE_TAG: u8 = 2;
+const MESSAGE_REQUEST_CLIENT_INIT_TAG: u8 = 3;
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum Message<'a> {
     KeyboardLayout(&'a str),
     WorkspaceList(Vec<u32>),
     WorkspaceActive(u32),
+    RequestClientInit,
 }
 
 impl<'a> Message<'a> {
@@ -37,6 +42,9 @@ impl<'a> Message<'a> {
                 bytes.push(MESSAGE_WORKSPACE_ACTIVE_TAG);
                 bytes.extend_from_slice(&id.to_le_bytes());
             }
+            Message::RequestClientInit => {
+                bytes.push(MESSAGE_REQUEST_CLIENT_INIT_TAG);
+            }
         };
 
         // write actual size value in the first 8 bytes
@@ -45,59 +53,89 @@ impl<'a> Message<'a> {
 
         bytes
     }
-}
 
-pub struct BarCommsBus<'a> {
-    bar_socket_path: &'a Path,
-    bar_unix_stream_maybe: Option<UnixStream>,
-}
-
-impl<'a> BarCommsBus<'a> {
-    pub fn new(bar_socket_path: &'a Path) -> Self {
-        if !bar_socket_path.exists() {
-            warn!("no bar has unix listener setup");
+    pub fn from_bytes(bytes: &[u8]) -> Option<Self> {
+        if bytes.is_empty() {
+            return None;
         }
-        BarCommsBus {
-            bar_socket_path,
-            bar_unix_stream_maybe: UnixStream::connect(bar_socket_path).ok(),
+        // first 1 byte is the integer value of the Message type tag
+        let msg_type_tag = bytes[0];
+        match msg_type_tag {
+            MESSAGE_REQUEST_CLIENT_INIT_TAG => Some(Message::RequestClientInit),
+            _ => None,
         }
     }
 
-    pub fn send_message(&mut self, message: Message) {
-        if self.bar_unix_stream_maybe.is_none() {
-            trace!("unix stream to bar is not established, reconnecting");
-            self.bar_unix_stream_maybe = UnixStream::connect(self.bar_socket_path).ok();
-        }
-        if let Some(bar_unix_stream) = &mut self.bar_unix_stream_maybe {
-            if let Err(err) = bar_unix_stream.write_all(&message.as_bytes()) {
-                warn!("failed to send message to the bar: {}", err);
-            } else {
-                if let Err(err) = bar_unix_stream.flush() {
-                    warn!("failed to flush message to the bar: {}", err);
+    pub fn read_from_unix_stream(unix_stream: &mut UnixStream) -> Option<Self> {
+        let mut buffer = [0; 4096];
+        match unix_stream.read(&mut buffer[..size_of::<usize>()]) {
+            Ok(n_size_bytes) => {
+                if n_size_bytes == size_of::<usize>() {
+                    if let Ok(arr) = buffer[..size_of::<usize>()].try_into() {
+                        let message_size = usize::from_le_bytes(arr);
+                        match unix_stream.read(&mut buffer[..message_size]) {
+                            Ok(n_bytes) => Message::from_bytes(&buffer[..n_bytes]),
+                            Err(err) => {
+                                warn!(
+                                    "failed to read message payload of size: {}, err: {}",
+                                    message_size, err
+                                );
+                                None
+                            }
+                        }
+                    } else {
+                        warn!(
+                            "failed to get message size from bytes: {:?}",
+                            &buffer[..size_of::<usize>()]
+                        );
+                        None
+                    }
                 } else {
-                    trace!("sent notification to bar over unix stream: {:?}", message);
+                    warn!(
+                        "received message size in bytes that != size_of::<usize>(): {}",
+                        n_size_bytes
+                    );
+                    None
                 }
             }
-        } else {
-            trace!("unix stream to bar is not established, no notification is sent");
+            Err(err) => {
+                warn!("failed to get message size from unix stream: {}", err);
+                None
+            }
         }
     }
 }
 
-// #[derive(Debug, PartialEq, Eq)]
-// pub enum MessageDecodeError {
-//     InputTooShort,
-//     InvalidSize,
-//     InvalidUtf8(std::string::FromUtf8Error),
-//     InvalidTag,
-//     IncorrectDataSize,
-// }
+pub struct UnixClients {
+    unix_clients: Vec<UnixStream>,
+}
 
-// impl Message {
-//     pub fn from_bytes(bytes: &[u8]) -> Result<Message, MessageDecodeError> {
-//         if bytes.len() < 9 {
+impl UnixClients {
+    pub fn new() -> Self {
+        Self {
+            unix_clients: Vec::new(),
+        }
+    }
 
-//         }
+    pub fn notify_all(&mut self, message: Message) {
+        for client_stream in self.unix_clients.iter_mut() {
+            if let Err(err) = client_stream.write_all(&message.as_bytes()) {
+                warn!(
+                    "failed to write message {:?} to client, err: {}",
+                    message, err
+                );
+            }
+            trace!("message sent to unix stream client: {:?}", message);
+        }
+    }
 
-//     }
-// }
+    pub fn add_client(&mut self, unix_stream: UnixStream) {
+        self.unix_clients.push(unix_stream);
+    }
+
+    pub fn find_client_by_fd(&mut self, fd: u64) -> Option<&mut UnixStream> {
+        self.unix_clients
+            .iter_mut()
+            .find(|stream| stream.as_raw_fd() as u64 == fd)
+    }
+}

@@ -9,7 +9,7 @@ use x11_bindings::{
     connection::Connection,
 };
 
-use crate::{bar_message::BarCommsBus, config::Config, monitor::Monitor};
+use crate::{bar_message::{Message, UnixClients}, config::Config, monitor::Monitor};
 
 #[allow(non_camel_case_types)]
 #[repr(u8)]
@@ -412,7 +412,6 @@ pub enum KeybindingAction {
     SwitchToWorkspace(u32),
     MoveFocusedWindowToWorkspace(u32),
     KillFocusedWindow,
-    ConfigReload,
 }
 
 #[allow(dead_code)]
@@ -469,8 +468,7 @@ pub fn handle_key_press(
     monitor: &mut Monitor,
     modifier: u16,
     keycode: xcb_keycode_t,
-    requested_config_reload: &mut bool,
-    bar_comms_bus: &mut BarCommsBus,
+    unix_clients: &mut UnixClients,
 ) {
     trace!(
         "handle key press, modifier: {}, keycode: {}",
@@ -490,31 +488,32 @@ pub fn handle_key_press(
                 KeybindingAction::Exec(cmd) => {
                     execute_command_from_str(cmd.as_str());
                 }
-                KeybindingAction::FocusWindow(direction) => {
-                    monitor.handle_focus_window_change(conn, config, *direction, bar_comms_bus)
-                }
+                KeybindingAction::FocusWindow(direction) => monitor.handle_focus_window_change(
+                    conn,
+                    config,
+                    *direction,
+                    unix_clients,
+                ),
                 KeybindingAction::MoveWindow(direction) => {
-                    monitor.handle_move_window(conn, config, *direction, bar_comms_bus)
+                    monitor.handle_move_window(conn, config, *direction, unix_clients)
                 }
                 KeybindingAction::ResizeWindow(dimension, size_change_pixels) => {
                     monitor.handle_resize_window(conn, config, *dimension, *size_change_pixels);
                 }
-                KeybindingAction::SwitchToWorkspace(workspace_id) => {
-                    monitor.handle_switch_to_workspace(conn, config, *workspace_id, bar_comms_bus)
-                }
+                KeybindingAction::SwitchToWorkspace(workspace_id) => monitor
+                    .handle_switch_to_workspace(conn, config, *workspace_id, unix_clients),
                 KeybindingAction::MoveFocusedWindowToWorkspace(workspace_id) => {
                     monitor.handle_move_focused_window_to_workspace(
                         conn,
                         config,
                         *workspace_id,
                         config.switch_to_workspace_on_focused_window_moved,
-                        bar_comms_bus,
+                        unix_clients,
                     );
                 }
                 KeybindingAction::KillFocusedWindow => {
                     monitor.handle_kill_focused_window(conn, config)
                 }
-                KeybindingAction::ConfigReload => *requested_config_reload = true,
             };
             break;
         }
@@ -819,14 +818,6 @@ fn keybinding_from_string(keybinding_str: &str) -> Option<Keybinding> {
                         modifiers_count,
                         keycode: keycode_maybe.unwrap(),
                         action: KeybindingAction::KillFocusedWindow,
-                    });
-                }
-                "config_reload" => {
-                    return Some(Keybinding {
-                        modifiers,
-                        modifiers_count,
-                        keycode: keycode_maybe.unwrap(),
-                        action: KeybindingAction::ConfigReload,
                     });
                 }
                 _ => error!("no command matching string: {}", command),

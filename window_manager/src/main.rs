@@ -1,4 +1,11 @@
-use std::path::Path;
+use std::{
+    io::Write,
+    os::{
+        fd::AsRawFd,
+        unix::net::{UnixListener},
+    },
+    path::Path,
+};
 
 use config::{Config, ConfigErrors};
 use env_logger::Env;
@@ -17,7 +24,7 @@ use x11_bindings::{
 };
 
 use crate::{
-    bar_message::{BarCommsBus, Message},
+    bar_message::{Message, UnixClients},
     keybindings::{execute_command_from_str_wait, keybindings_ungrab},
 };
 
@@ -92,20 +99,26 @@ fn main() {
 
     conn.change_cursor("left_ptr");
     conn.grab_button(MouseButton::Left);
-
-    const BAR_SOCKET_PATH_STR: &str = "/tmp/x11_bar_imgui_cpp.socket";
-    let bar_socket_path = Path::new(BAR_SOCKET_PATH_STR);
-    let mut bar_comms_bus = BarCommsBus::new(bar_socket_path);
-
     conn.flush();
 
-    trace!("started the loop");
-    let mut requested_config_reload = false;
+    const SERVER_SOCKET_PATH_STR: &str = "/tmp/x11_wm_rust.socket";
+    let server_socket_path = Path::new(SERVER_SOCKET_PATH_STR);
+    if server_socket_path.exists() {
+        let _ = std::fs::remove_file(server_socket_path);
+    }
+    let unix_listener =
+        UnixListener::bind(SERVER_SOCKET_PATH_STR).expect("failed to create unix listener");
+    epoll
+        .add_watch(unix_listener.as_raw_fd())
+        .expect("failed to add unix listener to epoll watch list");
+    let mut unix_clients = UnixClients::new();
+
+    let mut keyboard_layout_name_current = "en".to_string();
     loop {
         let events = epoll
             .wait()
             .expect("epoll failed while waiting for new events");
-        for event in events {
+        for event in events.clone() {
             if event.u64 == x11_conn_fd as u64 {
                 while let Some(event_res) = conn.poll_for_event() {
                     match event_res {
@@ -118,8 +131,7 @@ fn main() {
                                     &mut monitor,
                                     modifier,
                                     keycode,
-                                    &mut requested_config_reload,
-                                    &mut bar_comms_bus,
+                                    &mut unix_clients,
                                 )
                             }
                             connection::XcbEvents::MapRequst { window } => {
@@ -164,9 +176,10 @@ fn main() {
                                 if let Some(keyboard_layout_name) =
                                     keyboard_layout_names.get(group_idx)
                                 {
-                                    // trace!("keyboard_layout_name: {}", keyboard_layout_name);
-                                    let message = Message::KeyboardLayout(keyboard_layout_name);
-                                    bar_comms_bus.send_message(message);
+                                    keyboard_layout_name_current = keyboard_layout_name.clone();
+                                    unix_clients.notify_all(Message::KeyboardLayout(
+                                        keyboard_layout_name,
+                                    ));
                                 }
                             }
                         },
@@ -234,6 +247,74 @@ fn main() {
                         }
                     },
                     Err(err) => warn!("inotify read error: {:?}", err),
+                }
+            } else if event.u64 == unix_listener.as_raw_fd() as u64 {
+                match unix_listener.accept() {
+                    Ok((client, _)) => {
+                        if let Err(err) = epoll.add_watch(client.as_raw_fd()) {
+                            warn!("failed to add unix client to epoll watch list: {}", err);
+                        } else {
+                            unix_clients.add_client(client);
+                        }
+                    }
+                    Err(err) => warn!("unix listener failed to accept connection: {}", err),
+                }
+            } else {
+                if let Some(client_stream) = unix_clients.find_client_by_fd(event.u64) {
+                    if let Some(message) = Message::read_from_unix_stream(client_stream) {
+                        trace!("message from unix stream client: {:?}", message);
+                        match message {
+                            Message::RequestClientInit => {
+                                let message =
+                                    Message::KeyboardLayout(&keyboard_layout_name_current);
+                                if let Err(err) = client_stream.write_all(&message.as_bytes()) {
+                                    warn!(
+                                        "failed to write keyboard layout name to client on RequestClientInit: {}",
+                                        err
+                                    );
+                                }
+                                trace!(
+                                    "keyboard layout name sent to unix stream client: {:?}",
+                                    message
+                                );
+
+                                let workspaces_ids = monitor
+                                    .workspaces
+                                    .iter()
+                                    .map(|workspace| workspace.id)
+                                    .collect::<Vec<_>>();
+                                let message = Message::WorkspaceList(workspaces_ids);
+                                if let Err(err) = client_stream.write_all(&message.as_bytes()) {
+                                    warn!(
+                                        "failed to write workspaces ids to client on RequestClientInit: {}",
+                                        err
+                                    );
+                                }
+                                trace!("workspaces ids sent to unix stream client: {:?}", message);
+
+                                if let Some(focused_workspace_id) =
+                                    monitor.get_focused_workspace_id()
+                                {
+                                    let message = Message::WorkspaceActive(focused_workspace_id);
+                                    if let Err(err) = client_stream.write_all(&message.as_bytes()) {
+                                        warn!(
+                                            "failed to write focused workspace id to client on RequestClientInit: {}",
+                                            err
+                                        );
+                                    }
+                                    trace!(
+                                        "focused workspace id sent to unix stream client: {:?}",
+                                        message
+                                    );
+                                }
+                            }
+                            _ => {}
+                        }
+                    } else {
+                        warn!("wasn't able to read message sent by client");
+                    }
+                } else {
+                    warn!("received message from unknown client");
                 }
             }
         }

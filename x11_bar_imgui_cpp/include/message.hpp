@@ -12,9 +12,25 @@
 
 enum class MessageType : uint8_t
 {
-    KeyboardLayout  = 0,
-    WorkspaceList   = 1,
-    WorkspaceActive = 2,
+    KeyboardLayout    = 0,
+    WorkspaceList     = 1,
+    WorkspaceActive   = 2,
+    RequestClientInit = 3,
+};
+
+struct RequestClientInit
+{
+};
+
+union MessageRaw
+{
+    std::string                keyboard_layout_name;
+    std::uint32_t              workspace_active_id = 0;
+    std::vector<std::uint32_t> workspace_list_ids;
+    RequestClientInit          request_client_init;
+
+    MessageRaw() {}
+    ~MessageRaw() {}
 };
 
 template <MessageType E> struct MessageTypeDataType;
@@ -34,17 +50,12 @@ template <> struct MessageTypeDataType<MessageType::WorkspaceActive>
     using type = std::uint32_t;
 };
 
-template <MessageType E> using MessageTypeDataTypeT = typename MessageTypeDataType<E>::type;
-
-union MessageRaw
+template <> struct MessageTypeDataType<MessageType::RequestClientInit>
 {
-    std::string                keyboard_layout_name;
-    std::uint32_t              workspace_active_id = 0;
-    std::vector<std::uint32_t> workspace_list_ids;
-
-    MessageRaw() {}
-    ~MessageRaw() {}
+    using type = RequestClientInit;
 };
+
+template <MessageType E> using MessageTypeDataTypeT = typename MessageTypeDataType<E>::type;
 
 template <auto E> inline constexpr std::integral_constant<decltype(E), E> tag{};
 
@@ -92,6 +103,8 @@ class Message
             case MessageType::WorkspaceList:
                 new (&m_message_raw.workspace_list_ids) std::vector(other.m_message_raw.workspace_list_ids);
                 break;
+            case MessageType::RequestClientInit:
+                break;
             }
         }
     }
@@ -116,6 +129,8 @@ class Message
                     break;
                 case MessageType::WorkspaceList:
                     new (&m_message_raw.workspace_list_ids) std::vector(other.m_message_raw.workspace_list_ids);
+                    break;
+                case MessageType::RequestClientInit:
                     break;
                 }
             }
@@ -145,6 +160,10 @@ class Message
         {
             return &m_message_raw.workspace_list_ids;
         }
+        else if constexpr (E == MessageType::RequestClientInit)
+        {
+            return &m_message_raw.request_client_init;
+        }
         Assert(false);
     }
 
@@ -160,6 +179,8 @@ class Message
             return &m_message_raw.workspace_active_id;
         case MessageType::WorkspaceList:
             return &m_message_raw.workspace_list_ids;
+        case MessageType::RequestClientInit:
+            return &m_message_raw.request_client_init;
         }
         Assert(false);
     }
@@ -199,9 +220,11 @@ class Message
             bytes.insert(bytes.end(), list_ids_bytes, list_ids_bytes + len_list_ids * sizeof(uint32_t));
             break;
         }
+        case MessageType::RequestClientInit:
+            break;
         }
-        size_t bytes_size = bytes.size() - sizeof(size_t);
-        std::memcpy(bytes.data(), &bytes_size, sizeof(size_t));
+        size_t size_bytes = bytes.size() - sizeof(size_t);
+        std::memcpy(bytes.data(), &size_bytes, sizeof(size_t));
     }
 
     // first 1 byte of the enum tag type, then (size - 1) of actual data
@@ -275,6 +298,8 @@ class Message
             break;
         case MessageType::WorkspaceList:
             m_message_raw.workspace_list_ids.~vector();
+            break;
+        case MessageType::RequestClientInit:
             break;
         }
     }

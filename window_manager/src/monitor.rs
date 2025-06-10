@@ -8,7 +8,7 @@ use x11_bindings::bindings::{
 };
 
 use crate::{
-    bar_message::{BarCommsBus, Message},
+    bar_message::{Message, UnixClients},
     config::Config,
     connection::{Connection, WindowType},
     keybindings::{Dimension, Direction},
@@ -20,7 +20,7 @@ use crate::{
 #[derive(Debug)]
 pub struct Monitor {
     rect: Rect,
-    workspaces: Vec<Workspace>,
+    pub workspaces: Vec<Workspace>,
     docked: WindowsCollection,
     focused_workspace_idx: usize,
     to_check_deleted: Vec<(xcb_window_t, u64)>, // window and timestamp when it was requested to be deleted
@@ -236,7 +236,7 @@ impl Monitor {
         conn: &Connection,
         config: &Config,
         direction: Direction,
-        bar_comms_bus: &mut BarCommsBus,
+        unix_clients: &mut UnixClients,
     ) {
         trace!("focus window change: {:?}", direction);
         let avail_rect = self
@@ -261,7 +261,7 @@ impl Monitor {
                         conn,
                         config,
                         focused_workspace_id - 1,
-                        bar_comms_bus,
+                        unix_clients,
                     );
                 }
             }
@@ -273,7 +273,7 @@ impl Monitor {
                         conn,
                         config,
                         focused_workspace_id + 1,
-                        bar_comms_bus,
+                        unix_clients,
                     );
                 }
             }
@@ -286,7 +286,7 @@ impl Monitor {
         conn: &Connection,
         config: &Config,
         direction: Direction,
-        bar_comms_bus: &mut BarCommsBus,
+        unix_clients: &mut UnixClients,
     ) {
         trace!("move window: {:?}", direction);
         let avail_rect = self
@@ -315,7 +315,7 @@ impl Monitor {
                         config,
                         focused_workspace_id - 1,
                         true,
-                        bar_comms_bus,
+                        unix_clients,
                     );
                 }
             }
@@ -331,7 +331,7 @@ impl Monitor {
                         config,
                         focused_workspace_id + 1,
                         true,
-                        bar_comms_bus,
+                        unix_clients,
                     );
                 }
             }
@@ -376,7 +376,7 @@ impl Monitor {
         conn: &Connection,
         config: &Config,
         workspace_id: u32,
-        bar_comms_bus: &mut BarCommsBus,
+        unix_clients: &mut UnixClients,
     ) {
         let focused_workspace_id = self.workspaces.get(self.focused_workspace_idx).unwrap().id;
         trace!(
@@ -415,13 +415,13 @@ impl Monitor {
 
         conn.flush();
 
-        bar_comms_bus.send_message(Message::WorkspaceList(
+        unix_clients.notify_all(Message::WorkspaceList(
             self.workspaces
                 .iter()
                 .map(|workspace| workspace.id)
                 .collect(),
         ));
-        bar_comms_bus.send_message(Message::WorkspaceActive(workspace_id));
+        unix_clients.notify_all(Message::WorkspaceActive(workspace_id));
     }
 
     pub fn handle_move_focused_window_to_workspace(
@@ -430,7 +430,7 @@ impl Monitor {
         config: &Config,
         workspace_id: u32,
         switch_to_new_workspace: bool,
-        bar_comms_bus: &mut BarCommsBus,
+        unix_clients: &mut UnixClients,
     ) {
         let focused_workspace_id = self.workspaces.get(self.focused_workspace_idx).unwrap().id;
         trace!(
@@ -491,13 +491,13 @@ impl Monitor {
                     .unwrap()
                     .show_all_windows(&avail_rect, conn, config);
 
-                bar_comms_bus.send_message(Message::WorkspaceList(
+                unix_clients.notify_all(Message::WorkspaceList(
                     self.workspaces
                         .iter()
                         .map(|workspace| workspace.id)
                         .collect(),
                 ));
-                bar_comms_bus.send_message(Message::WorkspaceActive(workspace_id));
+                unix_clients.notify_all(Message::WorkspaceActive(workspace_id));
             }
             conn.flush();
         }
@@ -621,5 +621,13 @@ impl Monitor {
             .get_mut(self.focused_workspace_idx)
             .unwrap()
             .handle_button_release(conn);
+    }
+
+    pub fn get_focused_workspace_id(&self) -> Option<u32> {
+        if let Some(workspace) = self.workspaces.get(self.focused_workspace_idx) {
+            Some(workspace.id)
+        } else {
+            None
+        }
     }
 }

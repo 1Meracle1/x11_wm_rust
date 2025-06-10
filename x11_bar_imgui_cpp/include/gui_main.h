@@ -57,7 +57,7 @@ class GUI_Main
                       float          font_size,
                       ScreenLocation screen_location,
                       int            window_height,
-                      const char*    unix_socket_path);
+                      const char*    wm_unix_socket_path);
     ~GUI_Main();
 
     void render();

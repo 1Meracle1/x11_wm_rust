@@ -23,12 +23,12 @@ int main(int argc, char** argv)
 {
 #define Lit(str) Slice<const char>(str).chop_zero_termination()
 
-    const char* font_path        = "";
-    float       font_size        = 16.0f;
-    auto        screen_location  = ScreenLocation::Top;
-    int         padding_top      = 5;
-    int         window_height    = 25;
-    const char* unix_socket_path = "/tmp/x11_bar_imgui_cpp.socket";
+    const char* font_path           = "";
+    float       font_size           = 16.0f;
+    auto        screen_location     = ScreenLocation::Top;
+    int         padding_top         = 5;
+    int         window_height       = 25;
+    const char* wm_unix_socket_path = "/tmp/x11_wm_rust.socket";
 
     if (argc > 1)
     {
@@ -128,7 +128,7 @@ int main(int argc, char** argv)
 
     VulkanRenderer renderer(window);
 
-    GUI_Main app{window, font_path, font_size, screen_location, window_height, unix_socket_path};
+    GUI_Main app{window, font_path, font_size, screen_location, window_height, wm_unix_socket_path};
 
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 

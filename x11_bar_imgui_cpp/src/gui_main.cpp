@@ -148,8 +148,8 @@ GUI_Main::GUI_Main(GLFWwindow*    window,
                    float          font_size,
                    ScreenLocation screen_location,
                    int            window_height,
-                   const char*    unix_socket_path)
-    : m_unix_comm_bus(unix_socket_path)
+                   const char*    wm_unix_socket_path)
+    : m_unix_comm_bus(wm_unix_socket_path)
 {
     setup_fonts(font_path, font_size);
     set_rfl_theme();
@@ -191,6 +191,11 @@ GUI_Main::GUI_Main(GLFWwindow*    window,
 
     XMapWindow(x11_display, x11_window);
     XFlush(x11_display);
+
+    auto              request_init_msg = Message(tag<MessageType::RequestClientInit>, RequestClientInit{});
+    std::vector<char> bytes;
+    request_init_msg.as_bytes(bytes);
+    m_unix_comm_bus.notify_server(std::move(bytes));
 }
 
 GUI_Main::~GUI_Main() {}
@@ -201,7 +206,7 @@ void GUI_Main::render()
     m_cpu_usage.update();
 
     std::vector<char> bytes{};
-    while (m_unix_comm_bus.try_pop_client_message(bytes))
+    while (m_unix_comm_bus.try_pop_input_message(bytes))
     {
         if (auto message_maybe = Message::from_bytes(bytes); message_maybe.has_value())
         {
@@ -241,6 +246,8 @@ void GUI_Main::render()
                 std::cout << "updated active worskpace: " << m_active_workspace << '\n';
                 break;
             }
+            case MessageType::RequestClientInit:
+                break;
             }
         }
     }
@@ -346,7 +353,7 @@ void GUI_Main::render()
             // ImGui::Dummy(ImVec2(100.0f, text_height));
             // ImGui::SameLine();
             // ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
-            
+
             {
                 std::time_t time_now = std::time(nullptr);
                 std::tm*    local_tm = std::localtime(&time_now);
