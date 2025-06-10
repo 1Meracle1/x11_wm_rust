@@ -19,7 +19,7 @@ use crate::{
 #[allow(dead_code)]
 #[derive(Debug)]
 pub struct Monitor {
-    rect: Rect,
+    pub rect: Rect,
     pub workspaces: Vec<Workspace>,
     docked: WindowsCollection,
     focused_workspace_idx: usize,
@@ -37,6 +37,48 @@ impl Monitor {
             to_check_deleted: vec![],
             dmenu_window: None,
         }
+    }
+
+    pub fn update_with_new_dimensions(
+        &mut self,
+        width: u16,
+        height: u16,
+        conn: &Connection,
+        config: &Config,
+    ) {
+        let width = width as u32;
+        let height = height as u32;
+        if self.rect.width == width && self.rect.height == height {
+            return;
+        }
+        self.rect.width = width;
+        self.rect.height = height;
+        self.docked.iter_mut().for_each(|(window, rect, _)| {
+            if rect.width > rect.height {
+                rect.width = width;
+            } else {
+                rect.height = height;
+            }
+            if rect.y > (height / 2) as i32 {
+                rect.y = height as i32 - rect.height as i32
+            }
+            if rect.x > (width / 2) as i32 {
+                rect.x = width as i32 - rect.width as i32
+            }
+            conn.window_configure(*window, &rect, 0);
+        });
+
+        let new_avail_rect = self
+            .rect
+            .available_rect_after_adding_rects(self.docked.rect_iter());
+        self.workspaces.iter_mut().for_each(|wspace| {
+            wspace.reconfigure_windows_based_on_changed_available_rect(
+                conn,
+                config,
+                &new_avail_rect,
+            );
+        });
+        conn.flush();
     }
 
     pub fn remap_windows_with_upd_config(
@@ -522,6 +564,16 @@ impl Monitor {
         conn.flush();
     }
 
+    pub fn center_focused_window(&mut self, conn: &Connection, config: &Config) {
+        let avail_rect = self
+            .rect
+            .available_rect_after_adding_rects(self.docked.rect_iter());
+        if let Some(workspace) = self.workspaces.get_mut(self.focused_workspace_idx) {
+            workspace.center_focused_window(conn, config, &avail_rect);
+        }
+        conn.flush();
+    }
+
     /// destroy windows that still exist after more than 5 seconds since request for graceful deletion was issued
     pub fn check_deleted(&mut self, conn: &Connection) {
         if self.to_check_deleted.is_empty() {
@@ -628,6 +680,43 @@ impl Monitor {
             Some(workspace.id)
         } else {
             None
+        }
+    }
+
+    pub fn handle_destroy_notify(
+        &mut self,
+        window: xcb_window_t,
+        conn: &Connection,
+        config: &Config,
+    ) {
+        trace!("destroy notify for window: {}", window);
+        if let Some((index, _)) = self
+            .docked
+            .window_iter()
+            .enumerate()
+            .find(|(_, w)| **w == window)
+        {
+            self.docked.remove_at(index);
+            let avail_rect = self
+                .rect
+                .available_rect_after_adding_rects(self.docked.rect_iter());
+            self.workspaces.iter_mut().for_each(|workspace| {
+                workspace.reconfigure_windows_based_on_changed_available_rect(
+                    conn,
+                    config,
+                    &avail_rect,
+                );
+            });
+            return;
+        }
+        for workspace in &mut self.workspaces {
+            if let Some((index, window_type)) = workspace.find_window_info_by_xcb_id(window) {
+                let avail_rect = self
+                    .rect
+                    .available_rect_after_adding_rects(self.docked.rect_iter());
+                workspace.handle_destroy_notify(index, window_type, conn, config, &avail_rect);
+                break;
+            }
         }
     }
 }

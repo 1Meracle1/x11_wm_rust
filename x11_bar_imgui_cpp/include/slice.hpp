@@ -354,23 +354,6 @@ template <SliceValueTypeConcept ValueType> struct Slice
             swap(i, len() - i - 1);
     }
 
-    void unique()
-    {
-        if (len() < 2)
-            return *this;
-        size_type i = 1;
-        for (size_type j = 1; j < len(); j++)
-        {
-            if (m_ptr[j] != m_ptr[j - 1])
-            {
-                if (i != j)
-                    m_ptr[i] = m_ptr[j];
-                i += 1;
-            }
-        }
-        return slice_to(i);
-    }
-
     template <SliceElementEqualityPredicate<value_type> F> constexpr Slice unique(F predicate)
     {
         if (len() < 2)

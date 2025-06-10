@@ -1,16 +1,22 @@
 startup_commands = [
+  # "xrandr -s 5120x1440",
+  # "picom --config ~/.config/i3/picom.conf",
+
   "setxkbmap -layout us,ru,pl -option grp:alt_space_toggle",
   # "feh --bg-scale data/wallpapers/wallpaper.png",
   # "feh --bg-scale data/wallpapers/default10.jpg",
-  "feh --bg-scale data/wallpapers/default24.jpg",
+  # "feh --bg-scale /home/qamosu/.config/x11_wm_rust/wallpapers/default24.jpg",
   # "picom --config ~/.config/i3/picom.conf",
   "alacritty",
-  "target/debug/testbed_window floating X11_floating_window",
-  "target/debug/testbed_window floating X11_floating_window",
+  # "target/debug/testbed_window floating X11_floating_window",
+  # "target/debug/testbed_window floating X11_floating_window",
   # "target/debug/testbed_window docked bottom X11_docked_bottom_window",
   # "sleep 10 && x11_bar_imgui_cpp/build/x11_bar_imgui_cpp",
-  "x11_bar_imgui_cpp/build/x11_bar_imgui_cpp", #RobotoMonoNerdFont-Regular
+  "x11_bar_cpp", #RobotoMonoNerdFont-Regular
 ]
+
+wallpapers_command = "feh --bg-scale"
+wallpapers_path = "/home/qamosu/.config/x11_wm_rust/wallpapers/default24.jpg"
 
 keybindings = [
   "Alt+Left            focus_window left",
@@ -38,13 +44,13 @@ keybindings = [
   "Alt+T               exec cargo run -p testbed_window -- docked top X11_docked_top_window",
 
   "Alt+D               exec dmenu_run -i -fn 'NotoMonoRegular:bold:pixelsize=14'",
-  "Alt+Shift+D         exec dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'",
 
   # "Alt+Shift+C         exec xcolor",
+  "Alt+F               center_focused_window",
 
   "Alt+Q               kill_focused_window",
 
-  # "Alt+Shift+E         exec prompt_exit_window_manager",
+  "Alt+Ctrl+X          exec arcolinux-powermenu",
   # "Alt+Shift+Q         exit_window_manager",
 
   "Alt+1               switch_to_workspace 1",
@@ -85,4 +91,4 @@ border_color_active_str = "#82948c"
 
 switch_to_workspace_on_focused_window_moved = false
 
-override_to_floating = []
+override_to_floating = ["Xephyr"]

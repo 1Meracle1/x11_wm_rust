@@ -17,7 +17,7 @@ use crate::{config::Config, connection::Connection, window::WindowsCollection};
 #[derive(Debug)]
 pub struct Workspace {
     pub id: u32,
-    normal: WindowsCollection,
+    pub normal: WindowsCollection,
     floating: WindowsCollection,
     docked: WindowsCollection,
     focused_idx: usize,
@@ -899,14 +899,8 @@ impl Workspace {
     ) {
         let avail_rect = self.available_rectangle(monitor_rect, config);
         self.normal.rect_iter_mut().for_each(|rect| {
-            let y = rect
-                .y
-                .clamp(avail_rect.y, avail_rect.y + avail_rect.height as i32);
-            let height = rect
-                .height
-                .min((avail_rect.height as i32 - (avail_rect.y - y).abs()) as u32);
-            rect.y = y;
-            rect.height = height - config.border_size * 2;
+            rect.y = avail_rect.y;
+            rect.height = avail_rect.height - config.border_size * 2;
         });
         self.fix_existing_normal_windows(&avail_rect, conn, config);
     }
@@ -981,6 +975,76 @@ impl Workspace {
                         config.border_color_inactive_int.unwrap(),
                     )
                 });
+            }
+        }
+    }
+
+    pub fn center_focused_window(
+        &mut self,
+        conn: &Connection,
+        config: &Config,
+        monitor_rect: &Rect,
+    ) {
+        let avail_rect = self.available_rectangle(monitor_rect, config);
+        let focused_rect_maybe = match self.focused_type {
+            WindowType::Normal => self.normal.at_rect(self.focused_idx),
+            WindowType::Floating => self.floating.at_rect(self.focused_idx),
+            WindowType::Docked => None,
+        };
+        if let Some(focused_rect) = focused_rect_maybe {
+            let avail_center_x = avail_rect.x + (avail_rect.width as i32) / 2;
+            let focused_center_x = focused_rect.x + (focused_rect.width as i32) / 2;
+            let move_x = avail_center_x - focused_center_x;
+            self.normal.iter_mut().for_each(|(window, rect, _)| {
+                rect.x += move_x;
+                conn.window_configure(*window, rect, config.border_size)
+            });
+            self.floating.iter_mut().for_each(|(window, rect, _)| {
+                rect.x += move_x;
+                conn.window_configure(*window, rect, config.border_size)
+            });
+        }
+    }
+
+    pub fn find_window_info_by_xcb_id(&self, window: xcb_window_t) -> Option<(usize, WindowType)> {
+        if let Some((index, _)) = self
+            .normal
+            .window_iter()
+            .enumerate()
+            .find(|(_, w)| **w == window)
+        {
+            Some((index, WindowType::Normal))
+        } else if let Some((index, _)) = self
+            .floating
+            .window_iter()
+            .enumerate()
+            .find(|(_, w)| **w == window)
+        {
+            Some((index, WindowType::Floating))
+        } else {
+            None
+        }
+    }
+
+    pub fn handle_destroy_notify(
+        &mut self,
+        index: usize,
+        window_type: WindowType,
+        conn: &Connection,
+        config: &Config,
+        monitor_rect: &Rect,
+    ) {
+        match window_type {
+            WindowType::Normal => {
+                self.normal.remove_at(index);
+                let avail_rect = self.available_rectangle(monitor_rect, config);
+                self.fix_existing_normal_windows(&avail_rect, conn, config);
+            }
+            WindowType::Floating => {
+                self.floating.remove_at(index);
+            }
+            WindowType::Docked => {
+                self.docked.remove_at(index);
             }
         }
     }

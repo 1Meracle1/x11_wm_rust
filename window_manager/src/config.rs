@@ -2,6 +2,14 @@ use std::{fs, io, path::Path};
 
 use serde::Deserialize;
 
+#[allow(dead_code)]
+#[derive(Debug)]
+pub enum ConfigErrors {
+    FileNotFound(io::Error),
+    TomlParseError(toml::de::Error),
+    ValidationError(String),
+}
+
 #[derive(Deserialize, Debug)]
 pub struct Config {
     pub startup_commands: Vec<String>,
@@ -19,14 +27,8 @@ pub struct Config {
     pub border_color_active_int: Option<u32>,
     pub switch_to_workspace_on_focused_window_moved: bool,
     pub override_to_floating: Vec<String>,
-}
-
-#[allow(dead_code)]
-#[derive(Debug)]
-pub enum ConfigErrors {
-    FileNotFound(io::Error),
-    TomlParseError(toml::de::Error),
-    ValidationError(String),
+    pub wallpapers_command: Option<String>,
+    pub wallpapers_path: Option<String>,
 }
 
 impl Config {
@@ -120,17 +122,10 @@ impl Default for Config {
                 "Alt+Shift+K         window_size_change vertical    15",
             
                 "Alt+Enter           exec alacritty",
-                "Alt+D               exec cmake_debug_build/testbed_window -window-type=docked -docked-location=bottom",
-                "Alt+T               exec cmake_debug_build/testbed_window -window-type=docked -docked-location=top",
             
                 "Alt+D               exec dmenu_run -i 'NotoMonoRegular:bold:pixelsize=14'",
             
                 "Alt+Q               kill_focused_window",
-            
-                "Alt+Shift+R         restart_window_manager",
-            
-                "Alt+Shift+E         exec prompt_exit_window_manager",
-                "Alt+Shift+Q         exit_window_manager",
             
                 "Alt+1               switch_to_workspace 1",
                 "Alt+2               switch_to_workspace 2",
@@ -165,6 +160,8 @@ impl Default for Config {
             border_color_active_int: Self::try_color_from_str("#a38b43"),
             switch_to_workspace_on_focused_window_moved: false,
             override_to_floating: [""].iter().map(|e|e.to_string()).collect(),
+            wallpapers_command: None,
+            wallpapers_path: None,
         }
     }
 }

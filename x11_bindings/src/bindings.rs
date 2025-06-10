@@ -23608,18 +23608,18 @@ const _: () = {
     ["Offset of field: xcb_randr_set_screen_config_reply_t::pad0"]
         [::std::mem::offset_of!(xcb_randr_set_screen_config_reply_t, pad0) - 22usize];
 };
-pub const xcb_randr_notify_mask_t_XCB_RANDR_NOTIFY_MASK_SCREEN_CHANGE: xcb_randr_notify_mask_t = 1;
-pub const xcb_randr_notify_mask_t_XCB_RANDR_NOTIFY_MASK_CRTC_CHANGE: xcb_randr_notify_mask_t = 2;
-pub const xcb_randr_notify_mask_t_XCB_RANDR_NOTIFY_MASK_OUTPUT_CHANGE: xcb_randr_notify_mask_t = 4;
-pub const xcb_randr_notify_mask_t_XCB_RANDR_NOTIFY_MASK_OUTPUT_PROPERTY: xcb_randr_notify_mask_t =
+pub const XCB_RANDR_NOTIFY_MASK_SCREEN_CHANGE: xcb_randr_notify_mask_t = 1;
+pub const XCB_RANDR_NOTIFY_MASK_CRTC_CHANGE: xcb_randr_notify_mask_t = 2;
+pub const XCB_RANDR_NOTIFY_MASK_OUTPUT_CHANGE: xcb_randr_notify_mask_t = 4;
+pub const XCB_RANDR_NOTIFY_MASK_OUTPUT_PROPERTY: xcb_randr_notify_mask_t =
     8;
-pub const xcb_randr_notify_mask_t_XCB_RANDR_NOTIFY_MASK_PROVIDER_CHANGE: xcb_randr_notify_mask_t =
+pub const XCB_RANDR_NOTIFY_MASK_PROVIDER_CHANGE: xcb_randr_notify_mask_t =
     16;
-pub const xcb_randr_notify_mask_t_XCB_RANDR_NOTIFY_MASK_PROVIDER_PROPERTY: xcb_randr_notify_mask_t =
+pub const XCB_RANDR_NOTIFY_MASK_PROVIDER_PROPERTY: xcb_randr_notify_mask_t =
     32;
-pub const xcb_randr_notify_mask_t_XCB_RANDR_NOTIFY_MASK_RESOURCE_CHANGE: xcb_randr_notify_mask_t =
+pub const XCB_RANDR_NOTIFY_MASK_RESOURCE_CHANGE: xcb_randr_notify_mask_t =
     64;
-pub const xcb_randr_notify_mask_t_XCB_RANDR_NOTIFY_MASK_LEASE: xcb_randr_notify_mask_t = 128;
+pub const XCB_RANDR_NOTIFY_MASK_LEASE: xcb_randr_notify_mask_t = 128;
 pub type xcb_randr_notify_mask_t = ::std::os::raw::c_uint;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]

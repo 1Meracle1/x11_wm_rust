@@ -3,55 +3,7 @@ use std::{collections::HashMap, ffi::CString, mem::MaybeUninit, os::fd::RawFd};
 use base::Rect;
 
 use crate::bindings::{
-    XCB_ACCESS, XCB_ALLOC, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING, XCB_ATOM_WM_CLASS,
-    XCB_ATOM_WM_NORMAL_HINTS, XCB_BUTTON_PRESS, XCB_BUTTON_RELEASE, XCB_CLIENT_MESSAGE,
-    XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH, XCB_CONFIG_WINDOW_HEIGHT,
-    XCB_CONFIG_WINDOW_STACK_MODE, XCB_CONFIG_WINDOW_WIDTH, XCB_CONFIG_WINDOW_X,
-    XCB_CONFIG_WINDOW_Y, XCB_COORD_MODE_ORIGIN, XCB_COPY_FROM_PARENT, XCB_CURRENT_TIME, XCB_CURSOR,
-    XCB_CW_CURSOR, XCB_DRAWABLE, XCB_ENTER_NOTIFY, XCB_EVENT_MASK_BUTTON_PRESS,
-    XCB_EVENT_MASK_NO_EVENT, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_G_CONTEXT,
-    XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC, XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP,
-    XCB_IMAGE_FORMAT_Z_PIXMAP, XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION,
-    XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS, XCB_LEAVE_NOTIFY, XCB_LENGTH, XCB_MAP_REQUEST,
-    XCB_MATCH, XCB_MOD_MASK_ANY, XCB_MOTION_NOTIFY, XCB_NAME, XCB_NONE, XCB_PIXMAP,
-    XCB_PROP_MODE_REPLACE, XCB_SHAPE_SK_BOUNDING, XCB_SHAPE_SO_SET, XCB_STACK_MODE_ABOVE,
-    XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT, XCB_XKB_EVENT_TYPE_CONTROLS_NOTIFY,
-    XCB_XKB_EVENT_TYPE_NAMES_NOTIFY, XCB_XKB_EVENT_TYPE_STATE_NOTIFY, XCB_XKB_STATE_NOTIFY,
-    XCloseDisplay, XDefaultRootWindow, XDefineCursor, XDisplay, XFree, XGetAtomName,
-    XGetXCBConnection, XKB_CONTEXT_NO_FLAGS, XKB_KEYMAP_COMPILE_NO_FLAGS,
-    XKB_KEYMAP_FORMAT_TEXT_V1, XKB_X11_MIN_MAJOR_XKB_VERSION, XKB_X11_MIN_MINOR_XKB_VERSION,
-    XKB_X11_SETUP_XKB_EXTENSION_NO_FLAGS, XOpenDisplay, XcursorFilenameLoadCursor,
-    XkbAllControlsMaskConst, XkbAllocKeyboard, XkbFreeKeyboard, XkbGetControls, XkbGetNames,
-    XkbGroupNamesMask, XkbSymbolsNameMask, xcb_allow_events, xcb_allow_t, xcb_arc_t, xcb_atom_t,
-    xcb_button_press_event_t, xcb_button_release_event_t, xcb_button_t, xcb_change_gc,
-    xcb_change_property, xcb_change_window_attributes, xcb_change_window_attributes_checked,
-    xcb_client_message_data_t, xcb_client_message_event_t, xcb_configure_window,
-    xcb_configure_window_checked, xcb_connection_has_error, xcb_connection_t, xcb_create_cursor,
-    xcb_create_cursor_checked, xcb_create_gc, xcb_create_gc_checked, xcb_create_pixmap,
-    xcb_create_pixmap_checked, xcb_create_window, xcb_cursor_context_free, xcb_cursor_context_new,
-    xcb_cursor_context_t, xcb_cursor_load_cursor, xcb_cursor_t, xcb_cw_t, xcb_destroy_window,
-    xcb_disconnect, xcb_enter_notify_event_t, xcb_event_mask_t, xcb_ewmh_connection_t,
-    xcb_ewmh_get_atoms_reply_t, xcb_ewmh_get_atoms_reply_wipe, xcb_ewmh_get_cardinal_reply,
-    xcb_ewmh_get_wm_desktop, xcb_ewmh_get_wm_strut_partial, xcb_ewmh_get_wm_strut_partial_reply,
-    xcb_ewmh_get_wm_window_type, xcb_ewmh_get_wm_window_type_reply, xcb_ewmh_init_atoms,
-    xcb_ewmh_init_atoms_replies, xcb_ewmh_set_supported_checked, xcb_ewmh_wm_strut_partial_t,
-    xcb_flush, xcb_focus_in_event_t, xcb_focus_out_event_t, xcb_free_gc, xcb_free_pixmap, xcb_gc_t,
-    xcb_gcontext_t, xcb_generate_id, xcb_generic_error_t, xcb_generic_event_t,
-    xcb_get_file_descriptor, xcb_get_property, xcb_get_property_reply, xcb_get_property_value,
-    xcb_get_property_value_length, xcb_get_setup, xcb_get_window_attributes,
-    xcb_get_window_attributes_reply, xcb_grab_button, xcb_grab_key, xcb_grab_pointer,
-    xcb_grab_pointer_reply, xcb_icccm_set_wm_normal_hints, xcb_image_create,
-    xcb_image_create_native, xcb_image_destroy, xcb_image_put, xcb_intern_atom,
-    xcb_intern_atom_cookie_t, xcb_intern_atom_reply, xcb_key_press_event_t, xcb_keycode_t,
-    xcb_leave_notify_event_t, xcb_map_request_event_t, xcb_map_window, xcb_mod_mask_t,
-    xcb_motion_notify_event_t, xcb_notify_mode_t, xcb_pixmap_t, xcb_point_t, xcb_poll_for_event,
-    xcb_poly_fill_arc, xcb_poly_fill_rectangle, xcb_poly_point, xcb_put_image, xcb_rectangle_t,
-    xcb_request_check, xcb_screen_t, xcb_send_event, xcb_set_input_focus, xcb_setup_roots_iterator,
-    xcb_shape_mask, xcb_size_hints_t, xcb_ungrab_key, xcb_ungrab_pointer, xcb_unmap_window,
-    xcb_wait_for_event, xcb_window_t, xcb_xkb_select_events, xcb_xkb_state_notify_event_t,
-    xkb_context, xkb_context_new, xkb_keymap, xkb_keymap_get_as_string, xkb_state,
-    xkb_state_update_mask, xkb_x11_get_core_keyboard_device_id, xkb_x11_keymap_new_from_device,
-    xkb_x11_setup_xkb_extension, xkb_x11_state_new_from_device,
+    xcb_allow_events, xcb_allow_t, xcb_arc_t, xcb_atom_t, xcb_button_press_event_t, xcb_button_release_event_t, xcb_button_t, xcb_change_gc, xcb_change_property, xcb_change_window_attributes, xcb_change_window_attributes_checked, xcb_client_message_data_t, xcb_client_message_event_t, xcb_configure_window, xcb_configure_window_checked, xcb_connection_has_error, xcb_connection_t, xcb_create_cursor, xcb_create_cursor_checked, xcb_create_gc, xcb_create_gc_checked, xcb_create_pixmap, xcb_create_pixmap_checked, xcb_create_window, xcb_cursor_context_free, xcb_cursor_context_new, xcb_cursor_context_t, xcb_cursor_load_cursor, xcb_cursor_t, xcb_cw_t, xcb_destroy_notify_event_t, xcb_destroy_window, xcb_disconnect, xcb_enter_notify_event_t, xcb_event_mask_t, xcb_ewmh_connection_t, xcb_ewmh_get_atoms_reply_t, xcb_ewmh_get_atoms_reply_wipe, xcb_ewmh_get_cardinal_reply, xcb_ewmh_get_wm_desktop, xcb_ewmh_get_wm_strut_partial, xcb_ewmh_get_wm_strut_partial_reply, xcb_ewmh_get_wm_window_type, xcb_ewmh_get_wm_window_type_reply, xcb_ewmh_init_atoms, xcb_ewmh_init_atoms_replies, xcb_ewmh_set_supported_checked, xcb_ewmh_wm_strut_partial_t, xcb_flush, xcb_focus_in_event_t, xcb_focus_out_event_t, xcb_free_gc, xcb_free_pixmap, xcb_gc_t, xcb_gcontext_t, xcb_generate_id, xcb_generic_error_t, xcb_generic_event_t, xcb_get_file_descriptor, xcb_get_property, xcb_get_property_reply, xcb_get_property_value, xcb_get_property_value_length, xcb_get_setup, xcb_get_window_attributes, xcb_get_window_attributes_reply, xcb_grab_button, xcb_grab_key, xcb_grab_pointer, xcb_grab_pointer_reply, xcb_icccm_set_wm_normal_hints, xcb_image_create, xcb_image_create_native, xcb_image_destroy, xcb_image_put, xcb_intern_atom, xcb_intern_atom_cookie_t, xcb_intern_atom_reply, xcb_key_press_event_t, xcb_keycode_t, xcb_leave_notify_event_t, xcb_map_request_event_t, xcb_map_window, xcb_mod_mask_t, xcb_motion_notify_event_t, xcb_notify_mode_t, xcb_pixmap_t, xcb_point_t, xcb_poll_for_event, xcb_poly_fill_arc, xcb_poly_fill_rectangle, xcb_poly_point, xcb_put_image, xcb_query_extension, xcb_query_extension_reply, xcb_randr_notify_event_t, xcb_randr_screen_change_notify_event_t, xcb_randr_select_input_checked, xcb_rectangle_t, xcb_request_check, xcb_screen_t, xcb_send_event, xcb_set_input_focus, xcb_setup_roots_iterator, xcb_shape_mask, xcb_size_hints_t, xcb_ungrab_key, xcb_ungrab_pointer, xcb_unmap_notify_event_t, xcb_unmap_window, xcb_wait_for_event, xcb_window_t, xcb_xkb_select_events, xcb_xkb_state_notify_event_t, xkb_context, xkb_context_new, xkb_keymap, xkb_keymap_get_as_string, xkb_state, xkb_state_update_mask, xkb_x11_get_core_keyboard_device_id, xkb_x11_keymap_new_from_device, xkb_x11_setup_xkb_extension, xkb_x11_state_new_from_device, XCloseDisplay, XDefaultRootWindow, XDefineCursor, XDisplay, XFree, XGetAtomName, XGetXCBConnection, XOpenDisplay, XcursorFilenameLoadCursor, XkbAllControlsMaskConst, XkbAllocKeyboard, XkbFreeKeyboard, XkbGetControls, XkbGetNames, XkbGroupNamesMask, XkbSymbolsNameMask, XCB_ACCESS, XCB_ALLOC, XCB_ATOM, XCB_ATOM_ATOM, XCB_ATOM_STRING, XCB_ATOM_WM_CLASS, XCB_ATOM_WM_NORMAL_HINTS, XCB_BUTTON_PRESS, XCB_BUTTON_RELEASE, XCB_CLIENT_MESSAGE, XCB_COLORMAP, XCB_CONFIG_WINDOW_BORDER_WIDTH, XCB_CONFIG_WINDOW_HEIGHT, XCB_CONFIG_WINDOW_STACK_MODE, XCB_CONFIG_WINDOW_WIDTH, XCB_CONFIG_WINDOW_X, XCB_CONFIG_WINDOW_Y, XCB_COORD_MODE_ORIGIN, XCB_COPY_FROM_PARENT, XCB_CURRENT_TIME, XCB_CURSOR, XCB_CW_CURSOR, XCB_DESTROY_NOTIFY, XCB_DRAWABLE, XCB_ENTER_NOTIFY, XCB_EVENT_MASK_BUTTON_PRESS, XCB_EVENT_MASK_NO_EVENT, XCB_FOCUS_IN, XCB_FOCUS_OUT, XCB_FONT, XCB_GET_PROPERTY_TYPE_ANY, XCB_GRAB_MODE_ASYNC, XCB_G_CONTEXT, XCB_ID_CHOICE, XCB_IMAGE_FORMAT_XY_PIXMAP, XCB_IMAGE_FORMAT_Z_PIXMAP, XCB_IMAGE_ORDER_LSB_FIRST, XCB_IMPLEMENTATION, XCB_INPUT_FOCUS_POINTER_ROOT, XCB_KEY_PRESS, XCB_LEAVE_NOTIFY, XCB_LENGTH, XCB_MAP_REQUEST, XCB_MATCH, XCB_MOD_MASK_ANY, XCB_MOTION_NOTIFY, XCB_NAME, XCB_NONE, XCB_PIXMAP, XCB_PROP_MODE_REPLACE, XCB_RANDR_NOTIFY, XCB_RANDR_NOTIFY_MASK_SCREEN_CHANGE, XCB_RANDR_SCREEN_CHANGE_NOTIFY, XCB_SHAPE_SK_BOUNDING, XCB_SHAPE_SO_SET, XCB_STACK_MODE_ABOVE, XCB_UNMAP_NOTIFY, XCB_WINDOW, XCB_WINDOW_CLASS_INPUT_OUTPUT, XCB_XKB_EVENT_TYPE_CONTROLS_NOTIFY, XCB_XKB_EVENT_TYPE_NAMES_NOTIFY, XCB_XKB_EVENT_TYPE_STATE_NOTIFY, XCB_XKB_STATE_NOTIFY, XKB_CONTEXT_NO_FLAGS, XKB_KEYMAP_COMPILE_NO_FLAGS, XKB_KEYMAP_FORMAT_TEXT_V1, XKB_X11_MIN_MAJOR_XKB_VERSION, XKB_X11_MIN_MINOR_XKB_VERSION, XKB_X11_SETUP_XKB_EXTENSION_NO_FLAGS
 };
 
 #[derive(Debug)]
@@ -62,6 +14,7 @@ pub enum ConnectionError {
     UnableToSetSupportedEwmhAtoms,
     UnableToChangeWindowAttrs((xcb_window_t, String)),
     UnableToGrabPointer((xcb_window_t, String)),
+    UnableToQueryRandrExtension(String),
 }
 
 impl std::fmt::Display for ConnectionError {
@@ -85,6 +38,9 @@ impl std::fmt::Display for ConnectionError {
                 "Unable to grab pointer for window {}, error {}",
                 window, err
             ),
+            ConnectionError::UnableToQueryRandrExtension(err) => {
+                write!(f, "Unable to query randr extension, error {}", err)
+            }
         }
     }
 }
@@ -95,6 +51,7 @@ pub struct Connection {
     conn: *mut xcb_connection_t,
     screen: *mut xcb_screen_t,
     ewmh: *mut xcb_ewmh_connection_t,
+    randr_event_base: u8,
     xkb_event_base: u8,
     xkb_device_id: i32,
     xkb_context: *mut xkb_context,
@@ -164,6 +121,45 @@ impl Connection {
             return Err(ConnectionError::UnableToSetSupportedEwmhAtoms);
         }
 
+        let randr_ext_name = "RANDR";
+        let randr_reply = unsafe {
+            xcb_query_extension_reply(
+                conn,
+                xcb_query_extension(
+                    conn,
+                    randr_ext_name.len() as u16,
+                    randr_ext_name.as_ptr() as *const i8,
+                ),
+                std::ptr::null_mut(),
+            )
+        };
+        if randr_reply.is_null() {
+            return Err(ConnectionError::UnableToQueryRandrExtension(
+                "returned null".to_owned(),
+            ));
+        }
+        if unsafe { *randr_reply }.present == 0 {
+            return Err(ConnectionError::UnableToQueryRandrExtension(
+                "returned 'present == 0'".to_owned(),
+            ));
+        }
+        let randr_event_base = unsafe { *randr_reply }.first_event;
+
+        let randr_select_cookie = unsafe {
+            xcb_randr_select_input_checked(
+                conn,
+                (*screen).root,
+                XCB_RANDR_NOTIFY_MASK_SCREEN_CHANGE as u16,
+            )
+        };
+        let randr_select_error = unsafe { xcb_request_check(conn, randr_select_cookie) };
+        if !randr_select_error.is_null() {
+            return Err(ConnectionError::UnableToQueryRandrExtension(format!(
+                "{:?}",
+                randr_select_error
+            )));
+        }
+
         let mut xkb_event_base: u8 = 0;
         unsafe {
             xkb_x11_setup_xkb_extension(
@@ -214,6 +210,7 @@ impl Connection {
             xkb_context,
             xkb_keymap,
             xkb_state,
+            randr_event_base,
         })
     }
 }
@@ -1468,6 +1465,16 @@ pub enum XcbEvents {
     XkbStateNotify {
         event: *mut xcb_xkb_state_notify_event_t,
     },
+    RandrScreenChange {
+        width: u16,
+        height: u16,
+    },
+    DestroyNotify {
+        window: xcb_window_t,
+    },
+    UnmapNotify {
+        window: xcb_window_t,
+    }
 }
 
 impl Connection {
@@ -1492,7 +1499,19 @@ impl Connection {
         if generic_event.is_null() {
             return None;
         }
-        if unsafe { *generic_event }.response_type == self.xkb_event_base {
+        let response_type = unsafe { *generic_event }.response_type;
+        if response_type == self.randr_event_base + XCB_RANDR_SCREEN_CHANGE_NOTIFY as u8 {
+            let randr_event = generic_event as *mut xcb_randr_notify_event_t;
+            if unsafe { *randr_event }.subCode == XCB_RANDR_NOTIFY as u8 {
+                let event = randr_event as *mut xcb_randr_screen_change_notify_event_t;
+                return Some(Ok(XcbEvents::RandrScreenChange {
+                    width: unsafe { *event }.width,
+                    height: unsafe { *event }.height,
+                }));
+            }
+        }
+
+        if response_type == self.xkb_event_base {
             let xkb_event = generic_event as *mut xcb_xkb_state_notify_event_t;
             let xkb_type = unsafe { *xkb_event }.xkbType as u32;
             return match xkb_type {
@@ -1500,7 +1519,12 @@ impl Connection {
                 _ => None,
             };
         }
-        let event_type = unsafe { *generic_event }.response_type & !0x80;
+
+        let event_type = response_type & !0x80;
+        // println!(
+        //     "response_type: {}, event_type: {}, randr_event_base: {}, XCB_RANDR_NOTIFY: {}",
+        //     response_type, event_type, self.randr_event_base, XCB_RANDR_NOTIFY
+        // );
         match event_type as u32 {
             0 => {
                 let error = generic_event as *mut xcb_generic_error_t;
@@ -1569,6 +1593,18 @@ impl Connection {
                 let event = generic_event as *mut xcb_leave_notify_event_t;
                 Some(Ok(XcbEvents::LeaveNotify {
                     window: unsafe { *event }.event,
+                }))
+            }
+            XCB_DESTROY_NOTIFY => {
+                let event = generic_event as *mut xcb_destroy_notify_event_t;
+                Some(Ok(XcbEvents::DestroyNotify {
+                    window: unsafe { *event }.window,
+                }))
+            }
+            XCB_UNMAP_NOTIFY => {
+                let event = generic_event as *mut xcb_unmap_notify_event_t;
+                Some(Ok(XcbEvents::UnmapNotify {
+                    window: unsafe { *event }.window,
                 }))
             }
             _ => None,

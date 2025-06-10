@@ -1,9 +1,6 @@
 use std::{
     io::Write,
-    os::{
-        fd::AsRawFd,
-        unix::net::{UnixListener},
-    },
+    os::{fd::AsRawFd, unix::net::UnixListener},
     path::Path,
 };
 
@@ -12,13 +9,13 @@ use env_logger::Env;
 use keybindings::{
     execute_command_from_str, handle_key_press, keybindings_from_config, keybindings_grab,
 };
-use log::{error, info, trace, warn};
+use log::{error, trace, warn};
 use monitor::Monitor;
 use x11_bindings::{
     bindings::{
         XCB_CW_EVENT_MASK, XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY, XCB_EVENT_MASK_SUBSTRUCTURE_REDIRECT,
     },
-    connection::{self, Connection, MouseButton},
+    connection::{self, Connection},
     epoll::Epoll,
     inotify::Inotify,
 };
@@ -41,20 +38,53 @@ fn main() {
         .write_style_or("MY_LOG_STYLE", "always");
     env_logger::init_from_env(env);
 
-    let pid = std::process::id();
-    info!("PID: {}", pid);
+    let home_dir = std::env::var("HOME").unwrap();
 
-    let mut config = Config::new("config.toml")
+    let pid = std::process::id();
+    trace!("PID: {}", pid);
+
+    let mut config_filepath = "config.toml".to_owned();
+    let mut config = Config::new(config_filepath.as_str())
+        .or_else(|_| {
+            config_filepath = format!("{}/.config/x11_wm_rust/config.toml", home_dir);
+            Config::new(config_filepath.as_str())
+        })
         .or_else(|err| {
+            config_filepath = "".to_owned();
             error!("Failed init config from file, error: {:?}", err);
             warn!("Initializing config from default values.");
             Ok::<Config, ConfigErrors>(Config::default())
         })
         .unwrap();
     let mut inotify = Inotify::new().expect("failed to create inotify instance");
-    inotify
-        .add_watch("config.toml")
-        .expect("failed to add config file to watch list");
+    if !config_filepath.is_empty() {
+        inotify
+            .add_watch(config_filepath.as_str())
+            .expect("failed to add config file to watch list");
+    }
+
+    for cmd_str in &config.startup_commands {
+        if cmd_str.contains(" && ") {
+            let parts = cmd_str.split(" && ").collect::<Vec<_>>();
+            parts
+                .iter()
+                .take(parts.len() - 1)
+                .for_each(|cmd_str| execute_command_from_str_wait(cmd_str));
+            execute_command_from_str(parts.last().unwrap());
+        } else {
+            execute_command_from_str(cmd_str);
+        }
+    }
+    if config.wallpapers_command.is_some() && config.wallpapers_path.is_some() {
+        execute_command_from_str_wait(
+            format!(
+                "{} {}",
+                config.wallpapers_command.as_ref().unwrap(),
+                config.wallpapers_path.as_ref().unwrap()
+            )
+            .as_str(),
+        );
+    }
 
     let conn = Connection::new().unwrap();
     let x11_conn_fd = conn.get_file_descriptor();
@@ -79,26 +109,14 @@ fn main() {
     }
 
     let mut monitor = Monitor::new(&conn);
-
-    for cmd_str in &config.startup_commands {
-        if cmd_str.contains(" && ") {
-            let parts = cmd_str.split(" && ").collect::<Vec<_>>();
-            parts
-                .iter()
-                .take(parts.len() - 1)
-                .for_each(|cmd_str| execute_command_from_str_wait(cmd_str));
-            execute_command_from_str(parts.last().unwrap());
-        } else {
-            execute_command_from_str(cmd_str);
-        }
-    }
+    trace!("monitor dimensions: {:?}", monitor.rect);
 
     let mut keybindings = keybindings_from_config(&config);
     keybindings_grab(&keybindings, &conn);
     // trace!("keybindings: {:#?}", keybindings);
 
     conn.change_cursor("left_ptr");
-    conn.grab_button(MouseButton::Left);
+    // conn.grab_button(MouseButton::Left);
     conn.flush();
 
     const SERVER_SOCKET_PATH_STR: &str = "/tmp/x11_wm_rust.socket";
@@ -113,7 +131,7 @@ fn main() {
         .expect("failed to add unix listener to epoll watch list");
     let mut unix_clients = UnixClients::new();
 
-    let mut keyboard_layout_name_current = "en".to_string();
+    let mut keyboard_layout_name_current = "".to_string();
     loop {
         let events = epoll
             .wait()
@@ -177,10 +195,32 @@ fn main() {
                                     keyboard_layout_names.get(group_idx)
                                 {
                                     keyboard_layout_name_current = keyboard_layout_name.clone();
-                                    unix_clients.notify_all(Message::KeyboardLayout(
-                                        keyboard_layout_name,
-                                    ));
+                                    unix_clients
+                                        .notify_all(Message::KeyboardLayout(keyboard_layout_name));
                                 }
+                            }
+                            connection::XcbEvents::RandrScreenChange { width, height } => {
+                                trace!("RandrScreenChange: width: {}, heigth: {}", width, height);
+                                monitor.update_with_new_dimensions(width, height, &conn, &config);
+
+                                if config.wallpapers_command.is_some()
+                                    && config.wallpapers_path.is_some()
+                                {
+                                    execute_command_from_str_wait(
+                                        format!(
+                                            "{} {}",
+                                            config.wallpapers_command.as_ref().unwrap(),
+                                            config.wallpapers_path.as_ref().unwrap()
+                                        )
+                                        .as_str(),
+                                    );
+                                }
+                            }
+                            connection::XcbEvents::DestroyNotify { window } => {
+                                monitor.handle_destroy_notify(window, &conn, &config);
+                            }
+                            connection::XcbEvents::UnmapNotify { window } => {
+                                trace!("unmap notify for window: {}", window);
                             }
                         },
                         Err(error) => warn!("Error event: {:?}", error),
@@ -193,7 +233,7 @@ fn main() {
                     Ok(event) => match event {
                         x11_bindings::inotify::InotifyEvent::Modify => {
                             trace!("config file was updated, reloading...");
-                            match Config::new("config.toml") {
+                            match Config::new(config_filepath.as_str()) {
                                 Ok(new_config) => {
                                     trace!("updated config parsed successfully: {:#?}", new_config);
 
@@ -265,18 +305,20 @@ fn main() {
                         trace!("message from unix stream client: {:?}", message);
                         match message {
                             Message::RequestClientInit => {
-                                let message =
-                                    Message::KeyboardLayout(&keyboard_layout_name_current);
-                                if let Err(err) = client_stream.write_all(&message.as_bytes()) {
-                                    warn!(
-                                        "failed to write keyboard layout name to client on RequestClientInit: {}",
-                                        err
+                                if !keyboard_layout_name_current.is_empty() {
+                                    let message =
+                                        Message::KeyboardLayout(&keyboard_layout_name_current);
+                                    if let Err(err) = client_stream.write_all(&message.as_bytes()) {
+                                        warn!(
+                                            "failed to write keyboard layout name to client on RequestClientInit: {}",
+                                            err
+                                        );
+                                    }
+                                    trace!(
+                                        "keyboard layout name sent to unix stream client: {:?}",
+                                        message
                                     );
                                 }
-                                trace!(
-                                    "keyboard layout name sent to unix stream client: {:?}",
-                                    message
-                                );
 
                                 let workspaces_ids = monitor
                                     .workspaces

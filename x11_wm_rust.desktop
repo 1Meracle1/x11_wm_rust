@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=x11_wm_rust
+Comment=A lightweight X11 window manager written in Rust
+Exec=/usr/local/bin/x11_wm_rust_session
+Type=XSession

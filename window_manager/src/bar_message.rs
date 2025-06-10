@@ -1,9 +1,9 @@
 use std::{
     io::{Read, Write},
-    os::{fd::{AsRawFd, RawFd}, unix::net::UnixStream},
+    os::{fd::AsRawFd, unix::net::UnixStream},
 };
 
-use log::{trace, warn};
+use log::warn;
 
 const MESSAGE_KEYBOARD_LAYOUT_TAG: u8 = 0;
 const MESSAGE_WORKSPACE_LIST_TAG: u8 = 1;
@@ -125,7 +125,7 @@ impl UnixClients {
                     message, err
                 );
             }
-            trace!("message sent to unix stream client: {:?}", message);
+            // trace!("message sent to unix stream client: {:?}", message);
         }
     }
 
