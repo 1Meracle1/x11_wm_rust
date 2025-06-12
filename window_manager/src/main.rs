@@ -1,6 +1,9 @@
 use std::{
     io::Write,
-    os::{fd::AsRawFd, unix::net::UnixListener},
+    os::{
+        fd::{AsRawFd, RawFd},
+        unix::net::UnixListener,
+    },
     path::Path,
 };
 
@@ -108,16 +111,7 @@ fn main() {
     let mut unix_clients = UnixClients::new();
 
     for cmd_str in &config.startup_commands {
-        if cmd_str.contains(" && ") {
-            let parts = cmd_str.split(" && ").collect::<Vec<_>>();
-            parts
-                .iter()
-                .take(parts.len() - 1)
-                .for_each(|cmd_str| execute_command_from_str_wait(cmd_str));
-            execute_command_from_str(parts.last().unwrap());
-        } else {
-            execute_command_from_str(cmd_str);
-        }
+        execute_command_from_str(cmd_str);
     }
     if config.wallpapers_command.is_some() && config.wallpapers_path.is_some() {
         execute_command_from_str_wait(
@@ -256,18 +250,7 @@ fn main() {
                                                 },
                                             );
                                             for cmd_str in diff {
-                                                if cmd_str.contains(" && ") {
-                                                    let parts =
-                                                        cmd_str.split(" && ").collect::<Vec<_>>();
-                                                    parts.iter().take(parts.len() - 1).for_each(
-                                                        |cmd_str| {
-                                                            execute_command_from_str_wait(cmd_str)
-                                                        },
-                                                    );
-                                                    execute_command_from_str(parts.last().unwrap());
-                                                } else {
-                                                    execute_command_from_str(cmd_str);
-                                                }
+                                                execute_command_from_str(cmd_str);
                                             }
                                         }
 
@@ -341,7 +324,7 @@ fn main() {
                     Err(err) => warn!("unix listener failed to accept connection: {}", err),
                 }
             } else {
-                if let Some(client_stream) = unix_clients.find_client_by_fd(event.u64) {
+                if let Some(client_stream) = unix_clients.find_client_by_fd(event.u64 as RawFd) {
                     if let Some(message) = Message::read_from_unix_stream(client_stream) {
                         trace!("message from unix stream client: {:?}", message);
                         match message {
@@ -390,6 +373,19 @@ fn main() {
                                         message
                                     );
                                 }
+                            }
+                            Message::Eof => {
+                                let fd = client_stream.as_raw_fd();
+                                if let Err(err) = epoll.remove_watch(fd) {
+                                    warn!(
+                                        "failed to remove fd {} from epoll's watch list, err: {}",
+                                        fd, err
+                                    );
+                                }
+                                if let Err(err) = client_stream.shutdown(std::net::Shutdown::Both) {
+                                    warn!("failed to shutdown client stream: {}", err);
+                                }
+                                unix_clients.remove_client(fd);
                             }
                             _ => {}
                         }

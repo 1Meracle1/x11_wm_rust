@@ -14,7 +14,7 @@ impl Epoll {
             return Err(Error::last_os_error());
         }
         let mut events = Vec::with_capacity(events_capacity);
-        events.resize(events_capacity, libc::epoll_event{ events: 0, u64: 0 });
+        events.resize(events_capacity, libc::epoll_event { events: 0, u64: 0 });
 
         Ok(Self {
             epoll_fd,
@@ -40,10 +40,32 @@ impl Epoll {
         Ok(())
     }
 
+    pub fn remove_watch(&mut self, client_fd: RawFd) -> Result<(), std::io::Error> {
+        assert!(!self.is_closed());
+        let ctl_res = unsafe {
+            libc::epoll_ctl(
+                self.epoll_fd,
+                libc::EPOLL_CTL_DEL,
+                client_fd,
+                std::ptr::null_mut(),
+            )
+        };
+        if ctl_res == -1 {
+            let error = Error::last_os_error();
+            self.close();
+            return Err(error);
+        }
+
+        Ok(())
+    }
+
     pub fn wait(&mut self) -> Result<&Vec<libc::epoll_event>, std::io::Error> {
         assert!(!self.is_closed());
         self.events.clear();
-        self.events.resize(self.events_capacity, libc::epoll_event{ events: 0, u64: 0 });
+        self.events.resize(
+            self.events_capacity,
+            libc::epoll_event { events: 0, u64: 0 },
+        );
         let num_events = unsafe {
             libc::epoll_wait(
                 self.epoll_fd,
@@ -57,7 +79,8 @@ impl Epoll {
             self.close();
             return Err(error);
         }
-        self.events.resize(num_events as usize, libc::epoll_event{ events: 0, u64: 0 });
+        self.events
+            .resize(num_events as usize, libc::epoll_event { events: 0, u64: 0 });
         Ok(&self.events)
     }
 

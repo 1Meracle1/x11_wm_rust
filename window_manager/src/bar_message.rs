@@ -1,6 +1,9 @@
 use std::{
     io::{Read, Write},
-    os::{fd::AsRawFd, unix::net::UnixStream},
+    os::{
+        fd::{AsRawFd, RawFd},
+        unix::net::UnixStream,
+    },
 };
 
 use log::warn;
@@ -16,6 +19,7 @@ pub enum Message<'a> {
     WorkspaceList(Vec<u32>),
     WorkspaceActive(u32),
     RequestClientInit,
+    Eof,
 }
 
 impl<'a> Message<'a> {
@@ -45,6 +49,7 @@ impl<'a> Message<'a> {
             Message::RequestClientInit => {
                 bytes.push(MESSAGE_REQUEST_CLIENT_INIT_TAG);
             }
+            Message::Eof => unreachable!(),
         };
 
         // write actual size value in the first 8 bytes
@@ -90,6 +95,8 @@ impl<'a> Message<'a> {
                         );
                         None
                     }
+                } else if n_size_bytes == 0 {
+                    Some(Message::Eof)
                 } else {
                     warn!(
                         "received message size in bytes that != size_of::<usize>(): {}",
@@ -118,24 +125,48 @@ impl UnixClients {
     }
 
     pub fn notify_all(&mut self, message: Message) {
+        let mut to_remove: Vec<RawFd> = Vec::new();
         for client_stream in self.unix_clients.iter_mut() {
             if let Err(err) = client_stream.write_all(&message.as_bytes()) {
                 warn!(
                     "failed to write message {:?} to client, err: {}",
                     message, err
                 );
+                to_remove.push(client_stream.as_raw_fd());
             }
             // trace!("message sent to unix stream client: {:?}", message);
         }
+        for &fd in &to_remove {
+            if let Some((index, _)) = self
+                .unix_clients
+                .iter()
+                .enumerate()
+                .find(|&(_, client)| client.as_raw_fd() == fd)
+            {
+                self.unix_clients.remove(index);
+            }
+        }
+        to_remove.clear();
     }
 
     pub fn add_client(&mut self, unix_stream: UnixStream) {
         self.unix_clients.push(unix_stream);
     }
 
-    pub fn find_client_by_fd(&mut self, fd: u64) -> Option<&mut UnixStream> {
+    pub fn find_client_by_fd(&mut self, fd: RawFd) -> Option<&mut UnixStream> {
         self.unix_clients
             .iter_mut()
-            .find(|stream| stream.as_raw_fd() as u64 == fd)
+            .find(|stream| stream.as_raw_fd() == fd)
+    }
+
+    pub fn remove_client(&mut self, fd: RawFd) {
+        if let Some((index, _)) = self
+            .unix_clients
+            .iter()
+            .enumerate()
+            .find(|&(_, client)| client.as_raw_fd() == fd)
+        {
+            self.unix_clients.remove(index);
+        }
     }
 }

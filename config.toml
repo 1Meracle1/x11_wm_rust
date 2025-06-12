@@ -46,6 +46,8 @@ keybindings = [
 
   "Alt+Ctrl+Page_Down  exec flameshot gui",
 
+  "Alt+R               exec pkill x11_bar_cpp && x11_bar_cpp",
+
   # "Alt+Shift+C         exec xcolor",
   "Alt+F               center_focused_window",
 

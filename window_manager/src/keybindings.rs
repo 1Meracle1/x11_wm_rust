@@ -426,21 +426,30 @@ pub struct Keybinding {
 }
 
 pub fn execute_command_from_str(cmd_str: &str) {
-    let mut parts = cmd_str.split_whitespace();
-    if let Some(program_name) = parts.next() {
-        let args = parts.collect::<Vec<_>>();
-        match Command::new(program_name).args(args).spawn() {
-            Ok(_) => trace!("Executed command successfully: {}", cmd_str),
-            Err(err) => error!(
-                "Failed to run command with error: {}, command: {}",
-                err, cmd_str
-            ),
-        }
+    if cmd_str.contains(" && ") {
+        let parts = cmd_str.split(" && ").collect::<Vec<_>>();
+        parts
+            .iter()
+            .take(parts.len() - 1)
+            .for_each(|cmd_str| execute_command_from_str_wait(cmd_str));
+        execute_command_from_str(parts.last().unwrap());
     } else {
-        error!(
-            "Failed to run command as it doesn't contain program name, command: {}",
-            cmd_str
-        );
+        let mut parts = cmd_str.split_whitespace();
+        if let Some(program_name) = parts.next() {
+            let args = parts.collect::<Vec<_>>();
+            match Command::new(program_name).args(args).spawn() {
+                Ok(_) => trace!("Executed command successfully: {}", cmd_str),
+                Err(err) => error!(
+                    "Failed to run command with error: {}, command: {}",
+                    err, cmd_str
+                ),
+            }
+        } else {
+            error!(
+                "Failed to run command as it doesn't contain program name, command: {}",
+                cmd_str
+            );
+        }
     }
 }
 
