@@ -1,0 +1,1 @@
+Compiling and running via: `cargo run --bin testbed_window -- floating "X11 floating window"`

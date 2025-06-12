@@ -1,183 +1,95 @@
 startup_commands = [
+  # "xrandr -s 5120x1440",
+  # "picom --config ~/.config/i3/picom.conf",
+
   "setxkbmap -layout us,ru,pl -option grp:alt_space_toggle",
+  # "feh --bg-scale data/wallpapers/wallpaper.png",
+  # "feh --bg-scale data/wallpapers/default10.jpg",
+  # "feh --bg-scale /home/qamosu/.config/x11_wm_rust/wallpapers/default24.jpg",
+  # "picom --config ~/.config/i3/picom.conf",
   "alacritty",
+  # "target/debug/testbed_window floating X11_floating_window",
+  # "target/debug/testbed_window floating X11_floating_window",
+  # "target/debug/testbed_window docked bottom X11_docked_bottom_window",
+  # "sleep 10 && x11_bar_imgui_cpp/build/x11_bar_imgui_cpp",
+  "x11_bar_cpp", #RobotoMonoNerdFont-Regular
 ]
 
-switch_workspace_on_window_workspace_change = false
+wallpapers_command = "feh --bg-fill"
+wallpapers_path = "/home/qamosu/.config/x11_wm_rust/wallpapers/pexels-veeterzy-39811.jpg"
 
-################################################################
+keybindings = [
+  "Alt+Left            focus_window left",
+  "Alt+Right           focus_window right",
+  "Alt+Up              focus_window up",
+  "Alt+Down            focus_window down",
 
-[window]
+  "Alt+H               focus_window left",
+  "Alt+L               focus_window right",
+  "Alt+K               focus_window up",
+  "Alt+J               focus_window down",
+
+  "Alt+Ctrl+H          move_window left  15",
+  "Alt+Ctrl+L          move_window right 15",
+  "Alt+Ctrl+K          move_window up    15",
+  "Alt+Ctrl+J          move_window down  15",
+
+  "Alt+Shift+H         window_size_change horizontal  30",
+  "Alt+Shift+L         window_size_change horizontal -30",
+  # "Alt+Shift+J         window_size_change vertical    15",
+  # "Alt+Shift+K         window_size_change vertical    15",
+
+  "Alt+Enter           exec alacritty",
+
+  "Alt+D               exec dmenu_run -i -fn 'NotoMonoRegular:bold:pixelsize=14'",
+  "Alt+Shift+D         exec rofi -show drun -font \"Noto Sans 13\"",
+
+  "Alt+Ctrl+Page_Down  exec flameshot gui",
+
+  # "Alt+Shift+C         exec xcolor",
+  "Alt+F               center_focused_window",
+
+  "Alt+Q               kill_focused_window",
+
+  "Alt+Ctrl+X          exec arcolinux-powermenu",
+  # "Alt+Shift+Q         exit_window_manager",
+
+  "Alt+1               switch_to_workspace 1",
+  "Alt+2               switch_to_workspace 2",
+  "Alt+3               switch_to_workspace 3",
+  "Alt+4               switch_to_workspace 4",
+  "Alt+5               switch_to_workspace 5",
+  "Alt+6               switch_to_workspace 6",
+  "Alt+7               switch_to_workspace 7",
+  "Alt+8               switch_to_workspace 8",
+  "Alt+9               switch_to_workspace 9",
+
+  "Alt+Shift+1         move_focused_window_to_workspace 1",
+  "Alt+Shift+2         move_focused_window_to_workspace 2",
+  "Alt+Shift+3         move_focused_window_to_workspace 3",
+  "Alt+Shift+4         move_focused_window_to_workspace 4",
+  "Alt+Shift+5         move_focused_window_to_workspace 5",
+  "Alt+Shift+6         move_focused_window_to_workspace 6",
+  "Alt+Shift+7         move_focused_window_to_workspace 7",
+  "Alt+Shift+8         move_focused_window_to_workspace 8",
+  "Alt+Shift+9         move_focused_window_to_workspace 9",
+]
+
+
 minimum_width_tiling = 10
-default_width_tiling = 0.324
+minimum_height_tiling = 10
+default_screen_width_percent_tiling = 0.324
 
-[window.border]
-size = 2
-color_inactive = "#2b2b29"
-color_active = "#a38b43"
-
-[workspaces]
-count = 9
 outer_gap_horiz = 10
 outer_gap_vert = 10
 inner_gap = 5
 
-################################################################
+border_size = 3
+border_color_inactive_str = "#3c3a3a"
+border_color_active_str = "#82948c"
 
-[[keybindings]]
-keys_combination = "Alt+Return"
-action = "exec"
-arguments = ["alacritty"]
+# custom_cursor_filepath = "data/cursors/starter-lights-pack_32x32.cursor"
 
-#############################################################
+switch_to_workspace_on_focused_window_moved = false
 
-[[keybindings]]
-keys_combination = "Alt+H"
-action = "exec"
-arguments = ["target/debug/wm_msg focus left"]
-
-[[keybindings]]
-keys_combination = "Alt+L"
-action = "exec"
-arguments = ["target/debug/wm_msg focus right"]
-
-[[keybindings]]
-keys_combination = "Alt+J"
-action = "exec"
-arguments = ["target/debug/wm_msg focus up"]
-
-[[keybindings]]
-keys_combination = "Alt+K"
-action = "exec"
-arguments = ["target/debug/wm_msg focus down"]
-
-#############################################################
-
-[[keybindings]]
-keys_combination = "Alt+Ctrl+H"
-action = "exec"
-arguments = ["target/debug/wm_msg move left"]
-
-[[keybindings]]
-keys_combination = "Alt+Ctrl+L"
-action = "exec"
-arguments = ["target/debug/wm_msg move right"]
-
-[[keybindings]]
-keys_combination = "Alt+Ctrl+J"
-action = "exec"
-arguments = ["target/debug/wm_msg move down"]
-
-[[keybindings]]
-keys_combination = "Alt+Ctrl+K"
-action = "exec"
-arguments = ["target/debug/wm_msg move up"]
-
-#############################################################
-
-[[keybindings]]
-keys_combination = "Alt+Shift+H"
-action = "exec"
-arguments = ["target/debug/wm_msg grow width 16"]
-
-[[keybindings]]
-keys_combination = "Alt+Shift+L"
-action = "exec"
-arguments = ["target/debug/wm_msg shrink width 16"]
-
-#############################################################
-
-[[keybindings]]
-keys_combination = "Alt+1"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace change 1"]
-
-[[keybindings]]
-keys_combination = "Alt+2"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace change 2"]
-
-[[keybindings]]
-keys_combination = "Alt+3"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace change 3"]
-
-[[keybindings]]
-keys_combination = "Alt+4"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace change 4"]
-
-[[keybindings]]
-keys_combination = "Alt+5"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace change 5"]
-
-[[keybindings]]
-keys_combination = "Alt+6"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace change 6"]
-
-[[keybindings]]
-keys_combination = "Alt+7"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace change 7"]
-
-[[keybindings]]
-keys_combination = "Alt+8"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace change 8"]
-
-[[keybindings]]
-keys_combination = "Alt+9"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace change 9"]
-
-################################################################
-
-[[keybindings]]
-keys_combination = "Alt+Shift+1"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace window change 1"]
-
-[[keybindings]]
-keys_combination = "Alt+Shift+2"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace window change 2"]
-
-[[keybindings]]
-keys_combination = "Alt+Shift+3"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace window change 3"]
-
-[[keybindings]]
-keys_combination = "Alt+Shift+4"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace window change 4"]
-
-[[keybindings]]
-keys_combination = "Alt+Shift+5"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace window change 5"]
-
-[[keybindings]]
-keys_combination = "Alt+Shift+6"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace window change 6"]
-
-[[keybindings]]
-keys_combination = "Alt+Shift+7"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace window change 7"]
-
-[[keybindings]]
-keys_combination = "Alt+Shift+8"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace window change 8"]
-
-[[keybindings]]
-keys_combination = "Alt+Shift+9"
-action = "exec"
-arguments = ["target/debug/wm_msg workspace window change 9"]
-
-#############################################################
-
+override_to_floating = ["Xephyr"]

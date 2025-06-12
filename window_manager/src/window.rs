@@ -1,156 +1,314 @@
-use log::debug;
-use xcb::x;
+use std::ops::RangeBounds;
 
-use crate::monitor::Rect;
+use base::Rect;
+use x11_bindings::bindings::xcb_window_t;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum WindowType {
-    Tiling,
-    Floating,
-    Docking,
-}
-
-impl Default for WindowType {
-    fn default() -> Self {
-        WindowType::Tiling
-    }
+#[allow(dead_code)]
+#[derive(Debug, Clone)]
+pub struct Window {
+    pub window: xcb_window_t,
+    pub rect: Rect,
+    pub visible: bool,
 }
 
 #[derive(Debug)]
-pub struct Window {
-    pub rect: Rect,
-    pub id: x::Window,
-    pub r#type: WindowType,
-    pub mapped: bool,
-    pub border_size: u16,
+pub struct WindowsCollection {
+    windows: Vec<xcb_window_t>,
+    rects: Vec<Rect>,
+    visibles: Vec<bool>,
 }
 
-impl Window {
-    pub fn new(rect: Rect, xcb_window: x::Window, r#type: WindowType, border_size: u16) -> Self {
+impl WindowsCollection {
+    pub fn new(reserved_capacity: usize) -> Self {
+        let mut windows = Vec::new();
+        let mut rects = Vec::new();
+        let mut visibles = Vec::new();
+        if reserved_capacity > 0 {
+            windows.reserve(reserved_capacity);
+            rects.reserve(reserved_capacity);
+            visibles.reserve(reserved_capacity);
+        }
         Self {
-            rect,
-            id: xcb_window,
-            r#type,
-            mapped: false,
-            border_size,
+            windows,
+            rects,
+            visibles,
+        }
+    }
+
+    pub fn sort_by_rect_x_asc(&mut self) {
+        let mut indices: Vec<usize> = (0..self.rects.len()).collect();
+        indices.sort_by_key(|&i| self.rects[i].x);
+        self.windows = indices.iter().map(|&i| self.windows[i].clone()).collect();
+        self.rects = indices.iter().map(|&i| self.rects[i].clone()).collect();
+        self.visibles = indices.iter().map(|&i| self.visibles[i].clone()).collect();
+    }
+
+    pub fn sort_by_rect_y_asc(&mut self) {
+        let mut indices: Vec<usize> = (0..self.rects.len()).collect();
+        indices.sort_by_key(|&i| self.rects[i].y);
+        self.windows = indices.iter().map(|&i| self.windows[i].clone()).collect();
+        self.rects = indices.iter().map(|&i| self.rects[i].clone()).collect();
+        self.visibles = indices.iter().map(|&i| self.visibles[i].clone()).collect();
+    }
+
+    #[inline]
+    pub fn add(&mut self, window: xcb_window_t, rect: Rect, visible: bool) {
+        self.windows.push(window);
+        self.rects.push(rect);
+        self.visibles.push(visible);
+    }
+
+    #[inline]
+    pub fn remove_at(&mut self, index: usize) -> (xcb_window_t, Rect, bool) {
+        (
+            self.windows.remove(index),
+            self.rects.remove(index),
+            self.visibles.remove(index),
+        )
+    }
+
+    #[inline]
+    pub fn at(&self, index: usize) -> Option<(xcb_window_t, &Rect)> {
+        if index < self.windows.len() {
+            Some((self.windows[index], &self.rects[index]))
+        } else {
+            None
         }
     }
 
     #[inline]
-    pub fn map(&mut self, conn: &xcb::Connection) {
-        conn.send_request(&x::MapWindow { window: self.id });
-        self.mapped = true;
-    }
-
-    #[inline]
-    pub fn unmap(&mut self, conn: &xcb::Connection) {
-        conn.send_request(&x::UnmapWindow { window: self.id });
-        self.mapped = false;
-    }
-
-    #[inline]
-    pub fn show(&mut self, conn: &xcb::Connection) {
-        conn.send_request(&x::MapWindow { window: self.id });
-    }
-
-    #[inline]
-    pub fn hide(&mut self, conn: &xcb::Connection) {
-        conn.send_request(&x::UnmapWindow { window: self.id });
-    }
-
-    pub fn subscribe_to_wm_events(&self, conn: &xcb::Connection) {
-        conn.send_request(&x::ChangeWindowAttributes {
-            window: self.id,
-            value_list: &[x::Cw::EventMask(
-                x::EventMask::PROPERTY_CHANGE
-                    | x::EventMask::FOCUS_CHANGE
-                    | x::EventMask::ENTER_WINDOW
-                    | x::EventMask::LEAVE_WINDOW,
-            )],
-        });
-    }
-
-    #[inline]
-    pub fn configure(&self, conn: &xcb::Connection) {
-        conn.send_request(&x::ConfigureWindow {
-            window: self.id,
-            value_list: &[
-                x::ConfigWindow::X(self.rect.x as i32),
-                x::ConfigWindow::Y(self.rect.y as i32),
-                x::ConfigWindow::Width(self.rect.width as u32),
-                x::ConfigWindow::Height(self.rect.height as u32),
-                x::ConfigWindow::BorderWidth(self.border_size as u32),
-            ],
-        });
-    }
-
-    #[inline]
-    pub fn change_border_color(&self, conn: &xcb::Connection, color: u32) {
-        debug!("change border color: {} for {:?}", color, self.id);
-        conn.send_request(&x::ChangeWindowAttributes {
-            window: self.id,
-            value_list: &[x::Cw::BorderPixel(color)],
-        });
-    }
-
-    #[inline]
-    pub fn set_input_focus(&self, conn: &xcb::Connection) {
-        debug!("set input focus for {:?}", self.id);
-        conn.send_request(&x::SetInputFocus {
-            revert_to: x::InputFocus::PointerRoot,
-            focus: self.id,
-            time: x::CURRENT_TIME,
-        });
-    }
-
-    #[inline]
-    pub fn intersects_with(&self, x: i16, y: i16, width: u16, height: u16) -> bool {
-        if self.rect.x < x && self.rect.x + (self.rect.width as i16) < x
-            || self.rect.x > x + (width as i16)
-        {
-            return false;
+    pub fn at_rect(&self, index: usize) -> Option<&Rect> {
+        if index < self.rects.len() {
+            Some(&self.rects[index])
+        } else {
+            None
         }
-        if self.rect.y < y && self.rect.y + (self.rect.height as i16) < y
-            || self.rect.y > y + (height as i16)
-        {
-            return false;
-        }
-        true
     }
 
     #[inline]
-    pub fn intersects_with_rect(&self, rect: &Rect) -> bool {
-        self.intersects_with(rect.x, rect.y, rect.width, rect.height)
+    pub fn at_rect_mut(&mut self, index: usize) -> Option<&mut Rect> {
+        if index < self.rects.len() {
+            Some(&mut self.rects[index])
+        } else {
+            None
+        }
     }
 
     #[inline]
-    pub fn point_belongs_to(&self, pos_x: i16, pos_y: i16) -> bool {
-        if pos_x < self.rect.x || pos_x > self.rect.x + self.rect.width as i16 {
-            return false;
+    pub fn at_window(&self, index: usize) -> Option<xcb_window_t> {
+        if index < self.windows.len() {
+            Some(self.windows[index])
+        } else {
+            None
         }
-        if pos_y < self.rect.y || pos_y > self.rect.y + self.rect.height as i16 {
-            return false;
+    }
+
+    #[inline]
+    pub fn at_visible(&self, index: usize) -> Option<bool> {
+        if index < self.visibles.len() {
+            Some(self.visibles[index])
+        } else {
+            None
         }
-        true
+    }
+
+    #[inline]
+    pub fn index(&self, index: usize) -> (xcb_window_t, &Rect) {
+        (self.windows[index], &self.rects[index])
+    }
+
+    #[inline]
+    pub fn index_rect(&self, index: usize) -> &Rect {
+        &self.rects[index]
+    }
+
+    #[inline]
+    pub fn index_rect_mut(&mut self, index: usize) -> &mut Rect {
+        &mut self.rects[index]
+    }
+
+    #[inline]
+    pub fn index_window(&self, index: usize) -> xcb_window_t {
+        self.windows[index]
+    }
+
+    #[inline]
+    pub fn update_rect_at(&mut self, index: usize, new_rect: Rect) {
+        self.rects[index] = new_rect;
+    }
+
+    #[inline]
+    pub fn swap_windows(&mut self, index_lhs: usize, index_rhs: usize) {
+        self.windows.swap(index_lhs, index_rhs);
+    }
+
+    #[inline]
+    pub fn swap_visibles(&mut self, index_lhs: usize, index_rhs: usize) {
+        self.visibles.swap(index_lhs, index_rhs);
+    }
+
+    #[inline]
+    pub fn swap_rects(&mut self, index_lhs: usize, index_rhs: usize) {
+        self.rects.swap(index_lhs, index_rhs);
+    }
+
+    #[inline]
+    pub fn iter(&self) -> WindowsCollectionIter<'_> {
+        WindowsCollectionIter {
+            windows_iter: self.windows.iter(),
+            rects_iter: self.rects.iter(),
+            visibles_iter: self.visibles.iter(),
+        }
+    }
+
+    #[inline]
+    pub fn iter_mut(&mut self) -> WindowsCollectionIterMut<'_> {
+        WindowsCollectionIterMut {
+            windows_iter: self.windows.iter_mut(),
+            rects_iter: self.rects.iter_mut(),
+            visibles_iter: self.visibles.iter_mut(),
+        }
+    }
+
+    #[inline]
+    pub fn rect_iter(&self) -> std::slice::Iter<'_, Rect> {
+        self.rects.iter()
+    }
+
+    #[inline]
+    pub fn rect_iter_mut(&mut self) -> std::slice::IterMut<'_, Rect> {
+        self.rects.iter_mut()
+    }
+
+    #[inline]
+    pub fn window_iter(&self) -> std::slice::Iter<'_, xcb_window_t> {
+        self.windows.iter()
+    }
+
+    #[inline]
+    pub fn visible_iter(&self) -> std::slice::Iter<'_, bool> {
+        self.visibles.iter()
+    }
+
+    #[inline]
+    pub fn rects(&self) -> &Vec<Rect> {
+        &self.rects
+    }
+
+    #[inline]
+    pub fn rects_slice<R>(&self, range: R) -> &[Rect]
+    where
+        R: RangeBounds<usize>,
+    {
+        let start = match range.start_bound() {
+            std::ops::Bound::Included(&n) => n,
+            std::ops::Bound::Excluded(&n) => n + 1,
+            std::ops::Bound::Unbounded => 0,
+        };
+        let end = match range.end_bound() {
+            std::ops::Bound::Included(&n) => n + 1, // +1 because slice end is exclusive
+            std::ops::Bound::Excluded(&n) => n,
+            std::ops::Bound::Unbounded => self.rects.len(),
+        };
+        &self.rects[start..end]
+    }
+
+    #[inline]
+    pub fn rects_slice_mut<R>(&mut self, range: R) -> &mut [Rect]
+    where
+        R: RangeBounds<usize>,
+    {
+        let start = match range.start_bound() {
+            std::ops::Bound::Included(&n) => n,
+            std::ops::Bound::Excluded(&n) => n + 1,
+            std::ops::Bound::Unbounded => 0,
+        };
+        let end = match range.end_bound() {
+            std::ops::Bound::Included(&n) => n + 1, // +1 because slice end is exclusive
+            std::ops::Bound::Excluded(&n) => n,
+            std::ops::Bound::Unbounded => self.rects.len(),
+        };
+        &mut self.rects[start..end]
+    }
+
+    #[inline]
+    pub fn index_of(&self, window: xcb_window_t) -> Option<usize> {
+        if let Some((idx, _)) = self.windows.iter().enumerate().find(|(_, w)| **w == window) {
+            Some(idx)
+        } else {
+            None
+        }
+    }
+
+    #[inline]
+    pub fn is_empty(&self) -> bool {
+        self.windows.is_empty()
+    }
+
+    #[inline]
+    pub fn len(&self) -> usize {
+        self.windows.len()
     }
 }
 
-impl PartialEq for Window {
-    fn eq(&self, other: &Self) -> bool {
-        self.id == other.id
+pub struct WindowsCollectionIterMut<'a> {
+    windows_iter: std::slice::IterMut<'a, xcb_window_t>,
+    rects_iter: std::slice::IterMut<'a, Rect>,
+    visibles_iter: std::slice::IterMut<'a, bool>,
+}
+
+impl<'a> Iterator for WindowsCollectionIterMut<'a> {
+    type Item = (&'a mut xcb_window_t, &'a mut Rect, &'a mut bool);
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let window = self.windows_iter.next()?;
+        let rect = self.rects_iter.next()?;
+        let visible = self.visibles_iter.next()?;
+        Some((window, rect, visible))
     }
 }
 
-impl Eq for Window {}
+impl<'a> IntoIterator for &'a mut WindowsCollection {
+    type Item = (&'a mut xcb_window_t, &'a mut Rect, &'a mut bool);
 
-impl PartialOrd for Window {
-    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
-        self.rect.x.partial_cmp(&other.rect.x)
+    type IntoIter = WindowsCollectionIterMut<'a>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        WindowsCollectionIterMut {
+            windows_iter: self.windows.iter_mut(),
+            rects_iter: self.rects.iter_mut(),
+            visibles_iter: self.visibles.iter_mut(),
+        }
     }
 }
 
-impl Ord for Window {
-    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
-        self.rect.x.cmp(&other.rect.x)
+pub struct WindowsCollectionIter<'a> {
+    windows_iter: std::slice::Iter<'a, xcb_window_t>,
+    rects_iter: std::slice::Iter<'a, Rect>,
+    visibles_iter: std::slice::Iter<'a, bool>,
+}
+
+impl<'a> Iterator for WindowsCollectionIter<'a> {
+    type Item = (&'a xcb_window_t, &'a Rect, &'a bool);
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let window = self.windows_iter.next()?;
+        let rect = self.rects_iter.next()?;
+        let visible = self.visibles_iter.next()?;
+        Some((window, rect, visible))
+    }
+}
+
+impl<'a> IntoIterator for &'a WindowsCollection {
+    type Item = (&'a xcb_window_t, &'a Rect, &'a bool);
+
+    type IntoIter = WindowsCollectionIter<'a>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        WindowsCollectionIter {
+            windows_iter: self.windows.iter(),
+            rects_iter: self.rects.iter(),
+            visibles_iter: self.visibles.iter(),
+        }
     }
 }

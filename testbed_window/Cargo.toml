@@ -1,0 +1,11 @@
+[package]
+name = "testbed_window"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+base = { path = "../base" }
+x11_bindings = { path = "../x11_bindings" }
+env_logger = "0.11.6"
+log = "0.4.25"
+clap = { version = "4.5.29", features = ["derive"] }

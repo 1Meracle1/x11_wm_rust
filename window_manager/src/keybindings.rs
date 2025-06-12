@@ -1,385 +1,32 @@
-use std::{
-    process::{Command, Stdio},
-    str::FromStr,
+use std::{cmp::Reverse, process::Command};
+
+use log::{error, trace};
+use x11_bindings::{
+    bindings::{
+        XCB_MOD_MASK_1, XCB_MOD_MASK_2, XCB_MOD_MASK_4, XCB_MOD_MASK_CONTROL, XCB_MOD_MASK_LOCK,
+        XCB_MOD_MASK_SHIFT, xcb_keycode_t, xcb_mod_mask_t,
+    },
+    connection::Connection,
 };
 
-use log::{debug, error, info};
+use crate::{bar_message::UnixClients, config::Config, monitor::Monitor};
 
-use crate::config::Config;
-use xcb::x;
-
-#[derive(Debug)]
-pub enum Action {
-    Exec(String),
-}
-
-impl Action {
-    fn execute(&self) {
-        match self {
-            Action::Exec(command) => {
-                let segments = command.split(' ').collect::<Vec<_>>();
-                match Command::new(segments.first().unwrap())
-                    .args(segments[1..].iter())
-                    .stdout(Stdio::piped())
-                    .stderr(Stdio::piped())
-                    .spawn()
-                {
-                    Ok(_) => info!("Successfully executed command: '{command}'"),
-                    Err(error) => {
-                        error!("Failed to execute command: '{command}', error: '{error}'")
-                    }
-                }
-            }
-        }
-    }
-}
-
-#[derive(Debug)]
-pub struct Keybinding {
-    pub modifiers: x::ModMask,
-    pub key_name: Keycodes,
-    pub action: Action,
-    pub weight: u32,
-}
-
-pub struct KeyEventsHandler {
-    binds: Vec<Keybinding>,
-}
-
-impl KeyEventsHandler {
-    pub fn new(conn: &xcb::Connection, root_window: x::Window, config: &Config) -> Self {
-        let mut binds = Vec::new();
-        'outer: for bind in &config.keybindings {
-            let keys = bind.keys_combination.split('+');
-
-            let mut modifiers = x::ModMask::empty();
-            let mut key_name = Keycodes::None;
-            let mut weight: u32 = 0;
-            // let mut is_range = false;
-            for key in keys {
-                // if key.starts_with('[') && key.ends_with(']') {
-                //     if let Some(keycodes) = keycodes_from_number_range_str(key) {
-                //         if modifiers.is_empty() {
-                //             error!(
-                //                 "Invalid binding: no modifier supplied, binding: {:#?}",
-                //                 bind
-                //             );
-                //             continue;
-                //         }
-                //         keycodes.iter().for_each(|keycode| {
-                //             Self::add_grab_binding(
-                //                 &mut binds,
-                //                 &bind.action,
-                //                 &bind.arguments,
-                //                 modifiers,
-                //                 keycode.clone(),
-                //                 weight,
-                //                 root_window,
-                //                 conn,
-                //             )
-                //         });
-                //         is_range = true;
-                //         break;
-                //     }
-                // }
-                match Keycodes::from_str(&key) {
-                    Ok(key) => {
-                        if let Some(modifier) = Into::<Option<x::ModMask>>::into(key) {
-                            modifiers = modifiers.union(modifier);
-                            weight += 1;
-                        } else {
-                            key_name = key;
-                            weight += 1;
-                            break;
-                        }
-                    }
-                    Err(err) => {
-                        error!(
-                            "Invalid binding, error parsing modifiers: '{err}', binding: '{:#?}'",
-                            bind
-                        );
-                        continue 'outer;
-                    }
-                };
-            }
-            // if is_range {
-            //     continue;
-            // }
-            if modifiers.is_empty() || key_name == Keycodes::None {
-                error!(
-                    "Invalid binding: no modifier/keys supplied, binding: {:#?}",
-                    bind
-                );
-                continue;
-            }
-
-            Self::add_grab_binding(
-                &mut binds,
-                &bind.action,
-                &bind.arguments,
-                modifiers,
-                key_name,
-                weight,
-                root_window,
-                conn,
-            );
-        }
-
-        binds.sort_by(|lhs, rhs| lhs.weight.cmp(&rhs.weight));
-        // debug!("binds: {:#?}", binds);
-
-        Self { binds }
-    }
-
-    fn add_grab_binding(
-        binds: &mut Vec<Keybinding>,
-        action: &str,
-        arguments: &Vec<String>,
-        modifiers: x::ModMask,
-        keycode: Keycodes,
-        weight: u32,
-        root_window: x::Window,
-        conn: &xcb::Connection,
-    ) {
-        match action {
-            "exec" => {
-                if arguments.len() != 1 {
-                    error!(
-                        "Invalid binding, arguments len: {}, arguments: {:?}",
-                        arguments.len(),
-                        arguments
-                    );
-                    return;
-                }
-
-                let owner_events = false;
-                conn.send_request(&x::GrabKey {
-                    owner_events,
-                    grab_window: root_window,
-                    modifiers,
-                    key: keycode as u8,
-                    pointer_mode: x::GrabMode::Async,
-                    keyboard_mode: x::GrabMode::Async,
-                });
-                conn.send_request(&x::GrabKey {
-                    owner_events,
-                    grab_window: root_window,
-                    modifiers: modifiers.union(x::ModMask::LOCK),
-                    key: keycode as u8,
-                    pointer_mode: x::GrabMode::Async,
-                    keyboard_mode: x::GrabMode::Async,
-                });
-                conn.send_request(&x::GrabKey {
-                    owner_events,
-                    grab_window: root_window,
-                    modifiers: modifiers.union(x::ModMask::N2),
-                    key: keycode as u8,
-                    pointer_mode: x::GrabMode::Async,
-                    keyboard_mode: x::GrabMode::Async,
-                });
-                conn.send_request(&x::GrabKey {
-                    owner_events,
-                    grab_window: root_window,
-                    modifiers: modifiers.union(x::ModMask::N2.union(x::ModMask::LOCK)),
-                    key: keycode as u8,
-                    pointer_mode: x::GrabMode::Async,
-                    keyboard_mode: x::GrabMode::Async,
-                });
-                // conn.send_request(&x::GrabKey {
-                //     owner_events: true,
-                //     grab_window: root_window,
-                //     modifiers: x::ModMask::ANY,
-                //     key: key_name as u8,
-                //     pointer_mode: x::GrabMode::Async,
-                //     keyboard_mode: x::GrabMode::Async,
-                // });
-                // print_mod_mask(modifiers, "add keybinding - modifiers:");
-                // debug!("add keybinding - keycode: {:?}", keycode);
-
-                binds.push(Keybinding {
-                    modifiers,
-                    key_name: keycode,
-                    action: Action::Exec(arguments.first().unwrap().clone()),
-                    weight,
-                });
-            }
-            _ => {}
-        }
-    }
-
-    pub fn handle_key_press(&self, event: x::KeyPressEvent) {
-        // print_modifiers(event.state(), "before:");
-        let modifiers = event
-            .state()
-            .difference(x::KeyButMask::LOCK | x::KeyButMask::MOD2);
-        if modifiers.is_empty() {
-            return;
-        }
-        // print_modifiers(modifiers, "after:");
-        let modifiers = key_into_mod_mask(modifiers);
-        // print_mod_mask(modifiers, "converted mod mask:");
-        for bind in &self.binds {
-            if bind.modifiers.contains(modifiers) && event.detail() == bind.key_name as u8 {
-                // print_mod_mask(bind.modifiers, "matching bind mod mask:");
-                bind.action.execute();
-                break;
-            }
-        }
-    }
-}
-
-fn print_modifiers(modifiers: x::KeyButMask, message: &str) {
-    let mut pressed_modifiers = String::new();
-    if modifiers.contains(x::KeyButMask::SHIFT) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("SHIFT");
-    }
-    if modifiers.contains(x::KeyButMask::LOCK) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("LOCK");
-    }
-    if modifiers.contains(x::KeyButMask::CONTROL) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("CONTROL");
-    }
-    if modifiers.contains(x::KeyButMask::MOD1) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("MOD1");
-    }
-    if modifiers.contains(x::KeyButMask::MOD2) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("MOD2");
-    }
-    if modifiers.contains(x::KeyButMask::MOD3) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("MOD3");
-    }
-    if modifiers.contains(x::KeyButMask::MOD4) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("MOD4");
-    }
-    if modifiers.contains(x::KeyButMask::MOD5) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("MOD5");
-    }
-    debug!("{} {}", message, pressed_modifiers);
-}
-
-fn print_mod_mask(modifiers: x::ModMask, message: &str) {
-    let mut pressed_modifiers = String::new();
-    if modifiers.contains(x::ModMask::SHIFT) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("SHIFT");
-    }
-    if modifiers.contains(x::ModMask::LOCK) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("LOCK");
-    }
-    if modifiers.contains(x::ModMask::CONTROL) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("CONTROL");
-    }
-    if modifiers.contains(x::ModMask::N1) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("N1");
-    }
-    if modifiers.contains(x::ModMask::N2) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("N2");
-    }
-    if modifiers.contains(x::ModMask::N3) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("N3");
-    }
-    if modifiers.contains(x::ModMask::N4) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("N4");
-    }
-    if modifiers.contains(x::ModMask::N5) {
-        if !pressed_modifiers.is_empty() {
-            pressed_modifiers.push_str(" -> ");
-        }
-        pressed_modifiers.push_str("N5");
-    }
-    debug!("{} {}", message, pressed_modifiers);
-}
-
-fn key_into_mod_mask(key_mask: x::KeyButMask) -> x::ModMask {
-    let mut mod_mask = x::ModMask::empty();
-
-    if key_mask.contains(x::KeyButMask::SHIFT) {
-        mod_mask = mod_mask.union(x::ModMask::SHIFT);
-    }
-    if key_mask.contains(x::KeyButMask::LOCK) {
-        mod_mask = mod_mask.union(x::ModMask::LOCK);
-    }
-    if key_mask.contains(x::KeyButMask::CONTROL) {
-        mod_mask = mod_mask.union(x::ModMask::CONTROL);
-    }
-    if key_mask.contains(x::KeyButMask::MOD1) {
-        mod_mask = mod_mask.union(x::ModMask::N1);
-    }
-    if key_mask.contains(x::KeyButMask::MOD2) {
-        mod_mask = mod_mask.union(x::ModMask::N2);
-    }
-    if key_mask.contains(x::KeyButMask::MOD3) {
-        mod_mask = mod_mask.union(x::ModMask::N3);
-    }
-    if key_mask.contains(x::KeyButMask::MOD4) {
-        mod_mask = mod_mask.union(x::ModMask::N4);
-    }
-    if key_mask.contains(x::KeyButMask::MOD5) {
-        mod_mask = mod_mask.union(x::ModMask::N5);
-    }
-
-    mod_mask
-}
-
+// extracted by running `xev` command line tool`
 #[allow(non_camel_case_types)]
-#[derive(Debug, PartialEq, Eq, Copy, Clone)]
+#[repr(u8)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Keycodes {
-    None = 0,
     Escape = 9,
-    _1 = 10,
-    _2 = 11,
-    _3 = 12,
-    _4 = 13,
-    _5 = 14,
-    _6 = 15,
-    _7 = 16,
-    _8 = 17,
-    _9 = 18,
-    _0 = 19,
+    Num_1 = 10,
+    Num_2 = 11,
+    Num_3 = 12,
+    Num_4 = 13,
+    Num_5 = 14,
+    Num_6 = 15,
+    Num_7 = 16,
+    Num_8 = 17,
+    Num_9 = 18,
+    Num_0 = 19,
     minus = 20,
     equal = 21,
     BackSpace = 22,
@@ -409,7 +56,6 @@ pub enum Keycodes {
     l = 46,
     semicolon = 47,
     apostrophe = 48,
-    grave = 49,
     Shift_L = 50,
     backslash = 51,
     z = 52,
@@ -423,10 +69,8 @@ pub enum Keycodes {
     period = 60,
     slash = 61,
     Shift_R = 62,
-    KP_Multiply = 63,
     Alt_L = 64,
     space = 65,
-    Caps_Lock = 66,
     F1 = 67,
     F2 = 68,
     F3 = 69,
@@ -437,8 +81,6 @@ pub enum Keycodes {
     F8 = 74,
     F9 = 75,
     F10 = 76,
-    Num_Lock = 77,
-    Scroll_Lock = 78,
     KP_Home = 79,
     KP_Up = 80,
     KP_Prior = 81,
@@ -452,228 +94,183 @@ pub enum Keycodes {
     KP_Next = 89,
     KP_Insert = 90,
     KP_Delete = 91,
-    ISO_Level3_Shift = 92,
     less = 94,
     F11 = 95,
     F12 = 96,
-    Katakana = 98,
-    Hiragana = 99,
-    Henkan_Mode = 100,
-    Hiragana_Katakana = 101,
-    Muhenkan = 102,
     KP_Enter = 104,
     Control_R = 105,
     KP_Divide = 106,
     Print = 107,
     Alt_R = 108,
-    Linefeed = 109,
     Home = 110,
     Up = 111,
-    Prior = 112,
+    Page_Up = 112,
     Left = 113,
     Right = 114,
     End = 115,
     Down = 116,
-    Next = 117,
+    Page_Down = 117,
     Insert = 118,
     Delete = 119,
-    XF86AudioMute = 121,
-    XF86AudioLowerVolume = 122,
-    XF86AudioRaiseVolume = 123,
-    XF86PowerOff = 124,
     KP_Equal = 125,
     plusminus = 126,
     Pause = 127,
-    XF86LaunchA = 128,
     KP_Decimal = 129,
-    Hangul = 130,
-    Hangul_Hanja = 131,
     Super_L = 133,
     Super_R = 134,
     Menu = 135,
     Cancel = 136,
     Redo = 137,
-    SunProps = 138,
     Undo = 139,
-    SunFront = 140,
-    XF86Copy = 141,
-    XF86Open = 142,
-    XF86Paste = 143,
     Find = 144,
-    XF86Cut = 145,
     Help = 146,
-    XF86MenuKB = 147,
-    XF86Calculator = 148,
-    XF86Sleep = 150,
-    XF86WakeUp = 151,
-    XF86Explorer = 152,
-    XF86Send = 153,
-    XF86Xfer = 155,
-    XF86Launch1 = 156,
-    XF86Launch2 = 157,
-    XF86WWW = 158,
-    XF86DOS = 159,
-    XF86ScreenSaver = 160,
-    XF86RotateWindows = 161,
-    XF86TaskPane = 162,
-    XF86Mail = 163,
-    XF86Favorites = 164,
-    XF86MyComputer = 165,
-    XF86Back = 166,
-    XF86Forward = 167,
-    XF86Eject = 169,
-    XF86AudioNext = 171,
-    XF86AudioPlay = 172,
-    XF86AudioPrev = 173,
-    XF86AudioStop = 174,
-    XF86AudioRecord = 175,
-    XF86AudioRewind = 176,
-    XF86Phone = 177,
-    XF86Tools = 179,
-    XF86HomePage = 180,
-    XF86Reload = 181,
-    XF86Close = 182,
-    XF86ScrollUp = 185,
-    XF86ScrollDown = 186,
-    parenleft = 187,
-    parenright = 188,
-    XF86New = 189,
-    XF86Launch5 = 192,
-    XF86Launch6 = 193,
-    XF86Launch7 = 194,
-    XF86Launch8 = 195,
-    XF86Launch9 = 196,
-    XF86AudioMicMute = 198,
-    XF86TouchpadToggle = 199,
-    XF86TouchpadOn = 200,
-    XF86TouchpadOff = 201,
-    ISO_Level5_Shift = 203,
-    NoSymbol = 204,
-    XF86AudioPause = 209,
-    XF86Launch3 = 210,
-    XF86Launch4 = 211,
-    XF86LaunchB = 212,
-    XF86Suspend = 213,
-    XF86AudioForward = 216,
-    XF86WebCam = 220,
-    XF86AudioPreset = 221,
-    XF86Messenger = 224,
-    XF86Search = 225,
-    XF86Go = 226,
-    XF86Finance = 227,
-    XF86Game = 228,
-    XF86Shop = 229,
-    XF86MonBrightnessDown = 232,
-    XF86MonBrightnessUp = 233,
-    XF86AudioMedia = 234,
-    XF86Display = 235,
-    XF86KbdLightOnOff = 236,
-    XF86KbdBrightnessDown = 237,
-    XF86KbdBrightnessUp = 238,
-    XF86Reply = 240,
-    XF86MailForward = 241,
-    XF86Save = 242,
-    XF86Documents = 243,
-    XF86Battery = 244,
-    XF86Bluetooth = 245,
-    XF86WLAN = 246,
-    XF86UWB = 247,
-    XF86Next_VMode = 249,
-    XF86Prev_VMode = 250,
-    XF86MonBrightnessCycle = 251,
-    XF86BrightnessAuto = 252,
-    XF86DisplayOff = 253,
-    XF86WWAN = 254,
-    XF86RFKill = 255,
 }
 
-fn keycodes_from_number_range_str(key: &str) -> Option<Vec<Keycodes>> {
-    let key = &key[1..(key.len() - 1)];
-    let range_segments: Vec<&str> = key.split("..").collect();
-    if range_segments.len() == 2 {
-        let start_range: u16;
-        match u16::from_str(range_segments.first().unwrap()) {
-            Ok(value) => start_range = value,
-            Err(err) => {
-                error!("Invalid range - starts with not a number: {}", err);
-                return None;
-            }
-        }
-        let end_range: u16;
-        match u16::from_str(range_segments.last().unwrap()) {
-            Ok(value) => end_range = value,
-            Err(err) => {
-                error!("Invalid range - ends with not a number: {}", err);
-                return None;
-            }
-        }
-
-        if start_range < end_range {
-            if end_range > 9 {
-                error!(
-                    "Invalid range - ends with number higher than 9: {}",
-                    end_range
-                );
-            } else {
-                return Some(keycodes_from_number_range(start_range, end_range));
-            }
-        } else {
-            error!(
-                "invalid boundaries of the range, starts with: {}, ends with: {}",
-                start_range, end_range
-            );
-        }
-    } else {
-        error!(
-            "Invalid range - consists of more than two segments: {}",
-            key
-        );
+impl From<Keycodes> for u8 {
+    fn from(value: Keycodes) -> Self {
+        value as u8
     }
-
-    None
 }
 
-fn keycodes_from_number_range(starts: u16, ends: u16) -> Vec<Keycodes> {
-    assert!(starts < ends);
-    let mut res = Vec::<Keycodes>::new();
-    for i in starts..=ends {
-        match i {
-            1 => res.push(Keycodes::_1),
-            2 => res.push(Keycodes::_2),
-            3 => res.push(Keycodes::_3),
-            4 => res.push(Keycodes::_4),
-            5 => res.push(Keycodes::_5),
-            6 => res.push(Keycodes::_6),
-            7 => res.push(Keycodes::_7),
-            8 => res.push(Keycodes::_8),
-            9 => res.push(Keycodes::_9),
-            _ => {}
+impl TryFrom<u8> for Keycodes {
+    type Error = ();
+
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+        match value {
+            9 => Ok(Keycodes::Escape),
+            10 => Ok(Keycodes::Num_1),
+            11 => Ok(Keycodes::Num_2),
+            12 => Ok(Keycodes::Num_3),
+            13 => Ok(Keycodes::Num_4),
+            14 => Ok(Keycodes::Num_5),
+            15 => Ok(Keycodes::Num_6),
+            16 => Ok(Keycodes::Num_7),
+            17 => Ok(Keycodes::Num_8),
+            18 => Ok(Keycodes::Num_9),
+            19 => Ok(Keycodes::Num_0),
+            20 => Ok(Keycodes::minus),
+            21 => Ok(Keycodes::equal),
+            22 => Ok(Keycodes::BackSpace),
+            23 => Ok(Keycodes::Tab),
+            24 => Ok(Keycodes::q),
+            25 => Ok(Keycodes::w),
+            26 => Ok(Keycodes::e),
+            27 => Ok(Keycodes::r),
+            28 => Ok(Keycodes::t),
+            29 => Ok(Keycodes::y),
+            30 => Ok(Keycodes::u),
+            31 => Ok(Keycodes::i),
+            32 => Ok(Keycodes::o),
+            33 => Ok(Keycodes::p),
+            34 => Ok(Keycodes::bracketleft),
+            35 => Ok(Keycodes::bracketright),
+            36 => Ok(Keycodes::Return),
+            37 => Ok(Keycodes::Control_L),
+            38 => Ok(Keycodes::a),
+            39 => Ok(Keycodes::s),
+            40 => Ok(Keycodes::d),
+            41 => Ok(Keycodes::f),
+            42 => Ok(Keycodes::g),
+            43 => Ok(Keycodes::h),
+            44 => Ok(Keycodes::j),
+            45 => Ok(Keycodes::k),
+            46 => Ok(Keycodes::l),
+            47 => Ok(Keycodes::semicolon),
+            48 => Ok(Keycodes::apostrophe),
+            50 => Ok(Keycodes::Shift_L),
+            51 => Ok(Keycodes::backslash),
+            52 => Ok(Keycodes::z),
+            53 => Ok(Keycodes::x),
+            54 => Ok(Keycodes::c),
+            55 => Ok(Keycodes::v),
+            56 => Ok(Keycodes::b),
+            57 => Ok(Keycodes::n),
+            58 => Ok(Keycodes::m),
+            59 => Ok(Keycodes::comma),
+            60 => Ok(Keycodes::period),
+            61 => Ok(Keycodes::slash),
+            62 => Ok(Keycodes::Shift_R),
+            64 => Ok(Keycodes::Alt_L),
+            65 => Ok(Keycodes::space),
+            67 => Ok(Keycodes::F1),
+            68 => Ok(Keycodes::F2),
+            69 => Ok(Keycodes::F3),
+            70 => Ok(Keycodes::F4),
+            71 => Ok(Keycodes::F5),
+            72 => Ok(Keycodes::F6),
+            73 => Ok(Keycodes::F7),
+            74 => Ok(Keycodes::F8),
+            75 => Ok(Keycodes::F9),
+            76 => Ok(Keycodes::F10),
+            79 => Ok(Keycodes::KP_Home),
+            80 => Ok(Keycodes::KP_Up),
+            81 => Ok(Keycodes::KP_Prior),
+            82 => Ok(Keycodes::KP_Subtract),
+            83 => Ok(Keycodes::KP_Left),
+            84 => Ok(Keycodes::KP_Begin),
+            85 => Ok(Keycodes::KP_Right),
+            86 => Ok(Keycodes::KP_Add),
+            87 => Ok(Keycodes::KP_End),
+            88 => Ok(Keycodes::KP_Down),
+            89 => Ok(Keycodes::KP_Next),
+            90 => Ok(Keycodes::KP_Insert),
+            91 => Ok(Keycodes::KP_Delete),
+            94 => Ok(Keycodes::less),
+            95 => Ok(Keycodes::F11),
+            96 => Ok(Keycodes::F12),
+            104 => Ok(Keycodes::KP_Enter),
+            105 => Ok(Keycodes::Control_R),
+            106 => Ok(Keycodes::KP_Divide),
+            107 => Ok(Keycodes::Print),
+            108 => Ok(Keycodes::Alt_R),
+            110 => Ok(Keycodes::Home),
+            111 => Ok(Keycodes::Up),
+            112 => Ok(Keycodes::Page_Up),
+            113 => Ok(Keycodes::Left),
+            114 => Ok(Keycodes::Right),
+            115 => Ok(Keycodes::End),
+            116 => Ok(Keycodes::Down),
+            117 => Ok(Keycodes::Page_Down),
+            118 => Ok(Keycodes::Insert),
+            119 => Ok(Keycodes::Delete),
+            125 => Ok(Keycodes::KP_Equal),
+            126 => Ok(Keycodes::plusminus),
+            127 => Ok(Keycodes::Pause),
+            129 => Ok(Keycodes::KP_Decimal),
+            133 => Ok(Keycodes::Super_L),
+            134 => Ok(Keycodes::Super_R),
+            135 => Ok(Keycodes::Menu),
+            136 => Ok(Keycodes::Cancel),
+            137 => Ok(Keycodes::Redo),
+            139 => Ok(Keycodes::Undo),
+            144 => Ok(Keycodes::Find),
+            146 => Ok(Keycodes::Help),
+            _ => Err(()),
         }
     }
-    res
 }
 
-impl FromStr for Keycodes {
-    type Err = String;
+impl TryFrom<&str> for Keycodes {
+    type Error = ();
 
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        match s {
-            "Alt" => Ok(Keycodes::Alt_L),
-            "Escape" => Ok(Keycodes::Escape),
-            "1" => Ok(Keycodes::_1),
-            "2" => Ok(Keycodes::_2),
-            "3" => Ok(Keycodes::_3),
-            "4" => Ok(Keycodes::_4),
-            "5" => Ok(Keycodes::_5),
-            "6" => Ok(Keycodes::_6),
-            "7" => Ok(Keycodes::_7),
-            "8" => Ok(Keycodes::_8),
-            "9" => Ok(Keycodes::_9),
-            "0" => Ok(Keycodes::_0),
+    fn try_from(value: &str) -> Result<Self, Self::Error> {
+        let lower_case_value = value.to_lowercase();
+        match lower_case_value.as_str() {
+            "escape" => Ok(Keycodes::Escape),
+            "1" => Ok(Keycodes::Num_1),
+            "2" => Ok(Keycodes::Num_2),
+            "3" => Ok(Keycodes::Num_3),
+            "4" => Ok(Keycodes::Num_4),
+            "5" => Ok(Keycodes::Num_5),
+            "6" => Ok(Keycodes::Num_6),
+            "7" => Ok(Keycodes::Num_7),
+            "8" => Ok(Keycodes::Num_8),
+            "9" => Ok(Keycodes::Num_9),
+            "0" => Ok(Keycodes::Num_0),
             "minus" => Ok(Keycodes::minus),
             "equal" => Ok(Keycodes::equal),
-            "BackSpace" => Ok(Keycodes::BackSpace),
-            "Tab" => Ok(Keycodes::Tab),
+            "backspace" => Ok(Keycodes::BackSpace),
+            "tab" => Ok(Keycodes::Tab),
             "q" => Ok(Keycodes::q),
             "w" => Ok(Keycodes::w),
             "e" => Ok(Keycodes::e),
@@ -684,22 +281,13 @@ impl FromStr for Keycodes {
             "i" => Ok(Keycodes::i),
             "o" => Ok(Keycodes::o),
             "p" => Ok(Keycodes::p),
-            "Q" => Ok(Keycodes::q),
-            "W" => Ok(Keycodes::w),
-            "E" => Ok(Keycodes::e),
-            "R" => Ok(Keycodes::r),
-            "T" => Ok(Keycodes::t),
-            "Y" => Ok(Keycodes::y),
-            "U" => Ok(Keycodes::u),
-            "I" => Ok(Keycodes::i),
-            "O" => Ok(Keycodes::o),
-            "P" => Ok(Keycodes::p),
             "bracketleft" => Ok(Keycodes::bracketleft),
             "bracketright" => Ok(Keycodes::bracketright),
-            "Return" => Ok(Keycodes::Return),
-            "Control_L" => Ok(Keycodes::Control_L),
-            "Control" => Ok(Keycodes::Control_L),
-            "Ctrl" => Ok(Keycodes::Control_L),
+            "return" => Ok(Keycodes::Return),
+            "enter" => Ok(Keycodes::Return),
+            "control_l" => Ok(Keycodes::Control_L),
+            "control" => Ok(Keycodes::Control_L),
+            "ctrl" => Ok(Keycodes::Control_L),
             "a" => Ok(Keycodes::a),
             "s" => Ok(Keycodes::s),
             "d" => Ok(Keycodes::d),
@@ -709,20 +297,10 @@ impl FromStr for Keycodes {
             "j" => Ok(Keycodes::j),
             "k" => Ok(Keycodes::k),
             "l" => Ok(Keycodes::l),
-            "A" => Ok(Keycodes::a),
-            "S" => Ok(Keycodes::s),
-            "D" => Ok(Keycodes::d),
-            "F" => Ok(Keycodes::f),
-            "G" => Ok(Keycodes::g),
-            "H" => Ok(Keycodes::h),
-            "J" => Ok(Keycodes::j),
-            "K" => Ok(Keycodes::k),
-            "L" => Ok(Keycodes::l),
             "semicolon" => Ok(Keycodes::semicolon),
             "apostrophe" => Ok(Keycodes::apostrophe),
-            "grave" => Ok(Keycodes::grave),
-            "Shift_L" => Ok(Keycodes::Shift_L),
-            "Shift" => Ok(Keycodes::Shift_L),
+            "shift_l" => Ok(Keycodes::Shift_L),
+            "shift" => Ok(Keycodes::Shift_L),
             "backslash" => Ok(Keycodes::backslash),
             "z" => Ok(Keycodes::z),
             "x" => Ok(Keycodes::x),
@@ -731,204 +309,533 @@ impl FromStr for Keycodes {
             "b" => Ok(Keycodes::b),
             "n" => Ok(Keycodes::n),
             "m" => Ok(Keycodes::m),
-            "Z" => Ok(Keycodes::z),
-            "X" => Ok(Keycodes::x),
-            "C" => Ok(Keycodes::c),
-            "V" => Ok(Keycodes::v),
-            "B" => Ok(Keycodes::b),
-            "N" => Ok(Keycodes::n),
-            "M" => Ok(Keycodes::m),
             "comma" => Ok(Keycodes::comma),
             "period" => Ok(Keycodes::period),
             "slash" => Ok(Keycodes::slash),
-            "Shift_R" => Ok(Keycodes::Shift_R),
-            "KP_Multiply" => Ok(Keycodes::KP_Multiply),
-            "Alt_L" => Ok(Keycodes::Alt_L),
+            "shift_r" => Ok(Keycodes::Shift_R),
+            "alt_l" => Ok(Keycodes::Alt_L),
+            "alt" => Ok(Keycodes::Alt_L),
             "space" => Ok(Keycodes::space),
-            "Caps_Lock" => Ok(Keycodes::Caps_Lock),
-            "F1" => Ok(Keycodes::F1),
-            "F2" => Ok(Keycodes::F2),
-            "F3" => Ok(Keycodes::F3),
-            "F4" => Ok(Keycodes::F4),
-            "F5" => Ok(Keycodes::F5),
-            "F6" => Ok(Keycodes::F6),
-            "F7" => Ok(Keycodes::F7),
-            "F8" => Ok(Keycodes::F8),
-            "F9" => Ok(Keycodes::F9),
-            "F10" => Ok(Keycodes::F10),
-            "Num_Lock" => Ok(Keycodes::Num_Lock),
-            "Scroll_Lock" => Ok(Keycodes::Scroll_Lock),
-            "KP_Home" => Ok(Keycodes::KP_Home),
-            "KP_Up" => Ok(Keycodes::KP_Up),
-            "KP_Prior" => Ok(Keycodes::KP_Prior),
-            "KP_Subtract" => Ok(Keycodes::KP_Subtract),
-            "KP_Left" => Ok(Keycodes::KP_Left),
-            "KP_Begin" => Ok(Keycodes::KP_Begin),
-            "KP_Right" => Ok(Keycodes::KP_Right),
-            "KP_Add" => Ok(Keycodes::KP_Add),
-            "KP_End" => Ok(Keycodes::KP_End),
-            "KP_Down" => Ok(Keycodes::KP_Down),
-            "KP_Next" => Ok(Keycodes::KP_Next),
-            "KP_Insert" => Ok(Keycodes::KP_Insert),
-            "KP_Delete" => Ok(Keycodes::KP_Delete),
-            "ISO_Level3_Shift" => Ok(Keycodes::ISO_Level3_Shift),
+            "f1" => Ok(Keycodes::F1),
+            "f2" => Ok(Keycodes::F2),
+            "f3" => Ok(Keycodes::F3),
+            "f4" => Ok(Keycodes::F4),
+            "f5" => Ok(Keycodes::F5),
+            "f6" => Ok(Keycodes::F6),
+            "f7" => Ok(Keycodes::F7),
+            "f8" => Ok(Keycodes::F8),
+            "f9" => Ok(Keycodes::F9),
+            "f10" => Ok(Keycodes::F10),
+            "kp_home" => Ok(Keycodes::KP_Home),
+            "kp_up" => Ok(Keycodes::KP_Up),
+            "kp_prior" => Ok(Keycodes::KP_Prior),
+            "kp_subtract" => Ok(Keycodes::KP_Subtract),
+            "kp_left" => Ok(Keycodes::KP_Left),
+            "kp_begin" => Ok(Keycodes::KP_Begin),
+            "kp_right" => Ok(Keycodes::KP_Right),
+            "kp_add" => Ok(Keycodes::KP_Add),
+            "kp_end" => Ok(Keycodes::KP_End),
+            "kp_down" => Ok(Keycodes::KP_Down),
+            "kp_next" => Ok(Keycodes::KP_Next),
+            "kp_insert" => Ok(Keycodes::KP_Insert),
+            "kp_delete" => Ok(Keycodes::KP_Delete),
             "less" => Ok(Keycodes::less),
-            "F11" => Ok(Keycodes::F11),
-            "F12" => Ok(Keycodes::F12),
-            "Katakana" => Ok(Keycodes::Katakana),
-            "Hiragana" => Ok(Keycodes::Hiragana),
-            "Henkan_Mode" => Ok(Keycodes::Henkan_Mode),
-            "Hiragana_Katakana" => Ok(Keycodes::Hiragana_Katakana),
-            "Muhenkan" => Ok(Keycodes::Muhenkan),
-            "KP_Enter" => Ok(Keycodes::KP_Enter),
-            "Control_R" => Ok(Keycodes::Control_R),
-            "KP_Divide" => Ok(Keycodes::KP_Divide),
-            "Print" => Ok(Keycodes::Print),
-            "Alt_R" => Ok(Keycodes::Alt_R),
-            "Linefeed" => Ok(Keycodes::Linefeed),
-            "Home" => Ok(Keycodes::Home),
-            "Up" => Ok(Keycodes::Up),
-            "Prior" => Ok(Keycodes::Prior),
-            "Left" => Ok(Keycodes::Left),
-            "Right" => Ok(Keycodes::Right),
-            "End" => Ok(Keycodes::End),
-            "Down" => Ok(Keycodes::Down),
-            "Next" => Ok(Keycodes::Next),
-            "Insert" => Ok(Keycodes::Insert),
-            "Delete" => Ok(Keycodes::Delete),
-            "XF86AudioMute" => Ok(Keycodes::XF86AudioMute),
-            "XF86AudioLowerVolume" => Ok(Keycodes::XF86AudioLowerVolume),
-            "XF86AudioRaiseVolume" => Ok(Keycodes::XF86AudioRaiseVolume),
-            "XF86PowerOff" => Ok(Keycodes::XF86PowerOff),
-            "KP_Equal" => Ok(Keycodes::KP_Equal),
+            "f11" => Ok(Keycodes::F11),
+            "f12" => Ok(Keycodes::F12),
+            "kp_enter" => Ok(Keycodes::KP_Enter),
+            "control_r" => Ok(Keycodes::Control_R),
+            "kp_divide" => Ok(Keycodes::KP_Divide),
+            "print" => Ok(Keycodes::Print),
+            "alt_r" => Ok(Keycodes::Alt_R),
+            "home" => Ok(Keycodes::Home),
+            "up" => Ok(Keycodes::Up),
+            "page_up" => Ok(Keycodes::Page_Up),
+            "left" => Ok(Keycodes::Left),
+            "right" => Ok(Keycodes::Right),
+            "end" => Ok(Keycodes::End),
+            "down" => Ok(Keycodes::Down),
+            "page_down" => Ok(Keycodes::Page_Down),
+            "insert" => Ok(Keycodes::Insert),
+            "delete" => Ok(Keycodes::Delete),
+            "kp_equal" => Ok(Keycodes::KP_Equal),
             "plusminus" => Ok(Keycodes::plusminus),
-            "Pause" => Ok(Keycodes::Pause),
-            "XF86LaunchA" => Ok(Keycodes::XF86LaunchA),
-            "KP_Decimal" => Ok(Keycodes::KP_Decimal),
-            "Hangul" => Ok(Keycodes::Hangul),
-            "Hangul_Hanja" => Ok(Keycodes::Hangul_Hanja),
-            "Super_L" => Ok(Keycodes::Super_L),
-            "Super_R" => Ok(Keycodes::Super_R),
-            "Menu" => Ok(Keycodes::Menu),
-            "Cancel" => Ok(Keycodes::Cancel),
-            "Redo" => Ok(Keycodes::Redo),
-            "SunProps" => Ok(Keycodes::SunProps),
-            "Undo" => Ok(Keycodes::Undo),
-            "SunFront" => Ok(Keycodes::SunFront),
-            "XF86Copy" => Ok(Keycodes::XF86Copy),
-            "XF86Open" => Ok(Keycodes::XF86Open),
-            "XF86Paste" => Ok(Keycodes::XF86Paste),
-            "Find" => Ok(Keycodes::Find),
-            "XF86Cut" => Ok(Keycodes::XF86Cut),
-            "Help" => Ok(Keycodes::Help),
-            "XF86MenuKB" => Ok(Keycodes::XF86MenuKB),
-            "XF86Calculator" => Ok(Keycodes::XF86Calculator),
-            "XF86Sleep" => Ok(Keycodes::XF86Sleep),
-            "XF86WakeUp" => Ok(Keycodes::XF86WakeUp),
-            "XF86Explorer" => Ok(Keycodes::XF86Explorer),
-            "XF86Send" => Ok(Keycodes::XF86Send),
-            "XF86Xfer" => Ok(Keycodes::XF86Xfer),
-            "XF86Launch1" => Ok(Keycodes::XF86Launch1),
-            "XF86Launch2" => Ok(Keycodes::XF86Launch2),
-            "XF86WWW" => Ok(Keycodes::XF86WWW),
-            "XF86DOS" => Ok(Keycodes::XF86DOS),
-            "XF86ScreenSaver" => Ok(Keycodes::XF86ScreenSaver),
-            "XF86RotateWindows" => Ok(Keycodes::XF86RotateWindows),
-            "XF86TaskPane" => Ok(Keycodes::XF86TaskPane),
-            "XF86Mail" => Ok(Keycodes::XF86Mail),
-            "XF86Favorites" => Ok(Keycodes::XF86Favorites),
-            "XF86MyComputer" => Ok(Keycodes::XF86MyComputer),
-            "XF86Back" => Ok(Keycodes::XF86Back),
-            "XF86Forward" => Ok(Keycodes::XF86Forward),
-            "XF86Eject" => Ok(Keycodes::XF86Eject),
-            "XF86AudioNext" => Ok(Keycodes::XF86AudioNext),
-            "XF86AudioPlay" => Ok(Keycodes::XF86AudioPlay),
-            "XF86AudioPrev" => Ok(Keycodes::XF86AudioPrev),
-            "XF86AudioStop" => Ok(Keycodes::XF86AudioStop),
-            "XF86AudioRecord" => Ok(Keycodes::XF86AudioRecord),
-            "XF86AudioRewind" => Ok(Keycodes::XF86AudioRewind),
-            "XF86Phone" => Ok(Keycodes::XF86Phone),
-            "XF86Tools" => Ok(Keycodes::XF86Tools),
-            "XF86HomePage" => Ok(Keycodes::XF86HomePage),
-            "XF86Reload" => Ok(Keycodes::XF86Reload),
-            "XF86Close" => Ok(Keycodes::XF86Close),
-            "XF86ScrollUp" => Ok(Keycodes::XF86ScrollUp),
-            "XF86ScrollDown" => Ok(Keycodes::XF86ScrollDown),
-            "parenleft" => Ok(Keycodes::parenleft),
-            "parenright" => Ok(Keycodes::parenright),
-            "XF86New" => Ok(Keycodes::XF86New),
-            "XF86Launch5" => Ok(Keycodes::XF86Launch5),
-            "XF86Launch6" => Ok(Keycodes::XF86Launch6),
-            "XF86Launch7" => Ok(Keycodes::XF86Launch7),
-            "XF86Launch8" => Ok(Keycodes::XF86Launch8),
-            "XF86Launch9" => Ok(Keycodes::XF86Launch9),
-            "XF86AudioMicMute" => Ok(Keycodes::XF86AudioMicMute),
-            "XF86TouchpadToggle" => Ok(Keycodes::XF86TouchpadToggle),
-            "XF86TouchpadOn" => Ok(Keycodes::XF86TouchpadOn),
-            "XF86TouchpadOff" => Ok(Keycodes::XF86TouchpadOff),
-            "ISO_Level5_Shift" => Ok(Keycodes::ISO_Level5_Shift),
-            "NoSymbol" => Ok(Keycodes::NoSymbol),
-            "XF86AudioPause" => Ok(Keycodes::XF86AudioPause),
-            "XF86Launch3" => Ok(Keycodes::XF86Launch3),
-            "XF86Launch4" => Ok(Keycodes::XF86Launch4),
-            "XF86LaunchB" => Ok(Keycodes::XF86LaunchB),
-            "XF86Suspend" => Ok(Keycodes::XF86Suspend),
-            "XF86AudioForward" => Ok(Keycodes::XF86AudioForward),
-            "XF86WebCam" => Ok(Keycodes::XF86WebCam),
-            "XF86AudioPreset" => Ok(Keycodes::XF86AudioPreset),
-            "XF86Messenger" => Ok(Keycodes::XF86Messenger),
-            "XF86Search" => Ok(Keycodes::XF86Search),
-            "XF86Go" => Ok(Keycodes::XF86Go),
-            "XF86Finance" => Ok(Keycodes::XF86Finance),
-            "XF86Game" => Ok(Keycodes::XF86Game),
-            "XF86Shop" => Ok(Keycodes::XF86Shop),
-            "XF86MonBrightnessDown" => Ok(Keycodes::XF86MonBrightnessDown),
-            "XF86MonBrightnessUp" => Ok(Keycodes::XF86MonBrightnessUp),
-            "XF86AudioMedia" => Ok(Keycodes::XF86AudioMedia),
-            "XF86Display" => Ok(Keycodes::XF86Display),
-            "XF86KbdLightOnOff" => Ok(Keycodes::XF86KbdLightOnOff),
-            "XF86KbdBrightnessDown" => Ok(Keycodes::XF86KbdBrightnessDown),
-            "XF86KbdBrightnessUp" => Ok(Keycodes::XF86KbdBrightnessUp),
-            "XF86Reply" => Ok(Keycodes::XF86Reply),
-            "XF86MailForward" => Ok(Keycodes::XF86MailForward),
-            "XF86Save" => Ok(Keycodes::XF86Save),
-            "XF86Documents" => Ok(Keycodes::XF86Documents),
-            "XF86Battery" => Ok(Keycodes::XF86Battery),
-            "XF86Bluetooth" => Ok(Keycodes::XF86Bluetooth),
-            "XF86WLAN" => Ok(Keycodes::XF86WLAN),
-            "XF86UWB" => Ok(Keycodes::XF86UWB),
-            "XF86Next_VMode" => Ok(Keycodes::XF86Next_VMode),
-            "XF86Prev_VMode" => Ok(Keycodes::XF86Prev_VMode),
-            "XF86MonBrightnessCycle" => Ok(Keycodes::XF86MonBrightnessCycle),
-            "XF86BrightnessAuto" => Ok(Keycodes::XF86BrightnessAuto),
-            "XF86DisplayOff" => Ok(Keycodes::XF86DisplayOff),
-            "XF86WWAN" => Ok(Keycodes::XF86WWAN),
-            "XF86RFKill" => Ok(Keycodes::XF86RFKill),
-            _ => Err(format!("No matching keycode for {s}")),
+            "pause" => Ok(Keycodes::Pause),
+            "kp_decimal" => Ok(Keycodes::KP_Decimal),
+            "super_l" => Ok(Keycodes::Super_L),
+            "super" => Ok(Keycodes::Super_L),
+            "super_r" => Ok(Keycodes::Super_R),
+            "menu" => Ok(Keycodes::Menu),
+            "cancel" => Ok(Keycodes::Cancel),
+            "redo" => Ok(Keycodes::Redo),
+            "undo" => Ok(Keycodes::Undo),
+            "find" => Ok(Keycodes::Find),
+            "help" => Ok(Keycodes::Help),
+            _ => Err(()),
         }
     }
 }
 
-impl Into<Option<x::ModMask>> for Keycodes {
-    fn into(self) -> Option<x::ModMask> {
-        match self {
-            Self::Shift_L => Some(x::ModMask::SHIFT),
-            Self::Shift_R => Some(x::ModMask::SHIFT),
-            Self::Caps_Lock => Some(x::ModMask::LOCK),
-            Self::Control_L => Some(x::ModMask::CONTROL),
-            Self::Control_R => Some(x::ModMask::CONTROL),
-            Self::Alt_L => Some(x::ModMask::N1),
-            Self::Alt_R => Some(x::ModMask::N5),
-            Self::Num_Lock => Some(x::ModMask::N2),
-            Self::Super_L => Some(x::ModMask::N4),
-            Self::Super_R => Some(x::ModMask::N4),
-            _ => None,
+impl TryFrom<Keycodes> for xcb_mod_mask_t {
+    type Error = ();
+
+    fn try_from(value: Keycodes) -> Result<Self, Self::Error> {
+        match value {
+            Keycodes::Shift_L | Keycodes::Shift_R => Ok(XCB_MOD_MASK_SHIFT),
+            Keycodes::Control_L | Keycodes::Control_R => Ok(XCB_MOD_MASK_CONTROL),
+            Keycodes::Alt_L | Keycodes::Alt_R => Ok(XCB_MOD_MASK_1),
+            Keycodes::Super_L | Keycodes::Super_R => Ok(XCB_MOD_MASK_4),
+            _ => Err(()),
         }
     }
 }
 
-impl Default for Keycodes {
-    fn default() -> Self {
-        Keycodes::None
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
+pub enum Direction {
+    Left,
+    Right,
+    Up,
+    Down,
+}
+
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
+pub enum Dimension {
+    Horizontal,
+    Vertical,
+}
+
+#[allow(dead_code)]
+#[derive(Debug, PartialEq, Eq)]
+pub enum KeybindingAction {
+    Exec(String),
+    FocusWindow(Direction),
+    MoveWindow(Direction),
+    ResizeWindow(Dimension, i32),
+    SwitchToWorkspace(u32),
+    MoveFocusedWindowToWorkspace(u32),
+    KillFocusedWindow,
+    CenterFocusedWindow,
+}
+
+#[allow(dead_code)]
+#[derive(Debug, PartialEq, Eq)]
+pub struct Keybinding {
+    pub modifiers: xcb_mod_mask_t,
+    pub modifiers_count: usize,
+    pub keycode: Keycodes,
+    pub action: KeybindingAction,
+}
+
+pub fn execute_command_from_str(cmd_str: &str) {
+    let mut parts = cmd_str.split_whitespace();
+    if let Some(program_name) = parts.next() {
+        let args = parts.collect::<Vec<_>>();
+        match Command::new(program_name).args(args).spawn() {
+            Ok(_) => trace!("Executed command successfully: {}", cmd_str),
+            Err(err) => error!(
+                "Failed to run command with error: {}, command: {}",
+                err, cmd_str
+            ),
+        }
+    } else {
+        error!(
+            "Failed to run command as it doesn't contain program name, command: {}",
+            cmd_str
+        );
     }
+}
+
+pub fn execute_command_from_str_wait(cmd_str: &str) {
+    let mut parts = cmd_str.split_whitespace();
+    if let Some(program_name) = parts.next() {
+        let args = parts.collect::<Vec<_>>();
+        match Command::new(program_name).args(args).status() {
+            Ok(_) => trace!("Executed command successfully: {}", cmd_str),
+            Err(err) => error!(
+                "Failed to run command with error: {}, command: {}",
+                err, cmd_str
+            ),
+        }
+    } else {
+        error!(
+            "Failed to run command as it doesn't contain program name, command: {}",
+            cmd_str
+        );
+    }
+}
+
+pub fn handle_key_press(
+    keybindings: &Vec<Keybinding>,
+    conn: &Connection,
+    config: &Config,
+    monitor: &mut Monitor,
+    modifier: u16,
+    keycode: xcb_keycode_t,
+    unix_clients: &mut UnixClients,
+) {
+    trace!(
+        "handle key press, modifier: {}, keycode: {}",
+        modifier, keycode
+    );
+    let modifiers = modifier as u32 & !(XCB_MOD_MASK_2 | XCB_MOD_MASK_LOCK);
+    if modifiers == 0 {
+        error!("modifiers == 0");
+        return;
+    }
+    let keycode = keycode as u8;
+    for keybinding in keybindings {
+        if (modifiers & keybinding.modifiers) == keybinding.modifiers
+            && keycode == keybinding.keycode as u8
+        {
+            match &keybinding.action {
+                KeybindingAction::Exec(cmd) => {
+                    execute_command_from_str(cmd.as_str());
+                }
+                KeybindingAction::FocusWindow(direction) => {
+                    monitor.handle_focus_window_change(conn, config, *direction, unix_clients);
+                }
+                KeybindingAction::MoveWindow(direction) => {
+                    monitor.handle_move_window(conn, config, *direction, unix_clients);
+                }
+                KeybindingAction::ResizeWindow(dimension, size_change_pixels) => {
+                    monitor.handle_resize_window(conn, config, *dimension, *size_change_pixels);
+                }
+                KeybindingAction::SwitchToWorkspace(workspace_id) => {
+                    monitor.handle_switch_to_workspace(conn, config, *workspace_id, unix_clients);
+                }
+                KeybindingAction::MoveFocusedWindowToWorkspace(workspace_id) => {
+                    monitor.handle_move_focused_window_to_workspace(
+                        conn,
+                        config,
+                        *workspace_id,
+                        config.switch_to_workspace_on_focused_window_moved,
+                        unix_clients,
+                    );
+                }
+                KeybindingAction::KillFocusedWindow => {
+                    monitor.handle_kill_focused_window(conn, config);
+                }
+                KeybindingAction::CenterFocusedWindow => {
+                    monitor.center_focused_window(conn, config);
+                }
+            };
+            break;
+        }
+    }
+}
+
+pub fn keybindings_grab(keybindings: &Vec<Keybinding>, conn: &Connection) {
+    for keybinding in keybindings {
+        conn.grab_key(keybinding.modifiers, keybinding.keycode as u8);
+        conn.grab_key(
+            keybinding.modifiers | XCB_MOD_MASK_2,
+            keybinding.keycode as u8,
+        );
+        conn.grab_key(
+            keybinding.modifiers | XCB_MOD_MASK_LOCK,
+            keybinding.keycode as u8,
+        );
+        conn.grab_key(
+            keybinding.modifiers | XCB_MOD_MASK_2 | XCB_MOD_MASK_LOCK,
+            keybinding.keycode as u8,
+        );
+    }
+}
+
+pub fn keybindings_ungrab(keybindings: &Vec<Keybinding>, conn: &Connection) {
+    for keybinding in keybindings {
+        conn.ungrab_key(keybinding.modifiers, keybinding.keycode as u8);
+        conn.ungrab_key(
+            keybinding.modifiers | XCB_MOD_MASK_2,
+            keybinding.keycode as u8,
+        );
+        conn.ungrab_key(
+            keybinding.modifiers | XCB_MOD_MASK_LOCK,
+            keybinding.keycode as u8,
+        );
+        conn.ungrab_key(
+            keybinding.modifiers | XCB_MOD_MASK_2 | XCB_MOD_MASK_LOCK,
+            keybinding.keycode as u8,
+        );
+    }
+}
+
+pub fn keybindings_from_config(config: &Config) -> Vec<Keybinding> {
+    let mut keybindings: Vec<Keybinding> = Vec::new();
+    keybindings.reserve(config.keybindings.len());
+
+    for keybinding_str in &config.keybindings {
+        if let Some(keybinding) = keybinding_from_string(keybinding_str) {
+            keybindings.push(keybinding);
+        }
+    }
+    keybindings.sort_by_key(|e| Reverse(e.modifiers_count));
+
+    keybindings
+}
+
+fn keybinding_from_string(keybinding_str: &str) -> Option<Keybinding> {
+    let mut modifiers: xcb_mod_mask_t = 0;
+    let mut modifiers_count: usize = 0;
+
+    let mut parts = keybinding_str.trim().split_whitespace();
+    if let Some(keys_comb_str) = parts.next() {
+        let keys_comb = keys_comb_str.split('+').collect::<Vec<_>>();
+        let count = &keys_comb.len();
+        for mod_str in keys_comb.iter().take(count - 1) {
+            if let Ok(mod_keycode) = Keycodes::try_from(*mod_str) {
+                if let Ok(modifier) = xcb_mod_mask_t::try_from(mod_keycode) {
+                    modifiers |= modifier;
+                    modifiers_count += 1;
+                } else {
+                    error!("failed to extract modifier from keycode: {:?}", mod_keycode);
+                    return None;
+                }
+            } else {
+                error!(
+                    "failed to extract keycode modifier from string: {}",
+                    mod_str
+                );
+                return None;
+            }
+        }
+
+        let keycode_str = keys_comb.last().unwrap();
+        let keycode_maybe = Keycodes::try_from(*keycode_str);
+        if keycode_maybe.is_err() {
+            error!("failed to extract keycode from string: {}", keycode_str);
+            return None;
+        }
+        if let Some(command) = parts.next() {
+            match command {
+                "exec" => {
+                    let command_parts = parts.collect::<Vec<_>>().join(" ");
+                    // trace!("command_parts: {}", command_parts);
+                    return Some(Keybinding {
+                        modifiers,
+                        modifiers_count,
+                        keycode: keycode_maybe.unwrap(),
+                        action: KeybindingAction::Exec(command_parts),
+                    });
+                }
+                "focus_window" => {
+                    if let Some(focus_change_direction) = parts.next() {
+                        match focus_change_direction {
+                            "left" => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::FocusWindow(Direction::Left),
+                                });
+                            }
+                            "right" => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::FocusWindow(Direction::Right),
+                                });
+                            }
+                            "up" => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::FocusWindow(Direction::Up),
+                                });
+                            }
+                            "down" => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::FocusWindow(Direction::Down),
+                                });
+                            }
+                            _ => {
+                                error!(
+                                    "unknown focus change direction name: {}",
+                                    focus_change_direction
+                                );
+                            }
+                        }
+                    } else {
+                        error!(
+                            "no direction supplied for focus window change command: {:?}",
+                            parts
+                        );
+                    }
+                }
+                "move_window" => {
+                    if let Some(move_window_direction) = parts.next() {
+                        match move_window_direction {
+                            "left" => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::MoveWindow(Direction::Left),
+                                });
+                            }
+                            "right" => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::MoveWindow(Direction::Right),
+                                });
+                            }
+                            "up" => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::MoveWindow(Direction::Up),
+                                });
+                            }
+                            "down" => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::MoveWindow(Direction::Down),
+                                });
+                            }
+                            _ => {
+                                error!(
+                                    "unknown move window direction name: {}",
+                                    move_window_direction
+                                );
+                            }
+                        }
+                    } else {
+                        error!("no direction supplied for move window command: {:?}", parts);
+                    }
+                }
+                "window_size_change" => {
+                    if let Some(resize_dimension) = parts.next() {
+                        let maybe_size_change_str = parts.next();
+                        if maybe_size_change_str.is_none() {
+                            error!("no pixels in which size would be changed was specified");
+                            return None;
+                        }
+                        let maybe_size_change = maybe_size_change_str.unwrap().parse::<i32>();
+                        if maybe_size_change.is_err() {
+                            error!(
+                                "invalid size change pixels value: {}, error: {:?}",
+                                maybe_size_change_str.unwrap(),
+                                maybe_size_change.err()
+                            );
+                            return None;
+                        }
+                        let size_change_pixels = maybe_size_change.unwrap();
+                        match resize_dimension {
+                            "horizontal" => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::ResizeWindow(
+                                        Dimension::Horizontal,
+                                        size_change_pixels,
+                                    ),
+                                });
+                            }
+                            "vertical" => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::ResizeWindow(
+                                        Dimension::Vertical,
+                                        size_change_pixels,
+                                    ),
+                                });
+                            }
+                            _ => {
+                                error!("unknown resize dimension name: {}", resize_dimension);
+                            }
+                        }
+                    } else {
+                        error!(
+                            "no direction supplied for focus window change command: {:?}",
+                            parts
+                        );
+                    }
+                }
+                "switch_to_workspace" => {
+                    if let Some(workspace_id_str) = parts.next() {
+                        match workspace_id_str.parse::<u32>() {
+                            Ok(workspace_id) => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::SwitchToWorkspace(workspace_id),
+                                });
+                            }
+                            Err(err) => {
+                                error!(
+                                    "invalid unsigned integer '{}' provided as a workspace id for switch to workspace command: {}, error: {:?}",
+                                    workspace_id_str, command, err
+                                );
+                            }
+                        }
+                    } else {
+                        error!(
+                            "no workspace id provided for switch to workspace command: {}",
+                            command
+                        )
+                    }
+                }
+                "move_focused_window_to_workspace" => {
+                    if let Some(workspace_id_str) = parts.next() {
+                        match workspace_id_str.parse::<u32>() {
+                            Ok(workspace_id) => {
+                                return Some(Keybinding {
+                                    modifiers,
+                                    modifiers_count,
+                                    keycode: keycode_maybe.unwrap(),
+                                    action: KeybindingAction::MoveFocusedWindowToWorkspace(
+                                        workspace_id,
+                                    ),
+                                });
+                            }
+                            Err(err) => {
+                                error!(
+                                    "invalid unsigned integer '{}' provided as a workspace id for move focused window to workspace command: {}, error: {:?}",
+                                    workspace_id_str, command, err
+                                );
+                            }
+                        }
+                    } else {
+                        error!(
+                            "no workspace id provided for move focused window to workspace command: {}",
+                            command
+                        )
+                    }
+                }
+                "kill_focused_window" => {
+                    return Some(Keybinding {
+                        modifiers,
+                        modifiers_count,
+                        keycode: keycode_maybe.unwrap(),
+                        action: KeybindingAction::KillFocusedWindow,
+                    });
+                }
+                "center_focused_window" => {
+                    return Some(Keybinding {
+                        modifiers,
+                        modifiers_count,
+                        keycode: keycode_maybe.unwrap(),
+                        action: KeybindingAction::CenterFocusedWindow,
+                    });
+                }
+                _ => error!("no command matching string: {}", command),
+            }
+        } else {
+            error!("failed to find command in keybinding: {}", keybinding_str);
+        }
+    }
+    return None;
 }

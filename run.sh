@@ -1,7 +1,9 @@
 #!/bin/fish
 
-cargo build --manifest-path window_manager/Cargo.toml 
-cargo build --manifest-path wm_msg/Cargo.toml 
+#RUSTFLAGS="-Zsanitizer=address" cargo build || exit
+export RUST_BACKTRACE=1
+
+cargo build -p window_manager || exit
 
 set XEPHYR $(whereis -b Xephyr | sed -E 's/^.*: ?//')
 if [ -z "$XEPHYR" ]
@@ -9,4 +11,4 @@ if [ -z "$XEPHYR" ]
   exit 1
 end
 
-xinit ./window_manager/xinitrc_debug -- "$XEPHYR" :100 -ac -screen 1920x1080 -host-cursor
+xinit ./xinitrc -- "$XEPHYR" :100 -ac -screen 1920x1080 -host-cursor

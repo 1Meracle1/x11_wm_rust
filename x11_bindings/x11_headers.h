@@ -1,0 +1,16 @@
+#include <xcb/xcb.h>
+#include <xcb/xproto.h>
+#include <xcb/xcb_icccm.h>
+#include <xcb/xcb_cursor.h>
+#include <xcb/xcb_ewmh.h>
+#include <xcb/randr.h>
+#include <X11/Xlib.h>
+#include <X11/Xlib-xcb.h>
+#include <X11/extensions/XTest.h>
+#include <X11/Xcursor/Xcursor.h>
+#include <xcb/xcb_image.h>
+#include <xcb/shape.h>
+#include <xcb/xkb.h>
+#include <xkbcommon/xkbcommon.h>
+#include <xkbcommon/xkbcommon-x11.h>
+#include <X11/XKBlib.h>

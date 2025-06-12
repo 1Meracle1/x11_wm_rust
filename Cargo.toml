@@ -1,7 +1,8 @@
 [workspace]
 resolver = "2"
 members = [
-  "window_manager", 
-  "wm_msg",
-  "msg_types"
+  "x11_bindings",
+  "window_manager",
+  "testbed_window", 
+  "base",
 ]
