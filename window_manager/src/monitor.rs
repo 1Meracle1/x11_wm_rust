@@ -4,7 +4,7 @@ use base::Rect;
 use log::{error, trace};
 use x11_bindings::bindings::{
     XCB_CW_BORDER_PIXEL, XCB_NOTIFY_MODE_GRAB, XCB_NOTIFY_MODE_UNGRAB, xcb_button_t,
-    xcb_notify_mode_t, xcb_window_t,
+    xcb_notify_mode_t, xcb_timestamp_t, xcb_window_t,
 };
 
 use crate::{
@@ -106,8 +106,8 @@ impl Monitor {
             .rect
             .available_rect_after_adding_rects(self.docked.rect_iter());
 
-        let maybe_rect_hints = conn.window_rect_hints(window);
-        trace!("window rect hints: {:?}", maybe_rect_hints);
+        let rect_hints_maybe = conn.window_rect_hints(window);
+        trace!("window rect hints: {:?}", rect_hints_maybe);
 
         let requested_workspace = conn.window_requested_workspace(window);
 
@@ -154,10 +154,9 @@ impl Monitor {
             WindowType::Floating => {
                 let focused_workspace =
                     self.workspaces.get_mut(self.focused_workspace_idx).unwrap();
-                let base_window_rect = maybe_rect_hints.or_else(|| Some(Rect::default())).unwrap();
                 focused_workspace.handle_new_floating_window(
                     window,
-                    base_window_rect,
+                    rect_hints_maybe,
                     &avail_rect,
                     conn,
                     config,
@@ -513,7 +512,7 @@ impl Monitor {
                     self.workspaces
                         .get_mut(new_focused_workspace_idx)
                         .unwrap()
-                        .handle_new_floating_window(window, rect, &avail_rect, conn, config);
+                        .handle_existing_floating_window(window, &rect, &avail_rect, conn, config);
                 }
                 WindowType::Docked => todo!(),
             }
@@ -661,11 +660,12 @@ impl Monitor {
         detail: xcb_button_t,
         conn: &Connection,
         config: &Config,
+        time: xcb_timestamp_t,
     ) {
         self.workspaces
             .get_mut(self.focused_workspace_idx)
             .unwrap()
-            .handle_button_press(x, y, window, state, detail, conn, config);
+            .handle_button_press(x, y, window, state, detail, conn, config, time);
     }
 
     pub fn handle_button_release(&mut self, conn: &Connection) {

@@ -63,29 +63,6 @@ fn main() {
             .expect("failed to add config file to watch list");
     }
 
-    for cmd_str in &config.startup_commands {
-        if cmd_str.contains(" && ") {
-            let parts = cmd_str.split(" && ").collect::<Vec<_>>();
-            parts
-                .iter()
-                .take(parts.len() - 1)
-                .for_each(|cmd_str| execute_command_from_str_wait(cmd_str));
-            execute_command_from_str(parts.last().unwrap());
-        } else {
-            execute_command_from_str(cmd_str);
-        }
-    }
-    if config.wallpapers_command.is_some() && config.wallpapers_path.is_some() {
-        execute_command_from_str_wait(
-            format!(
-                "{} {}",
-                config.wallpapers_command.as_ref().unwrap(),
-                config.wallpapers_path.as_ref().unwrap()
-            )
-            .as_str(),
-        );
-    }
-
     let conn = Connection::new().unwrap();
     let x11_conn_fd = conn.get_file_descriptor();
 
@@ -116,7 +93,6 @@ fn main() {
     // trace!("keybindings: {:#?}", keybindings);
 
     conn.change_cursor("left_ptr");
-    // conn.grab_button(MouseButton::Left);
     conn.flush();
 
     const SERVER_SOCKET_PATH_STR: &str = "/tmp/x11_wm_rust.socket";
@@ -130,6 +106,29 @@ fn main() {
         .add_watch(unix_listener.as_raw_fd())
         .expect("failed to add unix listener to epoll watch list");
     let mut unix_clients = UnixClients::new();
+
+    for cmd_str in &config.startup_commands {
+        if cmd_str.contains(" && ") {
+            let parts = cmd_str.split(" && ").collect::<Vec<_>>();
+            parts
+                .iter()
+                .take(parts.len() - 1)
+                .for_each(|cmd_str| execute_command_from_str_wait(cmd_str));
+            execute_command_from_str(parts.last().unwrap());
+        } else {
+            execute_command_from_str(cmd_str);
+        }
+    }
+    if config.wallpapers_command.is_some() && config.wallpapers_path.is_some() {
+        execute_command_from_str_wait(
+            format!(
+                "{} {}",
+                config.wallpapers_command.as_ref().unwrap(),
+                config.wallpapers_path.as_ref().unwrap()
+            )
+            .as_str(),
+        );
+    }
 
     let mut keyboard_layout_name_current = "".to_string();
     loop {
@@ -171,9 +170,10 @@ fn main() {
                                 window,
                                 state,
                                 detail,
+                                time,
                             } => {
                                 monitor.handle_button_press(
-                                    x, y, window, state, detail, &conn, &config,
+                                    x, y, window, state, detail, &conn, &config, time,
                                 );
                             }
                             connection::XcbEvents::ButtonRelease { x: _, y: _ } => {
@@ -229,64 +229,105 @@ fn main() {
                 monitor.check_deleted(&conn);
                 conn.flush();
             } else if event.u64 == inotify.fd as u64 {
-                match inotify.read_event() {
-                    Ok(event) => match event {
-                        x11_bindings::inotify::InotifyEvent::Modify => {
-                            trace!("config file was updated, reloading...");
-                            match Config::new(config_filepath.as_str()) {
-                                Ok(new_config) => {
-                                    trace!("updated config parsed successfully: {:#?}", new_config);
-
-                                    if config.startup_commands != new_config.startup_commands {
-                                        let diff = new_config.startup_commands.iter().filter(
-                                            |exist_cmd| {
-                                                config
-                                                    .startup_commands
-                                                    .iter()
-                                                    .find(|new_cmd| new_cmd == exist_cmd)
-                                                    .is_none()
-                                            },
+                let mut stop_poll = false;
+                loop {
+                    if stop_poll {
+                        break;
+                    }
+                    match inotify.read_event() {
+                        Ok(event) => match event {
+                            x11_bindings::inotify::InotifyEvent::Modify => {
+                                trace!("config file was updated, reloading...");
+                                match Config::new(config_filepath.as_str()) {
+                                    Ok(new_config) => {
+                                        trace!(
+                                            "updated config parsed successfully: {:#?}",
+                                            new_config
                                         );
-                                        for cmd_str in diff {
-                                            if cmd_str.contains(" && ") {
-                                                let parts =
-                                                    cmd_str.split(" && ").collect::<Vec<_>>();
-                                                parts.iter().take(parts.len() - 1).for_each(
-                                                    |cmd_str| {
-                                                        execute_command_from_str_wait(cmd_str)
-                                                    },
-                                                );
-                                                execute_command_from_str(parts.last().unwrap());
-                                            } else {
-                                                execute_command_from_str(cmd_str);
+
+                                        if config.startup_commands != new_config.startup_commands {
+                                            let diff = new_config.startup_commands.iter().filter(
+                                                |exist_cmd| {
+                                                    config
+                                                        .startup_commands
+                                                        .iter()
+                                                        .find(|new_cmd| new_cmd == exist_cmd)
+                                                        .is_none()
+                                                },
+                                            );
+                                            for cmd_str in diff {
+                                                if cmd_str.contains(" && ") {
+                                                    let parts =
+                                                        cmd_str.split(" && ").collect::<Vec<_>>();
+                                                    parts.iter().take(parts.len() - 1).for_each(
+                                                        |cmd_str| {
+                                                            execute_command_from_str_wait(cmd_str)
+                                                        },
+                                                    );
+                                                    execute_command_from_str(parts.last().unwrap());
+                                                } else {
+                                                    execute_command_from_str(cmd_str);
+                                                }
                                             }
                                         }
-                                    }
 
-                                    let new_keybindings = keybindings_from_config(&config);
-                                    if keybindings != new_keybindings {
-                                        keybindings_ungrab(&keybindings, &conn);
-                                        keybindings = new_keybindings;
-                                        keybindings_grab(&keybindings, &conn);
-                                    }
+                                        if config.wallpapers_command
+                                            != new_config.wallpapers_command
+                                            || config.wallpapers_path != new_config.wallpapers_path
+                                        {
+                                            if new_config.wallpapers_command.is_some()
+                                                && new_config.wallpapers_path.is_some()
+                                            {
+                                                execute_command_from_str_wait(
+                                                    format!(
+                                                        "{} {}",
+                                                        new_config
+                                                            .wallpapers_command
+                                                            .as_ref()
+                                                            .unwrap(),
+                                                        new_config
+                                                            .wallpapers_path
+                                                            .as_ref()
+                                                            .unwrap()
+                                                    )
+                                                    .as_str(),
+                                                );
+                                            }
+                                        }
 
-                                    monitor.remap_windows_with_upd_config(
-                                        &conn,
-                                        &config,
-                                        &new_config,
-                                    );
-                                    config = new_config;
-                                }
-                                Err(err) => {
-                                    error!("Failed to reload config from file, error: {:?}", err)
+                                        let new_keybindings = keybindings_from_config(&config);
+                                        if keybindings != new_keybindings {
+                                            keybindings_ungrab(&keybindings, &conn);
+                                            keybindings_grab(&new_keybindings, &conn);
+                                            keybindings = new_keybindings;
+                                        }
+
+                                        monitor.remap_windows_with_upd_config(
+                                            &conn,
+                                            &config,
+                                            &new_config,
+                                        );
+                                        config = new_config;
+
+                                        conn.flush();
+                                    }
+                                    Err(err) => {
+                                        error!(
+                                            "Failed to reload config from file, error: {:?}",
+                                            err
+                                        )
+                                    }
                                 }
                             }
-                        }
-                        _ => {
-                            trace!("other inotify event: {:?}", event);
-                        }
-                    },
-                    Err(err) => warn!("inotify read error: {:?}", err),
+                            x11_bindings::inotify::InotifyEvent::Eof => {
+                                stop_poll = true;
+                            }
+                            _ => {
+                                trace!("other inotify event: {:?}", event);
+                            }
+                        },
+                        Err(err) => warn!("inotify read error: {:?}", err),
+                    }
                 }
             } else if event.u64 == unix_listener.as_raw_fd() as u64 {
                 match unix_listener.accept() {

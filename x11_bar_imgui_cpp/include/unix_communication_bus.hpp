@@ -38,7 +38,7 @@ class UnixCommunicationBus
         if (m_unix_stream.is_ok())
         {
             std::lock_guard<std::mutex> lock_guard(m_mutex);
-            if (!m_unix_stream.write_all(std::forward<std::vector<char>>(msg)))
+            if (m_unix_stream.write_all(std::forward<std::vector<char>>(msg)) != UnixError::Ok)
             {
                 perror("failed to write message to unix server");
             }
@@ -92,21 +92,24 @@ class UnixCommunicationBus
                 if (socket_fd == m_unix_stream.socket_fd())
                 {
                     std::lock_guard<std::mutex> lock_guard(m_mutex);
-                    if (m_unix_stream.read_exact(sizeof(std::size_t), len_bytes))
+                    if (auto read_size_result = m_unix_stream.read_exact(sizeof(std::size_t), len_bytes);
+                        read_size_result == UnixError::Ok)
                     {
                         std::size_t msg_len = *reinterpret_cast<std::size_t*>(len_bytes.data());
-                        if (m_unix_stream.read_exact(msg_len, msg_bytes))
+                        if (auto read_msg_result = m_unix_stream.read_exact(msg_len, msg_bytes);
+                            read_msg_result == UnixError::Ok)
                         {
                             m_input_msgs_queue.push(std::move(msg_bytes));
                         }
                         else
                         {
-                            std::cerr << "failed to read message of size: " << msg_len << '\n';
+                            std::cerr << "failed to read message of size: " << msg_len
+                                      << ", result: " << read_msg_result << '\n';
                         }
                     }
                     else
                     {
-                        std::cerr << "failed to read size of the message\n";
+                        std::cerr << "failed to read size of the message: " << read_size_result << '\n';
                     }
                 }
             }

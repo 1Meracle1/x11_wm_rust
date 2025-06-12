@@ -16872,24 +16872,24 @@ unsafe extern "C" {
         e: *mut *mut xcb_generic_error_t,
     ) -> u8;
 }
-pub const xcb_icccm_size_hints_flags_t_XCB_ICCCM_SIZE_HINT_US_POSITION:
+pub const XCB_ICCCM_SIZE_HINT_US_POSITION:
     xcb_icccm_size_hints_flags_t = 1;
-pub const xcb_icccm_size_hints_flags_t_XCB_ICCCM_SIZE_HINT_US_SIZE: xcb_icccm_size_hints_flags_t =
+pub const XCB_ICCCM_SIZE_HINT_US_SIZE: xcb_icccm_size_hints_flags_t =
     2;
-pub const xcb_icccm_size_hints_flags_t_XCB_ICCCM_SIZE_HINT_P_POSITION:
+pub const XCB_ICCCM_SIZE_HINT_P_POSITION:
     xcb_icccm_size_hints_flags_t = 4;
-pub const xcb_icccm_size_hints_flags_t_XCB_ICCCM_SIZE_HINT_P_SIZE: xcb_icccm_size_hints_flags_t = 8;
-pub const xcb_icccm_size_hints_flags_t_XCB_ICCCM_SIZE_HINT_P_MIN_SIZE:
+pub const XCB_ICCCM_SIZE_HINT_P_SIZE: xcb_icccm_size_hints_flags_t = 8;
+pub const XCB_ICCCM_SIZE_HINT_P_MIN_SIZE:
     xcb_icccm_size_hints_flags_t = 16;
-pub const xcb_icccm_size_hints_flags_t_XCB_ICCCM_SIZE_HINT_P_MAX_SIZE:
+pub const XCB_ICCCM_SIZE_HINT_P_MAX_SIZE:
     xcb_icccm_size_hints_flags_t = 32;
-pub const xcb_icccm_size_hints_flags_t_XCB_ICCCM_SIZE_HINT_P_RESIZE_INC:
+pub const XCB_ICCCM_SIZE_HINT_P_RESIZE_INC:
     xcb_icccm_size_hints_flags_t = 64;
-pub const xcb_icccm_size_hints_flags_t_XCB_ICCCM_SIZE_HINT_P_ASPECT: xcb_icccm_size_hints_flags_t =
+pub const XCB_ICCCM_SIZE_HINT_P_ASPECT: xcb_icccm_size_hints_flags_t =
     128;
-pub const xcb_icccm_size_hints_flags_t_XCB_ICCCM_SIZE_HINT_BASE_SIZE: xcb_icccm_size_hints_flags_t =
+pub const XCB_ICCCM_SIZE_HINT_BASE_SIZE: xcb_icccm_size_hints_flags_t =
     256;
-pub const xcb_icccm_size_hints_flags_t_XCB_ICCCM_SIZE_HINT_P_WIN_GRAVITY:
+pub const XCB_ICCCM_SIZE_HINT_P_WIN_GRAVITY:
     xcb_icccm_size_hints_flags_t = 512;
 pub type xcb_icccm_size_hints_flags_t = ::std::os::raw::c_uint;
 #[repr(C)]

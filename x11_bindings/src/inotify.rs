@@ -22,6 +22,7 @@ pub enum InotifyEvent {
     Modify,
     CloseWrite,
     Unknown,
+    Eof,
 }
 
 pub struct Inotify {
@@ -70,6 +71,8 @@ impl<'a> Inotify {
         };
         if len < 0 {
             Err(Error::OsError(std::io::Error::last_os_error()))
+        } else if len == 0 {
+            Ok(InotifyEvent::Eof)
         } else {
             let event = unsafe { *(buffer.as_ptr() as *const libc::inotify_event) };
             if event.mask & libc::IN_MODIFY == 0 {

@@ -3,10 +3,39 @@
 
 #include <condition_variable>
 #include <mutex>
+#include <ostream>
 #include <string_view>
 #include <vector>
 
 class UnixListener;
+
+enum class UnixError: uint8_t
+{
+    Ok,
+    InvalidInstance,
+    CommunicationError,
+    Eof,
+};
+
+inline std::ostream& operator<<(std::ostream& os, UnixError unix_error)
+{
+    switch (unix_error)
+    {
+    case UnixError::Ok:
+        os << "UnixError::Ok";
+        break;
+    case UnixError::InvalidInstance:
+        os << "UnixError::InvalidInstance";
+        break;
+    case UnixError::CommunicationError:
+        os << "UnixError::CommunicationError";
+        break;
+    case UnixError::Eof:
+        os << "UnixError::Eof";
+        break;
+    }
+    return os;
+}
 
 class UnixStream
 {
@@ -21,9 +50,9 @@ class UnixStream
     UnixStream& operator=(UnixStream&& other);
     ~UnixStream();
 
-    [[nodiscard]] bool read_exact(std::size_t bytes_len, std::vector<char>& bytes) const;
+    [[nodiscard]] UnixError read_exact(std::size_t bytes_len, std::vector<char>& bytes) const;
 
-    [[nodiscard]] bool write_all(const std::vector<char>& bytes) const;
+    [[nodiscard]] UnixError write_all(const std::vector<char>& bytes) const;
 
     [[nodiscard]] bool set_nonblocking(bool non_blocking);
 

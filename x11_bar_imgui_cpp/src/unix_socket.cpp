@@ -47,11 +47,11 @@ UnixStream::~UnixStream()
     }
 }
 
-[[nodiscard]] bool UnixStream::read_exact(std::size_t bytes_len, std::vector<char>& bytes) const
+[[nodiscard]] UnixError UnixStream::read_exact(std::size_t bytes_len, std::vector<char>& bytes) const
 {
     if (!is_ok())
     {
-        return false;
+        return UnixError::InvalidInstance;
     }
     Assert(bytes_len > 0);
     bytes.clear();
@@ -61,7 +61,8 @@ UnixStream::~UnixStream()
     while (total_read < bytes_len)
     {
         ssize_t bytes_read = ::read(m_socket_fd, buffer + total_read, bytes_len - total_read);
-        // std::cout << "read from socket: " << m_socket_fd << ", bytes_read: " << bytes_read << ", out of: " << bytes_len
+        // std::cout << "read from socket: " << m_socket_fd << ", bytes_read: " << bytes_read << ", out of: " <<
+        // bytes_len
         //           << '\n';
         if (bytes_read == -1)
         {
@@ -69,25 +70,25 @@ UnixStream::~UnixStream()
             {
                 continue;
             }
-            ::perror("got error trying to read from socket\n");
-            return false;
+            ::perror("got error trying to read from socket");
+            return UnixError::CommunicationError;
         }
         if (bytes_read == 0)
         {
-            return false;
+            return UnixError::Eof;
         }
         total_read += (size_t)bytes_read;
     }
     // std::cout << "completed read from socket: " << m_socket_fd << ", total_read: " << total_read
     //           << ", out of: " << bytes_len << '\n';
-    return true;
+    return UnixError::Ok;
 }
 
-[[nodiscard]] bool UnixStream::write_all(const std::vector<char>& bytes) const
+[[nodiscard]] UnixError UnixStream::write_all(const std::vector<char>& bytes) const
 {
     if (!is_ok())
     {
-        return false;
+        return UnixError::InvalidInstance;
     }
     std::size_t total_to_write = bytes.size();
     std::size_t total_written  = 0;
@@ -101,11 +102,12 @@ UnixStream::~UnixStream()
             {
                 continue;
             }
-            return false;
+            ::perror("got error trying to write to socket");
+            return UnixError::CommunicationError;
         }
         total_written += (std::size_t)bytes_written;
     }
-    return true;
+    return UnixError::Ok;
 }
 
 [[nodiscard]] bool UnixStream::set_nonblocking(bool non_blocking)

@@ -11,6 +11,7 @@ use x11_bindings::{
 
 use crate::{bar_message::UnixClients, config::Config, monitor::Monitor};
 
+// extracted by running `xev` command line tool`
 #[allow(non_camel_case_types)]
 #[repr(u8)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -103,12 +104,12 @@ pub enum Keycodes {
     Alt_R = 108,
     Home = 110,
     Up = 111,
-    Prior = 112,
+    Page_Up = 112,
     Left = 113,
     Right = 114,
     End = 115,
     Down = 116,
-    Next = 117,
+    Page_Down = 117,
     Insert = 118,
     Delete = 119,
     KP_Equal = 125,
@@ -224,12 +225,12 @@ impl TryFrom<u8> for Keycodes {
             108 => Ok(Keycodes::Alt_R),
             110 => Ok(Keycodes::Home),
             111 => Ok(Keycodes::Up),
-            112 => Ok(Keycodes::Prior),
+            112 => Ok(Keycodes::Page_Up),
             113 => Ok(Keycodes::Left),
             114 => Ok(Keycodes::Right),
             115 => Ok(Keycodes::End),
             116 => Ok(Keycodes::Down),
-            117 => Ok(Keycodes::Next),
+            117 => Ok(Keycodes::Page_Down),
             118 => Ok(Keycodes::Insert),
             119 => Ok(Keycodes::Delete),
             125 => Ok(Keycodes::KP_Equal),
@@ -348,12 +349,12 @@ impl TryFrom<&str> for Keycodes {
             "alt_r" => Ok(Keycodes::Alt_R),
             "home" => Ok(Keycodes::Home),
             "up" => Ok(Keycodes::Up),
-            "prior" => Ok(Keycodes::Prior),
+            "page_up" => Ok(Keycodes::Page_Up),
             "left" => Ok(Keycodes::Left),
             "right" => Ok(Keycodes::Right),
             "end" => Ok(Keycodes::End),
             "down" => Ok(Keycodes::Down),
-            "next" => Ok(Keycodes::Next),
+            "page_down" => Ok(Keycodes::Page_Down),
             "insert" => Ok(Keycodes::Insert),
             "delete" => Ok(Keycodes::Delete),
             "kp_equal" => Ok(Keycodes::KP_Equal),

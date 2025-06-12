@@ -7,7 +7,9 @@ use x11_bindings::{
         XCB_BUTTON_MASK_1, XCB_BUTTON_MASK_3, XCB_CW_BORDER_PIXEL, XCB_CW_EVENT_MASK,
         XCB_EVENT_MASK_BUTTON_MOTION, XCB_EVENT_MASK_BUTTON_RELEASE, XCB_EVENT_MASK_ENTER_WINDOW,
         XCB_EVENT_MASK_FOCUS_CHANGE, XCB_EVENT_MASK_LEAVE_WINDOW, XCB_EVENT_MASK_POINTER_MOTION,
-        XCB_MOD_MASK_1, xcb_button_t, xcb_window_t,
+        XCB_ICCCM_SIZE_HINT_BASE_SIZE, XCB_ICCCM_SIZE_HINT_P_MAX_SIZE,
+        XCB_ICCCM_SIZE_HINT_P_MIN_SIZE, XCB_ICCCM_SIZE_HINT_P_POSITION, XCB_ICCCM_SIZE_HINT_P_SIZE,
+        XCB_MOD_MASK_1, xcb_button_t, xcb_size_hints_t, xcb_timestamp_t, xcb_window_t,
     },
     connection::WindowType,
 };
@@ -42,36 +44,91 @@ impl Workspace {
         }
     }
 
-    pub fn handle_new_floating_window(
+    pub fn handle_existing_floating_window(
         &mut self,
         window: xcb_window_t,
-        rect_hints: Rect,
+        rect: &Rect,
         monitor_rect: &Rect,
         conn: &Connection,
         config: &Config,
     ) {
-        let window_rect = if rect_hints.x != 0 || rect_hints.y != 0 {
-            rect_hints
-        } else {
-            let center_x = (monitor_rect.x + monitor_rect.width as i32) / 2;
-            let center_y = (monitor_rect.y + monitor_rect.height as i32) / 2;
-            let rect = if rect_hints.width != 0 && rect_hints.height != 0 {
-                Rect {
-                    x: center_x - (rect_hints.width / 2) as i32,
-                    y: center_y - (rect_hints.height / 2) as i32,
-                    width: rect_hints.width,
-                    height: rect_hints.height,
-                }
-            } else {
-                let width: u32 = 800;
-                let height: u32 = 600;
-                Rect {
-                    x: center_x - (width / 2) as i32,
-                    y: center_y - (height / 2) as i32,
-                    width,
-                    height,
-                }
-            };
+        // conn.window_configure(window, &window_rect, config.border_size);
+        // // self.apply_rounded_mask(window, window_rect.width, window_rect.height, conn);
+
+        // conn.change_window_attrs(
+        //     window,
+        //     XCB_CW_EVENT_MASK,
+        //     XCB_EVENT_MASK_FOCUS_CHANGE
+        //         | XCB_EVENT_MASK_ENTER_WINDOW
+        //         | XCB_EVENT_MASK_LEAVE_WINDOW
+        //         | XCB_EVENT_MASK_BUTTON_MOTION,
+        // );
+
+        // conn.map_window(window);
+
+        // self.floating.add(window, window_rect, true);
+        // self.set_focused(window, WindowType::Floating, conn, config);
+        // self.focused_via_keyboard = true;
+        // self.reset_window_interaction_state(conn);
+    }
+
+    pub fn handle_new_floating_window(
+        &mut self,
+        window: xcb_window_t,
+        rect_hints: Option<xcb_size_hints_t>,
+        monitor_rect: &Rect,
+        conn: &Connection,
+        config: &Config,
+    ) {
+        let center_x = (monitor_rect.x + monitor_rect.width as i32) / 2;
+        let center_y = (monitor_rect.y + monitor_rect.height as i32) / 2;
+        let mut rect = {
+            let width: u32 = 800;
+            let height: u32 = 600;
+            Rect {
+                x: center_x - (width / 2) as i32,
+                y: center_y - (height / 2) as i32,
+                width,
+                height,
+            }
+        };
+
+        let mut rect_hints_relevant = false;
+        if let Some(hints) = rect_hints {
+            if hints.flags & XCB_ICCCM_SIZE_HINT_P_POSITION != 0 {
+                rect.x = hints.x;
+                rect.y = hints.y;
+                rect_hints_relevant = true;
+            }
+            if hints.flags & XCB_ICCCM_SIZE_HINT_P_SIZE != 0 && hints.width > 0 && hints.height > 0
+            {
+                rect.width = hints.width as u32;
+                rect.height = hints.height as u32;
+                rect_hints_relevant = true;
+            } else if hints.flags & XCB_ICCCM_SIZE_HINT_P_MIN_SIZE != 0
+                && hints.min_width > 0
+                && hints.min_height > 0
+            {
+                rect.width = hints.min_width as u32;
+                rect.height = hints.min_height as u32;
+                rect_hints_relevant = true;
+            } else if hints.flags & XCB_ICCCM_SIZE_HINT_P_MAX_SIZE != 0
+                && hints.max_width > 0
+                && hints.max_height > 0
+            {
+                rect.width = hints.max_width as u32;
+                rect.height = hints.max_height as u32;
+                rect_hints_relevant = true;
+            } else if hints.flags & XCB_ICCCM_SIZE_HINT_BASE_SIZE != 0
+                && hints.base_width > 0
+                && hints.base_height > 0
+            {
+                rect.width = hints.base_width as u32;
+                rect.height = hints.base_height as u32;
+                rect_hints_relevant = true;
+            }
+        }
+        if !rect_hints_relevant {
             // check if there are any floating windows that already have the same upper-left corner's position
             // move them slightly lower and to the right, though not in the case it is lower and/or right-er than accepted
             self.floating.sort_by_rect_x_asc();
@@ -95,10 +152,10 @@ impl Workspace {
                     }
                 }
             }
-            adjusted_rect
-        };
-        conn.window_configure(window, &window_rect, config.border_size);
-        // self.apply_rounded_mask(window, window_rect.width, window_rect.height, conn);
+            rect = adjusted_rect;
+        }
+
+        conn.window_configure(window, &rect, config.border_size);
 
         conn.change_window_attrs(
             window,
@@ -111,7 +168,9 @@ impl Workspace {
 
         conn.map_window(window);
 
-        self.floating.add(window, window_rect, true);
+        conn.grab_button(window);
+
+        self.floating.add(window, rect, true);
         self.set_focused(window, WindowType::Floating, conn, config);
         self.focused_via_keyboard = true;
         self.reset_window_interaction_state(conn);
@@ -550,9 +609,9 @@ impl Workspace {
         if self.is_visible {
             trace!("apply focus to {}", window);
             conn.window_set_input_focus(window);
-            // if window_type == WindowType::Floating {
-            conn.window_raise(window);
-            // }
+            if window_type == WindowType::Floating {
+                conn.window_raise(window);
+            }
         }
     }
 
@@ -565,7 +624,13 @@ impl Workspace {
     ) {
         let avail_rect = self.available_rectangle(monitor_rect, config);
         match self.focused_type {
-            WindowType::Normal if self.focused_idx < self.normal.len() => {
+            WindowType::Normal => {
+                if self.normal.is_empty() {
+                    return
+                }
+                if self.focused_idx >= self.normal.len() {
+                    self.focused_idx = self.normal.len() - 1;
+                }
                 let focused_rect = self.normal.index_rect(self.focused_idx).clone();
                 let new_width = (focused_rect.width as i32 + size_change_pixels)
                     .clamp(config.minimum_width_tiling as i32, avail_rect.width as i32);
@@ -609,10 +674,7 @@ impl Workspace {
             WindowType::Floating => {
                 trace!("horizontal resize window event received when floating window is focused");
             }
-            WindowType::Docked => {}
-            _ => {
-                warn!("horizontal resize window when docked window is focused");
-            }
+            WindowType::Docked => warn!("horizontal resize window when docked window is focused"),
         }
     }
 
@@ -1109,72 +1171,6 @@ impl Workspace {
             }
         }
     }
-
-    // fn apply_rounded_mask(&self, window: xcb_window_t, width: u32, height: u32, conn: &Connection) {
-    //     let pixmap = conn.generate_id() as xcb_pixmap_t;
-    //     conn.create_pixmap(pixmap, width, height, 1);
-
-    //     let gc = conn.generate_id() as xcb_gcontext_t;
-    //     conn.create_gc(gc, pixmap, 0, []);
-
-    //     let offset: u32 = 1;
-    //     let rect = xcb_rectangle_t {
-    //         x: offset as i16,
-    //         y: offset as i16,
-    //         width: width as u16 - (offset * 2) as u16,
-    //         height: height as u16 - (offset * 2) as u16,
-    //     };
-    //     conn.poly_fill_rectangle(pixmap, gc, rect);
-
-    //     conn.change_gc(gc, XCB_GC_FOREGROUND, [1]);
-    //     conn.poly_fill_rectangle(pixmap, gc, rect);
-    //     conn.change_gc(gc, XCB_GC_FOREGROUND, [0]);
-
-    //     let radius: u32 = 10;
-    //     conn.poly_fill_arc(
-    //         pixmap,
-    //         gc,
-    //         [
-    //             xcb_arc_t {
-    //                 x: 0,
-    //                 y: 0,
-    //                 width: radius as u16 * 2,
-    //                 height: radius as u16 * 2,
-    //                 angle1: 0,
-    //                 angle2: 360 * 64,
-    //             },
-    //             xcb_arc_t {
-    //                 x: width as i16 - radius as i16 * 2,
-    //                 y: 0,
-    //                 width: radius as u16 * 2,
-    //                 height: radius as u16 * 2,
-    //                 angle1: 0,
-    //                 angle2: 360 * 64,
-    //             },
-    //             xcb_arc_t {
-    //                 x: 0,
-    //                 y: height as i16 - radius as i16 * 2,
-    //                 width: radius as u16 * 2,
-    //                 height: radius as u16 * 2,
-    //                 angle1: 0,
-    //                 angle2: 360 * 64,
-    //             },
-    //             xcb_arc_t {
-    //                 x: width as i16 - radius as i16 * 2,
-    //                 y: height as i16 - radius as i16 * 2,
-    //                 width: radius as u16 * 2,
-    //                 height: radius as u16 * 2,
-    //                 angle1: 0,
-    //                 angle2: 360 * 64,
-    //             },
-    //         ],
-    //     );
-
-    //     conn.shape_mask(window, pixmap);
-
-    //     conn.free_gc(gc);
-    //     conn.free_pixmap(pixmap);
-    // }
 }
 
 #[derive(Debug)]
@@ -1203,16 +1199,20 @@ impl Workspace {
         detail: xcb_button_t,
         conn: &Connection,
         config: &Config,
+        time: xcb_timestamp_t,
     ) {
         let is_alt_pressed = (state as u32 & XCB_MOD_MASK_1) == XCB_MOD_MASK_1;
         let is_left_button_pressed = detail == 1;
         let is_right_button_pressed = detail == 3;
+        trace!(
+            "handle_button_press - is_alt_pressed: {}, is_left_button_pressed: {}, is_right_button_pressed: {}",
+            is_alt_pressed, is_left_button_pressed, is_right_button_pressed
+        );
+        let mut handled = false;
         if is_alt_pressed && (is_left_button_pressed || is_right_button_pressed) {
             if let Some((window_type, index)) = {
                 if let Some(index) = self.floating.index_of(window) {
                     Some((WindowType::Floating, index))
-                } else if let Some(index) = self.normal.index_of(window) {
-                    Some((WindowType::Normal, index))
                 } else {
                     None
                 }
@@ -1237,10 +1237,10 @@ impl Workspace {
                             "start dragging window {}, is_alt_pressed: {}",
                             window, is_alt_pressed
                         );
-                        let window_x = self.floating.index_rect(index).x;
-                        let window_y = self.floating.index_rect(index).y;
-                        let offset_x = x - window_x;
-                        let offset_y = y - window_y;
+                        // let window_x = self.floating.index_rect(index).x;
+                        // let window_y = self.floating.index_rect(index).y;
+                        let offset_x = x;
+                        let offset_y = y;
                         if is_left_button_pressed {
                             self.window_mouse_interaction = Some(WindowMouseInteraction::Move {
                                 window,
@@ -1256,10 +1256,22 @@ impl Workspace {
                                 offset_y,
                             })
                         }
+                        trace!(
+                            "window_mouse_interaction: {:?}",
+                            self.window_mouse_interaction
+                        );
+                        handled = true;
                     }
                     conn.flush();
+                } else {
+                    trace!("clicked window is not floating window");
                 }
+            } else {
+                trace!("clicked window is not found amongst floating windows");
             }
+        }
+        if !handled {
+            conn.allow_events(time);
         }
     }
 

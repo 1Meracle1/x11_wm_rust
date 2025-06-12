@@ -15,8 +15,8 @@ startup_commands = [
   "x11_bar_cpp", #RobotoMonoNerdFont-Regular
 ]
 
-wallpapers_command = "feh --bg-scale"
-wallpapers_path = "/home/qamosu/.config/x11_wm_rust/wallpapers/default24.jpg"
+wallpapers_command = "feh --bg-fill"
+wallpapers_path = "/home/qamosu/.config/x11_wm_rust/wallpapers/pexels-veeterzy-39811.jpg"
 
 keybindings = [
   "Alt+Left            focus_window left",
@@ -40,10 +40,11 @@ keybindings = [
   # "Alt+Shift+K         window_size_change vertical    15",
 
   "Alt+Enter           exec alacritty",
-  "Alt+B               exec cargo run -p testbed_window -- docked bottom X11_docked_bottom_window",
-  "Alt+T               exec cargo run -p testbed_window -- docked top X11_docked_top_window",
 
   "Alt+D               exec dmenu_run -i -fn 'NotoMonoRegular:bold:pixelsize=14'",
+  "Alt+Shift+D         exec rofi -show drun -font \"Noto Sans 13\"",
+
+  "Alt+Ctrl+Page_Down  exec flameshot gui",
 
   # "Alt+Shift+C         exec xcolor",
   "Alt+F               center_focused_window",
