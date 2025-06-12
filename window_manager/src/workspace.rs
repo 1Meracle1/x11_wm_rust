@@ -745,7 +745,8 @@ impl Workspace {
                 conn.map_window(*window);
             }
         }
-        self.fix_existing_normal_windows(&avail_rect, conn, config);
+        // self.fix_existing_normal_windows(&avail_rect, conn, config);
+        self.fix_windows_visibility(&avail_rect, conn);
 
         if self.focused_type == WindowType::Normal && !self.normal.is_empty() {
             let focused_idx = if self.focused_idx < self.normal.len() {
