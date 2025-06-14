@@ -1066,6 +1066,7 @@ impl Workspace {
                 rect.x += move_x;
                 conn.window_configure(*window, rect, config.border_size)
             });
+            self.fix_windows_visibility(&avail_rect, conn);
         }
     }
 
