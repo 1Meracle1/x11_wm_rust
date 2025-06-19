@@ -252,6 +252,7 @@ impl Workspace {
         window: xcb_window_t,
         window_rect: Rect,
         monitor_rect: &Rect,
+        from_workspace_id: u32,
         conn: &Connection,
         config: &Config,
     ) {
@@ -263,7 +264,7 @@ impl Workspace {
                 None
             };
 
-        let (window_rect, move_left_rects_by, move_right_rects_by) = avail_rect
+        let (mut window_rect, move_left_rects_by, move_right_rects_by) = avail_rect
             .calc_new_rect_added_after_focused(
                 window_rect.width,
                 window_rect.height,
@@ -289,13 +290,23 @@ impl Workspace {
                 }
             }
         }
+        if !self.is_visible {
+            let hide_below = from_workspace_id < self.id;
+            let move_y = if hide_below {
+                monitor_rect.height as i32
+            } else {
+                -(monitor_rect.height as i32)
+            };
+            window_rect.y += move_y;
+        }
 
-        self.normal.add(window, window_rect, !self.is_visible);
-        self.normal.sort_by_rect_x_asc();
         self.normal
-            .iter()
-            .for_each(|(w, rect, _)| conn.window_configure(*w, rect, config.border_size));
+            .add(window, window_rect.clone(), !self.is_visible);
+        self.normal.sort_by_rect_x_asc();
         if self.is_visible {
+            self.normal
+                .iter()
+                .for_each(|(w, rect, _)| conn.window_configure(*w, rect, config.border_size));
             self.fix_windows_visibility(monitor_rect, conn);
         } else {
             conn.unmap_window(window);
@@ -626,7 +637,7 @@ impl Workspace {
         match self.focused_type {
             WindowType::Normal => {
                 if self.normal.is_empty() {
-                    return
+                    return;
                 }
                 if self.focused_idx >= self.normal.len() {
                     self.focused_idx = self.normal.len() - 1;

@@ -506,7 +506,14 @@ impl Monitor {
                     self.workspaces
                         .get_mut(new_focused_workspace_idx)
                         .unwrap()
-                        .handle_existing_normal_window(window, rect, &avail_rect, conn, config);
+                        .handle_existing_normal_window(
+                            window,
+                            rect,
+                            &avail_rect,
+                            focused_workspace_id,
+                            conn,
+                            config,
+                        );
                 }
                 WindowType::Floating => {
                     self.workspaces
